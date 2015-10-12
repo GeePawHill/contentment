@@ -25,6 +25,7 @@ public class Main extends Application
 	private void prepareStage(Stage stage)
 	{
 		stage.setScene(new Scene(new BorderPane()));
+		stage.setMaximized(true);
 		stage.show();
 	}
 
