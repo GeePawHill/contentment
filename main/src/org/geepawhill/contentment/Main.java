@@ -20,8 +20,8 @@ public class Main extends Application
 		{
 			root = prepareStage(stage);
 			ActionList actions = new ActionList();
-			actions.add(new EnterBoxedText("Hi Mom!", 400d, 400d));
-			actions.add(new EnterBoxedText("Also, dad!!",400d,500d));
+			actions.add(new EnterLabelledBox("Hi Mom!", 400d, 400d));
+			actions.add(new EnterLabelledBox("Also, dad!!",400d,500d));
 			Iterator<Action> nextAction = actions.iterator();
 			play(nextAction);
 		}
