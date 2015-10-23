@@ -1,8 +1,9 @@
 package org.geepawhill.contentment;
 
+import java.util.Iterator;
+
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -18,10 +19,11 @@ public class Main extends Application
 		try
 		{
 			root = prepareStage(stage);
-			EnterBoxedText text = new EnterBoxedText("Hi Mom!", 400d, 400d);
-			text.play(root, event -> this.play2(event));
-			
-			
+			ActionList actions = new ActionList();
+			actions.add(new EnterBoxedText("Hi Mom!", 400d, 400d));
+			actions.add(new EnterBoxedText("Also, dad!!",400d,500d));
+			Iterator<Action> nextAction = actions.iterator();
+			play(nextAction);
 		}
 		catch (Exception e)
 		{
@@ -30,12 +32,14 @@ public class Main extends Application
 		}
 	}
 	
-	public void play2(ActionEvent event)
+	private void play(Iterator<Action> nextAction)
 	{
-		EnterBoxedText text2 = new EnterBoxedText("Also, dad!!",400d,500d);
-		text2.play(root,null);
+		if(nextAction.hasNext())
+		{
+			nextAction.next().play(root, event -> play(nextAction));
+		}
+		
 	}
-
 
 	private Pane prepareStage(Stage stage)
 	{
