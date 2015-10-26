@@ -1,3 +1,3 @@
 package org.geepawhill.contentment;
 
-enum PlayState { Before, After }
+enum PlayState { Before, After,Playing }
