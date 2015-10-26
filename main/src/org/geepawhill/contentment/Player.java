@@ -2,10 +2,26 @@ package org.geepawhill.contentment;
 
 public class Player
 {
-	enum Status { Before }
+	private PlayState status;
 
-	public Status status()
+	public Player()
 	{
-		return Status.Before;
+		status = PlayState.Before;
+	}
+
+	public PlayState status()
+	{
+		return status;
+	}
+
+	public void play()
+	{
+		status = PlayState.After;
+		
+	}
+
+	public void reset()
+	{
+		status = PlayState.Before;
 	};
 }
