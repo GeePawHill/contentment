@@ -8,9 +8,9 @@ public class PlayerTest
 {
 
 	@Test
-	public void test()
+	public void startsBefore()
 	{
-		fail("Not yet implemented");
+		assertEquals(Player.Status.Before,new Player().status());
 	}
 
 }
