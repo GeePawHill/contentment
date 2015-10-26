@@ -4,14 +4,17 @@ import java.util.Iterator;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class Main extends Application
 {
-	private Pane root;
+	private BorderPane root;
+	private ActionList actions;
 
 	@Override
 	public void start(Stage stage)
@@ -19,11 +22,18 @@ public class Main extends Application
 		try
 		{
 			root = prepareStage(stage);
-			ActionList actions = new ActionList();
+			
+			actions = new ActionList();
 			actions.add(new EnterLabelledBox("Hi Mom!", 400d, 400d));
 			actions.add(new EnterLabelledBox("Also, dad!!",400d,500d));
-			Iterator<Action> nextAction = actions.iterator();
-			play(nextAction);
+
+			ToolBar tools = new ToolBar();
+			tools.setOrientation(Orientation.VERTICAL);
+			Button play = new Button("Play");
+			play.setOnAction(event -> play(actions.iterator()));
+			tools.getItems().add(play);
+			
+			root.setRight(tools);
 		}
 		catch (Exception e)
 		{
@@ -41,7 +51,7 @@ public class Main extends Application
 		
 	}
 
-	private Pane prepareStage(Stage stage)
+	private BorderPane prepareStage(Stage stage)
 	{
 		BorderPane root = new BorderPane();
 		stage.setScene(new Scene(root));
