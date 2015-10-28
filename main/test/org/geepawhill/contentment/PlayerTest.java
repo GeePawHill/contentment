@@ -15,16 +15,38 @@ public class PlayerTest
 	private final class TestingAction implements Action
 	{
 		private EventHandler<ActionEvent> onFinished;
+		public boolean wasPaused;
+		public boolean wasResumed;
+		public boolean wasPlayed;
+		
+		TestingAction()
+		{
+			wasPaused=false;
+			wasPlayed=false;
+			wasResumed=false;
+		}
 
 		@Override
 		public void play(Pane destination, EventHandler<ActionEvent> onFinished)
 		{
 			this.onFinished = onFinished;
+			if(wasPaused)
+			{
+				wasResumed=true;
+			}
+			this.wasPlayed=true;
 		}
 		
 		public void finishPlaying()
 		{
 			onFinished.handle(null);
+		}
+
+		@Override
+		public void pause()
+		{
+			wasPaused=true;
+			
 		}
 	}
 
@@ -48,14 +70,14 @@ public class PlayerTest
 	@Test
 	public void emptyPlaysToAfter()
 	{
-		player.play();
+		player.play(null);
 		assertEquals(After,player.status());
 	}
 	
 	@Test
 	public void resetResets()
 	{
-		player.play();
+		player.play(null);
 		player.reset();
 		assertEquals(Before,player.status());
 	}
@@ -63,21 +85,52 @@ public class PlayerTest
 	@Test
 	public void resetActionsResets()
 	{
-		player.play();
+		player.play(null);
 		player.reset(actions);
 		assertEquals(Before,player.status());
 	}
 	
 	@Test
-	public void playPlays()
+	public void playPlaysFromStart()
 	{
 		TestingAction action = new TestingAction();
 		actions.add(action);
 		player.reset(actions);
-		player.play();
+		player.play(null);
+		assertTrue(action.wasPlayed);
+		assertFalse(action.wasResumed);
+		assertFalse(action.wasPaused);
 		assertEquals(Playing,player.status());
 		action.finishPlaying();
-		assertEquals(After,player.status());
+	}
+	
+	@Test
+	public void pausePauses()
+	{
+		TestingAction action = new TestingAction();
+		actions.add(action);
+		player.reset(actions);
+		player.play(null);
+		assertEquals(Playing,player.status());
+		player.pause();
+		assertEquals(Paused,player.status());
+		assertTrue(action.wasPaused);
+	}
+	
+	@Test
+	public void playResumesFromPause()
+	{
+		TestingAction action = new TestingAction();
+		actions.add(action);
+		player.reset(actions);
+		player.play(null);
+		assertEquals(Playing,player.status());
+		player.pause();
+		assertEquals(Paused,player.status());
+		assertTrue(action.wasPaused);
+		player.play(null);
+		action.finishPlaying();
+		assertTrue(action.wasResumed);
 	}
 
 }

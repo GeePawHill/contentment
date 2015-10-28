@@ -1,5 +1,6 @@
 package org.geepawhill.contentment;
 
+import javafx.animation.Animation.Status;
 import javafx.animation.SequentialTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,27 +20,30 @@ public class EnterLabelledBox implements Action
 	private Rectangle rectangle;
 	private Bounds bounds;
 	private Pane destination;
+	private SequentialTransition transition;
 
 	public EnterLabelledBox(String value, double centerX, double centerY)
 	{
 		this.value = value;
 		this.centerY = centerY;
 		this.centerX = centerX;
+		transition = new SequentialTransition();
+		transition.getChildren().add(new SimpleTransition(500, this::animateDrawText));
+		transition.getChildren().add(new SimpleTransition(1, this::animateComputeBox));
+		transition.getChildren().add(new SimpleTransition(500, this::animateDrawBox));
 	}
 
 	@Override
 	public void play(Pane destination, EventHandler<ActionEvent> onFinished)
 	{
-		this.destination = destination;
-		label = new Text(centerX, centerY, "");
-		destination.getChildren().add(label);
-		SequentialTransition transition = new SequentialTransition();
-		transition.getChildren().add(new SimpleTransition(500, this::animateDrawText));
-		transition.getChildren().add(new SimpleTransition(1, this::animateComputeBox));
-		transition.getChildren().add(new SimpleTransition(500, this::animateDrawBox));
-		transition.setOnFinished(onFinished);
+		if (transition.getStatus() != Status.PAUSED)
+		{
+			this.destination = destination;
+			label = new Text(centerX, centerY, "");
+			destination.getChildren().add(label);
+			transition.setOnFinished(onFinished);
+		}
 		transition.play();
-
 	}
 
 	protected void animateDrawText(double frac)
@@ -65,6 +69,12 @@ public class EnterLabelledBox implements Action
 		if (frac == 0d) return;
 		rectangle.setWidth(bounds.getWidth() * frac);
 		rectangle.setHeight(bounds.getHeight() * frac);
+	}
+
+	@Override
+	public void pause()
+	{
+		if (transition.getStatus() == Status.RUNNING) transition.pause();
 	}
 
 }

@@ -2,6 +2,8 @@ package org.geepawhill.contentment;
 
 import java.util.Iterator;
 
+import javafx.scene.layout.Pane;
+
 public class Player
 {
 	private PlayState status;
@@ -20,19 +22,19 @@ public class Player
 		return status;
 	}
 
-	public void play()
+	public void play(Pane pane)
 	{
 		cursor = actions.iterator();
-		continuePlayUntilDone();
+		continuePlayUntilDone(pane);
 	}
 
-	private void continuePlayUntilDone()
+	private void continuePlayUntilDone(Pane pane)
 	{
 		if (cursor.hasNext())
 		{
 			status=PlayState.Playing;
 			current = cursor.next();
-			current.play(null, event -> continuePlayUntilDone());
+			current.play(pane, event -> continuePlayUntilDone(pane));
 		}
 		else
 		{
@@ -49,5 +51,15 @@ public class Player
 	{
 		this.actions = actions;
 		reset();
+	}
+
+	public void pause()
+	{
+		if(status==PlayState.Playing)
+		{
+			current.pause();
+			status = PlayState.Paused;
+		}
+		
 	};
 }

@@ -15,6 +15,7 @@ public class Main extends Application
 {
 	private BorderPane root;
 	private ActionList actions;
+	private Player player;
 
 	@Override
 	public void start(Stage stage)
@@ -26,11 +27,14 @@ public class Main extends Application
 			actions = new ActionList();
 			actions.add(new EnterLabelledBox("Hi Mom!", 400d, 400d));
 			actions.add(new EnterLabelledBox("Also, dad!!",400d,500d));
+			
+			player = new Player();
+			player.reset(actions);
 
 			ToolBar tools = new ToolBar();
 			tools.setOrientation(Orientation.VERTICAL);
 			Button play = new Button("Play");
-			play.setOnAction(event -> play(actions.iterator()));
+			play.setOnAction(event -> player.play(root));
 			tools.getItems().add(play);
 			
 			root.setRight(tools);
@@ -42,15 +46,6 @@ public class Main extends Application
 		}
 	}
 	
-	private void play(Iterator<Action> nextAction)
-	{
-		if(nextAction.hasNext())
-		{
-			nextAction.next().play(root, event -> play(nextAction));
-		}
-		
-	}
-
 	private BorderPane prepareStage(Stage stage)
 	{
 		BorderPane root = new BorderPane();
