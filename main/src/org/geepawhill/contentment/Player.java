@@ -15,6 +15,7 @@ public class Player
 	{
 		status = PlayState.Before;
 		actions = new ActionList();
+		cursor = actions.iterator();
 	}
 
 	public PlayState status()
@@ -24,12 +25,25 @@ public class Player
 
 	public void play(Pane pane)
 	{
-		cursor = actions.iterator();
+		if(status==PlayState.Playing) return;
+		if(status==PlayState.After)
+		{
+			cursor = actions.iterator();
+			pane.getChildren().clear();
+		}
+		if(status==PlayState.Before)
+		{
+			cursor = actions.iterator();
+		}
 		continuePlayUntilDone(pane);
 	}
 
 	private void continuePlayUntilDone(Pane pane)
 	{
+		if(status==PlayState.Paused)
+		{
+			current.play(pane, event -> continuePlayUntilDone(pane));
+		}
 		if (cursor.hasNext())
 		{
 			status=PlayState.Playing;
