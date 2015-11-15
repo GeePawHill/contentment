@@ -2,9 +2,11 @@ package org.geepawhill.contentment;
 
 import javafx.animation.Animation.Status;
 import javafx.animation.SequentialTransition;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -20,7 +22,7 @@ public class EnterLabelledBox implements Action
 	private Rectangle rectangle;
 	private Bounds bounds;
 	private Pane destination;
-	private SequentialTransition transition;
+	public SequentialTransition transition;
 
 	public EnterLabelledBox(String value, double centerX, double centerY)
 	{
@@ -32,6 +34,15 @@ public class EnterLabelledBox implements Action
 		transition.getChildren().add(new SimpleTransition(1, this::animateComputeBox));
 		transition.getChildren().add(new SimpleTransition(500, this::animateDrawBox));
 	}
+	
+	public void addNodes(Pane pane)
+	{
+		label = new Text(centerX, centerY, "");
+		ObservableList<Node> children = pane.getChildren();
+		children.add(label);
+		rectangle = new Rectangle();
+		children.add(rectangle);
+	}
 
 	@Override
 	public void play(Pane destination, EventHandler<ActionEvent> onFinished)
@@ -39,8 +50,6 @@ public class EnterLabelledBox implements Action
 		if (transition.getStatus() != Status.PAUSED)
 		{
 			this.destination = destination;
-			label = new Text(centerX, centerY, "");
-			destination.getChildren().add(label);
 			transition.setOnFinished(onFinished);
 		}
 		transition.play();
@@ -56,12 +65,10 @@ public class EnterLabelledBox implements Action
 	{
 		bounds = label.getBoundsInParent();
 
-		rectangle = new Rectangle();
 		rectangle.setFill(Color.TRANSPARENT);
 		rectangle.setStroke(Color.RED);
 		rectangle.setX(bounds.getMinX());
 		rectangle.setY(bounds.getMinY());
-		destination.getChildren().add(rectangle);
 	}
 
 	protected void animateDrawBox(double frac)
