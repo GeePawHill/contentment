@@ -3,6 +3,7 @@ package org.geepawhill.contentment;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class PlayerTest
@@ -10,6 +11,8 @@ public class PlayerTest
 	private Sequence oneStepSequence;
 	private Player player;
 	private TestStep oneStep;
+	private TestStep twoStep;
+	private Sequence twoStepSequence;
 
 	static class TestStep implements Step
 	{
@@ -38,7 +41,9 @@ public class PlayerTest
 	{
 		player = new Player();
 		oneStep = new TestStep();
+		twoStep = new TestStep();
 		oneStepSequence = new Sequence(oneStep);
+		twoStepSequence = new Sequence(oneStep,twoStep);
 	}
 	
 	@Test
@@ -104,6 +109,50 @@ public class PlayerTest
 		player.stepBackward();
 		assertEquals(0,player.current());
 		assertTrue(oneStep.isBefore);
+	}
+	
+	@Ignore
+	@Test
+	public void seekNoChangeDoesBefore()
+	{
+		player.load(oneStepSequence);
+		player.stepForward();
+		player.seek(0);
+		assertEquals(0,player.current());
+		assertTrue(oneStep.isBefore);
+	}
+	
+	@Test
+	public void seekForward()
+	{
+		player.load(twoStepSequence);
+		player.seek(1);
+		assertEquals(1,player.current());
+		assertFalse(oneStep.isBefore);
+		assertTrue(twoStep.isBefore);
+	}
+	
+	@Test
+	public void seekBackward()
+	{
+		player.load(twoStepSequence);
+		player.stepForward();
+		player.stepForward();
+		player.seek(0);
+		assertEquals(0,player.current());
+		assertTrue(oneStep.isBefore);
+		assertTrue(twoStep.isBefore);
+	}
+	
+	@Test
+	public void seekCurrentResets()
+	{
+		player.load(twoStepSequence);
+		oneStep.isBefore=false;
+		player.seek(0);
+		assertEquals(0,player.current());
+		assertTrue(oneStep.isBefore);
+		assertTrue(twoStep.isBefore);
 	}
 	
 }

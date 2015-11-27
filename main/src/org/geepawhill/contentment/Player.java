@@ -51,4 +51,14 @@ public class Player
 
 	}
 
+	public void seek(int index)
+	{
+		while(index!=current)
+		{
+			if(index<current) stepBackward();
+			else stepForward();
+		}
+		sequence.get(current).jumpBefore();
+	}
+
 }
