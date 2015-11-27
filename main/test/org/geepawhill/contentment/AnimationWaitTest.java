@@ -33,6 +33,7 @@ public class AnimationWaitTest extends JavaFxTest
 //		waitFor(transition);
 //	}
 	
+	@Ignore
 	@Test
 	public void testBox()
 	{

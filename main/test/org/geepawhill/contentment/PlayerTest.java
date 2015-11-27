@@ -1,136 +1,33 @@
 package org.geepawhill.contentment;
 
 import static org.junit.Assert.*;
-import static org.geepawhill.contentment.PlayState.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.layout.Pane;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class PlayerTest
 {
-
-	private final class TestingAction implements Action
+	static class TestStep implements Step
 	{
-		private EventHandler<ActionEvent> onFinished;
-		public boolean wasPaused;
-		public boolean wasResumed;
-		public boolean wasPlayed;
 		
-		TestingAction()
-		{
-			wasPaused=false;
-			wasPlayed=false;
-			wasResumed=false;
-		}
-
-		@Override
-		public void play(Pane destination, EventHandler<ActionEvent> onFinished)
-		{
-			this.onFinished = onFinished;
-			if(wasPaused)
-			{
-				wasResumed=true;
-			}
-			this.wasPlayed=true;
-		}
-		
-		public void finishPlaying()
-		{
-			onFinished.handle(null);
-		}
-
-		@Override
-		public void pause()
-		{
-			wasPaused=true;
-			
-		}
-	}
-
-	private Player player;
-	private ActionList actions;
-	
-	
-	@Before
-	public void before()
-	{
-		actions = new ActionList();
-		player = new Player();
-	}
-
-	@Test
-	public void startsBefore()
-	{
-		assertEquals(Before,player.status());
 	}
 	
 	@Test
-	public void emptyPlaysToAfter()
+	public void newIsEmpty()
 	{
-		player.play(null);
-		assertEquals(After,player.status());
+		assertEquals(0,new Player().size());
 	}
 	
 	@Test
-	public void resetResets()
+	public void newIsBeforeAll()
 	{
-		player.play(null);
-		player.reset();
-		assertEquals(Before,player.status());
+		assertEquals(-1,new Player().current());
 	}
 	
 	@Test
-	public void resetActionsResets()
+	public void loadsLoads()
 	{
-		player.play(null);
-		player.reset(actions);
-		assertEquals(Before,player.status());
+		Player player = new Player();
+		player.load(new Sequence(new TestStep()));
+		assertEquals(1,player.size());
 	}
-	
-	@Test
-	public void playPlaysFromStart()
-	{
-		TestingAction action = new TestingAction();
-		actions.add(action);
-		player.reset(actions);
-		player.play(null);
-		assertTrue(action.wasPlayed);
-		assertFalse(action.wasResumed);
-		assertFalse(action.wasPaused);
-		assertEquals(Playing,player.status());
-		action.finishPlaying();
-	}
-	
-	@Test
-	public void pausePauses()
-	{
-		TestingAction action = new TestingAction();
-		actions.add(action);
-		player.reset(actions);
-		player.play(null);
-		assertEquals(Playing,player.status());
-		player.pause();
-		assertEquals(Paused,player.status());
-		assertTrue(action.wasPaused);
-	}
-	
-	@Test
-	public void playResumesFromPause()
-	{
-		TestingAction action = new TestingAction();
-		actions.add(action);
-		player.reset(actions);
-		player.play(null);
-		assertEquals(Playing,player.status());
-		player.pause();
-		assertEquals(Paused,player.status());
-		assertTrue(action.wasPaused);
-		player.play(null);
-		action.finishPlaying();
-		assertTrue(action.wasResumed);
-	}
-
 }

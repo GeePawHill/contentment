@@ -16,7 +16,7 @@ public class Main extends Application
 {
 	private BorderPane root;
 	private ActionList actions;
-	private Player player;
+	private OldPlayer player;
 
 	@Override
 	public void start(Stage stage)
@@ -46,7 +46,7 @@ public class Main extends Application
 			actions.add(new EnterLabelledBox("Hi Mom!", 400d, 400d));
 			actions.add(new EnterLabelledBox("Also, dad!!",400d,500d));
 			
-			player = new Player();
+			player = new OldPlayer();
 			player.reset(actions);
 		}
 		catch (Exception e)
