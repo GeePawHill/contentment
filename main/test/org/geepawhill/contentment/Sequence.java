@@ -1,21 +1,36 @@
 package org.geepawhill.contentment;
 
-public class Sequence
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class Sequence implements Iterable<Step>
 {
-	Step[] steps;
+	ArrayList<Step> steps;
 
 	public Sequence()
 	{
-		steps = new Step[0];
+		steps = new ArrayList<>();
 	}
 
 	public Sequence(Step... steps)
 	{
-		this.steps = steps;
+		this.steps = new ArrayList<Step>();
+		for(Step step : steps) this.steps.add(step);
 	}
 
 	public int size()
 	{
-		return steps.length;
+		return steps.size();
+	}
+
+	@Override
+	public Iterator<Step> iterator()
+	{
+		return steps.iterator();
+	}
+
+	public Step get(int index)
+	{
+		return steps.get(index);
 	}
 }

@@ -8,6 +8,16 @@ public class SequenceTest
 {
 	class TestStep implements Step
 	{
+
+		@Override
+		public void jumpAfter()
+		{
+		}
+
+		@Override
+		public void jumpBefore()
+		{
+		}
 		
 	}
 
