@@ -64,4 +64,9 @@ public class Player
 		if(skipPastLast) sequence.get(current).jumpAfter();
 	}
 
+	public void play()
+	{
+		sequence.get(current).play();
+	}
+
 }

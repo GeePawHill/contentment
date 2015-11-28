@@ -18,6 +18,11 @@ public class SequenceTest
 		public void jumpBefore()
 		{
 		}
+
+		@Override
+		public void play()
+		{
+		}
 		
 	}
 

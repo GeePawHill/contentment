@@ -17,21 +17,30 @@ public class PlayerTest
 	static class TestStep implements Step
 	{
 		public boolean isBefore;
+		public boolean isPlaying;
 		public TestStep()
 		{
 			isBefore=true;
+			isPlaying=false;
 		}
 
 		@Override
 		public void jumpAfter()
 		{
 			isBefore=false;
+			isPlaying=false;
 		}
 
 		@Override
 		public void jumpBefore()
 		{
 			isBefore=true;
+			isPlaying=false;
+		}
+		
+		public void play()
+		{
+			isPlaying=true;
 		}
 		
 	}
@@ -177,4 +186,11 @@ public class PlayerTest
 		assertFalse(twoStep.isBefore);		
 	}
 	
+	@Test
+	public void playStartsPlay()
+	{
+		player.load(oneStepSequence);
+		player.play();
+		assertTrue(oneStep.isPlaying);
+	}
 }
