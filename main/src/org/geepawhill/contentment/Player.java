@@ -48,17 +48,20 @@ public class Player
 			current -= 1;
 			sequence.get(current).jumpBefore();
 		}
-
 	}
 
 	public void seek(int index)
 	{
+		boolean skipPastLast = index>=size() ? true : false;
+		if(index>=size()) index=size()-1;
+		if(index<0) index=0;
 		while(index!=current)
 		{
 			if(index<current) stepBackward();
 			else stepForward();
 		}
 		sequence.get(current).jumpBefore();
+		if(skipPastLast) sequence.get(current).jumpAfter();
 	}
 
 }

@@ -155,4 +155,26 @@ public class PlayerTest
 		assertTrue(twoStep.isBefore);
 	}
 	
+	@Test
+	public void seekBeforeStart()
+	{
+		player.load(twoStepSequence);
+		player.stepForward();
+		player.stepForward();
+		player.seek(-20);
+		assertEquals(0,player.current());
+		assertTrue(oneStep.isBefore);
+		assertTrue(twoStep.isBefore);		
+	}
+	
+	@Test
+	public void seekAfterEnd()
+	{
+		player.load(twoStepSequence);
+		player.seek(20);
+		assertEquals(1,player.current());
+		assertFalse(oneStep.isBefore);
+		assertFalse(twoStep.isBefore);		
+	}
+	
 }
