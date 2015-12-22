@@ -6,10 +6,10 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class PlayerTest
+public class StepperTest
 {
 	private Sequence oneStepSequence;
-	private Player player;
+	private Stepper player;
 	private TestStep oneStep;
 	private TestStep twoStep;
 	private Sequence twoStepSequence;
@@ -48,7 +48,7 @@ public class PlayerTest
 	@Before
 	public void before()
 	{
-		player = new Player();
+		player = new Stepper();
 		oneStep = new TestStep();
 		twoStep = new TestStep();
 		oneStepSequence = new Sequence(oneStep);
@@ -186,11 +186,4 @@ public class PlayerTest
 		assertFalse(twoStep.isBefore);		
 	}
 	
-	@Test
-	public void playStartsPlay()
-	{
-		player.load(oneStepSequence);
-		player.play();
-		assertTrue(oneStep.isPlaying);
-	}
 }

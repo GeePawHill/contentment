@@ -1,12 +1,12 @@
 package org.geepawhill.contentment;
 
-public class Player
+public class Stepper
 {
 
 	Sequence sequence;
 	private int current;
 
-	public Player()
+	public Stepper()
 	{
 		sequence = new Sequence();
 		current = 0;
@@ -63,10 +63,4 @@ public class Player
 		sequence.get(current).jumpBefore();
 		if(skipPastLast) sequence.get(current).jumpAfter();
 	}
-
-	public void play()
-	{
-		sequence.get(current).play();
-	}
-
 }
