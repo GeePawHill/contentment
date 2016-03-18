@@ -7,54 +7,17 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import static org.geepawhill.contentment.TestStep.*;
 
 public class StepperTest
 {
-	private Sequence oneStepSequence;
+
 	private Stepper player;
-	private TestStep oneStep;
-	private TestStep twoStep;
-	private Sequence twoStepSequence;
 
-	static class TestStep implements Step
-	{
-		public boolean isBefore;
-		public boolean isPlaying;
-		public TestStep()
-		{
-			isBefore=true;
-			isPlaying=false;
-		}
-
-		@Override
-		public void jumpAfter()
-		{
-			isBefore=false;
-			isPlaying=false;
-		}
-
-		@Override
-		public void jumpBefore()
-		{
-			isBefore=true;
-			isPlaying=false;
-		}
-		
-		public void play()
-		{
-			isPlaying=true;
-		}
-		
-	}
-	
 	@Before
 	public void before()
 	{
 		player = new Stepper();
-		oneStep = new TestStep();
-		twoStep = new TestStep();
-		oneStepSequence = new Sequence(oneStep);
-		twoStepSequence = new Sequence(oneStep,twoStep);
 	}
 	
 	@Test

@@ -63,4 +63,14 @@ public class Stepper
 		sequence.get(current).jumpBefore();
 		if(skipPastLast) sequence.get(current).jumpAfter();
 	}
+	
+	public void play()
+	{
+		sequence.get(current).play();
+	}
+
+	public void pause() {
+		sequence.get(current).pause();
+		
+	}
 }

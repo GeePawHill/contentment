@@ -6,26 +6,6 @@ import org.junit.Test;
 
 public class SequenceTest
 {
-	class TestStep implements Step
-	{
-
-		@Override
-		public void jumpAfter()
-		{
-		}
-
-		@Override
-		public void jumpBefore()
-		{
-		}
-
-		@Override
-		public void play()
-		{
-		}
-		
-	}
-
 	@Test
 	public void emptyIs()
 	{
