@@ -1,5 +1,7 @@
 package org.geepawhill.contentment;
 
+import org.junit.BeforeClass;
+
 import javafx.animation.Animation;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -7,10 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-
-import org.junit.BeforeClass;
 
 public class JavaFxTest
 {

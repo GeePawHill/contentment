@@ -1,13 +1,19 @@
 package org.geepawhill.contentment;
 
-import static org.junit.Assert.*;
-import static org.geepawhill.contentment.PlayState.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.layout.Pane;
+import static org.geepawhill.contentment.PlayState.After;
+import static org.geepawhill.contentment.PlayState.Before;
+import static org.geepawhill.contentment.PlayState.Paused;
+import static org.geepawhill.contentment.PlayState.Playing;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.layout.Pane;
 
 public class OldPlayerTest
 {

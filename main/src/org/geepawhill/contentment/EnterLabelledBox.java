@@ -21,7 +21,6 @@ public class EnterLabelledBox implements Action
 	private double centerX;
 	private Rectangle rectangle;
 	private Bounds bounds;
-	private Pane destination;
 	public SequentialTransition transition;
 
 	public EnterLabelledBox(String value, double centerX, double centerY)
@@ -49,7 +48,6 @@ public class EnterLabelledBox implements Action
 	{
 		if (transition.getStatus() != Status.PAUSED)
 		{
-			this.destination = destination;
 			transition.setOnFinished(onFinished);
 		}
 		transition.play();

@@ -1,7 +1,5 @@
 package org.geepawhill.contentment;
 
-import java.util.Iterator;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Orientation;

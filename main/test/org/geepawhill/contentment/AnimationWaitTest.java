@@ -1,14 +1,10 @@
 package org.geepawhill.contentment;
 
-import javafx.animation.Transition;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
-
 import org.junit.Ignore;
 import org.junit.Test;
+
+import javafx.animation.Transition;
+import javafx.util.Duration;
 
 public class AnimationWaitTest extends JavaFxTest
 {
