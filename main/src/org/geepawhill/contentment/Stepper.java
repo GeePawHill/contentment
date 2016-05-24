@@ -71,7 +71,10 @@ public class Stepper
 
 	public void pause() {
 		sequence.get(current).pause();
-		
+	}
+	
+	public void resume() {
+		sequence.get(current).resume();
 	}
 
 	public void stop() {

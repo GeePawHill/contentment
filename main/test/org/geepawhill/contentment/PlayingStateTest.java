@@ -26,7 +26,7 @@ public class PlayingStateTest {
 	@Test
 	public void pauseTellsCurrentToPause() {
 		assertEquals(context.paused,context.playing.onPause(context));
-		assertTrue(oneStep.paused);
+		assertTrue(oneStep.isPaused);
 	}
 	
 	@Test

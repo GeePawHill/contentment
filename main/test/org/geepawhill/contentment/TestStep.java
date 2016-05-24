@@ -10,13 +10,13 @@ public class TestStep implements Step
 	
 	public boolean isBefore;
 	public boolean isPlaying;
-	public boolean paused;
+	public boolean isPaused;
 	
 	public TestStep()
 	{
 		isBefore=true;
 		isPlaying=false;
-		paused=false;
+		isPaused=false;
 	}
 
 	@Override
@@ -42,12 +42,12 @@ public class TestStep implements Step
 	@Override
 	public void pause()
 	{
-		paused=true;
+		isPaused=true;
 	}
 
 	@Override
 	public void resume() {
-		paused=false;
+		isPaused=false;
 	}
 
 	@Override
