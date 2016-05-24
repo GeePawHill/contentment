@@ -4,25 +4,23 @@ public class StoppedState implements PlayerState {
 
 	@Override
 	public PlayerState onPlay(Context context) {
-		// TODO Auto-generated method stub
-		return null;
+		context.stepper.play();
+		return context.playing;
 	}
 
 	@Override
 	public PlayerState onPause(Context context) {
-		// TODO Auto-generated method stub
-		return null;
+		return context.stopped;
 	}
 
 	@Override
 	public PlayerState onResume(Context context) {
-		return null;
+		return context.stopped;
 	}
 
 	@Override
 	public PlayerState onStop(Context context) {
-		// TODO Auto-generated method stub
-		return null;
+		return context.stopped;
 	}
 
 }

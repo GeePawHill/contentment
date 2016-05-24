@@ -21,7 +21,6 @@ public class PausedState implements PlayerState {
 
 	@Override
 	public PlayerState onStop(Context context) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
