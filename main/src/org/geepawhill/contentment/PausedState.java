@@ -14,4 +14,15 @@ public class PausedState implements PlayerState {
 		return null;
 	}
 
+	@Override
+	public PlayerState onResume(Context context) {
+		return null;
+	}
+
+	@Override
+	public PlayerState onStop(Context context) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

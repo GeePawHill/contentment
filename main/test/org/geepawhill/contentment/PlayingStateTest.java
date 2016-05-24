@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.geepawhill.contentment.TestStep.*;
 
-public class PlayingTest {
+public class PlayingStateTest {
 
 	private Context context;
 	
@@ -27,6 +27,16 @@ public class PlayingTest {
 	public void pauseTellsCurrentToPause() {
 		assertEquals(context.paused,context.playing.onPause(context));
 		assertTrue(oneStep.paused);
+	}
+	
+	@Test
+	public void resumeDoesNothing() {
+		assertEquals(context.playing,context.playing.onResume(context));
+	}
+	
+	@Test
+	public void stopStops() {
+		assertEquals(context.stopped,context.playing.onStop(context));
 	}
 
 }

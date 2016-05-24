@@ -13,4 +13,15 @@ public class PlayingState implements PlayerState {
 		return context.paused;
 	}
 
+	@Override
+	public PlayerState onResume(Context context) {
+		return context.playing;
+	}
+
+	@Override
+	public PlayerState onStop(Context context) {
+		context.stepper.stop();
+		return context.stopped;
+	}
+
 }

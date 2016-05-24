@@ -1,7 +1,7 @@
 package org.geepawhill.contentment;
 
 public class Context {
-	public final PlayingState playing;
+	public final PlayerState playing;
 	public final PausedState paused;
 	public final StoppedState stopped;
 	

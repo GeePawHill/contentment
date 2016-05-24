@@ -44,6 +44,17 @@ public class TestStep implements Step
 	{
 		paused=true;
 	}
+
+	@Override
+	public void resume() {
+		paused=false;
+	}
+
+	@Override
+	public void stop() {
+		isPlaying=false;
+		isBefore = true;
+	}
 	
 	
 	

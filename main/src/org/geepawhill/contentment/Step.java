@@ -6,4 +6,6 @@ public interface Step
 	public void jumpBefore();
 	public void play();
 	public void pause();
+	public void resume();
+	public void stop();
 }
