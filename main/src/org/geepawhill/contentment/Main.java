@@ -13,8 +13,7 @@ import javafx.stage.Stage;
 public class Main extends Application
 {
 	private BorderPane root;
-	private ActionList actions;
-	private OldPlayer player;
+	private Player player;
 
 	@Override
 	public void start(Stage stage)
@@ -28,26 +27,21 @@ public class Main extends Application
 
 			ToolBar tools = new ToolBar();
 			tools.setOrientation(Orientation.VERTICAL);
-			Button play = new Button("Play");
-			play.setOnAction(event -> player.play(canvas));
+			Button play = new Button("-->");
+			play.setOnAction(event -> player.stepForward());
 			tools.getItems().add(play);
 			
-			Button pause = new Button("Pause");
-			pause.setOnAction(event -> player.pause());
+			Button pause = new Button("<--");
+			pause.setOnAction(event -> player.stepBackward());
 			tools.getItems().add(pause);
 			
 			root.setRight(tools);
 			
 			LabelBoxStep boxOne = new LabelBoxStep("Hi Mom!", 400d, 400d);
 			Sequence sequence = new Sequence(boxOne);
-			
-			
-			actions = new ActionList();
-			actions.add(new EnterLabelledBox("Hi Mom!", 400d, 400d));
-			actions.add(new EnterLabelledBox("Also, dad!!",400d,500d));
-			
-			player = new OldPlayer();
-			player.reset(actions);
+
+			player = new Player();
+			player.reset(sequence);
 		}
 		catch (Exception e)
 		{
