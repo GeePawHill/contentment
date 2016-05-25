@@ -35,9 +35,11 @@ public class Main extends Application
 			Button pause = new Button("Pause");
 			pause.setOnAction(event -> player.pause());
 			tools.getItems().add(pause);
-
 			
 			root.setRight(tools);
+			
+			LabelBoxStep boxOne = new LabelBoxStep("Hi Mom!", 400d, 400d);
+			Sequence sequence = new Sequence(boxOne);
 			
 			
 			actions = new ActionList();
