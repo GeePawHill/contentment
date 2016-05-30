@@ -85,7 +85,6 @@ public class StepperTest
 		assertTrue(oneStep.isBefore);
 	}
 	
-	@Ignore
 	@Test
 	public void seekNoChangeDoesBefore()
 	{
