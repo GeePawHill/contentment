@@ -7,17 +7,22 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import javafx.scene.layout.Pane;
+
 import static org.geepawhill.contentment.TestStep.*;
 
 public class StepperTest
 {
 
 	private Stepper player;
+	Pane canvas;
 
 	@Before
 	public void before()
 	{
 		player = new Stepper();
+		canvas = new Pane();
 	}
 	
 	@Test
@@ -51,7 +56,7 @@ public class StepperTest
 	public void stepForwardDoes()
 	{
 		player.load(oneStepSequence);
-		player.stepForward();
+		player.stepForward(canvas);
 		assertEquals(1,player.current());
 		assertFalse(oneStep.isBefore);
 	}
@@ -60,7 +65,7 @@ public class StepperTest
 	public void stepBackwardDoes()
 	{
 		player.load(oneStepSequence);
-		player.stepForward();
+		player.stepForward(canvas);
 		player.stepBackward();
 		assertEquals(0,player.current());
 		assertTrue(oneStep.isBefore);
@@ -70,8 +75,8 @@ public class StepperTest
 	public void stepForwardNoopsAtEnd()
 	{
 		player.load(oneStepSequence);
-		player.stepForward();
-		player.stepForward();
+		player.stepForward(canvas);
+		player.stepForward(canvas);
 		assertEquals(1,player.current());
 		assertFalse(oneStep.isBefore);
 	}
@@ -89,8 +94,8 @@ public class StepperTest
 	public void seekNoChangeDoesBefore()
 	{
 		player.load(oneStepSequence);
-		player.stepForward();
-		player.seek(0);
+		player.stepForward(canvas);
+		player.seek(canvas, 0);
 		assertEquals(0,player.current());
 		assertTrue(oneStep.isBefore);
 	}
@@ -99,7 +104,7 @@ public class StepperTest
 	public void seekForward()
 	{
 		player.load(twoStepSequence);
-		player.seek(1);
+		player.seek(canvas, 1);
 		assertEquals(1,player.current());
 		assertFalse(oneStep.isBefore);
 		assertTrue(twoStep.isBefore);
@@ -109,9 +114,9 @@ public class StepperTest
 	public void seekBackward()
 	{
 		player.load(twoStepSequence);
-		player.stepForward();
-		player.stepForward();
-		player.seek(0);
+		player.stepForward(canvas);
+		player.stepForward(canvas);
+		player.seek(canvas, 0);
 		assertEquals(0,player.current());
 		assertTrue(oneStep.isBefore);
 		assertTrue(twoStep.isBefore);
@@ -122,7 +127,7 @@ public class StepperTest
 	{
 		player.load(twoStepSequence);
 		oneStep.isBefore=false;
-		player.seek(0);
+		player.seek(canvas, 0);
 		assertEquals(0,player.current());
 		assertTrue(oneStep.isBefore);
 		assertTrue(twoStep.isBefore);
@@ -132,9 +137,9 @@ public class StepperTest
 	public void seekBeforeStart()
 	{
 		player.load(twoStepSequence);
-		player.stepForward();
-		player.stepForward();
-		player.seek(-20);
+		player.stepForward(canvas);
+		player.stepForward(canvas);
+		player.seek(canvas, -20);
 		assertEquals(0,player.current());
 		assertTrue(oneStep.isBefore);
 		assertTrue(twoStep.isBefore);		
@@ -144,7 +149,7 @@ public class StepperTest
 	public void seekAfterEnd()
 	{
 		player.load(twoStepSequence);
-		player.seek(20);
+		player.seek(canvas, 20);
 		assertEquals(1,player.current());
 		assertFalse(oneStep.isBefore);
 		assertFalse(twoStep.isBefore);		

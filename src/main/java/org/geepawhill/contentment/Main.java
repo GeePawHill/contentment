@@ -38,9 +38,10 @@ public class Main extends Application
 			root.setRight(tools);
 			
 			LabelBoxStep boxOne = new LabelBoxStep("Hi Mom!", 400d, 400d);
-			Sequence sequence = new Sequence(boxOne);
+			LabelBoxStep boxTwo = new LabelBoxStep("Also, Dad!", 500d, 500d);
+			Sequence sequence = new Sequence(boxOne,boxTwo);
 
-			player = new Player();
+			player = new Player(canvas);
 			player.reset(sequence);
 		}
 		catch (Exception e)

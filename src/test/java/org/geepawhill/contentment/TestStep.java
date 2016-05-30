@@ -1,5 +1,7 @@
 package org.geepawhill.contentment;
 
+import javafx.scene.layout.Pane;
+
 public class TestStep implements Step
 {
 	
@@ -20,7 +22,7 @@ public class TestStep implements Step
 	}
 
 	@Override
-	public void jumpAfter()
+	public void jumpAfter(Pane canvas)
 	{
 		isBefore=false;
 		isPlaying=false;

@@ -1,7 +1,10 @@
 package org.geepawhill.contentment;
 
 import javafx.animation.SequentialTransition;
+import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
+import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -27,8 +30,15 @@ public class LabelBoxStep implements Step {
 	}
 
 	@Override
-	public void jumpAfter() {
-		
+	public void jumpAfter(Pane canvas) {
+		label = new Text(xCenter, yCenter, "");
+		ObservableList<Node> children = canvas.getChildren();
+		children.add(label);
+		rectangle = new Rectangle();
+		children.add(rectangle);
+		animateDrawText(1.0);
+		animateComputeBox(1.0);
+		animateDrawBox(1.0);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package org.geepawhill.contentment;
 
+import javafx.scene.layout.Pane;
+
 public class Stepper
 {
 
@@ -32,11 +34,11 @@ public class Stepper
 		current = 0;
 	}
 
-	public void stepForward()
+	public void stepForward(Pane canvas)
 	{
 		if (current() < size())
 		{
-			sequence.get(current).jumpAfter();
+			sequence.get(current).jumpAfter(canvas);
 			current += 1;
 		}
 	}
@@ -50,7 +52,7 @@ public class Stepper
 		}
 	}
 
-	public void seek(int index)
+	public void seek(Pane canvas, int index)
 	{
 		boolean skipPastLast = index>=size() ? true : false;
 		if(index>=size()) index=size()-1;
@@ -58,10 +60,10 @@ public class Stepper
 		while(index!=current)
 		{
 			if(index<current) stepBackward();
-			else stepForward();
+			else stepForward(canvas);
 		}
 		sequence.get(current).jumpBefore();
-		if(skipPastLast) sequence.get(current).jumpAfter();
+		if(skipPastLast) sequence.get(current).jumpAfter(canvas);
 	}
 	
 	public void play()
