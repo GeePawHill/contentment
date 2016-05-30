@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import javafx.scene.layout.Pane;
+
 import static org.geepawhill.contentment.TestStep.*;
 
 public class PlayingStateTest {
@@ -14,7 +16,8 @@ public class PlayingStateTest {
 	@Before
 	public void before()
 	{
-		context = new Context();
+		Pane canvas = new Pane();
+		context = new Context(canvas);
 		context.stepper.load(oneStepSequence);
 	}
 
