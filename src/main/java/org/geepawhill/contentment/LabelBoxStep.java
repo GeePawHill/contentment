@@ -1,5 +1,8 @@
 package org.geepawhill.contentment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.animation.SequentialTransition;
 import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
@@ -17,9 +20,11 @@ public class LabelBoxStep implements Step {
 	private Text label;
 	private Rectangle rectangle;
 	private Bounds bounds;
+	private final List<Node> children;
 	public SequentialTransition transition;
 
 	public LabelBoxStep(String text, double xCenter, double yCenter) {
+		children = new ArrayList<Node>();
 		this.text = text;
 		this.xCenter = xCenter;
 		this.yCenter = yCenter;
@@ -32,9 +37,11 @@ public class LabelBoxStep implements Step {
 	@Override
 	public void jumpAfter(Pane canvas) {
 		label = new Text(xCenter, yCenter, "");
-		ObservableList<Node> children = canvas.getChildren();
-		children.add(label);
 		rectangle = new Rectangle();
+		ObservableList<Node> canvasChildren = canvas.getChildren();
+		canvasChildren.add(label);
+		canvasChildren.add(rectangle);
+		children.add(label);
 		children.add(rectangle);
 		animateDrawText(1.0);
 		animateComputeBox(1.0);
@@ -42,9 +49,12 @@ public class LabelBoxStep implements Step {
 	}
 
 	@Override
-	public void jumpBefore() {
-		// TODO Auto-generated method stub
-
+	public void jumpBefore(Pane canvas) {
+		ObservableList<Node> canvasChildren = canvas.getChildren();
+		for(Node node : children)
+		{
+			canvasChildren.remove(node);
+		}
 	}
 
 	@Override

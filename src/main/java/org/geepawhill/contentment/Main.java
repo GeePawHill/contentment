@@ -39,7 +39,8 @@ public class Main extends Application
 			
 			LabelBoxStep boxOne = new LabelBoxStep("Hi Mom!", 400d, 400d);
 			LabelBoxStep boxTwo = new LabelBoxStep("Also, Dad!", 500d, 500d);
-			Sequence sequence = new Sequence(boxOne,boxTwo);
+			LabelBoxStep boxThree = new LabelBoxStep("Etc.",600d,600d);
+			Sequence sequence = new Sequence(boxOne,boxTwo,boxThree);
 
 			player = new Player(canvas);
 			player.reset(sequence);

@@ -17,7 +17,7 @@ public class PausedStateTest {
 	{
 		Pane canvas = new Pane();
 		context = new Context(canvas);
-		context.stepper.load(oneStepSequence);
+		context.stepper.load(oneStepSequence, canvas);
 	}
 
 	@Test

@@ -16,10 +16,11 @@ public class Player {
 	}
 
 	public void stepBackward() {
+		context.stepper.stepBackward(context.canvas);
 	}
 
 	public void reset(Sequence sequence) {
-		context.stepper.load(sequence);
+		context.stepper.load(sequence, context.canvas);
 	}
 
 }

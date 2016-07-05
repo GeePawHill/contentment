@@ -29,7 +29,7 @@ public class TestStep implements Step
 	}
 
 	@Override
-	public void jumpBefore()
+	public void jumpBefore(Pane canvas)
 	{
 		isBefore=true;
 		isPlaying=false;

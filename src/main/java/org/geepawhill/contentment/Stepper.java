@@ -24,12 +24,12 @@ public class Stepper
 		return current;
 	}
 
-	public void load(Sequence sequence)
+	public void load(Sequence sequence, Pane canvas)
 	{
 		this.sequence = sequence;
 		for (Step step : sequence)
 		{
-			step.jumpBefore();
+			step.jumpBefore(canvas);
 		}
 		current = 0;
 	}
@@ -43,12 +43,12 @@ public class Stepper
 		}
 	}
 
-	public void stepBackward()
+	public void stepBackward(Pane canvas)
 	{
 		if (current() > 0)
 		{
 			current -= 1;
-			sequence.get(current).jumpBefore();
+			sequence.get(current).jumpBefore(canvas);
 		}
 	}
 
@@ -59,10 +59,10 @@ public class Stepper
 		if(index<0) index=0;
 		while(index!=current)
 		{
-			if(index<current) stepBackward();
+			if(index<current) stepBackward(canvas);
 			else stepForward(canvas);
 		}
-		sequence.get(current).jumpBefore();
+		sequence.get(current).jumpBefore(canvas);
 		if(skipPastLast) sequence.get(current).jumpAfter(canvas);
 	}
 	
