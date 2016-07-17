@@ -61,16 +61,36 @@ public class Player
 		current = 0;
 	}
 
-	public void stepForward()
+	public void forward()
 	{
-		if (current() < size())
+		switch (state)
 		{
-			sequence.get(current).after(context);
-			current += 1;
+		default:
+		case After:
+			return;
+		case Playing:
+		case Before:
+		case Paused:
+			if (current() < size()-1)
+			{
+				sequence.get(current).after(context);
+				current += 1;
+				state=PlayState.Before;
+				return;
+			}
+			if(current() < size())
+			{
+				sequence.get(current).after(context);
+				state = PlayState.After;
+				return;
+			}
+
+			return;
 		}
+
 	}
 
-	public void stepBackward()
+	public void backward()
 	{
 		switch (state)
 		{
@@ -98,9 +118,9 @@ public class Player
 		while (index != current)
 		{
 			if (index < current)
-				stepBackward();
+				backward();
 			else
-				stepForward();
+				forward();
 		}
 		sequence.get(current).before(context);
 		if (skipPastLast) sequence.get(current).after(context);
@@ -139,7 +159,7 @@ public class Player
 	public void stop()
 	{
 		while (current >= 0)
-			stepBackward();
+			backward();
 	}
 
 	public PlayState getState()

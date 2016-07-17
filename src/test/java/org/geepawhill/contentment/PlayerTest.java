@@ -56,41 +56,93 @@ public class PlayerTest
 
 	
 	@Test
-	public void stepForwardDoes()
+	public void forwardWhileBeforeSteps()
 	{
-		player.reset(oneStepSequence);
-		player.stepForward();
+		player.reset(twoStepSequence);
+		player.forward();
 		assertEquals(1,player.current());
 		assertFalse(oneStep.isBefore);
 		assertBefore();
 	}
 	
 	@Test
-	public void stepBackwardDoes()
+	public void forwardWhilePlayingSteps()
+	{
+		player.reset(twoStepSequence);
+		player.play();
+		player.forward();
+		assertEquals(1,player.current());
+		assertFalse(oneStep.isBefore);
+		assertTrue(twoStep.isBefore);
+		assertBefore();
+	}
+	
+	@Test
+	public void forwardNoopsAtEnd()
 	{
 		player.reset(oneStepSequence);
-		player.stepForward();
-		player.stepBackward();
+		player.forward();
+		player.forward();
 		assertEquals(0,player.current());
-		assertTrue(oneStep.isBefore);
+		assertFalse(oneStep.isBefore);
+		assertAfter();
+	}
+
+	
+	@Test
+	public void backwardWhileBeforeGoesBackward()
+	{
+		player.reset(twoStepSequence);
+		player.play();
+		oneStep.finishPlaying(player.context);
+		player.backward();
+		assertEquals(1,player.current());
+		assertTrue(twoStep.isBefore);
 		assertBefore();
 	}
 	
 	@Test
-	public void stepForwardNoopsAtEnd()
+	public void backwardWhileAfterDoesBefore()
 	{
-		player.reset(oneStepSequence);
-		player.stepForward();
-		player.stepForward();
+		player.reset(twoStepSequence);
+		player.forward();
+		player.forward();
+		player.backward();
 		assertEquals(1,player.current());
-		assertFalse(oneStep.isBefore);
+		assertTrue(twoStep.isBefore);
+		assertBefore();
 	}
 	
 	@Test
-	public void stepBackwardNoopsAtBeginning()
+	public void backwardWhilePlayingDoesBefore()
+	{
+		player.reset(twoStepSequence);
+		player.play();
+		oneStep.finishPlaying(player.context);
+		player.backward();
+		assertEquals(1,player.current());
+		assertTrue(twoStep.isBefore);
+		assertBefore();
+	}
+	
+	@Test
+	public void backwardWhilePausedDoesBefore()
+	{
+		player.reset(twoStepSequence);
+		player.play();
+		oneStep.finishPlaying(player.context);
+		player.pause();
+		player.backward();
+		assertEquals(1,player.current());
+		assertTrue(twoStep.isBefore);
+		assertBefore();
+	}
+	
+	@Test
+	public void backwardackwardNoopsAtBeginning()
 	{
 		player.reset(oneStepSequence);
-		player.stepBackward();
+		player.backward();
 		assertEquals(0,player.current());
 		assertTrue(oneStep.isBefore);
 	}
@@ -99,7 +151,7 @@ public class PlayerTest
 	public void seekNoChangeDoesBefore()
 	{
 		player.reset(oneStepSequence);
-		player.stepForward();
+		player.forward();
 		player.seek(canvas, 0);
 		assertEquals(0,player.current());
 		assertTrue(oneStep.isBefore);
@@ -119,8 +171,8 @@ public class PlayerTest
 	public void seekBackward()
 	{
 		player.reset(twoStepSequence);
-		player.stepForward();
-		player.stepForward();
+		player.forward();
+		player.forward();
 		player.seek(canvas, 0);
 		assertEquals(0,player.current());
 		assertTrue(oneStep.isBefore);
@@ -142,8 +194,8 @@ public class PlayerTest
 	public void seekBeforeStart()
 	{
 		player.reset(twoStepSequence);
-		player.stepForward();
-		player.stepForward();
+		player.forward();
+		player.forward();
 		player.seek(canvas, -20);
 		assertEquals(0,player.current());
 		assertTrue(oneStep.isBefore);
