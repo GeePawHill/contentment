@@ -72,10 +72,21 @@ public class Player
 
 	public void stepBackward()
 	{
-		if (current() > 0)
+		switch (state)
 		{
-			current -= 1;
+		default:
+		case After:
+		case Playing:
+		case Paused:
 			sequence.get(current).before(context);
+			state = PlayState.Before;
+			return;
+		case Before:
+			if (current() > 0)
+			{
+				current -= 1;
+				sequence.get(current).before(context);
+			}
 		}
 	}
 

@@ -227,6 +227,18 @@ public class PlayerTest
 		assertEquals(1,player.current());
 		assertBefore();
 	}
+	
+	@Test
+	public void playOneStopsChainingWhilePlaying()
+	{
+		player.reset(twoStepSequence);
+		player.play();
+		player.playOne();
+		oneStep.finishPlaying(player.context);
+		assertFalse(twoStep.isPlaying);
+		assertEquals(1,player.current());
+		assertBefore();
+	}
 
 	private void assertAfter()
 	{

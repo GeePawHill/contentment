@@ -20,6 +20,7 @@ public class LabelBoxStep implements Step {
 		label = new Text(xCenter, yCenter, "");
 		rectangle = new Rectangle();
 		keeper.keep(label,rectangle);
+		bounds = label.getBoundsInParent();
 		this.text = text;
 		transition = new SequentialTransition();
 		transition.getChildren().add(new SimpleTransition(500, this::animateDrawText));
@@ -43,8 +44,9 @@ public class LabelBoxStep implements Step {
 	@Override
 	public void play(Context context) {
 		// TODO Auto-generated method stub
+		keeper.addTo(context.canvas);
 		transition.setOnFinished(context.onFinished);
-
+		transition.playFromStart();
 	}
 
 	@Override
@@ -73,11 +75,12 @@ public class LabelBoxStep implements Step {
 		rectangle.setStroke(Color.RED);
 		rectangle.setX(bounds.getMinX());
 		rectangle.setY(bounds.getMinY());
+		rectangle.setWidth(0d);
+		rectangle.setHeight(0d);
 	}
 
 	protected void animateDrawBox(double frac)
 	{
-		if (frac == 0d) return;
 		rectangle.setWidth(bounds.getWidth() * frac);
 		rectangle.setHeight(bounds.getHeight() * frac);
 	}

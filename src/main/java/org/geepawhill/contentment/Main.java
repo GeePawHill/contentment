@@ -27,13 +27,22 @@ public class Main extends Application
 
 			ToolBar tools = new ToolBar();
 			tools.setOrientation(Orientation.VERTICAL);
-			Button play = new Button("-->");
-			play.setOnAction(event -> player.stepForward());
+			Button forwards = new Button("-->");
+			forwards.setOnAction(event -> player.stepForward());
+			tools.getItems().add(forwards);
+			
+			Button backwards = new Button("<--");
+			backwards.setOnAction(event -> player.stepBackward());
+			tools.getItems().add(backwards);
+			
+			Button play = new Button(">");
+			play.setOnAction(event -> player.play());
 			tools.getItems().add(play);
 			
-			Button pause = new Button("<--");
-			pause.setOnAction(event -> player.stepBackward());
-			tools.getItems().add(pause);
+			Button playOne = new Button(">|");
+			playOne.setOnAction(event -> player.playOne());
+			
+			tools.getItems().add(playOne);
 			
 			root.setRight(tools);
 			
