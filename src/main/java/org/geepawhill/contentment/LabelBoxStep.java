@@ -2,7 +2,6 @@ package org.geepawhill.contentment;
 
 import javafx.animation.SequentialTransition;
 import javafx.geometry.Bounds;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -29,42 +28,36 @@ public class LabelBoxStep implements Step {
 	}
 
 	@Override
-	public void jumpAfter(Pane canvas) {
-		keeper.addTo(canvas);
+	public void after(Context context) {
+		keeper.addTo(context.canvas);
 		animateDrawText(1.0);
 		animateComputeBox(1.0);
 		animateDrawBox(1.0);
 	}
 
 	@Override
-	public void jumpBefore(Pane canvas) {
-		keeper.removeFrom(canvas);
+	public void before(Context context) {
+		keeper.removeFrom(context.canvas);
 	}
 
 	@Override
-	public void play() {
+	public void play(Context context) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void pause() {
+	public void pause(Context context) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void resume() {
+	public void resume(Context context) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	public void stop() {
-		// TODO Auto-generated method stub
-
-	}
-	
 	protected void animateDrawText(double frac)
 	{
 		String newText = text.substring(0, (int) (frac * text.length()));

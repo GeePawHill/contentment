@@ -1,7 +1,5 @@
 package org.geepawhill.contentment;
 
-import javafx.scene.layout.Pane;
-
 public class TestStep implements Step
 {
 	
@@ -22,43 +20,33 @@ public class TestStep implements Step
 	}
 
 	@Override
-	public void jumpAfter(Pane canvas)
+	public void after(Context context)
 	{
 		isBefore=false;
 		isPlaying=false;
 	}
 
 	@Override
-	public void jumpBefore(Pane canvas)
+	public void before(Context context)
 	{
 		isBefore=true;
 		isPlaying=false;
 	}
 	
 	@Override
-	public void play()
+	public void play(Context context)
 	{
 		isPlaying=true;
 	}
 	
 	@Override
-	public void pause()
+	public void pause(Context context)
 	{
 		isPaused=true;
 	}
 
 	@Override
-	public void resume() {
+	public void resume(Context context) {
 		isPaused=false;
-	}
-
-	@Override
-	public void stop() {
-		isPlaying=false;
-		isBefore = true;
-	}
-	
-	
-	
-	
+	}	
 }

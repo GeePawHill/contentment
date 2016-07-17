@@ -30,7 +30,7 @@ public class Player {
 		this.sequence = sequence;
 		for (Step step : sequence)
 		{
-			step.jumpBefore(context.canvas);
+			step.before(context);
 		}
 		current = 0;
 	}
@@ -39,7 +39,7 @@ public class Player {
 	{
 		if (current() < size())
 		{
-			sequence.get(current).jumpAfter(context.canvas);
+			sequence.get(current).after(context);
 			current += 1;
 		}
 	}
@@ -49,7 +49,7 @@ public class Player {
 		if (current() > 0)
 		{
 			current -= 1;
-			sequence.get(current).jumpBefore(context.canvas);
+			sequence.get(current).before(context);
 		}
 	}
 
@@ -63,24 +63,24 @@ public class Player {
 			if(index<current) stepBackward();
 			else stepForward();
 		}
-		sequence.get(current).jumpBefore(canvas);
-		if(skipPastLast) sequence.get(current).jumpAfter(canvas);
+		sequence.get(current).before(context);
+		if(skipPastLast) sequence.get(current).after(context);
 	}
 	
 	public void play()
 	{
-		sequence.get(current).play();
+		sequence.get(current).play(context);
 	}
 
 	public void pause() {
-		sequence.get(current).pause();
+		sequence.get(current).pause(context);
 	}
 	
 	public void resume() {
-		sequence.get(current).resume();
+		sequence.get(current).resume(context);
 	}
 
 	public void stop() {
-		sequence.get(current).stop();
+		while(current>=0) stepBackward();
 	}
 }
