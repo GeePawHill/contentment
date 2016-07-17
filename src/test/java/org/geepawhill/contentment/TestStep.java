@@ -11,12 +11,14 @@ public class TestStep implements Step
 	public boolean isBefore;
 	public boolean isPlaying;
 	public boolean isPaused;
+	public boolean isChanged;
 	
 	public TestStep()
 	{
 		isBefore=true;
 		isPlaying=false;
 		isPaused=false;
+		isChanged=false;
 	}
 
 	@Override
@@ -24,6 +26,7 @@ public class TestStep implements Step
 	{
 		isBefore=false;
 		isPlaying=false;
+		isChanged=true;
 	}
 
 	@Override
@@ -31,22 +34,36 @@ public class TestStep implements Step
 	{
 		isBefore=true;
 		isPlaying=false;
+		isChanged=true;
 	}
 	
 	@Override
 	public void play(Context context)
 	{
+		isBefore=false;
 		isPlaying=true;
+		isChanged=true;
 	}
 	
 	@Override
 	public void pause(Context context)
 	{
+		isChanged=true;
 		isPaused=true;
 	}
 
 	@Override
 	public void resume(Context context) {
 		isPaused=false;
+		isChanged=true;
+	}
+
+	public void finishPlaying(Context context)
+	{
+		isPlaying=false;
+		isBefore=false;
+		isPaused=false;
+		context.onFinished.handle(null);
+		
 	}	
 }

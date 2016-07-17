@@ -35,6 +35,7 @@ public class PlayerTest
 	public void newIsBeforeAll()
 	{
 		assertEquals(0,player.current());
+		assertBefore();
 	}
 	
 	@Test
@@ -50,7 +51,9 @@ public class PlayerTest
 		oneStep.isBefore=false;
 		player.reset(oneStepSequence);
 		assertTrue(oneStep.isBefore);
+		assertBefore();
 	}
+
 	
 	@Test
 	public void stepForwardDoes()
@@ -59,6 +62,7 @@ public class PlayerTest
 		player.stepForward();
 		assertEquals(1,player.current());
 		assertFalse(oneStep.isBefore);
+		assertBefore();
 	}
 	
 	@Test
@@ -69,6 +73,7 @@ public class PlayerTest
 		player.stepBackward();
 		assertEquals(0,player.current());
 		assertTrue(oneStep.isBefore);
+		assertBefore();
 	}
 	
 	@Test
@@ -155,4 +160,65 @@ public class PlayerTest
 		assertFalse(twoStep.isBefore);		
 	}
 	
+	@Test
+	public void playWhileBeforePlays()
+	{
+		player.reset(oneStepSequence);
+		player.play();
+		assertTrue(oneStep.isPlaying);
+		assertPlaying();
+	}
+	
+	@Test
+	public void playWhilePlayingNoops()
+	{
+		player.reset(oneStepSequence);
+		player.play();
+		assertTrue(oneStep.isPlaying);
+		assertTrue(oneStep.isChanged);
+		oneStep.isChanged = false;
+		player.play();
+		assertFalse(oneStep.isChanged);
+	}
+	
+	@Test
+	public void playWhilePausedResumes()
+	{
+		player.reset(oneStepSequence);
+		player.play();
+		assertTrue(oneStep.isPlaying);
+		assertTrue(oneStep.isChanged);
+		player.pause();
+		assertTrue(oneStep.isPaused);
+		player.play();
+		assertTrue(oneStep.isPlaying);
+	}
+	
+	@Test
+	public void playWhileAfterNoops()
+	{
+		player.reset(oneStepSequence);
+		player.play();
+		oneStep.finishPlaying(player.context);
+		oneStep.isChanged=false;
+		player.play();
+		assertFalse(oneStep.isChanged);
+		assertAfter();
+	}
+
+	private void assertAfter()
+	{
+		assertEquals(PlayState.After,player.getState());
+	}
+
+	private void assertPlaying()
+	{
+		assertEquals(PlayState.Playing,player.getState());
+	}
+	
+	private void assertBefore()
+	{
+		assertEquals(PlayState.Before,player.getState());
+	}
+
 }

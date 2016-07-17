@@ -43,6 +43,7 @@ public class LabelBoxStep implements Step {
 	@Override
 	public void play(Context context) {
 		// TODO Auto-generated method stub
+		transition.setOnFinished(context.onFinished);
 
 	}
 

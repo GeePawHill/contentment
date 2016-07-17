@@ -1,5 +1,7 @@
 package org.geepawhill.contentment;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.layout.Pane;
 
 public class Player {
@@ -7,12 +9,27 @@ public class Player {
 	Context context;
 	Sequence sequence;
 	private int current;
+	private PlayState state;
 	
 	public Player(Pane canvas)
 	{
 		context = new Context(canvas);
+		context.onFinished = this::onFinished;
 		sequence = new Sequence();
 		current = 0;
+		state=PlayState.Before;
+	}
+
+	private void onFinished(ActionEvent e)
+	{
+		if (current() < size()-1)
+		{
+			current += 1;
+		}
+		else
+		{
+			state = PlayState.After;
+		}
 	}
 
 	public int size()
@@ -69,7 +86,21 @@ public class Player {
 	
 	public void play()
 	{
-		sequence.get(current).play(context);
+		switch(state)
+		{
+		default:
+		case After:
+		case Playing:
+			return;
+		case Before:
+			state= PlayState.Playing;
+			sequence.get(current).play(context);
+			return;
+		case Paused:
+			state = PlayState.Playing;
+			sequence.get(current).resume(context);
+			return;
+		}
 	}
 
 	public void pause() {
@@ -82,5 +113,10 @@ public class Player {
 
 	public void stop() {
 		while(current>=0) stepBackward();
+	}
+
+	public PlayState getState()
+	{
+		return state;
 	}
 }
