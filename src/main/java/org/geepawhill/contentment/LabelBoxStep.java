@@ -1,12 +1,7 @@
 package org.geepawhill.contentment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.animation.SequentialTransition;
-import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
-import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -15,19 +10,18 @@ import javafx.scene.text.Text;
 public class LabelBoxStep implements Step {
 
 	private String text;
-	private double xCenter;
-	private double yCenter;
 	private Text label;
 	private Rectangle rectangle;
 	private Bounds bounds;
-	private final List<Node> children;
 	public SequentialTransition transition;
+	private final NodeKeeper keeper;
 
 	public LabelBoxStep(String text, double xCenter, double yCenter) {
-		children = new ArrayList<Node>();
+		keeper = new NodeKeeper();
+		label = new Text(xCenter, yCenter, "");
+		rectangle = new Rectangle();
+		keeper.keep(label,rectangle);
 		this.text = text;
-		this.xCenter = xCenter;
-		this.yCenter = yCenter;
 		transition = new SequentialTransition();
 		transition.getChildren().add(new SimpleTransition(500, this::animateDrawText));
 		transition.getChildren().add(new SimpleTransition(1, this::animateComputeBox));
@@ -36,13 +30,7 @@ public class LabelBoxStep implements Step {
 
 	@Override
 	public void jumpAfter(Pane canvas) {
-		label = new Text(xCenter, yCenter, "");
-		rectangle = new Rectangle();
-		ObservableList<Node> canvasChildren = canvas.getChildren();
-		canvasChildren.add(label);
-		canvasChildren.add(rectangle);
-		children.add(label);
-		children.add(rectangle);
+		keeper.addTo(canvas);
 		animateDrawText(1.0);
 		animateComputeBox(1.0);
 		animateDrawBox(1.0);
@@ -50,11 +38,7 @@ public class LabelBoxStep implements Step {
 
 	@Override
 	public void jumpBefore(Pane canvas) {
-		ObservableList<Node> canvasChildren = canvas.getChildren();
-		for(Node node : children)
-		{
-			canvasChildren.remove(node);
-		}
+		keeper.removeFrom(canvas);
 	}
 
 	@Override
