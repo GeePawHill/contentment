@@ -30,6 +30,7 @@ public class LabelBoxStep implements Step {
 
 	@Override
 	public void after(Context context) {
+		transition.stop();
 		keeper.addTo(context.canvas);
 		animateDrawText(1.0);
 		animateComputeBox(1.0);
@@ -38,6 +39,7 @@ public class LabelBoxStep implements Step {
 
 	@Override
 	public void before(Context context) {
+		transition.stop();
 		keeper.removeFrom(context.canvas);
 	}
 
