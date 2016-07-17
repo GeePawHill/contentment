@@ -205,6 +205,28 @@ public class PlayerTest
 		assertFalse(oneStep.isChanged);
 		assertAfter();
 	}
+	
+	@Test
+	public void playChainsToAllSteps()
+	{
+		player.reset(twoStepSequence);
+		player.play();
+		oneStep.finishPlaying(player.context);
+		assertTrue(twoStep.isPlaying);
+		twoStep.finishPlaying(player.context);
+		assertAfter();
+	}
+	
+	@Test
+	public void playOneDoesNotChain()
+	{
+		player.reset(twoStepSequence);
+		player.playOne();
+		oneStep.finishPlaying(player.context);
+		assertFalse(twoStep.isPlaying);
+		assertEquals(1,player.current());
+		assertBefore();
+	}
 
 	private void assertAfter()
 	{

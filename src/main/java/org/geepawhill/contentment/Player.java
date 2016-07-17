@@ -1,30 +1,39 @@
 package org.geepawhill.contentment;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.layout.Pane;
 
-public class Player {
-	
+public class Player
+{
+
 	Context context;
 	Sequence sequence;
 	private int current;
 	private PlayState state;
-	
+	private boolean isChaining;
+
 	public Player(Pane canvas)
 	{
 		context = new Context(canvas);
 		context.onFinished = this::onFinished;
 		sequence = new Sequence();
 		current = 0;
-		state=PlayState.Before;
+		state = PlayState.Before;
 	}
 
 	private void onFinished(ActionEvent e)
 	{
-		if (current() < size()-1)
+		if (current() < size() - 1)
 		{
 			current += 1;
+			if (isChaining)
+			{
+				sequence.get(current).play(context);
+			}
+			else
+			{
+				state=PlayState.Before;
+			}
 		}
 		else
 		{
@@ -72,28 +81,31 @@ public class Player {
 
 	public void seek(Pane canvas, int index)
 	{
-		boolean skipPastLast = index>=size() ? true : false;
-		if(index>=size()) index=size()-1;
-		if(index<0) index=0;
-		while(index!=current)
+		boolean skipPastLast = index >= size() ? true : false;
+		if (index >= size()) index = size() - 1;
+		if (index < 0) index = 0;
+		while (index != current)
 		{
-			if(index<current) stepBackward();
-			else stepForward();
+			if (index < current)
+				stepBackward();
+			else
+				stepForward();
 		}
 		sequence.get(current).before(context);
-		if(skipPastLast) sequence.get(current).after(context);
+		if (skipPastLast) sequence.get(current).after(context);
 	}
-	
+
 	public void play()
 	{
-		switch(state)
+		isChaining = true;
+		switch (state)
 		{
 		default:
 		case After:
 		case Playing:
 			return;
 		case Before:
-			state= PlayState.Playing;
+			state = PlayState.Playing;
 			sequence.get(current).play(context);
 			return;
 		case Paused:
@@ -103,20 +115,44 @@ public class Player {
 		}
 	}
 
-	public void pause() {
+	public void pause()
+	{
 		sequence.get(current).pause(context);
 	}
-	
-	public void resume() {
+
+	public void resume()
+	{
 		sequence.get(current).resume(context);
 	}
 
-	public void stop() {
-		while(current>=0) stepBackward();
+	public void stop()
+	{
+		while (current >= 0)
+			stepBackward();
 	}
 
 	public PlayState getState()
 	{
 		return state;
+	}
+
+	public void playOne()
+	{
+		isChaining = false;
+		switch (state)
+		{
+		default:
+		case After:
+		case Playing:
+			return;
+		case Before:
+			state = PlayState.Playing;
+			sequence.get(current).play(context);
+			return;
+		case Paused:
+			state = PlayState.Playing;
+			sequence.get(current).resume(context);
+			return;
+		}
 	}
 }
