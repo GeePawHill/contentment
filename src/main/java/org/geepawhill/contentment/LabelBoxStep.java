@@ -53,14 +53,13 @@ public class LabelBoxStep implements Step {
 
 	@Override
 	public void pause(Context context) {
-		// TODO Auto-generated method stub
+		transition.pause();
 
 	}
 
 	@Override
 	public void resume(Context context) {
-		// TODO Auto-generated method stub
-
+		transition.play();
 	}
 
 	protected void animateDrawText(double frac)

@@ -41,8 +41,11 @@ public class Main extends Application
 			
 			Button playOne = new Button(">|");
 			playOne.setOnAction(event -> player.playOne());
-			
 			tools.getItems().add(playOne);
+			
+			Button pause = new Button("||");
+			pause.setOnAction(event -> player.pause());
+			tools.getItems().add(pause);
 			
 			root.setRight(tools);
 			

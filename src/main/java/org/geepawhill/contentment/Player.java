@@ -148,7 +148,21 @@ public class Player
 
 	public void pause()
 	{
-		sequence.get(current).pause(context);
+		switch (state)
+		{
+		default:
+		case After:
+		case Before:
+			return;
+		case Paused:
+			state = PlayState.Playing;
+			sequence.get(current).resume(context);
+			return;
+		case Playing:
+			state = PlayState.Paused;
+			sequence.get(current).pause(context);
+			return;
+		}
 	}
 
 	public void resume()

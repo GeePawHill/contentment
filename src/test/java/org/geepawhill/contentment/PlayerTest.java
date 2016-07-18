@@ -148,6 +148,47 @@ public class PlayerTest
 	}
 	
 	@Test
+	public void pauseBeforeNoops()
+	{
+		player.reset(oneStepSequence);
+		player.pause();
+		assertTrue(oneStep.isBefore);
+	}
+	
+	@Test
+	public void pauseWhilePlayingPauses()
+	{
+		player.reset(oneStepSequence);
+		player.play();
+		player.pause();
+		assertTrue(oneStep.isPaused);
+		assertPaused();
+	}
+	
+	@Test
+	public void pauseWhilePausedPlays()
+	{
+		player.reset(oneStepSequence);
+		player.play();
+		player.pause();
+		assertTrue(oneStep.isPaused);
+		assertPaused();
+		player.pause();
+		assertFalse(oneStep.isPaused);
+		assertPlaying();
+	}
+
+	@Test
+	public void pauseAfterNoops()
+	{
+		player.reset(oneStepSequence);
+		player.forward();
+		oneStep.isChanged=false;
+		player.pause();
+		assertFalse(oneStep.isChanged);
+	}
+	
+	@Test
 	public void seekNoChangeDoesBefore()
 	{
 		player.reset(oneStepSequence);
@@ -305,6 +346,11 @@ public class PlayerTest
 	private void assertBefore()
 	{
 		assertEquals(PlayState.Before,player.getState());
+	}
+	
+	private void assertPaused()
+	{
+		assertEquals(PlayState.Paused,player.getState());
 	}
 
 }
