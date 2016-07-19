@@ -12,7 +12,7 @@ public class LabelBoxStep implements Step {
 	private Text label;
 	private Rectangle rectangle;
 	private Bounds bounds;
-	public SequentialTransition transition;
+	private final SequentialTransition transition;
 	private final NodeKeeper keeper;
 
 	public LabelBoxStep(String text, double xCenter, double yCenter) {
@@ -23,18 +23,15 @@ public class LabelBoxStep implements Step {
 		bounds = label.getBoundsInParent();
 		this.text = text;
 		transition = new SequentialTransition();
-		transition.getChildren().add(new SimpleTransition(500, this::animateDrawText));
-		transition.getChildren().add(new SimpleTransition(1, this::animateComputeBox));
-		transition.getChildren().add(new SimpleTransition(500, this::animateDrawBox));
 	}
 
 	@Override
 	public void after(Context context) {
 		transition.stop();
 		keeper.addTo(context.canvas);
-		animateDrawText(1.0);
-		animateComputeBox(1.0);
-		animateDrawBox(1.0);
+		animateDrawText(1.0, context);
+		animateComputeBox(1.0, context);
+		animateDrawBox(1.0, context);
 	}
 
 	@Override
@@ -47,6 +44,10 @@ public class LabelBoxStep implements Step {
 	public void play(Context context) {
 		// TODO Auto-generated method stub
 		keeper.addTo(context.canvas);
+		transition.getChildren().clear();
+		transition.getChildren().add(new ContextTransition(context,500, this::animateDrawText));
+		transition.getChildren().add(new ContextTransition(context,1, this::animateComputeBox));
+		transition.getChildren().add(new ContextTransition(context,500, this::animateDrawBox));
 		transition.setOnFinished(context.onFinished);
 		transition.playFromStart();
 	}
@@ -62,25 +63,25 @@ public class LabelBoxStep implements Step {
 		transition.play();
 	}
 
-	protected void animateDrawText(double frac)
+	protected void animateDrawText(double frac, Context context)
 	{
 		String newText = text.substring(0, (int) (frac * text.length()));
 		label.setText(newText);
 	}
 
-	protected void animateComputeBox(double frac)
+	protected void animateComputeBox(double frac, Context context)
 	{
 		bounds = label.getBoundsInParent();
 
 		rectangle.setFill(Color.TRANSPARENT);
-		rectangle.setStroke(Color.RED);
+		rectangle.setStroke(context.stroke);
 		rectangle.setX(bounds.getMinX());
 		rectangle.setY(bounds.getMinY());
 		rectangle.setWidth(0d);
 		rectangle.setHeight(0d);
 	}
 
-	protected void animateDrawBox(double frac)
+	protected void animateDrawBox(double frac, Context context)
 	{
 		rectangle.setWidth(bounds.getWidth() * frac);
 		rectangle.setHeight(bounds.getHeight() * frac);

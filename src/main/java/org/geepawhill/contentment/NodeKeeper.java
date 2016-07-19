@@ -39,7 +39,10 @@ public class NodeKeeper
 	{
 		for (Node node : nodes)
 		{
-			canvas.getChildren().add(node);
+			if (!canvas.getChildren().contains(node))
+			{
+				canvas.getChildren().add(node);
+			}
 		}
 	}
 
