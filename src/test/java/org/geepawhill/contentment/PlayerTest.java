@@ -78,6 +78,20 @@ public class PlayerTest
 	}
 	
 	@Test
+	public void forwardWhilePausedSteps()
+	{
+		player.reset(twoStepSequence);
+		player.play();
+		player.pause();
+		player.forward();
+		assertEquals(1,player.current());
+		assertFalse(oneStep.isBefore);
+		assertTrue(twoStep.isBefore);
+		assertBefore();
+	}
+
+	
+	@Test
 	public void forwardNoopsAtEnd()
 	{
 		player.reset(oneStepSequence);
@@ -251,8 +265,36 @@ public class PlayerTest
 		assertEquals(1,player.current());
 		assertFalse(oneStep.isBefore);
 		assertFalse(twoStep.isBefore);		
+		assertEquals(PlayState.After,player.getState());
 	}
 	
+	@Test
+	public void seekWhilePlayingStops()
+	{
+		player.reset(twoStepSequence);
+		player.play();
+		player.seek(canvas, 1);
+		assertEquals(1,player.current());
+		assertFalse(oneStep.isBefore);
+		assertFalse(oneStep.isPlaying);
+		assertTrue(twoStep.isBefore);
+		assertFalse(twoStep.isPlaying);
+	}
+
+	@Test
+	public void seekWhilePausedStops()
+	{
+		player.reset(twoStepSequence);
+		player.play();
+		player.pause();
+		player.seek(canvas, 1);
+		assertEquals(1,player.current());
+		assertFalse(oneStep.isBefore);
+		assertFalse(oneStep.isPlaying);
+		assertTrue(twoStep.isBefore);
+		assertFalse(twoStep.isPlaying);
+	}
+
 	@Test
 	public void playWhileBeforePlays()
 	{
