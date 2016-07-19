@@ -207,7 +207,7 @@ public class PlayerTest
 	{
 		player.reset(oneStepSequence);
 		player.forward();
-		player.seek(canvas, 0);
+		player.seek(0);
 		assertEquals(0,player.current());
 		assertTrue(oneStep.isBefore);
 	}
@@ -216,7 +216,7 @@ public class PlayerTest
 	public void seekForward()
 	{
 		player.reset(twoStepSequence);
-		player.seek(canvas, 1);
+		player.seek(1);
 		assertEquals(1,player.current());
 		assertFalse(oneStep.isBefore);
 		assertTrue(twoStep.isBefore);
@@ -228,7 +228,7 @@ public class PlayerTest
 		player.reset(twoStepSequence);
 		player.forward();
 		player.forward();
-		player.seek(canvas, 0);
+		player.seek(0);
 		assertEquals(0,player.current());
 		assertTrue(oneStep.isBefore);
 		assertTrue(twoStep.isBefore);
@@ -239,7 +239,7 @@ public class PlayerTest
 	{
 		player.reset(twoStepSequence);
 		oneStep.isBefore=false;
-		player.seek(canvas, 0);
+		player.seek(0);
 		assertEquals(0,player.current());
 		assertTrue(oneStep.isBefore);
 		assertTrue(twoStep.isBefore);
@@ -251,7 +251,7 @@ public class PlayerTest
 		player.reset(twoStepSequence);
 		player.forward();
 		player.forward();
-		player.seek(canvas, -20);
+		player.seek(-20);
 		assertEquals(0,player.current());
 		assertTrue(oneStep.isBefore);
 		assertTrue(twoStep.isBefore);		
@@ -261,11 +261,11 @@ public class PlayerTest
 	public void seekAfterEnd()
 	{
 		player.reset(twoStepSequence);
-		player.seek(canvas, 20);
+		player.seek(20);
 		assertEquals(1,player.current());
 		assertFalse(oneStep.isBefore);
 		assertFalse(twoStep.isBefore);		
-		assertEquals(PlayState.After,player.getState());
+		assertEquals(PlayState.After,player.state());
 	}
 	
 	@Test
@@ -273,7 +273,7 @@ public class PlayerTest
 	{
 		player.reset(twoStepSequence);
 		player.play();
-		player.seek(canvas, 1);
+		player.seek(1);
 		assertEquals(1,player.current());
 		assertFalse(oneStep.isBefore);
 		assertFalse(oneStep.isPlaying);
@@ -287,7 +287,7 @@ public class PlayerTest
 		player.reset(twoStepSequence);
 		player.play();
 		player.pause();
-		player.seek(canvas, 1);
+		player.seek(1);
 		assertEquals(1,player.current());
 		assertFalse(oneStep.isBefore);
 		assertFalse(oneStep.isPlaying);
@@ -377,22 +377,22 @@ public class PlayerTest
 
 	private void assertAfter()
 	{
-		assertEquals(PlayState.After,player.getState());
+		assertEquals(PlayState.After,player.state());
 	}
 
 	private void assertPlaying()
 	{
-		assertEquals(PlayState.Playing,player.getState());
+		assertEquals(PlayState.Playing,player.state());
 	}
 	
 	private void assertBefore()
 	{
-		assertEquals(PlayState.Before,player.getState());
+		assertEquals(PlayState.Before,player.state());
 	}
 	
 	private void assertPaused()
 	{
-		assertEquals(PlayState.Paused,player.getState());
+		assertEquals(PlayState.Paused,player.state());
 	}
 
 }

@@ -5,7 +5,6 @@ import javafx.scene.layout.Pane;
 
 public class Player
 {
-
 	Context context;
 	Sequence sequence;
 	private int current;
@@ -21,26 +20,6 @@ public class Player
 		state = PlayState.Before;
 	}
 
-	private void onFinished(ActionEvent e)
-	{
-		if (current() < size() - 1)
-		{
-			current += 1;
-			if (isChaining)
-			{
-				sequence.get(current).play(context);
-			}
-			else
-			{
-				state = PlayState.Before;
-			}
-		}
-		else
-		{
-			state = PlayState.After;
-		}
-	}
-
 	public int size()
 	{
 		return sequence.size();
@@ -49,6 +28,11 @@ public class Player
 	public int current()
 	{
 		return current;
+	}
+	
+	public PlayState state()
+	{
+		return state;
 	}
 
 	public void reset(Sequence sequence)
@@ -71,16 +55,15 @@ public class Player
 		case Playing:
 		case Before:
 		case Paused:
+			afterCurrent();
 			if (current() < size() - 1)
 			{
-				sequence.get(current).after(context);
 				current += 1;
 				state = PlayState.Before;
 				return;
 			}
-			if (current() < size())
+			else
 			{
-				sequence.get(current).after(context);
 				state = PlayState.After;
 				return;
 			}
@@ -95,19 +78,19 @@ public class Player
 		case After:
 		case Playing:
 		case Paused:
-			sequence.get(current).before(context);
+			beforeCurrent();
 			state = PlayState.Before;
 			return;
 		case Before:
 			if (current() > 0)
 			{
 				current -= 1;
-				sequence.get(current).before(context);
+				beforeCurrent();
 			}
 		}
 	}
 
-	public void seek(Pane canvas, int index)
+	public void seek(int index)
 	{
 		boolean skipPastLast = index >= size() ? true : false;
 		if (index >= size()) index = size() - 1;
@@ -119,13 +102,14 @@ public class Player
 			else
 				forward();
 		}
-		sequence.get(current).before(context);
+		beforeCurrent();
 		if (skipPastLast)
 		{
 			state = PlayState.After;
-			sequence.get(current).after(context);
+			afterCurrent();
 		}
 	}
+
 
 	public void play()
 	{
@@ -138,11 +122,11 @@ public class Player
 			return;
 		case Before:
 			state = PlayState.Playing;
-			sequence.get(current).play(context);
+			playCurrent();
 			return;
 		case Paused:
 			state = PlayState.Playing;
-			sequence.get(current).resume(context);
+			resumeCurrent();
 			return;
 		}
 	}
@@ -157,29 +141,19 @@ public class Player
 			return;
 		case Paused:
 			state = PlayState.Playing;
-			sequence.get(current).resume(context);
+			resumeCurrent();
 			return;
 		case Playing:
 			state = PlayState.Paused;
-			sequence.get(current).pause(context);
+			pauseCurrent();
 			return;
 		}
-	}
-
-	public void resume()
-	{
-		sequence.get(current).resume(context);
 	}
 
 	public void stop()
 	{
 		while (current >= 0)
 			backward();
-	}
-
-	public PlayState getState()
-	{
-		return state;
 	}
 
 	public void playOne()
@@ -193,12 +167,65 @@ public class Player
 			return;
 		case Before:
 			state = PlayState.Playing;
-			sequence.get(current).play(context);
+			playCurrent();
 			return;
 		case Paused:
 			state = PlayState.Playing;
-			sequence.get(current).resume(context);
+			resumeCurrent();
 			return;
 		}
 	}
+	
+	private Step currentStep()
+	{
+		return sequence.get(current);
+	}
+	
+	private void beforeCurrent()
+	{
+		currentStep().before(context);
+	}
+
+	private void afterCurrent()
+	{
+		currentStep().after(context);
+	}
+
+	private void resumeCurrent()
+	{
+		currentStep().resume(context);
+	}
+
+	private void playCurrent()
+	{
+		currentStep().play(context);
+	}
+	
+	private void pauseCurrent()
+	{
+		currentStep().pause(context);
+	}
+
+
+	
+	private void onFinished(ActionEvent e)
+	{
+		if (current() < size() - 1)
+		{
+			current += 1;
+			if (isChaining)
+			{
+				playCurrent();
+			}
+			else
+			{
+				state = PlayState.Before;
+			}
+		}
+		else
+		{
+			state = PlayState.After;
+		}
+	}
+
 }
