@@ -1,16 +1,17 @@
 package org.geepawhill.contentment;
 
+import static org.geepawhill.contentment.TestStep.oneStep;
+import static org.geepawhill.contentment.TestStep.oneStepSequence;
+import static org.geepawhill.contentment.TestStep.twoStep;
+import static org.geepawhill.contentment.TestStep.twoStepSequence;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import javafx.scene.layout.Pane;
-
-import static org.geepawhill.contentment.TestStep.*;
 
 public class PlayerTest
 {

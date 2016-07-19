@@ -29,7 +29,7 @@ public class Player
 	{
 		return current;
 	}
-	
+
 	public PlayState state()
 	{
 		return state;
@@ -56,15 +56,9 @@ public class Player
 		case Before:
 		case Paused:
 			afterCurrent();
-			if (current() < size() - 1)
+			if (!currentIsLast())
 			{
 				current += 1;
-				state = PlayState.Before;
-				return;
-			}
-			else
-			{
-				state = PlayState.After;
 				return;
 			}
 		}
@@ -79,7 +73,6 @@ public class Player
 		case Playing:
 		case Paused:
 			beforeCurrent();
-			state = PlayState.Before;
 			return;
 		case Before:
 			if (current() > 0)
@@ -90,14 +83,14 @@ public class Player
 		}
 	}
 
-	public void seek(int index)
+	public void seek(int target)
 	{
-		boolean skipPastLast = index >= size() ? true : false;
-		if (index >= size()) index = size() - 1;
-		if (index < 0) index = 0;
-		while (index != current)
+		boolean skipPastLast = target >= size() ? true : false;
+		if (target >= size()) target = size() - 1;
+		if (target < 0) target = 0;
+		while (target != current)
 		{
-			if (index < current)
+			if (target < current)
 				backward();
 			else
 				forward();
@@ -105,11 +98,9 @@ public class Player
 		beforeCurrent();
 		if (skipPastLast)
 		{
-			state = PlayState.After;
 			afterCurrent();
 		}
 	}
-
 
 	public void play()
 	{
@@ -121,11 +112,9 @@ public class Player
 		case Playing:
 			return;
 		case Before:
-			state = PlayState.Playing;
 			playCurrent();
 			return;
 		case Paused:
-			state = PlayState.Playing;
 			resumeCurrent();
 			return;
 		}
@@ -140,11 +129,9 @@ public class Player
 		case Before:
 			return;
 		case Paused:
-			state = PlayState.Playing;
 			resumeCurrent();
 			return;
 		case Playing:
-			state = PlayState.Paused;
 			pauseCurrent();
 			return;
 		}
@@ -166,51 +153,64 @@ public class Player
 		case Playing:
 			return;
 		case Before:
-			state = PlayState.Playing;
 			playCurrent();
 			return;
 		case Paused:
-			state = PlayState.Playing;
 			resumeCurrent();
 			return;
 		}
 	}
-	
+
 	private Step currentStep()
 	{
 		return sequence.get(current);
 	}
-	
+
 	private void beforeCurrent()
 	{
 		currentStep().before(context);
+		state = PlayState.Before;
 	}
 
 	private void afterCurrent()
 	{
 		currentStep().after(context);
+		if (currentIsLast())
+			state = PlayState.After;
+		else
+			state = PlayState.Before;
+	}
+
+	private boolean currentIsLast()
+	{
+		return current == size() - 1;
 	}
 
 	private void resumeCurrent()
 	{
 		currentStep().resume(context);
+		state = PlayState.Playing;
 	}
 
 	private void playCurrent()
 	{
 		currentStep().play(context);
+		state = PlayState.Playing;
 	}
-	
+
 	private void pauseCurrent()
 	{
 		currentStep().pause(context);
+		state = PlayState.Paused;
 	}
 
-
-	
 	private void onFinished(ActionEvent e)
 	{
-		if (current() < size() - 1)
+		if (currentIsLast())
+		{
+			state = PlayState.After;
+		}
+		else
 		{
 			current += 1;
 			if (isChaining)
@@ -221,10 +221,6 @@ public class Player
 			{
 				state = PlayState.Before;
 			}
-		}
-		else
-		{
-			state = PlayState.After;
 		}
 	}
 
