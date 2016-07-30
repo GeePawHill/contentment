@@ -1,7 +1,15 @@
 package org.geepawhill.contentment;
 
-public enum Style
+public class Style
 {
-	LineStroke,
-	LineColor
+
+	public final StyleId id;
+	public final Object value;
+
+	public Style(StyleId id, Object value)
+	{
+		this.id = id;
+		this.value = value;
+	}
+
 }

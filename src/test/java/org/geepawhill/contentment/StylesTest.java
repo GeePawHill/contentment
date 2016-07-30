@@ -1,6 +1,6 @@
 package org.geepawhill.contentment;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,41 +21,41 @@ public class StylesTest
 	@Test(expected=RuntimeException.class)
 	public void throwsOnMissing()
 	{
-		styles.get(Style.LineColor);
+		styles.get(StyleId.LineColor);
 	}
 	
 	@Test
 	public void setAndGet()
 	{
-		styles.set(Style.LineColor, Color.RED);
-		assertEquals(Color.RED,styles.get(Style.LineColor));
+		styles.set(StyleId.LineColor, Color.RED);
+		assertEquals(Color.RED,styles.get(StyleId.LineColor).value);
 	}
 	
 	@Test
 	public void getAfterPush()
 	{
-		styles.set(Style.LineColor, Color.RED);
+		styles.set(StyleId.LineColor, Color.RED);
 		styles.push();
-		assertEquals(Color.RED,styles.get(Style.LineColor));
+		assertEquals(Color.RED,styles.get(StyleId.LineColor).value);
 	}
 	
 	@Test
 	public void getNewAfterNewSetAfterPush()
 	{
-		styles.set(Style.LineColor, Color.RED);
+		styles.set(StyleId.LineColor, Color.RED);
 		styles.push();
-		styles.set(Style.LineColor, Color.BLACK);
-		assertEquals(Color.BLACK,styles.get(Style.LineColor));
+		styles.set(StyleId.LineColor, Color.BLACK);
+		assertEquals(Color.BLACK,styles.get(StyleId.LineColor).value);
 	}
 	
 	@Test
 	public void getOldAfterNewSetAfterPop()
 	{
-		styles.set(Style.LineColor, Color.RED);
+		styles.set(StyleId.LineColor, Color.RED);
 		styles.push();
-		styles.set(Style.LineColor, Color.BLACK);
+		styles.set(StyleId.LineColor, Color.BLACK);
 		styles.pop();
-		assertEquals(Color.RED,styles.get(Style.LineColor));
+		assertEquals(Color.RED,styles.get(StyleId.LineColor).value);
 	}
 
 	@Test(expected=RuntimeException.class)
@@ -63,6 +63,14 @@ public class StylesTest
 	{
 		styles.pop();
 		styles.pop();
+	}
+	
+	@Test
+	public void setWholeStyle()
+	{
+		Style style = new Style(StyleId.LineColor,Color.RED);
+		styles.set(style);
+		assertEquals(style,styles.get(StyleId.LineColor));
 	}
 
 }

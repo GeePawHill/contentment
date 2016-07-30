@@ -3,6 +3,7 @@ package org.geepawhill.contentment;
 import javafx.animation.SequentialTransition;
 import javafx.geometry.Bounds;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
@@ -74,7 +75,8 @@ public class LabelBoxStep implements Step {
 		bounds = label.getBoundsInParent();
 
 		rectangle.setFill(Color.TRANSPARENT);
-		rectangle.setStroke(context.stroke);
+		rectangle.setStroke((Paint)context.styles.get(StyleId.LineColor).value);
+		rectangle.setStrokeWidth((double)context.styles.get(StyleId.PenWidth).value);
 		rectangle.setX(bounds.getMinX());
 		rectangle.setY(bounds.getMinY());
 		rectangle.setWidth(0d);
