@@ -81,12 +81,14 @@ public class LabelBoxStep implements Step {
 		rectangle.setY(bounds.getMinY());
 		rectangle.setWidth(0d);
 		rectangle.setHeight(0d);
+		rectangle.setVisible(false);
 	}
 
 	protected void animateDrawBox(double frac, Context context)
 	{
 		rectangle.setWidth(bounds.getWidth() * frac);
 		rectangle.setHeight(bounds.getHeight() * frac);
+		if(frac!=0d) rectangle.setVisible(true);
 	}
 
 }
