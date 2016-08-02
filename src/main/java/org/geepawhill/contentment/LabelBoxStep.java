@@ -1,6 +1,7 @@
 package org.geepawhill.contentment;
 
 import javafx.animation.SequentialTransition;
+import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -9,6 +10,8 @@ import javafx.scene.text.Text;
 
 public class LabelBoxStep implements Step {
 
+	private static final double VMARGIN = 8d;
+	private static final double HMARGIN = 8d;
 	private String text;
 	private Text label;
 	private Rectangle rectangle;
@@ -73,7 +76,7 @@ public class LabelBoxStep implements Step {
 	protected void animateComputeBox(double frac, Context context)
 	{
 		bounds = label.getBoundsInParent();
-
+		bounds = new BoundingBox(bounds.getMinX()-HMARGIN,bounds.getMinY()-VMARGIN,bounds.getWidth()+2*HMARGIN,bounds.getHeight()+2*VMARGIN);
 		rectangle.setFill(Color.TRANSPARENT);
 		rectangle.setStroke((Paint)context.styles.get(StyleId.LineColor).value);
 		rectangle.setStrokeWidth((double)context.styles.get(StyleId.PenWidth).value);
