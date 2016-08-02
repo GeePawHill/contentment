@@ -51,11 +51,12 @@ public class Main extends Application
 			root.setRight(tools);
 			
 			LabelBoxStep boxOne = new LabelBoxStep("Hi Mom!", 400d, 400d);
+			StylePush push = new StylePush();
 			StyleStep redColor = new StyleStep(new Style(StyleId.LineColor,Color.RED));
 			LabelBoxStep boxTwo = new LabelBoxStep("Also, Dad!", 500d, 500d);
-			StyleStep blackColor = new StyleStep(new Style(StyleId.LineColor,Color.BLACK));
+			StylePop pop = new StylePop();
 			LabelBoxStep boxThree = new LabelBoxStep("Etc.",600d,600d);
-			Sequence sequence = new Sequence(boxOne,redColor,boxTwo,blackColor,boxThree);
+			Sequence sequence = new Sequence(boxOne,push,redColor,boxTwo,pop,boxThree);
 
 			player = new Player(canvas);
 			player.reset(sequence);
