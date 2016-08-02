@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application
@@ -50,9 +51,11 @@ public class Main extends Application
 			root.setRight(tools);
 			
 			LabelBoxStep boxOne = new LabelBoxStep("Hi Mom!", 400d, 400d);
+			StyleStep redColor = new StyleStep(new Style(StyleId.LineColor,Color.RED));
 			LabelBoxStep boxTwo = new LabelBoxStep("Also, Dad!", 500d, 500d);
+			StyleStep blackColor = new StyleStep(new Style(StyleId.LineColor,Color.BLACK));
 			LabelBoxStep boxThree = new LabelBoxStep("Etc.",600d,600d);
-			Sequence sequence = new Sequence(boxOne,boxTwo,boxThree);
+			Sequence sequence = new Sequence(boxOne,redColor,boxTwo,blackColor,boxThree);
 
 			player = new Player(canvas);
 			player.reset(sequence);
