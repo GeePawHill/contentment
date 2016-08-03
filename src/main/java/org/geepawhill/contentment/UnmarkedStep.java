@@ -1,6 +1,6 @@
 package org.geepawhill.contentment;
 
-public interface Step
+public interface UnmarkedStep
 {
 	public void after(Context context);
 	public void before(Context context);

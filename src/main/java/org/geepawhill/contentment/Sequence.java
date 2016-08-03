@@ -3,19 +3,20 @@ package org.geepawhill.contentment;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Sequence implements Iterable<Step>
+
+public class Sequence implements Iterable<UnmarkedStep>
 {
-	ArrayList<Step> steps;
+	ArrayList<UnmarkedStep> steps;
 
 	public Sequence()
 	{
 		steps = new ArrayList<>();
 	}
 
-	public Sequence(Step... steps)
+	public Sequence(UnmarkedStep... steps)
 	{
-		this.steps = new ArrayList<Step>();
-		for(Step step : steps) this.steps.add(step);
+		this.steps = new ArrayList<UnmarkedStep>();
+		for(UnmarkedStep step : steps) this.steps.add(step);
 	}
 
 	public int size()
@@ -24,12 +25,12 @@ public class Sequence implements Iterable<Step>
 	}
 
 	@Override
-	public Iterator<Step> iterator()
+	public Iterator<UnmarkedStep> iterator()
 	{
 		return steps.iterator();
 	}
 
-	public Step get(int index)
+	public UnmarkedStep get(int index)
 	{
 		return steps.get(index);
 	}

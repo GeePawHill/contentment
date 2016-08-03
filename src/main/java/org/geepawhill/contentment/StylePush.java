@@ -1,6 +1,6 @@
 package org.geepawhill.contentment;
 
-public class StylePush implements Step
+public class StylePush implements MarkedStep
 {
 	boolean hasPushed;
 	

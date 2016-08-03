@@ -1,6 +1,6 @@
 package org.geepawhill.contentment;
 
-public class StyleStep implements Step
+public class StyleStep implements MarkedStep
 {
 	
 	private Style style;

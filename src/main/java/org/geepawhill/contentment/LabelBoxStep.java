@@ -8,7 +8,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-public class LabelBoxStep implements Step {
+public class LabelBoxStep implements MarkedStep {
 
 	private static final double VMARGIN = 8d;
 	private static final double HMARGIN = 8d;

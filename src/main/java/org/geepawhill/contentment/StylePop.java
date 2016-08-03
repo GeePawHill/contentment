@@ -1,6 +1,6 @@
 package org.geepawhill.contentment;
 
-public class StylePop implements Step
+public class StylePop implements MarkedStep
 {
 	
 	boolean hasPopped;

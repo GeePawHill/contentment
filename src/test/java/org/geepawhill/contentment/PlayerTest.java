@@ -1,9 +1,6 @@
 package org.geepawhill.contentment;
 
-import static org.geepawhill.contentment.TestStep.oneStep;
-import static org.geepawhill.contentment.TestStep.oneStepSequence;
-import static org.geepawhill.contentment.TestStep.twoStep;
-import static org.geepawhill.contentment.TestStep.twoStepSequence;
+import static org.geepawhill.contentment.MarkedTestStep.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -55,6 +52,19 @@ public class PlayerTest
 		assertBefore();
 	}
 
+	@Test
+	public void forwardStopsOnMarkedStep()
+	{
+		UnmarkedTestStep unmarked = new UnmarkedTestStep();
+		Sequence mixedSequence = new Sequence(oneStep,unmarked,twoStep);
+		player.reset(mixedSequence);
+		player.forward();
+		assertEquals(2,player.current());
+		assertFalse(oneStep.isBefore);
+		assertFalse(unmarked.isBefore);
+		assertTrue(twoStep.isBefore);
+		assertBefore();
+	}
 	
 	@Test
 	public void forwardWhileBeforeSteps()
@@ -103,6 +113,20 @@ public class PlayerTest
 		assertAfter();
 	}
 
+	@Test
+	public void backwardStopsOnMarkedStep()
+	{
+		UnmarkedTestStep unmarked = new UnmarkedTestStep();
+		Sequence mixedSequence = new Sequence(oneStep,unmarked,twoStep);
+		player.reset(mixedSequence);
+		player.forward();
+		player.backward();
+		assertEquals(0,player.current());
+		assertTrue(oneStep.isBefore);
+		assertTrue(unmarked.isBefore);
+		assertTrue(twoStep.isBefore);
+		assertBefore();
+	}
 	
 	@Test
 	public void backwardWhileBeforeGoesBackward()

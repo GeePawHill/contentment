@@ -38,7 +38,7 @@ public class Player
 	public void reset(Sequence sequence)
 	{
 		this.sequence = sequence;
-		for (Step step : sequence)
+		for (UnmarkedStep step : sequence)
 		{
 			step.before(context);
 		}
@@ -56,11 +56,6 @@ public class Player
 		case Before:
 		case Paused:
 			afterCurrent();
-			if (!currentIsLast())
-			{
-				current += 1;
-				return;
-			}
 		}
 	}
 
@@ -161,7 +156,7 @@ public class Player
 		}
 	}
 
-	private Step currentStep()
+	private UnmarkedStep currentStep()
 	{
 		return sequence.get(current);
 	}
@@ -174,11 +169,21 @@ public class Player
 
 	private void afterCurrent()
 	{
-		currentStep().after(context);
-		if (currentIsLast())
-			state = PlayState.After;
-		else
-			state = PlayState.Before;
+		do {
+			currentStep().after(context);
+			if (!currentIsLast())
+			{
+				current += 1;
+				state = PlayState.Before;
+			}
+			else state = PlayState.After;
+		}
+		while(!currentIsLast() && !currentIsMarked());
+	}
+
+	private boolean currentIsMarked()
+	{
+		return currentStep() instanceof MarkedStep;
 	}
 
 	private boolean currentIsLast()
