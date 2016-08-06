@@ -1,10 +1,15 @@
 package org.geepawhill.contentment;
 
-import static org.geepawhill.contentment.MarkedTestStep.*;
+import static org.geepawhill.contentment.core.MarkedTestStep.oneStep;
+import static org.geepawhill.contentment.core.MarkedTestStep.oneStepSequence;
+import static org.geepawhill.contentment.core.MarkedTestStep.twoStep;
+import static org.geepawhill.contentment.core.MarkedTestStep.twoStepSequence;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.core.UnmarkedTestStep;
 import org.junit.Before;
 import org.junit.Test;
 

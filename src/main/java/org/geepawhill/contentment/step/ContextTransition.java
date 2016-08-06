@@ -1,4 +1,6 @@
-package org.geepawhill.contentment;
+package org.geepawhill.contentment.step;
+
+import org.geepawhill.contentment.core.Context;
 
 import javafx.animation.Transition;
 import javafx.util.Duration;

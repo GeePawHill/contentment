@@ -1,4 +1,4 @@
-package org.geepawhill.contentment;
+package org.geepawhill.contentment.core;
 
 import java.util.HashMap;
 import java.util.LinkedList;

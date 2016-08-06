@@ -1,5 +1,10 @@
 package org.geepawhill.contentment;
 
+import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.MarkedStep;
+import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.core.UnmarkedStep;
+
 import javafx.event.ActionEvent;
 import javafx.scene.layout.Pane;
 

@@ -1,4 +1,7 @@
-package org.geepawhill.contentment;
+package org.geepawhill.contentment.core;
+
+import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.UnmarkedStep;
 
 public class UnmarkedTestStep implements UnmarkedStep
 {

@@ -1,4 +1,4 @@
-package org.geepawhill.contentment;
+package org.geepawhill.contentment.core;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

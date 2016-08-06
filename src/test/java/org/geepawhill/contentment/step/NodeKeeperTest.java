@@ -1,7 +1,8 @@
-package org.geepawhill.contentment;
+package org.geepawhill.contentment.step;
 
 import static org.junit.Assert.*;
 
+import org.geepawhill.contentment.step.NodeKeeper;
 import org.junit.Before;
 import org.junit.Test;
 

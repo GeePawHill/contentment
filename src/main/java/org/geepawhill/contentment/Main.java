@@ -1,5 +1,13 @@
 package org.geepawhill.contentment;
 
+import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.core.Style;
+import org.geepawhill.contentment.core.StyleId;
+import org.geepawhill.contentment.step.LabelBoxStep;
+import org.geepawhill.contentment.step.StylePop;
+import org.geepawhill.contentment.step.StylePush;
+import org.geepawhill.contentment.step.StyleStep;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Orientation;

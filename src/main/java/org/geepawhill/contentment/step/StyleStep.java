@@ -1,4 +1,8 @@
-package org.geepawhill.contentment;
+package org.geepawhill.contentment.step;
+
+import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Style;
+import org.geepawhill.contentment.core.UnmarkedStep;
 
 public class StyleStep implements UnmarkedStep
 {

@@ -1,7 +1,8 @@
-package org.geepawhill.contentment;
+package org.geepawhill.contentment.core;
 
 import static org.junit.Assert.assertEquals;
 
+import org.geepawhill.contentment.core.Sequence;
 import org.junit.Test;
 
 public class SequenceTest

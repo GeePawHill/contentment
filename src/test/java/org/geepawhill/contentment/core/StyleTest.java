@@ -1,7 +1,9 @@
-package org.geepawhill.contentment;
+package org.geepawhill.contentment.core;
 
 import static org.junit.Assert.*;
 
+import org.geepawhill.contentment.core.Style;
+import org.geepawhill.contentment.core.StyleId;
 import org.junit.Test;
 
 import javafx.scene.paint.Color;

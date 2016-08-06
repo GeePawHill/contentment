@@ -1,4 +1,8 @@
-package org.geepawhill.contentment;
+package org.geepawhill.contentment.step;
+
+import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.MarkedStep;
+import org.geepawhill.contentment.core.StyleId;
 
 import javafx.animation.SequentialTransition;
 import javafx.geometry.BoundingBox;

@@ -1,4 +1,4 @@
-package org.geepawhill.contentment;
+package org.geepawhill.contentment.step;
 
 import java.util.ArrayList;
 
