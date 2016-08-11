@@ -1,15 +1,42 @@
 package org.geepawhill.contentment.core;
 
-public class Style
-{
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Shape;
 
-	public final StyleId id;
-	public final Object value;
-
-	public Style(StyleId id, Object value)
+public class Style {
+	private StyleId id;
+	private StyleApplier applier;
+	
+	@FunctionalInterface
+	public static interface StyleApplier
 	{
-		this.id = id;
-		this.value = value;
+		void accept(Shape shape);
 	}
 
+	
+	public Style(StyleId id, StyleApplier applier)
+	{
+		this.id = id;
+		this.applier = applier;
+	}
+
+	public StyleId id()
+	{
+		return id;
+	}
+	
+	public void apply(Shape node)
+	{
+		applier.accept(node);
+	}
+	
+	static public Style penWidth(double width)
+	{
+		return new Style(StyleId.PenWidth,(shape) -> { shape.setStrokeWidth(width); });
+	}
+	
+	static public Style lineColor(Paint paint)
+	{
+		return new Style(StyleId.LineColor,(shape) -> { shape.setStroke(paint); });
+	}
 }

@@ -19,7 +19,7 @@ public class StyleStep implements UnmarkedStep
 	@Override
 	public void after(Context context)
 	{
-		if(previous==null) previous = context.styles.get(style.id);
+		if(previous==null) previous = context.styles.get(style.id());
 		context.styles.set(style);
 	}
 

@@ -16,15 +16,9 @@ public class Styles
 		push();
 	}
 
-	public void set(StyleId id, Object value)
-	{
-		Style style = new Style(id,value);
-		set(style);
-	}
-
 	public void set(Style style)
 	{
-		old.get(0).put(style.id,style);
+		old.get(0).put(style.id(),style);
 	}
 
 	public Style get(StyleId id)

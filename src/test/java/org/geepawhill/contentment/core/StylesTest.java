@@ -2,9 +2,6 @@ package org.geepawhill.contentment.core;
 
 import static org.junit.Assert.assertEquals;
 
-import org.geepawhill.contentment.core.Style;
-import org.geepawhill.contentment.core.StyleId;
-import org.geepawhill.contentment.core.Styles;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,35 +27,41 @@ public class StylesTest
 	@Test
 	public void setAndGet()
 	{
-		styles.set(StyleId.LineColor, Color.RED);
-		assertEquals(Color.RED,styles.get(StyleId.LineColor).value);
+		Style red = Style.lineColor(Color.RED);
+		styles.set(red);
+		assertEquals(red,styles.get(StyleId.LineColor));
 	}
 	
 	@Test
 	public void getAfterPush()
 	{
-		styles.set(StyleId.LineColor, Color.RED);
+		Style red = Style.lineColor(Color.RED);
+		styles.set(red);
 		styles.push();
-		assertEquals(Color.RED,styles.get(StyleId.LineColor).value);
+		assertEquals(red,styles.get(StyleId.LineColor));
 	}
 	
 	@Test
 	public void getNewAfterNewSetAfterPush()
 	{
-		styles.set(StyleId.LineColor, Color.RED);
+		Style red = Style.lineColor(Color.RED);
+		styles.set(red);
 		styles.push();
-		styles.set(StyleId.LineColor, Color.BLACK);
-		assertEquals(Color.BLACK,styles.get(StyleId.LineColor).value);
+		Style black = Style.lineColor(Color.RED);
+		styles.set(black);
+		assertEquals(black,styles.get(StyleId.LineColor));
 	}
 	
 	@Test
 	public void getOldAfterNewSetAfterPop()
 	{
-		styles.set(StyleId.LineColor, Color.RED);
+		Style red = Style.lineColor(Color.RED);
+		styles.set(red);
 		styles.push();
-		styles.set(StyleId.LineColor, Color.BLACK);
+		Style black = Style.lineColor(Color.RED);
+		styles.set(black);
 		styles.pop();
-		assertEquals(Color.RED,styles.get(StyleId.LineColor).value);
+		assertEquals(red,styles.get(StyleId.LineColor));
 	}
 
 	@Test(expected=RuntimeException.class)
@@ -71,9 +74,9 @@ public class StylesTest
 	@Test
 	public void setWholeStyle()
 	{
-		Style style = new Style(StyleId.LineColor,Color.RED);
-		styles.set(style);
-		assertEquals(style,styles.get(StyleId.LineColor));
+		Style red = Style.lineColor(Color.RED);
+		styles.set(red);
+		assertEquals(red,styles.get(StyleId.LineColor));
 	}
 
 }
