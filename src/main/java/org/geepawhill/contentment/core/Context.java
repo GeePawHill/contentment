@@ -15,7 +15,7 @@ public class Context {
 	{
 		this.canvas = canvas;
 		this.styles = new Styles();
-		styles.set(Style.lineColor(Color.BLACK));
-		styles.set(Style.penWidth(6d));
+		styles.set(new Style(StyleId.LineColor,Color.BLACK));
+		styles.set(new Style(StyleId.PenWidth,6d));
 	}
 }

@@ -1,7 +1,8 @@
 package org.geepawhill.contentment;
 
-import org.geepawhill.contentment.core.Style;
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.core.Style;
+import org.geepawhill.contentment.core.StyleId;
 import org.geepawhill.contentment.step.LabelBoxStep;
 import org.geepawhill.contentment.step.StylePop;
 import org.geepawhill.contentment.step.StylePush;
@@ -59,7 +60,7 @@ public class Main extends Application
 			
 			LabelBoxStep boxOne = new LabelBoxStep("Hi Mom!", 400d, 400d);
 			StylePush push = new StylePush();
-			StyleStep redColor = new StyleStep(Style.lineColor(Color.RED));
+			StyleStep redColor = new StyleStep(new Style(StyleId.LineColor,Color.RED));
 			LabelBoxStep boxTwo = new LabelBoxStep("Also, Dad!", 500d, 500d);
 			StylePop pop = new StylePop();
 			LabelBoxStep boxThree = new LabelBoxStep("Etc.",600d,600d);
