@@ -14,11 +14,15 @@ public class StylesTest
 {
 
 	private Styles styles;
+	private Style redLine;
+	private Style blackLine;
 	
 	@Before
 	public void before()
 	{
 		styles = new Styles();
+		redLine = Style.lineColor(Color.RED);
+		blackLine = Style.lineColor(Color.BLACK);
 	}
 
 	@Test(expected=RuntimeException.class)
@@ -30,35 +34,35 @@ public class StylesTest
 	@Test
 	public void setAndGet()
 	{
-		styles.set(StyleId.LineColor, Color.RED);
-		assertEquals(Color.RED,styles.get(StyleId.LineColor).value);
+		styles.set(redLine);
+		assertEquals(redLine,styles.get(StyleId.LineColor));
 	}
-	
+
 	@Test
 	public void getAfterPush()
 	{
-		styles.set(StyleId.LineColor, Color.RED);
+		styles.set(redLine);
 		styles.push();
-		assertEquals(Color.RED,styles.get(StyleId.LineColor).value);
+		assertEquals(redLine,styles.get(StyleId.LineColor));
 	}
 	
 	@Test
 	public void getNewAfterNewSetAfterPush()
 	{
-		styles.set(StyleId.LineColor, Color.RED);
+		styles.set(redLine);
 		styles.push();
-		styles.set(StyleId.LineColor, Color.BLACK);
-		assertEquals(Color.BLACK,styles.get(StyleId.LineColor).value);
+		styles.set(blackLine);
+		assertEquals(blackLine,styles.get(StyleId.LineColor));
 	}
 	
 	@Test
 	public void getOldAfterNewSetAfterPop()
 	{
-		styles.set(StyleId.LineColor, Color.RED);
+		styles.set(redLine);
 		styles.push();
-		styles.set(StyleId.LineColor, Color.BLACK);
+		styles.set(blackLine);
 		styles.pop();
-		assertEquals(Color.RED,styles.get(StyleId.LineColor).value);
+		assertEquals(redLine,styles.get(StyleId.LineColor));
 	}
 
 	@Test(expected=RuntimeException.class)
@@ -68,12 +72,4 @@ public class StylesTest
 		styles.pop();
 	}
 	
-	@Test
-	public void setWholeStyle()
-	{
-		Style style = new Style(StyleId.LineColor,Color.RED);
-		styles.set(style);
-		assertEquals(style,styles.get(StyleId.LineColor));
-	}
-
 }
