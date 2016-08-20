@@ -8,7 +8,6 @@ import javafx.animation.SequentialTransition;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
@@ -82,8 +81,8 @@ public class LabelBoxStep implements MarkedStep {
 		bounds = label.getBoundsInParent();
 		bounds = new BoundingBox(bounds.getMinX()-HMARGIN,bounds.getMinY()-VMARGIN,bounds.getWidth()+2*HMARGIN,bounds.getHeight()+2*VMARGIN);
 		rectangle.setFill(Color.TRANSPARENT);
-		rectangle.setStroke((Paint)context.styles.get(StyleId.LineColor).value);
-		rectangle.setStrokeWidth((double)context.styles.get(StyleId.PenWidth).value);
+		context.styles.get(StyleId.LineColor).apply(rectangle);
+		context.styles.get(StyleId.PenWidth).apply(rectangle);
 		rectangle.setX(bounds.getMinX());
 		rectangle.setY(bounds.getMinY());
 		rectangle.setWidth(0d);
