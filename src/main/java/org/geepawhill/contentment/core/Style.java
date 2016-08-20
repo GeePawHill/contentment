@@ -37,9 +37,15 @@ public class Style
 
 	static public Style lineColor(Paint paint)
 	{
-		return new Style(StyleId.LineColor, (shape) -> {
-			shape.setStroke(paint);
-		});
+		ShapeApplier applier = new ShapeApplier() {
+			@Override
+			public void apply(Shape shape)
+			{
+				shape.setStroke(paint);
+				if(shape instanceof Text) ((Text)shape).setFill(paint);
+			} 
+		};
+		return new Style(StyleId.LineColor, applier);
 	}
 
 	static public Style penWidth(double width)
@@ -60,5 +66,18 @@ public class Style
 		};
 		return new Style(StyleId.Font,applier);
 	}
+	
+	static public Style composite(Style... styles)
+	{
+		ShapeApplier applier = new ShapeApplier() {
+			@Override
+			public void apply(Shape shape)
+			{
+				for(Style style : styles) style.apply(shape);
+			} 
+		};
+		return new Style(StyleId.Font,applier);
+	}
+
 
 }
