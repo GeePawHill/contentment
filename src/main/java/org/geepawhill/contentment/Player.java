@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
 
 public class Player
 {
-	Context context;
+	public Context context;
 	Sequence sequence;
 	private int current;
 	private PlayState state;

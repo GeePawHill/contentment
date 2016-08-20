@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -12,7 +12,7 @@ public class Styles
 	
 	public Styles()
 	{
-		old = new LinkedList<>();
+		old = new ArrayList<>();
 		push();
 	}
 
@@ -32,13 +32,20 @@ public class Styles
 
 	public void push()
 	{
-		old.add(0,new HashMap<StyleId,Style>());
+		HashMap<StyleId, Style> hashMap = new HashMap<StyleId,Style>();
+		push(hashMap);
 	}
 
-	public void pop()
+	public void push(HashMap<StyleId, Style> map)
+	{
+		old.add(0,map);
+	}
+
+	public HashMap<StyleId, Style> pop()
 	{
 		if(old.isEmpty()) throw new RuntimeException("Too many style pops.");
-		old.remove(0);
+		HashMap<StyleId,Style> result = old.remove(0);
+		return result;
 	}
 
 }

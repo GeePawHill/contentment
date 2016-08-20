@@ -1,32 +1,35 @@
 package org.geepawhill.contentment.step;
 
+import java.util.HashMap;
+
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Style;
+import org.geepawhill.contentment.core.StyleId;
 import org.geepawhill.contentment.core.UnmarkedStep;
 
 public class StylePop implements UnmarkedStep
 {
 	
-	boolean hasPopped;
+	HashMap<StyleId,Style> popped;
 	
 	public StylePop()
 	{
-		hasPopped=false;
+		popped=null;
 	}
 
 	@Override
 	public void after(Context context)
 	{
-		if(hasPopped) return;
-		context.styles.pop();
-		hasPopped=true;
+		if(popped!=null) return;
+		popped = context.styles.pop();
 	}
 
 	@Override
 	public void before(Context context)
 	{
-		if(!hasPopped) return;
-		context.styles.push();
-		hasPopped=false;
+		if(popped==null) return;
+		context.styles.push(popped);
+		popped=null;
 	}
 
 	@Override

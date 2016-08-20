@@ -23,5 +23,11 @@ public class Style
 	{
 		return new Style(StyleId.PenWidth,width);
 	}
+	
+	@Override
+	public String toString()
+	{
+		return id.toString()+": "+value.toString();
+	}
 
 }
