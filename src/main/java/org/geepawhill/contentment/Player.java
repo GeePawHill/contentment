@@ -206,20 +206,20 @@ public class Player
 
 	private void resumeCurrent()
 	{
-		currentStep().resume(context);
 		state = PlayState.Playing;
+		currentStep().resume(context);
 	}
 
 	private void playCurrent()
 	{
-		currentStep().play(context);
 		state = PlayState.Playing;
+		currentStep().play(context);
 	}
 
 	private void pauseCurrent()
 	{
-		currentStep().pause(context);
 		state = PlayState.Paused;
+		currentStep().pause(context);
 	}
 
 	private void onFinished(ActionEvent e)
