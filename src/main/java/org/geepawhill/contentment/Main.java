@@ -44,12 +44,12 @@ public class Main extends Application
 			LabelBox hiMom = new LabelBox("Hi Mom!",400d,400d);
 			LabelBox alsoDad = new LabelBox("Also, Dad!",500d,500d);
 			LabelBox etc = new LabelBox("Etc.",600d,600d);
-			Step boxOne = hiMom.sketch();
+			Step boxOne = hiMom.sketch(1000d);
 			StylePush push = new StylePush();
 			StyleStep redColor = new StyleStep(Style.lineColor(Color.RED));
-			Step boxTwo = alsoDad.sketch();
+			Step boxTwo = alsoDad.sketch(3000d);
 			StylePop pop = new StylePop();
-			Step boxThree = etc.sketch();
+			Step boxThree = etc.sketch(1000d);
 			Sequence sequence = new Sequence(boxOne,push,redColor,boxTwo,pop,boxThree);
 
 			player = new Player(scaledCanvas);

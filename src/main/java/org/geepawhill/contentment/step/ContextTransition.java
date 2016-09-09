@@ -8,20 +8,14 @@ import javafx.util.Duration;
 public class ContextTransition extends Transition
 {
 	
-	@FunctionalInterface
-	public static interface Interpolator
-	{
-		void accept(double fraction, Context context);
-	}
-
 	Context context;
-	Interpolator interpolator;
+	ContextInterpolator interpolator;
 
-	public ContextTransition(Context context,double ms,Interpolator interpolator)
+	public ContextTransition(Context context,SubStep substep, double trueTime)
 	{
 		this.context = context;
-		this.interpolator = interpolator;
-		setCycleDuration(Duration.millis(ms));
+		this.interpolator = substep.interpolator;
+		setCycleDuration(Duration.millis(trueTime));
 	}
 
 	@Override

@@ -1,8 +1,8 @@
 package org.geepawhill.contentment.core;
 
-import org.geepawhill.contentment.step.ContextTransition;
+import org.geepawhill.contentment.step.InterpolatedStep;
 import org.geepawhill.contentment.step.NodeKeeper;
-import org.geepawhill.contentment.step.TransitionStep;
+import org.geepawhill.contentment.step.SubStep;
 
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
@@ -31,13 +31,15 @@ public class LabelBox implements Actor
 		bounds = label.getBoundsInParent();
 	}
 
-	public Step sketch()
+	public Step sketch(double ms)
 	{
-		ContextTransition.Interpolator[] transitions = new ContextTransition.Interpolator[]
+		SubStep[] interpolators = new SubStep[]
 		{
-				this::animateDrawText, this::animateComputeBox, this::animateDrawBox
+				new SubStep(500d,this::animateDrawText),
+				new SubStep(1d,this::animateComputeBox), 
+				new SubStep(200d,this::animateDrawBox)
 		};
-		return new TransitionStep(keeper, transitions);
+		return new InterpolatedStep(keeper, ms, interpolators);
 	}
 
 	protected void animateDrawText(double frac, Context context)
