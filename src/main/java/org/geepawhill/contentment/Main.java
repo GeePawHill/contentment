@@ -1,10 +1,11 @@
 package org.geepawhill.contentment;
 
+import org.geepawhill.contentment.core.LabelBox;
 import org.geepawhill.contentment.core.ScaleListener;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.core.StageMaximizedListener;
+import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.core.Style;
-import org.geepawhill.contentment.step.LabelBoxStep;
 import org.geepawhill.contentment.step.StylePop;
 import org.geepawhill.contentment.step.StylePush;
 import org.geepawhill.contentment.step.StyleStep;
@@ -40,12 +41,15 @@ public class Main extends Application
 			canvas.getChildren().add(scaledCanvas);
 			forceLetterBox(stage,stage.getScene(),canvas,scaledCanvas);
 
-			LabelBoxStep boxOne = new LabelBoxStep("Hi Mom!", 400d, 400d);
+			LabelBox hiMom = new LabelBox("Hi Mom!");
+			LabelBox alsoDad = new LabelBox("Also, Dad!");
+			LabelBox etc = new LabelBox("Etc.");
+			Step boxOne = hiMom.sketch( 400d, 400d);
 			StylePush push = new StylePush();
 			StyleStep redColor = new StyleStep(Style.lineColor(Color.RED));
-			LabelBoxStep boxTwo = new LabelBoxStep("Also, Dad!", 500d, 500d);
+			Step boxTwo = alsoDad.sketch(500d, 500d);
 			StylePop pop = new StylePop();
-			LabelBoxStep boxThree = new LabelBoxStep("Etc.",600d,600d);
+			Step boxThree = etc.sketch(600d,600d);
 			Sequence sequence = new Sequence(boxOne,push,redColor,boxTwo,pop,boxThree);
 
 			player = new Player(scaledCanvas);
