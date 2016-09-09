@@ -1,11 +1,11 @@
 package org.geepawhill.contentment.core;
 
-import org.geepawhill.contentment.step.InterpolatedStep;
-import org.geepawhill.contentment.step.NodeKeeper;
 import org.geepawhill.contentment.step.SubStep;
+import org.geepawhill.contentment.step.TimedSequence;
 
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
+import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -13,35 +13,38 @@ import javafx.scene.text.Text;
 public class LabelBox implements Actor
 {
 	final String text;
+	
+	private final Group group;
+	private Text label;
+	private Rectangle rectangle;
+	
+	private Bounds bounds;
 
 	private static final double VMARGIN = 8d;
 	private static final double HMARGIN = 8d;
-	private Text label;
-	private Rectangle rectangle;
-	private Bounds bounds;
-	private final NodeKeeper keeper;
+	
 
 	public LabelBox(String text, double xCenter, double yCenter)
 	{
+		this.group = new Group();
 		this.text = text;
-		keeper = new NodeKeeper();
 		label = new Text(xCenter, yCenter, "");
 		rectangle = new Rectangle();
-		keeper.keep(label, rectangle);
+		group.getChildren().addAll(label,rectangle);
 		bounds = label.getBoundsInParent();
 	}
 
 	public Step sketch(double ms)
 	{
-		SubStep[] interpolators = new SubStep[]
+		SubStep[] substeps = new SubStep[]
 		{
 				new SubStep(500d,this::animateDrawText),
 				new SubStep(1d,this::animateComputeBox), 
 				new SubStep(200d,this::animateDrawBox)
 		};
-		return new InterpolatedStep(keeper, ms, interpolators);
+		return new TimedSequence(ms, group, substeps);
 	}
-
+	
 	protected void animateDrawText(double frac, Context context)
 	{
 		context.styles.get(StyleId.Font).apply(label);
