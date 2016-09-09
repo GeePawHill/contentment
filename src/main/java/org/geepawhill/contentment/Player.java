@@ -1,9 +1,8 @@
 package org.geepawhill.contentment;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.MarkedStep;
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.core.UnmarkedStep;
+import org.geepawhill.contentment.core.Step;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Group;
@@ -43,7 +42,7 @@ public class Player
 	public void reset(Sequence sequence)
 	{
 		this.sequence = sequence;
-		for (UnmarkedStep step : sequence)
+		for (Step step : sequence)
 		{
 			step.before(context);
 		}
@@ -159,7 +158,7 @@ public class Player
 		}
 	}
 
-	private UnmarkedStep currentStep()
+	private Step currentStep()
 	{
 		return sequence.get(current);
 	}
@@ -196,7 +195,7 @@ public class Player
 
 	private boolean currentIsMarked()
 	{
-		return currentStep() instanceof MarkedStep;
+		return currentStep().isMarked();
 	}
 
 	private boolean currentIsLast()

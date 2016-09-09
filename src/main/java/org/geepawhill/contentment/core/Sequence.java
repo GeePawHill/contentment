@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 
-public class Sequence implements Iterable<UnmarkedStep>
+public class Sequence implements Iterable<Step>
 {
-	ArrayList<UnmarkedStep> steps;
+	ArrayList<Step> steps;
 
 	public Sequence()
 	{
 		steps = new ArrayList<>();
 	}
 
-	public Sequence(UnmarkedStep... steps)
+	public Sequence(Step... steps)
 	{
-		this.steps = new ArrayList<UnmarkedStep>();
-		for(UnmarkedStep step : steps) this.steps.add(step);
+		this.steps = new ArrayList<Step>();
+		for(Step step : steps) this.steps.add(step);
 	}
 
 	public int size()
@@ -25,12 +25,12 @@ public class Sequence implements Iterable<UnmarkedStep>
 	}
 
 	@Override
-	public Iterator<UnmarkedStep> iterator()
+	public Iterator<Step> iterator()
 	{
 		return steps.iterator();
 	}
 
-	public UnmarkedStep get(int index)
+	public Step get(int index)
 	{
 		return steps.get(index);
 	}

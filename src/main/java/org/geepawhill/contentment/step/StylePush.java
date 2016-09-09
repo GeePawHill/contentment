@@ -1,9 +1,9 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.UnmarkedStep;
+import org.geepawhill.contentment.core.Step;
 
-public class StylePush implements UnmarkedStep
+public class StylePush implements Step
 {
 	boolean hasPushed;
 	
@@ -43,6 +43,12 @@ public class StylePush implements UnmarkedStep
 	@Override
 	public void resume(Context context)
 	{
+	}
+
+	@Override
+	public boolean isMarked()
+	{
+		return false;
 	}
 
 }

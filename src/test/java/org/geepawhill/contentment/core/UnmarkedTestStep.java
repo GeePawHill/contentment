@@ -1,9 +1,9 @@
 package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.UnmarkedStep;
+import org.geepawhill.contentment.core.Step;
 
-public class UnmarkedTestStep implements UnmarkedStep
+public class UnmarkedTestStep implements Step
 {
 	
 	public boolean isBefore;
@@ -63,6 +63,12 @@ public class UnmarkedTestStep implements UnmarkedStep
 		isPaused=false;
 		context.onFinished.handle(null);
 		
+	}
+
+	@Override
+	public boolean isMarked()
+	{
+		return false;
 	}	
 
 }

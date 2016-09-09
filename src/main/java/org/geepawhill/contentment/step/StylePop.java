@@ -5,9 +5,9 @@ import java.util.HashMap;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Style;
 import org.geepawhill.contentment.core.StyleId;
-import org.geepawhill.contentment.core.UnmarkedStep;
+import org.geepawhill.contentment.core.Step;
 
-public class StylePop implements UnmarkedStep
+public class StylePop implements Step
 {
 	
 	HashMap<StyleId,Style> popped;
@@ -47,6 +47,12 @@ public class StylePop implements UnmarkedStep
 	@Override
 	public void resume(Context context)
 	{
+	}
+
+	@Override
+	public boolean isMarked()
+	{
+		return false;
 	}
 
 }

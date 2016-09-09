@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.MarkedStep;
+import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.core.StyleId;
 
 import javafx.animation.SequentialTransition;
@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-public class LabelBoxStep implements MarkedStep {
+public class LabelBoxStep implements Step {
 
 	private static final double VMARGIN = 8d;
 	private static final double HMARGIN = 8d;
@@ -97,6 +97,12 @@ public class LabelBoxStep implements MarkedStep {
 		rectangle.setWidth(bounds.getWidth() * frac);
 		rectangle.setHeight(bounds.getHeight() * frac);
 		if(frac!=0d) rectangle.setVisible(true);
+	}
+
+	@Override
+	public boolean isMarked()
+	{
+		return true;
 	}
 
 }
