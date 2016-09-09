@@ -2,17 +2,17 @@ package org.geepawhill.contentment.core;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.layout.Pane;
+import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class Context {
 	
-	public final Pane canvas;
+	public final Group canvas;
 	public EventHandler<ActionEvent> onFinished;
 	public Styles styles;
 	
-	public Context(Pane canvas)
+	public Context(Group canvas)
 	{
 		this.canvas = canvas;
 		this.styles = new Styles();

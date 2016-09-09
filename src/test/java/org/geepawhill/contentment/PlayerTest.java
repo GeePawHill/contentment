@@ -13,18 +13,18 @@ import org.geepawhill.contentment.core.UnmarkedTestStep;
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.scene.layout.Pane;
+import javafx.scene.Group;
 
 public class PlayerTest
 {
 
 	private Player player;
-	Pane canvas;
+	Group canvas;
 
 	@Before
 	public void before()
 	{
-		canvas = new Pane();
+		canvas = new Group();
 		player = new Player(canvas);
 	}
 	

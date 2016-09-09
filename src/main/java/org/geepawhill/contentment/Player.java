@@ -6,7 +6,7 @@ import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.core.UnmarkedStep;
 
 import javafx.event.ActionEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.Group;
 
 public class Player
 {
@@ -16,7 +16,7 @@ public class Player
 	private PlayState state;
 	private boolean isChaining;
 
-	public Player(Pane canvas)
+	public Player(Group canvas)
 	{
 		context = new Context(canvas);
 		context.onFinished = this::onFinished;

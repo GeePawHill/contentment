@@ -2,8 +2,8 @@ package org.geepawhill.contentment.step;
 
 import java.util.ArrayList;
 
+import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.layout.Pane;
 
 public class NodeKeeper
 {
@@ -27,7 +27,7 @@ public class NodeKeeper
 		return nodes.size();
 	}
 
-	public void removeFrom(Pane canvas)
+	public void removeFrom(Group canvas)
 	{
 		for (Node node : nodes)
 		{
@@ -35,7 +35,7 @@ public class NodeKeeper
 		}
 	}
 
-	public void addTo(Pane canvas)
+	public void addTo(Group canvas)
 	{
 		for (Node node : nodes)
 		{

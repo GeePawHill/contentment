@@ -1,18 +1,18 @@
 package org.geepawhill.contentment.step;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import org.geepawhill.contentment.step.NodeKeeper;
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.scene.layout.Pane;
+import javafx.scene.Group;
 import javafx.scene.text.Text;
 
 public class NodeKeeperTest
 {
 	
-	private Pane canvas;
+	private Group canvas;
 	private Text node1;
 	private Text node2;
 	private NodeKeeper keeper;
@@ -20,7 +20,7 @@ public class NodeKeeperTest
 	@Before
 	public void before()
 	{
-		canvas = new Pane();
+		canvas = new Group();
 		node1 = new Text();
 		node2 = new Text();
 		keeper = new NodeKeeper();

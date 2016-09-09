@@ -7,7 +7,7 @@ import org.geepawhill.contentment.core.Style;
 import org.geepawhill.contentment.core.StyleId;
 import org.junit.Test;
 
-import javafx.scene.layout.Pane;
+import javafx.scene.Group;
 import javafx.scene.paint.Color;
 
 public class StylePopTest
@@ -16,7 +16,7 @@ public class StylePopTest
 	@Test
 	public void popUndoes()
 	{
-		Context context = new Context(new Pane());
+		Context context = new Context(new Group());
 		Style redLine = Style.lineColor(Color.RED);
 		context.styles.set(redLine);
 		StylePush push = new StylePush();
