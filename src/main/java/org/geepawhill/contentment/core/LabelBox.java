@@ -45,6 +45,15 @@ public class LabelBox implements Actor
 		return new TimedSequence(ms, group, substeps);
 	}
 	
+	public Step fadeIn(double ms)
+	{
+		SubStep[] substeps = new SubStep[]
+		{
+				new SubStep(500d,this::fadeIn)
+		};
+		return new TimedSequence(ms, group, substeps);
+	}
+	
 	protected void animateDrawText(double frac, Context context)
 	{
 		context.styles.get(StyleId.Font).apply(label);
@@ -73,6 +82,18 @@ public class LabelBox implements Actor
 		rectangle.setWidth(bounds.getWidth() * frac);
 		rectangle.setHeight(bounds.getHeight() * frac);
 		if (frac != 0d) rectangle.setVisible(true);
+	}
+	
+	protected void fadeIn(double frac, Context context)
+	{
+		if(frac==0d)
+		{
+			group.setOpacity(0d);
+			animateDrawText(1d,context);
+			animateComputeBox(1d,context);
+			animateDrawBox(1d,context);
+		}
+		group.setOpacity(frac);
 	}
 
 }

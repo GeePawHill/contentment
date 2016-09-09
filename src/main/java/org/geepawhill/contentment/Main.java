@@ -47,7 +47,7 @@ public class Main extends Application
 			Step boxOne = hiMom.sketch(1000d);
 			StylePush push = new StylePush();
 			StyleStep redColor = new StyleStep(Style.lineColor(Color.RED));
-			Step boxTwo = alsoDad.sketch(3000d);
+			Step boxTwo = alsoDad.fadeIn(1000d);
 			StylePop pop = new StylePop();
 			Step boxThree = etc.sketch(1000d);
 			Sequence sequence = new Sequence(boxOne,push,redColor,boxTwo,pop,boxThree);
