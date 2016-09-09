@@ -1,6 +1,8 @@
 package org.geepawhill.contentment;
 
+import org.geepawhill.contentment.core.ScaleListener;
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.core.StageMaximizedListener;
 import org.geepawhill.contentment.core.Style;
 import org.geepawhill.contentment.step.LabelBoxStep;
 import org.geepawhill.contentment.step.StylePop;
@@ -36,6 +38,7 @@ public class Main extends Application
 			root.setCenter(canvas);
 			Group scaledCanvas = new Group();
 			canvas.getChildren().add(scaledCanvas);
+			forceLetterBox(stage,stage.getScene(),canvas,scaledCanvas);
 
 			LabelBoxStep boxOne = new LabelBoxStep("Hi Mom!", 400d, 400d);
 			StylePush push = new StylePush();
@@ -53,6 +56,15 @@ public class Main extends Application
 			e.printStackTrace();
 			Platform.exit();
 		}
+	}
+
+	private void forceLetterBox(Stage stage,Scene scene,Pane canvas, Group scaledCanvas)
+	{
+		ScaleListener sizeListener = new ScaleListener(canvas, scaledCanvas);
+		scene.widthProperty().addListener(sizeListener);
+		scene.heightProperty().addListener(sizeListener);
+		StageMaximizedListener maximizeListener = new StageMaximizedListener(sizeListener);
+		stage.maximizedProperty().addListener(maximizeListener);
 	}
 
 	private void makeTools()
