@@ -41,15 +41,15 @@ public class Main extends Application
 			canvas.getChildren().add(scaledCanvas);
 			forceLetterBox(stage,stage.getScene(),canvas,scaledCanvas);
 
-			LabelBox hiMom = new LabelBox("Hi Mom!");
-			LabelBox alsoDad = new LabelBox("Also, Dad!");
-			LabelBox etc = new LabelBox("Etc.");
-			Step boxOne = hiMom.sketch( 400d, 400d);
+			LabelBox hiMom = new LabelBox("Hi Mom!",400d,400d);
+			LabelBox alsoDad = new LabelBox("Also, Dad!",500d,500d);
+			LabelBox etc = new LabelBox("Etc.",600d,600d);
+			Step boxOne = hiMom.sketch();
 			StylePush push = new StylePush();
 			StyleStep redColor = new StyleStep(Style.lineColor(Color.RED));
-			Step boxTwo = alsoDad.sketch(500d, 500d);
+			Step boxTwo = alsoDad.sketch();
 			StylePop pop = new StylePop();
-			Step boxThree = etc.sketch(600d,600d);
+			Step boxThree = etc.sketch();
 			Sequence sequence = new Sequence(boxOne,push,redColor,boxTwo,pop,boxThree);
 
 			player = new Player(scaledCanvas);
