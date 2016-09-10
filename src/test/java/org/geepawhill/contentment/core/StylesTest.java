@@ -2,9 +2,9 @@ package org.geepawhill.contentment.core;
 
 import static org.junit.Assert.assertEquals;
 
-import org.geepawhill.contentment.core.Style;
-import org.geepawhill.contentment.core.StyleId;
-import org.geepawhill.contentment.core.Styles;
+import org.geepawhill.contentment.style.Style;
+import org.geepawhill.contentment.style.StyleId;
+import org.geepawhill.contentment.style.Styles;
 import org.junit.Before;
 import org.junit.Test;
 

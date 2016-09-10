@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.core;
+package org.geepawhill.contentment.style;
 
 import java.util.ArrayList;
 import java.util.HashMap;

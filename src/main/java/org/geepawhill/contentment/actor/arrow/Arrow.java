@@ -1,8 +1,10 @@
-package org.geepawhill.contentment.core;
+package org.geepawhill.contentment.actor.arrow;
 
-import org.geepawhill.contentment.geometry.ArrowPoints;
+import org.geepawhill.contentment.core.Actor;
+import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.step.StrokeHelper;
+import org.geepawhill.contentment.step.HideStep;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
 

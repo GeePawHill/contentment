@@ -1,4 +1,7 @@
-package org.geepawhill.contentment.core;
+package org.geepawhill.contentment.step;
+
+import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Step;
 
 import javafx.scene.Group;
 

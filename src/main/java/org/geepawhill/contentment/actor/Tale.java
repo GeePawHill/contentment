@@ -1,4 +1,8 @@
-package org.geepawhill.contentment.core;
+package org.geepawhill.contentment.actor;
+
+import org.geepawhill.contentment.core.Actor;
+import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.step.ShowStep;
 
 import javafx.geometry.VPos;
 import javafx.scene.Group;

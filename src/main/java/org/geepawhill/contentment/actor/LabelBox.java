@@ -1,43 +1,48 @@
-package org.geepawhill.contentment.core;
+package org.geepawhill.contentment.actor;
 
-import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.core.Actor;
+import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
+import org.geepawhill.contentment.style.StyleId;
 
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
+import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-public class OvalText implements Actor
+public class LabelBox implements Actor
 {
 	final String text;
 	
 	private final Group group;
 	private Text label;
-	private Ellipse oval;
+	private Rectangle rectangle;
 	
 	private Bounds bounds;
 
-	private static final double VMARGIN = 4d;
-	private static final double HMARGIN = 20d;
+	private static final double VMARGIN = 8d;
+	private static final double HMARGIN = 8d;
 
 	private double xCenter;
 
 	private double yCenter;
 	
 
-	public OvalText(String text, double xCenter, double yCenter)
+	public LabelBox(String text, double xCenter, double yCenter)
 	{
 		this.xCenter = xCenter;
 		this.yCenter = yCenter;
 		this.group = new Group();
 		this.text = text;
 		label = new Text(xCenter, yCenter, "");
-		oval = new Ellipse();
-		group.getChildren().addAll(label,oval);
+		label.setTextOrigin(VPos.CENTER);
+		rectangle = new Rectangle();
+		group.getChildren().addAll(label,rectangle);
 		bounds = label.getBoundsInParent();
 	}
 
@@ -76,23 +81,22 @@ public class OvalText implements Actor
 		bounds = label.getBoundsInParent();
 		bounds = new BoundingBox(bounds.getMinX() - HMARGIN, bounds.getMinY() - VMARGIN, bounds.getWidth() + 2 * HMARGIN,
 				bounds.getHeight() + 2 * VMARGIN);
-		oval.setFill(Color.TRANSPARENT);
-		context.styles.get(StyleId.LineColor).apply(oval);
-		context.styles.get(StyleId.PenWidth).apply(oval);
-		context.styles.get(StyleId.Dash).apply(oval);
-		PointPair pair = new PointPair(bounds);
-		oval.setCenterX(pair.centerX());
-		oval.setCenterY(pair.centerY());
-		oval.setRadiusX(pair.width());
-		oval.setRadiusY(pair.height());
-		oval.setVisible(false);
+		rectangle.setFill(Color.TRANSPARENT);
+		context.styles.get(StyleId.LineColor).apply(rectangle);
+		context.styles.get(StyleId.PenWidth).apply(rectangle);
+		context.styles.get(StyleId.Dash).apply(rectangle);
+		rectangle.setX(bounds.getMinX());
+		rectangle.setY(bounds.getMinY());
+		rectangle.setWidth(0d);
+		rectangle.setHeight(0d);
+		rectangle.setVisible(false);
 	}
 
 	protected void animateDrawBox(double frac, Context context)
 	{
-		oval.setRadiusX((bounds.getWidth()/2d)+HMARGIN * frac);
-		oval.setRadiusY((bounds.getHeight()/2d)+VMARGIN * frac);
-		if (frac != 0d) oval.setVisible(true);
+		rectangle.setWidth(bounds.getWidth() * frac);
+		rectangle.setHeight(bounds.getHeight() * frac);
+		if (frac != 0d) rectangle.setVisible(true);
 	}
 	
 	protected void fadeIn(double frac, Context context)

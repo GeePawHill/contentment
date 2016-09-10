@@ -3,8 +3,10 @@ package org.geepawhill.contentment.step;
 import static org.junit.Assert.assertEquals;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.Style;
-import org.geepawhill.contentment.core.StyleId;
+import org.geepawhill.contentment.style.Style;
+import org.geepawhill.contentment.style.StyleId;
+import org.geepawhill.contentment.style.StylePop;
+import org.geepawhill.contentment.style.StylePush;
 import org.junit.Test;
 
 import javafx.scene.Group;

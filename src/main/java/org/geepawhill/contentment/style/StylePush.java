@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.step;
+package org.geepawhill.contentment.style;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Step;

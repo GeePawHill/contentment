@@ -1,14 +1,12 @@
 package org.geepawhill.contentment;
 
-import org.geepawhill.contentment.core.Arrow;
-import org.geepawhill.contentment.core.LabelBox;
-import org.geepawhill.contentment.core.OvalText;
-import org.geepawhill.contentment.core.ScaleListener;
+import org.geepawhill.contentment.actor.LabelBox;
+import org.geepawhill.contentment.actor.OvalText;
+import org.geepawhill.contentment.actor.Tale;
+import org.geepawhill.contentment.actor.arrow.Arrow;
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.core.StageMaximizedListener;
-import org.geepawhill.contentment.core.Style;
-import org.geepawhill.contentment.core.Tale;
-import org.geepawhill.contentment.step.StyleStep;
+import org.geepawhill.contentment.style.Style;
+import org.geepawhill.contentment.style.StyleStep;
 
 import javafx.application.Application;
 import javafx.application.Platform;

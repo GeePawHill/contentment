@@ -1,6 +1,5 @@
-package org.geepawhill.contentment.core;
+package org.geepawhill.contentment.actor.arrow;
 
-import org.geepawhill.contentment.geometry.ArrowPoints;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 

@@ -1,4 +1,6 @@
-package org.geepawhill.contentment.geometry;
+package org.geepawhill.contentment.actor.arrow;
+
+import org.geepawhill.contentment.geometry.PointPair;
 
 public class ArrowPoints
 {

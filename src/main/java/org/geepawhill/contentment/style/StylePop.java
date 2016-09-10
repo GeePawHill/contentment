@@ -1,33 +1,33 @@
-package org.geepawhill.contentment.step;
+package org.geepawhill.contentment.style;
+
+import java.util.HashMap;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.Style;
 import org.geepawhill.contentment.core.Step;
 
-public class StyleStep implements Step
+public class StylePop implements Step
 {
 	
-	private Style style;
-	private Style previous;
-
-	public StyleStep(Style style)
+	HashMap<StyleId,Style> popped;
+	
+	public StylePop()
 	{
-		this.style = style;
-		this.previous = null;
+		popped=null;
 	}
 
 	@Override
 	public void after(Context context)
 	{
-		if(previous==null) previous = context.styles.get(style.id);
-		context.styles.set(style);
+		if(popped!=null) return;
+		popped = context.styles.pop();
 	}
 
 	@Override
 	public void before(Context context)
 	{
-		if(previous!=null) context.styles.set(previous);
-		previous=null;
+		if(popped==null) return;
+		context.styles.push(popped);
+		popped=null;
 	}
 
 	@Override

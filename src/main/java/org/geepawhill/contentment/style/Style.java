@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.core;
+package org.geepawhill.contentment.style;
 
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
