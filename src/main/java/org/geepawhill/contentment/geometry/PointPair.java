@@ -6,8 +6,8 @@ import javafx.scene.Node;
 
 public class PointPair
 {
-	final Point from;
-	final Point to;
+	public final Point from;
+	public final Point to;
 
 	public PointPair(Point from, Point to)
 	{
@@ -92,5 +92,14 @@ public class PointPair
 	{
 		return new Point(from.x,to.y);
 	}
-	
+
+	public double partialX(double fraction)
+	{
+		return from.x + (to.x - from.x) * fraction;
+	}
+
+	public double partialY(double fraction)
+	{
+		return from.y + (to.y - from.y) * fraction;
+	}
 }

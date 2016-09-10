@@ -40,5 +40,15 @@ public class Point
 	public String toString()
 	{
 		return "Point [x=" + x + ", y=" + y + "]";
+	}
+
+	public double xDistance(Point to)
+	{
+		return to.x - x;
+	}
+
+	public double yDistance(Point to)
+	{
+		return to.y - y;
 	}	
 }
