@@ -3,6 +3,7 @@ package org.geepawhill.contentment.core;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class Styles
@@ -19,6 +20,7 @@ public class Styles
 	public void set(Style style)
 	{
 		old.get(0).put(style.id,style);
+		System.out.println("Setting: "+style.id);
 	}
 
 	public Style get(StyleId id)
@@ -46,6 +48,19 @@ public class Styles
 		if(old.isEmpty()) throw new RuntimeException("Too many style pops.");
 		HashMap<StyleId,Style> result = old.remove(0);
 		return result;
+	}
+	
+	public void dump()
+	{
+		System.out.println("Style Maps: "+old.size());
+		for(HashMap<StyleId,Style> map : old)
+		{
+			for(Map.Entry<StyleId,Style> entry : map.entrySet())
+			{
+				System.out.println(entry.getKey()+":"+entry.getValue());
+			}
+			System.out.println("----");
+		}
 	}
 
 }

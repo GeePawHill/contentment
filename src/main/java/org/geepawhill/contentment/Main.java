@@ -45,36 +45,34 @@ public class Main extends Application
 			forceLetterBox(stage, stage.getScene(), canvas, scaledCanvas);
 			makeGuides();
 
-			StyleStep redLine = new StyleStep(Style.lineColor(Color.RED));
-			StyleStep blueLine = new StyleStep(Style.lineColor(Color.BLUE));
-			StyleStep greenLine = new StyleStep(Style.lineColor(Color.GREEN));
+			Style redLine = Style.lineColor(Color.RED);
+			Style blueLine = Style.lineColor(Color.BLUE);
+			Style greenLine = Style.lineColor(Color.GREEN);
 			Tale tale = new Tale("A Simple Change Model", 30d);
 			LabelBox agent1 = new LabelBox("Agent", 800d, 450d);
 			OvalText before = new OvalText("Before", 400d, .75*900d);
 			OvalText after = new OvalText("After", 1200d, .75*900d);
 			Arrow oldWay = new Arrow(agent1, before);
 			Arrow newWay = new Arrow(agent1, after);
-			StyleStep dash = new StyleStep(Style.dash(10d));
-			StyleStep noDash = new StyleStep(Style.nodash());
 			LabelBox coach = new LabelBox("Coach", 800d, 200d);
 			Arrow poke1 = new Arrow(coach, agent1);
 
 			Sequence sequence = new Sequence();
 			sequence.unmarked(tale.show());
-			sequence.unmarked(redLine);
+			sequence.unmarked(new StyleStep(redLine));
 			sequence.marked(agent1.sketch(1000d));
-			sequence.unmarked(greenLine);
-			sequence.unmarked(dash);
+			sequence.unmarked(new StyleStep(greenLine));
+			sequence.unmarked(new StyleStep(Style.dash(10d)));
 			sequence.unmarked(before.sketch(1000d));
 			sequence.marked(oldWay.sketch(1d));
 			sequence.marked(after.sketch(1000d));
-			sequence.unmarked(noDash);
-			sequence.unmarked(blueLine);
+			sequence.unmarked(new StyleStep(Style.nodash()));
+			sequence.unmarked(new StyleStep(blueLine));
 			sequence.marked(coach.sketch(1000d));
 			sequence.marked(poke1.sketch(1000d));
 			sequence.unmarked(oldWay.hide());
-			sequence.unmarked(dash);
-			sequence.unmarked(greenLine);
+			sequence.unmarked(new StyleStep(Style.dash(10d)));
+			sequence.unmarked(new StyleStep(greenLine));
 			sequence.marked(newWay.sketch(1d));
 
 			player = new Player(scaledCanvas);

@@ -254,11 +254,13 @@ public class Player
 
 	public void home()
 	{
+		System.out.println("Seeking to home.");
 		seek(0);
 	}
 
 	public void end()
 	{
+		System.out.println("Seeking to end.");
 		seek(sequence.size());
 	}
 
