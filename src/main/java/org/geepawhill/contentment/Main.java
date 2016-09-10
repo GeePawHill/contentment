@@ -1,5 +1,6 @@
 package org.geepawhill.contentment;
 
+import org.geepawhill.contentment.core.Arrow;
 import org.geepawhill.contentment.core.LabelBox;
 import org.geepawhill.contentment.core.ScaleListener;
 import org.geepawhill.contentment.core.Sequence;
@@ -43,6 +44,7 @@ public class Main extends Application
 
 			LabelBox hiMom = new LabelBox("Hi Mom!",400d,400d);
 			LabelBox alsoDad = new LabelBox("Also, Dad!",500d,500d);
+			Arrow arrow = new Arrow(200d,200d,400d,200d);
 			LabelBox etc = new LabelBox("Etc.",600d,600d);
 			Step boxOne = hiMom.sketch(1000d);
 			StylePush push = new StylePush();
@@ -50,7 +52,7 @@ public class Main extends Application
 			Step boxTwo = alsoDad.fadeIn(1000d);
 			StylePop pop = new StylePop();
 			Step boxThree = etc.sketch(1000d);
-			Sequence sequence = new Sequence(boxOne,push,redColor,boxTwo,pop,boxThree);
+			Sequence sequence = new Sequence(arrow.sketch(1000d),boxOne,push,redColor,boxTwo,pop,boxThree);
 
 			player = new Player(scaledCanvas);
 			player.reset(sequence);

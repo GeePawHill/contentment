@@ -79,5 +79,17 @@ public class Style
 		return new Style(StyleId.Font,applier);
 	}
 
+	public static Style opacity(double d)
+	{
+		ShapeApplier applier = new ShapeApplier() {
+			@Override
+			public void apply(Shape shape)
+			{
+				shape.setOpacity(d);
+			} 
+		};
+		return new Style(StyleId.Opacity,applier);
+	}
+
 
 }

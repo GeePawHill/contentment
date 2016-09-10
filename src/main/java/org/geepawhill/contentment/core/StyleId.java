@@ -5,5 +5,6 @@ public enum StyleId
 	LineStroke,
 	LineColor,
 	PenWidth, 
-	Font
+	Font, 
+	Opacity
 }

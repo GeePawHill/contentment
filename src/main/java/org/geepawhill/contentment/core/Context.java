@@ -19,5 +19,6 @@ public class Context {
 		styles.set(Style.lineColor(Color.BLACK));
 		styles.set(Style.penWidth(6d));
 		styles.set(Style.font(new Font("Buxton Sketch",30d)));
+		styles.set(Style.opacity(.6d));
 	}
 }
