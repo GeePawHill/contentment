@@ -1,6 +1,5 @@
-package org.geepawhill.contentment;
+package org.geepawhill.contentment.core;
 
-import org.geepawhill.contentment.core.ArrowComputer;
 import org.geepawhill.contentment.geometry.ArrowPoints;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;

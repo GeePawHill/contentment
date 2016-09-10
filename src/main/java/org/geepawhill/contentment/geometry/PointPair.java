@@ -130,7 +130,7 @@ public class PointPair
 		PointPair eastLine = new PointPair(to.x, from.y, to.x, to.y);
 		Point eastIntersect = eastLine.intersects(other);
 		if (eastIntersect != null) return eastIntersect;
-		PointPair westLine = new PointPair(from.x, from.y, to.x, from.y);
+		PointPair westLine = new PointPair(from.x, from.y, from.x, to.y);
 		Point westIntersect = westLine.intersects(other);
 		if (westIntersect != null) return westIntersect;
 		return null;
@@ -139,6 +139,16 @@ public class PointPair
 	public PointPair grow(double delta)
 	{
 		return new PointPair(from.x-delta,from.y-delta,to.x+delta,to.y+delta);
+	}
+
+	public double width()
+	{
+		return to.x-from.x;
+	}
+	
+	public double height()
+	{
+		return to.y-from.y;
 	}
 
 }

@@ -2,15 +2,11 @@ package org.geepawhill.contentment;
 
 import org.geepawhill.contentment.core.Arrow;
 import org.geepawhill.contentment.core.LabelBox;
-import org.geepawhill.contentment.core.PointArrowComputer;
+import org.geepawhill.contentment.core.OvalText;
 import org.geepawhill.contentment.core.ScaleListener;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.core.StageMaximizedListener;
-import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.core.Style;
-import org.geepawhill.contentment.geometry.Point;
-import org.geepawhill.contentment.step.StylePop;
-import org.geepawhill.contentment.step.StylePush;
 import org.geepawhill.contentment.step.StyleStep;
 
 import javafx.application.Application;
@@ -44,18 +40,31 @@ public class Main extends Application
 			canvas.getChildren().add(scaledCanvas);
 			forceLetterBox(stage,stage.getScene(),canvas,scaledCanvas);
 
-			LabelBox hiMom = new LabelBox("Hi Mom!",400d,400d);
-			LabelBox alsoDad = new LabelBox("Also, Dad!",500d,500d);
-			Arrow arrow = new Arrow(new PointArrowComputer(new Point(200d,200d), new Point(400d,150d)));
-			LabelBox etc = new LabelBox("Etc.",600d,600d);
-			Step boxOne = hiMom.sketch(1000d);
-			StylePush push = new StylePush();
-			StyleStep redColor = new StyleStep(Style.lineColor(Color.RED));
-			Step boxTwo = alsoDad.fadeIn(1000d);
-			Arrow arrow2 = new Arrow(new NodeArrowComputer(hiMom.group(),alsoDad.group()));
-			StylePop pop = new StylePop();
-			Step boxThree = etc.sketch(1000d);
-			Sequence sequence = new Sequence(arrow.sketch(1000d),boxOne,push,redColor,boxTwo,pop,arrow2.sketch(1000d),boxThree);
+			StyleStep redLine = new StyleStep(Style.lineColor(Color.RED));
+			StyleStep blueLine = new StyleStep(Style.lineColor(Color.BLUE));
+			StyleStep greenLine = new StyleStep(Style.lineColor(Color.GREEN));
+			LabelBox agent1 = new LabelBox("Agent",800d,450d);
+			OvalText before = new OvalText("Before",400d,700d);
+			OvalText after = new OvalText("After",1200d,700d);
+			Arrow oldWay = new Arrow(agent1,before);
+			StyleStep dash = new StyleStep(Style.dash(8d));
+			StyleStep noDash = new StyleStep(Style.nodash());
+			LabelBox coach = new LabelBox("Coach",800d,200d);
+			Arrow poke1 = new Arrow(coach,agent1);
+			
+			Sequence sequence = new Sequence();
+			sequence.add(redLine);
+			sequence.add(agent1.sketch(1000d));
+			sequence.add(greenLine);
+			sequence.add(dash);
+			sequence.add(before.sketch(1000d));
+			sequence.add(oldWay.sketch(1000d));
+			sequence.add(after.sketch(1000d));
+			sequence.add(noDash);
+			sequence.add(blueLine);
+			sequence.add(coach.sketch(1000d));
+			sequence.add(poke1.sketch(1000d));
+
 
 			player = new Player(scaledCanvas);
 			player.reset(sequence);
@@ -80,9 +89,10 @@ public class Main extends Application
 	{
 		ToolBar tools = new ToolBar();
 		tools.setOrientation(Orientation.VERTICAL);
-		Button forwards = new Button("-->");
-		forwards.setOnAction(event -> player.forward());
-		tools.getItems().add(forwards);
+		
+		Button home = new Button("||<--");
+		home.setOnAction(event -> player.home());
+		tools.getItems().add(home);
 		
 		Button backwards = new Button("<--");
 		backwards.setOnAction(event -> player.backward());
@@ -91,14 +101,28 @@ public class Main extends Application
 		Button play = new Button(">");
 		play.setOnAction(event -> player.play());
 		tools.getItems().add(play);
-		
+
+		Button pause = new Button("||");
+		pause.setOnAction(event -> player.pause());
+		tools.getItems().add(pause);
+
 		Button playOne = new Button(">|");
 		playOne.setOnAction(event -> player.playOne());
 		tools.getItems().add(playOne);
 		
-		Button pause = new Button("||");
-		pause.setOnAction(event -> player.pause());
-		tools.getItems().add(pause);
+		Button forwards = new Button("-->");
+		forwards.setOnAction(event -> player.forward());
+		tools.getItems().add(forwards);
+		
+		Button end = new Button("-->||");
+		end.setOnAction(event -> player.end());
+		tools.getItems().add(end);
+
+		Button allButEnd = new Button("-->.");
+		allButEnd.setOnAction(event -> player.allButEnd());
+		tools.getItems().add(allButEnd);
+				
+		
 		
 		root.setRight(tools);
 	}

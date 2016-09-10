@@ -90,6 +90,31 @@ public class Style
 		};
 		return new Style(StyleId.Opacity,applier);
 	}
+	
+	public static Style dash(Double... dash)
+	{
+		ShapeApplier applier = new ShapeApplier() {
+			@Override
+			public void apply(Shape shape)
+			{
+				shape.getStrokeDashArray().clear();
+				shape.getStrokeDashArray().addAll(dash);
+			} 
+		};
+		return new Style(StyleId.Dash,applier);		
+	}
+
+	public static Style nodash()
+	{
+		ShapeApplier applier = new ShapeApplier() {
+			@Override
+			public void apply(Shape shape)
+			{
+				shape.getStrokeDashArray().clear();;
+			} 
+		};
+		return new Style(StyleId.Dash,applier);		
+	}
 
 
 }

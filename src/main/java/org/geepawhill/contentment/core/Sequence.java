@@ -34,4 +34,9 @@ public class Sequence implements Iterable<Step>
 	{
 		return steps.get(index);
 	}
+	
+	public void add(Step step)
+	{
+		steps.add(step);
+	}
 }

@@ -18,6 +18,11 @@ public class Arrow implements Actor
 	private ArrowPoints points;
 	private ArrowComputer computer;
 	
+	public Arrow(Actor from,Actor to)
+	{
+		this(new NodeArrowComputer(from.group(), to.group()));
+	}
+	
 	public Arrow(ArrowComputer computer)
 	{
 		this.computer = computer;

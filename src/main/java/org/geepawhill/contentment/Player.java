@@ -241,4 +241,19 @@ public class Player
 		}
 	}
 
+	public void home()
+	{
+		seek(0);
+	}
+
+	public void end()
+	{
+		seek(sequence.size());
+	}
+
+	public void allButEnd()
+	{
+		seek(sequence.size()-1);
+	}
+
 }

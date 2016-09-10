@@ -28,6 +28,7 @@ public class StrokeHelper
 			context.styles.get(StyleId.LineColor).apply(line);
 			context.styles.get(StyleId.PenWidth).apply(line);
 			context.styles.get(StyleId.Opacity).apply(line);
+			context.styles.get(StyleId.Dash).apply(line);
 			line.setStartX(points.from.x);
 			line.setStartY(points.from.y);
 			line.setEndX(points.partialX(fraction));
