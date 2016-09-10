@@ -2,11 +2,13 @@ package org.geepawhill.contentment;
 
 import org.geepawhill.contentment.core.Arrow;
 import org.geepawhill.contentment.core.LabelBox;
+import org.geepawhill.contentment.core.PointArrowComputer;
 import org.geepawhill.contentment.core.ScaleListener;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.core.StageMaximizedListener;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.core.Style;
+import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.step.StylePop;
 import org.geepawhill.contentment.step.StylePush;
 import org.geepawhill.contentment.step.StyleStep;
@@ -44,15 +46,16 @@ public class Main extends Application
 
 			LabelBox hiMom = new LabelBox("Hi Mom!",400d,400d);
 			LabelBox alsoDad = new LabelBox("Also, Dad!",500d,500d);
-			Arrow arrow = new Arrow(200d,200d,400d,150d);
+			Arrow arrow = new Arrow(new PointArrowComputer(new Point(200d,200d), new Point(400d,150d)));
 			LabelBox etc = new LabelBox("Etc.",600d,600d);
 			Step boxOne = hiMom.sketch(1000d);
 			StylePush push = new StylePush();
 			StyleStep redColor = new StyleStep(Style.lineColor(Color.RED));
 			Step boxTwo = alsoDad.fadeIn(1000d);
+			Arrow arrow2 = new Arrow(new NodeArrowComputer(hiMom.group(),alsoDad.group()));
 			StylePop pop = new StylePop();
 			Step boxThree = etc.sketch(1000d);
-			Sequence sequence = new Sequence(arrow.sketch(1000d),boxOne,push,redColor,boxTwo,pop,boxThree);
+			Sequence sequence = new Sequence(arrow.sketch(1000d),boxOne,push,redColor,boxTwo,pop,arrow2.sketch(1000d),boxThree);
 
 			player = new Player(scaledCanvas);
 			player.reset(sequence);

@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.geometry.ArrowPoints;
-import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.StrokeHelper;
 import org.geepawhill.contentment.step.SubStep;
@@ -16,14 +15,12 @@ public class Arrow implements Actor
 	private Line main;
 	private Line top;
 	private Line bottom;
-	private Point from;
-	private Point to;
 	private ArrowPoints points;
-
-	public Arrow(double fromX,double fromY,double toX,double toY)
+	private ArrowComputer computer;
+	
+	public Arrow(ArrowComputer computer)
 	{
-		this.from = new Point(fromX,fromY);
-		this.to = new Point(toX,toY);
+		this.computer = computer;
 		this.group = new Group();
 		this.main = new Line();
 		this.top = new Line();
@@ -46,7 +43,7 @@ public class Arrow implements Actor
 	private void computeArrow(double frac,Context context)
 	{
 		if(frac==0d) return;
-		points = new ArrowPoints(new PointPair(from,to));
+		points = computer.compute();
 	}
 
 	public PointPair mainPoints()

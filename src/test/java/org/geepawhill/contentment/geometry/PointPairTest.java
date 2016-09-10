@@ -50,5 +50,30 @@ public class PointPairTest
 		assertEquals(new Point(50d,275d),pair.west());
 		assertEquals(new Point(200d,275d),pair.east());
 	}
-
+	
+	@Test
+	public void intersects()
+	{
+		PointPair base = new PointPair( 100d,100d,200d,200d);
+		PointPair should = new PointPair( 100d,200d,200d,100d);
+		assertEquals(new Point(150d,150d),base.intersects(should));
+	}
+	
+	@Test
+	public void noIntersects()
+	{
+		PointPair base = new PointPair( 100d,100d,200d,200d);
+		PointPair should = new PointPair( 300d,100d,300d,200d);
+		assertNull(base.intersects(should));
+	}
+	
+	@Test
+	public void intersectsQuad()
+	{
+		PointPair base = new PointPair( 100d,100d,200d,200d);
+		Point farSouthCenter = new Point(base.centerX(),300d);
+		Point center = base.center();
+		Point should = base.quadIntersects(new PointPair(farSouthCenter,center));
+		assertEquals(base.south(),should);
+	}
 }
