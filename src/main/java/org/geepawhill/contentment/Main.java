@@ -44,7 +44,7 @@ public class Main extends Application
 
 			LabelBox hiMom = new LabelBox("Hi Mom!",400d,400d);
 			LabelBox alsoDad = new LabelBox("Also, Dad!",500d,500d);
-			Arrow arrow = new Arrow(200d,200d,400d,200d);
+			Arrow arrow = new Arrow(200d,200d,400d,150d);
 			LabelBox etc = new LabelBox("Etc.",600d,600d);
 			Step boxOne = hiMom.sketch(1000d);
 			StylePush push = new StylePush();
