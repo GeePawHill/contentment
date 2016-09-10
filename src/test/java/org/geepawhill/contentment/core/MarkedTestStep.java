@@ -7,9 +7,4 @@ public class MarkedTestStep extends UnmarkedTestStep
 	static public Sequence twoStepSequence = new Sequence(oneStep,twoStep);
 	static public Sequence oneStepSequence = new Sequence(oneStep);
 
-	@Override
-	public boolean isMarked()
-	{
-		return true;
-	}
 }

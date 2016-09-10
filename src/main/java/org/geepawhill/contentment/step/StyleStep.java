@@ -47,10 +47,4 @@ public class StyleStep implements Step
 	{
 	}
 
-	@Override
-	public boolean isMarked()
-	{
-		return false;
-	}
-
 }

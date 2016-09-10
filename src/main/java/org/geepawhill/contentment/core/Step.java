@@ -7,5 +7,4 @@ public interface Step
 	public void play(Context context);
 	public void pause(Context context);
 	public void resume(Context context);
-	public boolean isMarked();
 }

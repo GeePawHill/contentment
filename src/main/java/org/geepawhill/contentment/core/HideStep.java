@@ -42,10 +42,4 @@ public class HideStep implements Step
 	{
 	}
 
-	@Override
-	public boolean isMarked()
-	{
-		return true;
-	}
-
 }

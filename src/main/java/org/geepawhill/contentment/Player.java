@@ -42,8 +42,9 @@ public class Player
 	public void reset(Sequence sequence)
 	{
 		this.sequence = sequence;
-		for (Step step : sequence)
+		for(int i=0;i<sequence.size();i++)
 		{
+			Step step = sequence.get(i);
 			step.before(context);
 		}
 		current = 0;
@@ -198,7 +199,7 @@ public class Player
 
 	private boolean currentIsMarked()
 	{
-		return currentStep().isMarked();
+		return sequence.isMarked(current);
 	}
 
 	private boolean currentIsLast()
@@ -249,19 +250,6 @@ public class Player
 				state = PlayState.Before;
 			}
 		}
-	}
-
-	private void seekToNextMarked()
-	{
-		for (int step = current + 1; step < size(); step++)
-		{
-			if (sequence.get(step).isMarked())
-			{
-				seek(step);
-				return;
-			}
-		}
-		end();
 	}
 
 	public void home()

@@ -83,10 +83,4 @@ public class TimedSequence implements Step
 		transition.play();
 	}
 
-	@Override
-	public boolean isMarked()
-	{
-		return true;
-	}
-
 }

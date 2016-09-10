@@ -45,10 +45,4 @@ public class StylePush implements Step
 	{
 	}
 
-	@Override
-	public boolean isMarked()
-	{
-		return false;
-	}
-
 }
