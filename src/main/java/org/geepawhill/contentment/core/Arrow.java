@@ -71,4 +71,9 @@ public class Arrow implements Actor
 	{
 		return group;
 	}
+	
+	public Step hide()
+	{
+		return new HideStep(group);
+	}
 }

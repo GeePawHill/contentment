@@ -165,32 +165,35 @@ public class Player
 
 	private void decrementToMarkedOrZero()
 	{
-		if(current==0)
+		if (current == 0)
 		{
 			currentStep().before(context);
 			state = PlayState.Before;
 			return;
 		}
-		do {
+		do
+		{
 			current -= 1;
 			currentStep().before(context);
 		}
-		while(current()>0 && !currentIsMarked());
+		while (current() > 0 && !currentIsMarked());
 		state = PlayState.Before;
 	}
 
 	private void incrementToMarkedOrLast()
 	{
-		do {
+		do
+		{
 			currentStep().after(context);
 			if (!currentIsLast())
 			{
 				current += 1;
 				state = PlayState.Before;
 			}
-			else state = PlayState.After;
+			else
+				state = PlayState.After;
 		}
-		while(!currentIsLast() && !currentIsMarked());
+		while (!currentIsLast() && !currentIsMarked());
 	}
 
 	private boolean currentIsMarked()
@@ -229,16 +232,36 @@ public class Player
 		}
 		else
 		{
-			current += 1;
 			if (isChaining)
 			{
+				current += 1;
 				playCurrent();
 			}
 			else
 			{
+				if (!currentIsMarked())
+				{
+					current += 1;
+					playCurrent();
+					return;
+				}
+				current+=1;
 				state = PlayState.Before;
 			}
 		}
+	}
+
+	private void seekToNextMarked()
+	{
+		for (int step = current + 1; step < size(); step++)
+		{
+			if (sequence.get(step).isMarked())
+			{
+				seek(step);
+				return;
+			}
+		}
+		end();
 	}
 
 	public void home()
@@ -253,7 +276,7 @@ public class Player
 
 	public void allButEnd()
 	{
-		seek(sequence.size()-1);
+		seek(sequence.size() - 1);
 	}
 
 }

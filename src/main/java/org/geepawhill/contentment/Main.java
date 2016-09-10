@@ -47,6 +47,7 @@ public class Main extends Application
 			OvalText before = new OvalText("Before",400d,700d);
 			OvalText after = new OvalText("After",1200d,700d);
 			Arrow oldWay = new Arrow(agent1,before);
+			Arrow newWay = new Arrow(agent1,after);
 			StyleStep dash = new StyleStep(Style.dash(8d));
 			StyleStep noDash = new StyleStep(Style.nodash());
 			LabelBox coach = new LabelBox("Coach",800d,200d);
@@ -58,12 +59,16 @@ public class Main extends Application
 			sequence.add(greenLine);
 			sequence.add(dash);
 			sequence.add(before.sketch(1000d));
-			sequence.add(oldWay.sketch(1000d));
+			sequence.add(oldWay.sketch(1d));
 			sequence.add(after.sketch(1000d));
 			sequence.add(noDash);
 			sequence.add(blueLine);
 			sequence.add(coach.sketch(1000d));
 			sequence.add(poke1.sketch(1000d));
+			sequence.add(oldWay.hide());
+			sequence.add(dash);
+			sequence.add(greenLine);
+			sequence.add(newWay.sketch(1d));
 
 
 			player = new Player(scaledCanvas);
