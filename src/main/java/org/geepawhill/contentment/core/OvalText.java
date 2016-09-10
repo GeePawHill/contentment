@@ -23,10 +23,16 @@ public class OvalText implements Actor
 
 	private static final double VMARGIN = 4d;
 	private static final double HMARGIN = 20d;
+
+	private double xCenter;
+
+	private double yCenter;
 	
 
 	public OvalText(String text, double xCenter, double yCenter)
 	{
+		this.xCenter = xCenter;
+		this.yCenter = yCenter;
 		this.group = new Group();
 		this.text = text;
 		label = new Text(xCenter, yCenter, "");
@@ -61,6 +67,8 @@ public class OvalText implements Actor
 		context.styles.get(StyleId.LineColor).apply(label);
 		String newText = text.substring(0, (int) (frac * text.length()));
 		label.setText(newText);
+		label.setX(xCenter-label.getBoundsInParent().getWidth()/2d);
+		label.setY(yCenter);
 	}
 
 	protected void animateComputeBox(double frac, Context context)

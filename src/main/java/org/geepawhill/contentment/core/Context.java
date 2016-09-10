@@ -21,5 +21,6 @@ public class Context {
 		styles.set(Style.font(new Font("Buxton Sketch",60d)));
 		styles.set(Style.opacity(.6d));
 		styles.set(Style.nodash());
+		styles.push();
 	}
 }

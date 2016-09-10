@@ -5,6 +5,7 @@ import org.geepawhill.contentment.core.StyleId;
 import org.geepawhill.contentment.geometry.PointPair;
 
 import javafx.scene.shape.Line;
+import javafx.scene.shape.StrokeLineCap;
 
 public class StrokeHelper
 {
@@ -29,6 +30,7 @@ public class StrokeHelper
 			context.styles.get(StyleId.PenWidth).apply(line);
 			context.styles.get(StyleId.Opacity).apply(line);
 			context.styles.get(StyleId.Dash).apply(line);
+			line.setStrokeLineCap(StrokeLineCap.ROUND);
 			line.setStartX(points.from.x);
 			line.setStartY(points.from.y);
 			line.setEndX(points.partialX(fraction));

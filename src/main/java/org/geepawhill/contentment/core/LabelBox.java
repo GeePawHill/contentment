@@ -5,6 +5,7 @@ import org.geepawhill.contentment.step.TimedSequence;
 
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
+import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -22,13 +23,20 @@ public class LabelBox implements Actor
 
 	private static final double VMARGIN = 8d;
 	private static final double HMARGIN = 8d;
+
+	private double xCenter;
+
+	private double yCenter;
 	
 
 	public LabelBox(String text, double xCenter, double yCenter)
 	{
+		this.xCenter = xCenter;
+		this.yCenter = yCenter;
 		this.group = new Group();
 		this.text = text;
 		label = new Text(xCenter, yCenter, "");
+		label.setTextOrigin(VPos.CENTER);
 		rectangle = new Rectangle();
 		group.getChildren().addAll(label,rectangle);
 		bounds = label.getBoundsInParent();
@@ -60,6 +68,8 @@ public class LabelBox implements Actor
 		context.styles.get(StyleId.LineColor).apply(label);
 		String newText = text.substring(0, (int) (frac * text.length()));
 		label.setText(newText);
+		label.setX(xCenter-label.getBoundsInParent().getWidth()/2d);
+		label.setY(yCenter);
 	}
 
 	protected void animateComputeBox(double frac, Context context)
