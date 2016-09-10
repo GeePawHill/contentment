@@ -62,9 +62,9 @@ public class PlayerTest
 	{
 		UnmarkedTestStep unmarked = new UnmarkedTestStep();
 		Sequence mixedSequence = new Sequence();
-		mixedSequence.add(oneStep);
+		mixedSequence.marked(oneStep);
 		mixedSequence.add(false,unmarked);
-		mixedSequence.add(twoStep);
+		mixedSequence.marked(twoStep);
 		player.reset(mixedSequence);
 		player.forward();
 		assertEquals(2, player.current());
@@ -416,8 +416,8 @@ public class PlayerTest
 		UnmarkedTestStep unmarked = new UnmarkedTestStep();
 		Sequence mixedSequence = new Sequence();
 		mixedSequence.add(false,unmarked);
-		mixedSequence.add(oneStep);
-		mixedSequence.add(twoStep);
+		mixedSequence.marked(oneStep);
+		mixedSequence.marked(twoStep);
 		player.reset(mixedSequence);
 		player.playOne();
 		assertTrue(unmarked.isPlaying);

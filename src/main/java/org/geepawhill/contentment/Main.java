@@ -54,21 +54,21 @@ public class Main extends Application
 			Arrow poke1 = new Arrow(coach,agent1);
 			
 			Sequence sequence = new Sequence();
-			sequence.add(redLine);
-			sequence.add(agent1.sketch(1000d));
-			sequence.add(greenLine);
-			sequence.add(dash);
-			sequence.add(before.sketch(1000d));
-			sequence.add(oldWay.sketch(1d));
-			sequence.add(after.sketch(1000d));
-			sequence.add(noDash);
-			sequence.add(blueLine);
-			sequence.add(coach.sketch(1000d));
-			sequence.add(poke1.sketch(1000d));
-			sequence.add(oldWay.hide());
-			sequence.add(dash);
-			sequence.add(greenLine);
-			sequence.add(newWay.sketch(1d));
+			sequence.unmarked(redLine);
+			sequence.marked(agent1.sketch(1000d));
+			sequence.unmarked(greenLine);
+			sequence.unmarked(dash);
+			sequence.unmarked(before.sketch(1000d));
+			sequence.marked(oldWay.sketch(1d));
+			sequence.marked(after.sketch(1000d));
+			sequence.unmarked(noDash);
+			sequence.unmarked(blueLine);
+			sequence.marked(coach.sketch(1000d));
+			sequence.marked(poke1.sketch(1000d));
+			sequence.unmarked(oldWay.hide());
+			sequence.unmarked(dash);
+			sequence.unmarked(greenLine);
+			sequence.marked(newWay.sketch(1d));
 
 
 			player = new Player(scaledCanvas);

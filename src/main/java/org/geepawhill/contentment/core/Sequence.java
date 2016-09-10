@@ -10,11 +10,6 @@ public class Sequence
 		public final boolean isMarked;
 		public final Step step;
 		
-		public StepAndMark(Step step)
-		{
-			this(true,step);
-		}
-		
 		public StepAndMark(boolean isMarked,Step step)
 		{
 			this.isMarked = isMarked;
@@ -31,7 +26,7 @@ public class Sequence
 	public Sequence(Step... steps)
 	{
 		this.steps = new ArrayList<StepAndMark>();
-		for(Step step : steps) this.steps.add(new StepAndMark(step));
+		for(Step step : steps) this.steps.add(new StepAndMark(true,step));
 	}
 
 	public int size()
@@ -44,9 +39,14 @@ public class Sequence
 		return steps.get(index).step;
 	}
 	
-	public void add(Step step)
+	public void marked(Step step)
 	{
-		steps.add(new StepAndMark(step));
+		add(true,step);
+	}
+	
+	public void unmarked(Step step)
+	{
+		add(false,step);
 	}
 	
 	public void add(boolean isMarked,Step step)
