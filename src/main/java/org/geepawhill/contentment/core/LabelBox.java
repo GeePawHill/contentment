@@ -96,4 +96,10 @@ public class LabelBox implements Actor
 		group.setOpacity(frac);
 	}
 
+	@Override
+	public Group group()
+	{
+		return group;
+	}
+
 }
