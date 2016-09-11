@@ -56,9 +56,9 @@ public class Main extends Application
 			Arrow poke1 = new Arrow(coach, agent1);
 
 			Sequence sequence = new Sequence();
-			sequence.unmarked(tale.show());
+			sequence.marked(tale.show());
 			sequence.unmarked(new StyleStep(redLine));
-			sequence.marked(agent1.sketch(1000d));
+			sequence.unmarked(agent1.sketch(1000d));
 			sequence.unmarked(new StyleStep(greenLine));
 			sequence.unmarked(new StyleStep(Style.dash(10d)));
 			sequence.unmarked(before.sketch(1000d));
