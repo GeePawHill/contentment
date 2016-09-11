@@ -25,6 +25,5 @@ public class Context {
 		styles.set(Style.opacity(.6d));
 		styles.set(Style.nodash());
 		styles.push();
-		System.out.println("Styles set up.");
 	}
 }

@@ -2,6 +2,7 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.jfx.JfxUtility;
 
 import javafx.animation.SequentialTransition;
 import javafx.scene.Group;
@@ -25,7 +26,7 @@ public class TimedSequence implements Step
 	public void after(Context context)
 	{
 		transition.stop();
-		context.canvas.getChildren().add(group);
+		JfxUtility.addIfNeeded(context, group);
 		for (SubStep substep : substeps)
 		{
 			substep.interpolator.accept(1d, context);

@@ -20,7 +20,6 @@ public class Styles
 	public void set(Style style)
 	{
 		old.get(0).put(style.id,style);
-		System.out.println("Setting: "+style.id);
 	}
 
 	public Style get(StyleId id)

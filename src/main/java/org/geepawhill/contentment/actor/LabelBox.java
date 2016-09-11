@@ -29,7 +29,6 @@ public class LabelBox implements Actor
 	private static final double HMARGIN = 8d;
 
 	private double xCenter;
-
 	private double yCenter;
 	
 

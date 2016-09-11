@@ -2,6 +2,7 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.jfx.JfxUtility;
 
 import javafx.scene.Group;
 
@@ -18,7 +19,7 @@ public class ShowStep implements Step
 	@Override
 	public void after(Context context)
 	{
-		if(!context.canvas.getChildren().contains(group)) context.canvas.getChildren().add(group);
+		JfxUtility.addIfNeeded(context, group);
 		group.setVisible(true);
 	}
 
