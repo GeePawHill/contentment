@@ -6,6 +6,8 @@ import org.geepawhill.contentment.actor.Tale;
 import org.geepawhill.contentment.actor.arrow.Arrow;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.style.Style;
+import org.geepawhill.contentment.style.StylePop;
+import org.geepawhill.contentment.style.StylePush;
 import org.geepawhill.contentment.style.StyleStep;
 
 import javafx.application.Application;
@@ -19,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Main extends Application
@@ -48,8 +51,8 @@ public class Main extends Application
 			Style greenLine = Style.lineColor(Color.GREEN);
 			Tale tale = new Tale("A Simple Change Model", 30d);
 			LabelBox agent1 = new LabelBox("Agent", 800d, 450d);
-			OvalText before = new OvalText("Before", 400d, .75*900d);
-			OvalText after = new OvalText("After", 1200d, .75*900d);
+			OvalText before = new OvalText("Before", 650d, .75*900d);
+			OvalText after = new OvalText("After", 950d, .75*900d);
 			Arrow oldWay = new Arrow(agent1, before);
 			Arrow newWay = new Arrow(agent1, after);
 			LabelBox coach = new LabelBox("Coach", 800d, 200d);
@@ -59,12 +62,14 @@ public class Main extends Application
 			sequence.marked(tale.show());
 			sequence.unmarked(new StyleStep(redLine));
 			sequence.unmarked(agent1.sketch(1000d));
+			sequence.unmarked(new StylePush());
+			sequence.unmarked(new StyleStep(Style.font(new Font("Buxton Sketch",40d))));
 			sequence.unmarked(new StyleStep(greenLine));
 			sequence.unmarked(new StyleStep(Style.dash(10d)));
 			sequence.unmarked(before.sketch(1000d));
 			sequence.marked(oldWay.sketch(1d));
 			sequence.marked(after.sketch(1000d));
-			sequence.unmarked(new StyleStep(Style.nodash()));
+			sequence.unmarked(new StylePop());
 			sequence.unmarked(new StyleStep(blueLine));
 			sequence.marked(coach.sketch(1000d));
 			sequence.marked(poke1.sketch(1000d));
