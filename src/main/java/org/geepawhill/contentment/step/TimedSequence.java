@@ -46,7 +46,7 @@ public class TimedSequence implements Step
 	@Override
 	public void play(Context context)
 	{
-		context.canvas.getChildren().add(group);
+		JfxUtility.addIfNeeded(context, group);
 		addSubsteps(context);
 		transition.setOnFinished(context.onFinished);
 		transition.playFromStart();

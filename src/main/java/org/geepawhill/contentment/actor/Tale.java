@@ -3,6 +3,8 @@ package org.geepawhill.contentment.actor;
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.step.ShowStep;
+import org.geepawhill.contentment.step.SubStep;
+import org.geepawhill.contentment.step.TimedSequence;
 
 import javafx.geometry.VPos;
 import javafx.scene.Group;
@@ -16,7 +18,6 @@ import javafx.scene.text.TextAlignment;
 public class Tale implements Actor
 {
 	private Group group;
-	private String value;
 	private double fromY;
 	private Text text;
 	private Rectangle rectangle;
@@ -30,28 +31,32 @@ public class Tale implements Actor
 
 	public Tale(String value, double fromY)
 	{
-		this.value = value;
 		this.fromY = fromY;
 		this.group = new Group();
 		text = new Text(800d, fromY + YINSET, value);
 		rectangle = new Rectangle(XMARGIN, fromY, 1600d - XMARGIN - XINSET, 30d + 2 * YINSET);
-		group.getChildren().addAll(rectangle,text);
+		group.getChildren().addAll(rectangle, text);
 
+		adjustTextSize();
+
+		rectangle.setHeight(text.getBoundsInLocal().getHeight() + 2 * YINSET);
+		rectangle.setStrokeWidth(2d);
+		rectangle.setFill(Color.color(1d, GREEN, BLUE));
+		rectangle.setStroke(Color.color(.1d, .1d, .1d));
+		rectangle.setArcHeight(40d);
+		rectangle.setArcWidth(40d);
+	}
+
+	private void adjustTextSize()
+	{
 		text.setTextOrigin(VPos.TOP);
 		text.setTextAlignment(TextAlignment.CENTER);
-		text.setFont(new Font("Tahoma",40d));
+		text.setFont(new Font("Tahoma", 40d));
 		text.setTextOrigin(VPos.TOP);
-		text.setX(800d-text.getBoundsInLocal().getWidth()/2d);
-		text.setY(fromY+YINSET);
+		text.setX(800d - text.getBoundsInLocal().getWidth() / 2d);
+		text.setY(fromY + YINSET);
 		text.setStrokeWidth(3d);
 		text.setStrokeLineCap(StrokeLineCap.ROUND);
-		
-		rectangle.setHeight(text.getBoundsInLocal().getHeight()+2*YINSET);
-		rectangle.setStrokeWidth(2d);
-		rectangle.setFill(Color.color(1d,GREEN,BLUE));
-		rectangle.setStroke(Color.color(.1d,.1d,.1d));
-		rectangle.setArcHeight(40d);
-		rectangle.setArcWidth(40d);	
 	}
 
 	@Override
@@ -59,11 +64,26 @@ public class Tale implements Actor
 	{
 		return group;
 	}
-	
+
 	public Step show()
 	{
 		return new ShowStep(group);
 	}
-	
+
+	public Step setText(String newValue)
+	{
+		SubStep[] substeps = new SubStep[]
+		{
+				new SubStep(1d,(frac,context)-> { changeText(newValue); } ),
+		};
+		return new TimedSequence(1d, group, substeps);
+
+	}
+
+	private void changeText(String newValue)
+	{
+		text.setText(newValue);
+		adjustTextSize();
+	}
 
 }
