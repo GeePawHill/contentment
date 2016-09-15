@@ -84,28 +84,37 @@ public class Main extends Application
 			Arrow c5 = new Arrow(a5,p5);
 			Arrow c6 = new Arrow(a6,p6);
 
+			Arrow i1 = new Arrow(a1,a2);
+			Arrow i2 = new Arrow(a2,a3);
+			Arrow i3 = new Arrow(a3,agent1);
+			Arrow i4 = new Arrow(agent1,a4);
+			Arrow i5 = new Arrow(a4,a5);
+			Arrow i6 = new Arrow(a5,a6);
+
 			Sequence sequence = new Sequence();
 			sequence.marked(tale.show());
 			sequence.unmarked(new StyleStep(redLine));
 			sequence.unmarked(agent1.sketch(1000d));
+			sequence.unmarked(new StyleStep(blueLine));
+			sequence.marked(coach.sketch(1000d));
+			sequence.marked(poke.sketch(1000d));
 			sequence.unmarked(new StylePush());
 			sequence.unmarked(new StyleStep(Style.font(new Font("Buxton Sketch",40d))));
 			sequence.unmarked(new StyleStep(greenLine));
 			sequence.unmarked(new StyleStep(Style.dash(10d)));
 			sequence.unmarked(practice.sketch(1000d));
-			sequence.unmarked(new StylePop());
-			sequence.unmarked(new StyleStep(blueLine));
-			sequence.marked(coach.sketch(1000d));
-			sequence.marked(poke.sketch(1000d));
 			sequence.marked(change.sketch(1d));
+			sequence.unmarked(new StylePop());
 			sequence.marked(tale.setText("Complication: There are always multiple agents."));
 			sequence.unmarked(new StyleStep(Style.font(new Font("Buxton Sketch",30d))));
+			sequence.unmarked(new StyleStep(redLine));
 			sequence.unmarked(new InstantStep(a1.sketch(1d)));
 			sequence.unmarked(new InstantStep(a2.sketch(1d)));
 			sequence.unmarked(new InstantStep(a3.sketch(1d)));
 			sequence.unmarked(new InstantStep(a4.sketch(1d)));
 			sequence.unmarked(new InstantStep(a5.sketch(1d)));
 			sequence.unmarked(new InstantStep(a6.sketch(1d)));
+			sequence.unmarked(new StyleStep(blueLine));
 			sequence.unmarked(poke1.sketch(300d));
 			sequence.unmarked(poke2.sketch(300d));
 			sequence.unmarked(poke3.sketch(300d));
@@ -128,7 +137,16 @@ public class Main extends Application
 			sequence.unmarked(c4.sketch(200d));
 			sequence.unmarked(c5.sketch(200d));
 			sequence.marked(c6.sketch(200d));
-
+			
+			sequence.marked(tale.setText("Complication: The agents are interrelated."));
+			sequence.unmarked(new StyleStep(blueLine));
+			sequence.unmarked(i1.sketch(300d));
+			sequence.unmarked(i2.sketch(300d));
+			sequence.unmarked(i3.sketch(300d));
+			sequence.unmarked(i4.sketch(300d));
+			sequence.unmarked(i5.sketch(300d));
+			sequence.marked(i6.sketch(300d));
+					
 			sequence.unmarked(new StyleStep(Style.nodash()));
 			player = new Player(scaledCanvas);
 			player.reset(sequence);
