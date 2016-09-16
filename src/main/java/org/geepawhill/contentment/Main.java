@@ -51,11 +51,11 @@ public class Main extends Application
 			Style blueLine = Style.lineColor(Color.BLUE);
 			Style greenLine = Style.lineColor(Color.GREEN);
 			Tale tale = new Tale("A Simple Change Model", 30d);
-			LabelBox agent1 = new LabelBox("Agent", 800d, 450d);
+			LabelBox agent = new LabelBox("Agent", 800d, 450d);
 			OvalText practice = new OvalText("Practice", 800d, .75*900d);
-			Arrow change = new Arrow(agent1, practice);
+			Arrow change = new Arrow(agent, false, practice, true);
 			LabelBox coach = new LabelBox("Coach", 800d, 200d);
-			Arrow poke = new Arrow(coach, agent1);
+			Arrow poke = new Arrow(coach, false, agent, true);
 			
 			LabelBox a1 = new LabelBox("A",200d,200d);
 			LabelBox a2 = new LabelBox("A",400d,300d);
@@ -63,12 +63,12 @@ public class Main extends Application
 			LabelBox a4 = new LabelBox("A",1000d,400d);
 			LabelBox a5 = new LabelBox("A",1200d,300d);
 			LabelBox a6 = new LabelBox("A",1400d,200d);
-			Arrow poke1 = new Arrow(coach, a1);
-			Arrow poke2 = new Arrow(coach, a2);
-			Arrow poke3 = new Arrow(coach, a3);
-			Arrow poke4 = new Arrow(coach, a4);
-			Arrow poke5 = new Arrow(coach, a5);
-			Arrow poke6 = new Arrow(coach, a6);
+			Arrow poke1 = new Arrow(coach, false, a1, true);
+			Arrow poke2 = new Arrow(coach, false, a2, true);
+			Arrow poke3 = new Arrow(coach, false, a3, true);
+			Arrow poke4 = new Arrow(coach, false, a4, true);
+			Arrow poke5 = new Arrow(coach, false, a5, true);
+			Arrow poke6 = new Arrow(coach, false, a6, true);
 			
 			OvalText p1 = new OvalText("P",200d,400d);
 			OvalText p2 = new OvalText("P",400d,500d);
@@ -77,24 +77,24 @@ public class Main extends Application
 			OvalText p5 = new OvalText("P",1200d,500d);
 			OvalText p6 = new OvalText("P",1400d,400d);
 
-			Arrow c1 = new Arrow(a1,p1);
-			Arrow c2 = new Arrow(a2,p2);
-			Arrow c3 = new Arrow(a3,p3);
-			Arrow c4 = new Arrow(a4,p4);
-			Arrow c5 = new Arrow(a5,p5);
-			Arrow c6 = new Arrow(a6,p6);
+			Arrow c1 = new Arrow(a1,false, p1, true);
+			Arrow c2 = new Arrow(a2,false, p2, true);
+			Arrow c3 = new Arrow(a3,false, p3, true);
+			Arrow c4 = new Arrow(a4,false, p4, true);
+			Arrow c5 = new Arrow(a5,false, p5, true);
+			Arrow c6 = new Arrow(a6,false, p6, true);
 
-			Arrow i1 = new Arrow(a1,a2);
-			Arrow i2 = new Arrow(a2,a3);
-			Arrow i3 = new Arrow(a3,agent1);
-			Arrow i4 = new Arrow(agent1,a4);
-			Arrow i5 = new Arrow(a4,a5);
-			Arrow i6 = new Arrow(a5,a6);
+			Arrow i1 = new Arrow(a1,true, a2, true);
+			Arrow i2 = new Arrow(a2,true, a3, true);
+			Arrow i3 = new Arrow(a3,true, agent, true);
+			Arrow i4 = new Arrow(agent,true, a4, true);
+			Arrow i5 = new Arrow(a4,true, a5, true);
+			Arrow i6 = new Arrow(a5,true, a6, true);
 
 			Sequence sequence = new Sequence();
 			sequence.marked(tale.show());
 			sequence.unmarked(new StyleStep(redLine));
-			sequence.unmarked(agent1.sketch(1000d));
+			sequence.unmarked(agent.sketch(1000d));
 			sequence.unmarked(new StyleStep(blueLine));
 			sequence.marked(coach.sketch(1000d));
 			sequence.marked(poke.sketch(1000d));

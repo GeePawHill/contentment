@@ -32,28 +32,49 @@ public class NodeArrowComputer implements ArrowComputer
 		Point to = toGrown.quadIntersects(startLine);
 	
 		PointPair main = new PointPair(from, to);
-		double dx = from.xDistance(to);
-		double dy = from.yDistance(to);
-		double distance = Math.sqrt(dx * dx + dy * dy);
+		double xDistance = from.xDistance(to);
+		double yDistance = from.yDistance(to);
+		double distance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 		double xm = distance - d;
 		double ym = h;
 		double xn = xm;
 		double yn = -h;
-		double x;
-		double sin = dy / distance;
-		double cos = dx / distance;
+		double sin = yDistance / distance;
+		double cos = xDistance / distance;
 
-		x = xm * cos - ym * sin + from.x;
+		double x = xm * cos - ym * sin + from.x;
 		ym = xm * sin + ym * cos + from.y;
 		xm = x;
-		PointPair top = new PointPair(to, new Point(xm, ym));
+		PointPair toTop = new PointPair(to, new Point(xm, ym));
 
 		x = xn * cos - yn * sin + from.x;
 		yn = xn * sin + yn * cos + from.y;
 		xn = x;
-		PointPair bottom = new PointPair(to, new Point(xn, yn));
-		return new ArrowPoints(main, top, bottom);
+		PointPair toBottom = new PointPair(to, new Point(xn, yn));
+		
+		xDistance = to.xDistance(from);
+		yDistance = to.yDistance(from);
+		distance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
+		xm = distance - d;
+		ym = h;
+		xn = xm;
+		yn = -h;
+		sin = yDistance / distance;
+		cos = xDistance / distance;
+	
+		x = xm * cos - ym * sin + to.x;
+		ym = xm * sin + ym * cos + to.y;
+		xm = x;
+		PointPair fromTop = new PointPair(from, new Point(xm, ym));
+
+		x = xn * cos - yn * sin + to.x;
+		yn = xn * sin + yn * cos + to.y;
+		xn = x;
+		PointPair fromBottom = new PointPair(from, new Point(xn, yn));
+
+		return new ArrowPoints(main, toTop, toBottom, fromTop, fromBottom);
 
 	}
+
 
 }

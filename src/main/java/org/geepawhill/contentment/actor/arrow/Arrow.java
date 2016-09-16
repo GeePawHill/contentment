@@ -1,5 +1,7 @@
 package org.geepawhill.contentment.actor.arrow;
 
+import java.util.ArrayList;
+
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Step;
@@ -15,36 +17,60 @@ public class Arrow implements Actor
 {
 	private Group group;
 	private Line main;
-	private Line top;
-	private Line bottom;
+	private Line toTop;
+	private Line toBottom;
+	private Line fromTop;
+	private Line fromBottom;
 	private ArrowPoints points;
 	private ArrowComputer computer;
+	private boolean pointAtFrom;
+	private boolean pointAtTo;
 	
-	public Arrow(Actor from,Actor to)
+	public Arrow(Actor from,boolean pointAtFrom, Actor to, boolean pointAtTo)
 	{
-		this(new NodeArrowComputer(from.group(), to.group()));
+		this(pointAtFrom,pointAtTo,new NodeArrowComputer(from.group(), to.group()));
 	}
 	
-	public Arrow(ArrowComputer computer)
+	public Arrow(boolean pointAtFrom,boolean pointAtTo,ArrowComputer computer)
 	{
+		this.pointAtFrom = pointAtFrom;
+		this.pointAtTo = pointAtTo;
 		this.computer = computer;
 		this.group = new Group();
 		this.main = new Line();
-		this.top = new Line();
-		this.bottom = new Line();
-		group.getChildren().addAll(main,top,bottom);
+		group.getChildren().add(main);
+		if(pointAtFrom)
+		{
+			this.fromTop = new Line();
+			this.fromBottom = new Line();
+			group.getChildren().add(fromTop);
+			group.getChildren().add(fromBottom);
+		}
+		if(pointAtTo)
+		{
+			this.toTop = new Line();
+			this.toBottom = new Line();
+			group.getChildren().add(toTop);
+			group.getChildren().add(toBottom);
+		}
 	}
 	
 	public Step sketch(double ms)
 	{
-		SubStep[] substeps = new SubStep[]
+		ArrayList<SubStep> substeps = new ArrayList<>();
+		substeps.add(new SubStep(1d,this::computeArrow));
+		substeps.add(StrokeHelper.makeSubStep(main, 180d, this::mainPoints));
+		if(pointAtTo)
 		{
-				new SubStep(1d,this::computeArrow),
-				StrokeHelper.makeSubStep(main,80d,this::mainPoints),
-				StrokeHelper.makeSubStep(top, 10d,this::topPoints),
-				StrokeHelper.makeSubStep(bottom, 10d, this::bottomPoints)
-		};
-		return new TimedSequence(ms, group, substeps);
+			substeps.add(StrokeHelper.makeSubStep(toTop, 10d,this::topPoints));
+			substeps.add(StrokeHelper.makeSubStep(toBottom, 10d, this::bottomPoints));
+		}
+		if(pointAtFrom)
+		{
+			substeps.add(StrokeHelper.makeSubStep(fromTop, 10d, this::fromBottomPoints));
+			substeps.add(StrokeHelper.makeSubStep(fromBottom, 10d, this::fromTopPoints));
+		}
+		return new TimedSequence(ms, group, substeps.toArray(new SubStep[0]));
 	}
 	
 	private void computeArrow(double frac,Context context)
@@ -60,13 +86,23 @@ public class Arrow implements Actor
 	
 	public PointPair topPoints()
 	{
-		return points.top;
+		return points.toTop;
 	}
 	
 	public PointPair bottomPoints()
 	{
-		return points.bottom;
+		return points.toBottom;
 	}
+	
+	public PointPair fromBottomPoints()
+	{
+		return points.fromBottom;
+	}
+	public PointPair fromTopPoints()
+	{
+		return points.fromTop;
+	}
+
 
 	@Override
 	public Group group()
