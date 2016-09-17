@@ -4,6 +4,7 @@ import org.geepawhill.contentment.actor.LabelBox;
 import org.geepawhill.contentment.actor.OvalText;
 import org.geepawhill.contentment.actor.Spot;
 import org.geepawhill.contentment.actor.Tale;
+import org.geepawhill.contentment.actor.TargetBox;
 import org.geepawhill.contentment.actor.arrow.Arrow;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.step.ClearStep;
@@ -59,8 +60,9 @@ public class Main extends Application
 			
 			
 			
-			Tale tale = new Tale("Agents Are Susceptible To Change", 30d);
+			Tale tale = new Tale("Agents Are Susceptible To Pokes", 30d);
 			LabelBox agent = new LabelBox("Agent", 800d, 450d);
+			TargetBox target = new TargetBox("Target",1000d,350d,300d,200d);
 			
 			Spot poke1Source = new Spot(400d,450d);
 			Spot poke2Source = new Spot(800d,200d);
@@ -71,23 +73,35 @@ public class Main extends Application
 			Arrow poke3 = new Arrow(poke3Source,false,agent,true);
 			
 			sequence.unmarked(new ClearStep());
-			sequence.marked(tale.show());
+			sequence.unmarked(tale.show());
 			sequence.unmarked(new StyleStep(blueLine));
 			sequence.unmarked(new StyleStep(Style.nodash()));
 			sequence.unmarked(new StyleStep(Style.font(new Font("Buxton Sketch",60d))));
+
+			sequence.unmarked(new StylePush());
+			sequence.unmarked(new StyleStep(redLine));
+			sequence.unmarked(new StyleStep(Style.font(new Font("Century Gothic",24d))));
+			sequence.unmarked(new StyleStep(Style.dash(4d)));
+			sequence.unmarked(new StyleStep(Style.penWidth(1d)));
+			sequence.unmarked(target.sketch(1d));
+			sequence.unmarked(new StylePop());
 			sequence.marked(agent.sketch(1000d));
+			
 			sequence.unmarked(poke1Source.place());
 			sequence.marked(poke1.sketch(1000d));
-			sequence.marked(tale.setText("Agents Respond Unpredictably"));
+			sequence.unmarked(tale.setText("Agents Respond Unpredictably"));
 			sequence.marked(agent.move(900d, 400d));
+			sequence.unmarked(tale.setText("Whoops: Better Try Another Poke"));
 			sequence.unmarked(poke2Source.place());
 			sequence.unmarked(new StyleStep(redLine));
-			sequence.marked(poke2.sketch(1000d));
+			sequence.unmarked(poke2.sketch(1000d));
 			sequence.marked(agent.move(1000d, 500d));
+			sequence.unmarked(tale.setText("Almost there!"));
 			sequence.unmarked(poke3Source.place());
 			sequence.unmarked(new StyleStep(greenLine));
-			sequence.marked(poke3.sketch(1000d));
-			sequence.marked(agent.move(1100d, 450d));
+			sequence.unmarked(poke3.sketch(1000d));
+			sequence.unmarked(agent.move(1100d, 450d));
+			sequence.marked(tale.setText("Made it!!"));
 		
 			player = new Player(scaledCanvas);
 			player.reset(sequence);
