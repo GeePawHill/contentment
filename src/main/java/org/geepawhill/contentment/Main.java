@@ -60,8 +60,10 @@ public class Main extends Application
 			LabelBox agent = new LabelBox("Agent", 800d, 450d);
 			
 			Spot poke1Source = new Spot(400d,450d);
-			
+			Spot poke2Source = new Spot(600d,300d);
+		
 			Arrow poke1 = new Arrow(poke1Source,false,agent,true);
+			Arrow poke2 = new Arrow(poke2Source,false,agent,true);
 			
 			sequence.unmarked(new ClearStep());
 			sequence.marked(tale.show());
@@ -71,6 +73,10 @@ public class Main extends Application
 			sequence.marked(agent.sketch(1000d));
 			sequence.unmarked(poke1Source.place());
 			sequence.marked(poke1.sketch(1000d));
+			sequence.marked(agent.move(900d, 300d));
+			sequence.unmarked(poke2Source.place());
+			sequence.marked(poke2.sketch(1000d));
+			sequence.marked(agent.move(1000d, 500d));
 		
 			player = new Player(scaledCanvas);
 			player.reset(sequence);

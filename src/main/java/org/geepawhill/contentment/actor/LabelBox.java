@@ -5,8 +5,10 @@ import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
+import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.style.StyleId;
 
+import javafx.animation.TranslateTransition;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.VPos;
@@ -14,6 +16,7 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 public class LabelBox implements Actor
 {
@@ -108,6 +111,16 @@ public class LabelBox implements Actor
 			animateDrawBox(1d,context);
 		}
 		group.setOpacity(frac);
+	}
+	
+	public Step move(double newX,double newY)
+	{
+		TranslateTransition transition = new TranslateTransition();
+		transition.setNode(group);
+		transition.setToX(newX-xCenter);
+		transition.setToY(newY-yCenter);
+		transition.setDuration(Duration.millis(1000d));
+		return new TransitionStep(transition);
 	}
 
 	@Override
