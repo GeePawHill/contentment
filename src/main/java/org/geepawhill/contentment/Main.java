@@ -50,20 +50,25 @@ public class Main extends Application
 			makeGuides();
 
 			Sequence sequence = new Sequence();
-			addBaseComplications(sequence);
+//			addBaseComplications(sequence);
 			
 			Style redLine = Style.lineColor(Color.RED);
 			Style blueLine = Style.lineColor(Color.BLUE);
 			Style greenLine = Style.lineColor(Color.GREEN);
 			Style blackLine = Style.lineColor(Color.BLACK);
+			
+			
+			
 			Tale tale = new Tale("Agents Are Susceptible To Change", 30d);
 			LabelBox agent = new LabelBox("Agent", 800d, 450d);
 			
 			Spot poke1Source = new Spot(400d,450d);
-			Spot poke2Source = new Spot(600d,300d);
+			Spot poke2Source = new Spot(800d,200d);
+			Spot poke3Source = new Spot(800d,600d);
 		
 			Arrow poke1 = new Arrow(poke1Source,false,agent,true);
 			Arrow poke2 = new Arrow(poke2Source,false,agent,true);
+			Arrow poke3 = new Arrow(poke3Source,false,agent,true);
 			
 			sequence.unmarked(new ClearStep());
 			sequence.marked(tale.show());
@@ -73,10 +78,16 @@ public class Main extends Application
 			sequence.marked(agent.sketch(1000d));
 			sequence.unmarked(poke1Source.place());
 			sequence.marked(poke1.sketch(1000d));
-			sequence.marked(agent.move(900d, 300d));
+			sequence.marked(tale.setText("Agents Respond Unpredictably"));
+			sequence.marked(agent.move(900d, 400d));
 			sequence.unmarked(poke2Source.place());
+			sequence.unmarked(new StyleStep(redLine));
 			sequence.marked(poke2.sketch(1000d));
 			sequence.marked(agent.move(1000d, 500d));
+			sequence.unmarked(poke3Source.place());
+			sequence.unmarked(new StyleStep(greenLine));
+			sequence.marked(poke3.sketch(1000d));
+			sequence.marked(agent.move(1100d, 450d));
 		
 			player = new Player(scaledCanvas);
 			player.reset(sequence);
