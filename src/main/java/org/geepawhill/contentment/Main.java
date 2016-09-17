@@ -2,6 +2,7 @@ package org.geepawhill.contentment;
 
 import org.geepawhill.contentment.actor.LabelBox;
 import org.geepawhill.contentment.actor.OvalText;
+import org.geepawhill.contentment.actor.Spot;
 import org.geepawhill.contentment.actor.Tale;
 import org.geepawhill.contentment.actor.arrow.Arrow;
 import org.geepawhill.contentment.core.Sequence;
@@ -48,151 +49,29 @@ public class Main extends Application
 			forceLetterBox(stage, stage.getScene(), canvas, scaledCanvas);
 			makeGuides();
 
+			Sequence sequence = new Sequence();
+			addBaseComplications(sequence);
+			
 			Style redLine = Style.lineColor(Color.RED);
 			Style blueLine = Style.lineColor(Color.BLUE);
 			Style greenLine = Style.lineColor(Color.GREEN);
 			Style blackLine = Style.lineColor(Color.BLACK);
-			Tale tale = new Tale("A Simple Change Model", 30d);
+			Tale tale = new Tale("Agents Are Susceptible To Change", 30d);
 			LabelBox agent = new LabelBox("Agent", 800d, 450d);
-			OvalText practice = new OvalText("Practice", 800d, .75*900d);
-			Arrow change = new Arrow(agent, false, practice, true);
-			LabelBox coach = new LabelBox("Coach", 800d, 200d);
-			Arrow poke = new Arrow(coach, false, agent, true);
 			
-			LabelBox a1 = new LabelBox("A",200d,200d);
-			LabelBox a2 = new LabelBox("A",400d,300d);
-			LabelBox a3 = new LabelBox("A",600d,400d);
-			LabelBox a4 = new LabelBox("A",1000d,400d);
-			LabelBox a5 = new LabelBox("A",1200d,300d);
-			LabelBox a6 = new LabelBox("A",1400d,200d);
-			Arrow poke1 = new Arrow(coach, false, a1, true);
-			Arrow poke2 = new Arrow(coach, false, a2, true);
-			Arrow poke3 = new Arrow(coach, false, a3, true);
-			Arrow poke4 = new Arrow(coach, false, a4, true);
-			Arrow poke5 = new Arrow(coach, false, a5, true);
-			Arrow poke6 = new Arrow(coach, false, a6, true);
+			Spot poke1Source = new Spot(400d,450d);
 			
-			OvalText p1 = new OvalText("P",200d,400d);
-			OvalText p2 = new OvalText("P",400d,500d);
-			OvalText p3 = new OvalText("P",600d,600d);
-			OvalText p4 = new OvalText("P",1000d,600d);
-			OvalText p5 = new OvalText("P",1200d,500d);
-			OvalText p6 = new OvalText("P",1400d,400d);
-
-			Arrow c1 = new Arrow(a1,false, p1, true);
-			Arrow c2 = new Arrow(a2,false, p2, true);
-			Arrow c3 = new Arrow(a3,false, p3, true);
-			Arrow c4 = new Arrow(a4,false, p4, true);
-			Arrow c5 = new Arrow(a5,false, p5, true);
-			Arrow c6 = new Arrow(a6,false, p6, true);
-
-			Arrow c11 = new Arrow(a1,false, p2, true);
-			Arrow c12 = new Arrow(a2,false, p3, true);
-			Arrow c13 = new Arrow(a3,false, practice, true);
-			Arrow c14 = new Arrow(a4,false, p5, true);
-			Arrow c15 = new Arrow(a5,false, p6, true);
-			
-			Arrow c22 = new Arrow(a2,false, p1, true);
-			Arrow c23 = new Arrow(a3,false, p2, true);
-			Arrow c24 = new Arrow(a4,false, practice, true);
-			Arrow c25 = new Arrow(a5,false, p4, true);
-			Arrow c26 = new Arrow(a6,false, p5, true);
-			
-			Arrow i1 = new Arrow(a1,true, a2, true);
-			Arrow i2 = new Arrow(a2,true, a3, true);
-			Arrow i3 = new Arrow(a3,true, agent, true);
-			Arrow i4 = new Arrow(agent,true, a4, true);
-			Arrow i5 = new Arrow(a4,true, a5, true);
-			Arrow i6 = new Arrow(a5,true, a6, true);
-
-			Arrow pi1 = new Arrow(p1,true, p2, true);
-			Arrow pi2 = new Arrow(p2,true, p3, true);
-			Arrow pi3 = new Arrow(p3,true, practice, true);
-			Arrow pi4 = new Arrow(practice,true, p4, true);
-			Arrow pi5 = new Arrow(p4,true, p5, true);
-			Arrow pi6 = new Arrow(p5,true, p6, true);
-			
-			Sequence sequence = new Sequence();
-			sequence.marked(tale.show());
-			sequence.unmarked(new StyleStep(redLine));
-			sequence.unmarked(agent.sketch(1000d));
-			sequence.unmarked(new StyleStep(blueLine));
-			sequence.marked(coach.sketch(1000d));
-			sequence.marked(poke.sketch(1000d));
-			sequence.unmarked(new StylePush());
-			sequence.unmarked(new StyleStep(Style.font(new Font("Buxton Sketch",40d))));
-			sequence.unmarked(new StyleStep(greenLine));
-			sequence.unmarked(new StyleStep(Style.dash(10d)));
-			sequence.unmarked(practice.sketch(1000d));
-			sequence.marked(change.sketch(1d));
-			sequence.unmarked(new StylePop());
-			sequence.marked(tale.setText("Complication: There are always multiple agents."));
-			sequence.unmarked(new StyleStep(Style.font(new Font("Buxton Sketch",30d))));
-			sequence.unmarked(new StyleStep(redLine));
-			sequence.unmarked(new InstantStep(a1.sketch(1d)));
-			sequence.unmarked(new InstantStep(a2.sketch(1d)));
-			sequence.unmarked(new InstantStep(a3.sketch(1d)));
-			sequence.unmarked(new InstantStep(a4.sketch(1d)));
-			sequence.unmarked(new InstantStep(a5.sketch(1d)));
-			sequence.unmarked(new InstantStep(a6.sketch(1d)));
-			sequence.unmarked(new StyleStep(blueLine));
-			sequence.unmarked(poke1.sketch(300d));
-			sequence.unmarked(poke2.sketch(300d));
-			sequence.unmarked(poke3.sketch(300d));
-			sequence.unmarked(poke4.sketch(300d));
-			sequence.unmarked(poke5.sketch(300d));
-			sequence.marked(poke6.sketch(300d));
-			sequence.marked(tale.setText("Complication: There are always multiple practices."));
-			sequence.unmarked(new StyleStep(Style.dash(10d)));
-			sequence.unmarked(new StyleStep(greenLine));
-			sequence.unmarked(new InstantStep(p1.sketch(1d)));
-			sequence.unmarked(new InstantStep(p2.sketch(1d)));
-			sequence.unmarked(new InstantStep(p3.sketch(1d)));
-			sequence.unmarked(new InstantStep(p4.sketch(1d)));
-			sequence.unmarked(new InstantStep(p5.sketch(1d)));
-			sequence.unmarked(new InstantStep(p6.sketch(1d)));
-			sequence.unmarked(c1.sketch(200d));
-			sequence.unmarked(c2.sketch(200d));
-			sequence.unmarked(c3.sketch(200d));
-			sequence.unmarked(c4.sketch(200d));
-			sequence.unmarked(c5.sketch(200d));
-			sequence.marked(c6.sketch(200d));
-			
-			sequence.marked(tale.setText("Complication: Most agents change multiple practice ."));
-			sequence.unmarked(new StyleStep(Style.dash(10d)));
-			sequence.unmarked(new StyleStep(greenLine));
-			sequence.unmarked(c11.sketch(200d));
-			sequence.unmarked(c12.sketch(200d));
-			sequence.unmarked(c13.sketch(200d));
-			sequence.unmarked(c14.sketch(200d));
-			sequence.unmarked(c15.sketch(200d));
-			sequence.unmarked(c22.sketch(200d));
-			sequence.unmarked(c23.sketch(200d));
-			sequence.unmarked(c24.sketch(200d));
-			sequence.unmarked(c25.sketch(200d));
-			sequence.marked(c26.sketch(200d));
-			
-			sequence.unmarked(new StylePush());
-			sequence.unmarked(new StyleStep(Style.dash(3d)));
-			sequence.unmarked(new StyleStep(blackLine));
-			sequence.unmarked(new StyleStep(Style.penWidth(2d)));
-			sequence.marked(tale.setText("Complication: The agents are interrelated."));
-			sequence.unmarked(i1.sketch(300d));
-			sequence.unmarked(i2.sketch(300d));
-			sequence.unmarked(i3.sketch(300d));
-			sequence.unmarked(i4.sketch(300d));
-			sequence.unmarked(i5.sketch(300d));
-			sequence.marked(i6.sketch(300d));
-			sequence.marked(tale.setText("Complication: The practices are interrelated."));
-			sequence.unmarked(pi1.sketch(300d));
-			sequence.unmarked(pi2.sketch(300d));
-			sequence.unmarked(pi3.sketch(300d));
-			sequence.unmarked(pi4.sketch(300d));
-			sequence.unmarked(pi5.sketch(300d));
-			sequence.marked(pi6.sketch(300d));
-			sequence.unmarked(new StylePop());
+			Arrow poke1 = new Arrow(poke1Source,false,agent,true);
 			
 			sequence.unmarked(new ClearStep());
+			sequence.marked(tale.show());
+			sequence.unmarked(new StyleStep(blueLine));
+			sequence.unmarked(new StyleStep(Style.nodash()));
+			sequence.unmarked(new StyleStep(Style.font(new Font("Buxton Sketch",60d))));
+			sequence.marked(agent.sketch(1000d));
+			sequence.unmarked(poke1Source.place());
+			sequence.marked(poke1.sketch(1000d));
+		
 			player = new Player(scaledCanvas);
 			player.reset(sequence);
 		}
@@ -201,6 +80,152 @@ public class Main extends Application
 			e.printStackTrace();
 			Platform.exit();
 		}
+	}
+
+	private void addBaseComplications(Sequence sequence)
+	{
+		Style redLine = Style.lineColor(Color.RED);
+		Style blueLine = Style.lineColor(Color.BLUE);
+		Style greenLine = Style.lineColor(Color.GREEN);
+		Style blackLine = Style.lineColor(Color.BLACK);
+		Tale tale = new Tale("A Simple Change Model", 30d);
+		LabelBox agent = new LabelBox("Agent", 800d, 450d);
+		OvalText practice = new OvalText("Practice", 800d, .75*900d);
+		Arrow change = new Arrow(agent, false, practice, true);
+		LabelBox coach = new LabelBox("Coach", 800d, 200d);
+		Arrow poke = new Arrow(coach, false, agent, true);
+		
+		LabelBox a1 = new LabelBox("A",200d,200d);
+		LabelBox a2 = new LabelBox("A",400d,300d);
+		LabelBox a3 = new LabelBox("A",600d,400d);
+		LabelBox a4 = new LabelBox("A",1000d,400d);
+		LabelBox a5 = new LabelBox("A",1200d,300d);
+		LabelBox a6 = new LabelBox("A",1400d,200d);
+		Arrow poke1 = new Arrow(coach, false, a1, true);
+		Arrow poke2 = new Arrow(coach, false, a2, true);
+		Arrow poke3 = new Arrow(coach, false, a3, true);
+		Arrow poke4 = new Arrow(coach, false, a4, true);
+		Arrow poke5 = new Arrow(coach, false, a5, true);
+		Arrow poke6 = new Arrow(coach, false, a6, true);
+		
+		OvalText p1 = new OvalText("P",200d,400d);
+		OvalText p2 = new OvalText("P",400d,500d);
+		OvalText p3 = new OvalText("P",600d,600d);
+		OvalText p4 = new OvalText("P",1000d,600d);
+		OvalText p5 = new OvalText("P",1200d,500d);
+		OvalText p6 = new OvalText("P",1400d,400d);
+
+		Arrow c1 = new Arrow(a1,false, p1, true);
+		Arrow c2 = new Arrow(a2,false, p2, true);
+		Arrow c3 = new Arrow(a3,false, p3, true);
+		Arrow c4 = new Arrow(a4,false, p4, true);
+		Arrow c5 = new Arrow(a5,false, p5, true);
+		Arrow c6 = new Arrow(a6,false, p6, true);
+
+		Arrow c11 = new Arrow(a1,false, p2, true);
+		Arrow c12 = new Arrow(a2,false, p3, true);
+		Arrow c13 = new Arrow(a3,false, practice, true);
+		Arrow c14 = new Arrow(a4,false, p5, true);
+		Arrow c15 = new Arrow(a5,false, p6, true);
+		
+		Arrow c22 = new Arrow(a2,false, p1, true);
+		Arrow c23 = new Arrow(a3,false, p2, true);
+		Arrow c24 = new Arrow(a4,false, practice, true);
+		Arrow c25 = new Arrow(a5,false, p4, true);
+		Arrow c26 = new Arrow(a6,false, p5, true);
+		
+		Arrow i1 = new Arrow(a1,true, a2, true);
+		Arrow i2 = new Arrow(a2,true, a3, true);
+		Arrow i3 = new Arrow(a3,true, agent, true);
+		Arrow i4 = new Arrow(agent,true, a4, true);
+		Arrow i5 = new Arrow(a4,true, a5, true);
+		Arrow i6 = new Arrow(a5,true, a6, true);
+
+		Arrow pi1 = new Arrow(p1,true, p2, true);
+		Arrow pi2 = new Arrow(p2,true, p3, true);
+		Arrow pi3 = new Arrow(p3,true, practice, true);
+		Arrow pi4 = new Arrow(practice,true, p4, true);
+		Arrow pi5 = new Arrow(p4,true, p5, true);
+		Arrow pi6 = new Arrow(p5,true, p6, true);
+		
+		sequence.marked(tale.show());
+		sequence.unmarked(new StyleStep(redLine));
+		sequence.unmarked(agent.sketch(1000d));
+		sequence.unmarked(new StyleStep(blueLine));
+		sequence.marked(coach.sketch(1000d));
+		sequence.marked(poke.sketch(1000d));
+		sequence.unmarked(new StylePush());
+		sequence.unmarked(new StyleStep(Style.font(new Font("Buxton Sketch",40d))));
+		sequence.unmarked(new StyleStep(greenLine));
+		sequence.unmarked(new StyleStep(Style.dash(10d)));
+		sequence.unmarked(practice.sketch(1000d));
+		sequence.marked(change.sketch(1d));
+		sequence.unmarked(new StylePop());
+		sequence.marked(tale.setText("Complication: There are always multiple agents."));
+		sequence.unmarked(new StyleStep(Style.font(new Font("Buxton Sketch",30d))));
+		sequence.unmarked(new StyleStep(redLine));
+		sequence.unmarked(new InstantStep(a1.sketch(1d)));
+		sequence.unmarked(new InstantStep(a2.sketch(1d)));
+		sequence.unmarked(new InstantStep(a3.sketch(1d)));
+		sequence.unmarked(new InstantStep(a4.sketch(1d)));
+		sequence.unmarked(new InstantStep(a5.sketch(1d)));
+		sequence.unmarked(new InstantStep(a6.sketch(1d)));
+		sequence.unmarked(new StyleStep(blueLine));
+		sequence.unmarked(poke1.sketch(300d));
+		sequence.unmarked(poke2.sketch(300d));
+		sequence.unmarked(poke3.sketch(300d));
+		sequence.unmarked(poke4.sketch(300d));
+		sequence.unmarked(poke5.sketch(300d));
+		sequence.marked(poke6.sketch(300d));
+		sequence.marked(tale.setText("Complication: There are always multiple practices."));
+		sequence.unmarked(new StyleStep(Style.dash(10d)));
+		sequence.unmarked(new StyleStep(greenLine));
+		sequence.unmarked(new InstantStep(p1.sketch(1d)));
+		sequence.unmarked(new InstantStep(p2.sketch(1d)));
+		sequence.unmarked(new InstantStep(p3.sketch(1d)));
+		sequence.unmarked(new InstantStep(p4.sketch(1d)));
+		sequence.unmarked(new InstantStep(p5.sketch(1d)));
+		sequence.unmarked(new InstantStep(p6.sketch(1d)));
+		sequence.unmarked(c1.sketch(200d));
+		sequence.unmarked(c2.sketch(200d));
+		sequence.unmarked(c3.sketch(200d));
+		sequence.unmarked(c4.sketch(200d));
+		sequence.unmarked(c5.sketch(200d));
+		sequence.marked(c6.sketch(200d));
+		
+		sequence.marked(tale.setText("Complication: Most agents change multiple practice ."));
+		sequence.unmarked(new StyleStep(Style.dash(10d)));
+		sequence.unmarked(new StyleStep(greenLine));
+		sequence.unmarked(c11.sketch(200d));
+		sequence.unmarked(c12.sketch(200d));
+		sequence.unmarked(c13.sketch(200d));
+		sequence.unmarked(c14.sketch(200d));
+		sequence.unmarked(c15.sketch(200d));
+		sequence.unmarked(c22.sketch(200d));
+		sequence.unmarked(c23.sketch(200d));
+		sequence.unmarked(c24.sketch(200d));
+		sequence.unmarked(c25.sketch(200d));
+		sequence.marked(c26.sketch(200d));
+		
+		sequence.unmarked(new StylePush());
+		sequence.unmarked(new StyleStep(Style.dash(3d)));
+		sequence.unmarked(new StyleStep(blackLine));
+		sequence.unmarked(new StyleStep(Style.penWidth(2d)));
+		sequence.marked(tale.setText("Complication: The agents are interrelated."));
+		sequence.unmarked(i1.sketch(300d));
+		sequence.unmarked(i2.sketch(300d));
+		sequence.unmarked(i3.sketch(300d));
+		sequence.unmarked(i4.sketch(300d));
+		sequence.unmarked(i5.sketch(300d));
+		sequence.marked(i6.sketch(300d));
+		sequence.marked(tale.setText("Complication: The practices are interrelated."));
+		sequence.unmarked(pi1.sketch(300d));
+		sequence.unmarked(pi2.sketch(300d));
+		sequence.unmarked(pi3.sketch(300d));
+		sequence.unmarked(pi4.sketch(300d));
+		sequence.unmarked(pi5.sketch(300d));
+		sequence.marked(pi6.sketch(300d));
+		sequence.unmarked(new StylePop());
 	}
 	
 	private void makeGuides()
