@@ -5,6 +5,7 @@ import org.geepawhill.contentment.actor.OvalText;
 import org.geepawhill.contentment.actor.Tale;
 import org.geepawhill.contentment.actor.arrow.Arrow;
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.step.ClearStep;
 import org.geepawhill.contentment.step.InstantStep;
 import org.geepawhill.contentment.style.Style;
 import org.geepawhill.contentment.style.StylePop;
@@ -50,6 +51,7 @@ public class Main extends Application
 			Style redLine = Style.lineColor(Color.RED);
 			Style blueLine = Style.lineColor(Color.BLUE);
 			Style greenLine = Style.lineColor(Color.GREEN);
+			Style blackLine = Style.lineColor(Color.BLACK);
 			Tale tale = new Tale("A Simple Change Model", 30d);
 			LabelBox agent = new LabelBox("Agent", 800d, 450d);
 			OvalText practice = new OvalText("Practice", 800d, .75*900d);
@@ -84,6 +86,18 @@ public class Main extends Application
 			Arrow c5 = new Arrow(a5,false, p5, true);
 			Arrow c6 = new Arrow(a6,false, p6, true);
 
+			Arrow c11 = new Arrow(a1,false, p2, true);
+			Arrow c12 = new Arrow(a2,false, p3, true);
+			Arrow c13 = new Arrow(a3,false, practice, true);
+			Arrow c14 = new Arrow(a4,false, p5, true);
+			Arrow c15 = new Arrow(a5,false, p6, true);
+			
+			Arrow c22 = new Arrow(a2,false, p1, true);
+			Arrow c23 = new Arrow(a3,false, p2, true);
+			Arrow c24 = new Arrow(a4,false, practice, true);
+			Arrow c25 = new Arrow(a5,false, p4, true);
+			Arrow c26 = new Arrow(a6,false, p5, true);
+			
 			Arrow i1 = new Arrow(a1,true, a2, true);
 			Arrow i2 = new Arrow(a2,true, a3, true);
 			Arrow i3 = new Arrow(a3,true, agent, true);
@@ -91,6 +105,13 @@ public class Main extends Application
 			Arrow i5 = new Arrow(a4,true, a5, true);
 			Arrow i6 = new Arrow(a5,true, a6, true);
 
+			Arrow pi1 = new Arrow(p1,true, p2, true);
+			Arrow pi2 = new Arrow(p2,true, p3, true);
+			Arrow pi3 = new Arrow(p3,true, practice, true);
+			Arrow pi4 = new Arrow(practice,true, p4, true);
+			Arrow pi5 = new Arrow(p4,true, p5, true);
+			Arrow pi6 = new Arrow(p5,true, p6, true);
+			
 			Sequence sequence = new Sequence();
 			sequence.marked(tale.show());
 			sequence.unmarked(new StyleStep(redLine));
@@ -120,7 +141,6 @@ public class Main extends Application
 			sequence.unmarked(poke3.sketch(300d));
 			sequence.unmarked(poke4.sketch(300d));
 			sequence.unmarked(poke5.sketch(300d));
-			sequence.unmarked(poke6.sketch(300d));
 			sequence.marked(poke6.sketch(300d));
 			sequence.marked(tale.setText("Complication: There are always multiple practices."));
 			sequence.unmarked(new StyleStep(Style.dash(10d)));
@@ -130,7 +150,7 @@ public class Main extends Application
 			sequence.unmarked(new InstantStep(p3.sketch(1d)));
 			sequence.unmarked(new InstantStep(p4.sketch(1d)));
 			sequence.unmarked(new InstantStep(p5.sketch(1d)));
-			sequence.marked(new InstantStep(p6.sketch(1d)));
+			sequence.unmarked(new InstantStep(p6.sketch(1d)));
 			sequence.unmarked(c1.sketch(200d));
 			sequence.unmarked(c2.sketch(200d));
 			sequence.unmarked(c3.sketch(200d));
@@ -138,16 +158,41 @@ public class Main extends Application
 			sequence.unmarked(c5.sketch(200d));
 			sequence.marked(c6.sketch(200d));
 			
+			sequence.marked(tale.setText("Complication: Most agents change multiple practice ."));
+			sequence.unmarked(new StyleStep(Style.dash(10d)));
+			sequence.unmarked(new StyleStep(greenLine));
+			sequence.unmarked(c11.sketch(200d));
+			sequence.unmarked(c12.sketch(200d));
+			sequence.unmarked(c13.sketch(200d));
+			sequence.unmarked(c14.sketch(200d));
+			sequence.unmarked(c15.sketch(200d));
+			sequence.unmarked(c22.sketch(200d));
+			sequence.unmarked(c23.sketch(200d));
+			sequence.unmarked(c24.sketch(200d));
+			sequence.unmarked(c25.sketch(200d));
+			sequence.marked(c26.sketch(200d));
+			
+			sequence.unmarked(new StylePush());
+			sequence.unmarked(new StyleStep(Style.dash(3d)));
+			sequence.unmarked(new StyleStep(blackLine));
+			sequence.unmarked(new StyleStep(Style.penWidth(2d)));
 			sequence.marked(tale.setText("Complication: The agents are interrelated."));
-			sequence.unmarked(new StyleStep(blueLine));
 			sequence.unmarked(i1.sketch(300d));
 			sequence.unmarked(i2.sketch(300d));
 			sequence.unmarked(i3.sketch(300d));
 			sequence.unmarked(i4.sketch(300d));
 			sequence.unmarked(i5.sketch(300d));
 			sequence.marked(i6.sketch(300d));
-					
-			sequence.unmarked(new StyleStep(Style.nodash()));
+			sequence.marked(tale.setText("Complication: The practices are interrelated."));
+			sequence.unmarked(pi1.sketch(300d));
+			sequence.unmarked(pi2.sketch(300d));
+			sequence.unmarked(pi3.sketch(300d));
+			sequence.unmarked(pi4.sketch(300d));
+			sequence.unmarked(pi5.sketch(300d));
+			sequence.marked(pi6.sketch(300d));
+			sequence.unmarked(new StylePop());
+			
+			sequence.unmarked(new ClearStep());
 			player = new Player(scaledCanvas);
 			player.reset(sequence);
 		}
@@ -157,7 +202,7 @@ public class Main extends Application
 			Platform.exit();
 		}
 	}
-
+	
 	private void makeGuides()
 	{
 		guides = new Group();
