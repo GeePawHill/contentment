@@ -54,69 +54,10 @@ public class Main extends Application
 			makeGuides();
 
 			sequence = new Sequence();
+			addBaseComplications(sequence);
+			interactiveStabilization(sequence);
+			agentAndPokes();
 			
-//			interactiveStabilization(sequence);
-			
-			Style redLine = Style.lineColor(Color.RED);
-			Style blueLine = Style.lineColor(Color.BLUE);
-			Style greenLine = Style.lineColor(Color.GREEN);
-			Style blackLine = Style.lineColor(Color.BLACK);
-			Tale tale = new Tale("Agent: Anything With Susceptability & Unpredictability", 30d);
-			LabelBox agent = new LabelBox("Agent", 800d, 520d);
-			Label teammate = new Label("Teammate",800d, 520d);
-			Label practice = new Label("Practice", 800d, 800d);
-			Label coach = new Label("Coach", 800d, 275d);
-			Label software = new Label("Software",500d,300d);
-			Label hardware = new Label("Hardware",1300d,600d);
-			Label policy = new Label("Policy",1100d,300d);
-			Label personnel = new Label("Staff",500d,750d);
-			Label date = new Label("Date",1300d,450d);
-			Label framework = new Label("Framework",300d,600d);
-			Label tools = new Label("Tools",300d,450d);
-			Label orgchart = new Label("Org Chart",1100d,750d);
-
-			sequence.unmarked(new ClearStep());
-			sequence.unmarked(tale.show());
-			sequence.unmarked(new StyleStep(blueLine));
-			sequence.unmarked(new StyleStep(Style.nodash()));
-			sequence.unmarked(new StyleStep(Style.font(new Font("Buxton Sketch",60d))));
-			sequence.marked(agent.sketch(1d));
-			sequence.unmarked(new HideStep(agent.group()));
-			sequence.unmarked(new StyleStep(greenLine));
-			sequence.marked(teammate.fadeIn(500d));
-			sequence.unmarked(tale.setText("That Includes The Daily Practice"));
-			sequence.marked(practice.fadeIn(300d));
-			sequence.unmarked(tale.setText("Software We Use For Making"));
-			sequence.marked(software.fadeIn(300d));
-			sequence.unmarked(tale.setText("Or The Hardware We Use For Making"));
-			sequence.marked(hardware.fadeIn(300d));
-			sequence.unmarked(tale.setText("Corporate Policy Is An Agent"));
-			sequence.marked(policy.fadeIn(300d));
-			sequence.unmarked(tale.setText("The Staffing Demand & Supply"));
-			sequence.marked(personnel.fadeIn(300d));
-			sequence.unmarked(tale.setText("Everything About The Market, Like Shipping Date"));
-			sequence.marked(date.fadeIn(300d));
-			sequence.unmarked(tale.setText("The Conceptual Framework The Team Uses"));
-			sequence.marked(framework.fadeIn(300d));
-			sequence.unmarked(tale.setText("The Tools We Use"));
-			sequence.marked(tools.fadeIn(300d));
-			sequence.unmarked(tale.setText("The Hierarchy We Live In"));
-			sequence.marked(orgchart.fadeIn(300d));
-			sequence.unmarked(tale.setText("And, Yes, The Coach Is An Agent, Too"));
-			sequence.marked(coach.fadeIn(300d));
-			sequence.marked(tale.setText("Watch Just One Poke..."));
-			poke(coach,teammate,850d,570d);
-			poke(teammate,practice,750d,820d);
-			poke(practice,software,480d,310d);
-			poke(teammate,practice,820d,840d);
-			poke(practice,policy,1110d,320d);
-			poke(policy,date,1300d,500d);
-			poke(date,personnel,450d,770d);
-			poke(personnel,orgchart,1110d,745d);
-			poke(personnel,practice,820d,800d);
-			poke(practice,framework,250d,620d);
-			poke(framework,teammate,830d,550d);
-			poke(teammate,date,1300d,450d);
 			player = new Player(scaledCanvas);
 			player.reset(sequence);
 		}
@@ -125,6 +66,70 @@ public class Main extends Application
 			e.printStackTrace();
 			Platform.exit();
 		}
+	}
+
+	private void agentAndPokes()
+	{
+		Style redLine = Style.lineColor(Color.RED);
+		Style blueLine = Style.lineColor(Color.BLUE);
+		Style greenLine = Style.lineColor(Color.GREEN);
+		Style blackLine = Style.lineColor(Color.BLACK);
+		Tale tale = new Tale("Agent: Anything With Susceptability & Unpredictability", 30d);
+		LabelBox agent = new LabelBox("Agent", 800d, 520d);
+		Label teammate = new Label("Teammate",800d, 520d);
+		Label practice = new Label("Practice", 800d, 800d);
+		Label coach = new Label("Coach", 800d, 275d);
+		Label software = new Label("Software",500d,300d);
+		Label hardware = new Label("Hardware",1300d,600d);
+		Label policy = new Label("Policy",1100d,300d);
+		Label personnel = new Label("Staff",500d,750d);
+		Label date = new Label("Date",1300d,450d);
+		Label framework = new Label("Framework",300d,600d);
+		Label tools = new Label("Tools",300d,450d);
+		Label orgchart = new Label("Org Chart",1100d,750d);
+
+		sequence.unmarked(new ClearStep());
+		sequence.unmarked(tale.show());
+		sequence.unmarked(new StyleStep(blueLine));
+		sequence.unmarked(new StyleStep(Style.nodash()));
+		sequence.unmarked(new StyleStep(Style.font(new Font("Buxton Sketch",60d))));
+		sequence.marked(agent.sketch(1d));
+		sequence.unmarked(new HideStep(agent.group()));
+		sequence.unmarked(new StyleStep(greenLine));
+		sequence.marked(teammate.fadeIn(500d));
+		sequence.unmarked(tale.setText("That Includes The Daily Practice"));
+		sequence.marked(practice.fadeIn(300d));
+		sequence.unmarked(tale.setText("Software We Use For Making"));
+		sequence.marked(software.fadeIn(300d));
+		sequence.unmarked(tale.setText("Or The Hardware We Use For Making"));
+		sequence.marked(hardware.fadeIn(300d));
+		sequence.unmarked(tale.setText("Corporate Policy Is An Agent"));
+		sequence.marked(policy.fadeIn(300d));
+		sequence.unmarked(tale.setText("The Staffing Demand & Supply"));
+		sequence.marked(personnel.fadeIn(300d));
+		sequence.unmarked(tale.setText("Everything About The Market, Like Shipping Date"));
+		sequence.marked(date.fadeIn(300d));
+		sequence.unmarked(tale.setText("The Conceptual Framework The Team Uses"));
+		sequence.marked(framework.fadeIn(300d));
+		sequence.unmarked(tale.setText("The Tools We Use"));
+		sequence.marked(tools.fadeIn(300d));
+		sequence.unmarked(tale.setText("The Hierarchy We Live In"));
+		sequence.marked(orgchart.fadeIn(300d));
+		sequence.unmarked(tale.setText("And, Yes, The Coach Is An Agent, Too"));
+		sequence.marked(coach.fadeIn(300d));
+		sequence.marked(tale.setText("Watch Just One Poke..."));
+		poke(coach,teammate,850d,570d);
+		poke(teammate,practice,750d,820d);
+		poke(practice,software,480d,310d);
+		poke(teammate,practice,820d,840d);
+		poke(practice,policy,1110d,320d);
+		poke(policy,date,1300d,500d);
+		poke(date,personnel,450d,770d);
+		poke(personnel,orgchart,1110d,745d);
+		poke(personnel,practice,820d,800d);
+		poke(practice,framework,250d,620d);
+		poke(framework,teammate,830d,550d);
+		poke(teammate,date,1300d,450d);
 	}
 
 	private void poke(Label from, Label to, double newX, double newY)
