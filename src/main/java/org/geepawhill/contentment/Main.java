@@ -1,5 +1,6 @@
 package org.geepawhill.contentment;
 
+import org.geepawhill.contentment.actor.Label;
 import org.geepawhill.contentment.actor.LabelBox;
 import org.geepawhill.contentment.actor.OvalText;
 import org.geepawhill.contentment.actor.Spot;
@@ -8,6 +9,7 @@ import org.geepawhill.contentment.actor.TargetBox;
 import org.geepawhill.contentment.actor.arrow.Arrow;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.step.ClearStep;
+import org.geepawhill.contentment.step.HideStep;
 import org.geepawhill.contentment.step.InstantStep;
 import org.geepawhill.contentment.style.Style;
 import org.geepawhill.contentment.style.StylePop;
@@ -34,6 +36,7 @@ public class Main extends Application
 	private Player player;
 	private Group guides;
 	private Group scaledCanvas;
+	private Sequence sequence;
 
 	@Override
 	public void start(Stage stage)
@@ -50,59 +53,70 @@ public class Main extends Application
 			forceLetterBox(stage, stage.getScene(), canvas, scaledCanvas);
 			makeGuides();
 
-			Sequence sequence = new Sequence();
-//			addBaseComplications(sequence);
+			sequence = new Sequence();
+			
+//			interactiveStabilization(sequence);
 			
 			Style redLine = Style.lineColor(Color.RED);
 			Style blueLine = Style.lineColor(Color.BLUE);
 			Style greenLine = Style.lineColor(Color.GREEN);
 			Style blackLine = Style.lineColor(Color.BLACK);
-			
-			
-			
-			Tale tale = new Tale("Agents Are Susceptible To Pokes", 30d);
-			LabelBox agent = new LabelBox("Agent", 800d, 450d);
-			TargetBox target = new TargetBox("Target",1000d,350d,300d,200d);
-			
-			Spot poke1Source = new Spot(400d,450d);
-			Spot poke2Source = new Spot(800d,200d);
-			Spot poke3Source = new Spot(800d,600d);
-		
-			Arrow poke1 = new Arrow(poke1Source,false,agent,true);
-			Arrow poke2 = new Arrow(poke2Source,false,agent,true);
-			Arrow poke3 = new Arrow(poke3Source,false,agent,true);
-			
+			Tale tale = new Tale("Agent: Anything With Susceptability & Unpredictability", 30d);
+			LabelBox agent = new LabelBox("Agent", 800d, 520d);
+			Label teammate = new Label("Teammate",800d, 520d);
+			Label practice = new Label("Practice", 800d, 800d);
+			Label coach = new Label("Coach", 800d, 275d);
+			Label software = new Label("Software",500d,300d);
+			Label hardware = new Label("Hardware",1300d,600d);
+			Label policy = new Label("Policy",1100d,300d);
+			Label personnel = new Label("Staff",500d,750d);
+			Label date = new Label("Date",1300d,450d);
+			Label framework = new Label("Framework",300d,600d);
+			Label tools = new Label("Tools",300d,450d);
+			Label orgchart = new Label("Org Chart",1100d,750d);
+
 			sequence.unmarked(new ClearStep());
 			sequence.unmarked(tale.show());
 			sequence.unmarked(new StyleStep(blueLine));
 			sequence.unmarked(new StyleStep(Style.nodash()));
 			sequence.unmarked(new StyleStep(Style.font(new Font("Buxton Sketch",60d))));
-
-			sequence.unmarked(new StylePush());
-			sequence.unmarked(new StyleStep(redLine));
-			sequence.unmarked(new StyleStep(Style.font(new Font("Century Gothic",24d))));
-			sequence.unmarked(new StyleStep(Style.dash(4d)));
-			sequence.unmarked(new StyleStep(Style.penWidth(1d)));
-			sequence.unmarked(target.sketch(1d));
-			sequence.unmarked(new StylePop());
-			sequence.marked(agent.sketch(1000d));
-			
-			sequence.unmarked(poke1Source.place());
-			sequence.marked(poke1.sketch(1000d));
-			sequence.unmarked(tale.setText("Agents Respond Unpredictably"));
-			sequence.marked(agent.move(900d, 400d));
-			sequence.unmarked(tale.setText("Whoops: Better Try Another Poke"));
-			sequence.unmarked(poke2Source.place());
-			sequence.unmarked(new StyleStep(redLine));
-			sequence.unmarked(poke2.sketch(1000d));
-			sequence.marked(agent.move(1000d, 500d));
-			sequence.unmarked(tale.setText("Almost there!"));
-			sequence.unmarked(poke3Source.place());
+			sequence.marked(agent.sketch(1d));
+			sequence.unmarked(new HideStep(agent.group()));
 			sequence.unmarked(new StyleStep(greenLine));
-			sequence.unmarked(poke3.sketch(1000d));
-			sequence.unmarked(agent.move(1100d, 450d));
-			sequence.marked(tale.setText("Made it!!"));
-		
+			sequence.marked(teammate.fadeIn(500d));
+			sequence.unmarked(tale.setText("That Includes The Daily Practice"));
+			sequence.marked(practice.fadeIn(300d));
+			sequence.unmarked(tale.setText("Software We Use For Making"));
+			sequence.marked(software.fadeIn(300d));
+			sequence.unmarked(tale.setText("Or The Hardware We Use For Making"));
+			sequence.marked(hardware.fadeIn(300d));
+			sequence.unmarked(tale.setText("Corporate Policy Is An Agent"));
+			sequence.marked(policy.fadeIn(300d));
+			sequence.unmarked(tale.setText("The Staffing Demand & Supply"));
+			sequence.marked(personnel.fadeIn(300d));
+			sequence.unmarked(tale.setText("Everything About The Market, Like Shipping Date"));
+			sequence.marked(date.fadeIn(300d));
+			sequence.unmarked(tale.setText("The Conceptual Framework The Team Uses"));
+			sequence.marked(framework.fadeIn(300d));
+			sequence.unmarked(tale.setText("The Tools We Use"));
+			sequence.marked(tools.fadeIn(300d));
+			sequence.unmarked(tale.setText("The Hierarchy We Live In"));
+			sequence.marked(orgchart.fadeIn(300d));
+			sequence.unmarked(tale.setText("And, Yes, The Coach Is An Agent, Too"));
+			sequence.marked(coach.fadeIn(300d));
+			sequence.marked(tale.setText("Watch Just One Poke..."));
+			poke(coach,teammate,850d,570d);
+			poke(teammate,practice,750d,820d);
+			poke(practice,software,480d,310d);
+			poke(teammate,practice,820d,840d);
+			poke(practice,policy,1110d,320d);
+			poke(policy,date,1300d,500d);
+			poke(date,personnel,450d,770d);
+			poke(personnel,orgchart,1110d,745d);
+			poke(personnel,practice,820d,800d);
+			poke(practice,framework,250d,620d);
+			poke(framework,teammate,830d,550d);
+			poke(teammate,date,1300d,450d);
 			player = new Player(scaledCanvas);
 			player.reset(sequence);
 		}
@@ -111,6 +125,69 @@ public class Main extends Application
 			e.printStackTrace();
 			Platform.exit();
 		}
+	}
+
+	private void poke(Label from, Label to, double newX, double newY)
+	{
+		Arrow arrow = new Arrow(from,false,to,true);
+		sequence.unmarked(arrow.sketch(400d));
+		sequence.unmarked(to.move(newX, newY));
+		sequence.unmarked(new HideStep(arrow.group()));
+		
+	}
+
+	private void interactiveStabilization(Sequence sequence)
+	{
+		Style redLine = Style.lineColor(Color.RED);
+		Style blueLine = Style.lineColor(Color.BLUE);
+		Style greenLine = Style.lineColor(Color.GREEN);
+		Style blackLine = Style.lineColor(Color.BLACK);
+		
+		
+		
+		Tale tale = new Tale("Agents Are Susceptible To Pokes", 30d);
+		LabelBox agent = new LabelBox("Agent", 800d, 450d);
+		TargetBox target = new TargetBox("Target",1000d,350d,300d,200d);
+		
+		Spot poke1Source = new Spot(400d,450d);
+		Spot poke2Source = new Spot(800d,200d);
+		Spot poke3Source = new Spot(800d,600d);
+
+		Arrow poke1 = new Arrow(poke1Source,false,agent,true);
+		Arrow poke2 = new Arrow(poke2Source,false,agent,true);
+		Arrow poke3 = new Arrow(poke3Source,false,agent,true);
+		
+		sequence.unmarked(new ClearStep());
+		sequence.unmarked(tale.show());
+		sequence.unmarked(new StyleStep(blueLine));
+		sequence.unmarked(new StyleStep(Style.nodash()));
+		sequence.unmarked(new StyleStep(Style.font(new Font("Buxton Sketch",60d))));
+
+		sequence.unmarked(new StylePush());
+		sequence.unmarked(new StyleStep(redLine));
+		sequence.unmarked(new StyleStep(Style.font(new Font("Century Gothic",24d))));
+		sequence.unmarked(new StyleStep(Style.dash(4d)));
+		sequence.unmarked(new StyleStep(Style.penWidth(1d)));
+		sequence.unmarked(target.sketch(1d));
+		sequence.unmarked(new StylePop());
+		sequence.marked(agent.sketch(1000d));
+		
+		sequence.unmarked(poke1Source.place());
+		sequence.marked(poke1.sketch(1000d));
+		sequence.unmarked(tale.setText("Agents Respond Unpredictably"));
+		sequence.marked(agent.move(900d, 400d));
+		sequence.unmarked(tale.setText("Whoops: Better Try Another Poke"));
+		sequence.unmarked(poke2Source.place());
+		sequence.unmarked(new StyleStep(redLine));
+		sequence.unmarked(poke2.sketch(1000d));
+		sequence.marked(agent.move(1000d, 500d));
+		sequence.unmarked(tale.setText("Almost there!"));
+		sequence.unmarked(poke3Source.place());
+		sequence.unmarked(new StyleStep(greenLine));
+		sequence.unmarked(poke3.sketch(1000d));
+		sequence.unmarked(agent.move(1100d, 450d));
+		sequence.marked(tale.setText("Made it!!"));
+		
 	}
 
 	private void addBaseComplications(Sequence sequence)
