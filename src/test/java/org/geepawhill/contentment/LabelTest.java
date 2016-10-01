@@ -12,7 +12,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import javafx.scene.Node;
 import javafx.scene.text.Text;
 
 @RunWith(JfxTestRunner.class)
@@ -42,7 +41,7 @@ public class LabelTest
 		Label label = new Label("Hi Mom!",800d,450d);
 		Step step = label.sketch(1d);
 		jfxTester.finish(context, step);
-		Text text = (Text)jfxTester.snapshot(context).root.lookup("#label00");
+		Text text = (Text)jfxTester.snapshot(context).lookup("Label00.Text");
 		assertEquals("Hi Mom!", text.getText());
 		System.out.println("Animation played.");
 	}

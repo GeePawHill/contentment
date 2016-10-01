@@ -3,6 +3,7 @@ package org.geepawhill.contentment.actor;
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
 import org.geepawhill.contentment.step.TransitionStep;
@@ -40,14 +41,11 @@ public class LabelBox implements Actor
 	{
 		this.xCenter = xCenter;
 		this.yCenter = yCenter;
-		this.group = new Group();
 		this.text = text;
 		label = new Text(xCenter, yCenter, "");
-		label.setId("labelbox"+String.format("%1$02d",index++)+".label");
 		label.setTextOrigin(VPos.CENTER);
 		rectangle = new Rectangle();
-		label.setId("labelbox"+String.format("%1$02d",index++)+".rectangle");
-		group.getChildren().addAll(label,rectangle);
+		this.group = JfxUtility.makeGroup(index++,this,label,rectangle);
 		bounds = label.getBoundsInParent();
 	}
 

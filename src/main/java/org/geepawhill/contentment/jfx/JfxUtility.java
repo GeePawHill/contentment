@@ -1,8 +1,10 @@
 package org.geepawhill.contentment.jfx;
 
+import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
 
 import javafx.scene.Group;
+import javafx.scene.Node;
 
 public class JfxUtility
 {
@@ -13,4 +15,21 @@ public class JfxUtility
 			context.canvas.getChildren().add(group);
 		}
 	}
+	
+	static public void setId(int index,Actor actor,Node node)
+	{
+		node.setId(actor.getClass().getSimpleName()+String.format("%1$02d",index)+"."+node.getClass().getSimpleName());
+	}
+
+	public static Group makeGroup(int index, Actor actor, Node... nodes)
+	{
+		Group group = new Group();
+		for(Node node : nodes)
+		{
+			group.getChildren().add(node);
+			setId(index,actor,node);
+		}
+		return group;
+	}
+
 }

@@ -3,6 +3,7 @@ package org.geepawhill.contentment.actor;
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
 import org.geepawhill.contentment.step.TransitionStep;
@@ -31,12 +32,10 @@ public class Label implements Actor
 	{
 		this.xCenter = xCenter;
 		this.yCenter = yCenter;
-		this.group = new Group();
 		this.text = text;
 		label = new Text(xCenter, yCenter, "");
-		label.setId("label"+String.format("%1$02d",index++));
 		label.setTextOrigin(VPos.CENTER);
-		group.getChildren().addAll(label);
+		this.group = JfxUtility.makeGroup(index++, this, label);
 	}
 
 	public Step sketch(double ms)

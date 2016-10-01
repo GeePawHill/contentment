@@ -3,6 +3,7 @@ package org.geepawhill.contentment.actor;
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
 
@@ -19,11 +20,9 @@ public class Spot implements Actor
 	
 	public Spot(double x,double y)
 	{
-		this.group = new Group();
 		this.circle = new Circle(x,y,0d);
-		this.circle.setId("spot"+String.format("%1$02d",index++));
 		this.circle.setVisible(false);
-		this.group.getChildren().add(circle);
+		this.group = JfxUtility.makeGroup(index++,this,circle);
 	}
 	
 	@Override

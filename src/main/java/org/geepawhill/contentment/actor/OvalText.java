@@ -4,6 +4,7 @@ import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
 import org.geepawhill.contentment.style.StyleId;
@@ -39,13 +40,10 @@ public class OvalText implements Actor
 	{
 		this.xCenter = xCenter;
 		this.yCenter = yCenter;
-		this.group = new Group();
 		this.text = text;
 		label = new Text(xCenter, yCenter, "");
-		label.setId("ovaltext"+String.format("%1$02d",index++)+".label");
 		oval = new Ellipse();
-		oval.setId("ovaltext"+String.format("%1$02d",index++)+".oval");
-		group.getChildren().addAll(label,oval);
+		this.group = JfxUtility.makeGroup(index++,this,label,oval);
 		bounds = label.getBoundsInParent();
 	}
 

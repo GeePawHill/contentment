@@ -2,6 +2,7 @@ package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.step.ShowStep;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
@@ -34,17 +35,10 @@ public class Tale implements Actor
 	public Tale(String value, double fromY)
 	{
 		this.fromY = fromY;
-		this.group = new Group();
 		text = new Text(800d, fromY + YINSET, value);
-		text.setId("tale"+String.format("%1$02d",index++)+".text");
-
 		rectangle = new Rectangle(XMARGIN, fromY, 1600d - XMARGIN - XINSET, 30d + 2 * YINSET);
-		rectangle.setId("tale"+String.format("%1$02d",index++)+".rectangle");
-
-		group.getChildren().addAll(rectangle, text);
-
+		this.group = JfxUtility.makeGroup(index++,this,rectangle,text);
 		adjustTextSize();
-
 		rectangle.setHeight(text.getBoundsInLocal().getHeight() + 2 * YINSET);
 		rectangle.setStrokeWidth(2d);
 		rectangle.setFill(Color.color(1d, GREEN, BLUE));

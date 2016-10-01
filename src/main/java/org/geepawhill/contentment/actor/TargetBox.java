@@ -3,6 +3,7 @@ package org.geepawhill.contentment.actor;
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
 import org.geepawhill.contentment.step.TransitionStep;
@@ -46,14 +47,11 @@ public class TargetBox implements Actor
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		this.group = new Group();
 		this.text = text;
 		label = new Text(x, y, "");
-		label.setId("target"+String.format("%1$02d",index++)+".label");
 		label.setTextOrigin(VPos.CENTER);
 		rectangle = new Rectangle();
-		rectangle.setId("target"+String.format("%1$02d",index++)+".rectangle");
-		group.getChildren().addAll(rectangle,label);
+		this.group = JfxUtility.makeGroup(index++,this,rectangle,label);
 		bounds = label.getBoundsInParent();
 	}
 
