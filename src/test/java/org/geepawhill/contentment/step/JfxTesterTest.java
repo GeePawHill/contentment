@@ -18,12 +18,4 @@ public class JfxTesterTest
 		context = tester.prepareWindow();
 	}
 
-	@Test
-	public void virgin()
-	{
-		SnapShot snap = tester.snapshot(context);
-		assertNotNull(snap.root);
-		assertTrue(snap.root.getChildren().isEmpty());
-	}
-
 }
