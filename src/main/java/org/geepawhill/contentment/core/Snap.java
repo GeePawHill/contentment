@@ -1,21 +1,24 @@
-package org.geepawhill.contentment.step;
+package org.geepawhill.contentment.core;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javafx.geometry.Bounds;
 
-public class Snapshot
+public class Snap
 {
+	
+	public final static String TEXT="Text";
+	public final static String BOUNDS="Bounds";
 	
 	private final HashMap<String,Object> properties;
 	
-	public Snapshot()
+	public Snap()
 	{
 		this.properties = new HashMap<>();
 	}
 
-	public void put(String property, Object object)
+	public void add(String property, Object object)
 	{
 		if(properties.containsKey(property)) throw new RuntimeException("Attempt to add duplicate property: "+property);
 		properties.put(property, object);
@@ -26,20 +29,20 @@ public class Snapshot
 		return properties.get(property);
 	}
 
-	public void add(Snapshot addition)
+	public void add(Snap addition)
 	{
 		for( Map.Entry<String,Object> entry : addition.properties.entrySet())
 		{
-			put(entry.getKey(),entry.getValue());
+			add(entry.getKey(),entry.getValue());
 		}
 		
 	}
 
-	public void add(String prefix, Snapshot addition)
+	public void add(String prefix, Snap addition)
 	{
 		for( Map.Entry<String,Object> entry : addition.properties.entrySet())
 		{
-			put(prefix+"."+entry.getKey(),entry.getValue());
+			add(prefix+"."+entry.getKey(),entry.getValue());
 		}
 	}
 

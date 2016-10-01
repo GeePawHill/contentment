@@ -1,6 +1,10 @@
 package org.geepawhill.contentment.step;
 
+import static org.junit.Assert.*;
+
+import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Snap;
 import org.geepawhill.contentment.core.Step;
 
 import javafx.application.Platform;
@@ -11,7 +15,6 @@ import javafx.scene.layout.Pane;
 
 public class JfxTester
 {
-	
 	public void finish(Context context, Step step)
 	{
 		if (Platform.isFxApplicationThread()) throw new IllegalThreadStateException("Cannot be executed on main JavaFX thread");
@@ -59,5 +62,20 @@ public class JfxTester
 		Context context = new Context(group);
 		return context;
 	}
-
+	
+	public void properties(Actor actor,String... properties)
+	{
+		Snap snap = actor.snap();
+		for(String property : properties)
+		{
+			assertNotNull(snap.get(property));
+		}
+	}
+	
+	public void assertProperty(Actor actor,String property, String expected)
+	{
+		String result = actor.snap().asString(property);
+		assertNotNull(result);
+		assertEquals(expected,result);
+	}
 }

@@ -2,6 +2,7 @@ package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Snap;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.step.SubStep;
@@ -35,6 +36,14 @@ public class Label implements Actor
 		label = new Text(xCenter, yCenter, "");
 		label.setTextOrigin(VPos.CENTER);
 		this.group = JfxUtility.makeGroup(index++, this, label);
+	}
+	
+	public Snap snap()
+	{
+		Snap snapshot = new Snap();
+		snapshot.add(Snap.TEXT,label.getText());
+		snapshot.add(Snap.BOUNDS,label.getBoundsInLocal());
+		return snapshot;
 	}
 
 	public Step sketch(double ms)

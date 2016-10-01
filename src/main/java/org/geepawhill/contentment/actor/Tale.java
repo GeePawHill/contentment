@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Actor;
+import org.geepawhill.contentment.core.Snap;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.step.ShowStep;
@@ -84,6 +85,13 @@ public class Tale implements Actor
 	{
 		text.setText(newValue);
 		adjustTextSize();
+	}
+
+	@Override
+	public Snap snap()
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

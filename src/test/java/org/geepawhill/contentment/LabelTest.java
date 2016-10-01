@@ -1,9 +1,10 @@
 package org.geepawhill.contentment;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import org.geepawhill.contentment.actor.Label;
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Snap;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.step.JfxTester;
 import org.junit.Before;
@@ -14,33 +15,31 @@ import org.junit.runner.RunWith;
 @RunWith(JfxTestRunner.class)
 public class LabelTest
 {
-	private JfxTester jfxTester;
+	private JfxTester tester;
+	private Label label;
 
 	@Before
 	public void before()
 	{
-		jfxTester = new JfxTester();
-	}
-
-	@Ignore
-	@Test
-	public void failsOkay()
-	{
-		System.out.println("Test2 running.");
-		fail("Let's see a test fail.");
+		tester = new JfxTester();
+		label = new Label("Hi Mom!",800d,450d);
 	}
 
 	@Test
 	public void animationTest()
 	{
 		System.out.println("About to animate.");
-		Context context = jfxTester.prepareWindow();
-		Label label = new Label("Hi Mom!",800d,450d);
+		Context context = tester.prepareWindow();
+		tester.assertProperty(label, Snap.TEXT, "");
 		Step step = label.sketch(1d);
-		jfxTester.finish(context, step);
-//		Text text = (Text)jfxTester.snapshot(context).lookup("Label00.Text");
-//		assertEquals("Hi Mom!", text.getText());
-//		System.out.println("Animation played.");
+		tester.finish(context, step);
+		tester.assertProperty(label, Snap.TEXT, "Hi Mom!");
+	}
+	
+	@Test
+	public void snapshot()
+	{
+		tester.properties(label, Snap.TEXT,Snap.BOUNDS);
 	}
 
 }

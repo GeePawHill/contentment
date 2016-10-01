@@ -2,6 +2,7 @@ package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Snap;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.step.SubStep;
@@ -134,6 +135,13 @@ public class TargetBox implements Actor
 	public Group group()
 	{
 		return group;
+	}
+
+	@Override
+	public Snap snap()
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

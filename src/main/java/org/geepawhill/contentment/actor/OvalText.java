@@ -2,6 +2,7 @@ package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Snap;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.JfxUtility;
@@ -117,6 +118,12 @@ public class OvalText implements Actor
 	public Group group()
 	{
 		return group;
+	}
+
+	@Override
+	public Snap snap()
+	{
+		return null;
 	}
 
 }

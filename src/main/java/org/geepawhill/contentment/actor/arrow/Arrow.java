@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Snap;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.HideStep;
@@ -29,6 +30,11 @@ public class Arrow implements Actor
 	public Arrow(Actor from,boolean pointAtFrom, Actor to, boolean pointAtTo)
 	{
 		this(pointAtFrom,pointAtTo,new NodeArrowComputer(from.group(), to.group()));
+	}
+	
+	public Snap snap()
+	{
+		return new Snap();
 	}
 	
 	public Arrow(boolean pointAtFrom,boolean pointAtTo,ArrowComputer computer)
