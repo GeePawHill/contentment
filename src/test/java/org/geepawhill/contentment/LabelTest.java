@@ -17,23 +17,43 @@ public class LabelTest
 {
 	private JfxTester tester;
 	private Label label;
+	private Context context;
 
 	@Before
 	public void before()
 	{
 		tester = new JfxTester();
+		context = tester.prepareWindow();
 		label = new Label("Hi Mom!",800d,450d);
 	}
 
 	@Test
-	public void animationTest()
+	public void playChangesText()
 	{
-		System.out.println("About to animate.");
-		Context context = tester.prepareWindow();
 		tester.assertProperty(label, Snap.TEXT, "");
 		Step step = label.sketch(1d);
 		tester.finish(context, step);
 		tester.assertProperty(label, Snap.TEXT, "Hi Mom!");
+	}
+	
+	@Test
+	public void afterChangesText()
+	{
+		tester.assertProperty(label, Snap.TEXT, "");
+		Step step = label.sketch(1d);
+		step.after(context);
+		tester.assertProperty(label, Snap.TEXT, "Hi Mom!");
+	}
+	
+	@Test
+	public void beforeResetsText()
+	{
+		tester.assertProperty(label, Snap.TEXT, "");
+		Step step = label.sketch(1d);
+		tester.finish(context, step);
+		tester.assertProperty(label, Snap.TEXT, "Hi Mom!");
+		step.before(context);
+		tester.assertProperty(label,  Snap.TEXT, "");
 	}
 	
 	@Test

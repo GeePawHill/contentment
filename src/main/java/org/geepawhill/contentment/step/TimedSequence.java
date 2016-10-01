@@ -9,6 +9,7 @@ import javafx.scene.Group;
 
 public class TimedSequence implements Step
 {
+	private SubStep reset;
 	private SubStep[] substeps;
 	private SequentialTransition transition;
 	private double ms;
@@ -21,6 +22,16 @@ public class TimedSequence implements Step
 		this.substeps = substeps;
 		this.transition = new SequentialTransition();
 	}
+	
+	public TimedSequence(double ms, Group group, SubStep reset,SubStep... substeps)
+	{
+		this.ms = ms;
+		this.group = group;
+		this.reset = reset;
+		this.substeps = substeps;
+		this.transition = new SequentialTransition();
+	}
+
 
 	@Override
 	public void after(Context context)
@@ -37,6 +48,7 @@ public class TimedSequence implements Step
 	public void before(Context context)
 	{
 		transition.stop();
+		if(reset!=null) reset.interpolator.accept(1d, context);
 		if(context.canvas.getChildren().contains(group))
 		{
 			context.canvas.getChildren().remove(group);

@@ -50,9 +50,9 @@ public class Label implements Actor
 	{
 		SubStep[] substeps = new SubStep[]
 		{
-				new SubStep(500d, this::animateDrawText),
+				new SubStep(1d, this::animateDrawText),
 		};
-		return new TimedSequence(ms, group, substeps);
+		return new TimedSequence(ms, group,new SubStep(1d, this::resetText), substeps);
 	}
 
 	public Step fadeIn(double ms)
@@ -63,6 +63,12 @@ public class Label implements Actor
 		};
 		return new TimedSequence(ms, group, substeps);
 	}
+	
+	protected void resetText(double frac, Context context)
+	{
+		label.setText("");
+	}
+
 
 	protected void animateDrawText(double frac, Context context)
 	{
