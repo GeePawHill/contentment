@@ -12,11 +12,6 @@ import javafx.scene.layout.Pane;
 public class JfxTester
 {
 	
-	public SnapShot snapshot(Context context)
-	{
-		return new SnapShot(context);
-	}
-
 	public void finish(Context context, Step step)
 	{
 		if (Platform.isFxApplicationThread()) throw new IllegalThreadStateException("Cannot be executed on main JavaFX thread");

@@ -2,12 +2,12 @@ package org.geepawhill.contentment.step;
 
 import java.util.HashMap;
 
-public class SnapShotX
+public class Snapshot
 {
 	
 	private final HashMap<String,Object> property;
 	
-	public SnapShotX()
+	public Snapshot()
 	{
 		this.property = new HashMap<>();
 	}
