@@ -1,10 +1,7 @@
 package org.geepawhill.contentment.step;
 
-import static org.junit.Assert.*;
-
 import org.geepawhill.contentment.core.Context;
 import org.junit.Before;
-import org.junit.Test;
 
 public class JfxTesterTest
 {

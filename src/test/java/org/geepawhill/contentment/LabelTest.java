@@ -1,6 +1,5 @@
 package org.geepawhill.contentment;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.geepawhill.contentment.actor.Label;
@@ -11,8 +10,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import javafx.scene.text.Text;
 
 @RunWith(JfxTestRunner.class)
 public class LabelTest
