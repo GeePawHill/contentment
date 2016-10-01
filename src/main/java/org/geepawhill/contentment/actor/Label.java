@@ -24,6 +24,8 @@ public class Label implements Actor
 	private double xCenter;
 	private double yCenter;
 	
+	private static int index=0;
+	
 
 	public Label(String text, double xCenter, double yCenter)
 	{
@@ -32,6 +34,7 @@ public class Label implements Actor
 		this.group = new Group();
 		this.text = text;
 		label = new Text(xCenter, yCenter, "");
+		label.setId("label"+String.format("%1$02d",index++));
 		label.setTextOrigin(VPos.CENTER);
 		group.getChildren().addAll(label);
 	}

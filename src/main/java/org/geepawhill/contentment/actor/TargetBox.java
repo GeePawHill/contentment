@@ -38,6 +38,7 @@ public class TargetBox implements Actor
 
 	private double height;
 	
+	private static int index;
 
 	public TargetBox(String text, double x, double y, double width, double height)
 	{
@@ -48,8 +49,10 @@ public class TargetBox implements Actor
 		this.group = new Group();
 		this.text = text;
 		label = new Text(x, y, "");
+		label.setId("target"+String.format("%1$02d",index++)+".label");
 		label.setTextOrigin(VPos.CENTER);
 		rectangle = new Rectangle();
+		rectangle.setId("target"+String.format("%1$02d",index++)+".rectangle");
 		group.getChildren().addAll(rectangle,label);
 		bounds = label.getBoundsInParent();
 	}

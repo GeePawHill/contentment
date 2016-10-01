@@ -23,6 +23,7 @@ public class JfxTesterTest
 	{
 		SnapShot snap = tester.snapshot(context);
 		assertNotNull(snap.root);
+		assertTrue(snap.root.getChildren().isEmpty());
 	}
 
 }

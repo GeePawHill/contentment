@@ -34,6 +34,7 @@ public class LabelBox implements Actor
 	private double xCenter;
 	private double yCenter;
 	
+	private static int index = 0;
 
 	public LabelBox(String text, double xCenter, double yCenter)
 	{
@@ -42,8 +43,10 @@ public class LabelBox implements Actor
 		this.group = new Group();
 		this.text = text;
 		label = new Text(xCenter, yCenter, "");
+		label.setId("labelbox"+String.format("%1$02d",index++)+".label");
 		label.setTextOrigin(VPos.CENTER);
 		rectangle = new Rectangle();
+		label.setId("labelbox"+String.format("%1$02d",index++)+".rectangle");
 		group.getChildren().addAll(label,rectangle);
 		bounds = label.getBoundsInParent();
 	}

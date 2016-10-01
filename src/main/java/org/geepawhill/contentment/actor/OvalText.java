@@ -32,6 +32,8 @@ public class OvalText implements Actor
 
 	private double yCenter;
 	
+	private static int index=0;
+	
 
 	public OvalText(String text, double xCenter, double yCenter)
 	{
@@ -40,7 +42,9 @@ public class OvalText implements Actor
 		this.group = new Group();
 		this.text = text;
 		label = new Text(xCenter, yCenter, "");
+		label.setId("ovaltext"+String.format("%1$02d",index++)+".label");
 		oval = new Ellipse();
+		oval.setId("ovaltext"+String.format("%1$02d",index++)+".oval");
 		group.getChildren().addAll(label,oval);
 		bounds = label.getBoundsInParent();
 	}

@@ -42,7 +42,7 @@ public class LabelTest
 		Label label = new Label("Hi Mom!",800d,450d);
 		Step step = label.sketch(1d);
 		jfxTester.finish(context, step);
-		Text text = (Text)label.group().getChildren().get(0);
+		Text text = (Text)jfxTester.snapshot(context).root.lookup("#label00");
 		assertEquals("Hi Mom!", text.getText());
 		System.out.println("Animation played.");
 	}

@@ -28,13 +28,19 @@ public class Tale implements Actor
 
 	private final double GREEN = (double) 0xee / (double) 0xff;
 	private final double BLUE = (double) 0xbb / (double) 0xff;
+	
+	private static int index=0;
 
 	public Tale(String value, double fromY)
 	{
 		this.fromY = fromY;
 		this.group = new Group();
 		text = new Text(800d, fromY + YINSET, value);
+		text.setId("tale"+String.format("%1$02d",index++)+".text");
+
 		rectangle = new Rectangle(XMARGIN, fromY, 1600d - XMARGIN - XINSET, 30d + 2 * YINSET);
+		rectangle.setId("tale"+String.format("%1$02d",index++)+".rectangle");
+
 		group.getChildren().addAll(rectangle, text);
 
 		adjustTextSize();

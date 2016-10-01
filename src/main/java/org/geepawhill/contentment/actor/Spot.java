@@ -15,10 +15,13 @@ public class Spot implements Actor
 	Group group;
 	Circle circle;
 	
+	private static int index=0;
+	
 	public Spot(double x,double y)
 	{
 		this.group = new Group();
 		this.circle = new Circle(x,y,0d);
+		this.circle.setId("spot"+String.format("%1$02d",index++));
 		this.circle.setVisible(false);
 		this.group.getChildren().add(circle);
 	}
