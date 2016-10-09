@@ -1,9 +1,6 @@
 package org.geepawhill.contentment;
 
-import static org.junit.Assert.*;
-
 import org.geepawhill.contentment.actor.Label;
-import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Snap;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.step.JfxTester;
@@ -17,7 +14,6 @@ public class LabelTest extends ApplicationTest
 {
 	private JfxTester tester;
 	private Label label;
-	private Context context;
 
 	@Override
 	public void start(Stage stage) throws Exception
@@ -59,31 +55,29 @@ public class LabelTest extends ApplicationTest
 		tester.afterEqualsPlay(label, label.sketch(1d));
 	}
 	
-//	@Test
-//	public void afterChangesText()
-//	{
-//		tester.assertProperty(label, Snap.TEXT, "");
-//		Step step = label.sketch(1d);
-//		step.after(context);
-//		tester.assertProperty(label, Snap.TEXT, "Hi Mom!");
-//	}
-//	
-//	@Test
-//	public void beforeResetsText()
-//	{
-//		tester.assertProperty(label, Snap.TEXT, "");
-//		Step step = label.sketch(1d);
-//		tester.finish(context, step);
-//		tester.assertProperty(label, Snap.TEXT, "Hi Mom!");
-//		step.before(context);
-//		tester.assertProperty(label,  Snap.TEXT, "");
-//	}
-//	
-//	@Test
-//	public void snapshot()
-//	{
-//		tester.properties(label, Snap.TEXT,Snap.BOUNDS);
-//	}
-//
-
+	@Test
+	public void afterChangesText() throws Exception
+	{
+		tester.assertProperty(label, Snap.TEXT, "");
+		Step step = label.sketch(1d);
+		tester.waitForAfter(step);
+		tester.assertProperty(label, Snap.TEXT, "Hi Mom!");
+	}
+	
+	@Test
+	public void beforeResetsText() throws Exception
+	{
+		tester.assertProperty(label, Snap.TEXT, "");
+		Step step = label.sketch(1d);
+		tester.waitForAfter(step);
+		tester.assertProperty(label, Snap.TEXT, "Hi Mom!");
+		tester.waitForBefore(step);
+		tester.assertProperty(label,  Snap.TEXT, "");
+	}
+	
+	@Test
+	public void snapshot()
+	{
+		tester.properties(label, Snap.TEXT,Snap.VISIBLE);
+	}
 }
