@@ -58,7 +58,7 @@ public class LabelBox implements Actor
 				new SubStep(1d,this::animateComputeBox), 
 				new SubStep(200d,this::animateDrawBox)
 		};
-		return new TimedSequence(ms, group, substeps);
+		return new TimedSequence(ms, group,new SubStep(1d, this::resetText), substeps);
 	}
 	
 	public Step fadeIn(double ms)
@@ -115,6 +115,12 @@ public class LabelBox implements Actor
 		group.setOpacity(frac);
 	}
 	
+	protected void resetText(double frac, Context context)
+	{
+		label.setText("");
+	}
+
+	
 	public Step move(double newX,double newY)
 	{
 		TranslateTransition transition = new TranslateTransition();
@@ -134,7 +140,10 @@ public class LabelBox implements Actor
 	@Override
 	public Snap snap()
 	{
-		return new Snap();
+		Snap snapshot = new Snap();
+		snapshot.add(Snap.TEXT,label.getText());
+		snapshot.addGeometry(label);
+		return snapshot;
 	}
 
 }

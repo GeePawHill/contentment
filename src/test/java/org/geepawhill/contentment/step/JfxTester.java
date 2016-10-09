@@ -87,10 +87,10 @@ public class JfxTester
 		Snap before = actor.snap();
 		waitForPlay(step);
 		Snap after = actor.snap();
-		assertFalse(before.isEqual(after));
+		assertFalse(before.isEqual(after, false));
 		waitForBefore(step);
 		Snap afterReset = actor.snap();
-		assertTrue(before.isEqual(afterReset));
+		assertTrue(before.isEqual(afterReset, false));
 	}
 
 	public void beforeBeforesAfterAfter(Actor actor, Step step) throws Exception
@@ -98,10 +98,10 @@ public class JfxTester
 		Snap before = actor.snap();
 		waitForAfter(step);
 		Snap after = actor.snap();
-		assertFalse(before.isEqual(after));
+		assertFalse(before.isEqual(after, false));
 		waitForBefore(step);
 		Snap afterReset = actor.snap();
-		assertTrue(before.isEqual(afterReset));
+		assertTrue(before.isEqual(afterReset, true));
 	}
 
 	public void afterEqualsPlay(Actor actor, Step step) throws Exception
@@ -109,10 +109,10 @@ public class JfxTester
 		Snap before = actor.snap();
 		waitForAfter(step);
 		Snap after = actor.snap();
-		assertFalse(before.isEqual(after));
+		assertFalse(before.isEqual(after, false));
 		waitForBefore(step);
 		waitForPlay(step);
 		Snap afterReset = actor.snap();
-		assertTrue(after.isEqual(afterReset));
+		assertTrue(after.isEqual(afterReset, false));
 	}
 }

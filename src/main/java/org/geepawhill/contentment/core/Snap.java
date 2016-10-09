@@ -63,7 +63,7 @@ public class Snap
 		return (Bounds)get(property);
 	}
 
-	public boolean isEqual(Snap other)
+	public boolean isEqual(Snap other, boolean noisy)
 	{
 		boolean result = true;
 		for( Map.Entry<String,Object> entry : properties.entrySet())
@@ -72,7 +72,7 @@ public class Snap
 			Object otherValue = other.get(entry.getKey());
 			if(!myValue.equals(otherValue))
 			{
-				System.out.println("Snap Mismatch: |"+myValue+"|"+otherValue+"|");
+				if(noisy==true) System.out.println("Snap Mismatch: |"+myValue+"|"+otherValue+"|");
 				result= false;
 			}
 		}
