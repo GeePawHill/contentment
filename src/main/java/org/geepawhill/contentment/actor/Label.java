@@ -42,7 +42,7 @@ public class Label implements Actor
 	{
 		Snap snapshot = new Snap();
 		snapshot.add(Snap.TEXT,label.getText());
-		snapshot.add(Snap.BOUNDS,label.getBoundsInLocal());
+		snapshot.addGeometry(label);
 		return snapshot;
 	}
 

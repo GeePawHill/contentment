@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javafx.geometry.Bounds;
+import javafx.scene.Node;
 
 public class Snap
 {
 	
 	public final static String TEXT="Text";
 	public final static String BOUNDS="Bounds";
+	public final static String VISIBLE="Visible";
 	
 	private final HashMap<String,Object> properties;
 	
@@ -60,5 +62,44 @@ public class Snap
 	{
 		return (Bounds)get(property);
 	}
+
+	public boolean isEqual(Snap other)
+	{
+		boolean result = true;
+		for( Map.Entry<String,Object> entry : properties.entrySet())
+		{
+			Object myValue = entry.getValue();
+			Object otherValue = other.get(entry.getKey());
+			if(!myValue.equals(otherValue))
+			{
+				System.out.println("Snap Mismatch: |"+myValue+"|"+otherValue+"|");
+				result= false;
+			}
+		}
+		return result;
+	}
+
+	public void addGeometry(Node node)
+	{
+		boolean visible = isVisible(node);
+		add(VISIBLE,visible);
+		if (visible)
+		{
+			add(BOUNDS,node.getBoundsInParent());
+		}
+	}
+
+	private boolean isVisible(Node node)
+	{
+		if(node.getScene()==null) return false;
+		Node next = node;
+		while(next!=null)
+		{
+			if(!next.isVisible()) return false;
+			next = next.getParent();
+		}
+		return true;
+	}
+
 	
 }
