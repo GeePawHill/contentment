@@ -9,7 +9,7 @@ import org.testfx.framework.junit.ApplicationTest;
 
 import javafx.stage.Stage;
 
-public class LabelTest extends ApplicationTest
+public class LabelSketchTest extends ApplicationTest
 {
 	private JfxTester tester;
 	private Label label;
@@ -39,19 +39,19 @@ public class LabelTest extends ApplicationTest
 	@Test
 	public void beforeBeforesAfterPlay() throws Exception
 	{
-		tester.beforeBeforesAfterPlay(label, label.sketch(1d));
+		tester.beforeSameAsPlayBefore(label, label.sketch(1d));
 	}
 	
 	@Test
 	public void beforeBeforesAfterAfter() throws Exception
 	{
-		tester.beforeBeforesAfterAfter(label, label.sketch(1d));
+		tester.beforeSameAsAfterBefore(label, label.sketch(1d));
 	}
 	
 	@Test
 	public void afterEqualsPlay() throws Exception
 	{
-		tester.afterEqualsPlay(label, label.sketch(1d));
+		tester.afterSameAsPlay(label, label.sketch(1d));
 	}
 	
 	@Test

@@ -70,10 +70,8 @@ public class Main extends Application
 
 	private void agentAndPokes()
 	{
-		Style redLine = Style.lineColor(Color.RED);
 		Style blueLine = Style.lineColor(Color.BLUE);
 		Style greenLine = Style.lineColor(Color.GREEN);
-		Style blackLine = Style.lineColor(Color.BLACK);
 		Tale tale = new Tale("Agent: Anything With Susceptability & Unpredictability", 30d);
 		LabelBox agent = new LabelBox("Agent", 800d, 520d);
 		Label teammate = new Label("Teammate",800d, 520d);
@@ -146,9 +144,6 @@ public class Main extends Application
 		Style redLine = Style.lineColor(Color.RED);
 		Style blueLine = Style.lineColor(Color.BLUE);
 		Style greenLine = Style.lineColor(Color.GREEN);
-		Style blackLine = Style.lineColor(Color.BLACK);
-		
-		
 		
 		Tale tale = new Tale("Agents Are Susceptible To Pokes", 30d);
 		LabelBox agent = new LabelBox("Agent", 800d, 450d);

@@ -82,7 +82,7 @@ public class JfxTester
 		countDownLatch.await();
 	}
 
-	public void beforeBeforesAfterPlay(Actor actor, Step step) throws Exception
+	public void beforeSameAsPlayBefore(Actor actor, Step step) throws Exception
 	{
 		Snap before = actor.snap();
 		waitForPlay(step);
@@ -93,7 +93,7 @@ public class JfxTester
 		assertTrue(before.isEqual(afterReset, false));
 	}
 
-	public void beforeBeforesAfterAfter(Actor actor, Step step) throws Exception
+	public void beforeSameAsAfterBefore(Actor actor, Step step) throws Exception
 	{
 		Snap before = actor.snap();
 		waitForAfter(step);
@@ -104,7 +104,7 @@ public class JfxTester
 		assertTrue(before.isEqual(afterReset, true));
 	}
 
-	public void afterEqualsPlay(Actor actor, Step step) throws Exception
+	public void afterSameAsPlay(Actor actor, Step step) throws Exception
 	{
 		Snap before = actor.snap();
 		waitForAfter(step);

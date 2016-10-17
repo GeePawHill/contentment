@@ -1,8 +1,5 @@
 package org.geepawhill.contentment.step;
 
-import static org.junit.Assert.*;
-
-import org.geepawhill.contentment.actor.Label;
 import org.geepawhill.contentment.actor.LabelBox;
 import org.geepawhill.contentment.core.Snap;
 import org.geepawhill.contentment.core.Step;
@@ -12,7 +9,7 @@ import org.testfx.framework.junit.ApplicationTest;
 
 import javafx.stage.Stage;
 
-public class LabelBoxTest extends ApplicationTest
+public class LabelBoxSketchTest extends ApplicationTest
 {
 
 	private JfxTester tester;
@@ -43,19 +40,19 @@ public class LabelBoxTest extends ApplicationTest
 	@Test
 	public void beforeBeforesAfterPlay() throws Exception
 	{
-		tester.beforeBeforesAfterPlay(label, label.sketch(1d));
+		tester.beforeSameAsPlayBefore(label, label.sketch(1d));
 	}
 	
 	@Test
 	public void beforeBeforesAfterAfter() throws Exception
 	{
-		tester.beforeBeforesAfterAfter(label, label.sketch(1d));
+		tester.beforeSameAsAfterBefore(label, label.sketch(1d));
 	}
 	
 	@Test
 	public void afterEqualsPlay() throws Exception
 	{
-		tester.afterEqualsPlay(label, label.sketch(1d));
+		tester.afterSameAsPlay(label, label.sketch(1d));
 	}
 
 }
