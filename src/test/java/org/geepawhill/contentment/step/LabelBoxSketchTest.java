@@ -38,19 +38,19 @@ public class LabelBoxSketchTest extends ApplicationTest
 	}
 	
 	@Test
-	public void beforeBeforesAfterPlay() throws Exception
+	public void beforeSameAsPlayBefore() throws Exception
 	{
 		tester.beforeSameAsPlayBefore(label, label.sketch(1d));
 	}
 	
 	@Test
-	public void beforeBeforesAfterAfter() throws Exception
+	public void beforeSameAsAfterBefore() throws Exception
 	{
 		tester.beforeSameAsAfterBefore(label, label.sketch(1d));
 	}
 	
 	@Test
-	public void afterEqualsPlay() throws Exception
+	public void afterSameAsPlay() throws Exception
 	{
 		tester.afterSameAsPlay(label, label.sketch(1d));
 	}

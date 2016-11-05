@@ -34,6 +34,9 @@ public class Arrow implements Actor
 	
 	public Snap snap()
 	{
+		Snap snap = new Snap();
+		snap.addGeometry(group);
+		snap.addGeometry("main",main);
 		return new Snap();
 	}
 	

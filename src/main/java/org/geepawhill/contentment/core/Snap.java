@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
+import javafx.scene.shape.Line;
 
 public class Snap
 {
@@ -81,12 +82,7 @@ public class Snap
 
 	public void addGeometry(Node node)
 	{
-		boolean visible = isVisible(node);
-		add(VISIBLE,visible);
-		if (visible)
-		{
-			add(BOUNDS,node.getBoundsInParent());
-		}
+		addGeometry("",node);
 	}
 
 	private boolean isVisible(Node node)
@@ -99,6 +95,19 @@ public class Snap
 			next = next.getParent();
 		}
 		return true;
+	}
+
+	public void addGeometry(String prefix, Node	node)
+	{
+		if(prefix==null || prefix.equals("")) prefix="";
+		else prefix=prefix+".";
+		boolean visible = isVisible(node);
+		add(prefix+VISIBLE,visible);
+		if (visible)
+		{
+			add(prefix+BOUNDS,node.getBoundsInParent());
+		}
+		
 	}
 
 	
