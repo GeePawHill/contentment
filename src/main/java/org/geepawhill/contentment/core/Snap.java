@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
-import javafx.scene.shape.Line;
 
 public class Snap
 {

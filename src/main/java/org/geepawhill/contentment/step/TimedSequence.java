@@ -60,7 +60,7 @@ public class TimedSequence implements Step
 	{
 		JfxUtility.addIfNeeded(context, group);
 		addSubsteps(context);
-		transition.setOnFinished(context.onFinished);
+		transition.setOnFinished((event) -> context.onFinished.run());
 		transition.playFromStart();
 	}
 

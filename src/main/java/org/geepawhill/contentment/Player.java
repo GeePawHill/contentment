@@ -4,7 +4,6 @@ import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.core.Step;
 
-import javafx.event.ActionEvent;
 import javafx.scene.Group;
 
 public class Player
@@ -225,7 +224,7 @@ public class Player
 		currentStep().pause(context);
 	}
 
-	private void onFinished(ActionEvent e)
+	private void onFinished()
 	{
 		if (currentIsLast())
 		{

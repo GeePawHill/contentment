@@ -32,7 +32,7 @@ public class TransitionStep implements Step
 	@Override
 	public void play(Context context)
 	{
-		transition.setOnFinished(context.onFinished);
+		transition.setOnFinished((event) -> context.onFinished.run());
 		transition.play();
 	}
 

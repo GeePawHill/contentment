@@ -1,8 +1,5 @@
 package org.geepawhill.contentment.step;
 
-import static org.junit.Assert.*;
-
-import org.geepawhill.contentment.actor.LabelBox;
 import org.geepawhill.contentment.actor.Spot;
 import org.geepawhill.contentment.actor.arrow.Arrow;
 import org.junit.Before;

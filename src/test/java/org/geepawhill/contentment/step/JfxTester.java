@@ -25,7 +25,7 @@ public class JfxTester
 	public void waitForPlay(Step step) throws Exception
 	{
 		final CountDownLatch countDownLatch = new CountDownLatch(1);
-		context.onFinished = (event) -> {
+		context.onFinished = () -> {
 	        countDownLatch.countDown();
 		};
 		Platform.runLater(() -> {

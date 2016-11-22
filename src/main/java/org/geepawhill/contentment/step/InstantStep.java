@@ -29,7 +29,7 @@ public class InstantStep implements Step
 	public void play(Context context)
 	{
 		after(context);
-		context.onFinished.handle(null);
+		context.onFinished.run();
 
 	}
 

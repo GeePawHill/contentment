@@ -3,8 +3,6 @@ package org.geepawhill.contentment.core;
 import org.geepawhill.contentment.style.Style;
 import org.geepawhill.contentment.style.Styles;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -12,7 +10,7 @@ import javafx.scene.text.Font;
 public class Context {
 	
 	public final Group canvas;
-	public EventHandler<ActionEvent> onFinished;
+	public OnFinished onFinished;
 	public Styles styles;
 	
 	public Context(Group canvas)

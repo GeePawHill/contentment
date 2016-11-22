@@ -32,7 +32,7 @@ public class HideStep implements Step
 	public void play(Context context)
 	{
 		after(context);
-		context.onFinished.handle(null);
+		context.onFinished.run();
 	}
 
 	@Override

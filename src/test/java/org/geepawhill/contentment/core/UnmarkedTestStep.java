@@ -58,7 +58,7 @@ public class UnmarkedTestStep implements Step
 		isPlaying=false;
 		isBefore=false;
 		isPaused=false;
-		context.onFinished.handle(null);
+		context.onFinished.run();
 		
 	}
 

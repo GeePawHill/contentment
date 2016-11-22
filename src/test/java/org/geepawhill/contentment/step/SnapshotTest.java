@@ -1,6 +1,6 @@
 package org.geepawhill.contentment.step;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.geepawhill.contentment.core.Snap;
 import org.junit.Before;
