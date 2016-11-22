@@ -10,7 +10,6 @@ import javafx.scene.text.Font;
 public class Context {
 	
 	public final Group canvas;
-	public OnFinished onFinished;
 	public Styles styles;
 	
 	public Context(Group canvas)

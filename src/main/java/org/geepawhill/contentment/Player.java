@@ -17,7 +17,6 @@ public class Player
 	public Player(Group canvas)
 	{
 		context = new Context(canvas);
-		context.onFinished = this::onFinished;
 		sequence = new Sequence();
 		current = 0;
 		state = PlayState.Before;
@@ -215,7 +214,7 @@ public class Player
 	private void playCurrent()
 	{
 		state = PlayState.Playing;
-		currentStep().play(context, context.onFinished);
+		currentStep().play(context, this::onFinished);
 	}
 
 	private void pauseCurrent()
