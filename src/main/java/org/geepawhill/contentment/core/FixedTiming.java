@@ -3,6 +3,8 @@ package org.geepawhill.contentment.core;
 public class FixedTiming implements Timing
 {
 	
+	public static final Timing INSTANT = new FixedTiming(.1d);
+	
 	private double ms;
 
 	public FixedTiming(double ms)

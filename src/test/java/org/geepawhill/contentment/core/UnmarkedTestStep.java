@@ -64,4 +64,10 @@ public class UnmarkedTestStep implements Step
 		
 	}
 
+	@Override
+	public Timing timing()
+	{
+		return FixedTiming.INSTANT;
+	}
+
 }

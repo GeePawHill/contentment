@@ -7,4 +7,5 @@ public interface Step
 	public void play(Context context, OnFinished onFinished);
 	public void pause(Context context);
 	public void resume(Context context);
+	public Timing timing();
 }

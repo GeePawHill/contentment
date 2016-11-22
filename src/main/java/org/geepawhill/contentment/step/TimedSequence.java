@@ -1,8 +1,10 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.FixedTiming;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.core.Timing;
 import org.geepawhill.contentment.jfx.JfxUtility;
 
 import javafx.animation.SequentialTransition;
@@ -13,12 +15,12 @@ public class TimedSequence implements Step
 	private SubStep reset;
 	private SubStep[] substeps;
 	private SequentialTransition transition;
-	private double ms;
 	private final Group group;
+	private Timing timing;
 
 	public TimedSequence(double ms, Group group, SubStep... substeps)
 	{
-		this.ms = ms;
+		timing = new FixedTiming(ms);
 		this.group = group;
 		this.substeps = substeps;
 		this.transition = new SequentialTransition();
@@ -26,11 +28,17 @@ public class TimedSequence implements Step
 	
 	public TimedSequence(double ms, Group group, SubStep reset,SubStep... substeps)
 	{
-		this.ms = ms;
+		timing = new FixedTiming(ms);
 		this.group = group;
 		this.reset = reset;
 		this.substeps = substeps;
 		this.transition = new SequentialTransition();
+	}
+	
+	@Override
+	public Timing timing()
+	{
+		return timing;
 	}
 
 
@@ -73,7 +81,7 @@ public class TimedSequence implements Step
 		{
 			accumulatedProportions += substep.proportion;
 		}
-		double timescale = ms / accumulatedProportions;
+		double timescale = timing.getAbsolute() / accumulatedProportions;
 		for (SubStep substep : substeps)
 		{
 			transition.getChildren().add(new ContextTransition(context, substep, guaranteeProportion(timescale, substep)));

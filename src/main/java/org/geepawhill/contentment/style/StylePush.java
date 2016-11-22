@@ -1,8 +1,10 @@
 package org.geepawhill.contentment.style;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.FixedTiming;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.core.Timing;
 
 public class StylePush implements Step
 {
@@ -19,6 +21,12 @@ public class StylePush implements Step
 		if(hasPushed) return;
 		context.styles.push();
 		hasPushed=true;
+	}
+	
+	@Override
+	public Timing timing()
+	{
+		return FixedTiming.INSTANT;
 	}
 
 	@Override

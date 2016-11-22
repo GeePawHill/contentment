@@ -1,8 +1,10 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.FixedTiming;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.core.Timing;
 
 import javafx.animation.Transition;
 import javafx.util.Duration;
@@ -11,6 +13,12 @@ public class TransitionStep implements Step
 {
 	
 	private Transition transition;
+	
+	@Override
+	public Timing timing()
+	{
+		return new FixedTiming(transition.getTotalDuration().toMillis());
+	}
 
 	public TransitionStep(Transition transition)
 	{
