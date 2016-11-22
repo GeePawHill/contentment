@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.jfx.JfxUtility;
 
@@ -56,11 +57,11 @@ public class TimedSequence implements Step
 	}
 
 	@Override
-	public void play(Context context)
+	public void play(Context context, OnFinished onFinished)
 	{
 		JfxUtility.addIfNeeded(context, group);
 		addSubsteps(context);
-		transition.setOnFinished((event) -> context.onFinished.run());
+		transition.setOnFinished((event) -> onFinished.run());
 		transition.playFromStart();
 	}
 

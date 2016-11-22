@@ -7,6 +7,7 @@ public class UnmarkedTestStep implements Step
 	public boolean isPlaying;
 	public boolean isPaused;
 	public boolean isChanged;
+	private OnFinished onFinished;
 	
 	public UnmarkedTestStep()
 	{
@@ -33,8 +34,9 @@ public class UnmarkedTestStep implements Step
 	}
 	
 	@Override
-	public void play(Context context)
+	public void play(Context context, OnFinished onFinished)
 	{
+		this.onFinished = onFinished;
 		isBefore=false;
 		isPlaying=true;
 		isChanged=true;
@@ -58,7 +60,7 @@ public class UnmarkedTestStep implements Step
 		isPlaying=false;
 		isBefore=false;
 		isPaused=false;
-		context.onFinished.run();
+		onFinished.run();
 		
 	}
 

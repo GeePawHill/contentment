@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.core.Step;
 
 import javafx.animation.Transition;
@@ -30,9 +31,9 @@ public class TransitionStep implements Step
 	}
 
 	@Override
-	public void play(Context context)
+	public void play(Context context, OnFinished onFinished)
 	{
-		transition.setOnFinished((event) -> context.onFinished.run());
+		transition.setOnFinished((event) -> onFinished.run());
 		transition.play();
 	}
 

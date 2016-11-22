@@ -29,7 +29,7 @@ public class JfxTester
 	        countDownLatch.countDown();
 		};
 		Platform.runLater(() -> {
-			step.play(context);
+			step.play(context, context.onFinished);
 		});
 		countDownLatch.await();
 	}

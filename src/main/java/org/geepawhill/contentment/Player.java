@@ -215,7 +215,7 @@ public class Player
 	private void playCurrent()
 	{
 		state = PlayState.Playing;
-		currentStep().play(context);
+		currentStep().play(context, context.onFinished);
 	}
 
 	private void pauseCurrent()

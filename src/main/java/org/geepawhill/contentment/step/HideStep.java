@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.core.Step;
 
 import javafx.scene.Group;
@@ -29,10 +30,10 @@ public class HideStep implements Step
 	}
 
 	@Override
-	public void play(Context context)
+	public void play(Context context, OnFinished onFinished)
 	{
 		after(context);
-		context.onFinished.run();
+		onFinished.run();
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.style;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.core.Step;
 
 public class StyleStep implements Step
@@ -30,10 +31,10 @@ public class StyleStep implements Step
 	}
 
 	@Override
-	public void play(Context context)
+	public void play(Context context, OnFinished onFinished)
 	{
 		after(context);
-		context.onFinished.run();
+		onFinished.run();
 	}
 
 	@Override

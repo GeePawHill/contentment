@@ -3,6 +3,7 @@ package org.geepawhill.contentment.step;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.core.Step;
 
 import javafx.scene.Node;
@@ -36,10 +37,10 @@ public class ClearStep implements Step
 	}
 
 	@Override
-	public void play(Context context)
+	public void play(Context context, OnFinished onFinished)
 	{
 		after(context);
-		context.onFinished.run();
+		onFinished.run();
 	}
 
 	@Override
