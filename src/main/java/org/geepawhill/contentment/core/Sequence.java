@@ -2,21 +2,12 @@ package org.geepawhill.contentment.core;
 
 import java.util.ArrayList;
 
+import org.geepawhill.contentment.step.Stop;
+
 
 public class Sequence
 {
-	static class StepAndMark
-	{
-		public final boolean isMarked;
-		public final Step step;
-		
-		public StepAndMark(boolean isMarked,Step step)
-		{
-			this.isMarked = isMarked;
-			this.step = step;
-		}
-	}
-	ArrayList<StepAndMark> steps;
+	ArrayList<Step> steps;
 
 	public Sequence()
 	{
@@ -25,8 +16,8 @@ public class Sequence
 
 	public Sequence(Step... steps)
 	{
-		this.steps = new ArrayList<StepAndMark>();
-		for(Step step : steps) this.steps.add(new StepAndMark(true,step));
+		this.steps = new ArrayList<Step>();
+		for(Step step : steps) this.steps.add(step);
 	}
 
 	public int size()
@@ -36,28 +27,27 @@ public class Sequence
 
 	public Step get(int index)
 	{
-		return steps.get(index).step;
+		return steps.get(index);
 	}
 	
 	public void marked(Step step)
 	{
-		add(true,step);
+		add(new Stop());
+		add(step);
 	}
 	
 	public void unmarked(Step step)
 	{
-		add(false,step);
+		add(step);
 	}
 	
-	public void add(boolean isMarked,Step step)
+	public void add(Step step)
 	{
-		steps.add(new StepAndMark(isMarked,step));
+		steps.add(step);
 	}
 	
 	public boolean isMarked(int index)
 	{
-		return steps.get(index).isMarked;
+		return steps.get(index) instanceof Stop;
 	}
-
-	
 }

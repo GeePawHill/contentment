@@ -1,15 +1,16 @@
 package org.geepawhill.contentment.core;
 
-public class UnmarkedTestStep implements Step
+import org.geepawhill.contentment.step.Stop;
+
+public class TestStop extends Stop
 {
-	
 	public boolean isBefore;
 	public boolean isPlaying;
 	public boolean isPaused;
 	public boolean isChanged;
 	private OnFinished onFinished;
 	
-	public UnmarkedTestStep()
+	public TestStop()
 	{
 		isBefore=true;
 		isPlaying=false;
@@ -55,7 +56,7 @@ public class UnmarkedTestStep implements Step
 		isChanged=true;
 	}
 
-	public void finishPlaying(Context context)
+	public void finishPlaying()
 	{
 		isPlaying=false;
 		isBefore=false;
@@ -69,5 +70,4 @@ public class UnmarkedTestStep implements Step
 	{
 		return FixedTiming.INSTANT;
 	}
-
 }

@@ -15,8 +15,8 @@ public class SequenceTest
 	@Test
 	public void variadicLoads()
 	{
-		assertEquals(1,new Sequence(new MarkedTestStep()).size());
-		assertEquals(2,new Sequence(new MarkedTestStep(),new MarkedTestStep()).size());
+		assertEquals(1,new Sequence(new TestStep()).size());
+		assertEquals(2,new Sequence(new TestStep(),new TestStep()).size());
 	}
 
 }

@@ -3,11 +3,13 @@ package org.geepawhill.contentment.step;
 import org.geepawhill.contentment.actor.Spot;
 import org.geepawhill.contentment.actor.arrow.Arrow;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
 import javafx.stage.Stage;
 
+@Ignore
 public class ArrowSketchTest extends ApplicationTest
 {
 

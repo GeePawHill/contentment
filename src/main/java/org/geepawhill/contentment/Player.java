@@ -70,9 +70,6 @@ public class Player
 		case After:
 		case Playing:
 		case Paused:
-			currentStep().before(context);
-			state = PlayState.Before;
-			return;
 		case Before:
 			decrementToMarkedOrZero();
 		}
@@ -157,25 +154,23 @@ public class Player
 		}
 	}
 
-	private Step currentStep()
+	public Step currentStep()
 	{
 		return sequence.get(current);
 	}
 
 	private void decrementToMarkedOrZero()
 	{
-		if (current == 0)
-		{
-			currentStep().before(context);
-			state = PlayState.Before;
-			return;
-		}
 		do
 		{
-			current -= 1;
+			currentStep().before(context);
+			current-=1;
+		}
+		while(current()>0 && !currentIsMarked());
+		if(current()==0)
+		{
 			currentStep().before(context);
 		}
-		while (current() > 0 && !currentIsMarked());
 		state = PlayState.Before;
 	}
 
@@ -190,9 +185,13 @@ public class Player
 				state = PlayState.Before;
 			}
 			else
+			{
+				currentStep().after(context);
 				state = PlayState.After;
+				return;
+			}
 		}
-		while (!currentIsLast() && !currentIsMarked());
+		while (!currentIsMarked());
 	}
 
 	private boolean currentIsMarked()
@@ -238,13 +237,11 @@ public class Player
 			}
 			else
 			{
-				if (!currentIsMarked())
-				{
-					current += 1;
-					playCurrent();
-					return;
-				}
 				current+=1;
+				if(!currentIsMarked())
+				{
+					playCurrent();
+				}
 				state = PlayState.Before;
 			}
 		}
