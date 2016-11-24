@@ -6,6 +6,7 @@ import org.geepawhill.contentment.style.LineColor;
 import org.geepawhill.contentment.style.StyleStep;
 import org.geepawhill.contentment.tree.KeyValue;
 import org.geepawhill.contentment.tree.KeyValueTreeComparator;
+import org.geepawhill.contentment.tree.KeyValueTreeMessage;
 import org.geepawhill.contentment.tree.TreeOutput;
 import org.junit.Test;
 
@@ -25,11 +26,10 @@ public class ContextTest
 		TreeOutput<KeyValue> after = new TreeOutput<>();
 		context.dump(after );
 		KeyValueTreeComparator comparator = new KeyValueTreeComparator();
-		TreeOutput<String> details = new TreeOutput<>();
-		System.out.println(before.asText("Before"));
-		System.out.println(after.asText("After"));
-		assertFalse(comparator.match(before, after, details,true));
-		System.out.println(details.asText("Context"));
+		TreeOutput<KeyValueTreeMessage> details = new TreeOutput<>();
+//		System.out.println(before.asText("Before"));
+//		System.out.println(after.asText("After"));
+		assertFalse(comparator.match(before, after, details));
 	}
 
 }

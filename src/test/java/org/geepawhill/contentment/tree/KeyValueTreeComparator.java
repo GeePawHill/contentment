@@ -11,39 +11,39 @@ import javafx.scene.control.TreeItem;
 public class KeyValueTreeComparator
 {
 
-	public boolean match(TreeOutput<KeyValue> expected, TreeOutput<KeyValue> actual, TreeOutput<String> details)
+	public boolean match(TreeOutput<KeyValue> expected, TreeOutput<KeyValue> actual, TreeOutput<KeyValueTreeMessage> details)
 	{
 		return match(expected,actual,details,false);
 	}
 
-	public boolean match(TreeOutput<KeyValue> expected, TreeOutput<KeyValue> actual, TreeOutput<String> details,boolean noisy)
+	public boolean match(TreeOutput<KeyValue> expected, TreeOutput<KeyValue> actual, TreeOutput<KeyValueTreeMessage> details,boolean noisy)
 	{
 		Map<String,String> expectedMap = flatMap(expected);
 		if(noisy) dumpMap("expected", expectedMap);
 		Map<String,String> actualMap = flatMap(actual);
 		if(noisy) dumpMap("actual",actualMap);
 		
-		ArrayList<String> wrongValues = new ArrayList<>();
-		ArrayList<String> missingActuals = new ArrayList<>();
-		ArrayList<String> extraActuals = new ArrayList<>();
+		ArrayList<KeyValueTreeMessage> wrongValues = new ArrayList<>();
+		ArrayList<KeyValueTreeMessage> missingActuals = new ArrayList<>();
+		ArrayList<KeyValueTreeMessage> extraActuals = new ArrayList<>();
 		ArrayList<String> matchingKeys = new ArrayList<>();
 		
 		boolean result = true;
 		for(Map.Entry<String,String> entry : expectedMap.entrySet())
 		{
 			String actualValue = actualMap.get(entry.getKey());
+			String expectedValue = entry.getValue();
 			if(actualValue==null)
 			{
-				missingActuals.add("Key: ["+entry.getKey()+"] Value: ["+entry.getValue()+"]");
+				missingActuals.add(new KeyValueTreeMessage(entry.getKey(),expectedValue,""));
 				result = false;
 			}
 			else
 			{
 				matchingKeys.add(entry.getKey());
-				String expectedValue = entry.getValue();
 				if(!expectedValue.equals(actualValue))
 				{
-					wrongValues.add("Key: ["+entry.getKey()+"] Expected: ["+expectedValue+"] Actual: ["+actualValue+"]");
+					wrongValues.add(new KeyValueTreeMessage(entry.getKey(),entry.getValue(),actualValue));
 					result = false;
 				}
 			}
@@ -54,7 +54,7 @@ public class KeyValueTreeComparator
 		}
 		for(Map.Entry<String, String> extra : actualMap.entrySet())
 		{
-			extraActuals.add("Key: ["+extra.getKey()+ "] Value: ["+extra.getValue()+"]");
+			extraActuals.add(new KeyValueTreeMessage(extra.getKey(),"",extra.getValue()));
 			result=false;
 		}
 		addDetails(details, "Missing Actuals", missingActuals);
@@ -64,18 +64,17 @@ public class KeyValueTreeComparator
 
 	}
 
-	private void addDetails(TreeOutput<String> details, String type, ArrayList<String> messages)
+	private void addDetails(TreeOutput<KeyValueTreeMessage> details, String type, ArrayList<KeyValueTreeMessage> messages)
 	{
 		if(!messages.isEmpty())
 		{
-			details.append(type);
+			details.append(new KeyValueTreeMessage(type,"",""));
 			details.indent();
-			for(String message : messages) details.append(message);
+			for(KeyValueTreeMessage message : messages) details.append(message);
 			details.dedent();
 		}
 	}
 
-	@SuppressWarnings("unused")
 	private void dumpMap(String label,Map<String, String> map)
 	{
 		System.out.println(label);

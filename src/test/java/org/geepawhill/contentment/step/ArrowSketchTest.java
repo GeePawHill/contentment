@@ -2,6 +2,7 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.actor.Spot;
 import org.geepawhill.contentment.actor.arrow.Arrow;
+import org.geepawhill.contentment.test.JfxTester;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

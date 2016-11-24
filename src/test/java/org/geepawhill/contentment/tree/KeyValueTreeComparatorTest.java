@@ -23,7 +23,7 @@ public class KeyValueTreeComparatorTest
 	@Test
 	public void emptiesMatch()
 	{
-		assertTrue(comparator.match(expected,actual, new TreeOutput<String>()));
+		assertTrue(comparator.match(expected,actual, new TreeOutput<KeyValueTreeMessage>()));
 	}
 	
 	@Test
@@ -31,14 +31,14 @@ public class KeyValueTreeComparatorTest
 	{
 		appendExpected("Item 1");
 		appendActual("Item 1");
-		assertTrue(comparator.match(expected,actual, new TreeOutput<String>()));
+		assertTrue(comparator.match(expected,actual, new TreeOutput<KeyValueTreeMessage>()));
 	}
 	
 	@Test
 	public void missingActualFail()
 	{
 		appendExpected("Item 1");
-		TreeOutput<String> details = new TreeOutput<String>();
+		TreeOutput<KeyValueTreeMessage> details = new TreeOutput<>();
 		assertFalse(comparator.match(expected,actual, details));
 		assertEquals(2,details.asList().size());
 	}
@@ -47,7 +47,7 @@ public class KeyValueTreeComparatorTest
 	public void extraActualFail()
 	{
 		appendActual("Item 1");
-		TreeOutput<String> details = new TreeOutput<String>();
+		TreeOutput<KeyValueTreeMessage> details = new TreeOutput<>();
 		assertFalse(comparator.match(expected,actual, details));
 		assertEquals(2,details.asList().size());
 	}
@@ -57,7 +57,7 @@ public class KeyValueTreeComparatorTest
 	{
 		appendExpected("Item 1","key");
 		appendActual("Item 1","whoops");
-		TreeOutput<String> details = new TreeOutput<String>();
+		TreeOutput<KeyValueTreeMessage> details = new TreeOutput<KeyValueTreeMessage>();
 		assertFalse(comparator.match(expected,actual, details));
 		assertEquals(2,details.asList().size());
 	}

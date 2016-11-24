@@ -40,6 +40,27 @@ public class TreeOutput<T>
 	{
 		return items;
 	}
+	
+	public List<T> asLeafList()
+	{
+		ArrayList<T> result = new ArrayList<>();
+		TreeItem<T> root = new TreeItem<T>();
+		asTree(root);
+		addLeafs(result,root);
+		return result;
+	}
+	
+	private void addLeafs(List<T> result,TreeItem<T> item)
+	{
+		if(item.getChildren().isEmpty())
+		{
+			result.add(item.getValue());
+		}
+		for(TreeItem<T> child : item.getChildren())
+		{
+			addLeafs(result,child);
+		}
+	}
 
 	public String asText(String root)
 	{
@@ -55,10 +76,12 @@ public class TreeOutput<T>
 
 	public TreeItem<T> asTree(TreeItem<T> root)
 	{
+		root.setExpanded(true);
 		int lastIndent=1;
 		for (Appendee<T> appendee : items)
 		{
 			TreeItem<T> newItem = new TreeItem<>(appendee.data);
+			newItem.setExpanded(true);
 			for(int i=0;i<(lastIndent-appendee.indent);i++)
 			{
 				root = root.getParent();

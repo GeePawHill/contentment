@@ -3,6 +3,7 @@ package org.geepawhill.contentment.step;
 import org.geepawhill.contentment.actor.LabelBox;
 import org.geepawhill.contentment.core.Snap;
 import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.test.JfxTester;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
