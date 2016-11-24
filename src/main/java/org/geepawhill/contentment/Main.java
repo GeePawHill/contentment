@@ -12,6 +12,9 @@ import org.geepawhill.contentment.step.ClearStep;
 import org.geepawhill.contentment.step.HideStep;
 import org.geepawhill.contentment.step.InstantStep;
 import org.geepawhill.contentment.step.Stop;
+import org.geepawhill.contentment.style.Dash;
+import org.geepawhill.contentment.style.LineColor;
+import org.geepawhill.contentment.style.PenWidth;
 import org.geepawhill.contentment.style.Style;
 import org.geepawhill.contentment.style.StylePop;
 import org.geepawhill.contentment.style.StylePush;
@@ -71,8 +74,8 @@ public class Main extends Application
 
 	private void agentAndPokes()
 	{
-		Style blueLine = Style.lineColor("BLUE", Color.BLUE);
-		Style greenLine = Style.lineColor("GREEN", Color.GREEN);
+		Style blueLine = LineColor.lineColor("BLUE", Color.BLUE);
+		Style greenLine = LineColor.lineColor("GREEN", Color.GREEN);
 		Tale tale = new Tale("Agent: Anything With Susceptability & Unpredictability", 30d);
 		LabelBox agent = new LabelBox("Agent", 800d, 520d);
 		Label teammate = new Label("Teammate",800d, 520d);
@@ -90,8 +93,8 @@ public class Main extends Application
 		sequence.unmarked(new ClearStep());
 		sequence.unmarked(tale.show());
 		sequence.unmarked(new StyleStep(blueLine));
-		sequence.unmarked(new StyleStep(Style.nodash()));
-		sequence.unmarked(new StyleStep(Style.font(new Font("Buxton Sketch",60d))));
+		sequence.unmarked(new StyleStep(Dash.solid()));
+		sequence.unmarked(new StyleStep(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch",60d))));
 		sequence.add(agent.sketch(1d));
 		sequence.add(new Stop());
 		sequence.unmarked(new HideStep(agent.group()));
@@ -155,9 +158,9 @@ public class Main extends Application
 
 	private void interactiveStabilization(Sequence sequence)
 	{
-		Style redLine = Style.lineColor("RED", Color.RED);
-		Style blueLine = Style.lineColor("BLUE", Color.BLUE);
-		Style greenLine = Style.lineColor("GREEN", Color.GREEN);
+		Style redLine = LineColor.lineColor("RED", Color.RED);
+		Style blueLine = LineColor.lineColor("BLUE", Color.BLUE);
+		Style greenLine = LineColor.lineColor("GREEN", Color.GREEN);
 		
 		Tale tale = new Tale("Agents Are Susceptible To Pokes", 30d);
 		LabelBox agent = new LabelBox("Agent", 800d, 450d);
@@ -174,14 +177,14 @@ public class Main extends Application
 		sequence.unmarked(new ClearStep());
 		sequence.unmarked(tale.show());
 		sequence.unmarked(new StyleStep(blueLine));
-		sequence.unmarked(new StyleStep(Style.nodash()));
-		sequence.unmarked(new StyleStep(Style.font(new Font("Buxton Sketch",60d))));
+		sequence.unmarked(new StyleStep(Dash.solid()));
+		sequence.unmarked(new StyleStep(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch",60d))));
 
 		sequence.unmarked(new StylePush());
 		sequence.unmarked(new StyleStep(redLine));
-		sequence.unmarked(new StyleStep(Style.font(new Font("Century Gothic",24d))));
-		sequence.unmarked(new StyleStep(Style.dash(4d)));
-		sequence.unmarked(new StyleStep(Style.penWidth(1d)));
+		sequence.unmarked(new StyleStep(org.geepawhill.contentment.style.Font.font(new Font("Century Gothic",24d))));
+		sequence.unmarked(new StyleStep(Dash.dash(4d)));
+		sequence.unmarked(new StyleStep(PenWidth.penWidth(1d)));
 		sequence.unmarked(target.sketch(1d));
 		sequence.unmarked(new StylePop());
 		sequence.add(agent.sketch(1000d));
@@ -211,10 +214,10 @@ public class Main extends Application
 
 	private void addBaseComplications(Sequence sequence)
 	{
-		Style redLine = Style.lineColor("RED", Color.RED);
-		Style blueLine = Style.lineColor("BLUE", Color.BLUE);
-		Style greenLine = Style.lineColor("GREEN", Color.GREEN);
-		Style blackLine = Style.lineColor("BLACK", Color.BLACK);
+		Style redLine = LineColor.lineColor("RED", Color.RED);
+		Style blueLine = LineColor.lineColor("BLUE", Color.BLUE);
+		Style greenLine = LineColor.lineColor("GREEN", Color.GREEN);
+		Style blackLine = LineColor.lineColor("BLACK", Color.BLACK);
 		Tale tale = new Tale("A Simple Change Model", 30d);
 		LabelBox agent = new LabelBox("Agent", 800d, 450d);
 		OvalText practice = new OvalText("Practice", 800d, .75*900d);
@@ -283,15 +286,15 @@ public class Main extends Application
 		sequence.add(new Stop());
 		sequence.add(poke.sketch(1000d));
 		sequence.unmarked(new StylePush());
-		sequence.unmarked(new StyleStep(Style.font(new Font("Buxton Sketch",40d))));
+		sequence.unmarked(new StyleStep(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch",40d))));
 		sequence.unmarked(new StyleStep(greenLine));
-		sequence.unmarked(new StyleStep(Style.dash(10d)));
+		sequence.unmarked(new StyleStep(Dash.dash(10d)));
 		sequence.unmarked(practice.sketch(1000d));
 		sequence.unmarked(change.sketch(1d));
 		sequence.unmarked(new StylePop());
 		sequence.add(new Stop());
 		sequence.add(tale.setText("Complication: There are always multiple agents."));
-		sequence.unmarked(new StyleStep(Style.font(new Font("Buxton Sketch",30d))));
+		sequence.unmarked(new StyleStep(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch",30d))));
 		sequence.unmarked(new StyleStep(redLine));
 		sequence.unmarked(new InstantStep(a1.sketch(1d)));
 		sequence.unmarked(new InstantStep(a2.sketch(1d)));
@@ -308,7 +311,7 @@ public class Main extends Application
 		sequence.add(poke6.sketch(300d));
 		sequence.add(new Stop());
 		sequence.add(tale.setText("Complication: There are always multiple practices."));
-		sequence.unmarked(new StyleStep(Style.dash(10d)));
+		sequence.unmarked(new StyleStep(Dash.dash(10d)));
 		sequence.unmarked(new StyleStep(greenLine));
 		sequence.unmarked(new InstantStep(p1.sketch(1d)));
 		sequence.unmarked(new InstantStep(p2.sketch(1d)));
@@ -325,7 +328,7 @@ public class Main extends Application
 		sequence.add(new Stop());
 		
 		sequence.add(tale.setText("Complication: Most agents change multiple practice ."));
-		sequence.unmarked(new StyleStep(Style.dash(10d)));
+		sequence.unmarked(new StyleStep(Dash.dash(10d)));
 		sequence.unmarked(new StyleStep(greenLine));
 		sequence.unmarked(c11.sketch(200d));
 		sequence.unmarked(c12.sketch(200d));
@@ -340,9 +343,9 @@ public class Main extends Application
 		sequence.add(new Stop());
 		
 		sequence.unmarked(new StylePush());
-		sequence.unmarked(new StyleStep(Style.dash(3d)));
+		sequence.unmarked(new StyleStep(Dash.dash(3d)));
 		sequence.unmarked(new StyleStep(blackLine));
-		sequence.unmarked(new StyleStep(Style.penWidth(2d)));
+		sequence.unmarked(new StyleStep(PenWidth.penWidth(2d)));
 		sequence.add(tale.setText("Complication: The agents are interrelated."));
 		sequence.unmarked(i1.sketch(300d));
 		sequence.unmarked(i2.sketch(300d));

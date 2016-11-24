@@ -3,6 +3,8 @@ package org.geepawhill.contentment.tree;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javafx.scene.control.TreeItem;
 
@@ -11,8 +13,15 @@ public class KeyValueTreeComparator
 
 	public boolean match(TreeOutput<KeyValue> expected, TreeOutput<KeyValue> actual, TreeOutput<String> details)
 	{
+		return match(expected,actual,details,false);
+	}
+
+	public boolean match(TreeOutput<KeyValue> expected, TreeOutput<KeyValue> actual, TreeOutput<String> details,boolean noisy)
+	{
 		Map<String,String> expectedMap = flatMap(expected);
+		if(noisy) dumpMap("expected", expectedMap);
 		Map<String,String> actualMap = flatMap(actual);
+		if(noisy) dumpMap("actual",actualMap);
 		
 		ArrayList<String> wrongValues = new ArrayList<>();
 		ArrayList<String> missingActuals = new ArrayList<>();
@@ -70,9 +79,14 @@ public class KeyValueTreeComparator
 	private void dumpMap(String label,Map<String, String> map)
 	{
 		System.out.println(label);
+		SortedSet<String> result = new TreeSet<String>();
 		for(Map.Entry<String, String> entry : map.entrySet())
 		{
-			System.out.println("   Key ["+entry.getKey()+"] = ["+entry.getValue()+"]");
+			result.add("   Key ["+entry.getKey()+"] = ["+entry.getValue()+"]");
+		}
+		for(String line : result)
+		{
+			System.out.println(line);
 		}
 	}
 

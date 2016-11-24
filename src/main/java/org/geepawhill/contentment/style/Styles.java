@@ -57,15 +57,17 @@ public class Styles
 	{
 		tree.append(new KeyValue("Styles"));
 		tree.indent();
+		int mapNumber=0;
 		for(HashMap<StyleId,Style> map : old)
 		{
-			tree.append(new KeyValue("Map"));
+			tree.append(new KeyValue("Map"+mapNumber));
 			tree.indent();
 			for(Map.Entry<StyleId,Style> entry : map.entrySet())
 			{
 				tree.append(new KeyValue(entry.getKey().toString(),entry.getValue().toString()));
 			}
 			tree.dedent();
+			mapNumber+=1;
 		}
 		tree.dedent();
 	}

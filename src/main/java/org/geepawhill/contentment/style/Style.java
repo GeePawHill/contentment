@@ -1,9 +1,6 @@
 package org.geepawhill.contentment.style;
 
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 public class Style
 {
@@ -18,7 +15,7 @@ public class Style
 	private final ShapeApplier applier;
 	private String nickname;
 
-	private Style(String nickname, StyleId id, ShapeApplier applier)
+	public Style(String nickname, StyleId id, ShapeApplier applier)
 	{
 		this.nickname = nickname;
 		this.id = id;
@@ -36,38 +33,6 @@ public class Style
 		applier.apply(shape);
 	}
 
-	static public Style lineColor(String nickname, Paint paint)
-	{
-		ShapeApplier applier = new ShapeApplier() {
-			@Override
-			public void apply(Shape shape)
-			{
-				shape.setStroke(paint);
-				if(shape instanceof Text) ((Text)shape).setFill(paint);
-			} 
-		};
-		return new Style(nickname, StyleId.LineColor, applier);
-	}
-
-	static public Style penWidth(double width)
-	{
-		return new Style("?", StyleId.PenWidth, (shape) -> {
-			shape.setStrokeWidth(width);
-		});
-	}
-
-	static public Style font(Font font)
-	{
-		ShapeApplier applier = new ShapeApplier() {
-			@Override
-			public void apply(Shape shape)
-			{
-				if(shape instanceof Text) ((Text)shape).setFont(font);
-			} 
-		};
-		return new Style("?",StyleId.Font, applier);
-	}
-	
 	static public Style composite(Style... styles)
 	{
 		ShapeApplier applier = new ShapeApplier() {
@@ -78,43 +43,6 @@ public class Style
 			} 
 		};
 		return new Style("?",StyleId.Font, applier);
-	}
-
-	public static Style opacity(double d)
-	{
-		ShapeApplier applier = new ShapeApplier() {
-			@Override
-			public void apply(Shape shape)
-			{
-				shape.setOpacity(d);
-			} 
-		};
-		return new Style("?",StyleId.Opacity, applier);
-	}
-	
-	public static Style dash(Double... dash)
-	{
-		ShapeApplier applier = new ShapeApplier() {
-			@Override
-			public void apply(Shape shape)
-			{
-				shape.getStrokeDashArray().clear();
-				shape.getStrokeDashArray().addAll(dash);
-			} 
-		};
-		return new Style("?",StyleId.Dash, applier);		
-	}
-
-	public static Style nodash()
-	{
-		ShapeApplier applier = new ShapeApplier() {
-			@Override
-			public void apply(Shape shape)
-			{
-				shape.getStrokeDashArray().clear();;
-			} 
-		};
-		return new Style("?",StyleId.Dash, applier);		
 	}
 
 

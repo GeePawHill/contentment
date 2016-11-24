@@ -1,10 +1,14 @@
 package org.geepawhill.contentment.core;
 
-import org.geepawhill.contentment.style.Style;
+import org.geepawhill.contentment.style.Dash;
+import org.geepawhill.contentment.style.LineColor;
+import org.geepawhill.contentment.style.Opacity;
+import org.geepawhill.contentment.style.PenWidth;
 import org.geepawhill.contentment.style.Styles;
+import org.geepawhill.contentment.tree.KeyValue;
+import org.geepawhill.contentment.tree.TreeOutput;
 
 import javafx.scene.Group;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class Context {
@@ -16,11 +20,16 @@ public class Context {
 	{
 		this.canvas = canvas;
 		this.styles = new Styles();
-		styles.set(Style.lineColor("BLACK", Color.BLACK));
-		styles.set(Style.penWidth(5d));
-		styles.set(Style.font(new Font("Buxton Sketch",60d)));
-		styles.set(Style.opacity(.6d));
-		styles.set(Style.nodash());
+		styles.set(LineColor.black());
+		styles.set(PenWidth.penWidth(5d));
+		styles.set(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch",60d)));
+		styles.set(Opacity.opacity(.6d));
+		styles.set(Dash.solid());
 		styles.push();
+	}
+
+	public void dump(TreeOutput<KeyValue> output)
+	{
+		this.styles.dump(output);
 	}
 }

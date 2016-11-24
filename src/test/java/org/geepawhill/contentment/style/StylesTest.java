@@ -23,8 +23,8 @@ public class StylesTest
 	public void before()
 	{
 		styles = new Styles();
-		redLine = Style.lineColor("RED", Color.RED);
-		blackLine = Style.lineColor("BLACK", Color.BLACK);
+		redLine = LineColor.lineColor("RED", Color.RED);
+		blackLine = LineColor.lineColor("BLACK", Color.BLACK);
 	}
 
 	@Test(expected=RuntimeException.class)

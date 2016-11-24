@@ -3,6 +3,7 @@ package org.geepawhill.contentment.step;
 import static org.junit.Assert.assertEquals;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.style.LineColor;
 import org.geepawhill.contentment.style.Style;
 import org.geepawhill.contentment.style.StyleId;
 import org.geepawhill.contentment.style.StylePop;
@@ -19,11 +20,11 @@ public class StylePopTest
 	public void popUndoes()
 	{
 		Context context = new Context(new Group());
-		Style redLine = Style.lineColor("RED", Color.RED);
+		Style redLine = LineColor.lineColor("RED", Color.RED);
 		context.styles.set(redLine);
 		StylePush push = new StylePush();
 		push.after(context);
-		Style blackLine = Style.lineColor("BLACK", Color.BLACK);
+		Style blackLine = LineColor.lineColor("BLACK", Color.BLACK);
 		context.styles.set(blackLine);
 		StylePop pop = new StylePop();
 		pop.after(context);
