@@ -91,7 +91,7 @@ public class TargetBox implements Actor
 		bounds = label.getBoundsInParent();
 		bounds = new BoundingBox(bounds.getMinX() - HMARGIN, bounds.getMinY() - VMARGIN, width,
 				height);
-		rectangle.setFill(Color.ALICEBLUE);
+		rectangle.setFill(Color.TRANSPARENT);
 		context.styles.get(StyleId.LineColor).apply(rectangle);
 		context.styles.get(StyleId.PenWidth).apply(rectangle);
 		context.styles.get(StyleId.Dash).apply(rectangle);

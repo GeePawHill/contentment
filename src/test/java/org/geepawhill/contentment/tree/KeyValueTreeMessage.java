@@ -45,7 +45,7 @@ public class KeyValueTreeMessage
 	
 	public String toString()
 	{
-		String result = "Key: "+getKey();
+		String result = getKey();
 		if(!"".equals(getExpected())) result+=" Expected:"+getExpected();
 		if(!"".equals(getActual())) result+= " Actual:" +getActual();
 		return result;

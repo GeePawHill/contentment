@@ -51,6 +51,10 @@ public class Main extends Application
 			makeTools();
 
 			Pane canvas = new Pane();
+			String image = ClassLoader.getSystemResource("mottled2.jpg").toExternalForm();
+			root.setStyle("-fx-background-image: url('" + image + "'); " +
+			           "-fx-background-position: center center; " +
+			           "-fx-background-repeat: repeat;");
 			root.setCenter(canvas);
 			scaledCanvas = new Group();
 			canvas.getChildren().add(scaledCanvas);
@@ -217,7 +221,7 @@ public class Main extends Application
 		Style redLine = LineColor.lineColor("RED", Color.RED);
 		Style blueLine = LineColor.lineColor("BLUE", Color.BLUE);
 		Style greenLine = LineColor.lineColor("GREEN", Color.GREEN);
-		Style blackLine = LineColor.lineColor("BLACK", Color.BLACK);
+		Style blackLine = LineColor.lineColor("BLACK", Color.WHITE);
 		Tale tale = new Tale("A Simple Change Model", 30d);
 		LabelBox agent = new LabelBox("Agent", 800d, 450d);
 		OvalText practice = new OvalText("Practice", 800d, .75*900d);
@@ -327,7 +331,7 @@ public class Main extends Application
 		sequence.add(c6.sketch(200d));
 		sequence.add(new Stop());
 		
-		sequence.add(tale.setText("Complication: Most agents change multiple practice ."));
+		sequence.add(tale.setText("Complication: Most agents change multiple practices."));
 		sequence.unmarked(new StyleStep(Dash.dash(10d)));
 		sequence.unmarked(new StyleStep(greenLine));
 		sequence.unmarked(c11.sketch(200d));

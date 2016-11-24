@@ -28,8 +28,8 @@ public class Tale implements Actor
 	private final double XINSET = 30d;
 	private final double YINSET = 20d;
 
-	private final double GREEN = (double) 0xee / (double) 0xff;
-	private final double BLUE = (double) 0xbb / (double) 0xff;
+	private final double GREEN = (double) 0xbe / (double) 0xff;
+	private final double BLUE = (double) 0x8b / (double) 0xff;
 	
 	private static int index=0;
 
@@ -42,14 +42,17 @@ public class Tale implements Actor
 		adjustTextSize();
 		rectangle.setHeight(text.getBoundsInLocal().getHeight() + 2 * YINSET);
 		rectangle.setStrokeWidth(2d);
-		rectangle.setFill(Color.color(1d, GREEN, BLUE));
-		rectangle.setStroke(Color.color(.1d, .1d, .1d));
+		rectangle.setFill(Color.color(.3d, .3d, .3d));
+		rectangle.setStroke(Color.color(.9d, .9d, .9d));
 		rectangle.setArcHeight(40d);
 		rectangle.setArcWidth(40d);
 	}
 
 	private void adjustTextSize()
 	{
+		Color color = Color.color(.9d, .9d, .9d);
+		text.setFill(color);
+		text.setStroke(color);
 		text.setTextOrigin(VPos.TOP);
 		text.setTextAlignment(TextAlignment.CENTER);
 		text.setFont(new Font("Tahoma", 40d));

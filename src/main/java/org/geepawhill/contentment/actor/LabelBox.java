@@ -89,6 +89,7 @@ public class LabelBox implements Actor
 		context.styles.get(StyleId.LineColor).apply(rectangle);
 		context.styles.get(StyleId.PenWidth).apply(rectangle);
 		context.styles.get(StyleId.Dash).apply(rectangle);
+		context.styles.get(StyleId.Opacity).apply(rectangle);
 		rectangle.setX(bounds.getMinX());
 		rectangle.setY(bounds.getMinY());
 		rectangle.setWidth(0d);

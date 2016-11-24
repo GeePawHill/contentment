@@ -23,7 +23,7 @@ public class Context {
 		styles.set(LineColor.black());
 		styles.set(PenWidth.penWidth(5d));
 		styles.set(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch",60d)));
-		styles.set(Opacity.opacity(.6d));
+		styles.set(Opacity.opacity(.5d));
 		styles.set(Dash.solid());
 		styles.push();
 	}

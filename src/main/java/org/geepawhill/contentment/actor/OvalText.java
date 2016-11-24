@@ -87,6 +87,7 @@ public class OvalText implements Actor
 		context.styles.get(StyleId.LineColor).apply(oval);
 		context.styles.get(StyleId.PenWidth).apply(oval);
 		context.styles.get(StyleId.Dash).apply(oval);
+		context.styles.get(StyleId.Opacity).apply(oval);
 		PointPair pair = new PointPair(bounds);
 		oval.setCenterX(pair.centerX());
 		oval.setCenterY(pair.centerY());

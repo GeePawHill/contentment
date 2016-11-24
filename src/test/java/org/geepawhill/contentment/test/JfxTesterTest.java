@@ -22,11 +22,15 @@ public class JfxTesterTest
 	public void junitRunTimePopup()
 	{
 		TreeOutput<KeyValue> before = new TreeOutput<>();
+		before.append(new KeyValue("Parent"));
+		before.indent();
 		before.append(new KeyValue("CorrectInBoth","Value"));
 		before.append(new KeyValue("MissingInActual","Value"));
 		before.append(new KeyValue("DifferentValue","Value"));
 		
 		TreeOutput<KeyValue> after = new TreeOutput<>();
+		after.append(new KeyValue("Parent"));
+		after.indent();
 		after.append(new KeyValue("CorrectInBoth","Value"));
 		after.append(new KeyValue("DifferentValue","Whoops!"));
 		after.append(new KeyValue("MissingInExpected","Value"));
