@@ -1,19 +1,11 @@
 package org.geepawhill.contentment.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 
-import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.style.Dash;
-import org.geepawhill.contentment.style.LineColor;
-import org.geepawhill.contentment.style.PenWidth;
-import org.geepawhill.contentment.style.StyleStep;
 import org.geepawhill.contentment.tree.KeyValue;
-import org.geepawhill.contentment.tree.KeyValueTreeComparator;
 import org.geepawhill.contentment.tree.KeyValueTreeMessage;
 import org.geepawhill.contentment.tree.TreeOutput;
 import org.junit.Test;
-
-import javafx.scene.Group;
 
 public class JfxTesterTest
 {

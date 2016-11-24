@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.actor.Label;
-import org.geepawhill.contentment.core.Snap;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.test.JfxTester;
 import org.junit.Before;
@@ -31,10 +30,8 @@ public class LabelSketchTest extends ApplicationTest
 	@Test
 	public void playChangesText() throws Exception
 	{
-		tester.assertProperty(label, Snap.TEXT, "");
 		Step step = label.sketch(1d);
 		tester.waitForPlay(step);
-		tester.assertProperty(label, Snap.TEXT, "Hi Mom!");
 	}
 	
 	@Test
@@ -58,26 +55,20 @@ public class LabelSketchTest extends ApplicationTest
 	@Test
 	public void afterChangesText() throws Exception
 	{
-		tester.assertProperty(label, Snap.TEXT, "");
 		Step step = label.sketch(1d);
 		tester.waitForAfter(step);
-		tester.assertProperty(label, Snap.TEXT, "Hi Mom!");
 	}
 	
 	@Test
 	public void beforeResetsText() throws Exception
 	{
-		tester.assertProperty(label, Snap.TEXT, "");
 		Step step = label.sketch(1d);
 		tester.waitForAfter(step);
-		tester.assertProperty(label, Snap.TEXT, "Hi Mom!");
 		tester.waitForBefore(step);
-		tester.assertProperty(label,  Snap.TEXT, "");
 	}
 	
 	@Test
 	public void snapshot()
 	{
-		tester.properties(label, Snap.TEXT,Snap.VISIBLE);
 	}
 }

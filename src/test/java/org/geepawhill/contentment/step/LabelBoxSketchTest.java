@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.actor.LabelBox;
-import org.geepawhill.contentment.core.Snap;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.test.JfxTester;
 import org.junit.Before;
@@ -32,10 +31,8 @@ public class LabelBoxSketchTest extends ApplicationTest
 	@Test
 	public void playChangesText() throws Exception
 	{
-		tester.assertProperty(label, Snap.TEXT, "");
 		Step step = label.sketch(1d);
 		tester.waitForPlay(step);
-		tester.assertProperty(label, Snap.TEXT, "Hi Mom!");
 	}
 	
 	@Test

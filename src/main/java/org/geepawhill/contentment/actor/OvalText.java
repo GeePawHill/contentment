@@ -2,13 +2,14 @@ package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.Snap;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
 import org.geepawhill.contentment.style.StyleId;
+import org.geepawhill.contentment.tree.KeyValue;
+import org.geepawhill.contentment.tree.TreeOutput;
 
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
@@ -36,7 +37,6 @@ public class OvalText implements Actor
 	
 	private static int index=0;
 	
-
 	public OvalText(String text, double xCenter, double yCenter)
 	{
 		this.xCenter = xCenter;
@@ -46,6 +46,12 @@ public class OvalText implements Actor
 		oval = new Ellipse();
 		this.group = JfxUtility.makeGroup(index++,this,label,oval);
 		bounds = label.getBoundsInParent();
+	}
+	
+	@Override
+	public void dump(TreeOutput<KeyValue> output)
+	{
+		
 	}
 
 	public Step sketch(double ms)
@@ -119,12 +125,6 @@ public class OvalText implements Actor
 	public Group group()
 	{
 		return group;
-	}
-
-	@Override
-	public Snap snap()
-	{
-		return null;
 	}
 
 }

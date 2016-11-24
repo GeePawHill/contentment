@@ -1,12 +1,13 @@
 package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Actor;
-import org.geepawhill.contentment.core.Snap;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.step.ShowStep;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
+import org.geepawhill.contentment.tree.KeyValue;
+import org.geepawhill.contentment.tree.TreeOutput;
 
 import javafx.geometry.VPos;
 import javafx.scene.Group;
@@ -28,8 +29,8 @@ public class Tale implements Actor
 	private final double XINSET = 30d;
 	private final double YINSET = 20d;
 
-	private final double GREEN = (double) 0xbe / (double) 0xff;
-	private final double BLUE = (double) 0x8b / (double) 0xff;
+//	private final double GREEN = (double) 0xbe / (double) 0xff;
+//	private final double BLUE = (double) 0x8b / (double) 0xff;
 	
 	private static int index=0;
 
@@ -46,6 +47,12 @@ public class Tale implements Actor
 		rectangle.setStroke(Color.color(.9d, .9d, .9d));
 		rectangle.setArcHeight(40d);
 		rectangle.setArcWidth(40d);
+	}
+	
+	@Override
+	public void dump(TreeOutput<KeyValue> output)
+	{
+		
 	}
 
 	private void adjustTextSize()
@@ -88,13 +95,6 @@ public class Tale implements Actor
 	{
 		text.setText(newValue);
 		adjustTextSize();
-	}
-
-	@Override
-	public Snap snap()
-	{
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

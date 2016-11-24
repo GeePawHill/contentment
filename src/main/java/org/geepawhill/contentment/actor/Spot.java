@@ -2,11 +2,12 @@ package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.Snap;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
+import org.geepawhill.contentment.tree.KeyValue;
+import org.geepawhill.contentment.tree.TreeOutput;
 
 import javafx.scene.Group;
 import javafx.scene.shape.Circle;
@@ -24,6 +25,12 @@ public class Spot implements Actor
 		this.circle = new Circle(x,y,0d);
 		this.circle.setVisible(false);
 		this.group = JfxUtility.makeGroup(index++,this,circle);
+	}
+	
+	@Override
+	public void dump(TreeOutput<KeyValue> output)
+	{
+		
 	}
 	
 	@Override
@@ -45,13 +52,5 @@ public class Spot implements Actor
 	{
 		circle.setVisible(true);
 	}
-
-	@Override
-	public Snap snap()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 }

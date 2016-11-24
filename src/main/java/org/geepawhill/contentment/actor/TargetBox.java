@@ -2,13 +2,14 @@ package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.Snap;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
 import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.style.StyleId;
+import org.geepawhill.contentment.tree.KeyValue;
+import org.geepawhill.contentment.tree.TreeOutput;
 
 import javafx.animation.TranslateTransition;
 import javafx.geometry.BoundingBox;
@@ -54,6 +55,12 @@ public class TargetBox implements Actor
 		rectangle = new Rectangle();
 		this.group = JfxUtility.makeGroup(index++,this,rectangle,label);
 		bounds = label.getBoundsInParent();
+	}
+	
+	@Override
+	public void dump(TreeOutput<KeyValue> output)
+	{
+		
 	}
 
 	public Step sketch(double ms)
@@ -136,12 +143,4 @@ public class TargetBox implements Actor
 	{
 		return group;
 	}
-
-	@Override
-	public Snap snap()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

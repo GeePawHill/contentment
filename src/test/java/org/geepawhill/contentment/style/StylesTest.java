@@ -2,9 +2,6 @@ package org.geepawhill.contentment.style;
 
 import static org.junit.Assert.assertEquals;
 
-import org.geepawhill.contentment.style.Style;
-import org.geepawhill.contentment.style.StyleId;
-import org.geepawhill.contentment.style.Styles;
 import org.geepawhill.contentment.tree.KeyValue;
 import org.geepawhill.contentment.tree.TreeOutput;
 import org.junit.Before;

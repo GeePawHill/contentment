@@ -4,12 +4,13 @@ import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.Snap;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.HideStep;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
+import org.geepawhill.contentment.tree.KeyValue;
+import org.geepawhill.contentment.tree.TreeOutput;
 
 import javafx.scene.Group;
 import javafx.scene.shape.Line;
@@ -32,12 +33,10 @@ public class Arrow implements Actor
 		this(pointAtFrom,pointAtTo,new NodeArrowComputer(from.group(), to.group()));
 	}
 	
-	public Snap snap()
+	@Override
+	public void dump(TreeOutput<KeyValue> output)
 	{
-		Snap snap = new Snap();
-		snap.addGeometry(group);
-		snap.addGeometry("main",main);
-		return new Snap();
+		
 	}
 	
 	public Arrow(boolean pointAtFrom,boolean pointAtTo,ArrowComputer computer)

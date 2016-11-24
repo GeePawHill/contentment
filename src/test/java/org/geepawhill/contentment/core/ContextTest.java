@@ -1,6 +1,6 @@
 package org.geepawhill.contentment.core;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 
 import org.geepawhill.contentment.style.LineColor;
 import org.geepawhill.contentment.style.StyleStep;
