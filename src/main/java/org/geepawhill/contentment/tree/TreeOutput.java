@@ -47,7 +47,7 @@ public class TreeOutput<T>
 		for (Appendee<T> appendee : items)
 		{
 			for (int tab = 0; tab < appendee.indent; tab++)
-				result.append("\t");
+				result.append("   ");
 			result.append(appendee.data.toString() + "\n");
 		}
 		return result.toString();

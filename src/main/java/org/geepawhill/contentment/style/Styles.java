@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.geepawhill.contentment.tree.KeyValue;
+import org.geepawhill.contentment.tree.TreeOutput;
+
+
 
 public class Styles
 {
@@ -49,17 +53,21 @@ public class Styles
 		return result;
 	}
 	
-	public void dump()
+	public void dump(TreeOutput<KeyValue> tree)
 	{
-		System.out.println("Style Maps: "+old.size());
+		tree.append(new KeyValue("Styles"));
+		tree.indent();
 		for(HashMap<StyleId,Style> map : old)
 		{
+			tree.append(new KeyValue("Map"));
+			tree.indent();
 			for(Map.Entry<StyleId,Style> entry : map.entrySet())
 			{
-				System.out.println(entry.getKey()+":"+entry.getValue());
+				tree.append(new KeyValue(entry.getKey().toString(),entry.getValue().toString()));
 			}
-			System.out.println("----");
+			tree.dedent();
 		}
+		tree.dedent();
 	}
 
 }

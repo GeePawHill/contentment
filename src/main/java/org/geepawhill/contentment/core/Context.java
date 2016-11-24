@@ -16,7 +16,7 @@ public class Context {
 	{
 		this.canvas = canvas;
 		this.styles = new Styles();
-		styles.set(Style.lineColor(Color.BLACK));
+		styles.set(Style.lineColor("BLACK", Color.BLACK));
 		styles.set(Style.penWidth(5d));
 		styles.set(Style.font(new Font("Buxton Sketch",60d)));
 		styles.set(Style.opacity(.6d));

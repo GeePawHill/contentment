@@ -11,6 +11,11 @@ public class KeyValue
 		this.setKey(key);
 		this.setValue(value);
 	}
+	
+	public KeyValue(String key)
+	{
+		this(key,"");
+	}
 
 	public String getKey()
 	{
@@ -30,6 +35,13 @@ public class KeyValue
 	public void setValue(String value)
 	{
 		this.value = value;
+	}
+	
+	public String toString()
+	{
+		String result = key;
+		if(value!=null && !value.isEmpty()) result+=" = "+value;
+		return result;
 	}
 
 }

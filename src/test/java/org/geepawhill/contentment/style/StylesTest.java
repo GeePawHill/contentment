@@ -1,10 +1,12 @@
-package org.geepawhill.contentment.core;
+package org.geepawhill.contentment.style;
 
 import static org.junit.Assert.assertEquals;
 
 import org.geepawhill.contentment.style.Style;
 import org.geepawhill.contentment.style.StyleId;
 import org.geepawhill.contentment.style.Styles;
+import org.geepawhill.contentment.tree.KeyValue;
+import org.geepawhill.contentment.tree.TreeOutput;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,8 +23,8 @@ public class StylesTest
 	public void before()
 	{
 		styles = new Styles();
-		redLine = Style.lineColor(Color.RED);
-		blackLine = Style.lineColor(Color.BLACK);
+		redLine = Style.lineColor("RED", Color.RED);
+		blackLine = Style.lineColor("BLACK", Color.BLACK);
 	}
 
 	@Test(expected=RuntimeException.class)
@@ -70,6 +72,17 @@ public class StylesTest
 	{
 		styles.pop();
 		styles.pop();
+	}
+	
+	@Test
+	public void dump()
+	{
+		TreeOutput<KeyValue> tree = new TreeOutput<KeyValue>();
+		styles.set(redLine);
+		styles.push();
+		styles.set(blackLine);
+		styles.dump(tree);
+//		System.out.println(tree.asText("root"));
 	}
 	
 }

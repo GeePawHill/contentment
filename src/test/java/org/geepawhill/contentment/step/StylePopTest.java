@@ -19,11 +19,11 @@ public class StylePopTest
 	public void popUndoes()
 	{
 		Context context = new Context(new Group());
-		Style redLine = Style.lineColor(Color.RED);
+		Style redLine = Style.lineColor("RED", Color.RED);
 		context.styles.set(redLine);
 		StylePush push = new StylePush();
 		push.after(context);
-		Style blackLine = Style.lineColor(Color.BLACK);
+		Style blackLine = Style.lineColor("BLACK", Color.BLACK);
 		context.styles.set(blackLine);
 		StylePop pop = new StylePop();
 		pop.after(context);

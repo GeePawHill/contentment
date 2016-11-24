@@ -71,8 +71,8 @@ public class Main extends Application
 
 	private void agentAndPokes()
 	{
-		Style blueLine = Style.lineColor(Color.BLUE);
-		Style greenLine = Style.lineColor(Color.GREEN);
+		Style blueLine = Style.lineColor("BLUE", Color.BLUE);
+		Style greenLine = Style.lineColor("GREEN", Color.GREEN);
 		Tale tale = new Tale("Agent: Anything With Susceptability & Unpredictability", 30d);
 		LabelBox agent = new LabelBox("Agent", 800d, 520d);
 		Label teammate = new Label("Teammate",800d, 520d);
@@ -155,9 +155,9 @@ public class Main extends Application
 
 	private void interactiveStabilization(Sequence sequence)
 	{
-		Style redLine = Style.lineColor(Color.RED);
-		Style blueLine = Style.lineColor(Color.BLUE);
-		Style greenLine = Style.lineColor(Color.GREEN);
+		Style redLine = Style.lineColor("RED", Color.RED);
+		Style blueLine = Style.lineColor("BLUE", Color.BLUE);
+		Style greenLine = Style.lineColor("GREEN", Color.GREEN);
 		
 		Tale tale = new Tale("Agents Are Susceptible To Pokes", 30d);
 		LabelBox agent = new LabelBox("Agent", 800d, 450d);
@@ -211,10 +211,10 @@ public class Main extends Application
 
 	private void addBaseComplications(Sequence sequence)
 	{
-		Style redLine = Style.lineColor(Color.RED);
-		Style blueLine = Style.lineColor(Color.BLUE);
-		Style greenLine = Style.lineColor(Color.GREEN);
-		Style blackLine = Style.lineColor(Color.BLACK);
+		Style redLine = Style.lineColor("RED", Color.RED);
+		Style blueLine = Style.lineColor("BLUE", Color.BLUE);
+		Style greenLine = Style.lineColor("GREEN", Color.GREEN);
+		Style blackLine = Style.lineColor("BLACK", Color.BLACK);
 		Tale tale = new Tale("A Simple Change Model", 30d);
 		LabelBox agent = new LabelBox("Agent", 800d, 450d);
 		OvalText practice = new OvalText("Practice", 800d, .75*900d);

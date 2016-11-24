@@ -81,8 +81,8 @@ public class TreeOutputTest
 		tree.dedent();
 		String actual = tree.asText("Root");
 		assertEquals("Root\n"
-				+ "\tItem 1\n"
-				+ "\t\tItem 1.1\n",actual);
+				+ "   Item 1\n"
+				+ "      Item 1.1\n",actual);
 	}
 	
 	@Test

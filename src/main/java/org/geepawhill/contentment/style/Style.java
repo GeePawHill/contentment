@@ -16,9 +16,11 @@ public class Style
 
 	public final StyleId id;
 	private final ShapeApplier applier;
+	private String nickname;
 
-	private Style(StyleId id, ShapeApplier applier)
+	private Style(String nickname, StyleId id, ShapeApplier applier)
 	{
+		this.nickname = nickname;
 		this.id = id;
 		this.applier = applier;
 	}
@@ -26,16 +28,15 @@ public class Style
 	@Override
 	public String toString()
 	{
-		return id.toString() + ": " + applier.toString();
+		return nickname;
 	}
 
 	public void apply(Shape shape)
 	{
 		applier.apply(shape);
-
 	}
 
-	static public Style lineColor(Paint paint)
+	static public Style lineColor(String nickname, Paint paint)
 	{
 		ShapeApplier applier = new ShapeApplier() {
 			@Override
@@ -45,12 +46,12 @@ public class Style
 				if(shape instanceof Text) ((Text)shape).setFill(paint);
 			} 
 		};
-		return new Style(StyleId.LineColor, applier);
+		return new Style(nickname, StyleId.LineColor, applier);
 	}
 
 	static public Style penWidth(double width)
 	{
-		return new Style(StyleId.PenWidth, (shape) -> {
+		return new Style("?", StyleId.PenWidth, (shape) -> {
 			shape.setStrokeWidth(width);
 		});
 	}
@@ -64,7 +65,7 @@ public class Style
 				if(shape instanceof Text) ((Text)shape).setFont(font);
 			} 
 		};
-		return new Style(StyleId.Font,applier);
+		return new Style("?",StyleId.Font, applier);
 	}
 	
 	static public Style composite(Style... styles)
@@ -76,7 +77,7 @@ public class Style
 				for(Style style : styles) style.apply(shape);
 			} 
 		};
-		return new Style(StyleId.Font,applier);
+		return new Style("?",StyleId.Font, applier);
 	}
 
 	public static Style opacity(double d)
@@ -88,7 +89,7 @@ public class Style
 				shape.setOpacity(d);
 			} 
 		};
-		return new Style(StyleId.Opacity,applier);
+		return new Style("?",StyleId.Opacity, applier);
 	}
 	
 	public static Style dash(Double... dash)
@@ -101,7 +102,7 @@ public class Style
 				shape.getStrokeDashArray().addAll(dash);
 			} 
 		};
-		return new Style(StyleId.Dash,applier);		
+		return new Style("?",StyleId.Dash, applier);		
 	}
 
 	public static Style nodash()
@@ -113,7 +114,7 @@ public class Style
 				shape.getStrokeDashArray().clear();;
 			} 
 		};
-		return new Style(StyleId.Dash,applier);		
+		return new Style("?",StyleId.Dash, applier);		
 	}
 
 
