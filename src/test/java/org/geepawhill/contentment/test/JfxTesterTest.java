@@ -5,11 +5,14 @@ import static org.junit.Assert.assertFalse;
 import org.geepawhill.contentment.tree.KeyValue;
 import org.geepawhill.contentment.tree.KeyValueTreeMessage;
 import org.geepawhill.contentment.tree.TreeOutput;
+import org.junit.Ignore;
 import org.junit.Test;
+
 
 public class JfxTesterTest
 {
 
+	@Ignore
 	@Test
 	public void junitRunTimePopup()
 	{
