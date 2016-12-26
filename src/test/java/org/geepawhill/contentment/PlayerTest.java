@@ -20,9 +20,8 @@ public class PlayerTest
 	static public TestStep nonStopSecond = new TestStep();
 	static public TestStop stopSecond = new TestStop();
 	static public TestStep nonStopThird = new TestStep();
-	
-	static public Sequence mixedSequence = new Sequence(nonStopFirst,stopFirst,nonStopSecond,stopSecond,nonStopThird);
 
+	static public Sequence mixedSequence = new Sequence(nonStopFirst, stopFirst, nonStopSecond, stopSecond, nonStopThird);
 
 	private Player player;
 	Group canvas;
@@ -62,7 +61,7 @@ public class PlayerTest
 		assertTrue(nonStopSecond.isBefore);
 		assertBefore();
 	}
-	
+
 	@Test
 	public void playGoesToEnd()
 	{
@@ -75,7 +74,7 @@ public class PlayerTest
 		nonStopThird.finishPlaying();
 		assertAfter();
 	}
-	
+
 	@Test
 	public void pauseAndResume()
 	{
@@ -91,7 +90,7 @@ public class PlayerTest
 		assertFalse(nonStopFirst.isBefore);
 		assertAfter();
 	}
-	
+
 	@Test
 	public void forwardBreaksPlaying()
 	{
@@ -116,7 +115,7 @@ public class PlayerTest
 		assertFalse(nonStopFirst.isPlaying);
 		assertFalse(nonStopFirst.isBefore);
 	}
-	
+
 	@Test
 	public void backwardBreaksPlaying()
 	{
@@ -141,48 +140,47 @@ public class PlayerTest
 		assertFalse(nonStopFirst.isPlaying);
 		assertTrue(nonStopFirst.isBefore);
 	}
-	
+
 	@Test
 	public void forwardBeforeStopGoesToBeforeNextStop()
 	{
-		player.reset(new Sequence(nonStopFirst,stopFirst));
+		player.reset(new Sequence(nonStopFirst, stopFirst));
 		player.forward();
 		assertFalse(nonStopFirst.isPlaying);
 		assertFalse(nonStopFirst.isBefore);
 		assertTrue(stopFirst.isBefore);
-		assertEquals(stopFirst,player.currentStep());
+		assertEquals(stopFirst, player.currentStep());
 	}
-	
+
 	@Test
 	public void playOneBeforeStopGoesToBeforeNextStop()
 	{
-		player.reset(new Sequence(nonStopFirst,stopFirst));
+		player.reset(new Sequence(nonStopFirst, stopFirst));
 		player.playOne();
 		nonStopFirst.finishPlaying();
 		assertFalse(nonStopFirst.isPlaying);
 		assertFalse(nonStopFirst.isBefore);
 		assertTrue(stopFirst.isBefore);
-		assertEquals(stopFirst,player.currentStep());
+		assertEquals(stopFirst, player.currentStep());
 	}
 
-	
 	@Test
 	public void forwardOnStopGoesToBeforeNextStop()
 	{
-		player.reset(new Sequence(stopFirst,nonStopFirst,stopSecond));
+		player.reset(new Sequence(stopFirst, nonStopFirst, stopSecond));
 		player.forward();
 		assertFalse(stopFirst.isPlaying);
 		assertFalse(stopFirst.isBefore);
 		assertFalse(nonStopFirst.isPlaying);
 		assertFalse(nonStopFirst.isBefore);
 		assertTrue(stopSecond.isBefore);
-		assertEquals(stopSecond,player.currentStep());
+		assertEquals(stopSecond, player.currentStep());
 	}
-	
+
 	@Test
 	public void playOneOnStopGoesToBeforeNextStop()
 	{
-		player.reset(new Sequence(stopFirst,nonStopFirst,stopSecond));
+		player.reset(new Sequence(stopFirst, nonStopFirst, stopSecond));
 		player.playOne();
 		stopFirst.finishPlaying();
 		nonStopFirst.finishPlaying();
@@ -191,71 +189,70 @@ public class PlayerTest
 		assertFalse(nonStopFirst.isPlaying);
 		assertFalse(nonStopFirst.isBefore);
 		assertTrue(stopSecond.isBefore);
-		assertEquals(stopSecond,player.currentStep());
+		assertEquals(stopSecond, player.currentStep());
 	}
-
 
 	@Test
 	public void forwardOnLastStopGoesToEnd()
 	{
-		player.reset(new Sequence(stopFirst,nonStopSecond,nonStopThird));
+		player.reset(new Sequence(stopFirst, nonStopSecond, nonStopThird));
 		player.forward();
 		assertFalse(stopFirst.isPlaying);
 		assertFalse(stopFirst.isBefore);
 		assertFalse(nonStopSecond.isPlaying);
 		assertFalse(nonStopSecond.isBefore);
 		assertFalse(nonStopThird.isPlaying);
-		assertEquals(nonStopThird,player.currentStep());
+		assertEquals(nonStopThird, player.currentStep());
 		assertFalse(nonStopThird.isBefore);
 		assertAfter();
 	}
-	
+
 	@Test
 	public void backwardWithNoStopGoesToZero()
 	{
-		player.reset(new Sequence(nonStopFirst,nonStopSecond));
+		player.reset(new Sequence(nonStopFirst, nonStopSecond));
 		player.forward();
 		player.backward();
 		assertFalse(nonStopSecond.isPlaying);
 		assertTrue(nonStopSecond.isBefore);
 		assertFalse(nonStopFirst.isPlaying);
 		assertTrue(nonStopFirst.isBefore);
-		assertEquals(nonStopFirst,player.currentStep());
+		assertEquals(nonStopFirst, player.currentStep());
 		assertBefore();
 	}
-	
+
 	@Test
 	public void backwardOnStopGoesBeforePreviousStop()
 	{
-		player.reset(new Sequence(stopFirst,stopSecond));
+		player.reset(new Sequence(stopFirst, stopSecond));
 		player.forward();
 		player.backward();
 		assertFalse(stopSecond.isPlaying);
 		assertTrue(stopSecond.isBefore);
 		assertFalse(stopFirst.isPlaying);
 		assertTrue(stopFirst.isBefore);
-		assertEquals(stopFirst,player.currentStep());
+		assertEquals(stopFirst, player.currentStep());
 		assertBefore();
 	}
-	
+
 	@Test
 	public void backwardOnNonStopGoesBeforePreviousStop()
 	{
-		player.reset(new Sequence(stopFirst,nonStopSecond));
+		player.reset(new Sequence(stopFirst, nonStopSecond));
 		player.forward();
 		player.backward();
 		assertFalse(nonStopSecond.isPlaying);
 		assertTrue(nonStopSecond.isBefore);
 		assertFalse(stopFirst.isPlaying);
 		assertTrue(stopFirst.isBefore);
-		assertEquals(stopFirst,player.currentStep());
+		assertEquals(stopFirst, player.currentStep());
 		assertBefore();
 	}
-	
+
 	@Test
 	public void backwardBeforeStopGoesBeforePreviousStop()
 	{
-		player.reset(new Sequence(stopFirst,nonStopFirst,stopSecond));
+		player.reset(new Sequence(stopFirst, nonStopFirst, stopSecond));
 		player.forward();
 		player.backward();
 		assertFalse(stopSecond.isPlaying);
@@ -264,30 +261,28 @@ public class PlayerTest
 		assertTrue(nonStopFirst.isBefore);
 		assertFalse(stopFirst.isPlaying);
 		assertTrue(stopFirst.isBefore);
-		assertEquals(stopFirst,player.currentStep());
+		assertEquals(stopFirst, player.currentStep());
 		assertBefore();
 	}
 
-	
 	@Test
 	public void backwardSkGoesBeforePreviousStop()
 	{
-		player.reset(new Sequence(stopFirst,stopSecond));
+		player.reset(new Sequence(stopFirst, stopSecond));
 		player.forward();
 		player.backward();
 		assertFalse(stopSecond.isPlaying);
 		assertTrue(stopSecond.isBefore);
 		assertFalse(stopFirst.isPlaying);
 		assertTrue(stopFirst.isBefore);
-		assertEquals(stopFirst,player.currentStep());
+		assertEquals(stopFirst, player.currentStep());
 		assertBefore();
 	}
-
 
 	@Test
 	public void playOneOnLastStopGoesToEnd()
 	{
-		player.reset(new Sequence(stopFirst,nonStopSecond,nonStopThird));
+		player.reset(new Sequence(stopFirst, nonStopSecond, nonStopThird));
 		player.playOne();
 		stopFirst.finishPlaying();
 		nonStopSecond.finishPlaying();
@@ -297,32 +292,31 @@ public class PlayerTest
 		assertFalse(nonStopSecond.isPlaying);
 		assertFalse(nonStopSecond.isBefore);
 		assertFalse(nonStopThird.isPlaying);
-		assertEquals(nonStopThird,player.currentStep());
+		assertEquals(nonStopThird, player.currentStep());
 		assertFalse(nonStopThird.isBefore);
 		assertAfter();
 	}
-	
+
 	@Test
 	public void forwardNoopsAtEnd()
 	{
 		player.reset(new Sequence(nonStopFirst));
 		player.forward();
-		assertEquals(nonStopFirst,player.currentStep());
+		assertEquals(nonStopFirst, player.currentStep());
 		assertFalse(nonStopFirst.isBefore);
 		assertAfter();
 		player.forward();
-		assertEquals(nonStopFirst,player.currentStep());
+		assertEquals(nonStopFirst, player.currentStep());
 		assertFalse(nonStopFirst.isBefore);
 		assertAfter();
 	}
 
-	@Ignore
 	@Test
 	public void backwardNoopsAtBegin()
 	{
 		player.reset(new Sequence(nonStopFirst));
 		player.backward();
-		assertEquals(nonStopFirst,player.currentStep());
+		assertEquals(nonStopFirst, player.currentStep());
 		assertTrue(nonStopFirst.isBefore);
 		assertBefore();
 	}
@@ -330,7 +324,7 @@ public class PlayerTest
 	@Test
 	public void playOneStopsChainingWhilePlaying()
 	{
-		player.reset(new Sequence(nonStopFirst,nonStopSecond,stopFirst));
+		player.reset(new Sequence(nonStopFirst, nonStopSecond, stopFirst));
 		player.play();
 		nonStopFirst.finishPlaying();
 		assertTrue(nonStopSecond.isPlaying);
@@ -346,7 +340,7 @@ public class PlayerTest
 	{
 		assertEquals(PlayState.After, player.state());
 	}
-	
+
 	private void assertPlaying()
 	{
 		assertEquals(PlayState.Playing, player.state());
@@ -361,5 +355,7 @@ public class PlayerTest
 	{
 		assertEquals(PlayState.Paused, player.state());
 	}
+	
+	
 
 }
