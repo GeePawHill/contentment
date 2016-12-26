@@ -66,4 +66,28 @@ public class Dump implements Tree<KeyValue>
 		return tree.asTree(root);
 	}
 
+	public KeyValue find(String fullKey)
+	{
+		List<Appendee<KeyValue>> list = tree.asList();
+		String[] keys = fullKey.split("\\.");
+		int item=-1;
+		for(int k=0; k<keys.length;k++)
+		{
+			item = findChild(list,item+1,k+1,keys[k]);
+			if(item==-1) return null;
+		}
+		return list.get(item).data;
+	}
+
+	private int findChild(List<Appendee<KeyValue>> list,int start, int indent, String key)
+	{
+		for(int candidate = start; candidate<list.size();candidate++)
+		{
+			Appendee<KeyValue> appendee = list.get(candidate);
+			if(appendee.indent>indent) continue;
+			if(appendee.data.getKey().equals(key)) return candidate;
+		}
+		return -1;
+	}
+
 }

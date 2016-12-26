@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.core.TestStep;
 import org.geepawhill.contentment.core.TestStop;
+import org.geepawhill.contentment.tree.Dump;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -334,6 +335,15 @@ public class PlayerTest
 		assertTrue(stopFirst.isBefore);
 		assertEquals(stopFirst, player.currentStep());
 		assertBefore();
+	}
+	
+	@Test
+	public void dumpsStepAndState()
+	{
+		Dump dump = new Dump();
+		player.reset(new Sequence(nonStopFirst));
+//		player.dump(dump);
+//		assertEquals("0",dump.findKey("Player.Step").getValue());
 	}
 
 	private void assertAfter()
