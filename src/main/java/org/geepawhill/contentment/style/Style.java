@@ -32,18 +32,4 @@ public class Style
 	{
 		applier.apply(shape);
 	}
-
-	static public Style composite(Style... styles)
-	{
-		ShapeApplier applier = new ShapeApplier() {
-			@Override
-			public void apply(Shape shape)
-			{
-				for(Style style : styles) style.apply(shape);
-			} 
-		};
-		return new Style("?",StyleId.Font, applier);
-	}
-
-
 }

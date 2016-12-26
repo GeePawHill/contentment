@@ -2,6 +2,9 @@ package org.geepawhill.contentment.style;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
+import org.geepawhill.contentment.tree.Appendee;
 import org.geepawhill.contentment.tree.KeyValue;
 import org.geepawhill.contentment.tree.TreeOutput;
 import org.junit.Before;
@@ -79,7 +82,14 @@ public class StylesTest
 		styles.push();
 		styles.set(blackLine);
 		styles.dump(tree);
-//		System.out.println(tree.asText("root"));
+		List<Appendee<KeyValue>> output = tree.asList();
+		System.out.println(tree.asText("ROOT"));
+		assertEquals(5,output.size());
+		assertEquals("Styles",output.get(0).data.getKey());
+		assertEquals("Map0",output.get(1).data.getKey());
+		assertEquals("LineColor = BLACK (0x000000ff)",output.get(2).data.toString());
+		assertEquals("Map1",output.get(3).data.getKey());
+		assertEquals("LineColor = RED (0xff0000ff)",output.get(4).data.toString());
 	}
 	
 }

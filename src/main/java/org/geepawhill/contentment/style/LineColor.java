@@ -18,6 +18,7 @@ public class LineColor
 				if(shape instanceof Text) ((Text)shape).setFill(paint);
 			} 
 		};
+		nickname = nickname+" ("+paint.toString()+")";
 		return new Style(nickname, StyleId.LineColor, applier);
 	}
 	
