@@ -11,21 +11,21 @@ public class KeyValueTreeComparatorTest
 {
 
 	private KeyValueTreeComparator comparator;
-	private TreeOutput<KeyValue> actual;
-	private TreeOutput<KeyValue> expected;
+	private TypedTree<KeyValue> actual;
+	private TypedTree<KeyValue> expected;
 	
 	@Before
 	public void before()
 	{
 		comparator = new KeyValueTreeComparator();
-		actual = new TreeOutput<>();
-		expected = new TreeOutput<>();
+		actual = new TypedTree<>();
+		expected = new TypedTree<>();
 	}
 
 	@Test
 	public void emptiesMatch()
 	{
-		assertTrue(comparator.match(expected,actual, new TreeOutput<KeyValueTreeMessage>()));
+		assertTrue(comparator.match(expected,actual, new TypedTree<KeyValueTreeMessage>()));
 	}
 	
 	@Test
@@ -33,14 +33,14 @@ public class KeyValueTreeComparatorTest
 	{
 		appendExpected("Item 1");
 		appendActual("Item 1");
-		assertTrue(comparator.match(expected,actual, new TreeOutput<KeyValueTreeMessage>()));
+		assertTrue(comparator.match(expected,actual, new TypedTree<KeyValueTreeMessage>()));
 	}
 	
 	@Test
 	public void missingActualFail()
 	{
 		appendExpected("Item 1");
-		TreeOutput<KeyValueTreeMessage> details = new TreeOutput<>();
+		TypedTree<KeyValueTreeMessage> details = new TypedTree<>();
 		assertFalse(comparator.match(expected,actual, details));
 		assertEquals(2,details.asList().size());
 	}
@@ -49,7 +49,7 @@ public class KeyValueTreeComparatorTest
 	public void extraActualFail()
 	{
 		appendActual("Item 1");
-		TreeOutput<KeyValueTreeMessage> details = new TreeOutput<>();
+		TypedTree<KeyValueTreeMessage> details = new TypedTree<>();
 		assertFalse(comparator.match(expected,actual, details));
 		assertEquals(2,details.asList().size());
 	}
@@ -59,7 +59,7 @@ public class KeyValueTreeComparatorTest
 	{
 		appendExpected("Item 1","key");
 		appendActual("Item 1","whoops");
-		TreeOutput<KeyValueTreeMessage> details = new TreeOutput<KeyValueTreeMessage>();
+		TypedTree<KeyValueTreeMessage> details = new TypedTree<KeyValueTreeMessage>();
 		assertFalse(comparator.match(expected,actual, details));
 		assertEquals(2,details.asList().size());
 	}

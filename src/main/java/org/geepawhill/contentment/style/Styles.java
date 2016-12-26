@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.geepawhill.contentment.tree.KeyValue;
-import org.geepawhill.contentment.tree.TreeOutput;
+import org.geepawhill.contentment.tree.Dump;
 
 public class Styles
 {
@@ -50,21 +49,21 @@ public class Styles
 		return result;
 	}
 
-	public void dump(TreeOutput<KeyValue> output)
+	public void dump(Dump output)
 	{
-		output.append(new KeyValue("Styles"));
+		output.append("Styles");
 		output.indent();
 		int mapNumber = 0;
 		for (HashMap<StyleId, Style> map : old)
 		{
-			output.append(new KeyValue("Map" + mapNumber));
+			output.append("Map" + mapNumber);
 			dumpMap(output, map);
 			mapNumber += 1;
 		}
 		output.dedent();
 	}
 
-	private void dumpMap(TreeOutput<KeyValue> output, HashMap<StyleId, Style> map)
+	private void dumpMap(Dump output, HashMap<StyleId, Style> map)
 	{
 		output.indent();
 		for (Style value : map.values())

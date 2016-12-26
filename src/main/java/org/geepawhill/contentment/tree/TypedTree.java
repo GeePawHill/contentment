@@ -5,17 +5,21 @@ import java.util.List;
 
 import javafx.scene.control.TreeItem;
 
-public class TreeOutput<T>
+public class TypedTree<T> implements Tree<T>
 {
 	private final ArrayList<Appendee<T>> items;
 	private int indent;
 
-	public TreeOutput()
+	public TypedTree()
 	{
 		items = new ArrayList<>();
 		indent = 1;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.geepawhill.contentment.tree.Tree#indent()
+	 */
+	@Override
 	public void indent()
 	{
 		if(items.isEmpty() || items.get(items.size()-1).indent!=indent)
@@ -25,22 +29,38 @@ public class TreeOutput<T>
 		indent += 1;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.geepawhill.contentment.tree.Tree#append(T)
+	 */
+	@Override
 	public void append(T data)
 	{
 		items.add(new Appendee<T>(indent, data));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.geepawhill.contentment.tree.Tree#dedent()
+	 */
+	@Override
 	public void dedent()
 	{
 		indent -= 1;
 		if (indent == 0) throw new RuntimeException("Too many dedents!");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.geepawhill.contentment.tree.Tree#asList()
+	 */
+	@Override
 	public List<Appendee<T>> asList()
 	{
 		return items;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.geepawhill.contentment.tree.Tree#asLeafList()
+	 */
+	@Override
 	public List<T> asLeafList()
 	{
 		ArrayList<T> result = new ArrayList<>();
@@ -62,6 +82,10 @@ public class TreeOutput<T>
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.geepawhill.contentment.tree.Tree#asText(java.lang.String)
+	 */
+	@Override
 	public String asText(String root)
 	{
 		StringBuffer result = new StringBuffer(root + "\n");
@@ -74,6 +98,10 @@ public class TreeOutput<T>
 		return result.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.geepawhill.contentment.tree.Tree#asTree(javafx.scene.control.TreeItem)
+	 */
+	@Override
 	public TreeItem<T> asTree(TreeItem<T> root)
 	{
 		root.setExpanded(true);

@@ -9,7 +9,7 @@ import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
 import org.geepawhill.contentment.style.StyleId;
 import org.geepawhill.contentment.tree.KeyValue;
-import org.geepawhill.contentment.tree.TreeOutput;
+import org.geepawhill.contentment.tree.TypedTree;
 
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
@@ -49,7 +49,7 @@ public class OvalText implements Actor
 	}
 	
 	@Override
-	public void dump(TreeOutput<KeyValue> output)
+	public void dump(TypedTree<KeyValue> output)
 	{
 		
 	}

@@ -11,12 +11,12 @@ import javafx.scene.control.TreeItem;
 public class KeyValueTreeComparator
 {
 
-	public boolean match(TreeOutput<KeyValue> expected, TreeOutput<KeyValue> actual, TreeOutput<KeyValueTreeMessage> details)
+	public boolean match(Tree<KeyValue> expected, Tree<KeyValue> actual, TypedTree<KeyValueTreeMessage> details)
 	{
 		return match(expected,actual,details,false);
 	}
 
-	public boolean match(TreeOutput<KeyValue> expected, TreeOutput<KeyValue> actual, TreeOutput<KeyValueTreeMessage> details,boolean noisy)
+	public boolean match(Tree<KeyValue> expected, Tree<KeyValue> actual, TypedTree<KeyValueTreeMessage> details,boolean noisy)
 	{
 		Map<String,String> expectedMap = flatMap(expected);
 		if(noisy) dumpMap("expected", expectedMap);
@@ -64,7 +64,7 @@ public class KeyValueTreeComparator
 
 	}
 
-	private void addDetails(TreeOutput<KeyValueTreeMessage> details, String type, ArrayList<KeyValueTreeMessage> messages)
+	private void addDetails(Tree<KeyValueTreeMessage> details, String type, ArrayList<KeyValueTreeMessage> messages)
 	{
 		if(!messages.isEmpty())
 		{
@@ -89,7 +89,7 @@ public class KeyValueTreeComparator
 		}
 	}
 
-	private Map<String, String> flatMap(TreeOutput<KeyValue> source)
+	private Map<String, String> flatMap(Tree<KeyValue> source)
 	{
 		TreeItem<KeyValue> root = new TreeItem<>(new KeyValue("Root", ""));
 		source.asTree(root);

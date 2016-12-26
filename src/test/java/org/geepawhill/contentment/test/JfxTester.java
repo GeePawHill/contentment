@@ -9,7 +9,7 @@ import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.tree.KeyValue;
 import org.geepawhill.contentment.tree.KeyValueTreeComparator;
 import org.geepawhill.contentment.tree.KeyValueTreeMessage;
-import org.geepawhill.contentment.tree.TreeOutput;
+import org.geepawhill.contentment.tree.TypedTree;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -111,20 +111,20 @@ public class JfxTester
 //		assertTrue(after.isEqual(afterReset, false));
 	}
 
-	public boolean compareSnaps(TreeOutput<KeyValue> expected, TreeOutput<KeyValue> actual)
+	public boolean compareSnaps(TypedTree<KeyValue> expected, TypedTree<KeyValue> actual)
 	{
-		return compareSnaps(expected, actual, new TreeOutput<KeyValueTreeMessage>());
+		return compareSnaps(expected, actual, new TypedTree<KeyValueTreeMessage>());
 	}
 
-	public boolean compareSnaps(TreeOutput<KeyValue> expected, TreeOutput<KeyValue> actual,
-			TreeOutput<KeyValueTreeMessage> details)
+	public boolean compareSnaps(TypedTree<KeyValue> expected, TypedTree<KeyValue> actual,
+			TypedTree<KeyValueTreeMessage> details)
 	{
 		return comparator.match(expected, actual, details);
 	}
 
-	public boolean compareSnapsVisual(TreeOutput<KeyValue> expected, TreeOutput<KeyValue> actual)
+	public boolean compareSnapsVisual(TypedTree<KeyValue> expected, TypedTree<KeyValue> actual)
 	{
-		TreeOutput<KeyValueTreeMessage> details = new TreeOutput<>();
+		TypedTree<KeyValueTreeMessage> details = new TypedTree<>();
 		boolean result = comparator.match(expected, actual, details);
 		if (result == true) return true;
 		final CountDownLatch countDownLatch = new CountDownLatch(1);

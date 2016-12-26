@@ -4,7 +4,7 @@ import static org.junit.Assert.assertFalse;
 
 import org.geepawhill.contentment.tree.KeyValue;
 import org.geepawhill.contentment.tree.KeyValueTreeMessage;
-import org.geepawhill.contentment.tree.TreeOutput;
+import org.geepawhill.contentment.tree.TypedTree;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -16,14 +16,14 @@ public class JfxTesterTest
 	@Test
 	public void junitRunTimePopup()
 	{
-		TreeOutput<KeyValue> before = new TreeOutput<>();
+		TypedTree<KeyValue> before = new TypedTree<>();
 		before.append(new KeyValue("Parent"));
 		before.indent();
 		before.append(new KeyValue("CorrectInBoth","Value"));
 		before.append(new KeyValue("MissingInActual","Value"));
 		before.append(new KeyValue("DifferentValue","Value"));
 		
-		TreeOutput<KeyValue> after = new TreeOutput<>();
+		TypedTree<KeyValue> after = new TypedTree<>();
 		after.append(new KeyValue("Parent"));
 		after.indent();
 		after.append(new KeyValue("CorrectInBoth","Value"));
@@ -31,7 +31,7 @@ public class JfxTesterTest
 		after.append(new KeyValue("MissingInExpected","Value"));
 
 		JfxTester tester = new JfxTester();
-		TreeOutput<KeyValueTreeMessage> details = new TreeOutput<>();
+		TypedTree<KeyValueTreeMessage> details = new TypedTree<>();
 		tester.compareSnaps(before,after,details);
 		System.out.println(details.asText("Details"));
 		assertFalse(tester.compareSnapsVisual(before,after));

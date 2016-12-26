@@ -9,7 +9,7 @@ import org.geepawhill.contentment.step.TimedSequence;
 import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.style.StyleId;
 import org.geepawhill.contentment.tree.KeyValue;
-import org.geepawhill.contentment.tree.TreeOutput;
+import org.geepawhill.contentment.tree.TypedTree;
 
 import javafx.animation.TranslateTransition;
 import javafx.geometry.VPos;
@@ -74,7 +74,7 @@ public class Label implements Actor
 	}
 
 	@Override
-	public void dump(TreeOutput<KeyValue> output)
+	public void dump(TypedTree<KeyValue> output)
 	{
 		
 	}

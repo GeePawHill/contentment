@@ -14,12 +14,12 @@ import javafx.scene.control.TreeItem;
 public class TreeOutputTest
 {
 
-	private TreeOutput<String> tree;
+	private TypedTree<String> tree;
 	
 	@Before
 	public void before()
 	{
-		tree = new TreeOutput<String>();
+		tree = new TypedTree<String>();
 	}
 	
 	@Test
@@ -102,7 +102,7 @@ public class TreeOutputTest
 	@Test(expected=RuntimeException.class)
 	public void tooManyDedents()
 	{
-		TreeOutput<String> tree = new TreeOutput<String>();
+		TypedTree<String> tree = new TypedTree<String>();
 		tree.dedent();
 	}
 

@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.style;
 
-import org.geepawhill.contentment.tree.KeyValue;
-import org.geepawhill.contentment.tree.TreeOutput;
+import org.geepawhill.contentment.tree.Dump;
 
 import javafx.scene.shape.Shape;
 
@@ -36,8 +35,8 @@ public class Style
 		applier.apply(shape);
 	}
 	
-	public void dump(TreeOutput<KeyValue> output)
+	public void dump(Dump output)
 	{
-		output.append(new KeyValue(id.toString(),nickname));
+		output.append(id.toString(),nickname);
 	}
 }

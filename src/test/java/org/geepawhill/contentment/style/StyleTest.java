@@ -1,9 +1,8 @@
 package org.geepawhill.contentment.style;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.geepawhill.contentment.tree.KeyValue;
-import org.geepawhill.contentment.tree.TreeOutput;
+import org.geepawhill.contentment.tree.Dump;
 import org.junit.Test;
 
 public class StyleTest
@@ -53,7 +52,7 @@ public class StyleTest
 
 	private void assertDump(String expected, Style style)
 	{
-		TreeOutput<KeyValue> output = new TreeOutput<>();
+		Dump output = new Dump();
 		style.dump(output);
 		assertEquals(expected,output.asList().get(0).data.toString());
 	}

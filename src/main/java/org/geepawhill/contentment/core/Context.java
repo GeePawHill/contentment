@@ -5,8 +5,7 @@ import org.geepawhill.contentment.style.LineColor;
 import org.geepawhill.contentment.style.Opacity;
 import org.geepawhill.contentment.style.PenWidth;
 import org.geepawhill.contentment.style.Styles;
-import org.geepawhill.contentment.tree.KeyValue;
-import org.geepawhill.contentment.tree.TreeOutput;
+import org.geepawhill.contentment.tree.Dump;
 
 import javafx.scene.Group;
 import javafx.scene.text.Font;
@@ -28,7 +27,7 @@ public class Context {
 		styles.push();
 	}
 
-	public void dump(TreeOutput<KeyValue> output)
+	public void dump(Dump output)
 	{
 		this.styles.dump(output);
 	}
