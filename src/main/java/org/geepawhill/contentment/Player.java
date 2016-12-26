@@ -3,6 +3,7 @@ package org.geepawhill.contentment;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.tree.Dump;
 
 import javafx.scene.Group;
 
@@ -261,6 +262,16 @@ public class Player
 	public void allButEnd()
 	{
 		seek(sequence.size() - 1);
+	}
+
+	public void dump(Dump dump)
+	{
+		dump.append("Player");
+		dump.indent();
+		dump.append("State",state.name());
+		dump.append("Current",Integer.toString(current));
+		dump.dedent();
+		context.styles.dump(dump);
 	}
 
 }

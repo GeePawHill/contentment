@@ -2,6 +2,7 @@ package org.geepawhill.contentment;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.geepawhill.contentment.core.Sequence;
@@ -9,7 +10,6 @@ import org.geepawhill.contentment.core.TestStep;
 import org.geepawhill.contentment.core.TestStop;
 import org.geepawhill.contentment.tree.Dump;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import javafx.scene.Group;
@@ -338,13 +338,25 @@ public class PlayerTest
 	}
 	
 	@Test
-	public void dumpsStepAndState()
+	public void dumpsCurrentAndState()
 	{
 		Dump dump = new Dump();
 		player.reset(new Sequence(nonStopFirst));
-//		player.dump(dump);
-//		assertEquals("0",dump.findKey("Player.Step").getValue());
+		player.dump(dump);
+		System.out.println(dump.asText("Root"));
+		assertEquals("0",dump.find("Player.Current").getValue());
+		assertEquals("Before",dump.find("Player.State").getValue());
 	}
+	
+	@Test
+	public void dumpsStyles()
+	{
+		Dump dump = new Dump();
+		player.reset(new Sequence(nonStopFirst));
+		player.dump(dump);
+		assertNotNull("Does not include Styles.",dump.find("Styles"));
+	}
+
 
 	private void assertAfter()
 	{
