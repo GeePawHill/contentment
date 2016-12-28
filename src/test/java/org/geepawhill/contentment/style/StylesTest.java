@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import org.geepawhill.contentment.tree.Appendee;
-import org.geepawhill.contentment.tree.Dump;
-import org.geepawhill.contentment.tree.KeyValue;
+import org.geepawhill.contentment.outline.KeyValue;
+import org.geepawhill.contentment.outline.KvOutline;
+import org.geepawhill.contentment.outline.Line;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -77,12 +77,12 @@ public class StylesTest
 	@Test
 	public void dump()
 	{
-		Dump tree = new Dump();
+		KvOutline tree = new KvOutline();
 		styles.set(redLine);
 		styles.push();
 		styles.set(blackLine);
 		styles.dump(tree);
-		List<Appendee<KeyValue>> output = tree.asList();
+		List<Line<KeyValue>> output = tree.asList();
 		assertEquals(5,output.size());
 		assertEquals("Styles",output.get(0).data.getKey());
 		assertEquals("Map0",output.get(1).data.getKey());

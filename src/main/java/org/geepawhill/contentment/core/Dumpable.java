@@ -1,9 +1,9 @@
 package org.geepawhill.contentment.core;
 
-import org.geepawhill.contentment.tree.KeyValue;
-import org.geepawhill.contentment.tree.TypedTree;
+import org.geepawhill.contentment.outline.BasicOutline;
+import org.geepawhill.contentment.outline.KeyValue;
 
 public interface Dumpable
 {
-	public void dump(TypedTree<KeyValue> output);
+	public void dump(BasicOutline<KeyValue> output);
 }

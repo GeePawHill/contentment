@@ -1,17 +1,17 @@
-package org.geepawhill.contentment.tree;
+package org.geepawhill.contentment.outline;
 
 import java.util.List;
 
 import javafx.scene.control.TreeItem;
 
-public class Dump implements Tree<KeyValue>
+public class KvOutline implements Outline<KeyValue>
 {
 	
-	private TypedTree<KeyValue> tree;
+	private BasicOutline<KeyValue> tree;
 
-	public Dump()
+	public KvOutline()
 	{
-		tree = new TypedTree<KeyValue>();
+		tree = new BasicOutline<KeyValue>();
 	}
 	
 	public void append(String key)
@@ -43,7 +43,7 @@ public class Dump implements Tree<KeyValue>
 	}
 
 	@Override
-	public List<Appendee<KeyValue>> asList()
+	public List<Line<KeyValue>> asList()
 	{
 		return tree.asList();
 	}
@@ -68,7 +68,7 @@ public class Dump implements Tree<KeyValue>
 
 	public KeyValue find(String fullKey)
 	{
-		List<Appendee<KeyValue>> list = tree.asList();
+		List<Line<KeyValue>> list = tree.asList();
 		String[] keys = fullKey.split("\\.");
 		int item=-1;
 		for(int k=0; k<keys.length;k++)
@@ -79,11 +79,11 @@ public class Dump implements Tree<KeyValue>
 		return list.get(item).data;
 	}
 
-	private int findChild(List<Appendee<KeyValue>> list,int start, int indent, String key)
+	private int findChild(List<Line<KeyValue>> list,int start, int indent, String key)
 	{
 		for(int candidate = start; candidate<list.size();candidate++)
 		{
-			Appendee<KeyValue> appendee = list.get(candidate);
+			Line<KeyValue> appendee = list.get(candidate);
 			if(appendee.indent>indent) continue;
 			if(appendee.data.getKey().equals(key)) return candidate;
 		}

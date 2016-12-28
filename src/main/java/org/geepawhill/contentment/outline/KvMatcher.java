@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.tree;
+package org.geepawhill.contentment.outline;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,26 +6,30 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.geepawhill.contentment.outline.BasicOutline;
+import org.geepawhill.contentment.outline.KeyValue;
+import org.geepawhill.contentment.outline.Outline;
+
 import javafx.scene.control.TreeItem;
 
-public class KeyValueTreeComparator
+public class KvMatcher
 {
 
-	public boolean match(Tree<KeyValue> expected, Tree<KeyValue> actual, TypedTree<KeyValueTreeMessage> details)
+	public boolean match(KvOutline expected, KvOutline actual, BasicOutline<KvDifference> details)
 	{
 		return match(expected,actual,details,false);
 	}
 
-	public boolean match(Tree<KeyValue> expected, Tree<KeyValue> actual, TypedTree<KeyValueTreeMessage> details,boolean noisy)
+	public boolean match(KvOutline expected, KvOutline actual, BasicOutline<KvDifference> details,boolean noisy)
 	{
 		Map<String,String> expectedMap = flatMap(expected);
 		if(noisy) dumpMap("expected", expectedMap);
 		Map<String,String> actualMap = flatMap(actual);
 		if(noisy) dumpMap("actual",actualMap);
 		
-		ArrayList<KeyValueTreeMessage> wrongValues = new ArrayList<>();
-		ArrayList<KeyValueTreeMessage> missingActuals = new ArrayList<>();
-		ArrayList<KeyValueTreeMessage> extraActuals = new ArrayList<>();
+		ArrayList<KvDifference> wrongValues = new ArrayList<>();
+		ArrayList<KvDifference> missingActuals = new ArrayList<>();
+		ArrayList<KvDifference> extraActuals = new ArrayList<>();
 		ArrayList<String> matchingKeys = new ArrayList<>();
 		
 		boolean result = true;
@@ -35,7 +39,7 @@ public class KeyValueTreeComparator
 			String expectedValue = entry.getValue();
 			if(actualValue==null)
 			{
-				missingActuals.add(new KeyValueTreeMessage(entry.getKey(),expectedValue,""));
+				missingActuals.add(new KvDifference(entry.getKey(),expectedValue,""));
 				result = false;
 			}
 			else
@@ -43,7 +47,7 @@ public class KeyValueTreeComparator
 				matchingKeys.add(entry.getKey());
 				if(!expectedValue.equals(actualValue))
 				{
-					wrongValues.add(new KeyValueTreeMessage(entry.getKey(),entry.getValue(),actualValue));
+					wrongValues.add(new KvDifference(entry.getKey(),entry.getValue(),actualValue));
 					result = false;
 				}
 			}
@@ -54,7 +58,7 @@ public class KeyValueTreeComparator
 		}
 		for(Map.Entry<String, String> extra : actualMap.entrySet())
 		{
-			extraActuals.add(new KeyValueTreeMessage(extra.getKey(),"",extra.getValue()));
+			extraActuals.add(new KvDifference(extra.getKey(),"",extra.getValue()));
 			result=false;
 		}
 		addDetails(details, "Missing Actuals", missingActuals);
@@ -64,13 +68,13 @@ public class KeyValueTreeComparator
 
 	}
 
-	private void addDetails(Tree<KeyValueTreeMessage> details, String type, ArrayList<KeyValueTreeMessage> messages)
+	private void addDetails(Outline<KvDifference> details, String type, ArrayList<KvDifference> messages)
 	{
 		if(!messages.isEmpty())
 		{
-			details.append(new KeyValueTreeMessage(type,"",""));
+			details.append(new KvDifference(type,"",""));
 			details.indent();
-			for(KeyValueTreeMessage message : messages) details.append(message);
+			for(KvDifference message : messages) details.append(message);
 			details.dedent();
 		}
 	}
@@ -89,7 +93,7 @@ public class KeyValueTreeComparator
 		}
 	}
 
-	private Map<String, String> flatMap(Tree<KeyValue> source)
+	private Map<String, String> flatMap(KvOutline source)
 	{
 		TreeItem<KeyValue> root = new TreeItem<>(new KeyValue("Root", ""));
 		source.asTree(root);

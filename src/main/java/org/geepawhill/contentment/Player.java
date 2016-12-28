@@ -3,7 +3,7 @@ package org.geepawhill.contentment;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.core.Step;
-import org.geepawhill.contentment.tree.Dump;
+import org.geepawhill.contentment.outline.KvOutline;
 
 import javafx.scene.Group;
 
@@ -264,7 +264,7 @@ public class Player
 		seek(sequence.size() - 1);
 	}
 
-	public void dump(Dump dump)
+	public void dump(KvOutline dump)
 	{
 		dump.append("Player");
 		dump.indent();

@@ -1,10 +1,10 @@
-package org.geepawhill.contentment.tree;
+package org.geepawhill.contentment.outline;
 
 import java.util.List;
 
 import javafx.scene.control.TreeItem;
 
-public interface Tree<T>
+public interface Outline<T>
 {
 
 	void indent();
@@ -13,7 +13,7 @@ public interface Tree<T>
 
 	void dedent();
 
-	List<Appendee<T>> asList();
+	List<Line<T>> asList();
 
 	List<T> asLeafList();
 

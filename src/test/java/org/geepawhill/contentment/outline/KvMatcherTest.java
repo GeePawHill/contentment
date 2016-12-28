@@ -1,31 +1,33 @@
-package org.geepawhill.contentment.tree;
+package org.geepawhill.contentment.outline;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.geepawhill.contentment.outline.BasicOutline;
+import org.geepawhill.contentment.outline.KeyValue;
 import org.junit.Before;
 import org.junit.Test;
 
-public class KeyValueTreeComparatorTest
+public class KvMatcherTest
 {
 
-	private KeyValueTreeComparator comparator;
-	private TypedTree<KeyValue> actual;
-	private TypedTree<KeyValue> expected;
+	private KvMatcher matcher;
+	private KvOutline actual;
+	private KvOutline expected;
 	
 	@Before
 	public void before()
 	{
-		comparator = new KeyValueTreeComparator();
-		actual = new TypedTree<>();
-		expected = new TypedTree<>();
+		matcher = new KvMatcher();
+		actual = new KvOutline();
+		expected = new KvOutline();
 	}
 
 	@Test
 	public void emptiesMatch()
 	{
-		assertTrue(comparator.match(expected,actual, new TypedTree<KeyValueTreeMessage>()));
+		assertTrue(matcher.match(expected,actual, new BasicOutline<KvDifference>()));
 	}
 	
 	@Test
@@ -33,15 +35,15 @@ public class KeyValueTreeComparatorTest
 	{
 		appendExpected("Item 1");
 		appendActual("Item 1");
-		assertTrue(comparator.match(expected,actual, new TypedTree<KeyValueTreeMessage>()));
+		assertTrue(matcher.match(expected,actual, new BasicOutline<KvDifference>()));
 	}
 	
 	@Test
 	public void missingActualFail()
 	{
 		appendExpected("Item 1");
-		TypedTree<KeyValueTreeMessage> details = new TypedTree<>();
-		assertFalse(comparator.match(expected,actual, details));
+		BasicOutline<KvDifference> details = new BasicOutline<>();
+		assertFalse(matcher.match(expected,actual, details));
 		assertEquals(2,details.asList().size());
 	}
 	
@@ -49,8 +51,8 @@ public class KeyValueTreeComparatorTest
 	public void extraActualFail()
 	{
 		appendActual("Item 1");
-		TypedTree<KeyValueTreeMessage> details = new TypedTree<>();
-		assertFalse(comparator.match(expected,actual, details));
+		BasicOutline<KvDifference> details = new BasicOutline<>();
+		assertFalse(matcher.match(expected,actual, details));
 		assertEquals(2,details.asList().size());
 	}
 
@@ -59,8 +61,8 @@ public class KeyValueTreeComparatorTest
 	{
 		appendExpected("Item 1","key");
 		appendActual("Item 1","whoops");
-		TypedTree<KeyValueTreeMessage> details = new TypedTree<KeyValueTreeMessage>();
-		assertFalse(comparator.match(expected,actual, details));
+		BasicOutline<KvDifference> details = new BasicOutline<KvDifference>();
+		assertFalse(matcher.match(expected,actual, details));
 		assertEquals(2,details.asList().size());
 	}
 	

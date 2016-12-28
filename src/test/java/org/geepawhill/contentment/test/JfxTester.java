@@ -6,10 +6,10 @@ import java.util.concurrent.CountDownLatch;
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Step;
-import org.geepawhill.contentment.tree.KeyValue;
-import org.geepawhill.contentment.tree.KeyValueTreeComparator;
-import org.geepawhill.contentment.tree.KeyValueTreeMessage;
-import org.geepawhill.contentment.tree.TypedTree;
+import org.geepawhill.contentment.outline.BasicOutline;
+import org.geepawhill.contentment.outline.KvDifference;
+import org.geepawhill.contentment.outline.KvMatcher;
+import org.geepawhill.contentment.outline.KvOutline;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -27,11 +27,11 @@ import javafx.stage.Stage;
 public class JfxTester
 {
 	private Context context;
-	private KeyValueTreeComparator comparator;
+	private KvMatcher comparator;
 
 	public JfxTester()
 	{
-		comparator = new KeyValueTreeComparator();
+		comparator = new KvMatcher();
 	}
 
 	public void waitForPlay(Step step) throws Exception
@@ -111,20 +111,20 @@ public class JfxTester
 //		assertTrue(after.isEqual(afterReset, false));
 	}
 
-	public boolean compareSnaps(TypedTree<KeyValue> expected, TypedTree<KeyValue> actual)
+	public boolean compareSnaps(KvOutline expected, KvOutline actual)
 	{
-		return compareSnaps(expected, actual, new TypedTree<KeyValueTreeMessage>());
+		return compareSnaps(expected, actual, new BasicOutline<KvDifference>());
 	}
 
-	public boolean compareSnaps(TypedTree<KeyValue> expected, TypedTree<KeyValue> actual,
-			TypedTree<KeyValueTreeMessage> details)
+	public boolean compareSnaps(KvOutline expected, KvOutline actual,
+			BasicOutline<KvDifference> details)
 	{
 		return comparator.match(expected, actual, details);
 	}
 
-	public boolean compareSnapsVisual(TypedTree<KeyValue> expected, TypedTree<KeyValue> actual)
+	public boolean compareSnapsVisual(KvOutline expected, KvOutline actual)
 	{
-		TypedTree<KeyValueTreeMessage> details = new TypedTree<>();
+		BasicOutline<KvDifference> details = new BasicOutline<>();
 		boolean result = comparator.match(expected, actual, details);
 		if (result == true) return true;
 		final CountDownLatch countDownLatch = new CountDownLatch(1);
@@ -132,23 +132,23 @@ public class JfxTester
 			final Stage dialog = new Stage();
 			dialog.initModality(Modality.APPLICATION_MODAL);
 			AnchorPane pane = new AnchorPane();
-			List<KeyValueTreeMessage> messages = details.asLeafList();
-			ObservableList<KeyValueTreeMessage> observable = FXCollections.observableList(messages);
+			List<KvDifference> messages = details.asLeafList();
+			ObservableList<KvDifference> observable = FXCollections.observableList(messages);
 			FXCollections.sort(observable,(left,right) -> left.getKey().compareTo(right.getKey()));
-			TableView<KeyValueTreeMessage> detailsView = new TableView<>(observable);
+			TableView<KvDifference> detailsView = new TableView<>(observable);
 			detailsView.setStyle("-fx-font: 18px Tahoma");
 
-			TableColumn<KeyValueTreeMessage, String> keyColumn = new TableColumn<>("Key");
+			TableColumn<KvDifference, String> keyColumn = new TableColumn<>("Key");
 			keyColumn.setPrefWidth(400d);
 			keyColumn.setCellValueFactory((param) -> new SimpleStringProperty(param.getValue().getKey()));
 			detailsView.getColumns().add(keyColumn);
 			
-			TableColumn<KeyValueTreeMessage, String> expectedColumn = new TableColumn<>("Expected");
+			TableColumn<KvDifference, String> expectedColumn = new TableColumn<>("Expected");
 			expectedColumn.setPrefWidth(250d);
 			expectedColumn.setCellValueFactory((param) -> new SimpleStringProperty(param.getValue().getExpected()));
 			detailsView.getColumns().add(expectedColumn);
 
-			TableColumn<KeyValueTreeMessage, String> actualColumn = new TableColumn<>("Actual");
+			TableColumn<KvDifference, String> actualColumn = new TableColumn<>("Actual");
 			actualColumn.setPrefWidth(250d);
 			actualColumn.setCellValueFactory((param) -> new SimpleStringProperty(param.getValue().getActual()));
 			detailsView.getColumns().add(actualColumn);

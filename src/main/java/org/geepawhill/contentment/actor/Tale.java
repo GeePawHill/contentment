@@ -3,11 +3,11 @@ package org.geepawhill.contentment.actor;
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.jfx.JfxUtility;
+import org.geepawhill.contentment.outline.BasicOutline;
+import org.geepawhill.contentment.outline.KeyValue;
 import org.geepawhill.contentment.step.ShowStep;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
-import org.geepawhill.contentment.tree.KeyValue;
-import org.geepawhill.contentment.tree.TypedTree;
 
 import javafx.geometry.VPos;
 import javafx.scene.Group;
@@ -50,7 +50,7 @@ public class Tale implements Actor
 	}
 	
 	@Override
-	public void dump(TypedTree<KeyValue> output)
+	public void dump(BasicOutline<KeyValue> output)
 	{
 		
 	}

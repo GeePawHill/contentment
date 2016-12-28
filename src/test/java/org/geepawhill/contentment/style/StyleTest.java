@@ -2,7 +2,7 @@ package org.geepawhill.contentment.style;
 
 import static org.junit.Assert.assertEquals;
 
-import org.geepawhill.contentment.tree.Dump;
+import org.geepawhill.contentment.outline.KvOutline;
 import org.junit.Test;
 
 public class StyleTest
@@ -52,7 +52,7 @@ public class StyleTest
 
 	private void assertDump(String expected, Style style)
 	{
-		Dump output = new Dump();
+		KvOutline output = new KvOutline();
 		style.dump(output);
 		assertEquals(expected,output.asList().get(0).data.toString());
 	}

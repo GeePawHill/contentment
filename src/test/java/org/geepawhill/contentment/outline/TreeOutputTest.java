@@ -1,10 +1,12 @@
-package org.geepawhill.contentment.tree;
+package org.geepawhill.contentment.outline;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.geepawhill.contentment.outline.BasicOutline;
+import org.geepawhill.contentment.outline.Line;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,12 +16,12 @@ import javafx.scene.control.TreeItem;
 public class TreeOutputTest
 {
 
-	private TypedTree<String> tree;
+	private BasicOutline<String> tree;
 	
 	@Before
 	public void before()
 	{
-		tree = new TypedTree<String>();
+		tree = new BasicOutline<String>();
 	}
 	
 	@Test
@@ -32,7 +34,7 @@ public class TreeOutputTest
 	public void asListSingleItem()
 	{
 		tree.append("Item 1");
-		List<Appendee<String>> list = tree.asList();
+		List<Line<String>> list = tree.asList();
 		assertEquals(1,list.size());
 		assertEquals("Item 1",list.get(0).data);
 		assertEquals(1,list.get(0).indent);
@@ -44,7 +46,7 @@ public class TreeOutputTest
 		tree.append("Item 1");
 		tree.indent();
 		tree.append("Item 1.1");
-		List<Appendee<String>> list = tree.asList();
+		List<Line<String>> list = tree.asList();
 		assertEquals(2,list.size());
 		assertEquals("Item 1",list.get(0).data);
 		assertEquals(1,list.get(0).indent);
@@ -61,7 +63,7 @@ public class TreeOutputTest
 		tree.append("Item 1.2");
 		tree.dedent();
 		tree.append("Item 2");
-		List<Appendee<String>> list = tree.asList();
+		List<Line<String>> list = tree.asList();
 		assertEquals(4,list.size());
 		assertEquals("Item 1",list.get(0).data);
 		assertEquals(1,list.get(0).indent);
@@ -102,7 +104,7 @@ public class TreeOutputTest
 	@Test(expected=RuntimeException.class)
 	public void tooManyDedents()
 	{
-		TypedTree<String> tree = new TypedTree<String>();
+		BasicOutline<String> tree = new BasicOutline<String>();
 		tree.dedent();
 	}
 

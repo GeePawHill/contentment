@@ -1,12 +1,12 @@
-package org.geepawhill.contentment.tree;
+package org.geepawhill.contentment.outline;
 
-public class KeyValueTreeMessage
+public class KvDifference
 {
 	private String key;
 	private String actual;
 	private String expected;
 
-	public KeyValueTreeMessage(String key,String expected,String actual)
+	public KvDifference(String key,String expected,String actual)
 	{
 		this.setKey(key);
 		this.setActual(actual);

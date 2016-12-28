@@ -1,16 +1,16 @@
-package org.geepawhill.contentment.tree;
+package org.geepawhill.contentment.outline;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.control.TreeItem;
 
-public class TypedTree<T> implements Tree<T>
+public class BasicOutline<T> implements Outline<T>
 {
-	private final ArrayList<Appendee<T>> items;
+	private final ArrayList<Line<T>> items;
 	private int indent;
 
-	public TypedTree()
+	public BasicOutline()
 	{
 		items = new ArrayList<>();
 		indent = 1;
@@ -35,7 +35,7 @@ public class TypedTree<T> implements Tree<T>
 	@Override
 	public void append(T data)
 	{
-		items.add(new Appendee<T>(indent, data));
+		items.add(new Line<T>(indent, data));
 	}
 
 	/* (non-Javadoc)
@@ -52,7 +52,7 @@ public class TypedTree<T> implements Tree<T>
 	 * @see org.geepawhill.contentment.tree.Tree#asList()
 	 */
 	@Override
-	public List<Appendee<T>> asList()
+	public List<Line<T>> asList()
 	{
 		return items;
 	}
@@ -89,7 +89,7 @@ public class TypedTree<T> implements Tree<T>
 	public String asText(String root)
 	{
 		StringBuffer result = new StringBuffer(root + "\n");
-		for (Appendee<T> appendee : items)
+		for (Line<T> appendee : items)
 		{
 			for (int tab = 0; tab < appendee.indent; tab++)
 				result.append("   ");
@@ -106,7 +106,7 @@ public class TypedTree<T> implements Tree<T>
 	{
 		root.setExpanded(true);
 		int lastIndent=1;
-		for (Appendee<T> appendee : items)
+		for (Line<T> appendee : items)
 		{
 			TreeItem<T> newItem = new TreeItem<>(appendee.data);
 			newItem.setExpanded(true);

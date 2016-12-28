@@ -6,11 +6,11 @@ import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.outline.BasicOutline;
+import org.geepawhill.contentment.outline.KeyValue;
 import org.geepawhill.contentment.step.HideStep;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
-import org.geepawhill.contentment.tree.KeyValue;
-import org.geepawhill.contentment.tree.TypedTree;
 
 import javafx.scene.Group;
 import javafx.scene.shape.Line;
@@ -34,7 +34,7 @@ public class Arrow implements Actor
 	}
 	
 	@Override
-	public void dump(TypedTree<KeyValue> output)
+	public void dump(BasicOutline<KeyValue> output)
 	{
 		
 	}

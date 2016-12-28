@@ -2,9 +2,10 @@ package org.geepawhill.contentment.test;
 
 import static org.junit.Assert.assertFalse;
 
-import org.geepawhill.contentment.tree.KeyValue;
-import org.geepawhill.contentment.tree.KeyValueTreeMessage;
-import org.geepawhill.contentment.tree.TypedTree;
+import org.geepawhill.contentment.outline.BasicOutline;
+import org.geepawhill.contentment.outline.KeyValue;
+import org.geepawhill.contentment.outline.KvDifference;
+import org.geepawhill.contentment.outline.KvOutline;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -16,14 +17,14 @@ public class JfxTesterTest
 	@Test
 	public void junitRunTimePopup()
 	{
-		TypedTree<KeyValue> before = new TypedTree<>();
+		KvOutline before = new KvOutline();
 		before.append(new KeyValue("Parent"));
 		before.indent();
 		before.append(new KeyValue("CorrectInBoth","Value"));
 		before.append(new KeyValue("MissingInActual","Value"));
 		before.append(new KeyValue("DifferentValue","Value"));
 		
-		TypedTree<KeyValue> after = new TypedTree<>();
+		KvOutline after = new KvOutline();
 		after.append(new KeyValue("Parent"));
 		after.indent();
 		after.append(new KeyValue("CorrectInBoth","Value"));
@@ -31,9 +32,8 @@ public class JfxTesterTest
 		after.append(new KeyValue("MissingInExpected","Value"));
 
 		JfxTester tester = new JfxTester();
-		TypedTree<KeyValueTreeMessage> details = new TypedTree<>();
+		BasicOutline<KvDifference> details = new BasicOutline<>();
 		tester.compareSnaps(before,after,details);
-		System.out.println(details.asText("Details"));
 		assertFalse(tester.compareSnapsVisual(before,after));
 	}
 

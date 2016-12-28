@@ -4,12 +4,12 @@ import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.jfx.JfxUtility;
+import org.geepawhill.contentment.outline.BasicOutline;
+import org.geepawhill.contentment.outline.KeyValue;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
 import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.style.StyleId;
-import org.geepawhill.contentment.tree.KeyValue;
-import org.geepawhill.contentment.tree.TypedTree;
 
 import javafx.animation.TranslateTransition;
 import javafx.geometry.BoundingBox;
@@ -52,7 +52,7 @@ public class LabelBox implements Actor
 	}
 	
 	@Override
-	public void dump(TypedTree<KeyValue> output)
+	public void dump(BasicOutline<KeyValue> output)
 	{
 		
 	}

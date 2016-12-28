@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.tree;
+package org.geepawhill.contentment.outline;
 
 public class KeyValue
 {

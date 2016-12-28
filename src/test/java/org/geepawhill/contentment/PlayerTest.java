@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.core.TestStep;
 import org.geepawhill.contentment.core.TestStop;
-import org.geepawhill.contentment.tree.Dump;
+import org.geepawhill.contentment.outline.KvOutline;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -340,7 +340,7 @@ public class PlayerTest
 	@Test
 	public void dumpsCurrentAndState()
 	{
-		Dump dump = new Dump();
+		KvOutline dump = new KvOutline();
 		player.reset(new Sequence(nonStopFirst));
 		player.dump(dump);
 		System.out.println(dump.asText("Root"));
@@ -351,7 +351,7 @@ public class PlayerTest
 	@Test
 	public void dumpsStyles()
 	{
-		Dump dump = new Dump();
+		KvOutline dump = new KvOutline();
 		player.reset(new Sequence(nonStopFirst));
 		player.dump(dump);
 		assertNotNull("Does not include Styles.",dump.find("Styles"));

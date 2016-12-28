@@ -1,6 +1,6 @@
 package org.geepawhill.contentment.style;
 
-import org.geepawhill.contentment.tree.Dump;
+import org.geepawhill.contentment.outline.KvOutline;
 
 import javafx.scene.shape.Shape;
 
@@ -35,7 +35,7 @@ public class Style
 		applier.apply(shape);
 	}
 	
-	public void dump(Dump output)
+	public void dump(KvOutline output)
 	{
 		output.append(id.toString(),nickname);
 	}

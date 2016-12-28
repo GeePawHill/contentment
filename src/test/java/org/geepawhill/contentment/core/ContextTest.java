@@ -2,12 +2,12 @@ package org.geepawhill.contentment.core;
 
 import static org.junit.Assert.assertFalse;
 
+import org.geepawhill.contentment.outline.BasicOutline;
+import org.geepawhill.contentment.outline.KvMatcher;
+import org.geepawhill.contentment.outline.KvDifference;
+import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.style.LineColor;
 import org.geepawhill.contentment.style.StyleStep;
-import org.geepawhill.contentment.tree.Dump;
-import org.geepawhill.contentment.tree.KeyValueTreeComparator;
-import org.geepawhill.contentment.tree.KeyValueTreeMessage;
-import org.geepawhill.contentment.tree.TypedTree;
 import org.junit.Test;
 
 import javafx.scene.Group;
@@ -18,15 +18,15 @@ public class ContextTest
 	@Test
 	public void detectsStyleCorruption()
 	{
-		Dump before = new Dump();
+		KvOutline before = new KvOutline();
 		Context context = new Context(new Group());
 		context.dump(before);
 		StyleStep style = new StyleStep(LineColor.red());
 		style.after(context);
-		Dump after = new Dump();
+		KvOutline after = new KvOutline();
 		context.dump(after );
-		KeyValueTreeComparator comparator = new KeyValueTreeComparator();
-		TypedTree<KeyValueTreeMessage> details = new TypedTree<>();
+		KvMatcher comparator = new KvMatcher();
+		BasicOutline<KvDifference> details = new BasicOutline<>();
 		assertFalse(comparator.match(before, after, details));
 	}
 

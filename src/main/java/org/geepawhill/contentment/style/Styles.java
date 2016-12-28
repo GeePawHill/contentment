@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.geepawhill.contentment.tree.Dump;
+import org.geepawhill.contentment.outline.KvOutline;
 
 public class Styles
 {
@@ -49,7 +49,7 @@ public class Styles
 		return result;
 	}
 
-	public void dump(Dump output)
+	public void dump(KvOutline output)
 	{
 		output.append("Styles");
 		output.indent();
@@ -63,7 +63,7 @@ public class Styles
 		output.dedent();
 	}
 
-	private void dumpMap(Dump output, HashMap<StyleId, Style> map)
+	private void dumpMap(KvOutline output, HashMap<StyleId, Style> map)
 	{
 		output.indent();
 		for (Style value : map.values())
