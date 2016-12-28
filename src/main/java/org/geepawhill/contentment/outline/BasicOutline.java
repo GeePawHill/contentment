@@ -124,4 +124,9 @@ public class BasicOutline<T> implements Outline<T>
 		return root;
 	}
 
+	public void clear()
+	{
+		items.clear();
+	}
+
 }

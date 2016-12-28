@@ -90,4 +90,10 @@ public class KvOutline implements Outline<KeyValue>
 		return -1;
 	}
 
+	@Override
+	public void clear()
+	{
+		tree.clear();
+	}
+
 }

@@ -21,4 +21,6 @@ public interface Outline<T>
 
 	TreeItem<T> asTree(TreeItem<T> root);
 
+	void clear();
+
 }
