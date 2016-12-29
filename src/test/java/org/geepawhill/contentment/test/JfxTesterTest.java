@@ -2,9 +2,7 @@ package org.geepawhill.contentment.test;
 
 import static org.junit.Assert.assertFalse;
 
-import org.geepawhill.contentment.outline.BasicOutline;
 import org.geepawhill.contentment.outline.KeyValue;
-import org.geepawhill.contentment.outline.KvDifference;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -32,8 +30,6 @@ public class JfxTesterTest
 		after.append(new KeyValue("MissingInExpected","Value"));
 
 		JfxTester tester = new JfxTester();
-		BasicOutline<KvDifference> details = new BasicOutline<>();
-		tester.compareSnaps(before,after,details);
 		assertFalse(tester.compareSnapsVisual(before,after));
 	}
 

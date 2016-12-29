@@ -2,9 +2,7 @@ package org.geepawhill.contentment.core;
 
 import static org.junit.Assert.assertFalse;
 
-import org.geepawhill.contentment.outline.BasicOutline;
 import org.geepawhill.contentment.outline.KvMatcher;
-import org.geepawhill.contentment.outline.KvDifference;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.style.LineColor;
 import org.geepawhill.contentment.style.StyleStep;
@@ -26,8 +24,7 @@ public class ContextTest
 		KvOutline after = new KvOutline();
 		context.dump(after );
 		KvMatcher comparator = new KvMatcher();
-		BasicOutline<KvDifference> details = new BasicOutline<>();
-		assertFalse(comparator.match(before, after, details));
+		assertFalse(comparator.match(before, after).match);
 	}
 
 }

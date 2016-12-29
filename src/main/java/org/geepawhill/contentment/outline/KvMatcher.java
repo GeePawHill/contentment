@@ -44,6 +44,13 @@ public class KvMatcher
 		matchingKeys = new ArrayList<>();
 		result = new MatchResult();
 	}
+	
+	public MatchResult match(KvOutline expected, KvOutline actual)
+	{
+		MatchResult result = new MatchResult();
+		result.match = match(expected,actual,result.details);
+		return result;
+	}
 
 	public boolean match(KvOutline expected, KvOutline actual, BasicOutline<KvDifference> details)
 	{

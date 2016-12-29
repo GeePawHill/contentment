@@ -113,13 +113,7 @@ public class JfxTester
 
 	public boolean compareSnaps(KvOutline expected, KvOutline actual)
 	{
-		return compareSnaps(expected, actual, new BasicOutline<KvDifference>());
-	}
-
-	public boolean compareSnaps(KvOutline expected, KvOutline actual,
-			BasicOutline<KvDifference> details)
-	{
-		return comparator.match(expected, actual, details);
+		return comparator.match(expected, actual, new BasicOutline<KvDifference>());
 	}
 
 	public boolean compareSnapsVisual(KvOutline expected, KvOutline actual)

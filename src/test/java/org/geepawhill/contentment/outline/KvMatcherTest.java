@@ -4,8 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.geepawhill.contentment.outline.BasicOutline;
-import org.geepawhill.contentment.outline.KeyValue;
+import org.geepawhill.contentment.outline.KvMatcher.MatchResult;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,7 +26,7 @@ public class KvMatcherTest
 	@Test
 	public void emptiesMatch()
 	{
-		assertTrue(matcher.match(expected,actual, new BasicOutline<KvDifference>()));
+		assertTrue(matcher.match(expected,actual).match);
 	}
 	
 	@Test
@@ -35,25 +34,25 @@ public class KvMatcherTest
 	{
 		appendExpected("Item 1");
 		appendActual("Item 1");
-		assertTrue(matcher.match(expected,actual, new BasicOutline<KvDifference>()));
+		assertTrue(matcher.match(expected,actual).match);
 	}
 	
 	@Test
 	public void missingActualFail()
 	{
 		appendExpected("Item 1");
-		BasicOutline<KvDifference> details = new BasicOutline<>();
-		assertFalse(matcher.match(expected,actual, details));
-		assertEquals(2,details.asList().size());
+		MatchResult result = matcher.match(expected, actual);
+		assertFalse(result.match);
+		assertEquals(2,result.details.asList().size());
 	}
 	
 	@Test
 	public void extraActualFail()
 	{
 		appendActual("Item 1");
-		BasicOutline<KvDifference> details = new BasicOutline<>();
-		assertFalse(matcher.match(expected,actual, details));
-		assertEquals(2,details.asList().size());
+		MatchResult result = matcher.match(expected, actual);
+		assertFalse(result.match);
+		assertEquals(2,result.details.asList().size());
 	}
 
 	@Test
@@ -61,9 +60,9 @@ public class KvMatcherTest
 	{
 		appendExpected("Item 1","key");
 		appendActual("Item 1","whoops");
-		BasicOutline<KvDifference> details = new BasicOutline<KvDifference>();
-		assertFalse(matcher.match(expected,actual, details));
-		assertEquals(2,details.asList().size());
+		MatchResult result = matcher.match(expected, actual);
+		assertFalse(result.match);
+		assertEquals(2,result.details.asList().size());
 	}
 	
 	private void appendExpected(String key,String value)
