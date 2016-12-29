@@ -27,8 +27,15 @@ public class Context {
 		styles.push();
 	}
 
-	public void dump(KvOutline output)
+	public void outline(KvOutline output)
 	{
 		this.styles.dump(output);
+	}
+
+	public KvOutline outline()
+	{
+		KvOutline output = new KvOutline();
+		outline(output);
+		return output;
 	}
 }

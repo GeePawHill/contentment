@@ -16,13 +16,11 @@ public class ContextTest
 	@Test
 	public void detectsStyleCorruption()
 	{
-		KvOutline before = new KvOutline();
 		Context context = new Context(new Group());
-		context.dump(before);
+		KvOutline before = context.outline();
 		StyleStep style = new StyleStep(LineColor.red());
 		style.after(context);
-		KvOutline after = new KvOutline();
-		context.dump(after );
+		KvOutline after = context.outline();
 		KvMatcher comparator = new KvMatcher();
 		assertFalse(comparator.match(before, after).match);
 	}

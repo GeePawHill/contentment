@@ -8,7 +8,6 @@ import java.util.TreeSet;
 
 import org.geepawhill.contentment.outline.BasicOutline;
 import org.geepawhill.contentment.outline.KeyValue;
-import org.geepawhill.contentment.outline.Outline;
 
 import javafx.scene.control.TreeItem;
 
@@ -47,33 +46,27 @@ public class KvMatcher
 	
 	public MatchResult match(KvOutline expected, KvOutline actual)
 	{
-		MatchResult result = new MatchResult();
-		result.match = match(expected,actual,result.details);
+		match(expected,actual,result.details,false);
 		return result;
 	}
 
-	public boolean match(KvOutline expected, KvOutline actual, BasicOutline<KvDifference> details)
+	public MatchResult match(KvOutline expected, KvOutline actual, BasicOutline<KvDifference> details, boolean noisy)
 	{
-		return match(expected, actual, details, false);
-	}
-
-	public boolean match(KvOutline expected, KvOutline actual, BasicOutline<KvDifference> details, boolean noisy)
-	{
+		resetDetailArrays();
 		Map<String, String> expectedMap = flatMap(expected);
 		Map<String, String> actualMap = flatMap(actual);
 		printIfNoisy(noisy, expectedMap, actualMap);
-		resetDetailArrays();
 		matchKeys(expectedMap, actualMap);
 		collectRemainingActuals(actualMap);
-		finalizeDetails(details);
-		return result.match;
+		finalizeDetails();
+		return result;
 	}
 
-	private void finalizeDetails(BasicOutline<KvDifference> details)
+	private void finalizeDetails()
 	{
-		addDetails(details, "Missing Actuals", missingActuals);
-		addDetails(details, "Wrong Values", wrongValues);
-		addDetails(details, "Extra Actuals", extraActuals);
+		addDetails("Missing Actuals", missingActuals);
+		addDetails("Wrong Values", wrongValues);
+		addDetails("Extra Actuals", extraActuals);
 	}
 
 	private void collectRemainingActuals(Map<String, String> actualMap)
@@ -134,15 +127,15 @@ public class KvMatcher
 		matchingKeys.clear();
 	}
 
-	private void addDetails(Outline<KvDifference> details, String type, ArrayList<KvDifference> messages)
+	private void addDetails(String type, ArrayList<KvDifference> messages)
 	{
 		if (!messages.isEmpty())
 		{
-			details.append(new KvDifference(type, "", ""));
-			details.indent();
+			result.details.append(new KvDifference(type, "", ""));
+			result.details.indent();
 			for (KvDifference message : messages)
-				details.append(message);
-			details.dedent();
+				result.details.append(message);
+			result.details.dedent();
 		}
 	}
 
