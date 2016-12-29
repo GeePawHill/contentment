@@ -39,19 +39,19 @@ public class ArrowSketchTest extends ApplicationTest
 	@Test
 	public void beforeSameAsPlayBefore() throws Exception
 	{
-		tester.beforeSameAsPlayBefore(arrow, arrow.sketch(1d));
+		tester.beforeSameAsPlayBefore(arrow.sketch(1d));
 	}
 	
 	@Test
 	public void beforeSameAsAfterBefore() throws Exception
 	{
-		tester.beforeSameAsAfterBefore(arrow, arrow.sketch(1d));
+		tester.beforeSameAsAfterBefore(arrow.sketch(1d));
 	}
 	
 	@Test
 	public void afterSameAsPlay() throws Exception
 	{
-		tester.afterSameAsPlay(arrow, arrow.sketch(1d));
+		tester.afterSameAsPlay(arrow.sketch(1d));
 	}
 
 

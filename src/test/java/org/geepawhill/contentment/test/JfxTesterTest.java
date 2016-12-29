@@ -1,36 +1,55 @@
 package org.geepawhill.contentment.test;
 
-import static org.junit.Assert.assertFalse;
-
-import org.geepawhill.contentment.outline.KeyValue;
-import org.geepawhill.contentment.outline.KvOutline;
+import org.geepawhill.contentment.style.LineColor;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.testfx.framework.junit.ApplicationTest;
 
+import javafx.stage.Stage;
 
-public class JfxTesterTest
+@Ignore
+public class JfxTesterTest extends ApplicationTest
 {
 
-	@Ignore
-	@Test
-	public void junitRunTimePopup()
+	JfxTester tester;
+	private TestStep playOnly;
+	private TestStep afterOnly;
+	
+	@Override
+	public void start(Stage stage) throws Exception
 	{
-		KvOutline before = new KvOutline();
-		before.append(new KeyValue("Parent"));
-		before.indent();
-		before.append(new KeyValue("CorrectInBoth","Value"));
-		before.append(new KeyValue("MissingInActual","Value"));
-		before.append(new KeyValue("DifferentValue","Value"));
+		tester = new JfxTester();
+		tester.prepareWindow(stage);
 		
-		KvOutline after = new KvOutline();
-		after.append(new KeyValue("Parent"));
-		after.indent();
-		after.append(new KeyValue("CorrectInBoth","Value"));
-		after.append(new KeyValue("DifferentValue","Whoops!"));
-		after.append(new KeyValue("MissingInExpected","Value"));
-
-		JfxTester tester = new JfxTester();
-		assertFalse(tester.compareSnapsVisual(before,after));
+		playOnly = new TestStep(null,null,(context,onFinished) -> 
+		{
+			context.styles.set(LineColor.red());
+			onFinished.run();
+		});
+		
+		
+		afterOnly = new TestStep(null,(context,onFinished) -> 
+		{
+			context.styles.set(LineColor.red());
+		},
+		null);
+	}
+	
+	@Test
+	public void beforeDoesntUndoPlay()
+	{
+		tester.beforeSameAsPlayBefore(playOnly);
+	}
+	
+	@Test
+	public void afterDoesntMatchPlay()
+	{
+		tester.afterSameAsPlay(playOnly);
 	}
 
+	@Test
+	public void beforeDoesntUndoAfter()
+	{
+		tester.beforeSameAsAfterBefore(afterOnly);
+	}
 }
