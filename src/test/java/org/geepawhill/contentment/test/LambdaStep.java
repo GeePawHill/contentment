@@ -5,7 +5,7 @@ import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.core.Timing;
 
-class TestStep implements Step {
+class LambdaStep implements Step {
 	
 	
 	private StepAction before;
@@ -18,7 +18,7 @@ class TestStep implements Step {
 		void run(Context context, OnFinished onFinished);
 	}
 	
-	public TestStep( StepAction before, StepAction after, StepAction play)
+	public LambdaStep( StepAction before, StepAction after, StepAction play)
 	{
 		this.before = before;
 		this.after = after;

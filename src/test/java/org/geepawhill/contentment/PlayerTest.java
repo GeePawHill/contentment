@@ -343,7 +343,6 @@ public class PlayerTest
 		KvOutline dump = new KvOutline();
 		player.reset(new Sequence(nonStopFirst));
 		player.dump(dump);
-		System.out.println(dump.asText("Root"));
 		assertEquals("0",dump.find("Player.Current").getValue());
 		assertEquals("Before",dump.find("Player.State").getValue());
 	}

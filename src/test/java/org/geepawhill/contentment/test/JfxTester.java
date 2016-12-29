@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.outline.KvVisualMatcher;
@@ -21,7 +22,7 @@ public class JfxTester
 {
 	private Context context;
 	private KvVisualMatcher matcher;
-	private KvOutline beforeAll;
+	public KvOutline beforeAll;
 
 	public JfxTester()
 	{
@@ -41,21 +42,49 @@ public class JfxTester
 		stage.show();
 	}
 
+	public KvOutline waitForPlay(Sequence sequence)
+	{
+		for(int s=0;s<sequence.size();s++)
+		{
+			waitForPlayNoOutline(sequence.get(s));
+		}
+		return context.outline();
+	}
+
 	public KvOutline waitForPlay(Step step)
 	{
-		playLater(step);
+		waitForPlayNoOutline(step);
 		return context.outline();
 	}
 	
 	public KvOutline waitForBefore(Step step)
 	{
-		beforeLater(step);
+		waitForBeforeNoOutline(step);
+		return context.outline();
+	}
+	
+	public KvOutline waitForBefore(Sequence sequence)
+	{
+		for(int s=sequence.size()-1;s>=0;s--)
+		{
+			waitForBeforeNoOutline(sequence.get(s));
+		}
 		return context.outline();
 	}
 
+	public KvOutline waitForAfter(Sequence sequence)
+	{
+		for(int s=0;s<sequence.size();s++)
+		{
+			waitForAfterNoOutline(sequence.get(s));
+		}
+		return context.outline();
+	}
+
+	
 	public KvOutline waitForAfter(Step step)
 	{
-		afterLater(step);
+		waitForAfterNoOutline(step);
 		return context.outline();
 	}
 	
@@ -86,17 +115,17 @@ public class JfxTester
 		matcher.assertEqual(expected, actual);
 	}
 	
-	private void playLater(Step step)
+	private void waitForPlayNoOutline(Step step)
 	{
 		actLater(step,(latch) -> step.play(context,()-> latch.countDown()),	"Play timed out.");
 	}
 	
-	private void afterLater(Step step)
+	private void waitForAfterNoOutline(Step step)
 	{
 		actLater(step, (latch) -> { step.after(context); latch.countDown(); } ,"After timed out.");
 	}
 	
-	private void beforeLater(Step step)
+	private void waitForBeforeNoOutline(Step step)
 	{
 		actLater(step, (latch) -> { step.before(context); latch.countDown(); }, "Before timed out.");
 	}
