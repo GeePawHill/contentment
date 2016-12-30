@@ -4,8 +4,7 @@ import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.jfx.JfxUtility;
-import org.geepawhill.contentment.outline.BasicOutline;
-import org.geepawhill.contentment.outline.KeyValue;
+import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
 import org.geepawhill.contentment.step.TransitionStep;
@@ -58,7 +57,7 @@ public class TargetBox implements Actor
 	}
 	
 	@Override
-	public void dump(BasicOutline<KeyValue> output)
+	public void outline(KvOutline output)
 	{
 		
 	}
