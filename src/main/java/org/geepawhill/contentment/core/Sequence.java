@@ -2,6 +2,8 @@ package org.geepawhill.contentment.core;
 
 import java.util.ArrayList;
 
+import org.geepawhill.contentment.newstep.Instant;
+import org.geepawhill.contentment.newstep.InstantStep;
 import org.geepawhill.contentment.step.Stop;
 
 
@@ -44,6 +46,11 @@ public class Sequence
 	public void add(Step step)
 	{
 		steps.add(step);
+	}
+	
+	public void add(Instant instant)
+	{
+		steps.add(new InstantStep(instant));
 	}
 	
 	public boolean isMarked(int index)

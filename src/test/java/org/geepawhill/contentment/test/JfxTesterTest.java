@@ -17,8 +17,8 @@ public class JfxTesterTest extends ApplicationTest
 {
 
 	JfxTester tester;
-	private LambdaStep playOnly;
-	private LambdaStep afterOnly;
+	private TestLambdaStep playOnly;
+	private TestLambdaStep afterOnly;
 	private Sequence sequence;
 	
 	@Override
@@ -27,14 +27,14 @@ public class JfxTesterTest extends ApplicationTest
 		tester = new JfxTester();
 		tester.prepareWindow(stage);
 		
-		playOnly = new LambdaStep(null,null,(context,onFinished) -> 
+		playOnly = new TestLambdaStep(null,null,(context,onFinished) -> 
 		{
 			context.styles.set(LineColor.red());
 			onFinished.run();
 		});
 		
 		
-		afterOnly = new LambdaStep(null,(context,onFinished) -> 
+		afterOnly = new TestLambdaStep(null,(context,onFinished) -> 
 		{
 			context.styles.set(LineColor.red());
 		},

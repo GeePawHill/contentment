@@ -1,4 +1,10 @@
-package org.geepawhill.contentment.core;
+package org.geepawhill.contentment.test;
+
+import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.OnFinished;
+import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.timing.FixedTiming;
+import org.geepawhill.contentment.timing.Timing;
 
 public class TestStep implements Step
 {

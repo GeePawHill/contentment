@@ -3,10 +3,10 @@ package org.geepawhill.contentment.style;
 import java.util.HashMap;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.FixedTiming;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.core.Step;
-import org.geepawhill.contentment.core.Timing;
+import org.geepawhill.contentment.timing.FixedTiming;
+import org.geepawhill.contentment.timing.Timing;
 
 public class StylePop implements Step
 {

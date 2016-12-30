@@ -6,9 +6,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.core.TestStep;
-import org.geepawhill.contentment.core.TestStop;
 import org.geepawhill.contentment.outline.KvOutline;
+import org.geepawhill.contentment.test.TestStep;
+import org.geepawhill.contentment.test.TestStop;
 import org.junit.Before;
 import org.junit.Test;
 

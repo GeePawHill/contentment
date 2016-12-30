@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.core;
+package org.geepawhill.contentment.timing;
 
 public class TimingBuilder
 {

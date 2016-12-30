@@ -1,46 +1,36 @@
-package org.geepawhill.contentment.style;
+package org.geepawhill.contentment.newstep;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.core.Step;
-import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.Timing;
 
-public class StylePush implements Step
+public class InstantStep implements Step
 {
-	boolean hasPushed;
-	
-	public StylePush()
+	private Instant instant;
+
+	public InstantStep(Instant instant)
 	{
-		hasPushed=false;
+		this.instant = instant;
 	}
 
 	@Override
 	public void after(Context context)
 	{
-		if(hasPushed) return;
-		context.styles.push();
-		hasPushed=true;
-	}
-	
-	@Override
-	public Timing timing()
-	{
-		return FixedTiming.INSTANT;
+		instant.after(context);
 	}
 
 	@Override
 	public void before(Context context)
 	{
-		if(!hasPushed) return;
-		context.styles.pop();
-		hasPushed=false;
+		instant.before(context);
+
 	}
 
 	@Override
 	public void play(Context context, OnFinished onFinished)
 	{
-		after(context);
+		instant.after(context);
 		onFinished.run();
 	}
 
@@ -52,6 +42,12 @@ public class StylePush implements Step
 	@Override
 	public void resume(Context context)
 	{
+	}
+
+	@Override
+	public Timing timing()
+	{
+		return Timing.INSTANT;
 	}
 
 }
