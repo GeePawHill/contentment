@@ -14,21 +14,17 @@ public class PopStyles implements Instant
 	
 	public PopStyles()
 	{
-		popped=null;
 	}
 	
 	@Override
 	public void after(Context context)
 	{
-		if(popped!=null) return;
 		popped = context.styles.pop();
 	}
 
 	@Override
 	public void before(Context context)
 	{
-		if(popped==null) return;
 		context.styles.push(popped);
-		popped=null;
 	}
 }

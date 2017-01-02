@@ -13,20 +13,18 @@ public class SetStyle implements Instant
 	public SetStyle(Style style)
 	{
 		this.style = style;
-		this.previous = null;
 	}
 	
 	@Override
 	public void after(Context context)
 	{
-		if(previous==null) previous = context.styles.get(style.id);
+		previous = context.styles.get(style.id);
 		context.styles.set(style);
 	}
 
 	@Override
 	public void before(Context context)
 	{
-		if(previous!=null) context.styles.set(previous);
-		previous=null;
+		context.styles.set(previous);
 	}
 }

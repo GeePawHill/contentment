@@ -24,7 +24,6 @@ public class InstantStep implements Step
 	public void before(Context context)
 	{
 		instant.before(context);
-
 	}
 
 	@Override

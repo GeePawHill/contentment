@@ -9,6 +9,8 @@ import java.util.function.Consumer;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.newstep.Instant;
+import org.geepawhill.contentment.newstep.InstantStep;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.outline.KvVisualMatcher;
 
@@ -23,6 +25,7 @@ public class JfxTester
 	private Context context;
 	private KvVisualMatcher matcher;
 	public KvOutline beforeAll;
+	private Group group;
 
 	public JfxTester()
 	{
@@ -34,14 +37,24 @@ public class JfxTester
 		Pane region = new Pane();
 		region.setMaxSize(1600d, 900d);
 		region.setMinSize(1600d, 900d);
-		Group group = new Group();
+		group = new Group();
 		region.getChildren().add(group);
-		context = new Context(group);
-		beforeAll = context.outline();
+		resetContext();
 		stage.setScene(new Scene(region));
 		stage.show();
 	}
 
+	private void resetContext()
+	{
+		context = new Context(group);
+		beforeAll = context.outline();
+	}
+
+	public KvOutline waitForPlay(Step step)
+	{
+		return waitForPlay(new Sequence(step));
+	}
+	
 	public KvOutline waitForPlay(Sequence sequence)
 	{
 		for(int s=0;s<sequence.size();s++)
@@ -50,17 +63,10 @@ public class JfxTester
 		}
 		return context.outline();
 	}
-
-	public KvOutline waitForPlay(Step step)
-	{
-		waitForPlayNoOutline(step);
-		return context.outline();
-	}
 	
 	public KvOutline waitForBefore(Step step)
 	{
-		waitForBeforeNoOutline(step);
-		return context.outline();
+		return waitForBefore(new Sequence(step));
 	}
 	
 	public KvOutline waitForBefore(Sequence sequence)
@@ -71,7 +77,12 @@ public class JfxTester
 		}
 		return context.outline();
 	}
-
+	
+	public KvOutline waitForAfter(Step step)
+	{
+		return waitForAfter(new Sequence(step));
+	}
+	
 	public KvOutline waitForAfter(Sequence sequence)
 	{
 		for(int s=0;s<sequence.size();s++)
@@ -81,38 +92,49 @@ public class JfxTester
 		return context.outline();
 	}
 
-	
-	public KvOutline waitForAfter(Step step)
-	{
-		waitForAfterNoOutline(step);
-		return context.outline();
-	}
-	
 	public void beforeSameAsPlayBefore(Step step) 
 	{
-		waitForPlay(step);
-		KvOutline before = waitForBefore(step);
-		matcher.assertEqual(beforeAll, before);
+		beforeSameAsPlayBefore(new Sequence(step));
+	}
+	
+	public void beforeSameAsPlayBefore(Sequence sequence) 
+	{
+		resetContext();
+		waitForPlay(sequence);
+		KvOutline before = waitForBefore(sequence);
+		matcher.assertEqual("Before Same as Play Before", beforeAll, before);
 	}
 
 	public void beforeSameAsAfterBefore(Step step)
 	{
-		waitForAfter(step);
-		KvOutline before = waitForBefore(step);
-		matcher.assertEqual(beforeAll, before);
+		beforeSameAsAfterBefore(new Sequence(step));
+	}
+	
+	public void beforeSameAsAfterBefore(Sequence sequence) 
+	{
+		resetContext();
+		waitForAfter(sequence);
+		KvOutline before = waitForBefore(sequence);
+		matcher.assertEqual("Change fail message!", beforeAll, before);
 	}
 
 	public void afterSameAsPlay(Step step)
 	{
-		KvOutline after = waitForAfter(step);
-		waitForBefore(step);
-		KvOutline play = waitForPlay(step);
-		matcher.assertEqual(after, play);
+		afterSameAsPlay(new Sequence(step));
+	}
+
+	public void afterSameAsPlay(Sequence sequence)
+	{
+		resetContext();
+		KvOutline after = waitForAfter(sequence);
+		resetContext();
+		KvOutline play = waitForPlay(sequence);
+		matcher.assertEqual("Change fail message!", after, play);
 	}
 
 	public void assertEquals(KvOutline expected, KvOutline actual)
 	{
-		matcher.assertEqual(expected, actual);
+		matcher.assertEqual("Change fail message!", expected, actual);
 	}
 	
 	private void waitForPlayNoOutline(Step step)
@@ -150,5 +172,22 @@ public class JfxTester
 		{
 			throw new RuntimeException(e);
 		}
+	}
+
+	public void assertContractValid(Instant step)
+	{
+		assertContractValid(new Sequence(new InstantStep(step)));
+	}
+
+	public void assertContractValid(Step step)
+	{
+		assertContractValid(new Sequence(step));
+	}
+	
+	public void assertContractValid(Sequence sequence)
+	{
+		afterSameAsPlay(sequence);
+		beforeSameAsPlayBefore(sequence);
+		beforeSameAsAfterBefore(sequence);
 	}
 }

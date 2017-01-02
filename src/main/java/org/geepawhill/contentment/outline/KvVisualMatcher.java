@@ -27,7 +27,7 @@ public class KvVisualMatcher
 		matcher = new KvMatcher();
 	}
 
-	public void assertEqual(KvOutline expected, KvOutline actual)
+	public void assertEqual(String message, KvOutline expected, KvOutline actual)
 	{
 		MatchResult result = matcher.match(expected, actual);
 		if (result.match == true) return;
@@ -47,7 +47,9 @@ public class KvVisualMatcher
 		catch (InterruptedException ignored)
 		{
 		}
-		fail("Mismatch in outlines.");
+		System.out.println(expected.asText("Expected"));
+		System.out.println(actual.asText("Actual"));
+		fail("Mismatch in outlines: "+message);
 	}
 
 	private Scene loadDifferencesToScene(TableView<KvDifference> detailsView)
