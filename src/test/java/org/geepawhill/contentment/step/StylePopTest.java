@@ -3,11 +3,11 @@ package org.geepawhill.contentment.step;
 import static org.junit.Assert.assertEquals;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.step.styles.PopStyles;
+import org.geepawhill.contentment.step.styles.PushStyles;
 import org.geepawhill.contentment.style.LineColor;
 import org.geepawhill.contentment.style.Style;
 import org.geepawhill.contentment.style.StyleId;
-import org.geepawhill.contentment.style.StylePop;
-import org.geepawhill.contentment.style.StylePush;
 import org.junit.Test;
 
 import javafx.scene.Group;
@@ -22,11 +22,11 @@ public class StylePopTest
 		Context context = new Context(new Group());
 		Style redLine = LineColor.lineColor("RED", Color.RED);
 		context.styles.set(redLine);
-		StylePush push = new StylePush();
+		PushStyles push = new PushStyles();
 		push.after(context);
 		Style blackLine = LineColor.lineColor("BLACK", Color.BLACK);
 		context.styles.set(blackLine);
-		StylePop pop = new StylePop();
+		PopStyles pop = new PopStyles();
 		pop.after(context);
 		assertEquals(redLine,context.styles.get(StyleId.LineColor));
 		pop.before(context);

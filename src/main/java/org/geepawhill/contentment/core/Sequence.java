@@ -43,6 +43,11 @@ public class Sequence
 		add(step);
 	}
 	
+	public void unmarked(Instant instant)
+	{
+		add(instant);
+	}
+	
 	public void add(Step step)
 	{
 		steps.add(step);
