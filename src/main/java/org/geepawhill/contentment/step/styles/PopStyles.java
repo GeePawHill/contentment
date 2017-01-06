@@ -15,12 +15,12 @@ public class PopStyles implements Instant
 	@Override
 	public void after(Context context)
 	{
-		popped = context.styles.pop();
+		popped = context.styles.getAll();
 	}
 
 	@Override
 	public void before(Context context)
 	{
-		context.styles.push(popped);
+		context.styles.setAll(popped);
 	}
 }

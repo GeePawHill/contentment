@@ -24,7 +24,6 @@ public class Context {
 		styles.set(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch",60d)));
 		styles.set(Opacity.opacity(.5d));
 		styles.set(Dash.solid());
-		styles.push();
 	}
 
 	public void outline(KvOutline output)

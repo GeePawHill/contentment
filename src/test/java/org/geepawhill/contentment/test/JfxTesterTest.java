@@ -4,7 +4,9 @@ import static org.junit.Assert.*;
 
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.outline.KvOutline;
+import org.geepawhill.contentment.step.styles.PopStyles;
 import org.geepawhill.contentment.step.styles.PushStyles;
+import org.geepawhill.contentment.step.styles.SetStyle;
 import org.geepawhill.contentment.style.LineColor;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -44,7 +46,8 @@ public class JfxTesterTest extends ApplicationTest
 		
 		sequence = new Sequence();
 		sequence.add(new PushStyles());
-		sequence.add(new PushStyles());
+		sequence.add(new SetStyle(LineColor.red()));
+		sequence.add(new PopStyles());
 	}
 
 	@Ignore
@@ -72,16 +75,14 @@ public class JfxTesterTest extends ApplicationTest
 	public void playSequence()
 	{
 		KvOutline play = tester.waitForPlay(sequence);
-		assertNotNull(play.find("Styles.Map2"));
-		assertNotNull(play.find("Styles.Map3"));
+		assertEquals(LineColor.red().toString(),play.find("Styles.LineColor").getValue());
 	}
 	
 	@Test
 	public void afterSequence()
 	{
 		KvOutline after = tester.waitForAfter(sequence);
-		assertNotNull(after.find("Styles.Map2"));
-		assertNotNull(after.find("Styles.Map3"));
+		assertEquals(LineColor.red().toString(),after.find("Styles.LineColor").getValue());
 	}
 	
 	@Test
@@ -89,7 +90,6 @@ public class JfxTesterTest extends ApplicationTest
 	{
 		tester.waitForPlay(sequence);
 		KvOutline before = tester.waitForBefore(sequence);
-		assertNull(before.find("Styles.Map2"));
-		assertNull(before.find("Styles.Map3"));
+		assertEquals(LineColor.black().toString(),before.find("Styles.LineColor").getValue());
 	}
 }

@@ -1,74 +1,59 @@
 package org.geepawhill.contentment.style;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import org.geepawhill.contentment.outline.KvOutline;
 
 public class Styles
 {
-	
+
 	static public class StylesMemo
 	{
-		private HashMap<StyleId, Style> map;
+		private HashMap<StyleId, Style> stash;
+
+		public StylesMemo(HashMap<StyleId, Style> styles)
+		{
+			stash = styles;
+		}
 	}
 
-	List<HashMap<StyleId, Style>> old;
+	HashMap<StyleId, Style> styles;
 
 	public Styles()
 	{
-		old = new ArrayList<>();
-		push();
+		styles = new HashMap<>();
 	}
 
-	public void set(Style style)
+	public Style set(Style style)
 	{
-		old.get(0).put(style.id, style);
+		Style oldStyle = styles.get(style.id);
+		styles.put(style.id, style);
+		return oldStyle;
 	}
 
 	public Style get(StyleId id)
 	{
-		for (HashMap<StyleId, Style> map : old)
-		{
-			if (map.containsKey(id)) return map.get(id);
-		}
-		throw new RuntimeException("Asked for unset style: " + id.toString());
+		if(styles.containsKey(id)) return styles.get(id);
+		throw new RuntimeException("Attempt to get un-set style: "+id.name());
 	}
 
-	public void push()
+	@SuppressWarnings("unchecked")
+	public StylesMemo getAll()
 	{
-		HashMap<StyleId, Style> hashMap = new HashMap<StyleId, Style>();
-		StylesMemo memo = new StylesMemo();
-		memo.map = hashMap;
-		push(memo);
+		return new StylesMemo((HashMap<StyleId, Style>) styles.clone());
 	}
 
-	public void push(StylesMemo memo)
+	public StylesMemo setAll(StylesMemo memo)
 	{
-		old.add(0, memo.map);
-	}
-
-	public StylesMemo pop()
-	{
-		if (old.isEmpty()) throw new RuntimeException("Too many style pops.");
-		StylesMemo memo = new StylesMemo();
-		memo.map = old.remove(0);
-		return memo;
+		StylesMemo result = new StylesMemo(styles);
+		styles = memo.stash;
+		return result;
 	}
 
 	public void dump(KvOutline output)
 	{
 		output.append("Styles");
-		output.indent();
-		int mapNumber = 0;
-		for (HashMap<StyleId, Style> map : old)
-		{
-			output.append("Map" + mapNumber);
-			dumpMap(output, map);
-			mapNumber += 1;
-		}
-		output.dedent();
+		dumpMap(output, styles);
 	}
 
 	private void dumpMap(KvOutline output, HashMap<StyleId, Style> map)
