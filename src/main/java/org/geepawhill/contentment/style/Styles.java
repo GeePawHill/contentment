@@ -8,6 +8,11 @@ import org.geepawhill.contentment.outline.KvOutline;
 
 public class Styles
 {
+	
+	static public class StylesMemo
+	{
+		private HashMap<StyleId, Style> map;
+	}
 
 	List<HashMap<StyleId, Style>> old;
 
@@ -34,19 +39,22 @@ public class Styles
 	public void push()
 	{
 		HashMap<StyleId, Style> hashMap = new HashMap<StyleId, Style>();
-		push(hashMap);
+		StylesMemo memo = new StylesMemo();
+		memo.map = hashMap;
+		push(memo);
 	}
 
-	public void push(HashMap<StyleId, Style> map)
+	public void push(StylesMemo memo)
 	{
-		old.add(0, map);
+		old.add(0, memo.map);
 	}
 
-	public HashMap<StyleId, Style> pop()
+	public StylesMemo pop()
 	{
 		if (old.isEmpty()) throw new RuntimeException("Too many style pops.");
-		HashMap<StyleId, Style> result = old.remove(0);
-		return result;
+		StylesMemo memo = new StylesMemo();
+		memo.map = old.remove(0);
+		return memo;
 	}
 
 	public void dump(KvOutline output)

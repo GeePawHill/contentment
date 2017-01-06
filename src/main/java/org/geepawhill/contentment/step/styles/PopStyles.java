@@ -1,16 +1,12 @@
 package org.geepawhill.contentment.step.styles;
 
-import java.util.HashMap;
-
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.newstep.Instant;
-import org.geepawhill.contentment.style.Style;
-import org.geepawhill.contentment.style.StyleId;
+import org.geepawhill.contentment.style.Styles.StylesMemo;
 
 public class PopStyles implements Instant
 {
-	
-	HashMap<StyleId,Style> popped;
+	StylesMemo popped;
 	
 	public PopStyles()
 	{
