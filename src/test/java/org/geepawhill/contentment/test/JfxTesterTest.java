@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.outline.KvOutline;
-import org.geepawhill.contentment.step.styles.PopStyles;
-import org.geepawhill.contentment.step.styles.PushStyles;
+import org.geepawhill.contentment.step.styles.SetStyles;
+import org.geepawhill.contentment.step.styles.GetStyles;
 import org.geepawhill.contentment.step.styles.SetStyle;
 import org.geepawhill.contentment.style.LineColor;
 import org.junit.Ignore;
@@ -45,9 +45,9 @@ public class JfxTesterTest extends ApplicationTest
 		
 		
 		sequence = new Sequence();
-		sequence.add(new PushStyles());
+		sequence.add(new GetStyles());
 		sequence.add(new SetStyle(LineColor.red()));
-		sequence.add(new PopStyles());
+		sequence.add(new SetStyles());
 	}
 
 	@Ignore

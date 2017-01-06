@@ -28,7 +28,7 @@ public class Context {
 
 	public void outline(KvOutline output)
 	{
-		this.styles.dump(output);
+		this.styles.outline(output);
 	}
 
 	public KvOutline outline()

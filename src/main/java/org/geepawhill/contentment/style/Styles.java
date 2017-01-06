@@ -3,8 +3,9 @@ package org.geepawhill.contentment.style;
 import java.util.HashMap;
 
 import org.geepawhill.contentment.outline.KvOutline;
+import org.geepawhill.contentment.outline.Outliner;
 
-public class Styles
+public class Styles implements Outliner
 {
 
 	static public class StylesMemo
@@ -50,7 +51,8 @@ public class Styles
 		return result;
 	}
 
-	public void dump(KvOutline output)
+	@Override
+	public void outline(KvOutline output)
 	{
 		output.append("Styles");
 		dumpMap(output, styles);

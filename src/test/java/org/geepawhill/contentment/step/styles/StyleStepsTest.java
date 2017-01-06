@@ -10,32 +10,32 @@ public class StyleStepsTest extends JfxTest
 {
 
 	@Test
-	public void pushContract()
+	public void setStylesContract()
 	{
-		Sequence sequence = new Sequence(new InstantStep(new PushStyles()));
+		Sequence sequence = new Sequence(new InstantStep(new GetStyles()));
 		tester.afterSameAsPlay(sequence);
 		tester.beforeSameAsPlayBefore(sequence);
 		tester.beforeSameAsAfterBefore(sequence);
 	}
 	
 	@Test
-	public void popContract()
+	public void getStylesContract()
 	{
 		Sequence sequence = new Sequence();
-		sequence.add(new PushStyles());
-		sequence.add(new PopStyles());
+		sequence.add(new GetStyles());
+		sequence.add(new SetStyles());
 		tester.afterSameAsPlay(sequence);
 		tester.beforeSameAsPlayBefore(sequence);
 		tester.beforeSameAsAfterBefore(sequence);
 	}
 	
 	@Test
-	public void setContract()
+	public void setStyleContract()
 	{
 		Sequence sequence = new Sequence();
 		sequence.add(new SetStyle(LineColor.red()));
 		tester.beforeSameAsPlayBefore(sequence);
-//		tester.afterSameAsPlay(sequence);
-//		tester.beforeSameAsAfterBefore(sequence);
+		tester.afterSameAsPlay(sequence);
+		tester.beforeSameAsAfterBefore(sequence);
 	}
 }

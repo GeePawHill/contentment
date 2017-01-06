@@ -271,7 +271,7 @@ public class Player
 		dump.append("State",state.name());
 		dump.append("Current",Integer.toString(current));
 		dump.dedent();
-		context.styles.dump(dump);
+		context.styles.outline(dump);
 	}
 
 }

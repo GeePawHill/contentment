@@ -29,7 +29,7 @@ public class LineColor
 
 	public static Style red()
 	{
-		return lineColor("RED",Color.BLACK);
+		return lineColor("RED",Color.RED);
 	}
 
 }
