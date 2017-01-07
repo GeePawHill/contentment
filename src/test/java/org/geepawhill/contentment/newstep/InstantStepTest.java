@@ -3,12 +3,12 @@ package org.geepawhill.contentment.newstep;
 import static org.junit.Assert.*;
 
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.test.JfxTest;
+import org.geepawhill.contentment.test.StepTest;
 import org.geepawhill.contentment.test.TestInstant;
 import org.junit.Before;
 import org.junit.Test;
 
-public class InstantStepTest extends JfxTest
+public class InstantStepTest extends StepTest
 {
 
 	private Sequence sequence;
@@ -25,22 +25,22 @@ public class InstantStepTest extends JfxTest
 	@Test
 	public void playDoes()
 	{
-		tester.waitForPlay(sequence);
+		runner.waitForPlay(sequence);
 		assertFalse(instant.isBefore);
 	}
 	
 	@Test
 	public void afterDoes()
 	{
-		tester.waitForAfter(sequence);
+		runner.waitForAfter(sequence);
 		assertFalse(instant.isBefore);
 	}
 	
 	@Test
 	public void beforeDoes()
 	{
-		tester.waitForPlay(sequence);
-		tester.waitForBefore(sequence);
+		runner.waitForPlay(sequence);
+		runner.waitForBefore(sequence);
 		assertTrue(instant.isBefore);
 	}
 
