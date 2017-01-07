@@ -3,7 +3,10 @@ package org.geepawhill.contentment.core;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Actors implements Iterable<Actor>
+import org.geepawhill.contentment.outline.KvOutline;
+import org.geepawhill.contentment.outline.Outliner;
+
+public class Actors implements Iterable<Actor>, Outliner
 {
 	
 	private ArrayList<Actor> actors;
@@ -37,5 +40,20 @@ public class Actors implements Iterable<Actor>
 	public Iterator<Actor> iterator()
 	{
 		return actors.iterator();
+	}
+
+	@Override
+	public void outline(KvOutline output)
+	{
+		if(size()==0) return;
+		{
+			output.append("Actors");
+			output.indent();
+			for(Actor actor : actors)
+			{
+				actor.outline(output);
+			}
+			output.dedent();
+		}
 	}
 }

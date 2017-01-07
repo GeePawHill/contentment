@@ -5,21 +5,23 @@ import static org.junit.Assert.*;
 import java.util.Iterator;
 
 import org.geepawhill.contentment.actor.LabelBox;
+import org.geepawhill.contentment.actor.Spot;
+import org.geepawhill.contentment.outline.KvOutline;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ActorsTest
 {
 	Actors actors = new Actors();
-	private LabelBox box1;
-	private LabelBox box2;
+	private Spot box1;
+	private Spot box2;
 	
 	@Before
 	public void before()
 	{
 		actors = new Actors();
-		box1 = new LabelBox("", 0, 0);
-		box2 = new LabelBox("", 0, 0);
+		box1 = new Spot(0d, 0d);
+		box2 = new Spot(100d, 100d);
 	}
 
 	@Test
@@ -56,6 +58,15 @@ public class ActorsTest
 		assertEquals(box1,iterator.next());
 		assertEquals(box2,iterator.next());
 		assertFalse(iterator.hasNext());
+	}
+	
+	@Test
+	public void outline()
+	{
+		actors.add(box1);
+		KvOutline output = new KvOutline();
+		actors.outline(output);
+		assertEquals("Spot_1 = (0.0,0.0)",output.find("Actors.Spot_1").toString());
 	}
 
 }

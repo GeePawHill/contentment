@@ -14,22 +14,29 @@ import javafx.scene.shape.Circle;
 public class Spot implements Actor
 {
 
-	Group group;
-	Circle circle;
+	final String name;
+	final Group group;
+	final Circle circle;
 	
 	private static int index=0;
 	
-	public Spot(double x,double y)
+	public Spot(String name,double x, double y)
 	{
+		this.name = name;
 		this.circle = new Circle(x,y,0d);
 		this.circle.setVisible(false);
 		this.group = JfxUtility.makeGroup(index++,this,circle);
 	}
 	
+	public Spot(double x,double y)
+	{
+		this(Names.make(Spot.class.getSimpleName()),x,y);
+	}
+	
 	@Override
 	public void outline(KvOutline output)
 	{
-		
+		output.append(name,"("+circle.getCenterX()+","+circle.getCenterY()+")");
 	}
 	
 	@Override

@@ -96,4 +96,9 @@ public class KvOutline implements Outline<KeyValue>
 		tree.clear();
 	}
 
+	public void dump(String root)
+	{
+		System.out.println(asText(root));
+	}
+
 }

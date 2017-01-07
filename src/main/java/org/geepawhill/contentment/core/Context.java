@@ -12,12 +12,14 @@ import javafx.scene.text.Font;
 
 public class Context {
 	
+	public final Actors actors;
 	public final Group canvas;
 	public Styles styles;
 	
 	public Context(Group canvas)
 	{
 		this.canvas = canvas;
+		this.actors = new Actors();
 		this.styles = new Styles();
 		styles.set(LineColor.black());
 		styles.set(PenWidth.penWidth(5d));
@@ -28,7 +30,8 @@ public class Context {
 
 	public void outline(KvOutline output)
 	{
-		this.styles.outline(output);
+		styles.outline(output);
+		actors.outline(output);
 	}
 
 	public KvOutline outline()
