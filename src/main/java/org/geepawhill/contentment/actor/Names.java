@@ -7,6 +7,12 @@ public class Names
 	
 	private static HashMap<String,Integer> increments = new HashMap<>();
 
+	
+	public static String make(Class clazz)
+	{
+		return make(clazz.getSimpleName());
+	}
+	
 	public static String make(String simpleName)
 	{
 		Integer increment = increments.getOrDefault(simpleName, 1);

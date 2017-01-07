@@ -4,9 +4,12 @@ import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.newstep.Instant;
 import org.geepawhill.contentment.newstep.InstantStep;
+import org.geepawhill.contentment.outline.KeyValue;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.outline.KvVisualMatcher;
 import org.testfx.framework.junit.ApplicationTest;
+
+import static org.junit.Assert.*;
 
 import javafx.stage.Stage;
 
@@ -22,6 +25,11 @@ public class StepTest extends ApplicationTest
 		runner = new StepRunner();
 		matcher = new KvVisualMatcher();
 		runner.prepareWindow(stage);
+	}
+	
+	public KvOutline play(Instant instant)
+	{
+		return play(new InstantStep(instant));
 	}
 
 	public KvOutline play(Step step)
@@ -54,7 +62,7 @@ public class StepTest extends ApplicationTest
 		return runner.waitForAfter(sequence);
 	}
 
-	public void assertEquals(String message, KvOutline expected, KvOutline actual)
+	public void assertOutlines(String message, KvOutline expected, KvOutline actual)
 	{
 		matcher.assertEqual(message, expected, actual);
 	}
@@ -74,7 +82,7 @@ public class StepTest extends ApplicationTest
 		runner.resetContext();
 		play(sequence);
 		KvOutline before = before(sequence);
-		assertEquals("Before not equal to Play Before.", runner.beforeAll, before);
+		assertOutlines("Before not equal to Play Before.", runner.beforeAll, before);
 	}
 	
 	public void assertBeforeEqualsAfterBefore(Instant instant)
@@ -92,7 +100,7 @@ public class StepTest extends ApplicationTest
 		runner.resetContext();
 		after(sequence);
 		KvOutline before = before(sequence);
-		matcher.assertEqual("Before not equal to After Before.", runner.beforeAll, before);
+		assertOutlines("Before not equal to After Before.", runner.beforeAll, before);
 	}
 	
 	public void assertAfterEqualsPlay(Instant instant)
@@ -111,7 +119,7 @@ public class StepTest extends ApplicationTest
 		KvOutline after = after(sequence);
 		runner.resetContext();
 		KvOutline play = play(sequence);
-		matcher.assertEqual("After not equal to play.", after, play);
+		assertOutlines("After not equal to play.", after, play);
 	}
 
 	public void assertContractValid(Instant step)
@@ -130,5 +138,24 @@ public class StepTest extends ApplicationTest
 		assertBeforeEqualsPlayBefore(sequence);
 		assertBeforeEqualsAfterBefore(sequence);
 	}
+	
+	public KeyValue assertKey(KvOutline outline,String key)
+	{
+		KeyValue found = outline.find(key);
+		if(found==null)
+		{
+			outline.dump("Outline");
+			System.out.println("Missing key: "+key);
+			fail("Key not found: ["+key+"]");
+		}
+		return found;
+	}
 
+	public void assertKey(KvOutline outline,String key,String value)
+	{
+		KeyValue found = assertKey(outline,key);
+		assertEquals(value,found.getValue());
+	}
+
+	
 }

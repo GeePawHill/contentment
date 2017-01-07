@@ -18,20 +18,19 @@ public class Spot implements Actor
 	final Group group;
 	final Circle circle;
 	
-	private static int index=0;
+	public Spot(double x,double y)
+	{
+		this(Names.make(Spot.class.getSimpleName()),x,y);
+	}
 	
 	public Spot(String name,double x, double y)
 	{
 		this.name = name;
 		this.circle = new Circle(x,y,0d);
 		this.circle.setVisible(false);
-		this.group = JfxUtility.makeGroup(index++,this,circle);
+		this.group = new Group(circle);
 	}
 	
-	public Spot(double x,double y)
-	{
-		this(Names.make(Spot.class.getSimpleName()),x,y);
-	}
 	
 	@Override
 	public void outline(KvOutline output)
