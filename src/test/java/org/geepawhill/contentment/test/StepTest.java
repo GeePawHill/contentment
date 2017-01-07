@@ -156,6 +156,4 @@ public class StepTest extends ApplicationTest
 		KeyValue found = assertKey(outline,key);
 		assertEquals(value,found.getValue());
 	}
-
-	
 }
