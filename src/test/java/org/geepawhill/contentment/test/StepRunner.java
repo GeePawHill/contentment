@@ -18,9 +18,9 @@ import javafx.stage.Stage;
 
 public class StepRunner
 {
-	private Context context;
+	public Context context;
 	public KvOutline beforeAll;
-	private Group group;
+	public Group group;
 
 	public void prepareWindow(Stage stage)
 	{
@@ -78,7 +78,7 @@ public class StepRunner
 				step.play(context, () -> latch.countDown() );
 			}
 		};
-		actLater(step, action);
+		actLater(action);
 	}
 
 	private void afterWithLatch(Step step)
@@ -92,7 +92,7 @@ public class StepRunner
 				latch.countDown();
 			}
 		};
-		actLater(step, action);
+		actLater(action);
 	}
 
 	private void beforeWithLatch(Step step)
@@ -106,10 +106,10 @@ public class StepRunner
 				latch.countDown();
 			}
 		};
-		actLater(step, action);
+		actLater(action);
 	}
 
-	private void actLater(Step step, Consumer<CountDownLatch> action)
+	public void actLater(Consumer<CountDownLatch> action)
 	{
 		final CountDownLatch latch = new CountDownLatch(1);
 		Platform.runLater(() -> action.accept(latch));

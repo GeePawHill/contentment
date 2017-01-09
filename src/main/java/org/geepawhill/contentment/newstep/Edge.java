@@ -1,0 +1,74 @@
+package org.geepawhill.contentment.newstep;
+
+import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.OnFinished;
+import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.step.ContextTransition;
+import org.geepawhill.contentment.timing.Timing;
+
+import javafx.animation.Transition;
+import javafx.scene.shape.Line;
+
+public class Edge implements Step
+{
+
+	private Timing timing;
+	private PointPair points;
+	private Line line;
+	private Transition transition;
+
+	public Edge(Timing timing, PointPair points, Line line)
+	{
+		this.timing = timing;
+		this.points = points;
+		this.line = line;
+	}
+
+	@Override
+	public void after(Context context)
+	{
+		interpolate(1d,context);
+	}
+
+	@Override
+	public void before(Context context)
+	{
+		interpolate(0d,context);
+	}
+
+	@Override
+	public void play(Context context, OnFinished onFinished)
+	{
+		transition = new ContextTransition( context,this::interpolate,timing().getAbsolute());
+		transition.setOnFinished((event) -> onFinished.run());
+		transition.play();
+	}
+
+	@Override
+	public void pause(Context context)
+	{
+		transition.pause();
+	}
+
+	@Override
+	public void resume(Context context)
+	{
+		transition.play();
+	}
+
+	@Override
+	public Timing timing()
+	{
+		return timing;
+	}
+	
+	private void interpolate(double fraction, Context context)
+	{
+		line.setStartX(points.from.x);
+		line.setStartY(points.from.y);
+		line.setEndX(points.partialX(fraction));
+		line.setEndY(points.partialY(fraction));
+		if(fraction>0d) line.setVisible(true);
+	}
+}

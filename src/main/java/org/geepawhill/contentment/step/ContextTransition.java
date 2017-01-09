@@ -10,12 +10,17 @@ public class ContextTransition extends Transition
 	
 	Context context;
 	ContextInterpolator interpolator;
-
-	public ContextTransition(Context context,SubStep substep, double trueTime)
+	
+	public ContextTransition(Context context, ContextInterpolator interpolator, double ms)
 	{
 		this.context = context;
-		this.interpolator = substep.interpolator;
-		setCycleDuration(Duration.millis(trueTime));
+		this.interpolator = interpolator;
+		setCycleDuration(Duration.millis(ms));
+	}
+
+	public ContextTransition(Context context,SubStep substep, double ms)
+	{
+		this(context,substep.interpolator,ms);
 	}
 
 	@Override
