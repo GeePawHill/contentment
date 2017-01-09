@@ -8,7 +8,7 @@ public class Names
 	private static HashMap<String,Integer> increments = new HashMap<>();
 
 	
-	public static String make(Class clazz)
+	public static <T> String make(Class<T> clazz)
 	{
 		return make(clazz.getSimpleName());
 	}

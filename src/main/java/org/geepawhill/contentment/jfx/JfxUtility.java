@@ -32,4 +32,12 @@ public class JfxUtility
 		return group;
 	}
 
+	public static void removeIfNeeded(Context context, Group group)
+	{
+		if(context.canvas.getChildren().contains(group))
+		{
+			context.canvas.getChildren().remove(group);
+		}
+	}
+
 }

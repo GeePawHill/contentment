@@ -3,14 +3,10 @@ package org.geepawhill.contentment.step;
 import org.geepawhill.contentment.actor.Spot;
 import org.geepawhill.contentment.actor.arrow.Arrow;
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.test.StepRunner;
 import org.geepawhill.contentment.test.StepTest;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.testfx.framework.junit.ApplicationTest;
-
-import javafx.stage.Stage;
 
 @Ignore
 public class ArrowSketchTest extends StepTest

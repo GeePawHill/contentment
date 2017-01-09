@@ -5,6 +5,7 @@ import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.ContextTransition;
+import org.geepawhill.contentment.style.StyleId;
 import org.geepawhill.contentment.timing.Timing;
 
 import javafx.animation.Transition;
@@ -13,9 +14,9 @@ import javafx.scene.shape.Line;
 public class Edge implements Step
 {
 
-	private Timing timing;
-	private PointPair points;
-	private Line line;
+	private final Timing timing;
+	private final PointPair points;
+	private final Line line;
 	private Transition transition;
 
 	public Edge(Timing timing, PointPair points, Line line)
@@ -65,10 +66,18 @@ public class Edge implements Step
 	
 	private void interpolate(double fraction, Context context)
 	{
+		if(fraction==0d)
+		{
+			line.setVisible(false);
+		}
+		else
+			line.setVisible(true);
+		context.apply(StyleId.LineColor,line);
+		context.apply(StyleId.PenWidth,line);
+		context.apply(StyleId.Opacity, line);
 		line.setStartX(points.from.x);
 		line.setStartY(points.from.y);
 		line.setEndX(points.partialX(fraction));
 		line.setEndY(points.partialY(fraction));
-		if(fraction>0d) line.setVisible(true);
 	}
 }

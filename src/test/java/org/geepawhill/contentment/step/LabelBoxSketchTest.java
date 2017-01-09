@@ -3,12 +3,9 @@ package org.geepawhill.contentment.step;
 import org.geepawhill.contentment.actor.LabelBox;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.core.Step;
-import org.geepawhill.contentment.test.StepRunner;
 import org.geepawhill.contentment.test.StepTest;
 import org.junit.Before;
 import org.junit.Test;
-
-import javafx.stage.Stage;
 
 public class LabelBoxSketchTest extends StepTest
 {

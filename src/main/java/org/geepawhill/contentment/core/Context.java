@@ -5,9 +5,11 @@ import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.LineColor;
 import org.geepawhill.contentment.style.Opacity;
 import org.geepawhill.contentment.style.PenWidth;
+import org.geepawhill.contentment.style.StyleId;
 import org.geepawhill.contentment.style.Styles;
 
 import javafx.scene.Group;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 
 public class Context {
@@ -40,4 +42,11 @@ public class Context {
 		outline(output);
 		return output;
 	}
+
+	public void apply(StyleId id,Shape shape)
+	{
+		styles.get(id).apply(shape);
+	}
+
+
 }

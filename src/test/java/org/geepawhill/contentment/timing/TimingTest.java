@@ -4,9 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.geepawhill.contentment.core.RelativeTiming;
-import org.geepawhill.contentment.timing.FixedTiming;
-import org.geepawhill.contentment.timing.Timing;
-import org.geepawhill.contentment.timing.TimingBuilder;
 import org.junit.Before;
 import org.junit.Test;
 

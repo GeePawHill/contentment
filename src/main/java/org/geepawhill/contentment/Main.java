@@ -4,21 +4,24 @@ import org.geepawhill.contentment.actor.Label;
 import org.geepawhill.contentment.actor.LabelBox;
 import org.geepawhill.contentment.actor.OvalText;
 import org.geepawhill.contentment.actor.Spot;
+import org.geepawhill.contentment.actor.Stroke;
 import org.geepawhill.contentment.actor.Tale;
 import org.geepawhill.contentment.actor.TargetBox;
 import org.geepawhill.contentment.actor.arrow.Arrow;
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.ClearStep;
 import org.geepawhill.contentment.step.HideStep;
 import org.geepawhill.contentment.step.InstantStep;
 import org.geepawhill.contentment.step.Stop;
-import org.geepawhill.contentment.step.styles.SetStyles;
 import org.geepawhill.contentment.step.styles.GetStyles;
 import org.geepawhill.contentment.step.styles.SetStyle;
+import org.geepawhill.contentment.step.styles.SetStyles;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.LineColor;
 import org.geepawhill.contentment.style.PenWidth;
 import org.geepawhill.contentment.style.Style;
+import org.geepawhill.contentment.timing.FixedTiming;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -60,11 +63,15 @@ public class Main extends Application
 			canvas.getChildren().add(scaledCanvas);
 			forceLetterBox(stage, stage.getScene(), canvas, scaledCanvas);
 			makeGuides();
+			
+			Sequence sequence = new Sequence();
+			Stroke stroke = new Stroke(new PointPair(100d,200d,300d,400d));
+			stroke.sketch(sequence, new FixedTiming(2000d));
 
-			sequence = new Sequence();
-			addBaseComplications(sequence);
-			interactiveStabilization(sequence);
-			agentAndPokes();
+//			sequence = new Sequence();
+//			addBaseComplications(sequence);
+//			interactiveStabilization(sequence);
+//			agentAndPokes();
 			
 			player = new Player(scaledCanvas);
 			player.reset(sequence);

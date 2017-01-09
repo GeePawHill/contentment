@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.newstep;
 
 import org.geepawhill.contentment.actor.Spot;
-import org.geepawhill.contentment.outline.KvOutline;
+import org.geepawhill.contentment.test.ContextOutline;
 import org.geepawhill.contentment.test.StepTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +22,7 @@ public class EntranceTest extends StepTest
 	@Test
 	public void adds()
 	{
-		KvOutline outline = play(entrance);
+		ContextOutline outline = play(entrance);
 		assertKey(outline,"Actors.Spot_1","(100.0,100.0)");
 	}
 

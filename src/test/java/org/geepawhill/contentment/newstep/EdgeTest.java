@@ -1,8 +1,7 @@
 package org.geepawhill.contentment.newstep;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.test.StepTest;

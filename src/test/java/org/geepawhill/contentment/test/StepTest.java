@@ -5,11 +5,8 @@ import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.newstep.Instant;
 import org.geepawhill.contentment.newstep.InstantStep;
 import org.geepawhill.contentment.outline.KeyValue;
-import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.outline.KvVisualMatcher;
 import org.testfx.framework.junit.ApplicationTest;
-
-import static org.junit.Assert.*;
 
 import javafx.stage.Stage;
 
@@ -27,42 +24,42 @@ public class StepTest extends ApplicationTest
 		runner.prepareWindow(stage);
 	}
 	
-	public KvOutline play(Instant instant)
+	public ContextOutline play(Instant instant)
 	{
 		return play(new InstantStep(instant));
 	}
 
-	public KvOutline play(Step step)
+	public ContextOutline play(Step step)
 	{
 		return play(new Sequence(step));
 	}
 
-	public KvOutline play(Sequence sequence)
+	public ContextOutline play(Sequence sequence)
 	{
 		return runner.waitForPlay(sequence);
 	}
 
-	public KvOutline before(Step step)
+	public ContextOutline before(Step step)
 	{
 		return before(new Sequence(step));
 	}
 
-	public KvOutline before(Sequence sequence)
+	public ContextOutline before(Sequence sequence)
 	{
 		return runner.waitForBefore(sequence);
 	}
 
-	public KvOutline after(Step step)
+	public ContextOutline after(Step step)
 	{
 		return after(new Sequence(step));
 	}
 
-	public KvOutline after(Sequence sequence)
+	public ContextOutline after(Sequence sequence)
 	{
 		return runner.waitForAfter(sequence);
 	}
 
-	public void assertOutlines(String message, KvOutline expected, KvOutline actual)
+	public void assertOutlines(String message, ContextOutline expected, ContextOutline actual)
 	{
 		matcher.assertEqual(message, expected, actual);
 	}
@@ -81,7 +78,7 @@ public class StepTest extends ApplicationTest
 	{
 		runner.resetContext();
 		play(sequence);
-		KvOutline before = before(sequence);
+		ContextOutline before = before(sequence);
 		assertOutlines("Before not equal to Play Before.", runner.beforeAll, before);
 	}
 	
@@ -99,7 +96,7 @@ public class StepTest extends ApplicationTest
 	{
 		runner.resetContext();
 		after(sequence);
-		KvOutline before = before(sequence);
+		ContextOutline before = before(sequence);
 		assertOutlines("Before not equal to After Before.", runner.beforeAll, before);
 	}
 	
@@ -116,9 +113,9 @@ public class StepTest extends ApplicationTest
 	public void assertAfterEqualsPlay(Sequence sequence)
 	{
 		runner.resetContext();
-		KvOutline after = after(sequence);
+		ContextOutline after = after(sequence);
 		runner.resetContext();
-		KvOutline play = play(sequence);
+		ContextOutline play = play(sequence);
 		assertOutlines("After not equal to play.", after, play);
 	}
 
@@ -139,21 +136,13 @@ public class StepTest extends ApplicationTest
 		assertBeforeEqualsAfterBefore(sequence);
 	}
 	
-	public KeyValue assertKey(KvOutline outline,String key)
+	public KeyValue assertKey(ContextOutline outline,String key)
 	{
-		KeyValue found = outline.find(key);
-		if(found==null)
-		{
-			outline.dump("Outline");
-			System.out.println("Missing key: "+key);
-			fail("Key not found: ["+key+"]");
-		}
-		return found;
+		return outline.assertKey(key);
 	}
 
-	public void assertKey(KvOutline outline,String key,String value)
+	public KeyValue assertKey(ContextOutline outline,String key,String value)
 	{
-		KeyValue found = assertKey(outline,key);
-		assertEquals(value,found.getValue());
+		return outline.assertKey(key,value);
 	}
 }

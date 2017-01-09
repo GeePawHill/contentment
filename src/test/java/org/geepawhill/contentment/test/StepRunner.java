@@ -8,7 +8,6 @@ import org.geepawhill.contentment.actor.Names;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.core.Step;
-import org.geepawhill.contentment.outline.KvOutline;
 
 import javafx.application.Platform;
 import javafx.scene.Group;
@@ -19,7 +18,7 @@ import javafx.stage.Stage;
 public class StepRunner
 {
 	public Context context;
-	public KvOutline beforeAll;
+	public ContextOutline beforeAll;
 	public Group group;
 
 	public void prepareWindow(Stage stage)
@@ -38,34 +37,34 @@ public class StepRunner
 	{
 		Names.reset();
 		context = new Context(group);
-		beforeAll = context.outline();
+		beforeAll = new ContextOutline(context.outline());
 	}
 
-	public KvOutline waitForPlay(Sequence sequence)
+	public ContextOutline waitForPlay(Sequence sequence)
 	{
 		for (int s = 0; s < sequence.size(); s++)
 		{
 			playWithLatch(sequence.get(s));
 		}
-		return context.outline();
+		return new ContextOutline(context.outline());
 	}
 
-	public KvOutline waitForBefore(Sequence sequence)
+	public ContextOutline waitForBefore(Sequence sequence)
 	{
 		for (int s = sequence.size() - 1; s >= 0; s--)
 		{
 			beforeWithLatch(sequence.get(s));
 		}
-		return context.outline();
+		return new ContextOutline(context.outline());
 	}
 
-	public KvOutline waitForAfter(Sequence sequence)
+	public ContextOutline waitForAfter(Sequence sequence)
 	{
 		for (int s = 0; s < sequence.size(); s++)
 		{
 			afterWithLatch(sequence.get(s));
 		}
-		return context.outline();
+		return new ContextOutline(context.outline());
 	}
 
 	private void playWithLatch(Step step)

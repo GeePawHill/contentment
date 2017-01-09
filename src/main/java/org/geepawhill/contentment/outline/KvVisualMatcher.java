@@ -1,10 +1,11 @@
 package org.geepawhill.contentment.outline;
 
+import static org.junit.Assert.fail;
+
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import org.geepawhill.contentment.outline.KvMatcher.MatchResult;
-import static org.junit.Assert.*;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -27,7 +28,7 @@ public class KvVisualMatcher
 		matcher = new KvMatcher();
 	}
 
-	public void assertEqual(String message, KvOutline expected, KvOutline actual)
+	public void assertEqual(String message, Outline<KeyValue> expected, Outline<KeyValue> actual)
 	{
 		MatchResult result = matcher.match(expected, actual);
 		if (result.match == true) return;

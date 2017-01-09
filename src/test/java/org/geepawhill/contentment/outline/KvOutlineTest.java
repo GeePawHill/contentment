@@ -1,9 +1,7 @@
 package org.geepawhill.contentment.outline;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.geepawhill.contentment.outline.KeyValue;
-import org.geepawhill.contentment.outline.KvOutline;
 import org.junit.Before;
 import org.junit.Test;
 

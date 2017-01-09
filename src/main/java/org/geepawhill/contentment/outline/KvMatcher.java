@@ -6,9 +6,6 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.geepawhill.contentment.outline.BasicOutline;
-import org.geepawhill.contentment.outline.KeyValue;
-
 import javafx.scene.control.TreeItem;
 
 public class KvMatcher
@@ -44,13 +41,13 @@ public class KvMatcher
 		result = new MatchResult();
 	}
 	
-	public MatchResult match(KvOutline expected, KvOutline actual)
+	public MatchResult match(Outline<KeyValue> expected, Outline<KeyValue> actual)
 	{
 		match(expected,actual,result.details,false);
 		return result;
 	}
 
-	public MatchResult match(KvOutline expected, KvOutline actual, BasicOutline<KvDifference> details, boolean noisy)
+	public MatchResult match(Outline<KeyValue> expected, Outline<KeyValue> actual, BasicOutline<KvDifference> details, boolean noisy)
 	{
 		resetDetailArrays();
 		Map<String, String> expectedMap = flatMap(expected);
@@ -153,7 +150,7 @@ public class KvMatcher
 		}
 	}
 
-	private Map<String, String> flatMap(KvOutline source)
+	private Map<String, String> flatMap(Outline<KeyValue> source)
 	{
 		TreeItem<KeyValue> root = new TreeItem<>(new KeyValue("Root", ""));
 		source.asTree(root);

@@ -3,7 +3,6 @@ package org.geepawhill.contentment.test;
 import static org.junit.Assert.assertEquals;
 
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.styles.GetStyles;
 import org.geepawhill.contentment.step.styles.SetStyle;
 import org.geepawhill.contentment.step.styles.SetStyles;
@@ -35,14 +34,14 @@ public class StepRunnerTest extends ApplicationTest
 	@Test
 	public void playSequence()
 	{
-		KvOutline play = runner.waitForPlay(sequence);
+		ContextOutline play = runner.waitForPlay(sequence);
 		assertEquals(LineColor.red().toString(),play.find("Styles.LineColor").getValue());
 	}
 	
 	@Test
 	public void afterSequence()
 	{
-		KvOutline after = runner.waitForAfter(sequence);
+		ContextOutline after = runner.waitForAfter(sequence);
 		assertEquals(LineColor.red().toString(),after.find("Styles.LineColor").getValue());
 	}
 	
@@ -50,7 +49,7 @@ public class StepRunnerTest extends ApplicationTest
 	public void beforeSequence()
 	{
 		runner.waitForPlay(sequence);
-		KvOutline before = runner.waitForBefore(sequence);
+		ContextOutline before = runner.waitForBefore(sequence);
 		assertEquals(LineColor.black().toString(),before.find("Styles.LineColor").getValue());
 	}
 }

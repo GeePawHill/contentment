@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.newstep;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.test.StepTest;

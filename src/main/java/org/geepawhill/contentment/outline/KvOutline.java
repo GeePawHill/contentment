@@ -23,7 +23,17 @@ public class KvOutline implements Outline<KeyValue>
 	{
 		append(new KeyValue(key,value));
 	}
-
+	
+	public void append(String key,Boolean bool)
+	{
+		append(new KeyValue(key,bool.toString()));
+	}
+	
+	public void append(String key,Double d)
+	{
+		append(new KeyValue(key,d.toString()));
+	}
+	
 	@Override
 	public void indent()
 	{

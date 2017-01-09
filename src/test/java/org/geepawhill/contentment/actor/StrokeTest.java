@@ -1,0 +1,48 @@
+package org.geepawhill.contentment.actor;
+
+import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.step.styles.SetStyle;
+import org.geepawhill.contentment.style.LineColor;
+import org.geepawhill.contentment.test.ContextOutline;
+import org.geepawhill.contentment.test.StepTest;
+import org.geepawhill.contentment.timing.FixedTiming;
+import org.junit.Before;
+import org.junit.Test;
+
+public class StrokeTest extends StepTest
+{
+	
+	private Stroke stroke;
+	
+	@Before
+	public void before()
+	{
+		stroke = new Stroke(new PointPair(100d,200d,300d,400d));
+	}
+
+	@Test
+	public void sketchContract()
+	{
+		assertContractValid(sketch());
+	}
+	
+	@Test
+	public void sketchProperties()
+	{
+		ContextOutline outline = play(sketch());
+		System.out.println(outline.asText("Context"));
+		outline.baseKey("Actors.Stroke_1.Line");
+		outline.assertBase("Visible","true");
+		outline.assertBase("Opacity","0.5");
+		outline.assertBase("LineColor","0xff0000ff");
+		outline.assertBase("Bounds","(96,196) - (304,404)");
+	}
+
+	private Sequence sketch()
+	{
+		Sequence sequence = new Sequence();
+		sequence.add(new SetStyle(LineColor.red()));
+		return stroke.sketch(sequence,new FixedTiming(1d));
+	}
+}
