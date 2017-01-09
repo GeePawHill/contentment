@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.geepawhill.contentment.model.Outline;
+
 import javafx.scene.control.TreeItem;
 
 public class KvMatcher

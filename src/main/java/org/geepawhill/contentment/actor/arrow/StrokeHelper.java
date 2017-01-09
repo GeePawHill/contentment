@@ -1,9 +1,9 @@
 package org.geepawhill.contentment.actor.arrow;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.StyleId;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.SubStep;
-import org.geepawhill.contentment.style.StyleId;
 
 import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;

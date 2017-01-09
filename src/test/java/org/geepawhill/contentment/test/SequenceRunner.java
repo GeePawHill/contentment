@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 import org.geepawhill.contentment.actor.Names;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.model.Step;
 
 import javafx.application.Platform;
 import javafx.scene.Group;
@@ -15,7 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class StepRunner
+public class SequenceRunner
 {
 	public Context context;
 	public ContextOutline beforeAll;

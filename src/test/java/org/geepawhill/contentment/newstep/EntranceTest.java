@@ -2,11 +2,11 @@ package org.geepawhill.contentment.newstep;
 
 import org.geepawhill.contentment.actor.Spot;
 import org.geepawhill.contentment.test.ContextOutline;
-import org.geepawhill.contentment.test.StepTest;
+import org.geepawhill.contentment.test.SequenceTest;
 import org.junit.Before;
 import org.junit.Test;
 
-public class EntranceTest extends StepTest
+public class EntranceTest extends SequenceTest
 {
 
 	private Spot spot;

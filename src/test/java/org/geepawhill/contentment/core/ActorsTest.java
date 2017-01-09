@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Iterator;
 
 import org.geepawhill.contentment.actor.Spot;
+import org.geepawhill.contentment.model.Actor;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.junit.Before;
 import org.junit.Test;

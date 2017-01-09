@@ -1,5 +1,7 @@
 package org.geepawhill.contentment.timing;
 
+import org.geepawhill.contentment.model.Timing;
+
 public class FixedTiming implements Timing
 {
 	

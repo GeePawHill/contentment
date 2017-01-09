@@ -1,5 +1,5 @@
-package org.geepawhill.contentment.actor;
-import org.geepawhill.contentment.core.Actor;
+package org.geepawhill.contentment.core;
+import org.geepawhill.contentment.model.Actor;
 import org.geepawhill.contentment.outline.KvOutline;
 
 import javafx.geometry.Bounds;

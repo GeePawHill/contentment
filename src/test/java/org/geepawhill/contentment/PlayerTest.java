@@ -5,7 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import org.geepawhill.contentment.core.Player;
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.model.PlayState;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.test.TestStep;
 import org.geepawhill.contentment.test.TestStop;
@@ -356,7 +358,6 @@ public class PlayerTest
 		assertNotNull("Does not include Styles.",dump.find("Styles"));
 	}
 
-
 	private void assertAfter()
 	{
 		assertEquals(PlayState.After, player.state());
@@ -376,7 +377,4 @@ public class PlayerTest
 	{
 		assertEquals(PlayState.Paused, player.state());
 	}
-	
-	
-
 }

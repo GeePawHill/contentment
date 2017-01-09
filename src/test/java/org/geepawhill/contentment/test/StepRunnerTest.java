@@ -16,13 +16,13 @@ import javafx.stage.Stage;
 public class StepRunnerTest extends ApplicationTest
 {
 
-	private StepRunner runner;
+	private SequenceRunner runner;
 	private Sequence sequence;
 	
 	@Override
 	public void start(Stage stage) throws Exception
 	{
-		runner = new StepRunner();
+		runner = new SequenceRunner();
 		runner.prepareWindow(stage);
 		
 		sequence = new Sequence();

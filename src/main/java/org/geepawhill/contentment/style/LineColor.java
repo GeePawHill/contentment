@@ -1,5 +1,9 @@
 package org.geepawhill.contentment.style;
 
+import org.geepawhill.contentment.core.Style;
+import org.geepawhill.contentment.core.StyleApplier;
+import org.geepawhill.contentment.core.StyleId;
+
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
@@ -10,7 +14,7 @@ public class LineColor
 
 	static public Style lineColor(String nickname, Paint paint)
 	{
-		Style.ShapeApplier applier = new Style.ShapeApplier() {
+		StyleApplier applier = new StyleApplier() {
 			@Override
 			public void apply(Shape shape)
 			{

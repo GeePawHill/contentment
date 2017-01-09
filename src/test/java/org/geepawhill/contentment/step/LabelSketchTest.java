@@ -2,12 +2,12 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.actor.Label;
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.core.Step;
-import org.geepawhill.contentment.test.StepTest;
+import org.geepawhill.contentment.model.Step;
+import org.geepawhill.contentment.test.SequenceTest;
 import org.junit.Before;
 import org.junit.Test;
 
-public class LabelSketchTest extends StepTest
+public class LabelSketchTest extends SequenceTest
 {
 	private Label label;
 

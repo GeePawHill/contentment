@@ -1,4 +1,4 @@
-package org.geepawhill.contentment;
+package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.actor.Label;
 import org.geepawhill.contentment.actor.LabelBox;
@@ -8,19 +8,19 @@ import org.geepawhill.contentment.actor.Stroke;
 import org.geepawhill.contentment.actor.Tale;
 import org.geepawhill.contentment.actor.TargetBox;
 import org.geepawhill.contentment.actor.arrow.Arrow;
-import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.jfx.ScaleListener;
+import org.geepawhill.contentment.jfx.StageMaximizedListener;
+import org.geepawhill.contentment.newstep.Stop;
 import org.geepawhill.contentment.step.ClearStep;
 import org.geepawhill.contentment.step.HideStep;
 import org.geepawhill.contentment.step.InstantStep;
-import org.geepawhill.contentment.step.Stop;
 import org.geepawhill.contentment.step.styles.GetStyles;
 import org.geepawhill.contentment.step.styles.SetStyle;
 import org.geepawhill.contentment.step.styles.SetStyles;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.LineColor;
 import org.geepawhill.contentment.style.PenWidth;
-import org.geepawhill.contentment.style.Style;
 import org.geepawhill.contentment.timing.FixedTiming;
 
 import javafx.application.Application;

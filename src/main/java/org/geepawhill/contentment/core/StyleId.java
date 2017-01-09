@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.style;
+package org.geepawhill.contentment.core;
 
 public enum StyleId
 {

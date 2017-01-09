@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.test;
 
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.newstep.Instant;
 import org.geepawhill.contentment.newstep.InstantStep;
 import org.geepawhill.contentment.outline.KeyValue;
@@ -10,16 +10,16 @@ import org.testfx.framework.junit.ApplicationTest;
 
 import javafx.stage.Stage;
 
-public class StepTest extends ApplicationTest
+public class SequenceTest extends ApplicationTest
 {
 
-	public StepRunner runner;
+	public SequenceRunner runner;
 	public KvVisualMatcher matcher;
 
 	@Override
 	public void start(Stage stage) throws Exception
 	{
-		runner = new StepRunner();
+		runner = new SequenceRunner();
 		matcher = new KvVisualMatcher();
 		runner.prepareWindow(stage);
 	}

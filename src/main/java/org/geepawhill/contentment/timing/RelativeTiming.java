@@ -1,6 +1,6 @@
-package org.geepawhill.contentment.core;
+package org.geepawhill.contentment.timing;
 
-import org.geepawhill.contentment.timing.Timing;
+import org.geepawhill.contentment.model.Timing;
 
 public class RelativeTiming implements Timing
 {

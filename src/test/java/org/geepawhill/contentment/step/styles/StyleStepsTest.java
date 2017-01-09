@@ -2,10 +2,10 @@ package org.geepawhill.contentment.step.styles;
 
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.style.LineColor;
-import org.geepawhill.contentment.test.StepTest;
+import org.geepawhill.contentment.test.SequenceTest;
 import org.junit.Test;
 
-public class StyleStepsTest extends StepTest
+public class StyleStepsTest extends SequenceTest
 {
 
 	@Test

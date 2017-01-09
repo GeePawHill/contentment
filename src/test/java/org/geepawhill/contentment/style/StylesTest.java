@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
+import org.geepawhill.contentment.core.Style;
+import org.geepawhill.contentment.core.StyleId;
 import org.geepawhill.contentment.outline.KeyValue;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.outline.Line;

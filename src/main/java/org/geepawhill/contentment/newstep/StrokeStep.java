@@ -1,17 +1,17 @@
 package org.geepawhill.contentment.newstep;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.core.StyleId;
 import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.model.OnFinished;
+import org.geepawhill.contentment.model.Step;
+import org.geepawhill.contentment.model.Timing;
 import org.geepawhill.contentment.step.ContextTransition;
-import org.geepawhill.contentment.style.StyleId;
-import org.geepawhill.contentment.timing.Timing;
 
 import javafx.animation.Transition;
 import javafx.scene.shape.Line;
 
-public class Edge implements Step
+public class StrokeStep implements Step
 {
 
 	private final Timing timing;
@@ -19,7 +19,7 @@ public class Edge implements Step
 	private final Line line;
 	private Transition transition;
 
-	public Edge(Timing timing, PointPair points, Line line)
+	public StrokeStep(Timing timing, PointPair points, Line line)
 	{
 		this.timing = timing;
 		this.points = points;

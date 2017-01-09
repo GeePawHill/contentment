@@ -3,8 +3,9 @@ package org.geepawhill.contentment.core;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.geepawhill.contentment.model.Actor;
+import org.geepawhill.contentment.model.Outliner;
 import org.geepawhill.contentment.outline.KvOutline;
-import org.geepawhill.contentment.outline.Outliner;
 
 public class Actors implements Iterable<Actor>, Outliner
 {

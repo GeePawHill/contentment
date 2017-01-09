@@ -2,8 +2,10 @@ package org.geepawhill.contentment.style;
 
 import java.util.HashMap;
 
+import org.geepawhill.contentment.core.Style;
+import org.geepawhill.contentment.core.StyleId;
+import org.geepawhill.contentment.model.Outliner;
 import org.geepawhill.contentment.outline.KvOutline;
-import org.geepawhill.contentment.outline.Outliner;
 
 public class Styles implements Outliner
 {
@@ -63,7 +65,7 @@ public class Styles implements Outliner
 		output.indent();
 		for (Style value : map.values())
 		{
-			value.dump(output);
+			value.outline(output);
 		}
 		output.dedent();
 	}

@@ -1,4 +1,4 @@
-package org.geepawhill.contentment;
+package org.geepawhill.contentment.jfx;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

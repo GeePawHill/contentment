@@ -5,14 +5,13 @@ import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.styles.SetStyle;
 import org.geepawhill.contentment.style.LineColor;
 import org.geepawhill.contentment.test.ContextOutline;
-import org.geepawhill.contentment.test.StepTest;
+import org.geepawhill.contentment.test.SequenceTest;
 import org.geepawhill.contentment.timing.FixedTiming;
 import org.junit.Before;
 import org.junit.Test;
 
-public class StrokeTest extends StepTest
+public class StrokeTest extends SequenceTest
 {
-	
 	private Stroke stroke;
 	
 	@Before
@@ -31,7 +30,6 @@ public class StrokeTest extends StepTest
 	public void sketchProperties()
 	{
 		ContextOutline outline = play(sketch());
-		System.out.println(outline.asText("Context"));
 		outline.baseKey("Actors.Stroke_1.Line");
 		outline.assertBase("Visible","true");
 		outline.assertBase("Opacity","0.5");

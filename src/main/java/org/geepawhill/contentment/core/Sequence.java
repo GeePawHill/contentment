@@ -2,9 +2,10 @@ package org.geepawhill.contentment.core;
 
 import java.util.ArrayList;
 
+import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.newstep.Instant;
 import org.geepawhill.contentment.newstep.InstantStep;
-import org.geepawhill.contentment.step.Stop;
+import org.geepawhill.contentment.newstep.Stop;
 
 
 public class Sequence

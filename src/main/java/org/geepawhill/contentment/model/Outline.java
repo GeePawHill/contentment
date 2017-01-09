@@ -1,6 +1,8 @@
-package org.geepawhill.contentment.outline;
+package org.geepawhill.contentment.model;
 
 import java.util.List;
+
+import org.geepawhill.contentment.outline.Line;
 
 import javafx.scene.control.TreeItem;
 

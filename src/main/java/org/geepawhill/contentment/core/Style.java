@@ -1,23 +1,17 @@
-package org.geepawhill.contentment.style;
+package org.geepawhill.contentment.core;
 
+import org.geepawhill.contentment.model.Outliner;
 import org.geepawhill.contentment.outline.KvOutline;
 
 import javafx.scene.shape.Shape;
 
-public class Style
+public class Style implements Outliner
 {
-
-	@FunctionalInterface
-	public static interface ShapeApplier
-	{
-		public void apply(Shape shape);
-	}
-
 	public final StyleId id;
-	private final ShapeApplier applier;
-	private String nickname;
+	private final StyleApplier applier;
+	private final String nickname;
 
-	public Style(String nickname, StyleId id, ShapeApplier applier)
+	public Style(String nickname, StyleId id, StyleApplier applier)
 	{
 		this.nickname = nickname;
 		this.id = id;
@@ -35,7 +29,8 @@ public class Style
 		applier.apply(shape);
 	}
 	
-	public void dump(KvOutline output)
+	@Override
+	public void outline(KvOutline output)
 	{
 		output.append(id.toString(),nickname);
 	}

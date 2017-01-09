@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+import org.geepawhill.contentment.model.Outline;
 import org.geepawhill.contentment.outline.KvMatcher.MatchResult;
 
 import javafx.application.Platform;
