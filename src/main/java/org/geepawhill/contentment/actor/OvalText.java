@@ -83,8 +83,8 @@ public class OvalText implements Actor
 	
 	protected void animateDrawText(double frac, Context context)
 	{
-		context.styles.get(StyleId.Font).apply(label);
-		context.styles.get(StyleId.LineColor).apply(label);
+		context.styles.get(StyleId.TextFont).apply(label);
+		context.styles.get(StyleId.ShapeLinePaint).apply(label);
 		String newText = text.substring(0, (int) (frac * text.length()));
 		label.setText(newText);
 		label.setX(xCenter-label.getBoundsInParent().getWidth()/2d);
@@ -97,10 +97,10 @@ public class OvalText implements Actor
 		bounds = new BoundingBox(bounds.getMinX() - HMARGIN, bounds.getMinY() - VMARGIN, bounds.getWidth() + 2 * HMARGIN,
 				bounds.getHeight() + 2 * VMARGIN);
 		oval.setFill(Color.TRANSPARENT);
-		context.styles.get(StyleId.LineColor).apply(oval);
-		context.styles.get(StyleId.PenWidth).apply(oval);
-		context.styles.get(StyleId.Dash).apply(oval);
-		context.styles.get(StyleId.Opacity).apply(oval);
+		context.styles.get(StyleId.ShapeLinePaint).apply(oval);
+		context.styles.get(StyleId.ShapeLineWidth).apply(oval);
+		context.styles.get(StyleId.ShapeLineDash).apply(oval);
+		context.styles.get(StyleId.ShapeLineOpacity).apply(oval);
 		PointPair pair = new PointPair(bounds);
 		oval.setCenterX(pair.centerX());
 		oval.setCenterY(pair.centerY());

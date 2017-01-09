@@ -32,14 +32,14 @@ public class StylesTest
 	@Test(expected=RuntimeException.class)
 	public void throwsOnMissing()
 	{
-		styles.get(StyleId.LineColor);
+		styles.get(StyleId.ShapeLinePaint);
 	}
 	
 	@Test
 	public void setAndGet()
 	{
 		styles.set(redLine);
-		assertEquals(redLine,styles.get(StyleId.LineColor));
+		assertEquals(redLine,styles.get(StyleId.ShapeLinePaint));
 	}
 	
 	@Test
@@ -54,9 +54,9 @@ public class StylesTest
 		styles.set(redLine);
 		StylesMemo previous = styles.getAll();
 		styles.set(blackLine);
-		assertEquals(blackLine,styles.get(StyleId.LineColor));
+		assertEquals(blackLine,styles.get(StyleId.ShapeLinePaint));
 		styles.setAll(previous);
-		assertEquals(redLine,styles.get(StyleId.LineColor));
+		assertEquals(redLine,styles.get(StyleId.ShapeLinePaint));
 	}
 
 	@Test

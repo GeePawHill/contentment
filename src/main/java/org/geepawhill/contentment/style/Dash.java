@@ -18,7 +18,7 @@ public class Dash
 				shape.getStrokeDashArray().clear();;
 			} 
 		};
-		return new Style("SOLID",StyleId.Dash, applier);		
+		return new Style("SOLID",StyleId.ShapeLineDash, applier);		
 	}
 
 	public static Style dash(Double... dash)
@@ -39,7 +39,7 @@ public class Dash
 			nickname+=dashItem;
 			isFirst=false;
 		}
-		return new Style(nickname,StyleId.Dash, applier);		
+		return new Style(nickname,StyleId.ShapeLineDash, applier);		
 	}
 
 }

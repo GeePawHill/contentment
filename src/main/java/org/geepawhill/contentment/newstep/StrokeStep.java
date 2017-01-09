@@ -72,9 +72,9 @@ public class StrokeStep implements Step
 		}
 		else
 			line.setVisible(true);
-		context.apply(StyleId.LineColor,line);
-		context.apply(StyleId.PenWidth,line);
-		context.apply(StyleId.Opacity, line);
+		context.apply(StyleId.ShapeLinePaint,line);
+		context.apply(StyleId.ShapeLineWidth,line);
+		context.apply(StyleId.ShapeLineOpacity, line);
 		line.setStartX(points.from.x);
 		line.setStartY(points.from.y);
 		line.setEndX(points.partialX(fraction));

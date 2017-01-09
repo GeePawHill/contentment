@@ -71,8 +71,8 @@ public class Label implements Actor
 
 	protected void animateDrawText(double frac, Context context)
 	{
-		context.styles.get(StyleId.Font).apply(label);
-		context.styles.get(StyleId.LineColor).apply(label);
+		context.styles.get(StyleId.TextFont).apply(label);
+		context.styles.get(StyleId.ShapeLinePaint).apply(label);
 		String newText = text.substring(0, (int) (frac * text.length()));
 		label.setText(newText);
 		label.setX(xCenter - label.getBoundsInParent().getWidth() / 2d);

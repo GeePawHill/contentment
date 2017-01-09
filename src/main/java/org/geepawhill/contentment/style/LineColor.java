@@ -23,7 +23,7 @@ public class LineColor
 			} 
 		};
 		nickname = nickname+" ("+paint.toString()+")";
-		return new Style(nickname, StyleId.LineColor, applier);
+		return new Style(nickname, StyleId.ShapeLinePaint, applier);
 	}
 	
 	static public Style black()
