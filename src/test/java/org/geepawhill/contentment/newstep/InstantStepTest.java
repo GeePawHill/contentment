@@ -4,12 +4,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.test.SequenceTest;
+import org.geepawhill.contentment.test.SequenceTester;
 import org.geepawhill.contentment.test.TestInstant;
 import org.junit.Before;
 import org.junit.Test;
 
-public class InstantStepTest extends SequenceTest
+public class InstantStepTest extends SequenceTester
 {
 
 	private Sequence sequence;

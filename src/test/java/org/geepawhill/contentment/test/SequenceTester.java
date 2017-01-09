@@ -10,7 +10,7 @@ import org.testfx.framework.junit.ApplicationTest;
 
 import javafx.stage.Stage;
 
-public class SequenceTest extends ApplicationTest
+public class SequenceTester extends ApplicationTest
 {
 
 	public SequenceRunner runner;

@@ -1,8 +1,8 @@
 package org.geepawhill.contentment.step.styles;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.StylesMemo;
 import org.geepawhill.contentment.newstep.Instant;
-import org.geepawhill.contentment.style.Styles.StylesMemo;
 
 public class GetStyles implements Instant
 {

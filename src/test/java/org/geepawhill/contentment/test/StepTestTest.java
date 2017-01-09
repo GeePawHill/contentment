@@ -6,7 +6,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 @Ignore
-public class StepTestTest extends SequenceTest
+public class StepTestTest extends SequenceTester
 {
 
 	private TestLambdaStep playOnly;

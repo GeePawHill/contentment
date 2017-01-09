@@ -3,11 +3,11 @@ package org.geepawhill.contentment.step;
 import org.geepawhill.contentment.actor.LabelBox;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.model.Step;
-import org.geepawhill.contentment.test.SequenceTest;
+import org.geepawhill.contentment.test.SequenceTester;
 import org.junit.Before;
 import org.junit.Test;
 
-public class LabelBoxSketchTest extends SequenceTest
+public class LabelBoxSketchTest extends SequenceTester
 {
 	private LabelBox label;
 

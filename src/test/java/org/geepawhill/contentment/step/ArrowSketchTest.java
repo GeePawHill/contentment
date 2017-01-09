@@ -3,13 +3,13 @@ package org.geepawhill.contentment.step;
 import org.geepawhill.contentment.actor.Spot;
 import org.geepawhill.contentment.actor.arrow.Arrow;
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.test.SequenceTest;
+import org.geepawhill.contentment.test.SequenceTester;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 @Ignore
-public class ArrowSketchTest extends SequenceTest
+public class ArrowSketchTest extends SequenceTester
 {
 
 	private Arrow arrow;

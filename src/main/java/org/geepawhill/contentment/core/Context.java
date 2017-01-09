@@ -5,7 +5,6 @@ import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.LineColor;
 import org.geepawhill.contentment.style.Opacity;
 import org.geepawhill.contentment.style.PenWidth;
-import org.geepawhill.contentment.style.Styles;
 
 import javafx.scene.Group;
 import javafx.scene.shape.Shape;

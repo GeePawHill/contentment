@@ -5,12 +5,12 @@ import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.styles.SetStyle;
 import org.geepawhill.contentment.style.LineColor;
 import org.geepawhill.contentment.test.ContextOutline;
-import org.geepawhill.contentment.test.SequenceTest;
+import org.geepawhill.contentment.test.SequenceTester;
 import org.geepawhill.contentment.timing.FixedTiming;
 import org.junit.Before;
 import org.junit.Test;
 
-public class StrokeTest extends SequenceTest
+public class StrokeTest extends SequenceTester
 {
 	private Stroke stroke;
 	

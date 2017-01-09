@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.style;
+package org.geepawhill.contentment.core;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,10 +6,12 @@ import java.util.List;
 
 import org.geepawhill.contentment.core.Style;
 import org.geepawhill.contentment.core.StyleId;
+import org.geepawhill.contentment.core.Styles;
+import org.geepawhill.contentment.core.StylesMemo;
 import org.geepawhill.contentment.outline.KeyValue;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.outline.Line;
-import org.geepawhill.contentment.style.Styles.StylesMemo;
+import org.geepawhill.contentment.style.LineColor;
 import org.junit.Before;
 import org.junit.Test;
 
