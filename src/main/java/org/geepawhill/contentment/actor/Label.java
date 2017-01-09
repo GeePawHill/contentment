@@ -18,6 +18,7 @@ import javafx.util.Duration;
 
 public class Label implements Actor
 {
+	final String nickname;
 	final String text;
 
 	private final Group group;
@@ -30,12 +31,18 @@ public class Label implements Actor
 
 	public Label(String text, double xCenter, double yCenter)
 	{
+		this.nickname = Names.make(getClass());
 		this.xCenter = xCenter;
 		this.yCenter = yCenter;
 		this.text = text;
 		label = new Text(xCenter, yCenter, "");
 		label.setTextOrigin(VPos.CENTER);
 		this.group = JfxUtility.makeGroup(index++, this, label);
+	}
+	
+	public String nickname()
+	{
+		return nickname;
 	}
 	
 	public Step sketch(double ms)

@@ -22,6 +22,7 @@ import javafx.util.Duration;
 
 public class LabelBox implements Actor
 {
+	final String nickname;
 	final String text;
 	
 	private final Group group;
@@ -40,6 +41,7 @@ public class LabelBox implements Actor
 
 	public LabelBox(String text, double xCenter, double yCenter)
 	{
+		this.nickname = Names.make(getClass());
 		this.xCenter = xCenter;
 		this.yCenter = yCenter;
 		this.text = text;
@@ -50,6 +52,11 @@ public class LabelBox implements Actor
 		bounds = label.getBoundsInParent();
 	}
 	
+	public String nickname()
+	{
+		return nickname;
+	}
+
 	@Override
 	public void outline(KvOutline output)
 	{

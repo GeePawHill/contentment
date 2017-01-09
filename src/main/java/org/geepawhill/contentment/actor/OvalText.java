@@ -19,6 +19,7 @@ import javafx.scene.text.Text;
 
 public class OvalText implements Actor
 {
+	final String nickname;
 	final String text;
 	
 	private final Group group;
@@ -38,6 +39,7 @@ public class OvalText implements Actor
 	
 	public OvalText(String text, double xCenter, double yCenter)
 	{
+		this.nickname = Names.make(getClass());
 		this.xCenter = xCenter;
 		this.yCenter = yCenter;
 		this.text = text;
@@ -46,6 +48,12 @@ public class OvalText implements Actor
 		this.group = JfxUtility.makeGroup(index++,this,label,oval);
 		bounds = label.getBoundsInParent();
 	}
+	
+	public String nickname()
+	{
+		return nickname;
+	}
+
 	
 	@Override
 	public void outline(KvOutline output)

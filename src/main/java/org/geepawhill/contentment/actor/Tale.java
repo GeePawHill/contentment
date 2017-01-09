@@ -19,6 +19,7 @@ import javafx.scene.text.TextAlignment;
 
 public class Tale implements Actor
 {
+	private final String nickname;
 	private Group group;
 	private double fromY;
 	private Text text;
@@ -35,6 +36,7 @@ public class Tale implements Actor
 
 	public Tale(String value, double fromY)
 	{
+		this.nickname = Names.make(getClass());
 		this.fromY = fromY;
 		text = new Text(800d, fromY + YINSET, value);
 		rectangle = new Rectangle(XMARGIN, fromY, 1600d - XMARGIN - XINSET, 30d + 2 * YINSET);
@@ -46,6 +48,11 @@ public class Tale implements Actor
 		rectangle.setStroke(Color.color(.9d, .9d, .9d));
 		rectangle.setArcHeight(40d);
 		rectangle.setArcWidth(40d);
+	}
+	
+	public String nickname()
+	{
+		return nickname;
 	}
 	
 	@Override

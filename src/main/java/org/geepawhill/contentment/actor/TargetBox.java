@@ -22,6 +22,7 @@ import javafx.util.Duration;
 
 public class TargetBox implements Actor
 {
+	private final String nickname;
 	final String text;
 	
 	private final Group group;
@@ -44,6 +45,7 @@ public class TargetBox implements Actor
 
 	public TargetBox(String text, double x, double y, double width, double height)
 	{
+		this.nickname = Names.make(getClass());
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -54,6 +56,11 @@ public class TargetBox implements Actor
 		rectangle = new Rectangle();
 		this.group = JfxUtility.makeGroup(index++,this,rectangle,label);
 		bounds = label.getBoundsInParent();
+	}
+	
+	public String nickname()
+	{
+		return nickname;
 	}
 	
 	@Override

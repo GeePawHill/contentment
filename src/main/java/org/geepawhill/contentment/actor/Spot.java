@@ -14,7 +14,7 @@ import javafx.scene.shape.Circle;
 public class Spot implements Actor
 {
 
-	final String name;
+	final String nickname;
 	final Group group;
 	final Circle circle;
 	
@@ -25,17 +25,21 @@ public class Spot implements Actor
 	
 	public Spot(String name,double x, double y)
 	{
-		this.name = name;
+		this.nickname = name;
 		this.circle = new Circle(x,y,0d);
 		this.circle.setVisible(false);
 		this.group = new Group(circle);
 	}
 	
+	public String nickname()
+	{
+		return nickname;
+	}
 	
 	@Override
 	public void outline(KvOutline output)
 	{
-		output.append(name,"("+circle.getCenterX()+","+circle.getCenterY()+")");
+		output.append(nickname,"("+circle.getCenterX()+","+circle.getCenterY()+")");
 	}
 	
 	@Override

@@ -2,6 +2,7 @@ package org.geepawhill.contentment.actor.arrow;
 
 import java.util.ArrayList;
 
+import org.geepawhill.contentment.actor.Names;
 import org.geepawhill.contentment.core.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Step;
@@ -16,6 +17,7 @@ import javafx.scene.shape.Line;
 
 public class Arrow implements Actor
 {
+	private final String nickname;
 	private Group group;
 	private Line main;
 	private Line toTop;
@@ -40,6 +42,7 @@ public class Arrow implements Actor
 	
 	public Arrow(boolean pointAtFrom,boolean pointAtTo,ArrowComputer computer)
 	{
+		this.nickname = Names.make(getClass());
 		this.pointAtFrom = pointAtFrom;
 		this.pointAtTo = pointAtTo;
 		this.computer = computer;
@@ -61,6 +64,12 @@ public class Arrow implements Actor
 			group.getChildren().add(toBottom);
 		}
 	}
+	
+	public String nickname()
+	{
+		return nickname;
+	}
+
 	
 	public Step sketch(double ms)
 	{
