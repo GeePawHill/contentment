@@ -4,11 +4,9 @@ import org.geepawhill.contentment.actor.Label;
 import org.geepawhill.contentment.actor.LabelBox;
 import org.geepawhill.contentment.actor.OvalText;
 import org.geepawhill.contentment.actor.Spot;
-import org.geepawhill.contentment.actor.Stroke;
 import org.geepawhill.contentment.actor.Tale;
 import org.geepawhill.contentment.actor.TargetBox;
 import org.geepawhill.contentment.actor.arrow.Arrow;
-import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.ScaleListener;
 import org.geepawhill.contentment.jfx.StageMaximizedListener;
 import org.geepawhill.contentment.newstep.Stop;
@@ -19,9 +17,8 @@ import org.geepawhill.contentment.step.styles.GetStyles;
 import org.geepawhill.contentment.step.styles.SetStyle;
 import org.geepawhill.contentment.step.styles.SetStyles;
 import org.geepawhill.contentment.style.Dash;
-import org.geepawhill.contentment.style.LineColor;
 import org.geepawhill.contentment.style.PenWidth;
-import org.geepawhill.contentment.timing.FixedTiming;
+import org.geepawhill.contentment.style.ShapePen;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -55,23 +52,23 @@ public class Main extends Application
 
 			Pane canvas = new Pane();
 			String image = ClassLoader.getSystemResource("mottled2.jpg").toExternalForm();
-			root.setStyle("-fx-background-image: url('" + image + "'); " +
-			           "-fx-background-position: center center; " +
-			           "-fx-background-repeat: repeat;");
+//			root.setStyle("-fx-background-image: url('" + image + "'); " +
+//			           "-fx-background-position: center center; " +
+//			           "-fx-background-repeat: repeat;");
 			root.setCenter(canvas);
 			scaledCanvas = new Group();
 			canvas.getChildren().add(scaledCanvas);
 			forceLetterBox(stage, stage.getScene(), canvas, scaledCanvas);
 			makeGuides();
 			
-			Sequence sequence = new Sequence();
-			Stroke stroke = new Stroke(new PointPair(100d,200d,300d,400d));
-			stroke.sketch(sequence, new FixedTiming(2000d));
+//			Sequence sequence = new Sequence();
+//			Stroke stroke = new Stroke(new PointPair(100d,200d,300d,400d));
+//			stroke.sketch(sequence, new FixedTiming(2000d));
 
-//			sequence = new Sequence();
-//			addBaseComplications(sequence);
-//			interactiveStabilization(sequence);
-//			agentAndPokes();
+			sequence = new Sequence();
+			addBaseComplications(sequence);
+			interactiveStabilization(sequence);
+			agentAndPokes();
 			
 			player = new Player(scaledCanvas);
 			player.reset(sequence);
@@ -85,8 +82,8 @@ public class Main extends Application
 
 	private void agentAndPokes()
 	{
-		Style blueLine = LineColor.lineColor("BLUE", Color.BLUE);
-		Style greenLine = LineColor.lineColor("GREEN", Color.GREEN);
+		Style blueLine = ShapePen.second();
+		Style greenLine = ShapePen.third();
 		Tale tale = new Tale("Agent: Anything With Susceptability & Unpredictability", 30d);
 		LabelBox agent = new LabelBox("Agent", 800d, 520d);
 		Label teammate = new Label("Teammate",800d, 520d);
@@ -169,9 +166,9 @@ public class Main extends Application
 
 	private void interactiveStabilization(Sequence sequence)
 	{
-		Style redLine = LineColor.lineColor("RED", Color.RED);
-		Style blueLine = LineColor.lineColor("BLUE", Color.BLUE);
-		Style greenLine = LineColor.lineColor("GREEN", Color.GREEN);
+		Style redLine = ShapePen.first();
+		Style blueLine = ShapePen.second();
+		Style greenLine = ShapePen.third();
 		
 		Tale tale = new Tale("Agents Are Susceptible To Pokes", 30d);
 		LabelBox agent = new LabelBox("Agent", 800d, 450d);
@@ -225,10 +222,11 @@ public class Main extends Application
 
 	private void addBaseComplications(Sequence sequence)
 	{
-		Style redLine = LineColor.lineColor("RED", Color.RED);
-		Style blueLine = LineColor.lineColor("BLUE", Color.BLUE);
-		Style greenLine = LineColor.lineColor("GREEN", Color.GREEN);
-		Style blackLine = LineColor.lineColor("BLACK", Color.WHITE);
+		Style firstMarker = ShapePen.pen("First", Color.RED, Color.TRANSPARENT, 5d, .5d);
+		Style redLine = ShapePen.first();
+		Style blueLine = ShapePen.second();
+		Style greenLine = ShapePen.third();
+		Style blackLine = ShapePen.fourth();
 		Tale tale = new Tale("A Simple Change Model", 30d);
 		LabelBox agent = new LabelBox("Agent", 800d, 450d);
 		OvalText practice = new OvalText("Practice", 800d, .75*900d);
@@ -291,8 +289,10 @@ public class Main extends Application
 		
 		sequence.unmarked(tale.show());
 		sequence.unmarked(new SetStyle(redLine));
+		sequence.unmarked(new SetStyle(firstMarker));
 		sequence.unmarked(agent.sketch(1000d));
 		sequence.unmarked(new SetStyle(blueLine));
+		sequence.unmarked(new SetStyle(ShapePen.second()));
 		sequence.unmarked(coach.sketch(1000d));
 		sequence.add(new Stop());
 		sequence.add(poke.sketch(1000d));
@@ -307,6 +307,7 @@ public class Main extends Application
 		sequence.add(tale.setText("Complication: There are always multiple agents."));
 		sequence.unmarked(new SetStyle(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch",30d))));
 		sequence.unmarked(new SetStyle(redLine));
+		sequence.unmarked(new SetStyle(firstMarker));
 		sequence.unmarked(new InstantStep(a1.sketch(1d)));
 		sequence.unmarked(new InstantStep(a2.sketch(1d)));
 		sequence.unmarked(new InstantStep(a3.sketch(1d)));

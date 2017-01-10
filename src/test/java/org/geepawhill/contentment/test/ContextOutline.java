@@ -64,7 +64,7 @@ public class ContextOutline implements Outline<KeyValue>
 		return found;
 	}
 
-	public KeyValue assertKey(String key,String value)
+	public KeyValue assertKey(String key,String expected)
 	{
 		KeyValue found = source.find(key);
 		if(found==null)
@@ -73,10 +73,10 @@ public class ContextOutline implements Outline<KeyValue>
 			System.out.println("Missing key: "+key);
 			fail("Key not found: ["+key+"]");
 		}
-		if(!value.equals(found.getValue()))
+		if(!expected.equals(found.getValue()))
 		{
 			source.dump("Outline");
-			String message = "Bad Value for "+key+": ["+value+"] instead of ["+found.getValue()+"]";
+			String message = "Bad Value for "+key+": ["+found.getValue()+"] instead of ["+expected+"]";
 			System.out.println(message);
 			fail(message);
 		}

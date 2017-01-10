@@ -2,9 +2,10 @@ package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.style.Dash;
-import org.geepawhill.contentment.style.LineColor;
 import org.geepawhill.contentment.style.Opacity;
 import org.geepawhill.contentment.style.PenWidth;
+import org.geepawhill.contentment.style.ShapePen;
+import org.geepawhill.contentment.style.TextPen;
 
 import javafx.scene.Group;
 import javafx.scene.shape.Shape;
@@ -21,7 +22,8 @@ public class Context {
 		this.canvas = canvas;
 		this.actors = new Actors();
 		this.styles = new Styles();
-		styles.set(LineColor.black());
+		styles.set(ShapePen.first());
+		styles.set(TextPen.first());
 		styles.set(PenWidth.penWidth(5d));
 		styles.set(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch",60d)));
 		styles.set(Opacity.opacity(.5d));

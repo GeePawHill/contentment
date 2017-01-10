@@ -1,12 +1,11 @@
 package org.geepawhill.contentment.test;
 
-import static org.junit.Assert.assertEquals;
-
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.core.StyleId;
 import org.geepawhill.contentment.step.styles.GetStyles;
 import org.geepawhill.contentment.step.styles.SetStyle;
 import org.geepawhill.contentment.step.styles.SetStyles;
-import org.geepawhill.contentment.style.LineColor;
+import org.geepawhill.contentment.style.ShapePen;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -27,7 +26,7 @@ public class SequenceRunnerTest extends ApplicationTest
 		
 		sequence = new Sequence();
 		sequence.add(new GetStyles());
-		sequence.add(new SetStyle(LineColor.red()));
+		sequence.add(new SetStyle(ShapePen.second()));
 		sequence.add(new SetStyles());
 	}
 	
@@ -35,14 +34,14 @@ public class SequenceRunnerTest extends ApplicationTest
 	public void playSequence()
 	{
 		ContextOutline play = runner.waitForPlay(sequence);
-		assertEquals(LineColor.red().toString(),play.find("Styles.LineColor").getValue());
+		play.assertKey("Styles."+StyleId.ShapePen.name(),ShapePen.second().toString());
 	}
 	
 	@Test
 	public void afterSequence()
 	{
 		ContextOutline after = runner.waitForAfter(sequence);
-		assertEquals(LineColor.red().toString(),after.find("Styles.LineColor").getValue());
+		after.assertKey("Styles."+StyleId.ShapePen.name(),ShapePen.second().toString());
 	}
 	
 	@Test
@@ -50,6 +49,6 @@ public class SequenceRunnerTest extends ApplicationTest
 	{
 		runner.waitForPlay(sequence);
 		ContextOutline before = runner.waitForBefore(sequence);
-		assertEquals(LineColor.black().toString(),before.find("Styles.LineColor").getValue());
+		before.assertKey("Styles."+StyleId.ShapePen.name(),ShapePen.first().toString());
 	}
 }

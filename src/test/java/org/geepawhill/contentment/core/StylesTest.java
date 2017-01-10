@@ -2,73 +2,64 @@ package org.geepawhill.contentment.core;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.List;
-
-import org.geepawhill.contentment.core.Style;
-import org.geepawhill.contentment.core.StyleId;
-import org.geepawhill.contentment.core.Styles;
-import org.geepawhill.contentment.core.StylesMemo;
-import org.geepawhill.contentment.outline.KeyValue;
 import org.geepawhill.contentment.outline.KvOutline;
-import org.geepawhill.contentment.outline.Line;
-import org.geepawhill.contentment.style.LineColor;
+import org.geepawhill.contentment.style.ShapePen;
+import org.geepawhill.contentment.test.ContextOutline;
 import org.junit.Before;
 import org.junit.Test;
 
 public class StylesTest
 {
 	private Styles styles;
-	private Style redLine;
-	private Style blackLine;
+	private Style first;
+	private Style second;
 	
 	@Before
 	public void before()
 	{
 		styles = new Styles();
-		redLine = LineColor.red();
-		blackLine = LineColor.black();
+		first = ShapePen.first();
+		second = ShapePen.second();
 	}
 	
 	@Test(expected=RuntimeException.class)
 	public void throwsOnMissing()
 	{
-		styles.get(StyleId.LineColor);
+		styles.get(StyleId.ShapePen);
 	}
 	
 	@Test
 	public void setAndGet()
 	{
-		styles.set(redLine);
-		assertEquals(redLine,styles.get(StyleId.LineColor));
+		styles.set(first);
+		assertEquals(first,styles.get(StyleId.ShapePen));
 	}
 	
 	@Test
 	public void setReturnsOld()
 	{
-		styles.set(redLine);
-		assertEquals(redLine,styles.set(blackLine));
+		styles.set(first);
+		assertEquals(first,styles.set(second));
 	}
 
 	public void getAllSetAll()
 	{
-		styles.set(redLine);
+		styles.set(first);
 		StylesMemo previous = styles.getAll();
-		styles.set(blackLine);
-		assertEquals(blackLine,styles.get(StyleId.LineColor));
+		styles.set(second);
+		assertEquals(second,styles.get(StyleId.ShapePen));
 		styles.setAll(previous);
-		assertEquals(redLine,styles.get(StyleId.LineColor));
+		assertEquals(first,styles.get(StyleId.ShapePen));
 	}
 
 	@Test
 	public void outline()
 	{
 		KvOutline tree = new KvOutline();
-		styles.set(redLine);
+		styles.set(first);
 		styles.outline(tree);
-		List<Line<KeyValue>> output = tree.asList();
-		assertEquals(2,output.size());
-		assertEquals("Styles",output.get(0).data.getKey());
-		assertEquals("LineColor = RED (0xff0000ff)",output.get(1).data.toString());
+		ContextOutline outline = new ContextOutline(tree);
+		outline.assertKey("Styles.ShapePen");
 	}
 	
 }

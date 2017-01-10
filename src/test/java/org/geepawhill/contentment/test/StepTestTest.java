@@ -1,6 +1,6 @@
 package org.geepawhill.contentment.test;
 
-import org.geepawhill.contentment.style.LineColor;
+import org.geepawhill.contentment.style.ShapePen;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -17,14 +17,14 @@ public class StepTestTest extends SequenceTester
 	{
 		playOnly = new TestLambdaStep(null,null,(context,onFinished) -> 
 		{
-			context.styles.set(LineColor.red());
+			context.styles.set(ShapePen.first());
 			onFinished.run();
 		});
 		
 		
 		afterOnly = new TestLambdaStep(null,(context,onFinished) -> 
 		{
-			context.styles.set(LineColor.red());
+			context.styles.set(ShapePen.first());
 		},
 		null);
 

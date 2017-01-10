@@ -40,12 +40,7 @@ public class Player
 	public void reset(Sequence sequence)
 	{
 		this.sequence = sequence;
-		for(int i=0;i<sequence.size();i++)
-		{
-			Step step = sequence.get(i);
-			step.before(context);
-		}
-		current = 0;
+		while(current!=0) backward();
 	}
 
 	public void forward()

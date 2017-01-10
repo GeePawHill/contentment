@@ -2,11 +2,9 @@ package org.geepawhill.contentment.core;
 
 import static org.junit.Assert.assertEquals;
 
-import org.geepawhill.contentment.core.Style;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Font;
-import org.geepawhill.contentment.style.LineColor;
 import org.geepawhill.contentment.style.Opacity;
 import org.geepawhill.contentment.style.PenWidth;
 import org.junit.Test;
@@ -20,13 +18,6 @@ public class StyleTest
 		assertOutline("Font = Buxton Sketch 60.0", style);
 	}
 	
-	@Test
-	public void dumpLineColor()
-	{
-		Style style = LineColor.black();
-		assertOutline("LineColor = BLACK (0x000000ff)", style);
-	}
-
 	@Test
 	public void dumpOpacity()
 	{

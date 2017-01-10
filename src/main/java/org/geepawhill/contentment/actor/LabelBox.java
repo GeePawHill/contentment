@@ -86,7 +86,7 @@ public class LabelBox implements Actor
 	protected void animateDrawText(double frac, Context context)
 	{
 		context.styles.get(StyleId.Font).apply(label);
-		context.styles.get(StyleId.LineColor).apply(label);
+		context.apply(StyleId.TextPen,label);
 		String newText = text.substring(0, (int) (frac * text.length()));
 		label.setText(newText);
 		label.setX(xCenter-label.getBoundsInParent().getWidth()/2d);
@@ -99,10 +99,8 @@ public class LabelBox implements Actor
 		bounds = new BoundingBox(bounds.getMinX() - HMARGIN, bounds.getMinY() - VMARGIN, bounds.getWidth() + 2 * HMARGIN,
 				bounds.getHeight() + 2 * VMARGIN);
 		rectangle.setFill(Color.TRANSPARENT);
-		context.styles.get(StyleId.LineColor).apply(rectangle);
-		context.styles.get(StyleId.PenWidth).apply(rectangle);
+		context.apply(StyleId.ShapePen, rectangle);
 		context.styles.get(StyleId.Dash).apply(rectangle);
-		context.styles.get(StyleId.Opacity).apply(rectangle);
 		rectangle.setX(bounds.getMinX());
 		rectangle.setY(bounds.getMinY());
 		rectangle.setWidth(0d);

@@ -15,7 +15,6 @@ import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -92,7 +91,7 @@ public class TargetBox implements Actor
 	protected void animateDrawText(double frac, Context context)
 	{
 		context.styles.get(StyleId.Font).apply(label);
-		context.styles.get(StyleId.LineColor).apply(label);
+		context.apply(StyleId.TextPen,label);
 		String newText = text.substring(0, (int) (frac * text.length()));
 		label.setText(newText);
 //		label.setX(x-label.getBoundsInParent().getWidth()/2d);
@@ -104,9 +103,7 @@ public class TargetBox implements Actor
 		bounds = label.getBoundsInParent();
 		bounds = new BoundingBox(bounds.getMinX() - HMARGIN, bounds.getMinY() - VMARGIN, width,
 				height);
-		rectangle.setFill(Color.TRANSPARENT);
-		context.styles.get(StyleId.LineColor).apply(rectangle);
-		context.styles.get(StyleId.PenWidth).apply(rectangle);
+		context.apply(StyleId.ShapePen,rectangle);
 		context.styles.get(StyleId.Dash).apply(rectangle);
 		rectangle.setX(bounds.getMinX());
 		rectangle.setY(bounds.getMinY());

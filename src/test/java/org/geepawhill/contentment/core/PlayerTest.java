@@ -5,8 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import org.geepawhill.contentment.core.Player;
-import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.model.PlayState;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.test.TestStep;
@@ -18,13 +16,13 @@ import javafx.scene.Group;
 
 public class PlayerTest
 {
-	static public TestStep nonStopFirst = new TestStep();
-	static public TestStop stopFirst = new TestStop();
-	static public TestStep nonStopSecond = new TestStep();
-	static public TestStop stopSecond = new TestStop();
-	static public TestStep nonStopThird = new TestStep();
+	TestStep nonStopFirst;
+	TestStop stopFirst;
+	TestStep nonStopSecond;
+	TestStop stopSecond;
+	TestStep nonStopThird;
 
-	static public Sequence mixedSequence = new Sequence(nonStopFirst, stopFirst, nonStopSecond, stopSecond, nonStopThird);
+	Sequence mixedSequence;
 
 	private Player player;
 	Group canvas;
@@ -32,7 +30,12 @@ public class PlayerTest
 	@Before
 	public void before()
 	{
-		canvas = new Group();
+		nonStopFirst = new TestStep();
+		stopFirst = new TestStop();
+		nonStopSecond = new TestStep();
+		stopSecond = new TestStop();
+		nonStopThird = new TestStep();
+		mixedSequence = new Sequence(nonStopFirst, stopFirst, nonStopSecond, stopSecond, nonStopThird);		canvas = new Group();
 		player = new Player(canvas);
 	}
 
@@ -54,15 +57,6 @@ public class PlayerTest
 	{
 		player.reset(mixedSequence);
 		assertEquals(5, player.size());
-	}
-
-	@Test
-	public void loadBeforesAll()
-	{
-		nonStopSecond.isBefore = false;
-		player.reset(mixedSequence);
-		assertTrue(nonStopSecond.isBefore);
-		assertBefore();
 	}
 
 	@Test
@@ -338,24 +332,24 @@ public class PlayerTest
 		assertEquals(stopFirst, player.currentStep());
 		assertBefore();
 	}
-	
+
 	@Test
 	public void dumpsCurrentAndState()
 	{
 		KvOutline dump = new KvOutline();
 		player.reset(new Sequence(nonStopFirst));
 		player.dump(dump);
-		assertEquals("0",dump.find("Player.Current").getValue());
-		assertEquals("Before",dump.find("Player.State").getValue());
+		assertEquals("0", dump.find("Player.Current").getValue());
+		assertEquals("Before", dump.find("Player.State").getValue());
 	}
-	
+
 	@Test
 	public void dumpsStyles()
 	{
 		KvOutline dump = new KvOutline();
 		player.reset(new Sequence(nonStopFirst));
 		player.dump(dump);
-		assertNotNull("Does not include Styles.",dump.find("Styles"));
+		assertNotNull("Does not include Styles.", dump.find("Styles"));
 	}
 
 	private void assertAfter()

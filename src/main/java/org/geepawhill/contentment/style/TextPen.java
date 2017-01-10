@@ -1,0 +1,38 @@
+package org.geepawhill.contentment.style;
+
+import org.geepawhill.contentment.core.Style;
+import org.geepawhill.contentment.core.StyleApplier;
+import org.geepawhill.contentment.core.StyleId;
+
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Shape;
+
+public class TextPen
+{
+	static public Style pen(String nickname, Paint line,Paint fill, double width, double opacity)
+	{
+		StyleApplier applier = new StyleApplier() {
+			@Override
+			public void apply(Shape shape)
+			{
+				shape.setStroke(line);
+				shape.setFill(fill);
+				shape.setStrokeWidth(width);
+				shape.setOpacity(opacity);
+			} 
+		};
+		nickname = nickname+" (Line: "+line.toString()+" Fill: "+fill.toString()+" Width: "+width+" Opacity: "+opacity+")";
+		return new Style(nickname, StyleId.TextPen, applier);
+	}
+
+	public static Style first()
+	{
+		return pen("First", Color.BLACK, Color.BLACK, 2d, 1d);
+	}
+	
+	public static Style second()
+	{
+		return pen("Second", Color.BLUE, Color.BLUE,5d,.5d);
+	}
+}
