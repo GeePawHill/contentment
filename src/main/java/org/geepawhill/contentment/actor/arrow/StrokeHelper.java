@@ -27,10 +27,10 @@ public class StrokeHelper
 		{
 			if (fraction == 0d) return;
 			PointPair points = computer.compute();
-			context.styles.get(StyleId.ShapeLinePaint).apply(line);
-			context.styles.get(StyleId.ShapeLineWidth).apply(line);
-			context.styles.get(StyleId.ShapeLineOpacity).apply(line);
-			context.styles.get(StyleId.ShapeLineDash).apply(line);
+			context.styles.get(StyleId.LineColor).apply(line);
+			context.styles.get(StyleId.PenWidth).apply(line);
+			context.styles.get(StyleId.Opacity).apply(line);
+			context.styles.get(StyleId.Dash).apply(line);
 			line.setStrokeLineCap(StrokeLineCap.ROUND);
 			line.setStartX(points.from.x);
 			line.setStartY(points.from.y);

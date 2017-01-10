@@ -18,7 +18,7 @@ public class Font
 				if(shape instanceof Text) ((Text)shape).setFont(font);
 			} 
 		};
-		return new Style(font.getFamily()+" "+font.getSize(),StyleId.TextFont, applier);
+		return new Style(font.getFamily()+" "+font.getSize(),StyleId.Font, applier);
 	}
 
 }

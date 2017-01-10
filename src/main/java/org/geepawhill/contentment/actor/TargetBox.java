@@ -91,8 +91,8 @@ public class TargetBox implements Actor
 	
 	protected void animateDrawText(double frac, Context context)
 	{
-		context.styles.get(StyleId.TextFont).apply(label);
-		context.styles.get(StyleId.ShapeLinePaint).apply(label);
+		context.styles.get(StyleId.Font).apply(label);
+		context.styles.get(StyleId.LineColor).apply(label);
 		String newText = text.substring(0, (int) (frac * text.length()));
 		label.setText(newText);
 //		label.setX(x-label.getBoundsInParent().getWidth()/2d);
@@ -105,9 +105,9 @@ public class TargetBox implements Actor
 		bounds = new BoundingBox(bounds.getMinX() - HMARGIN, bounds.getMinY() - VMARGIN, width,
 				height);
 		rectangle.setFill(Color.TRANSPARENT);
-		context.styles.get(StyleId.ShapeLinePaint).apply(rectangle);
-		context.styles.get(StyleId.ShapeLineWidth).apply(rectangle);
-		context.styles.get(StyleId.ShapeLineDash).apply(rectangle);
+		context.styles.get(StyleId.LineColor).apply(rectangle);
+		context.styles.get(StyleId.PenWidth).apply(rectangle);
+		context.styles.get(StyleId.Dash).apply(rectangle);
 		rectangle.setX(bounds.getMinX());
 		rectangle.setY(bounds.getMinY());
 		rectangle.setWidth(0d);
