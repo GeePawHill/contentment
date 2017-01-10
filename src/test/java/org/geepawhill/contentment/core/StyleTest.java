@@ -6,7 +6,6 @@ import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Font;
 import org.geepawhill.contentment.style.Opacity;
-import org.geepawhill.contentment.style.PenWidth;
 import org.junit.Test;
 
 public class StyleTest
@@ -25,13 +24,6 @@ public class StyleTest
 		assertOutline("Opacity = 0.3", style);
 	}
 	
-	@Test
-	public void dumpPenWidth()
-	{
-		Style style = PenWidth.penWidth(7d);
-		assertOutline("PenWidth = 7.0", style);
-	}
-
 	@Test
 	public void dumpDash()
 	{

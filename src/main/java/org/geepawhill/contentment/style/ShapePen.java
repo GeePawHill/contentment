@@ -46,4 +46,14 @@ public class ShapePen
 		return pen("Fourth", Color.BLACK, Color.TRANSPARENT,5d,.5d);
 	}
 	
+	public static Style thinFourth()
+	{
+		return pen("ThinFourth", Color.BLACK,Color.TRANSPARENT,2d,.5d);
+	}
+
+	public static Style thinFirst()
+	{
+		return pen("ThinFirst", Color.RED, Color.TRANSPARENT, 1d, .5d);
+	}
+	
 }

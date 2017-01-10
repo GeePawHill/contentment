@@ -17,7 +17,6 @@ import org.geepawhill.contentment.step.styles.GetStyles;
 import org.geepawhill.contentment.step.styles.SetStyle;
 import org.geepawhill.contentment.step.styles.SetStyles;
 import org.geepawhill.contentment.style.Dash;
-import org.geepawhill.contentment.style.PenWidth;
 import org.geepawhill.contentment.style.ShapePen;
 
 import javafx.application.Application;
@@ -192,7 +191,7 @@ public class Main extends Application
 		sequence.unmarked(new SetStyle(redLine));
 		sequence.unmarked(new SetStyle(org.geepawhill.contentment.style.Font.font(new Font("Century Gothic",24d))));
 		sequence.unmarked(new SetStyle(Dash.dash(4d)));
-		sequence.unmarked(new SetStyle(PenWidth.penWidth(1d)));
+		sequence.unmarked(new SetStyle(ShapePen.thinFirst()));
 		sequence.unmarked(target.sketch(1d));
 		sequence.unmarked(new SetStyles());
 		sequence.add(agent.sketch(1000d));
@@ -356,8 +355,7 @@ public class Main extends Application
 		
 		sequence.unmarked(new GetStyles());
 		sequence.unmarked(new SetStyle(Dash.dash(3d)));
-		sequence.unmarked(new SetStyle(blackLine));
-		sequence.unmarked(new SetStyle(PenWidth.penWidth(2d)));
+		sequence.unmarked(new SetStyle(ShapePen.thinFourth()));
 		sequence.add(tale.setText("Complication: The agents are interrelated."));
 		sequence.unmarked(i1.sketch(300d));
 		sequence.unmarked(i2.sketch(300d));
