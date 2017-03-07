@@ -28,7 +28,7 @@ public class ShapePen
 
 	public static Style first()
 	{
-		return pen("First", Color.RED, Color.TRANSPARENT, 5d, .5d);
+		return pen("First", Color.RED, Color.RED, 5d, .5d);
 	}
 	
 	public static Style second()

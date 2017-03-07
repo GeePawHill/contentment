@@ -2,6 +2,7 @@ package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.ActorOutliner;
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.model.Actor;
 import org.geepawhill.contentment.newstep.Entrance;
@@ -12,27 +13,30 @@ import org.geepawhill.contentment.timing.FixedTiming;
 
 import javafx.scene.Group;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
 
-public class Stroke implements Actor
+public class Letters implements Actor
 {
 	private final String nickname;
-	public final Line line;
-	private PointPair points;
 	private final Group group;
+	private String source;
+	private Point center;
+	private Text text;
 
-	public Stroke(PointPair points)
+	public Letters(String source, Point center)
 	{
 		this.nickname = Names.make(getClass());
-		this.points = points;
-		this.line = new Line();
-		this.group = new Group(line);
+		this.source = source;
+		this.center = center;
+		this.text = new Text();
+		this.group = new Group(text);
 	}
 
 	public Sequence sketch(Sequence sequence, FixedTiming timing)
 	{
 		if (sequence == null) sequence = new Sequence();
 		sequence.add(new Entrance(this));
-		sequence.add(new StrokeStep(timing, points, line));
+		sequence.add(new LettersStep(timing, source, center, text));
 		return sequence;
 	}
 
@@ -47,13 +51,15 @@ public class Stroke implements Actor
 	{
 		ActorOutliner outliner = new ActorOutliner(this, output);
 		outliner.start();
-		outliner.startNode(line);
-		if (outliner.visibility(line))
+		outliner.append("Source",source);
+		outliner.startNode(text);
+		if (outliner.visibility(text))
 		{
-			outliner.bounds(line);
-			outliner.opacity(line);
-			outliner.strokeWidth(line);
-			outliner.lineColor(line);
+			outliner.append("Current",text.getText());
+			outliner.bounds(text);
+			outliner.opacity(text);
+			outliner.strokeWidth(text);
+			outliner.lineColor(text);
 		}
 		outliner.endNode();
 		outliner.end();

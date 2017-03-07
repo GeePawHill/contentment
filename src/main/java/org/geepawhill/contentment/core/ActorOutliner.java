@@ -67,4 +67,10 @@ public class ActorOutliner
 	{
 		outline.append("LineColor",node.getStroke().toString());
 	}
+
+	public void append(String key, String value)
+	{
+		outline.append(key,value);
+		
+	}
 }
