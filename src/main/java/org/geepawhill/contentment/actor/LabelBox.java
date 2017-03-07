@@ -15,6 +15,8 @@ import org.geepawhill.contentment.newstep.StrokeStep;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.timing.FixedTiming;
+import org.geepawhill.contentment.timing.RelativeTiming;
+import org.geepawhill.contentment.timing.TimingBuilder;
 
 import javafx.animation.TranslateTransition;
 import javafx.geometry.VPos;
@@ -65,17 +67,18 @@ public class LabelBox implements Actor
 	@Override
 	public void outline(KvOutline output)
 	{
-		
 	}
 
 	public void sketch(Sequence sequence, double ms)
 	{
+		LettersStep lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, text);
+		northStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),north);
+		westStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),west);
+		southStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),south);
+		eastStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),east);
+		new TimingBuilder().build(ms, lettersStep,northStep,westStep,southStep,eastStep);
 		sequence.add(new Entrance(this));
-		sequence.add(new LettersStep(new FixedTiming(ms), source, center, text));
-		northStep = new StrokeStep(new FixedTiming(100d),new PointPair(0d,0d,0d,0d),north);
-		westStep = new StrokeStep(new FixedTiming(100d), new PointPair(0d,0d,0d,0d),west);
-		southStep = new StrokeStep(new FixedTiming(100d),new PointPair(0d,0d,0d,0d),south);
-		eastStep = new StrokeStep(new FixedTiming(100d), new PointPair(0d,0d,0d,0d),east);
+		sequence.add(lettersStep);
 		sequence.add(new BoundsStep(text,this::boundsChanged));
 		sequence.add(northStep);
 		sequence.add(eastStep);

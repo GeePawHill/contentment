@@ -1,5 +1,6 @@
 package org.geepawhill.contentment.timing;
 
+import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.model.Timing;
 
 public class TimingBuilder
@@ -9,6 +10,17 @@ public class TimingBuilder
 	public static final String ABSOLUTE_OVERRUN = "Absolutes are bigger than allocated.";
 	private double accumulatedAbsolute;
 	private double accumulatedRelative;
+	
+	public double build(double total, Step... steps)
+	{
+		Timing[] timings = new Timing[steps.length];
+		int dest = 0;
+		for(Step step: steps)
+		{
+			timings[dest++]=step.timing();
+		}
+		return build(total,timings);
+	}
 
 	public double build(double total, Timing...timings)
 	{
