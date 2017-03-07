@@ -1,55 +1,60 @@
 package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.core.StyleId;
+import org.geepawhill.contentment.geometry.Point;
+import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.model.Actor;
 import org.geepawhill.contentment.model.Step;
+import org.geepawhill.contentment.newstep.BoundsStep;
+import org.geepawhill.contentment.newstep.Entrance;
+import org.geepawhill.contentment.newstep.LettersStep;
+import org.geepawhill.contentment.newstep.StrokeStep;
 import org.geepawhill.contentment.outline.KvOutline;
-import org.geepawhill.contentment.step.SubStep;
-import org.geepawhill.contentment.step.TimedSequence;
 import org.geepawhill.contentment.step.TransitionStep;
+import org.geepawhill.contentment.timing.FixedTiming;
 
 import javafx.animation.TranslateTransition;
-import javafx.geometry.BoundingBox;
-import javafx.geometry.Bounds;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class LabelBox implements Actor
 {
 	final String nickname;
-	final String text;
+	final String source;
 	
 	private final Group group;
-	private Text label;
-	private Rectangle rectangle;
+	private Text text;
+	private Line north;
+	private Line south;
+	private Line east;
+	private Line west;
 	
-	private Bounds bounds;
 
-	private static final double VMARGIN = 8d;
-	private static final double HMARGIN = 8d;
-
-	private double xCenter;
-	private double yCenter;
+	private Point center;
 	
-	private static int index = 0;
+	private StrokeStep northStep;
+	private StrokeStep southStep;
+	private StrokeStep westStep;
+	private StrokeStep eastStep;
 
-	public LabelBox(String text, double xCenter, double yCenter)
+	public LabelBox(String source, double xCenter, double yCenter)
 	{
 		this.nickname = Names.make(getClass());
-		this.xCenter = xCenter;
-		this.yCenter = yCenter;
-		this.text = text;
-		label = new Text(xCenter, yCenter, "");
-		label.setTextOrigin(VPos.CENTER);
-		rectangle = new Rectangle();
-		this.group = JfxUtility.makeGroup(index++,this,label,rectangle);
-		bounds = label.getBoundsInParent();
+		this.center = new Point(xCenter,yCenter);
+		this.source = source;
+		text = new Text();
+		text.setTextOrigin(VPos.CENTER);
+		north = new Line();
+		south = new Line();
+		east = new Line();
+		west = new Line();
+		this.group = JfxUtility.makeGroup(this,text,north,west,south,east);
 	}
 	
 	public String nickname()
@@ -63,82 +68,51 @@ public class LabelBox implements Actor
 		
 	}
 
-	public Step sketch(double ms)
+	public void sketch(Sequence sequence, double ms)
 	{
-		SubStep[] substeps = new SubStep[]
-		{
-				new SubStep(500d,this::animateDrawText),
-				new SubStep(1d,this::animateComputeBox), 
-				new SubStep(200d,this::animateDrawBox)
-		};
-		return new TimedSequence(ms, group,new SubStep(1d, this::resetText), substeps);
+		sequence.add(new Entrance(this));
+		sequence.add(new LettersStep(new FixedTiming(ms), source, center, text));
+		northStep = new StrokeStep(new FixedTiming(100d),new PointPair(0d,0d,0d,0d),north);
+		westStep = new StrokeStep(new FixedTiming(100d), new PointPair(0d,0d,0d,0d),west);
+		southStep = new StrokeStep(new FixedTiming(100d),new PointPair(0d,0d,0d,0d),south);
+		eastStep = new StrokeStep(new FixedTiming(100d), new PointPair(0d,0d,0d,0d),east);
+		sequence.add(new BoundsStep(text,this::boundsChanged));
+		sequence.add(northStep);
+		sequence.add(eastStep);
+		sequence.add(southStep);
+		sequence.add(westStep);
 	}
 	
-	public Step fadeIn(double ms)
+	private void boundsChanged(PointPair pair)
 	{
-		SubStep[] substeps = new SubStep[]
-		{
-				new SubStep(500d,this::fadeIn)
-		};
-		return new TimedSequence(ms, group, substeps);
+		PointPair grow = pair.grow(4d);
+		northStep.setPoints(grow.northLine());
+		westStep.setPoints(grow.westLine());
+		southStep.setPoints(grow.southLine());
+		eastStep.setPoints(grow.eastLine());
 	}
 	
 	protected void animateDrawText(double frac, Context context)
 	{
-		context.styles.get(StyleId.Font).apply(label);
-		context.apply(StyleId.ShapePen,label);
-		String newText = text.substring(0, (int) (frac * text.length()));
-		label.setText(newText);
-		label.setX(xCenter-label.getBoundsInParent().getWidth()/2d);
-		label.setY(yCenter);
+		context.styles.get(StyleId.Font).apply(text);
+		context.apply(StyleId.ShapePen,text);
+		String newText = source.substring(0, (int) (frac * source.length()));
+		text.setText(newText);
+		text.setX(center.x-text.getBoundsInParent().getWidth()/2d);
+		text.setY(center.y);
 	}
 
-	protected void animateComputeBox(double frac, Context context)
-	{
-		bounds = label.getBoundsInParent();
-		bounds = new BoundingBox(bounds.getMinX() - HMARGIN, bounds.getMinY() - VMARGIN, bounds.getWidth() + 2 * HMARGIN,
-				bounds.getHeight() + 2 * VMARGIN);
-		rectangle.setFill(Color.TRANSPARENT);
-		context.apply(StyleId.ShapePen, rectangle);
-		context.styles.get(StyleId.Dash).apply(rectangle);
-		rectangle.setX(bounds.getMinX());
-		rectangle.setY(bounds.getMinY());
-		rectangle.setWidth(0d);
-		rectangle.setHeight(0d);
-		rectangle.setVisible(false);
-	}
-
-	protected void animateDrawBox(double frac, Context context)
-	{
-		rectangle.setWidth(bounds.getWidth() * frac);
-		rectangle.setHeight(bounds.getHeight() * frac);
-		if (frac != 0d) rectangle.setVisible(true);
-	}
-	
-	protected void fadeIn(double frac, Context context)
-	{
-		if(frac==0d)
-		{
-			group.setOpacity(0d);
-			animateDrawText(1d,context);
-			animateComputeBox(1d,context);
-			animateDrawBox(1d,context);
-		}
-		group.setOpacity(frac);
-	}
-	
 	protected void resetText(double frac, Context context)
 	{
-		label.setText("");
+		text.setText("");
 	}
 
-	
 	public Step move(double newX,double newY)
 	{
 		TranslateTransition transition = new TranslateTransition();
 		transition.setNode(group);
-		transition.setToX(newX-xCenter);
-		transition.setToY(newY-yCenter);
+		transition.setToX(newX-center.x);
+		transition.setToY(newY-center.y);
 		transition.setDuration(Duration.millis(1000d));
 		return new TransitionStep(transition);
 	}

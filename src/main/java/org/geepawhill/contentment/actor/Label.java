@@ -37,7 +37,7 @@ public class Label implements Actor
 		this.text = text;
 		label = new Text(xCenter, yCenter, "");
 		label.setTextOrigin(VPos.CENTER);
-		this.group = JfxUtility.makeGroup(index++, this, label);
+		this.group = JfxUtility.makeGroup(this, label);
 	}
 	
 	public String nickname()

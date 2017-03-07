@@ -16,18 +16,12 @@ public class JfxUtility
 		}
 	}
 	
-	static public void setId(int index,Actor actor,Node node)
-	{
-		node.setId(actor.getClass().getSimpleName()+String.format("%1$02d",index)+"."+node.getClass().getSimpleName());
-	}
-
-	public static Group makeGroup(int index, Actor actor, Node... nodes)
+	public static Group makeGroup(Actor actor, Node... nodes)
 	{
 		Group group = new Group();
 		for(Node node : nodes)
 		{
 			group.getChildren().add(node);
-			setId(index,actor,node);
 		}
 		return group;
 	}

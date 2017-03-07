@@ -151,4 +151,24 @@ public class PointPair
 		return to.y-from.y;
 	}
 
+	public PointPair northLine()
+	{
+		return new PointPair(from.x,from.y,to.x,from.y);
+	}
+
+	public PointPair southLine()
+	{
+		return new PointPair(from.x,to.y,to.x,to.y);
+	}
+
+	public PointPair eastLine()
+	{
+		return new PointPair(to.x,from.y,to.x,to.y);
+	}
+
+	public PointPair westLine()
+	{
+		return new PointPair(from.x,from.y,from.x,to.y);
+	}
+
 }

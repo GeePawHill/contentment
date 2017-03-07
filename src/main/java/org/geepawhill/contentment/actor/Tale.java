@@ -40,7 +40,7 @@ public class Tale implements Actor
 		this.fromY = fromY;
 		text = new Text(800d, fromY + YINSET, value);
 		rectangle = new Rectangle(XMARGIN, fromY, 1600d - XMARGIN - XINSET, 30d + 2 * YINSET);
-		this.group = JfxUtility.makeGroup(index++,this,rectangle,text);
+		this.group = JfxUtility.makeGroup(this,rectangle,text);
 		adjustTextSize();
 		rectangle.setHeight(text.getBoundsInLocal().getHeight() + 2 * YINSET);
 		rectangle.setStrokeWidth(2d);

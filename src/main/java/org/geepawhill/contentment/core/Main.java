@@ -69,11 +69,11 @@ public class Main extends Application
 			// stroke.sketch(sequence, new FixedTiming(2000d));
 
 			sequence = new Sequence();
-			Letters letters = new Letters("thing thid.", new Point(400d, 400d));
-			letters.sketch(sequence, new FixedTiming(1000));
-			// addBaseComplications(sequence);
-			// interactiveStabilization(sequence);
-			// agentAndPokes();
+//			Letters letters = new Letters("thing thid.", new Point(400d, 400d));
+//			letters.sketch(sequence, new FixedTiming(1000));
+			 addBaseComplications(sequence);
+			 interactiveStabilization(sequence);
+			 agentAndPokes();
 
 			player = new Player(scaledCanvas);
 			player.reset(sequence);
@@ -108,7 +108,7 @@ public class Main extends Application
 		sequence.unmarked(new SetStyle(blueLine));
 		sequence.unmarked(new SetStyle(Dash.solid()));
 		sequence.unmarked(new SetStyle(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch", 60d))));
-		sequence.add(agent.sketch(1d));
+		agent.sketch(sequence, 1d);
 		sequence.add(new Stop());
 		sequence.unmarked(new HideStep(agent.group()));
 		sequence.unmarked(new SetStyle(greenLine));
@@ -200,7 +200,7 @@ public class Main extends Application
 		sequence.unmarked(new SetStyle(ShapePen.thinFirst()));
 		sequence.unmarked(target.sketch(1d));
 		sequence.unmarked(new SetStyles());
-		sequence.add(agent.sketch(1000d));
+		agent.sketch(sequence, 1d);
 		sequence.add(new Stop());
 
 		sequence.unmarked(poke1Source.place());
@@ -295,10 +295,10 @@ public class Main extends Application
 		sequence.unmarked(tale.show());
 		sequence.unmarked(new SetStyle(redLine));
 		sequence.unmarked(new SetStyle(firstMarker));
-		sequence.unmarked(agent.sketch(1000d));
+		agent.sketch(sequence, 1000d);
 		sequence.unmarked(new SetStyle(blueLine));
 		sequence.unmarked(new SetStyle(ShapePen.second()));
-		sequence.unmarked(coach.sketch(1000d));
+		coach.sketch(sequence, 1000d);
 		sequence.add(new Stop());
 		sequence.add(poke.sketch(1000d));
 		sequence.unmarked(new GetStyles());
@@ -313,12 +313,12 @@ public class Main extends Application
 		sequence.unmarked(new SetStyle(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch", 30d))));
 		sequence.unmarked(new SetStyle(redLine));
 		sequence.unmarked(new SetStyle(firstMarker));
-		sequence.unmarked(new InstantStep(a1.sketch(1d)));
-		sequence.unmarked(new InstantStep(a2.sketch(1d)));
-		sequence.unmarked(new InstantStep(a3.sketch(1d)));
-		sequence.unmarked(new InstantStep(a4.sketch(1d)));
-		sequence.unmarked(new InstantStep(a5.sketch(1d)));
-		sequence.unmarked(new InstantStep(a6.sketch(1d)));
+		a1.sketch(sequence, 1d);
+		a2.sketch(sequence, 1d);
+		a3.sketch(sequence, 1d);
+		a4.sketch(sequence, 1d);
+		a5.sketch(sequence, 1d);
+		a6.sketch(sequence, 1d);
 		sequence.unmarked(new SetStyle(blueLine));
 		sequence.unmarked(poke1.sketch(300d));
 		sequence.unmarked(poke2.sketch(300d));

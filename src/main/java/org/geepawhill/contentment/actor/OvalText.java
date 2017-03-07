@@ -45,7 +45,7 @@ public class OvalText implements Actor
 		this.text = text;
 		label = new Text(xCenter, yCenter, "");
 		oval = new Ellipse();
-		this.group = JfxUtility.makeGroup(index++,this,label,oval);
+		this.group = JfxUtility.makeGroup(this,label,oval);
 		bounds = label.getBoundsInParent();
 	}
 	

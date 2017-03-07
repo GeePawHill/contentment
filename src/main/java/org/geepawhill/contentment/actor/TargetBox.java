@@ -53,7 +53,7 @@ public class TargetBox implements Actor
 		label = new Text(x, y, "");
 		label.setTextOrigin(VPos.CENTER);
 		rectangle = new Rectangle();
-		this.group = JfxUtility.makeGroup(index++,this,rectangle,label);
+		this.group = JfxUtility.makeGroup(this,rectangle,label);
 		bounds = label.getBoundsInParent();
 	}
 	

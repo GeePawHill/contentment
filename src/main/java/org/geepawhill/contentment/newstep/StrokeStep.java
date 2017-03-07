@@ -15,7 +15,7 @@ public class StrokeStep implements Step
 {
 
 	private final Timing timing;
-	private final PointPair points;
+	private PointPair points;
 	private final Line line;
 	private Transition transition;
 
@@ -24,6 +24,11 @@ public class StrokeStep implements Step
 		this.timing = timing;
 		this.points = points;
 		this.line = line;
+	}
+	
+	public void setPoints(PointPair points)
+	{
+		this.points = points; 
 	}
 
 	@Override

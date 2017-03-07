@@ -33,12 +33,6 @@ public class Sequence
 		return steps.get(index);
 	}
 	
-	public void marked(Step step)
-	{
-		add(new Stop());
-		add(step);
-	}
-	
 	public void unmarked(Step step)
 	{
 		add(step);
