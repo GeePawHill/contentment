@@ -1,8 +1,6 @@
 package org.geepawhill.contentment.actor;
 
-import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.core.StyleId;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.JfxUtility;
@@ -14,7 +12,6 @@ import org.geepawhill.contentment.newstep.LettersStep;
 import org.geepawhill.contentment.newstep.StrokeStep;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.TransitionStep;
-import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.TimingBuilder;
 
@@ -95,21 +92,6 @@ public class LabelBox implements Actor
 		eastStep.setPoints(grow.eastLine());
 	}
 	
-	protected void animateDrawText(double frac, Context context)
-	{
-		context.styles.get(StyleId.Font).apply(text);
-		context.apply(StyleId.ShapePen,text);
-		String newText = source.substring(0, (int) (frac * source.length()));
-		text.setText(newText);
-		text.setX(center.x-text.getBoundsInParent().getWidth()/2d);
-		text.setY(center.y);
-	}
-
-	protected void resetText(double frac, Context context)
-	{
-		text.setText("");
-	}
-
 	public Step move(double newX,double newY)
 	{
 		TranslateTransition transition = new TranslateTransition();

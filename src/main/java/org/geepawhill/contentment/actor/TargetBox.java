@@ -40,8 +40,6 @@ public class TargetBox implements Actor
 
 	private double height;
 	
-	private static int index;
-
 	public TargetBox(String text, double x, double y, double width, double height)
 	{
 		this.nickname = Names.make(getClass());
@@ -94,8 +92,6 @@ public class TargetBox implements Actor
 		context.apply(StyleId.ShapePen,label);
 		String newText = text.substring(0, (int) (frac * text.length()));
 		label.setText(newText);
-//		label.setX(x-label.getBoundsInParent().getWidth()/2d);
-//		label.setY(y);
 	}
 
 	protected void animateComputeBox(double frac, Context context)

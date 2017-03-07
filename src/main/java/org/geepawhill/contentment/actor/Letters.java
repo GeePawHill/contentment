@@ -3,16 +3,13 @@ package org.geepawhill.contentment.actor;
 import org.geepawhill.contentment.core.ActorOutliner;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.geometry.Point;
-import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.model.Actor;
 import org.geepawhill.contentment.newstep.Entrance;
-import org.geepawhill.contentment.newstep.StrokeStep;
 import org.geepawhill.contentment.newstep.LettersStep;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.timing.FixedTiming;
 
 import javafx.scene.Group;
-import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
 public class Letters implements Actor

@@ -2,30 +2,36 @@ package org.geepawhill.contentment.newstep;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.StyleId;
-import org.geepawhill.contentment.geometry.Point;
+import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.model.OnFinished;
 import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.model.Timing;
 import org.geepawhill.contentment.step.ContextTransition;
 
 import javafx.animation.Transition;
-import javafx.scene.text.Text;
+import javafx.scene.shape.Ellipse;
 
-public class LettersStep implements Step
+public class OvalStep implements Step
 {
 
 	private final Timing timing;
-	private final Point center;
-	private final String letters;
-	private final Text text;
+	private PointPair points;
+	private final Ellipse ellipse;
 	private Transition transition;
+	
+	private static final double VMARGIN = 4d;
+	private static final double HMARGIN = 20d;
 
-	public LettersStep(Timing timing, String letters, Point center, Text text)
+	public OvalStep(Timing timing, PointPair points, Ellipse ellipse)
 	{
 		this.timing = timing;
-		this.center = center;
-		this.text = text;
-		this.letters = letters;
+		this.points = points;
+		this.ellipse = ellipse;
+	}
+	
+	public void setPoints(PointPair points)
+	{
+		this.points = points; 
 	}
 
 	@Override
@@ -70,15 +76,14 @@ public class LettersStep implements Step
 	{
 		if(fraction==0d)
 		{
-			text.setVisible(false);
+			ellipse.setVisible(false);
 		}
 		else
-			text.setVisible(true);
-		context.apply(StyleId.Font,text);
-		context.apply(StyleId.ShapePen,text);
-		String newText = letters.substring(0, (int) (fraction * letters.length()));
-		text.setText(newText);
-		text.setX(center.x-text.getBoundsInParent().getWidth()/2d);
-		text.setY(center.y);
+			ellipse.setVisible(true);
+		context.apply(StyleId.ShapePen, ellipse);
+		ellipse.setCenterX(points.centerX());
+		ellipse.setCenterY(points.centerY());
+		ellipse.setRadiusX((points.width()/2d)+HMARGIN * fraction);
+		ellipse.setRadiusY((points.height()/2d)+VMARGIN * fraction);
 	}
 }

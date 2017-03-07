@@ -1,129 +1,71 @@
 package org.geepawhill.contentment.actor;
 
-import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.StyleId;
+import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.model.Actor;
-import org.geepawhill.contentment.model.Step;
+import org.geepawhill.contentment.newstep.BoundsStep;
+import org.geepawhill.contentment.newstep.Entrance;
+import org.geepawhill.contentment.newstep.LettersStep;
+import org.geepawhill.contentment.newstep.OvalStep;
 import org.geepawhill.contentment.outline.KvOutline;
-import org.geepawhill.contentment.step.SubStep;
-import org.geepawhill.contentment.step.TimedSequence;
+import org.geepawhill.contentment.timing.RelativeTiming;
+import org.geepawhill.contentment.timing.TimingBuilder;
 
-import javafx.geometry.BoundingBox;
-import javafx.geometry.Bounds;
 import javafx.scene.Group;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Text;
 
 public class OvalText implements Actor
 {
 	final String nickname;
-	final String text;
-	
+	final String source;
+
 	private final Group group;
-	private Text label;
+	private Text text;
 	private Ellipse oval;
-	
-	private Bounds bounds;
 
-	private static final double VMARGIN = 4d;
-	private static final double HMARGIN = 20d;
+	private Point center;
 
-	private double xCenter;
+	private OvalStep ovalStep;
 
-	private double yCenter;
-	
-	private static int index=0;
-	
-	public OvalText(String text, double xCenter, double yCenter)
+	public OvalText(String source, double xCenter, double yCenter)
 	{
 		this.nickname = Names.make(getClass());
-		this.xCenter = xCenter;
-		this.yCenter = yCenter;
-		this.text = text;
-		label = new Text(xCenter, yCenter, "");
+		this.center = new Point(xCenter, yCenter);
+		this.source = source;
+		text = new Text(xCenter, yCenter, "");
 		oval = new Ellipse();
-		this.group = JfxUtility.makeGroup(this,label,oval);
-		bounds = label.getBoundsInParent();
+		this.group = JfxUtility.makeGroup(this, text, oval);
 	}
-	
+
 	public String nickname()
 	{
 		return nickname;
 	}
 
-	
 	@Override
 	public void outline(KvOutline output)
 	{
-		
+
 	}
 
-	public Step sketch(double ms)
+	public void sketch(Sequence sequence, double ms)
 	{
-		SubStep[] substeps = new SubStep[]
-		{
-				new SubStep(500d,this::animateDrawText),
-				new SubStep(1d,this::animateComputeBox), 
-				new SubStep(200d,this::animateDrawBox)
-		};
-		return new TimedSequence(ms, group, substeps);
-	}
-	
-	public Step fadeIn(double ms)
-	{
-		SubStep[] substeps = new SubStep[]
-		{
-				new SubStep(500d,this::fadeIn)
-		};
-		return new TimedSequence(ms, group, substeps);
-	}
-	
-	protected void animateDrawText(double frac, Context context)
-	{
-		context.styles.get(StyleId.Font).apply(label);
-		context.apply(StyleId.ShapePen,label);
-		String newText = text.substring(0, (int) (frac * text.length()));
-		label.setText(newText);
-		label.setX(xCenter-label.getBoundsInParent().getWidth()/2d);
-		label.setY(yCenter);
+		LettersStep lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, text);
+		ovalStep = new OvalStep(new RelativeTiming(.4d), new PointPair(0d, 0d, 0d, 0d), oval);
+		new TimingBuilder().build(ms, lettersStep, ovalStep);
+		sequence.add(new Entrance(this));
+		sequence.add(lettersStep);
+		sequence.add(new BoundsStep(text, this::boundsChanged));
+		sequence.add(ovalStep);
 	}
 
-	protected void animateComputeBox(double frac, Context context)
+	private void boundsChanged(PointPair pair)
 	{
-		bounds = label.getBoundsInParent();
-		bounds = new BoundingBox(bounds.getMinX() - HMARGIN, bounds.getMinY() - VMARGIN, bounds.getWidth() + 2 * HMARGIN,
-				bounds.getHeight() + 2 * VMARGIN);
-		oval.setFill(Color.TRANSPARENT);
-		context.apply(StyleId.ShapePen, oval);
-		context.styles.get(StyleId.Dash).apply(oval);
-		PointPair pair = new PointPair(bounds);
-		oval.setCenterX(pair.centerX());
-		oval.setCenterY(pair.centerY());
-		oval.setRadiusX(pair.width());
-		oval.setRadiusY(pair.height());
-		oval.setVisible(false);
-	}
-
-	protected void animateDrawBox(double frac, Context context)
-	{
-		oval.setRadiusX((bounds.getWidth()/2d)+HMARGIN * frac);
-		oval.setRadiusY((bounds.getHeight()/2d)+VMARGIN * frac);
-		if (frac != 0d) oval.setVisible(true);
-	}
-	
-	protected void fadeIn(double frac, Context context)
-	{
-		if(frac==0d)
-		{
-			group.setOpacity(0d);
-			animateDrawText(1d,context);
-			animateComputeBox(1d,context);
-			animateDrawBox(1d,context);
-		}
-		group.setOpacity(frac);
+		PointPair grow = pair.grow(4d);
+		ovalStep.setPoints(grow);
 	}
 
 	@Override

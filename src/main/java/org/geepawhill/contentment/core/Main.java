@@ -2,25 +2,21 @@ package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.actor.Label;
 import org.geepawhill.contentment.actor.LabelBox;
-import org.geepawhill.contentment.actor.Letters;
 import org.geepawhill.contentment.actor.OvalText;
 import org.geepawhill.contentment.actor.Spot;
 import org.geepawhill.contentment.actor.Tale;
 import org.geepawhill.contentment.actor.TargetBox;
 import org.geepawhill.contentment.actor.arrow.Arrow;
-import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.jfx.ScaleListener;
 import org.geepawhill.contentment.jfx.StageMaximizedListener;
 import org.geepawhill.contentment.newstep.Stop;
 import org.geepawhill.contentment.step.ClearStep;
 import org.geepawhill.contentment.step.HideStep;
-import org.geepawhill.contentment.step.InstantStep;
 import org.geepawhill.contentment.step.styles.GetStyles;
 import org.geepawhill.contentment.step.styles.SetStyle;
 import org.geepawhill.contentment.step.styles.SetStyles;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.ShapePen;
-import org.geepawhill.contentment.timing.FixedTiming;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -35,7 +31,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import jdk.nashorn.internal.runtime.Timing;
 
 public class Main extends Application
 {
@@ -305,7 +300,7 @@ public class Main extends Application
 		sequence.unmarked(new SetStyle(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch", 40d))));
 		sequence.unmarked(new SetStyle(greenLine));
 		sequence.unmarked(new SetStyle(Dash.dash(10d)));
-		sequence.unmarked(practice.sketch(1000d));
+		practice.sketch(sequence, 1000d);
 		sequence.unmarked(change.sketch(1d));
 		sequence.unmarked(new SetStyles());
 		sequence.add(new Stop());
@@ -330,12 +325,12 @@ public class Main extends Application
 		sequence.add(tale.setText("Complication: There are always multiple practices."));
 		sequence.unmarked(new SetStyle(Dash.dash(10d)));
 		sequence.unmarked(new SetStyle(greenLine));
-		sequence.unmarked(new InstantStep(p1.sketch(1d)));
-		sequence.unmarked(new InstantStep(p2.sketch(1d)));
-		sequence.unmarked(new InstantStep(p3.sketch(1d)));
-		sequence.unmarked(new InstantStep(p4.sketch(1d)));
-		sequence.unmarked(new InstantStep(p5.sketch(1d)));
-		sequence.unmarked(new InstantStep(p6.sketch(1d)));
+		p1.sketch(sequence, 1d);
+		p2.sketch(sequence, 1d);
+		p3.sketch(sequence, 1d);
+		p4.sketch(sequence, 1d);
+		p5.sketch(sequence, 1d);
+		p6.sketch(sequence, 1d);
 		sequence.unmarked(c1.sketch(200d));
 		sequence.unmarked(c2.sketch(200d));
 		sequence.unmarked(c3.sketch(200d));

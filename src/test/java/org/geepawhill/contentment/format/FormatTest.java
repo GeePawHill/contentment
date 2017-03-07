@@ -1,13 +1,12 @@
 package org.geepawhill.contentment.format;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import org.geepawhill.contentment.style.ShapePen;
 import org.junit.Before;
 import org.junit.Test;
 
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 public class FormatTest
 {

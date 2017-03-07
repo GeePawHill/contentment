@@ -32,8 +32,6 @@ public class Tale implements Actor
 //	private final double GREEN = (double) 0xbe / (double) 0xff;
 //	private final double BLUE = (double) 0x8b / (double) 0xff;
 	
-	private static int index=0;
-
 	public Tale(String value, double fromY)
 	{
 		this.nickname = Names.make(getClass());

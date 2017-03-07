@@ -27,8 +27,6 @@ public class Label implements Actor
 	private double xCenter;
 	private double yCenter;
 
-	private static int index = 0;
-
 	public Label(String text, double xCenter, double yCenter)
 	{
 		this.nickname = Names.make(getClass());
