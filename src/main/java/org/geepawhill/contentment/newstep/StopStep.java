@@ -6,7 +6,7 @@ import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.model.Timing;
 import org.geepawhill.contentment.timing.FixedTiming;
 
-public class Stop implements Step
+public class StopStep implements Step
 {
 
 	@Override

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.newstep.Instant;
 import org.geepawhill.contentment.newstep.InstantStep;
-import org.geepawhill.contentment.newstep.Stop;
+import org.geepawhill.contentment.newstep.StopStep;
 
 
 public class Sequence
@@ -55,6 +55,6 @@ public class Sequence
 	
 	public boolean isMarked(int index)
 	{
-		return steps.get(index) instanceof Stop;
+		return steps.get(index) instanceof StopStep;
 	}
 }
