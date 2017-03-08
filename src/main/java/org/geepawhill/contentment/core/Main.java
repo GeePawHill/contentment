@@ -63,9 +63,9 @@ public class Main extends Application
 			common = new CommonSteps(sequence);
 //			Letters letters = new Letters("thing thid.", new Point(400d, 400d));
 //			letters.sketch(sequence, new FixedTiming(1000));
-			 addBaseComplications(sequence);
+//			 addBaseComplications(sequence);
 			 interactiveStabilization(sequence);
-			 agentAndPokes();
+//			 agentAndPokes();
 
 			player = new Player(scaledCanvas);
 			player.reset(sequence);
