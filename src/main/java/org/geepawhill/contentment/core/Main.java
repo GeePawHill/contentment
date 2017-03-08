@@ -9,7 +9,7 @@ import org.geepawhill.contentment.actor.TargetBox;
 import org.geepawhill.contentment.actor.arrow.Arrow;
 import org.geepawhill.contentment.jfx.ScaleListener;
 import org.geepawhill.contentment.jfx.StageMaximizedListener;
-import org.geepawhill.contentment.step.CommonSteps;
+import org.geepawhill.contentment.newstep.CommonSteps;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.ShapePen;
 
@@ -193,20 +193,20 @@ public class Main extends Application
 		agent.sketch(sequence, 1d);
 		common.stop();
 
-		sequence.unmarked(poke1Source.place());
+		poke1Source.place(sequence);
 		sequence.add(poke1.sketch(1000d));
 		common.stop();
 		sequence.unmarked(tale.setText("Agents Respond Unpredictably"));
 		sequence.add(agent.move(900d, 400d));
 		common.stop();
 		sequence.unmarked(tale.setText("Whoops: Better Try Another Poke"));
-		sequence.unmarked(poke2Source.place());
+		poke2Source.place(sequence);
 		common.set(redLine);
 		sequence.unmarked(poke2.sketch(1000d));
 		sequence.add(agent.move(1000d, 500d));
 		common.stop();
 		sequence.unmarked(tale.setText("Almost there!"));
-		sequence.unmarked(poke3Source.place());
+		poke3Source.place(sequence);
 		common.set(greenLine);
 		sequence.unmarked(poke3.sketch(1000d));
 		sequence.unmarked(agent.move(1100d, 450d));
@@ -294,13 +294,13 @@ public class Main extends Application
 		coach.sketch(sequence, 1000d);
 		common.stop();
 		sequence.add(poke.sketch(1000d));
-		sequence.unmarked(new GetStyles());
+		common.saveStyles();
 		common.set(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch", 40d)));
 		common.set(greenLine);
 		common.set(Dash.dash(10d));
 		practice.sketch(sequence, 1000d);
 		sequence.unmarked(change.sketch(1d));
-		sequence.unmarked(new SetStyles());
+		common.restoreStyles();
 		common.stop();
 		sequence.add(tale.setText("Complication: There are always multiple agents."));
 		common.set(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch", 30d)));
@@ -352,7 +352,7 @@ public class Main extends Application
 		sequence.add(c26.sketch(200d));
 		common.stop();
 
-		sequence.unmarked(new GetStyles());
+		common.saveStyles();
 		common.set(Dash.dash(3d));
 		common.set(ShapePen.thinFourth());
 		sequence.add(tale.setText("Complication: The agents are interrelated."));
@@ -371,7 +371,7 @@ public class Main extends Application
 		sequence.unmarked(pi5.sketch(300d));
 		sequence.add(pi6.sketch(300d));
 		common.stop();
-		sequence.unmarked(new SetStyles());
+		common.restoreStyles();
 	}
 
 	private void makeGuides()

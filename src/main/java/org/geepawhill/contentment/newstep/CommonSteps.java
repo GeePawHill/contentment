@@ -1,12 +1,11 @@
-package org.geepawhill.contentment.step;
+package org.geepawhill.contentment.newstep;
 
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.core.Style;
 import org.geepawhill.contentment.model.Actor;
-import org.geepawhill.contentment.newstep.StopStep;
-import org.geepawhill.contentment.step.styles.GetStyles;
-import org.geepawhill.contentment.step.styles.SetStyle;
-import org.geepawhill.contentment.step.styles.SetStyles;
+import org.geepawhill.contentment.step.ClearStep;
+import org.geepawhill.contentment.step.HideStep;
+import org.geepawhill.contentment.step.ShowStep;
 
 public class CommonSteps
 {
@@ -35,7 +34,7 @@ public class CommonSteps
 	
 	public void set(Style style)
 	{
-		sequence.add(new SetStyle(style));
+		sequence.add(new SetStyleStep(style));
 	}
 
 	
@@ -46,12 +45,12 @@ public class CommonSteps
 
 	public void saveStyles()
 	{
-		sequence.unmarked(new GetStyles());
+		sequence.unmarked(new SaveStylesStep());
 	}
 
 	public void restoreStyles()
 	{
-		sequence.unmarked(new SetStyles());
+		sequence.unmarked(new RestoreStylesStep());
 	}
 
 

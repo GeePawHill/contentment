@@ -1,6 +1,6 @@
-package org.geepawhill.contentment.step;
+package org.geepawhill.contentment.newstep;
 
-import java.util.ArrayList;
+import java.util.function.Consumer;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.model.OnFinished;
@@ -8,40 +8,25 @@ import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.model.Timing;
 import org.geepawhill.contentment.timing.FixedTiming;
 
-import javafx.scene.Node;
-
-public class ClearStep implements Step
+public class OneWayStep implements Step
 {
 	
-	
-	private ArrayList<Node> nodes;
+	private Consumer<Context> action;
 
-	public ClearStep()
+	public OneWayStep(Consumer<Context> action)
 	{
-		nodes = new ArrayList<>();
-	}
-	
-	@Override
-	public Timing timing()
-	{
-		return FixedTiming.INSTANT;
+		this.action = action;
 	}
 
 	@Override
 	public void after(Context context)
 	{
-		nodes.addAll(context.canvas.getChildren());
-		context.canvas.getChildren().clear();
+		action.accept(context);
 	}
 
 	@Override
 	public void before(Context context)
 	{
-		for(Node node : nodes)
-		{
-			context.canvas.getChildren().add(node);
-		}
-		nodes.clear();
 	}
 
 	@Override
@@ -49,6 +34,7 @@ public class ClearStep implements Step
 	{
 		after(context);
 		onFinished.run();
+		
 	}
 
 	@Override
@@ -61,4 +47,9 @@ public class ClearStep implements Step
 	{
 	}
 
+	@Override
+	public Timing timing()
+	{
+		return FixedTiming.INSTANT;
+	}
 }

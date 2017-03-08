@@ -1,10 +1,9 @@
-package org.geepawhill.contentment.step.styles;
+package org.geepawhill.contentment.newstep;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.StylesMemo;
-import org.geepawhill.contentment.newstep.Instant;
 
-public class GetStyles implements Instant
+public class SaveStylesStep implements Instant
 {
 	
 	private StylesMemo previous;

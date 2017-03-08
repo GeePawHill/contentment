@@ -1,9 +1,13 @@
 package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.model.Actor;
 import org.geepawhill.contentment.model.Step;
+import org.geepawhill.contentment.newstep.Entrance;
+import org.geepawhill.contentment.newstep.OneWayStep;
 import org.geepawhill.contentment.outline.KvOutline;
+import org.geepawhill.contentment.step.ShowStep;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
 import org.geepawhill.contentment.utility.Names;
@@ -48,13 +52,20 @@ public class Spot implements Actor
 		return group;
 	}
 	
-	public Step place()
+//	public void place(Sequence sequence)
+//	{
+//		sequence.add(new OneWayStep((context) -> System.out.println(circle.getBoundsInParent())));
+//		sequence.add(new Entrance(this));
+//		sequence.add(new ShowStep(group));
+//	}
+	
+	public void place(Sequence sequence)
 	{
 		SubStep[] substeps = new SubStep[]
 		{
 				new SubStep(1d,this::animateDrawText)
 		};
-		return new TimedSequence(1d, group, substeps);
+		sequence.add(new TimedSequence(1d, group, substeps));
 	}
 	
 	public void animateDrawText(double fraction,Context context)

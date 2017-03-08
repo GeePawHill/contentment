@@ -1,6 +1,9 @@
 package org.geepawhill.contentment.step.styles;
 
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.newstep.RestoreStylesStep;
+import org.geepawhill.contentment.newstep.SaveStylesStep;
+import org.geepawhill.contentment.newstep.SetStyleStep;
 import org.geepawhill.contentment.style.ShapePen;
 import org.geepawhill.contentment.test.SequenceTester;
 import org.junit.Test;
@@ -11,15 +14,15 @@ public class StyleStepsTest extends SequenceTester
 	@Test
 	public void setStylesContract()
 	{
-		assertContractValid(new GetStyles());
+		assertContractValid(new SaveStylesStep());
 	}
 	
 	@Test
 	public void getStylesContract()
 	{
 		Sequence sequence = new Sequence();
-		sequence.add(new GetStyles());
-		sequence.add(new SetStyles());
+		sequence.add(new SaveStylesStep());
+		sequence.add(new RestoreStylesStep());
 		assertContractValid(sequence);
 	}
 	
@@ -27,7 +30,7 @@ public class StyleStepsTest extends SequenceTester
 	public void setStyleContract()
 	{
 		Sequence sequence = new Sequence();
-		sequence.add(new SetStyle(ShapePen.first()));
+		sequence.add(new SetStyleStep(ShapePen.first()));
 		assertContractValid(sequence);
 	}
 }

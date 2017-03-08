@@ -2,9 +2,9 @@ package org.geepawhill.contentment.test;
 
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.core.StyleId;
-import org.geepawhill.contentment.step.styles.GetStyles;
-import org.geepawhill.contentment.step.styles.SetStyle;
-import org.geepawhill.contentment.step.styles.SetStyles;
+import org.geepawhill.contentment.newstep.RestoreStylesStep;
+import org.geepawhill.contentment.newstep.SaveStylesStep;
+import org.geepawhill.contentment.newstep.SetStyleStep;
 import org.geepawhill.contentment.style.ShapePen;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
@@ -25,9 +25,9 @@ public class SequenceRunnerTest extends ApplicationTest
 		runner.prepareWindow(stage);
 		
 		sequence = new Sequence();
-		sequence.add(new GetStyles());
-		sequence.add(new SetStyle(ShapePen.second()));
-		sequence.add(new SetStyles());
+		sequence.add(new SaveStylesStep());
+		sequence.add(new SetStyleStep(ShapePen.second()));
+		sequence.add(new RestoreStylesStep());
 	}
 	
 	@Test

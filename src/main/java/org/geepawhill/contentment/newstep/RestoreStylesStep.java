@@ -1,14 +1,13 @@
-package org.geepawhill.contentment.step.styles;
+package org.geepawhill.contentment.newstep;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.StylesMemo;
-import org.geepawhill.contentment.newstep.Instant;
 
-public class SetStyles implements Instant
+public class RestoreStylesStep implements Instant
 {
 	StylesMemo previous;
 	
-	public SetStyles()
+	public RestoreStylesStep()
 	{
 	}
 	

@@ -2,7 +2,7 @@ package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.geometry.Point;
-import org.geepawhill.contentment.step.styles.SetStyle;
+import org.geepawhill.contentment.newstep.SetStyleStep;
 import org.geepawhill.contentment.style.ShapePen;
 import org.geepawhill.contentment.test.ContextOutline;
 import org.geepawhill.contentment.test.SequenceTester;
@@ -42,7 +42,7 @@ public class LettersTest extends SequenceTester
 	private Sequence sketch()
 	{
 		Sequence sequence = new Sequence();
-		sequence.add(new SetStyle(ShapePen.first()));
+		sequence.add(new SetStyleStep(ShapePen.first()));
 		return stroke.sketch(sequence,new FixedTiming(1d));
 	}
 }

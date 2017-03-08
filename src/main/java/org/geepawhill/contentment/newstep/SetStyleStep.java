@@ -1,16 +1,15 @@
-package org.geepawhill.contentment.step.styles;
+package org.geepawhill.contentment.newstep;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Style;
-import org.geepawhill.contentment.newstep.Instant;
 
-public class SetStyle implements Instant
+public class SetStyleStep implements Instant
 {
 	
 	private Style style;
 	private Style previous;
 
-	public SetStyle(Style style)
+	public SetStyleStep(Style style)
 	{
 		this.style = style;
 	}
