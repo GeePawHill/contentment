@@ -8,6 +8,7 @@ import org.geepawhill.contentment.newstep.Entrance;
 import org.geepawhill.contentment.newstep.StrokeStep;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.timing.FixedTiming;
+import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
 import javafx.scene.shape.Line;

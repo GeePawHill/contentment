@@ -9,6 +9,7 @@ import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
 import org.geepawhill.contentment.step.TransitionStep;
+import org.geepawhill.contentment.utility.Names;
 
 import javafx.animation.TranslateTransition;
 import javafx.geometry.BoundingBox;

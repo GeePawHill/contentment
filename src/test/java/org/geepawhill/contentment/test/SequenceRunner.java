@@ -4,10 +4,10 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-import org.geepawhill.contentment.actor.Names;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.model.Step;
+import org.geepawhill.contentment.utility.Names;
 
 import javafx.application.Platform;
 import javafx.scene.Group;

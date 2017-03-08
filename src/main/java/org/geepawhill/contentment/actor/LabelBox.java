@@ -14,6 +14,7 @@ import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.TimingBuilder;
+import org.geepawhill.contentment.utility.Names;
 
 import javafx.animation.TranslateTransition;
 import javafx.geometry.VPos;

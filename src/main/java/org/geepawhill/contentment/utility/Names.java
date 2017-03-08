@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.actor;
+package org.geepawhill.contentment.utility;
 
 import java.util.HashMap;
 

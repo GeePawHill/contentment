@@ -2,7 +2,6 @@ package org.geepawhill.contentment.actor.arrow;
 
 import java.util.ArrayList;
 
-import org.geepawhill.contentment.actor.Names;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.model.Actor;
@@ -11,6 +10,7 @@ import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.HideStep;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
+import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
 import javafx.scene.shape.Line;

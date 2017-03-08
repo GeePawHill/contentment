@@ -6,6 +6,7 @@ import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.SubStep;
 import org.geepawhill.contentment.step.TimedSequence;
+import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
 import javafx.scene.shape.Circle;
