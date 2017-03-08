@@ -49,7 +49,6 @@ public class Spot implements Actor
 	
 	public void place(Sequence sequence)
 	{
-			
 		sequence.add(new Entrance(this));
 		sequence.add(new ShowStep(group));
 	}
