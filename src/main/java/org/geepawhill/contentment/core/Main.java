@@ -4,7 +4,7 @@ import org.geepawhill.contentment.actor.Label;
 import org.geepawhill.contentment.actor.LabelBox;
 import org.geepawhill.contentment.actor.OvalText;
 import org.geepawhill.contentment.actor.Spot;
-import org.geepawhill.contentment.actor.Tale;
+import org.geepawhill.contentment.actor.Title;
 import org.geepawhill.contentment.actor.TargetBox;
 import org.geepawhill.contentment.actor.arrow.Arrow;
 import org.geepawhill.contentment.jfx.ScaleListener;
@@ -81,7 +81,7 @@ public class Main extends Application
 	{
 		Style blueLine = ShapePen.second();
 		Style greenLine = ShapePen.third();
-		Tale tale = new Tale("Agent: Anything With Susceptability & Unpredictability", 30d);
+		Title tale = new Title("Agent: Anything With Susceptability & Unpredictability");
 		LabelBox agent = new LabelBox("Agent", 800d, 520d);
 		Label teammate = new Label("Teammate", 800d, 520d);
 		Label practice = new Label("Practice", 800d, 800d);
@@ -106,37 +106,37 @@ public class Main extends Application
 		common.set(greenLine);
 		sequence.add(teammate.fadeIn(500d));
 		common.stop();
-		sequence.unmarked(tale.setText("That Includes The Daily Practice"));
+		tale.setText(sequence, "That Includes The Daily Practice");
 		sequence.add(practice.fadeIn(300d));
 		common.stop();
-		sequence.unmarked(tale.setText("Software We Use For Making"));
+		tale.setText(sequence, "Software We Use For Making");
 		sequence.add(software.fadeIn(300d));
 		common.stop();
-		sequence.unmarked(tale.setText("Or The Hardware We Use For Making"));
+		tale.setText(sequence, "Or The Hardware We Use For Making");
 		sequence.add(hardware.fadeIn(300d));
 		common.stop();
-		sequence.unmarked(tale.setText("Corporate Policy Is An Agent"));
+		tale.setText(sequence, "Corporate Policy Is An Agent");
 		sequence.add(policy.fadeIn(300d));
 		common.stop();
-		sequence.unmarked(tale.setText("The Staffing Demand & Supply"));
+		tale.setText(sequence, "The Staffing Demand & Supply");
 		sequence.add(personnel.fadeIn(300d));
 		common.stop();
-		sequence.unmarked(tale.setText("Everything About The Market, Like Shipping Date"));
+		tale.setText(sequence, "Everything About The Market, Like Shipping Date");
 		sequence.add(date.fadeIn(300d));
 		common.stop();
-		sequence.unmarked(tale.setText("The Conceptual Framework The Team Uses"));
+		tale.setText(sequence, "The Conceptual Framework The Team Uses");
 		sequence.add(framework.fadeIn(300d));
 		common.stop();
-		sequence.unmarked(tale.setText("The Tools We Use"));
+		tale.setText(sequence, "The Tools We Use");
 		sequence.add(tools.fadeIn(300d));
 		common.stop();
-		sequence.unmarked(tale.setText("The Hierarchy We Live In"));
+		tale.setText(sequence, "The Hierarchy We Live In");
 		sequence.add(orgchart.fadeIn(300d));
 		common.stop();
-		sequence.unmarked(tale.setText("And, Yes, The Coach Is An Agent, Too"));
+		tale.setText(sequence, "And, Yes, The Coach Is An Agent, Too");
 		sequence.add(coach.fadeIn(300d));
 		common.stop();
-		sequence.add(tale.setText("Watch Just One Poke..."));
+		tale.setText(sequence, "Watch Just One Poke...");
 		common.stop();
 		poke(coach, teammate, 850d, 570d);
 		poke(teammate, practice, 750d, 820d);
@@ -166,7 +166,7 @@ public class Main extends Application
 		Style blueLine = ShapePen.second();
 		Style greenLine = ShapePen.third();
 
-		Tale tale = new Tale("Agents Are Susceptible To Pokes", 30d);
+		Title tale = new Title("Agents Are Susceptible To Pokes");
 		LabelBox agent = new LabelBox("Agent", 800d, 450d);
 		TargetBox target = new TargetBox("Target", 1000d, 350d, 300d, 200d);
 
@@ -196,21 +196,21 @@ public class Main extends Application
 		poke1Source.place(sequence);
 		sequence.add(poke1.sketch(1000d));
 		common.stop();
-		sequence.unmarked(tale.setText("Agents Respond Unpredictably"));
+		tale.setText(sequence, "Agents Respond Unpredictably");
 		sequence.add(agent.move(900d, 400d));
 		common.stop();
-		sequence.unmarked(tale.setText("Whoops: Better Try Another Poke"));
+		tale.setText(sequence, "Whoops: Better Try Another Poke");
 		poke2Source.place(sequence);
 		common.set(redLine);
 		sequence.unmarked(poke2.sketch(1000d));
 		sequence.add(agent.move(1000d, 500d));
 		common.stop();
-		sequence.unmarked(tale.setText("Almost there!"));
+		tale.setText(sequence, "Almost there!");
 		poke3Source.place(sequence);
 		common.set(greenLine);
 		sequence.unmarked(poke3.sketch(1000d));
 		sequence.unmarked(agent.move(1100d, 450d));
-		sequence.add(tale.setText("Made it!!"));
+		tale.setText(sequence, "Made it!!");
 		common.stop();
 
 	}
@@ -222,7 +222,7 @@ public class Main extends Application
 		Style blueLine = ShapePen.second();
 		Style greenLine = ShapePen.third();
 		Style blackLine = ShapePen.fourth();
-		Tale tale = new Tale("A Simple Change Model", 30d);
+		Title tale = new Title("A Simple Change Model");
 		LabelBox agent = new LabelBox("Agent", 800d, 450d);
 		OvalText practice = new OvalText("Practice", 800d, .75 * 900d);
 		Arrow change = new Arrow(agent, false, practice, true);
@@ -302,7 +302,7 @@ public class Main extends Application
 		sequence.unmarked(change.sketch(1d));
 		common.restoreStyles();
 		common.stop();
-		sequence.add(tale.setText("Complication: There are always multiple agents."));
+		tale.setText(sequence, "Complication: There are always multiple agents.");
 		common.set(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch", 30d)));
 		common.set(redLine);
 		common.set(firstMarker);
@@ -320,7 +320,7 @@ public class Main extends Application
 		sequence.unmarked(poke5.sketch(300d));
 		sequence.add(poke6.sketch(300d));
 		common.stop();
-		sequence.add(tale.setText("Complication: There are always multiple practices."));
+		tale.setText(sequence, "Complication: There are always multiple practices.");
 		common.set(Dash.dash(10d));
 		common.set(greenLine);
 		p1.sketch(sequence, 1d);
@@ -337,7 +337,7 @@ public class Main extends Application
 		sequence.add(c6.sketch(200d));
 		common.stop();
 
-		sequence.add(tale.setText("Complication: Most agents change multiple practices."));
+		tale.setText(sequence, "Complication: Most agents change multiple practices.");
 		common.set(Dash.dash(10d));
 		common.set(greenLine);
 		sequence.unmarked(c11.sketch(200d));
@@ -355,7 +355,7 @@ public class Main extends Application
 		common.saveStyles();
 		common.set(Dash.dash(3d));
 		common.set(ShapePen.thinFourth());
-		sequence.add(tale.setText("Complication: The agents are interrelated."));
+		tale.setText(sequence, "Complication: The agents are interrelated.");
 		sequence.unmarked(i1.sketch(300d));
 		sequence.unmarked(i2.sketch(300d));
 		sequence.unmarked(i3.sketch(300d));
@@ -363,7 +363,7 @@ public class Main extends Application
 		sequence.unmarked(i5.sketch(300d));
 		sequence.add(i6.sketch(300d));
 		common.stop();
-		sequence.add(tale.setText("Complication: The practices are interrelated."));
+		tale.setText(sequence, "Complication: The practices are interrelated.");
 		sequence.unmarked(pi1.sketch(300d));
 		sequence.unmarked(pi2.sketch(300d));
 		sequence.unmarked(pi3.sketch(300d));
