@@ -1,12 +1,12 @@
 package org.geepawhill.contentment.core;
 
+import org.geepawhill.contentment.actor.Arrow;
 import org.geepawhill.contentment.actor.Label;
 import org.geepawhill.contentment.actor.LabelBox;
 import org.geepawhill.contentment.actor.OvalText;
 import org.geepawhill.contentment.actor.Spot;
 import org.geepawhill.contentment.actor.TargetBox;
 import org.geepawhill.contentment.actor.Title;
-import org.geepawhill.contentment.actor.arrow.Arrow;
 import org.geepawhill.contentment.jfx.ScaleListener;
 import org.geepawhill.contentment.jfx.StageMaximizedListener;
 import org.geepawhill.contentment.newstep.CommonSteps;
