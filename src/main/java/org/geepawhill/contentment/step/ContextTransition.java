@@ -18,11 +18,6 @@ public class ContextTransition extends Transition
 		setCycleDuration(Duration.millis(ms));
 	}
 
-	public ContextTransition(Context context,SubStep substep, double ms)
-	{
-		this(context,substep.interpolator,ms);
-	}
-
 	@Override
 	protected void interpolate(double arg0)
 	{

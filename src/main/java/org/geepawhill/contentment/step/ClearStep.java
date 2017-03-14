@@ -13,7 +13,6 @@ import javafx.scene.Node;
 public class ClearStep implements Step
 {
 	
-	
 	private ArrayList<Node> nodes;
 
 	public ClearStep()
