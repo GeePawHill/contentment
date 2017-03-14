@@ -3,6 +3,7 @@ package org.geepawhill.contentment.actor.arrow;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.model.Actor;
 import org.geepawhill.contentment.model.Step;
@@ -71,7 +72,7 @@ public class Arrow implements Actor
 	}
 
 	
-	public Step sketch(double ms)
+	public void sketch(Sequence sequence,double ms)
 	{
 		ArrayList<SubStep> substeps = new ArrayList<>();
 		substeps.add(new SubStep(1d,this::computeArrow));
@@ -86,7 +87,7 @@ public class Arrow implements Actor
 			substeps.add(StrokeHelper.makeSubStep(fromTop, 10d, this::fromBottomPoints));
 			substeps.add(StrokeHelper.makeSubStep(fromBottom, 10d, this::fromTopPoints));
 		}
-		return new TimedSequence(ms, group, substeps.toArray(new SubStep[0]));
+		sequence.add(new TimedSequence(ms, group, substeps.toArray(new SubStep[0])));
 	}
 	
 	private void computeArrow(double frac,Context context)
