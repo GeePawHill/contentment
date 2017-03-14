@@ -140,6 +140,11 @@ public class PointPair
 	{
 		return new PointPair(from.x-delta,from.y-delta,to.x+delta,to.y+delta);
 	}
+	
+	public PointPair change(double deltaLeft,double deltaTop,double deltaRight,double deltaBottom)
+	{
+		return new PointPair(from.x-deltaLeft,from.y-deltaTop,to.x+deltaRight,to.y+deltaBottom);
+	}
 
 	public double width()
 	{

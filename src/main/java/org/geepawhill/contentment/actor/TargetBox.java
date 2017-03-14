@@ -1,139 +1,104 @@
 package org.geepawhill.contentment.actor;
 
-import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.StyleId;
+import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.geometry.Point;
+import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.model.Actor;
 import org.geepawhill.contentment.model.Step;
+import org.geepawhill.contentment.newstep.BoundsStep;
+import org.geepawhill.contentment.newstep.Entrance;
+import org.geepawhill.contentment.newstep.LettersStep;
+import org.geepawhill.contentment.newstep.StrokeStep;
 import org.geepawhill.contentment.outline.KvOutline;
-import org.geepawhill.contentment.step.SubStep;
-import org.geepawhill.contentment.step.TimedSequence;
 import org.geepawhill.contentment.step.TransitionStep;
+import org.geepawhill.contentment.timing.RelativeTiming;
+import org.geepawhill.contentment.timing.TimingBuilder;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.animation.TranslateTransition;
-import javafx.geometry.BoundingBox;
-import javafx.geometry.Bounds;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class TargetBox implements Actor
 {
-	private final String nickname;
-	final String text;
+	final String nickname;
+	final String source;
 	
 	private final Group group;
-	private Text label;
-	private Rectangle rectangle;
+	private Text text;
+	private Line north;
+	private Line south;
+	private Line east;
+	private Line west;
 	
-	private Bounds bounds;
 
-	private static final double VMARGIN = 8d;
-	private static final double HMARGIN = 8d;
-
-	private double x;
-	private double y;
-
-	private double width;
-
-	private double height;
+	private Point center;
 	
-	public TargetBox(String text, double x, double y, double width, double height)
+	private StrokeStep northStep;
+	private StrokeStep southStep;
+	private StrokeStep westStep;
+	private StrokeStep eastStep;
+
+	public TargetBox(String source, double xCenter, double yCenter)
 	{
 		this.nickname = Names.make(getClass());
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.text = text;
-		label = new Text(x, y, "");
-		label.setTextOrigin(VPos.CENTER);
-		rectangle = new Rectangle();
-		this.group = JfxUtility.makeGroup(this,rectangle,label);
-		bounds = label.getBoundsInParent();
+		this.center = new Point(xCenter,yCenter);
+		this.source = source;
+		text = new Text();
+		text.setTextOrigin(VPos.CENTER);
+		north = new Line();
+		south = new Line();
+		east = new Line();
+		west = new Line();
+		this.group = JfxUtility.makeGroup(this,text,north,west,south,east);
 	}
 	
 	public String nickname()
 	{
 		return nickname;
 	}
-	
+
 	@Override
 	public void outline(KvOutline output)
 	{
-		
 	}
 
-	public Step sketch(double ms)
+	public void sketch(Sequence sequence, double ms)
 	{
-		SubStep[] substeps = new SubStep[]
-		{
-				new SubStep(500d,this::animateDrawText),
-				new SubStep(1d,this::animateComputeBox), 
-				new SubStep(200d,this::animateDrawBox)
-		};
-		return new TimedSequence(ms, group, substeps);
+		LettersStep lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, text);
+		northStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),north);
+		westStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),west);
+		southStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),south);
+		eastStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),east);
+		new TimingBuilder().build(ms, lettersStep,northStep,westStep,southStep,eastStep);
+		sequence.add(new Entrance(this));
+		sequence.add(lettersStep);
+		sequence.add(new BoundsStep(text,this::boundsChanged));
+		sequence.add(northStep);
+		sequence.add(eastStep);
+		sequence.add(southStep);
+		sequence.add(westStep);
 	}
 	
-	public Step fadeIn(double ms)
+	private void boundsChanged(PointPair pair)
 	{
-		SubStep[] substeps = new SubStep[]
-		{
-				new SubStep(500d,this::fadeIn)
-		};
-		return new TimedSequence(ms, group, substeps);
-	}
-	
-	protected void animateDrawText(double frac, Context context)
-	{
-		context.styles.get(StyleId.Font).apply(label);
-		context.apply(StyleId.ShapePen,label);
-		String newText = text.substring(0, (int) (frac * text.length()));
-		label.setText(newText);
-	}
-
-	protected void animateComputeBox(double frac, Context context)
-	{
-		bounds = label.getBoundsInParent();
-		bounds = new BoundingBox(bounds.getMinX() - HMARGIN, bounds.getMinY() - VMARGIN, width,
-				height);
-		context.apply(StyleId.ShapePen,rectangle);
-		context.styles.get(StyleId.Dash).apply(rectangle);
-		rectangle.setX(bounds.getMinX());
-		rectangle.setY(bounds.getMinY());
-		rectangle.setWidth(0d);
-		rectangle.setHeight(0d);
-		rectangle.setVisible(false);
-	}
-
-	protected void animateDrawBox(double frac, Context context)
-	{
-		rectangle.setWidth(width * frac);
-		rectangle.setHeight(height * frac);
-		if (frac != 0d) rectangle.setVisible(true);
-	}
-	
-	protected void fadeIn(double frac, Context context)
-	{
-		if(frac==0d)
-		{
-			group.setOpacity(0d);
-			animateDrawText(1d,context);
-			animateComputeBox(1d,context);
-			animateDrawBox(1d,context);
-		}
-		group.setOpacity(frac);
+		PointPair grow = pair.change(4d,4d,300d,300d);
+		northStep.setPoints(grow.northLine());
+		westStep.setPoints(grow.westLine());
+		southStep.setPoints(grow.southLine());
+		eastStep.setPoints(grow.eastLine());
 	}
 	
 	public Step move(double newX,double newY)
 	{
 		TranslateTransition transition = new TranslateTransition();
 		transition.setNode(group);
-		transition.setToX(newX-x);
-		transition.setToY(newY-y);
+		transition.setToX(newX-center.x);
+		transition.setToY(newY-center.y);
 		transition.setDuration(Duration.millis(1000d));
 		return new TransitionStep(transition);
 	}
@@ -143,4 +108,5 @@ public class TargetBox implements Actor
 	{
 		return group;
 	}
+
 }

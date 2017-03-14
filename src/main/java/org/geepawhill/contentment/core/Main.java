@@ -63,8 +63,8 @@ public class Main extends Application
 			common = new CommonSteps(sequence);
 //			Letters letters = new Letters("thing thid.", new Point(400d, 400d));
 //			letters.sketch(sequence, new FixedTiming(1000));
-//			 addBaseComplications(sequence);
-//			 interactiveStabilization(sequence);
+			 addBaseComplications(sequence);
+			 interactiveStabilization(sequence);
 			 agentAndPokes();
 
 			player = new Player(scaledCanvas);
@@ -168,7 +168,7 @@ public class Main extends Application
 
 		Title tale = new Title("Agents Are Susceptible To Pokes");
 		LabelBox agent = new LabelBox("Agent", 800d, 450d);
-		TargetBox target = new TargetBox("Target", 1000d, 350d, 300d, 200d);
+		TargetBox target = new TargetBox("Target", 1050d, 350d);
 
 		Spot poke1Source = new Spot(400d, 450d);
 		Spot poke2Source = new Spot(800d, 200d);
@@ -180,16 +180,15 @@ public class Main extends Application
 
 		common.clear();
 		common.show(tale);
+		common.set(redLine);
+		common.set(org.geepawhill.contentment.style.Font.font(new Font("Century Gothic", 24d)));
+		common.set(Dash.dash(11d));
+		common.set(ShapePen.thinFirst());
+		target.sketch(sequence,1d);
+
 		common.set(blueLine);
 		common.set(Dash.solid());
 		common.set(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch", 60d)));
-		common.saveStyles();
-		common.set(redLine);
-		common.set(org.geepawhill.contentment.style.Font.font(new Font("Century Gothic", 24d)));
-		common.set(Dash.dash(4d));
-		common.set(ShapePen.thinFirst());
-		sequence.unmarked(target.sketch(1d));
-		common.restoreStyles();
 		agent.sketch(sequence, 1d);
 		common.stop();
 
@@ -217,11 +216,9 @@ public class Main extends Application
 
 	private void addBaseComplications(Sequence sequence)
 	{
-		Style firstMarker = ShapePen.pen("First", Color.RED, Color.TRANSPARENT, 5d, .5d);
 		Style redLine = ShapePen.first();
 		Style blueLine = ShapePen.second();
 		Style greenLine = ShapePen.third();
-		Style blackLine = ShapePen.fourth();
 		Title tale = new Title("A Simple Change Model");
 		LabelBox agent = new LabelBox("Agent", 800d, 450d);
 		OvalText practice = new OvalText("Practice", 800d, .75 * 900d);
@@ -285,9 +282,6 @@ public class Main extends Application
 
 		common.show(tale);
 		common.set(redLine);
-		common.set(firstMarker);
-
-		common.set(firstMarker);
 		agent.sketch(sequence, 1000d);
 		common.set(blueLine);
 		common.set(ShapePen.second());
@@ -299,13 +293,13 @@ public class Main extends Application
 		common.set(greenLine);
 		common.set(Dash.dash(10d));
 		practice.sketch(sequence, 1000d);
+		common.set(Dash.solid());
 		sequence.unmarked(change.sketch(1d));
 		common.restoreStyles();
 		common.stop();
 		tale.setText(sequence, "Complication: There are always multiple agents.");
 		common.set(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch", 30d)));
 		common.set(redLine);
-		common.set(firstMarker);
 		a1.sketch(sequence, 1d);
 		a2.sketch(sequence, 1d);
 		a3.sketch(sequence, 1d);
@@ -313,12 +307,12 @@ public class Main extends Application
 		a5.sketch(sequence, 1d);
 		a6.sketch(sequence, 1d);
 		common.set(blueLine);
-		sequence.unmarked(poke1.sketch(300d));
-		sequence.unmarked(poke2.sketch(300d));
-		sequence.unmarked(poke3.sketch(300d));
-		sequence.unmarked(poke4.sketch(300d));
-		sequence.unmarked(poke5.sketch(300d));
-		sequence.add(poke6.sketch(300d));
+		sequence.unmarked(poke1.sketch(1d));
+		sequence.unmarked(poke2.sketch(1d));
+		sequence.unmarked(poke3.sketch(1d));
+		sequence.unmarked(poke4.sketch(1d));
+		sequence.unmarked(poke5.sketch(1d));
+		sequence.add(poke6.sketch(1d));
 		common.stop();
 		tale.setText(sequence, "Complication: There are always multiple practices.");
 		common.set(Dash.dash(10d));
@@ -329,12 +323,12 @@ public class Main extends Application
 		p4.sketch(sequence, 1d);
 		p5.sketch(sequence, 1d);
 		p6.sketch(sequence, 1d);
-		sequence.unmarked(c1.sketch(200d));
-		sequence.unmarked(c2.sketch(200d));
-		sequence.unmarked(c3.sketch(200d));
-		sequence.unmarked(c4.sketch(200d));
-		sequence.unmarked(c5.sketch(200d));
-		sequence.add(c6.sketch(200d));
+		sequence.unmarked(c1.sketch(1d));
+		sequence.unmarked(c2.sketch(1d));
+		sequence.unmarked(c3.sketch(1d));
+		sequence.unmarked(c4.sketch(1d));
+		sequence.unmarked(c5.sketch(1d));
+		sequence.add(c6.sketch(1d));
 		common.stop();
 
 		tale.setText(sequence, "Complication: Most agents change multiple practices.");
