@@ -40,7 +40,7 @@ public class Format
 	public IStyle style(String styleName)
 	{
 		IStyle result = findStyle(styleName);
-		if(result==null) throw new RuntimeException("Attempt to get non-existent style: "+styleName);
+		if(result==null) throw new MissingFormatException(styleName,name);
 		return result;
 	}
 

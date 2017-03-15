@@ -20,6 +20,12 @@ public class FormatTest
 		style = new TextPaint(Color.RED,Color.BLUE,.5d);
 		base = new Format("Base");
 	}
+	
+	@Test(expected=MissingFormatException.class)
+	public void throwsOnMissingStyle()
+	{
+		base.style("TextPaint");
+	}
 
 	@Test
 	public void overrides()
@@ -27,12 +33,6 @@ public class FormatTest
 		assertNull(base.findStyle("TextPaint"));
 		base.override("TextPaint",style);
 		assertEquals(style,base.findStyle("TextPaint"));
-	}
-	
-	@Test(expected = RuntimeException.class)
-	public void missingStyle()
-	{
-		base.style("TextPaint");
 	}
 	
 	@Test

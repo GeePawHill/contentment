@@ -59,18 +59,6 @@ public class TimingBuilder
 		return accumulatedAbsolute;
 	}
 	
-	private void gatherAbsolutes()
-	{
-		accumulatedAbsolute = 0d;
-		for (Timing timing : timings)
-		{
-			if (timing.getRatio() == 0d)
-			{
-				accumulatedAbsolute += timing.getAbsolute();
-			}
-		}
-	}
-
 	private void gatherTotals(Timing... timings)
 	{
 		accumulatedAbsolute = 0d;
