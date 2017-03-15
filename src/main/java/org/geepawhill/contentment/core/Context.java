@@ -21,7 +21,7 @@ public class Context {
 		this.actors = new Actors();
 		this.styles = new Styles();
 		styles.set(ShapePen.first());
-		styles.set(org.geepawhill.contentment.style.Font.font(new Font("Buxton Sketch",60d)));
+		styles.set(org.geepawhill.contentment.style.Font.font("?", new Font("Buxton Sketch",60d)));
 		styles.set(Opacity.opacity(.5d));
 		styles.set(Dash.solid());
 	}

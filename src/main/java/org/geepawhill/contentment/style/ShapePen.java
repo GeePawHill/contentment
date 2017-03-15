@@ -23,8 +23,8 @@ public class ShapePen
 				shape.setOpacity(opacity);
 			} 
 		};
-		nickname = nickname+" (Line: "+line.toString()+" Fill: "+fill.toString()+" Width: "+width+" Opacity: "+opacity+")";
-		return new Style(KIND, nickname, applier, "Line: "+line.toString()+" Fill: "+fill.toString()+" Width: "+width+" Opacity: "+opacity);
+		String value = "Line: "+line.toString()+" Fill: "+fill.toString()+" Width: "+width+" Opacity: "+opacity;
+		return new Style(KIND, nickname, applier, value);
 	}
 
 	public static Style first()

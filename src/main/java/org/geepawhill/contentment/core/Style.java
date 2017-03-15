@@ -24,7 +24,7 @@ public class Style implements Outliner
 	@Override
 	public String toString()
 	{
-		return nickname;
+		return nickname+" ("+value+")";
 	}
 
 	public void apply(Shape shape)
@@ -35,7 +35,7 @@ public class Style implements Outliner
 	@Override
 	public void outline(KvOutline output)
 	{
-		output.append(kind,nickname);
+		output.append(kind,toString());
 	}
 
 	public String kind()

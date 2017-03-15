@@ -10,7 +10,7 @@ public class Font
 {
 	public static final String KIND = "Font";
 
-	static public Style font(javafx.scene.text.Font font)
+	static public Style font(String nickname, javafx.scene.text.Font font)
 	{
 		StyleApplier applier = new StyleApplier() {
 			@Override
@@ -19,7 +19,7 @@ public class Font
 				if(shape instanceof Text) ((Text)shape).setFont(font);
 			} 
 		};
-		return new Style(KIND,font.getFamily()+" "+font.getSize(), applier, font.getFamily()+" "+font.getSize());
+		return new Style(KIND,nickname, applier, font.getFamily()+" "+font.getSize());
 	}
 
 }

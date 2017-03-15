@@ -22,7 +22,7 @@ public class Dash
 		return new Style(KIND,"SOLID", applier, "SOLID");		
 	}
 
-	public static Style dash(Double... dash)
+	public static Style dash(String nickname, Double... dash)
 	{
 		StyleApplier applier = new StyleApplier() {
 			@Override
@@ -40,7 +40,7 @@ public class Dash
 			value+=dashItem;
 			isFirst=false;
 		}
-		return new Style(KIND,value, applier, value);		
+		return new Style(KIND,nickname, applier, value);		
 	}
 
 }

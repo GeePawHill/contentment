@@ -13,29 +13,29 @@ public class StyleTest
 	@Test
 	public void dumpFont()
 	{
-		Style style = Font.font(new javafx.scene.text.Font("Buxton Sketch",60d));
-		assertOutline("Font = Buxton Sketch 60.0", style);
+		Style style = Font.font("Hand.Large", new javafx.scene.text.Font("Buxton Sketch",60d));
+		assertOutline("Font = Hand.Large (Buxton Sketch 60.0)", style);
 	}
 	
 	@Test
 	public void dumpOpacity()
 	{
 		Style style = Opacity.opacity(.3d);
-		assertOutline("Opacity = 0.3", style);
+		assertOutline("Opacity =  (0.3)", style);
 	}
 	
 	@Test
 	public void dumpDash()
 	{
-		Style style = Dash.dash(2d,5d,7d);
-		assertOutline("Dash = 2.0, 5.0, 7.0", style);
+		Style style = Dash.dash("Dash",2d,5d, 7d);
+		assertOutline("Dash = Dash (2.0, 5.0, 7.0)", style);
 	}
 
 	@Test
 	public void dumpDashSolid()
 	{
 		Style style = Dash.solid();
-		assertOutline("Dash = SOLID", style);
+		assertOutline("Dash = SOLID (SOLID)", style);
 	}
 
 	private void assertOutline(String expected, Style style)
