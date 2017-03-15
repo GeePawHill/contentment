@@ -10,22 +10,22 @@ public class TimingBuilder
 	public static final String ABSOLUTE_OVERRUN = "Absolutes are bigger than allocated.";
 	private double accumulatedAbsolute;
 	private double accumulatedRelative;
-	
+
 	public double build(double total, Step... steps)
 	{
 		Timing[] timings = new Timing[steps.length];
 		int dest = 0;
-		for(Step step: steps)
+		for (Step step : steps)
 		{
-			timings[dest++]=step.timing();
+			timings[dest++] = step.timing();
 		}
-		return build(total,timings);
+		return build(total, timings);
 	}
 
-	public double build(double total, Timing...timings)
+	public double build(double total, Timing... timings)
 	{
 		gatherTotals(timings);
-		if(total==0d) return noTotalSupplied();
+		if (total == 0d) return noTotalSupplied();
 		double distribute = amountLeftToDistribute(total);
 		return distributeRelatives(distribute, timings);
 	}
@@ -33,14 +33,14 @@ public class TimingBuilder
 	private double distributeRelatives(double distribute, Timing... timings)
 	{
 		double afterDistribution = accumulatedAbsolute;
-		for(Timing timing : timings)
+		for (Timing timing : timings)
 		{
 			double ratio = timing.getRatio();
-			if(ratio!=0d)
+			if (ratio != 0d)
 			{
-				double ms = (ratio*distribute)/accumulatedRelative;
-				afterDistribution+=ms;
-				timing.setAbsolute( ms);
+				double ms = (ratio * distribute) / accumulatedRelative;
+				afterDistribution += ms;
+				timing.setAbsolute(ms);
 			}
 		}
 		return afterDistribution;
@@ -49,32 +49,41 @@ public class TimingBuilder
 	private double amountLeftToDistribute(double total)
 	{
 		double distribute = total - accumulatedAbsolute;
-		if(distribute<0d) throw new RuntimeException(ABSOLUTE_OVERRUN);
+		if (distribute < 0d) throw new RuntimeException(ABSOLUTE_OVERRUN);
 		return distribute;
 	}
 
 	private double noTotalSupplied()
 	{
-		if(accumulatedRelative>0d)
-		{
-			throw new RuntimeException(RELATIVES_BUT_NO_TOTAL);
-		}
+		if (accumulatedRelative > 0d) { throw new RuntimeException(RELATIVES_BUT_NO_TOTAL); }
 		return accumulatedAbsolute;
+	}
+	
+	private void gatherAbsolutes()
+	{
+		accumulatedAbsolute = 0d;
+		for (Timing timing : timings)
+		{
+			if (timing.getRatio() == 0d)
+			{
+				accumulatedAbsolute += timing.getAbsolute();
+			}
+		}
 	}
 
 	private void gatherTotals(Timing... timings)
 	{
 		accumulatedAbsolute = 0d;
 		accumulatedRelative = 0d;
-		for(Timing timing : timings)
+		for (Timing timing : timings)
 		{
-			if(timing.getRatio()==0d)
+			if (timing.getRatio() == 0d)
 			{
-				accumulatedAbsolute+=timing.getAbsolute();
+				accumulatedAbsolute += timing.getAbsolute();
 			}
 			else
 			{
-				accumulatedRelative+=timing.getRatio();
+				accumulatedRelative += timing.getRatio();
 			}
 		}
 	}
