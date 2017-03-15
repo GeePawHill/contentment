@@ -25,14 +25,14 @@ public class StylesTest
 	@Test(expected=RuntimeException.class)
 	public void throwsOnMissing()
 	{
-		styles.get(StyleId.ShapePen);
+		styles.get(ShapePen.KIND);
 	}
 	
 	@Test
 	public void setAndGet()
 	{
 		styles.set(first);
-		assertEquals(first,styles.get(StyleId.ShapePen));
+		assertEquals(first,styles.get(ShapePen.KIND));
 	}
 	
 	@Test
@@ -47,9 +47,9 @@ public class StylesTest
 		styles.set(first);
 		StylesMemo previous = styles.getAll();
 		styles.set(second);
-		assertEquals(second,styles.get(StyleId.ShapePen));
+		assertEquals(second,styles.get(ShapePen.KIND));
 		styles.setAll(previous);
-		assertEquals(first,styles.get(StyleId.ShapePen));
+		assertEquals(first,styles.get(ShapePen.KIND));
 	}
 
 	@Test
@@ -59,7 +59,7 @@ public class StylesTest
 		styles.set(first);
 		styles.outline(tree);
 		ContextOutline outline = new ContextOutline(tree);
-		outline.assertKey("Styles.ShapePen");
+		outline.assertKey("Styles."+ShapePen.KIND);
 	}
 	
 }

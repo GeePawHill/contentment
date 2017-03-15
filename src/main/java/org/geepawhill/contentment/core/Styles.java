@@ -17,11 +17,11 @@ public class Styles implements Outliner
 		return styles.set(style);
 	}
 
-	public Style get(StyleId id)
+	public Style get(String kind)
 	{
-		Style result = styles.get(id.name());
+		Style result = styles.get(kind);
 		if (result!=null) return result;
-		throw new RuntimeException("Attempt to get un-set style: " + id.name());
+		throw new RuntimeException("Attempt to get un-set style: " + kind);
 	}
 
 	public StylesMemo getAll()
@@ -42,4 +42,5 @@ public class Styles implements Outliner
 		output.append("Styles");
 		styles.outline(output);
 	}
+
 }

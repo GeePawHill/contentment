@@ -1,12 +1,13 @@
 package org.geepawhill.contentment.newstep;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.StyleId;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.model.OnFinished;
 import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.model.Timing;
 import org.geepawhill.contentment.step.ContextTransition;
+import org.geepawhill.contentment.style.Dash;
+import org.geepawhill.contentment.style.ShapePen;
 
 import javafx.animation.Transition;
 import javafx.scene.shape.Line;
@@ -77,8 +78,8 @@ public class StrokeStep implements Step
 		}
 		else
 			line.setVisible(true);
-		context.apply(StyleId.ShapePen, line);
-		context.apply(StyleId.Dash, line);
+		context.apply(ShapePen.KIND, line);
+		context.apply(Dash.KIND, line);
 		line.setStartX(points.from.x);
 		line.setStartY(points.from.y);
 		line.setEndX(points.partialX(fraction));

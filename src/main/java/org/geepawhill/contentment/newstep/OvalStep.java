@@ -1,12 +1,12 @@
 package org.geepawhill.contentment.newstep;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.StyleId;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.model.OnFinished;
 import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.model.Timing;
 import org.geepawhill.contentment.step.ContextTransition;
+import org.geepawhill.contentment.style.ShapePen;
 
 import javafx.animation.Transition;
 import javafx.scene.shape.Ellipse;
@@ -80,7 +80,7 @@ public class OvalStep implements Step
 		}
 		else
 			ellipse.setVisible(true);
-		context.apply(StyleId.ShapePen, ellipse);
+		context.apply(ShapePen.KIND, ellipse);
 		ellipse.setCenterX(points.centerX());
 		ellipse.setCenterY(points.centerY());
 		ellipse.setRadiusX((points.width()/2d)+HMARGIN * fraction);

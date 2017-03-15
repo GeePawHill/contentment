@@ -1,5 +1,6 @@
 package org.geepawhill.contentment.core;
 
+import org.geepawhill.contentment.style.ShapePen;
 import org.geepawhill.contentment.test.ContextOutline;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ public class ContextTest
 		Context context = new Context(new Group());
 		ContextOutline outline = new ContextOutline(context.outline());
 		outline.baseKey("Styles");
-		outline.assertBase(StyleId.ShapePen.name());
+		outline.assertBase(ShapePen.KIND);
 	}
 
 }

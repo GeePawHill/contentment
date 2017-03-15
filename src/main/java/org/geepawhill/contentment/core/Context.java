@@ -38,11 +38,9 @@ public class Context {
 		outline(output);
 		return output;
 	}
-
-	public void apply(StyleId id,Shape shape)
+	
+	public void apply(String kind, Shape shape)
 	{
-		styles.get(id).apply(shape);
+		styles.get(kind).apply(shape);
 	}
-
-
 }

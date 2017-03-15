@@ -17,8 +17,7 @@ public class SetStyleStep implements Instant
 	@Override
 	public void after(Context context)
 	{
-		previous = context.styles.get(style.id);
-		context.styles.set(style);
+		previous = context.styles.set(style);
 	}
 
 	@Override

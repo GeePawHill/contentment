@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.test;
 
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.core.StyleId;
 import org.geepawhill.contentment.newstep.RestoreStylesStep;
 import org.geepawhill.contentment.newstep.SaveStylesStep;
 import org.geepawhill.contentment.newstep.SetStyleStep;
@@ -34,14 +33,14 @@ public class SequenceRunnerTest extends ApplicationTest
 	public void playSequence()
 	{
 		ContextOutline play = runner.waitForPlay(sequence);
-		play.assertKey("Styles."+StyleId.ShapePen.name(),ShapePen.second().toString());
+		play.assertKey("Styles."+ShapePen.KIND,ShapePen.second().toString());
 	}
 	
 	@Test
 	public void afterSequence()
 	{
 		ContextOutline after = runner.waitForAfter(sequence);
-		after.assertKey("Styles."+StyleId.ShapePen.name(),ShapePen.second().toString());
+		after.assertKey("Styles."+ShapePen.KIND,ShapePen.second().toString());
 	}
 	
 	@Test
@@ -49,6 +48,6 @@ public class SequenceRunnerTest extends ApplicationTest
 	{
 		runner.waitForPlay(sequence);
 		ContextOutline before = runner.waitForBefore(sequence);
-		before.assertKey("Styles."+StyleId.ShapePen.name(),ShapePen.first().toString());
+		before.assertKey("Styles."+ShapePen.KIND,ShapePen.first().toString());
 	}
 }

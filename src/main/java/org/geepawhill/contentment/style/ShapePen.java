@@ -2,7 +2,6 @@ package org.geepawhill.contentment.style;
 
 import org.geepawhill.contentment.core.Style;
 import org.geepawhill.contentment.core.StyleApplier;
-import org.geepawhill.contentment.core.StyleId;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -10,6 +9,8 @@ import javafx.scene.shape.Shape;
 
 public class ShapePen
 {
+	static public String KIND = "ShapePen";
+	
 	static public Style pen(String nickname, Paint line,Paint fill, double width, double opacity)
 	{
 		StyleApplier applier = new StyleApplier() {
@@ -23,7 +24,7 @@ public class ShapePen
 			} 
 		};
 		nickname = nickname+" (Line: "+line.toString()+" Fill: "+fill.toString()+" Width: "+width+" Opacity: "+opacity+")";
-		return new Style(nickname, StyleId.ShapePen, applier, "Line: "+line.toString()+" Fill: "+fill.toString()+" Width: "+width+" Opacity: "+opacity);
+		return new Style(KIND, nickname, applier, "Line: "+line.toString()+" Fill: "+fill.toString()+" Width: "+width+" Opacity: "+opacity);
 	}
 
 	public static Style first()

@@ -7,18 +7,16 @@ import javafx.scene.shape.Shape;
 
 public class Style implements Outliner
 {
-	public final StyleId id;
 	private final StyleApplier applier;
 	
 	private final String kind;
 	private final String nickname;
 	private final String value;
 
-	public Style(String nickname, StyleId id, StyleApplier applier, String value)
+	public Style(String kind, String nickname, StyleApplier applier, String value)
 	{
 		this.nickname = nickname;
-		this.id = id;
-		this.kind = id.name();
+		this.kind = kind;
 		this.applier = applier;
 		this.value = value;
 	}
@@ -37,7 +35,7 @@ public class Style implements Outliner
 	@Override
 	public void outline(KvOutline output)
 	{
-		output.append(id.toString(),nickname);
+		output.append(kind,nickname);
 	}
 
 	public String kind()

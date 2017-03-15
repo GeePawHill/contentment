@@ -2,12 +2,13 @@ package org.geepawhill.contentment.style;
 
 import org.geepawhill.contentment.core.Style;
 import org.geepawhill.contentment.core.StyleApplier;
-import org.geepawhill.contentment.core.StyleId;
 
 import javafx.scene.shape.Shape;
 
 public class Dash
 {
+
+	public static final String KIND = "Dash";
 
 	public static Style solid()
 	{
@@ -18,7 +19,7 @@ public class Dash
 				shape.getStrokeDashArray().clear();;
 			} 
 		};
-		return new Style("SOLID",StyleId.Dash, applier, "SOLID");		
+		return new Style(KIND,"SOLID", applier, "SOLID");		
 	}
 
 	public static Style dash(Double... dash)
@@ -39,7 +40,7 @@ public class Dash
 			value+=dashItem;
 			isFirst=false;
 		}
-		return new Style(value,StyleId.Dash, applier, value);		
+		return new Style(KIND,value, applier, value);		
 	}
 
 }

@@ -1,12 +1,13 @@
 package org.geepawhill.contentment.newstep;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.StyleId;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.model.OnFinished;
 import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.model.Timing;
 import org.geepawhill.contentment.step.ContextTransition;
+import org.geepawhill.contentment.style.Font;
+import org.geepawhill.contentment.style.ShapePen;
 
 import javafx.animation.Transition;
 import javafx.scene.text.Text;
@@ -74,8 +75,8 @@ public class LettersStep implements Step
 		}
 		else
 			text.setVisible(true);
-		context.apply(StyleId.Font,text);
-		context.apply(StyleId.ShapePen,text);
+		context.apply(Font.KIND,text);
+		context.apply(ShapePen.KIND,text);
 		String newText = letters.substring(0, (int) (fraction * letters.length()));
 		text.setText(newText);
 		text.setX(center.x-text.getBoundsInParent().getWidth()/2d);
