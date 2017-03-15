@@ -23,7 +23,7 @@ public class ShapePen
 			} 
 		};
 		nickname = nickname+" (Line: "+line.toString()+" Fill: "+fill.toString()+" Width: "+width+" Opacity: "+opacity+")";
-		return new Style(nickname, StyleId.ShapePen, applier);
+		return new Style(nickname, StyleId.ShapePen, applier, "Line: "+line.toString()+" Fill: "+fill.toString()+" Width: "+width+" Opacity: "+opacity);
 	}
 
 	public static Style first()

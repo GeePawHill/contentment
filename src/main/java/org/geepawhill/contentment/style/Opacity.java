@@ -18,7 +18,7 @@ public class Opacity
 				shape.setOpacity(d);
 			} 
 		};
-		return new Style(Double.toString(d),StyleId.Opacity, applier);
+		return new Style(Double.toString(d),StyleId.Opacity, applier, Double.toString(d));
 	}
 
 }

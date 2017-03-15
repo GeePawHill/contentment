@@ -1,12 +1,10 @@
 package org.geepawhill.contentment.core;
 
-import java.util.HashMap;
-
 public class StylesMemo
 {
-	HashMap<StyleId, Style> stash;
+	StyleMap stash;
 
-	public StylesMemo(HashMap<StyleId, Style> styles)
+	public StylesMemo(StyleMap styles)
 	{
 		stash = styles;
 	}

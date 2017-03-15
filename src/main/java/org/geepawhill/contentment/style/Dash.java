@@ -18,7 +18,7 @@ public class Dash
 				shape.getStrokeDashArray().clear();;
 			} 
 		};
-		return new Style("SOLID",StyleId.Dash, applier);		
+		return new Style("SOLID",StyleId.Dash, applier, "SOLID");		
 	}
 
 	public static Style dash(Double... dash)
@@ -31,15 +31,15 @@ public class Dash
 				shape.getStrokeDashArray().addAll(dash);
 			} 
 		};
-		String nickname = "";
+		String value = "";
 		boolean isFirst = true;
 		for(Double dashItem : dash)
 		{
-			if(!isFirst) nickname+=", ";
-			nickname+=dashItem;
+			if(!isFirst) value+=", ";
+			value+=dashItem;
 			isFirst=false;
 		}
-		return new Style(nickname,StyleId.Dash, applier);		
+		return new Style(value,StyleId.Dash, applier, value);		
 	}
 
 }

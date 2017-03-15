@@ -1,36 +1,32 @@
 package org.geepawhill.contentment.core;
 
-import java.util.HashMap;
-
 import org.geepawhill.contentment.model.Outliner;
 import org.geepawhill.contentment.outline.KvOutline;
 
 public class Styles implements Outliner
 {
-	HashMap<StyleId, Style> styles;
+	StyleMap styles;
 
 	public Styles()
 	{
-		styles = new HashMap<>();
+		styles = new StyleMap();
 	}
 
 	public Style set(Style style)
 	{
-		Style oldStyle = styles.get(style.id);
-		styles.put(style.id, style);
-		return oldStyle;
+		return styles.set(style);
 	}
 
 	public Style get(StyleId id)
 	{
-		if (styles.containsKey(id)) return styles.get(id);
+		Style result = styles.get(id.name());
+		if (result!=null) return result;
 		throw new RuntimeException("Attempt to get un-set style: " + id.name());
 	}
 
-	@SuppressWarnings("unchecked")
 	public StylesMemo getAll()
 	{
-		return new StylesMemo((HashMap<StyleId, Style>) styles.clone());
+		return new StylesMemo(styles.deepCopy());
 	}
 
 	public StylesMemo setAll(StylesMemo memo)
@@ -44,16 +40,6 @@ public class Styles implements Outliner
 	public void outline(KvOutline output)
 	{
 		output.append("Styles");
-		dumpMap(output, styles);
-	}
-
-	private void dumpMap(KvOutline output, HashMap<StyleId, Style> map)
-	{
-		output.indent();
-		for (Style value : map.values())
-		{
-			value.outline(output);
-		}
-		output.dedent();
+		styles.outline(output);
 	}
 }
