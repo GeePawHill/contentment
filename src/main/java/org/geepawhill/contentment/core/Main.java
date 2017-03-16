@@ -14,6 +14,7 @@ import org.geepawhill.contentment.jfx.ScaleListener;
 import org.geepawhill.contentment.jfx.StageMaximizedListener;
 import org.geepawhill.contentment.step.CommonSteps;
 import org.geepawhill.contentment.style.Dash;
+import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.ShapePen;
 import org.geepawhill.contentment.style.TextColors;
 import org.geepawhill.contentment.style.TextFont;
@@ -86,7 +87,7 @@ public class Main extends Application
 		Style blueLine = ShapePen.second();
 		Style greenLine = ShapePen.third();
 		Title tale = new Title("Agent: Anything With Susceptability & Unpredictability");
-		LabelBox agent = new LabelBox("Agent", 800d, 520d);
+		LabelBox agent = new LabelBox("Agent", new Point(800d, 520d),agentFormat());
 		
 		Letters teammate = new Letters("Teammate", new Point( 800d, 520d),agentFormat());
 		Letters practice = new Letters("Practice", new Point( 800d, 800d),agentFormat());
@@ -159,10 +160,19 @@ public class Main extends Application
 
 	private Format agentFormat()
 	{
-		Style agentColors = TextColors.color("Agent", Color.CHARTREUSE, .5d);
+		Style agentColors = TextColors.color("Agent", Color.CHARTREUSE, .8d);
 		Style agentFont = TextFont.largeHand();
-		Format agentFormat = new Format("Agent",agentColors,agentFont);
+		Style agentFrame = Frames.frame("Agent",Color.CHARTREUSE,5d,.8d);
+		Style agentDash = Dash.solid();
+		Format agentFormat = new Format("Agent",agentColors,agentFont,agentFrame,agentDash);
 		return agentFormat;
+	}
+	
+	private Format coachFormat()
+	{
+		return new Format("Coach",agentFormat(),
+				TextColors.color("Coach", Color.LIGHTSKYBLUE, .8d),
+				Frames.frame("Coach", Color.LIGHTSKYBLUE, 5d, .8d));
 	}
 
 	private void poke(Letters from, Letters to, double newX, double newY)
@@ -180,7 +190,7 @@ public class Main extends Application
 		Style greenLine = ShapePen.third();
 
 		Title tale = new Title("Agents Are Susceptible To Pokes");
-		LabelBox agent = new LabelBox("Agent", 800d, 450d);
+		LabelBox agent = new LabelBox("Agent", new Point(800d, 450d),agentFormat());
 		TargetBox target = new TargetBox("Target", 1050d, 350d);
 
 		Spot poke1Source = new Spot(400d, 450d);
@@ -233,18 +243,18 @@ public class Main extends Application
 		Style blueLine = ShapePen.second();
 		Style greenLine = ShapePen.third();
 		Title tale = new Title("A Simple Change Model");
-		LabelBox agent = new LabelBox("Agent", 800d, 450d);
+		LabelBox agent = new LabelBox("Agent", new Point(800d, 450d),agentFormat());
 		OvalText practice = new OvalText("Practice", 800d, .75 * 900d);
 		Arrow change = new Arrow(agent, false, practice, true);
-		LabelBox coach = new LabelBox("Coach", 800d, 200d);
+		LabelBox coach = new LabelBox("Coach", new Point(800d, 200d),coachFormat());
 		Arrow poke = new Arrow(coach, false, agent, true);
 
-		LabelBox a1 = new LabelBox("A", 200d, 200d);
-		LabelBox a2 = new LabelBox("A", 400d, 300d);
-		LabelBox a3 = new LabelBox("A", 600d, 400d);
-		LabelBox a4 = new LabelBox("A", 1000d, 400d);
-		LabelBox a5 = new LabelBox("A", 1200d, 300d);
-		LabelBox a6 = new LabelBox("A", 1400d, 200d);
+		LabelBox a1 = new LabelBox("A", new Point(200d, 200d),agentFormat());
+		LabelBox a2 = new LabelBox("A", new Point(400d, 300d),agentFormat());
+		LabelBox a3 = new LabelBox("A", new Point(600d, 400d),agentFormat());
+		LabelBox a4 = new LabelBox("A", new Point(1000d, 400d),agentFormat());
+		LabelBox a5 = new LabelBox("A", new Point(1200d, 300d),agentFormat());
+		LabelBox a6 = new LabelBox("A", new Point(1400d, 200d),agentFormat());
 
 		Arrow poke1 = new Arrow(coach, false, a1, true);
 		Arrow poke2 = new Arrow(coach, false, a2, true);
@@ -380,6 +390,8 @@ public class Main extends Application
 		common.stop();
 		common.restoreStyles();
 	}
+
+
 
 	private void makeGuides()
 	{

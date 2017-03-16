@@ -11,6 +11,12 @@ public class Frames
 {
 	public static final String KEY = "Frame";
 	
+	
+	public static Style frame(String nickname,Paint stroke, Double width, Double opacity)
+	{
+		return frame(nickname,stroke,Color.TRANSPARENT,width,opacity);
+	}
+
 	public static Style frame(String nickname,Paint stroke, Paint fill, Double width, Double opacity)
 	{
 		StyleApplier applier = new StyleApplier() {

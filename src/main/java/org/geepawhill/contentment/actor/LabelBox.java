@@ -49,19 +49,6 @@ public class LabelBox implements Actor
 	private StrokeStep eastStep;
 	private Format format;
 	
-	private final static Format UNSPECIFIED = 
-			new Format("Unspecified",
-					TextColors.unspecified(),
-					TextFont.unspecified(),
-					Frames.unspecified(),
-					Dash.solid()
-					);
-
-	public LabelBox(String source, double xCenter, double yCenter)
-	{
-		this(source,new Point(xCenter,yCenter), UNSPECIFIED);
-	}
-	
 	public LabelBox(String source, Point center, Format format)
 	{
 		this.format = format;
@@ -76,7 +63,6 @@ public class LabelBox implements Actor
 		west = new Line();
 		this.group = JfxUtility.makeGroup(this,text,north,west,south,east);
 	}
-
 	
 	public String nickname()
 	{
