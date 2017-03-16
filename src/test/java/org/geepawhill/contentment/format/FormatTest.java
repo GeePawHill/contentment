@@ -32,7 +32,7 @@ public class FormatTest
 	public void overrides()
 	{
 		assertNull(base.find(key));
-		base.override(style);
+		base.put(style);
 		assertEquals(style,base.find(Opacity.KEY));
 	}
 	
@@ -46,7 +46,7 @@ public class FormatTest
 	@Test
 	public void findsInBase()
 	{
-		base.override(style);
+		base.put(style);
 		Format derived = new Format("Derived",base);
 		assertEquals(style,derived.find(key));
 	}

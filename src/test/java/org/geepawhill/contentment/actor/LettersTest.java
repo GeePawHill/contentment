@@ -32,11 +32,11 @@ public class LettersTest extends SequenceTester
 		ContextOutline outline = play(sketch());
 		outline.assertKey("Actors.Letters_1.Source","Some text.");
 		outline.baseKey("Actors.Letters_1.Text");
-		outline.assertBase("Current","Some text.");
-		outline.assertBase("Visible","true");
-		outline.assertBase("Opacity","0.5");
-		outline.assertBase("LineColor","0xff0000ff");
-		outline.assertBase("Bounds","(180,149) - (415,223)");
+		outline.assertBase("Current");
+		outline.assertBase("Visible");
+		outline.assertBase("Opacity");
+		outline.assertBase("LineColor");
+		outline.assertBase("Bounds");
 	}
 
 	private Sequence sketch()

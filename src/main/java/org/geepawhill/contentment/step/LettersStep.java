@@ -1,12 +1,13 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.model.OnFinished;
 import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.model.Timing;
-import org.geepawhill.contentment.style.Typeface;
-import org.geepawhill.contentment.style.ShapePen;
+import org.geepawhill.contentment.style.TextColors;
+import org.geepawhill.contentment.style.TextFont;
 
 import javafx.animation.Transition;
 import javafx.scene.text.Text;
@@ -19,31 +20,43 @@ public class LettersStep implements Step
 	private final String letters;
 	private final Text text;
 	private Transition transition;
+	private Format format;
+
+	private static Format defaultFormat()
+	{
+		return new Format("DefaultLetters", TextFont.unspecified(), TextColors.unspecified());
+	}
 
 	public LettersStep(Timing timing, String letters, Point center, Text text)
+	{
+		this(timing, letters, center, text, defaultFormat());
+	}
+
+	public LettersStep(Timing timing, String letters, Point center, Text text, Format format)
 	{
 		this.timing = timing;
 		this.center = center;
 		this.text = text;
 		this.letters = letters;
+		this.format = format;
 	}
 
 	@Override
 	public void after(Context context)
 	{
-		interpolate(1d,context);
+		interpolate(1d, context);
 	}
 
 	@Override
 	public void before(Context context)
 	{
-		interpolate(0d,context);
+		interpolate(0d, context);
 	}
 
 	@Override
 	public void play(Context context, OnFinished onFinished)
 	{
-		transition = new ContextTransition( context,this::interpolate,timing().getAbsolute());
+		transition = new ContextTransition(context, this::interpolate, timing().getAbsolute());
 		transition.setOnFinished((event) -> onFinished.run());
 		transition.play();
 	}
@@ -65,20 +78,20 @@ public class LettersStep implements Step
 	{
 		return timing;
 	}
-	
+
 	private void interpolate(double fraction, Context context)
 	{
-		if(fraction==0d)
+		if (fraction == 0d)
 		{
 			text.setVisible(false);
 		}
 		else
 			text.setVisible(true);
-		context.apply(Typeface.KEY,text);
-		context.apply(ShapePen.KEY,text);
+		format.apply(TextFont.KEY, text);
+		format.apply(TextColors.KEY, text);
 		String newText = letters.substring(0, (int) (fraction * letters.length()));
 		text.setText(newText);
-		text.setX(center.x-text.getBoundsInParent().getWidth()/2d);
+		text.setX(center.x - text.getBoundsInParent().getWidth() / 2d);
 		text.setY(center.y);
 	}
 }

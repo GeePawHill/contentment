@@ -2,22 +2,25 @@ package org.geepawhill.contentment.format;
 
 import java.util.HashMap;
 
+import javafx.scene.shape.Shape;
+
 public class Format
 {
 	private final HashMap<String,Style> overrides;
 	public final String nickname;
 	public final Format base;
 	
-	public Format(String name)
+	public Format(String name,Style... styles)
 	{
-		this(name,null);
+		this(name,null,styles);
 	}
 
-	public Format(String name, Format base)
+	public Format(String name, Format base, Style... styles)
 	{
 		this.nickname = name;
 		this.base = base;
 		this.overrides = new HashMap<>();
+		for(Style style : styles) put(style);
 	}
 
 	public Style find(String key)
@@ -32,7 +35,7 @@ public class Format
 		return null;
 	}
 
-	public void override(Style style)
+	public void put(Style style)
 	{
 		overrides.put(style.key(), style);
 	}
@@ -40,8 +43,13 @@ public class Format
 	public Style require(String key)
 	{
 		Style result = find(key);
-		if(result==null) throw new MissingFormatException(key,nickname);
-		return result;
+		if(result!=null) return result;
+		throw new MissingFormatException(key,nickname);
+	}
+
+	public void apply(String key, Shape	shape)
+	{
+		require(key).apply(shape);
 	}
 
 }

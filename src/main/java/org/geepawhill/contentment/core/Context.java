@@ -22,7 +22,7 @@ public class Context {
 		this.actors = new Actors();
 		this.styles = new Styles();
 		styles.set(ShapePen.first());
-		styles.set(org.geepawhill.contentment.style.Typeface.font("?", new Font("Buxton Sketch",60d)));
+		styles.set(org.geepawhill.contentment.style.TextFont.font("?", new Font("Buxton Sketch",60d), 1d, .5d));
 		styles.set(Opacity.opacity(.5d));
 		styles.set(Dash.solid());
 	}

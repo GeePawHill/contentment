@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.geepawhill.contentment.format.Style;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.style.Dash;
-import org.geepawhill.contentment.style.Typeface;
+import org.geepawhill.contentment.style.TextFont;
 import org.geepawhill.contentment.style.Opacity;
 import org.junit.Test;
 
@@ -14,8 +14,8 @@ public class StyleTest
 	@Test
 	public void dumpFont()
 	{
-		Style style = Typeface.font("Hand.Large", new javafx.scene.text.Font("Buxton Sketch",60d));
-		assertOutline("Font = Hand.Large (Buxton Sketch 60.0)", style);
+		Style style = TextFont.font("Hand.Large", new javafx.scene.text.Font("Buxton Sketch",60d), 1d, .5d);
+		assertOutline("TextFont = Hand.Large (Buxton Sketch 60.0)", style);
 	}
 	
 	@Test
