@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.JfxUtility;
@@ -12,6 +13,10 @@ import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.step.TransitionStep;
+import org.geepawhill.contentment.style.Dash;
+import org.geepawhill.contentment.style.Frames;
+import org.geepawhill.contentment.style.TextColors;
+import org.geepawhill.contentment.style.TextFont;
 import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.TimingBuilder;
 import org.geepawhill.contentment.utility.Names;
@@ -42,11 +47,26 @@ public class LabelBox implements Actor
 	private StrokeStep southStep;
 	private StrokeStep westStep;
 	private StrokeStep eastStep;
+	private Format format;
+	
+	private final static Format UNSPECIFIED = 
+			new Format("Unspecified",
+					TextColors.unspecified(),
+					TextFont.unspecified(),
+					Frames.unspecified(),
+					Dash.solid()
+					);
 
 	public LabelBox(String source, double xCenter, double yCenter)
 	{
+		this(source,new Point(xCenter,yCenter), UNSPECIFIED);
+	}
+	
+	public LabelBox(String source, Point center, Format format)
+	{
+		this.format = format;
 		this.nickname = Names.make(getClass());
-		this.center = new Point(xCenter,yCenter);
+		this.center = center;
 		this.source = source;
 		text = new Text();
 		text.setTextOrigin(VPos.CENTER);
@@ -56,6 +76,7 @@ public class LabelBox implements Actor
 		west = new Line();
 		this.group = JfxUtility.makeGroup(this,text,north,west,south,east);
 	}
+
 	
 	public String nickname()
 	{
@@ -69,11 +90,11 @@ public class LabelBox implements Actor
 
 	public void sketch(Sequence sequence, double ms)
 	{
-		LettersStep lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, text);
-		northStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),north);
-		westStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),west);
-		southStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),south);
-		eastStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),east);
+		LettersStep lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, text, format);
+		northStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),north, format);
+		westStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),west, format);
+		southStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),south,format);
+		eastStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),east, format);
 		new TimingBuilder().build(ms, lettersStep,northStep,westStep,southStep,eastStep);
 		sequence.add(new Entrance(this));
 		sequence.add(lettersStep);

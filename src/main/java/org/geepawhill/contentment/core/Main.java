@@ -88,20 +88,17 @@ public class Main extends Application
 		Title tale = new Title("Agent: Anything With Susceptability & Unpredictability");
 		LabelBox agent = new LabelBox("Agent", 800d, 520d);
 		
-		Style agentColors = TextColors.color("Agent", Color.CHARTREUSE, .5d);
-		Style agentFont = TextFont.largeHand();
-		Format agentFormat = new Format("Agent",agentColors,agentFont);
-		Letters teammate = new Letters("Teammate", new Point( 800d, 520d),agentFormat);
-		Letters practice = new Letters("Practice", new Point( 800d, 800d),agentFormat);
-		Letters coach = new Letters("Coach", new Point( 800d, 275d),agentFormat);
-		Letters software = new Letters("Software", new Point( 500d, 300d),agentFormat);
-		Letters hardware = new Letters("Hardware", new Point( 1300d, 600d),agentFormat);
-		Letters policy = new Letters("Policy", new Point( 1100d, 300d),agentFormat);
-		Letters personnel = new Letters("Staff", new Point( 500d, 750d),agentFormat);
-		Letters date = new Letters("Date", new Point( 1300d, 450d),agentFormat);
-		Letters framework = new Letters("Framework", new Point( 300d, 600d),agentFormat);
-		Letters tools = new Letters("Tools", new Point( 300d, 450d),agentFormat);
-		Letters orgchart = new Letters("Org Chart", new Point( 1100d, 750d),agentFormat);
+		Letters teammate = new Letters("Teammate", new Point( 800d, 520d),agentFormat());
+		Letters practice = new Letters("Practice", new Point( 800d, 800d),agentFormat());
+		Letters coach = new Letters("Coach", new Point( 800d, 275d),agentFormat());
+		Letters software = new Letters("Software", new Point( 500d, 300d),agentFormat());
+		Letters hardware = new Letters("Hardware", new Point( 1300d, 600d),agentFormat());
+		Letters policy = new Letters("Policy", new Point( 1100d, 300d),agentFormat());
+		Letters personnel = new Letters("Staff", new Point( 500d, 750d),agentFormat());
+		Letters date = new Letters("Date", new Point( 1300d, 450d),agentFormat());
+		Letters framework = new Letters("Framework", new Point( 300d, 600d),agentFormat());
+		Letters tools = new Letters("Tools", new Point( 300d, 450d),agentFormat());
+		Letters orgchart = new Letters("Org Chart", new Point( 1100d, 750d),agentFormat());
 
 		common.clear();
 		common.show(tale);
@@ -158,6 +155,14 @@ public class Main extends Application
 		poke(practice, framework, 250d, 620d);
 		poke(framework, teammate, 830d, 550d);
 		poke(teammate, date, 1300d, 450d);
+	}
+
+	private Format agentFormat()
+	{
+		Style agentColors = TextColors.color("Agent", Color.CHARTREUSE, .5d);
+		Style agentFont = TextFont.largeHand();
+		Format agentFormat = new Format("Agent",agentColors,agentFont);
+		return agentFormat;
 	}
 
 	private void poke(Letters from, Letters to, double newX, double newY)
