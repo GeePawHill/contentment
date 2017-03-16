@@ -1,5 +1,6 @@
 package org.geepawhill.contentment.core;
 
+import org.geepawhill.contentment.format.Styles;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Opacity;

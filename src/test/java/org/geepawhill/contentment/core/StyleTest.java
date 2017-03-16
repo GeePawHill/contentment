@@ -2,6 +2,7 @@ package org.geepawhill.contentment.core;
 
 import static org.junit.Assert.assertEquals;
 
+import org.geepawhill.contentment.format.Style;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Font;

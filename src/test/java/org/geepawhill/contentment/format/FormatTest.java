@@ -3,6 +3,7 @@ package org.geepawhill.contentment.format;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import org.geepawhill.contentment.style.Opacity;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,27 +13,29 @@ public class FormatTest
 {
 	
 	private Format base;
-	private TextPaint style;
+	private Style style;
+	private String key;
 
 	@Before
 	public void before()
 	{
-		style = new TextPaint(Color.RED,Color.BLUE,.5d);
+		style = Opacity.opacity(.5d);
 		base = new Format("Base");
+		key = style.key();
 	}
 	
 	@Test(expected=MissingFormatException.class)
 	public void throwsOnMissingStyle()
 	{
-		base.style("TextPaint");
+		base.require(key);
 	}
 
 	@Test
 	public void overrides()
 	{
-		assertNull(base.findStyle("TextPaint"));
-		base.override("TextPaint",style);
-		assertEquals(style,base.findStyle("TextPaint"));
+		assertNull(base.find(key));
+		base.override(style);
+		assertEquals(style,base.find(Opacity.KEY));
 	}
 	
 	@Test
@@ -45,9 +48,9 @@ public class FormatTest
 	@Test
 	public void findsInBase()
 	{
-		base.override("TextPaint",style);
+		base.override(style);
 		Format derived = new Format("Derived",base);
-		assertEquals(style,derived.findStyle("TextPaint"));
+		assertEquals(style,derived.find(key));
 	}
 
 

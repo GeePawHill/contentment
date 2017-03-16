@@ -1,12 +1,14 @@
 package org.geepawhill.contentment.style;
 
-import org.geepawhill.contentment.core.Style;
-import org.geepawhill.contentment.core.StyleApplier;
+import org.geepawhill.contentment.format.Style;
+import org.geepawhill.contentment.format.StyleApplier;
 
 import javafx.scene.shape.Shape;
 
 public class Opacity
 {
+	
+	public final static String KEY="Opacity";
 
 	public static Style opacity(double d)
 	{

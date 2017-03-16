@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 public class Format
 {
-	private final HashMap<String,IStyle> overrides;
-	public final String name;
+	private final HashMap<String,Style> overrides;
+	public final String nickname;
 	public final Format base;
 	
 	public Format(String name)
@@ -15,32 +15,32 @@ public class Format
 
 	public Format(String name, Format base)
 	{
-		this.name = name;
+		this.nickname = name;
 		this.base = base;
-		overrides = new HashMap<>();
+		this.overrides = new HashMap<>();
 	}
 
-	public IStyle findStyle(String styleName)
+	public Style find(String key)
 	{
 		Format candidate = this;
 		while(candidate!=null)
 		{
-			IStyle result = candidate.overrides.get(styleName);
+			Style result = candidate.overrides.get(key);
 			if(result!=null) return result;
 			candidate = candidate.base;
 		}
 		return null;
 	}
 
-	public void override(String styleName, IStyle style)
+	public void override(Style style)
 	{
-		overrides.put(styleName, style);
+		overrides.put(style.key(), style);
 	}
 
-	public IStyle style(String styleName)
+	public Style require(String key)
 	{
-		IStyle result = findStyle(styleName);
-		if(result==null) throw new MissingFormatException(styleName,name);
+		Style result = find(key);
+		if(result==null) throw new MissingFormatException(key,nickname);
 		return result;
 	}
 

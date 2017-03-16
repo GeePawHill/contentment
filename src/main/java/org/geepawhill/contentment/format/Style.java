@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.core;
+package org.geepawhill.contentment.format;
 
 import org.geepawhill.contentment.model.Outliner;
 import org.geepawhill.contentment.outline.KvOutline;
@@ -9,14 +9,14 @@ public class Style implements Outliner
 {
 	private final StyleApplier applier;
 	
-	private final String kind;
+	private final String key;
 	private final String nickname;
 	private final String value;
 
-	public Style(String kind, String nickname, StyleApplier applier, String value)
+	public Style(String key, String nickname, StyleApplier applier, String value)
 	{
 		this.nickname = nickname;
-		this.kind = kind;
+		this.key = key;
 		this.applier = applier;
 		this.value = value;
 	}
@@ -35,11 +35,11 @@ public class Style implements Outliner
 	@Override
 	public void outline(KvOutline output)
 	{
-		output.append(kind,toString());
+		output.append(key,toString());
 	}
 
-	public String kind()
+	public String key()
 	{
-		return kind;
+		return key;
 	}
 }

@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.newstep;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.Style;
+import org.geepawhill.contentment.format.Style;
 
 public class SetStyleStep implements Instant
 {

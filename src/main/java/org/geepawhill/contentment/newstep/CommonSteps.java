@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.newstep;
 
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.core.Style;
+import org.geepawhill.contentment.format.Style;
 import org.geepawhill.contentment.model.Actor;
 import org.geepawhill.contentment.step.ClearStep;
 import org.geepawhill.contentment.step.HideStep;

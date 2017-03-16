@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.core;
+package org.geepawhill.contentment.format;
 
 public class StylesMemo
 {

@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.core;
+package org.geepawhill.contentment.format;
 
 import java.util.HashMap;
 
@@ -21,8 +21,8 @@ public class StyleMap implements Outliner
 	
 	public Style set(Style style)
 	{
-		Style result = get(style.kind());
-		map.put(style.kind(), style);
+		Style result = get(style.key());
+		map.put(style.key(), style);
 		return result;
 	}
 

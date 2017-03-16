@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.newstep;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.StylesMemo;
+import org.geepawhill.contentment.format.StylesMemo;
 
 public class RestoreStylesStep implements Instant
 {
