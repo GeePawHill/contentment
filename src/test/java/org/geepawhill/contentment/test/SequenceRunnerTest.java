@@ -40,7 +40,6 @@ public class SequenceRunnerTest extends ApplicationTest
 	public void playSequence()
 	{
 		ContextOutline play = runner.waitForPlay(sequence);
-		System.out.println(play.asText());
 		play.assertKey("Actors.Stroke_1");
 	}
 	

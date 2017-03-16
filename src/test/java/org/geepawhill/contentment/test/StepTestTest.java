@@ -29,7 +29,11 @@ public class StepTestTest extends SequenceTester
 		{
 			context.actors.add(new Stroke(new PointPair(0d,0d,100d,100d),new Format(Frames.unspecified())));
 		},
-		null);
+		(context,onFinished) -> 
+		{
+			context.actors.add(new Stroke(new PointPair(0d,0d,100d,100d),new Format(Frames.unspecified())));
+			onFinished.run();
+		});
 
 	}
 	
