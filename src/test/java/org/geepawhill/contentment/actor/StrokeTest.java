@@ -32,9 +32,9 @@ public class StrokeTest extends SequenceTester
 		ContextOutline outline = play(sketch());
 		outline.baseKey("Actors.Stroke_1.Line");
 		outline.assertBase("Visible","true");
-		outline.assertBase("Opacity","0.5");
-		outline.assertBase("LineColor","0xff0000ff");
-		outline.assertBase("Bounds","(96,196) - (304,404)");
+		outline.assertBase("Opacity");
+		outline.assertBase("LineColor");
+		outline.assertBase("Bounds");
 	}
 
 	private Sequence sketch()
