@@ -2,6 +2,7 @@ package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.ActorOutliner;
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.model.Actor;
 import org.geepawhill.contentment.outline.KvOutline;
@@ -19,9 +20,11 @@ public class Stroke implements Actor
 	public final Line line;
 	private PointPair points;
 	private final Group group;
+	private Format format;
 
-	public Stroke(PointPair points)
+	public Stroke(PointPair points, Format format)
 	{
+		this.format = format;
 		this.nickname = Names.make(getClass());
 		this.points = points;
 		this.line = new Line();
@@ -32,7 +35,7 @@ public class Stroke implements Actor
 	{
 		if (sequence == null) sequence = new Sequence();
 		sequence.add(new Entrance(this));
-		sequence.add(new StrokeStep(timing, points, line));
+		sequence.add(new StrokeStep(timing, points, line, format));
 		return sequence;
 	}
 

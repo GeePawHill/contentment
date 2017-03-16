@@ -22,16 +22,6 @@ public class LettersStep implements Step
 	private Transition transition;
 	private Format format;
 
-	private static Format defaultFormat()
-	{
-		return new Format("DefaultLetters", TextFont.unspecified(), TextColors.unspecified());
-	}
-
-	public LettersStep(Timing timing, String letters, Point center, Text text)
-	{
-		this(timing, letters, center, text, defaultFormat());
-	}
-
 	public LettersStep(Timing timing, String letters, Point center, Text text, Format format)
 	{
 		this.timing = timing;

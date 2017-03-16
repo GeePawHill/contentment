@@ -1,8 +1,11 @@
 package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.SetStyleStep;
+import org.geepawhill.contentment.style.Dash;
+import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.ShapePen;
 import org.geepawhill.contentment.test.ContextOutline;
 import org.geepawhill.contentment.test.SequenceTester;
@@ -17,7 +20,8 @@ public class StrokeTest extends SequenceTester
 	@Before
 	public void before()
 	{
-		stroke = new Stroke(new PointPair(100d,200d,300d,400d));
+		Format format = new Format(Frames.unspecified(),Dash.solid());
+		stroke = new Stroke(new PointPair(100d,200d,300d,400d),format);
 	}
 
 	@Test

@@ -21,13 +21,6 @@ public class StrokeStep implements Step
 	private Transition transition;
 	private Format format;
 	
-	private final static Format UNSPECIFIED = new Format("Unspecified",Frames.unspecified(),Dash.solid());
-
-	public StrokeStep(Timing timing, PointPair points, Line line)
-	{
-		this(timing,points,line,UNSPECIFIED);
-	}
-	
 	public StrokeStep(Timing timing, PointPair points, Line line, Format format)
 	{
 		this.timing = timing;
