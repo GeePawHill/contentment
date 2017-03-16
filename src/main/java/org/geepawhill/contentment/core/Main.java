@@ -31,6 +31,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -174,14 +175,27 @@ public class Main extends Application
 				TextColors.color("Coach", Color.LIGHTSKYBLUE, .8d),
 				Frames.frame("Coach", Color.LIGHTSKYBLUE, 5d, .8d));
 	}
+	
+	private Format pokeFormat(Paint paint)
+	{
+		return new Format(pokeFormat(),Frames.frame("Poke", paint, 5d, .8d));
+	}
+	
+	private Format pokeFormat()
+	{
+		return new Format("Poke",agentFormat(),
+				Dash.solid(),
+				Frames.frame("Coach", Color.SLATEBLUE, 5d, .8d));
+	}
 
 	private void poke(Letters from, Letters to, double newX, double newY)
 	{
-		Arrow arrow = new Arrow(from, false, to, true);
+		Arrow arrow = new Arrow(from, false, to, true,pokeFormat());
 		arrow.sketch(sequence, 400d);
 		to.move(sequence,newX, newY);
 		common.hide(arrow);
 	}
+
 
 	private void interactiveStabilization(Sequence sequence)
 	{
@@ -191,15 +205,15 @@ public class Main extends Application
 
 		Title tale = new Title("Agents Are Susceptible To Pokes");
 		LabelBox agent = new LabelBox("Agent", new Point(800d, 450d),agentFormat());
-		TargetBox target = new TargetBox("Target", 1050d, 350d);
+		TargetBox target = new TargetBox("Target", new Point(1050d, 350d),targetFormat());
 
 		Spot poke1Source = new Spot(400d, 450d);
 		Spot poke2Source = new Spot(800d, 200d);
 		Spot poke3Source = new Spot(800d, 600d);
 
-		Arrow poke1 = new Arrow(poke1Source, false, agent, true);
-		Arrow poke2 = new Arrow(poke2Source, false, agent, true);
-		Arrow poke3 = new Arrow(poke3Source, false, agent, true);
+		Arrow poke1 = new Arrow(poke1Source, false, agent, true,pokeFormat(Color.RED));
+		Arrow poke2 = new Arrow(poke2Source, false, agent, true,pokeFormat(Color.BLUE));
+		Arrow poke3 = new Arrow(poke3Source, false, agent, true,pokeFormat(Color.GREEN));
 
 		common.clear();
 		common.show(tale);
@@ -237,6 +251,16 @@ public class Main extends Application
 
 	}
 
+	private Format targetFormat()
+	{
+		return new Format(
+				Frames.frame("Target", Color.WHITE, 2d, .8d),
+				TextFont.mediumSans(),
+				TextColors.color("Target", Color.WHITE, .8d),
+				Dash.dash("dash", 5d)
+				);
+	}
+
 	private void addBaseComplications(Sequence sequence)
 	{
 		Style redLine = ShapePen.first();
@@ -244,10 +268,10 @@ public class Main extends Application
 		Style greenLine = ShapePen.third();
 		Title tale = new Title("A Simple Change Model");
 		LabelBox agent = new LabelBox("Agent", new Point(800d, 450d),agentFormat());
-		OvalText practice = new OvalText("Practice", 800d, .75 * 900d);
-		Arrow change = new Arrow(agent, false, practice, true);
+		OvalText practice = new OvalText("Practice", new Point(800d,.75 * 900d),practiceFormat());
+		Arrow change = new Arrow(agent, false, practice, true,changeFormat());
 		LabelBox coach = new LabelBox("Coach", new Point(800d, 200d),coachFormat());
-		Arrow poke = new Arrow(coach, false, agent, true);
+		Arrow poke = new Arrow(coach, false, agent, true, pokeFormat());
 
 		LabelBox a1 = new LabelBox("A", new Point(200d, 200d),agentFormat());
 		LabelBox a2 = new LabelBox("A", new Point(400d, 300d),agentFormat());
@@ -256,52 +280,52 @@ public class Main extends Application
 		LabelBox a5 = new LabelBox("A", new Point(1200d, 300d),agentFormat());
 		LabelBox a6 = new LabelBox("A", new Point(1400d, 200d),agentFormat());
 
-		Arrow poke1 = new Arrow(coach, false, a1, true);
-		Arrow poke2 = new Arrow(coach, false, a2, true);
-		Arrow poke3 = new Arrow(coach, false, a3, true);
-		Arrow poke4 = new Arrow(coach, false, a4, true);
-		Arrow poke5 = new Arrow(coach, false, a5, true);
-		Arrow poke6 = new Arrow(coach, false, a6, true);
+		Arrow poke1 = new Arrow(coach, false, a1, true, pokeFormat());
+		Arrow poke2 = new Arrow(coach, false, a2, true, pokeFormat());
+		Arrow poke3 = new Arrow(coach, false, a3, true, pokeFormat());
+		Arrow poke4 = new Arrow(coach, false, a4, true, pokeFormat());
+		Arrow poke5 = new Arrow(coach, false, a5, true, pokeFormat());
+		Arrow poke6 = new Arrow(coach, false, a6, true, pokeFormat());
 
-		OvalText p1 = new OvalText("P", 200d, 400d);
-		OvalText p2 = new OvalText("P", 400d, 500d);
-		OvalText p3 = new OvalText("P", 600d, 600d);
-		OvalText p4 = new OvalText("P", 1000d, 600d);
-		OvalText p5 = new OvalText("P", 1200d, 500d);
-		OvalText p6 = new OvalText("P", 1400d, 400d);
+		OvalText p1 = new OvalText("P", new Point(200d,400d),practiceFormat());
+		OvalText p2 = new OvalText("P", new Point(400d,500d),practiceFormat());
+		OvalText p3 = new OvalText("P", new Point(600d,600d),practiceFormat());
+		OvalText p4 = new OvalText("P", new Point(1000d,600d),practiceFormat());
+		OvalText p5 = new OvalText("P", new Point(1200d,500d),practiceFormat());
+		OvalText p6 = new OvalText("P", new Point(1400d,400d),practiceFormat());
 
-		Arrow c1 = new Arrow(a1, false, p1, true);
-		Arrow c2 = new Arrow(a2, false, p2, true);
-		Arrow c3 = new Arrow(a3, false, p3, true);
-		Arrow c4 = new Arrow(a4, false, p4, true);
-		Arrow c5 = new Arrow(a5, false, p5, true);
-		Arrow c6 = new Arrow(a6, false, p6, true);
+		Arrow c1 = new Arrow(a1, false, p1, true, changeFormat());
+		Arrow c2 = new Arrow(a2, false, p2, true, changeFormat());
+		Arrow c3 = new Arrow(a3, false, p3, true, changeFormat());
+		Arrow c4 = new Arrow(a4, false, p4, true, changeFormat());
+		Arrow c5 = new Arrow(a5, false, p5, true, changeFormat());
+		Arrow c6 = new Arrow(a6, false, p6, true, changeFormat());
 
-		Arrow c11 = new Arrow(a1, false, p2, true);
-		Arrow c12 = new Arrow(a2, false, p3, true);
-		Arrow c13 = new Arrow(a3, false, practice, true);
-		Arrow c14 = new Arrow(a4, false, p5, true);
-		Arrow c15 = new Arrow(a5, false, p6, true);
+		Arrow c11 = new Arrow(a1, false, p2, true, changeFormat());
+		Arrow c12 = new Arrow(a2, false, p3, true, changeFormat());
+		Arrow c13 = new Arrow(a3, false, practice, true, changeFormat());
+		Arrow c14 = new Arrow(a4, false, p5, true, changeFormat());
+		Arrow c15 = new Arrow(a5, false, p6, true, changeFormat());
 
-		Arrow c22 = new Arrow(a2, false, p1, true);
-		Arrow c23 = new Arrow(a3, false, p2, true);
-		Arrow c24 = new Arrow(a4, false, practice, true);
-		Arrow c25 = new Arrow(a5, false, p4, true);
-		Arrow c26 = new Arrow(a6, false, p5, true);
+		Arrow c22 = new Arrow(a2, false, p1, true, changeFormat());
+		Arrow c23 = new Arrow(a3, false, p2, true, changeFormat());
+		Arrow c24 = new Arrow(a4, false, practice, true, changeFormat());
+		Arrow c25 = new Arrow(a5, false, p4, true, changeFormat());
+		Arrow c26 = new Arrow(a6, false, p5, true, changeFormat());
 
-		Arrow i1 = new Arrow(a1, true, a2, true);
-		Arrow i2 = new Arrow(a2, true, a3, true);
-		Arrow i3 = new Arrow(a3, true, agent, true);
-		Arrow i4 = new Arrow(agent, true, a4, true);
-		Arrow i5 = new Arrow(a4, true, a5, true);
-		Arrow i6 = new Arrow(a5, true, a6, true);
+		Arrow i1 = new Arrow(a1, false, a2, false, relationFormat());
+		Arrow i2 = new Arrow(a2, false, a3, false, relationFormat());
+		Arrow i3 = new Arrow(a3, false, agent, false, relationFormat());
+		Arrow i4 = new Arrow(agent, false, a4, false, relationFormat());
+		Arrow i5 = new Arrow(a4, false, a5, false, relationFormat());
+		Arrow i6 = new Arrow(a5, false, a6, false, relationFormat());
 
-		Arrow pi1 = new Arrow(p1, true, p2, true);
-		Arrow pi2 = new Arrow(p2, true, p3, true);
-		Arrow pi3 = new Arrow(p3, true, practice, true);
-		Arrow pi4 = new Arrow(practice, true, p4, true);
-		Arrow pi5 = new Arrow(p4, true, p5, true);
-		Arrow pi6 = new Arrow(p5, true, p6, true);
+		Arrow pi1 = new Arrow(p1, false, p2, false, relationFormat());
+		Arrow pi2 = new Arrow(p2, false, p3, false, relationFormat());
+		Arrow pi3 = new Arrow(p3, false, practice, false, relationFormat());
+		Arrow pi4 = new Arrow(practice, false, p4, false, relationFormat());
+		Arrow pi5 = new Arrow(p4, false, p5, false, relationFormat());
+		Arrow pi6 = new Arrow(p5, false, p6, false, relationFormat());
 
 		common.show(tale);
 		common.set(redLine);
@@ -317,7 +341,7 @@ public class Main extends Application
 		common.set(Dash.dash("Dash", 10d));
 		practice.sketch(sequence, 1000d);
 		common.set(Dash.solid());
-		change.sketch(sequence, 1d);
+		change.sketch(sequence, 1000d);
 		common.restoreStyles();
 		common.stop();
 		tale.setText(sequence, "Complication: There are always multiple agents.");
@@ -357,41 +381,62 @@ public class Main extends Application
 		tale.setText(sequence, "Complication: Most agents change multiple practices.");
 		common.set(Dash.dash("Dash", 10d));
 		common.set(greenLine);
-		c11.sketch(sequence, 200d);
 		c12.sketch(sequence, 200d);
-		c13.sketch(sequence, 200d);
-		c14.sketch(sequence, 200d);
-		c15.sketch(sequence, 200d);
 		c22.sketch(sequence, 200d);
-		c23.sketch(sequence, 200d);
-		c24.sketch(sequence, 200d);
-		c25.sketch(sequence, 200d);
-		c26.sketch(sequence, 200d);
+		common.stop();
+		c11.sketch(sequence, 1d);
+		c13.sketch(sequence, 1d);
+		c14.sketch(sequence, 1d);
+		c15.sketch(sequence, 1d);
+		c23.sketch(sequence, 1d);
+		c24.sketch(sequence, 1d);
+		c25.sketch(sequence, 1d);
+		c26.sketch(sequence, 1d);
 		common.stop();
 
 		common.saveStyles();
 		common.set(Dash.dash("Dash", 3d));
 		common.set(ShapePen.thinFourth());
 		tale.setText(sequence, "Complication: The agents are interrelated.");
-		i1.sketch(sequence, 300d);
-		i2.sketch(sequence, 300d);
-		i3.sketch(sequence, 300d);
-		i4.sketch(sequence, 300d);
-		i5.sketch(sequence, 300d);
-		i6.sketch(sequence, 300d);
+		i1.sketch(sequence, 1000d);
+		common.stop();
+		i2.sketch(sequence, 1d);
+		i3.sketch(sequence, 1d);
+		i4.sketch(sequence, 1d);
+		i5.sketch(sequence, 1d);
+		i6.sketch(sequence, 1d);
 		common.stop();
 		tale.setText(sequence, "Complication: The practices are interrelated.");
-		pi1.sketch(sequence, 300d);
-		pi2.sketch(sequence, 300d);
-		pi3.sketch(sequence, 300d);
-		pi4.sketch(sequence, 300d);
-		pi5.sketch(sequence, 300d);
-		pi6.sketch(sequence, 300d);
+		pi1.sketch(sequence, 1000d);
+		common.stop();
+		pi2.sketch(sequence, 1d);
+		pi3.sketch(sequence, 1d);
+		pi4.sketch(sequence, 1d);
+		pi5.sketch(sequence, 1d);
+		pi6.sketch(sequence, 1d);
 		common.stop();
 		common.restoreStyles();
 	}
 
 
+	private Format practiceFormat()
+	{
+		return new Format(
+				Frames.frame("Practice", Color.TOMATO, 4d, .8d),
+				TextColors.color("Practice",Color.TOMATO,.8d),
+				Dash.dash("dash",4d),
+				TextFont.largeHand());
+	}
+
+	private Format relationFormat()
+	{
+		return new Format(Frames.frame("Change", Color.LIGHTCORAL, 2d, .8d), Dash.dash("Relationship", 10d));
+	}
+
+	private Format changeFormat()
+	{
+		return new Format(Frames.frame("Change", Color.ANTIQUEWHITE, 5d, .8d), Dash.dash("Change", 10d));
+	}
 
 	private void makeGuides()
 	{

@@ -6,6 +6,7 @@ import org.geepawhill.contentment.actor.arrow.ArrowComputer;
 import org.geepawhill.contentment.actor.arrow.ArrowPoints;
 import org.geepawhill.contentment.actor.arrow.NodeArrowComputer;
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.model.Actor;
@@ -49,17 +50,15 @@ public class Arrow implements Actor
 	private Line toBottom;
 	private ArrowPoints points;
 
-	public Arrow(Actor from,boolean pointAtFrom, Actor to, boolean pointAtTo)
-	{
-		this(pointAtFrom,pointAtTo,new NodeArrowComputer(from.group(), to.group()));
-	}
+	private Format format;
 
-	public Arrow(boolean pointAtFrom,boolean pointAtTo,ArrowComputer computer)
+	public Arrow(Actor from, boolean pointAtFrom, Actor to, boolean pointAtTo,Format format)
 	{
+		this.format = format;
 		this.nickname = Names.make(getClass());
 		this.pointAtFrom = pointAtFrom;
 		this.pointAtTo = pointAtTo;
-		this.computer = computer;
+		this.computer = new NodeArrowComputer(from.group(),to.group());
 		this.group = new Group();
 		this.main = new Line();
 		group.getChildren().add(main);
@@ -94,24 +93,24 @@ public class Arrow implements Actor
 		sequence.add(new Entrance(this));
 		sequence.add(new OneWayStep((context) -> boundsChanged()));
 		ArrayList<Step> steps = new ArrayList<>();
-		mainStep = new StrokeStep(new RelativeTiming(.8d),new PointPair(0d,0d,0d,0d),main);
+		mainStep = new StrokeStep(new RelativeTiming(.8d),new PointPair(0d,0d,0d,0d),main,format);
 		steps.add(mainStep);
 		sequence.add(mainStep);
 		if(pointAtFrom)
 		{
-			fromTopStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),fromTop);
+			fromTopStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),fromTop,format);
 			steps.add(fromTopStep);
 			sequence.add(fromTopStep);
-			fromBottomStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),fromBottom);
+			fromBottomStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),fromBottom,format);
 			steps.add(fromBottomStep);
 			sequence.add(fromBottomStep);
 		}
 		if(pointAtTo)
 		{
-			toTopStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),toTop);
+			toTopStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),toTop,format);
 			steps.add(toTopStep);
 			sequence.add(toTopStep);
-			toBottomStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),toBottom);
+			toBottomStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),toBottom,format);
 			steps.add(toBottomStep);
 			sequence.add(toBottomStep);
 		}

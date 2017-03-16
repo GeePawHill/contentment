@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.JfxUtility;
@@ -42,11 +43,13 @@ public class TargetBox implements Actor
 	private StrokeStep southStep;
 	private StrokeStep westStep;
 	private StrokeStep eastStep;
+	private Format format;
 
-	public TargetBox(String source, double xCenter, double yCenter)
+	public TargetBox(String source, Point center, Format format)
 	{
+		this.format = format;
 		this.nickname = Names.make(getClass());
-		this.center = new Point(xCenter,yCenter);
+		this.center = center;
 		this.source = source;
 		text = new Text();
 		text.setTextOrigin(VPos.CENTER);
@@ -69,11 +72,11 @@ public class TargetBox implements Actor
 
 	public void sketch(Sequence sequence, double ms)
 	{
-		LettersStep lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, text);
-		northStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),north);
-		westStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),west);
-		southStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),south);
-		eastStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),east);
+		LettersStep lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, text, format);
+		northStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),north,format);
+		westStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),west,format);
+		southStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),south,format);
+		eastStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),east,format);
 		new TimingBuilder().build(ms, lettersStep,northStep,westStep,southStep,eastStep);
 		sequence.add(new Entrance(this));
 		sequence.add(lettersStep);

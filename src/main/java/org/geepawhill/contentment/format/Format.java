@@ -17,6 +17,11 @@ public class Format
 		this(Names.make("Unspecified"+Format.class.getName()),styles);
 	}
 	
+	public Format(Format base, Style... styles)
+	{
+		this(Names.make("Unspecified"+Format.class.getName()),base,styles);
+	}
+	
 	public Format(String name,Style... styles)
 	{
 		this(name,null,styles);

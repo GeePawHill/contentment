@@ -44,5 +44,10 @@ public class TextFont
 	{
 		return font("LargeHand", new Font("Buxton Sketch", 60d), 2d, .5d);
 	}
+
+	public static Style mediumSans()
+	{
+		return font("MediumSans", new Font("Arial",30d), 1d, .8d);
+	}
 	
 }

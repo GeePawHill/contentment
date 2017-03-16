@@ -1,11 +1,13 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.model.OnFinished;
 import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.model.Timing;
-import org.geepawhill.contentment.style.ShapePen;
+import org.geepawhill.contentment.style.Dash;
+import org.geepawhill.contentment.style.Frames;
 
 import javafx.animation.Transition;
 import javafx.scene.shape.Ellipse;
@@ -20,12 +22,14 @@ public class OvalStep implements Step
 	
 	private static final double VMARGIN = 4d;
 	private static final double HMARGIN = 20d;
+	private Format format;
 
-	public OvalStep(Timing timing, PointPair points, Ellipse ellipse)
+	public OvalStep(Timing timing, PointPair points, Ellipse ellipse, Format format)
 	{
 		this.timing = timing;
 		this.points = points;
 		this.ellipse = ellipse;
+		this.format = format;
 	}
 	
 	public void setPoints(PointPair points)
@@ -79,7 +83,8 @@ public class OvalStep implements Step
 		}
 		else
 			ellipse.setVisible(true);
-		context.apply(ShapePen.KEY, ellipse);
+		format.apply(Frames.KEY,ellipse);
+		format.apply(Dash.KEY,ellipse);
 		ellipse.setCenterX(points.centerX());
 		ellipse.setCenterY(points.centerY());
 		ellipse.setRadiusX((points.width()/2d)+HMARGIN * fraction);

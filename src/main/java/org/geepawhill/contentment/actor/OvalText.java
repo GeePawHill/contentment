@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.JfxUtility;
@@ -30,13 +31,15 @@ public class OvalText implements Actor
 	private Point center;
 
 	private OvalStep ovalStep;
+	private Format format;
 
-	public OvalText(String source, double xCenter, double yCenter)
+	public OvalText(String source, Point center, Format format)
 	{
 		this.nickname = Names.make(getClass());
-		this.center = new Point(xCenter, yCenter);
+		this.center = center;
 		this.source = source;
-		text = new Text(xCenter, yCenter, "");
+		this.format = format;
+		text = new Text(center.x, center.y, "");
 		oval = new Ellipse();
 		this.group = JfxUtility.makeGroup(this, text, oval);
 	}
@@ -54,8 +57,8 @@ public class OvalText implements Actor
 
 	public void sketch(Sequence sequence, double ms)
 	{
-		LettersStep lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, text);
-		ovalStep = new OvalStep(new RelativeTiming(.4d), new PointPair(0d, 0d, 0d, 0d), oval);
+		LettersStep lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, text, format);
+		ovalStep = new OvalStep(new RelativeTiming(.4d), new PointPair(0d, 0d, 0d, 0d), oval, format);
 		new TimingBuilder().build(ms, lettersStep, ovalStep);
 		sequence.add(new Entrance(this));
 		sequence.add(lettersStep);
