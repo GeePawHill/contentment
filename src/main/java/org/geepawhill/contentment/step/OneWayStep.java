@@ -1,36 +1,40 @@
-package org.geepawhill.contentment.newstep;
+package org.geepawhill.contentment.step;
+
+import java.util.function.Consumer;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.model.OnFinished;
 import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.model.Timing;
+import org.geepawhill.contentment.timing.FixedTiming;
 
-public class InstantStep implements Step
+public class OneWayStep implements Step
 {
-	private Instant instant;
+	
+	private Consumer<Context> action;
 
-	public InstantStep(Instant instant)
+	public OneWayStep(Consumer<Context> action)
 	{
-		this.instant = instant;
+		this.action = action;
 	}
 
 	@Override
 	public void after(Context context)
 	{
-		instant.after(context);
+		action.accept(context);
 	}
 
 	@Override
 	public void before(Context context)
 	{
-		instant.before(context);
 	}
 
 	@Override
 	public void play(Context context, OnFinished onFinished)
 	{
-		instant.after(context);
+		after(context);
 		onFinished.run();
+		
 	}
 
 	@Override
@@ -46,7 +50,6 @@ public class InstantStep implements Step
 	@Override
 	public Timing timing()
 	{
-		return Timing.INSTANT;
+		return FixedTiming.INSTANT;
 	}
-
 }

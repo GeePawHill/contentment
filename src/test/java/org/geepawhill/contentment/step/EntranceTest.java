@@ -1,6 +1,7 @@
-package org.geepawhill.contentment.newstep;
+package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.actor.Spot;
+import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.test.ContextOutline;
 import org.geepawhill.contentment.test.SequenceTester;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.newstep;
+package org.geepawhill.contentment.step;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

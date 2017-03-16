@@ -10,7 +10,7 @@ import org.geepawhill.contentment.actor.Title;
 import org.geepawhill.contentment.format.Style;
 import org.geepawhill.contentment.jfx.ScaleListener;
 import org.geepawhill.contentment.jfx.StageMaximizedListener;
-import org.geepawhill.contentment.newstep.CommonSteps;
+import org.geepawhill.contentment.step.CommonSteps;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.ShapePen;
 

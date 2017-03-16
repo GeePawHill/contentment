@@ -2,7 +2,7 @@ package org.geepawhill.contentment.core;
 
 import static org.junit.Assert.assertEquals;
 
-import org.geepawhill.contentment.newstep.InstantStep;
+import org.geepawhill.contentment.step.InstantStep;
 import org.geepawhill.contentment.test.TestInstant;
 import org.geepawhill.contentment.test.TestStep;
 import org.junit.Test;

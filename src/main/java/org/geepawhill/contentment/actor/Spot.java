@@ -3,8 +3,8 @@ package org.geepawhill.contentment.actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.model.Actor;
-import org.geepawhill.contentment.newstep.Entrance;
 import org.geepawhill.contentment.outline.KvOutline;
+import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.step.ShowStep;
 import org.geepawhill.contentment.utility.Names;
 

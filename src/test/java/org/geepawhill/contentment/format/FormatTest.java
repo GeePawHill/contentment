@@ -50,6 +50,4 @@ public class FormatTest
 		Format derived = new Format("Derived",base);
 		assertEquals(style,derived.find(key));
 	}
-
-
 }

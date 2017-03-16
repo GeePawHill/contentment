@@ -4,9 +4,9 @@ import org.geepawhill.contentment.core.ActorOutliner;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.model.Actor;
-import org.geepawhill.contentment.newstep.Entrance;
-import org.geepawhill.contentment.newstep.LettersStep;
 import org.geepawhill.contentment.outline.KvOutline;
+import org.geepawhill.contentment.step.Entrance;
+import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.utility.Names;
 

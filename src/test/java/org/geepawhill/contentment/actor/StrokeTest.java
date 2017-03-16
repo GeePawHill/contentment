@@ -2,7 +2,7 @@ package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.newstep.SetStyleStep;
+import org.geepawhill.contentment.step.SetStyleStep;
 import org.geepawhill.contentment.style.ShapePen;
 import org.geepawhill.contentment.test.ContextOutline;
 import org.geepawhill.contentment.test.SequenceTester;

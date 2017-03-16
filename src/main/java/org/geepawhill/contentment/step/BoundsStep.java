@@ -1,27 +1,31 @@
-package org.geepawhill.contentment.newstep;
-
-import java.util.function.Consumer;
+package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.geometry.PointPairConsumer;
 import org.geepawhill.contentment.model.OnFinished;
 import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.model.Timing;
 import org.geepawhill.contentment.timing.FixedTiming;
 
-public class OneWayStep implements Step
+import javafx.scene.Node;
+
+public class BoundsStep implements Step
 {
 	
-	private Consumer<Context> action;
+	private Node source;
+	private PointPairConsumer onCollected;
 
-	public OneWayStep(Consumer<Context> action)
+	public BoundsStep(Node source,PointPairConsumer onCollected)
 	{
-		this.action = action;
+		this.source = source;
+		this.onCollected = onCollected;
 	}
 
 	@Override
 	public void after(Context context)
 	{
-		action.accept(context);
+		onCollected.accept(new PointPair(source.getBoundsInParent()));
 	}
 
 	@Override
@@ -34,7 +38,6 @@ public class OneWayStep implements Step
 	{
 		after(context);
 		onFinished.run();
-		
 	}
 
 	@Override
@@ -52,4 +55,5 @@ public class OneWayStep implements Step
 	{
 		return FixedTiming.INSTANT;
 	}
+
 }

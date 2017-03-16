@@ -3,8 +3,8 @@ package org.geepawhill.contentment.actor;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.model.Actor;
-import org.geepawhill.contentment.newstep.SetTitleStep;
 import org.geepawhill.contentment.outline.KvOutline;
+import org.geepawhill.contentment.step.SetTitleStep;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;

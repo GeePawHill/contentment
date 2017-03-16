@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.test;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.newstep.Instant;
+import org.geepawhill.contentment.step.Instant;
 
 public class TestInstant implements Instant
 {

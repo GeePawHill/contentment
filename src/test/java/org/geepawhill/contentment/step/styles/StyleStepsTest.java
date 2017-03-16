@@ -1,9 +1,9 @@
 package org.geepawhill.contentment.step.styles;
 
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.newstep.RestoreStylesStep;
-import org.geepawhill.contentment.newstep.SaveStylesStep;
-import org.geepawhill.contentment.newstep.SetStyleStep;
+import org.geepawhill.contentment.step.RestoreStylesStep;
+import org.geepawhill.contentment.step.SaveStylesStep;
+import org.geepawhill.contentment.step.SetStyleStep;
 import org.geepawhill.contentment.style.ShapePen;
 import org.geepawhill.contentment.test.SequenceTester;
 import org.junit.Test;

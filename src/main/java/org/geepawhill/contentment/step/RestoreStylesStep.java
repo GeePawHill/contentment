@@ -1,19 +1,22 @@
-package org.geepawhill.contentment.newstep;
+package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.format.StylesMemo;
 
-public class SaveStylesStep implements Instant
+public class RestoreStylesStep implements Instant
 {
+	StylesMemo previous;
 	
-	private StylesMemo previous;
+	public RestoreStylesStep()
+	{
+	}
 	
 	@Override
 	public void after(Context context)
 	{
 		previous = context.styles.getAll();
 	}
-	
+
 	@Override
 	public void before(Context context)
 	{

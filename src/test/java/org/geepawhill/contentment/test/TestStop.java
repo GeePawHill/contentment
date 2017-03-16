@@ -3,7 +3,7 @@ package org.geepawhill.contentment.test;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.model.OnFinished;
 import org.geepawhill.contentment.model.Timing;
-import org.geepawhill.contentment.newstep.StopStep;
+import org.geepawhill.contentment.step.StopStep;
 import org.geepawhill.contentment.timing.FixedTiming;
 
 public class TestStop extends StopStep
