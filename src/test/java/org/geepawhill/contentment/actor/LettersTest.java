@@ -1,9 +1,13 @@
 package org.geepawhill.contentment.actor;
 
+
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.step.SetStyleStep;
 import org.geepawhill.contentment.style.ShapePen;
+import org.geepawhill.contentment.style.TextColors;
+import org.geepawhill.contentment.style.TextFont;
 import org.geepawhill.contentment.test.ContextOutline;
 import org.geepawhill.contentment.test.SequenceTester;
 import org.geepawhill.contentment.timing.FixedTiming;
@@ -17,7 +21,7 @@ public class LettersTest extends SequenceTester
 	@Before
 	public void before()
 	{
-		stroke = new Letters("Some text.",new Point(300d,200d));
+		stroke = new Letters("Some text.",new Point(300d,200d), new Format(TextFont.unspecified(),TextColors.unspecified()));
 	}
 
 	@Test

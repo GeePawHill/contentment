@@ -10,8 +10,6 @@ import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.step.FadeStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.TransitionStep;
-import org.geepawhill.contentment.style.TextColors;
-import org.geepawhill.contentment.style.TextFont;
 import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.utility.Names;
 
@@ -28,12 +26,7 @@ public class Letters implements Actor
 	private Point center;
 	private Text text;
 	private Format format;
-	
-	public Letters(String source, Point center)
-	{
-		this(source,center,new Format("Unspecified",TextColors.unspecified(),TextFont.unspecified()));
-	}
-	
+
 	public Letters(String source, Point center, Format format)
 	{
 		this.format = format;
@@ -44,7 +37,6 @@ public class Letters implements Actor
 		this.group = new Group(text);
 	}
 
-
 	public Sequence sketch(Sequence sequence, FixedTiming timing)
 	{
 		if (sequence == null) sequence = new Sequence();
@@ -52,14 +44,14 @@ public class Letters implements Actor
 		sequence.add(new LettersStep(timing, source, center, text, format));
 		return sequence;
 	}
-	
-	public void fadeIn(Sequence sequence,double ms)
+
+	public void fadeIn(Sequence sequence, double ms)
 	{
 		LettersStep lettersStep = new LettersStep(FixedTiming.INSTANT, source, center, text, format);
 		group().setOpacity(0d);
 		sequence.add(lettersStep);
 		sequence.add(new Entrance(this));
-		sequence.add(new FadeStep(this,ms) );
+		sequence.add(new FadeStep(this, ms));
 	}
 
 	public void move(Sequence sequence, double newX, double newY)
@@ -72,7 +64,6 @@ public class Letters implements Actor
 		sequence.add(new TransitionStep(transition));
 	}
 
-
 	@Override
 	public String nickname()
 	{
@@ -84,11 +75,11 @@ public class Letters implements Actor
 	{
 		ActorOutliner outliner = new ActorOutliner(this, output);
 		outliner.start();
-		outliner.append("Source",source);
+		outliner.append("Source", source);
 		outliner.startNode(text);
 		if (outliner.visibility(text))
 		{
-			outliner.append("Current",text.getText());
+			outliner.append("Current", text.getText());
 			outliner.bounds(text);
 			outliner.opacity(text);
 			outliner.strokeWidth(text);

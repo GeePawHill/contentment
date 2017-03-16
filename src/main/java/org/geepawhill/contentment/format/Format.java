@@ -2,6 +2,8 @@ package org.geepawhill.contentment.format;
 
 import java.util.HashMap;
 
+import org.geepawhill.contentment.utility.Names;
+
 import javafx.scene.shape.Shape;
 
 public class Format
@@ -9,6 +11,11 @@ public class Format
 	private final HashMap<String,Style> overrides;
 	public final String nickname;
 	public final Format base;
+	
+	public Format(Style... styles)
+	{
+		this(Names.make("Unspecified"+Format.class.getName()),styles);
+	}
 	
 	public Format(String name,Style... styles)
 	{
