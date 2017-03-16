@@ -39,5 +39,10 @@ public class TextFont
 	{
 		return font("Unspecified", new Font(50d), 1d, .5d);
 	}
+
+	public static Style largeHand()
+	{
+		return font("LargeHand", new Font("Buxton Sketch", 60d), 2d, .5d);
+	}
 	
 }

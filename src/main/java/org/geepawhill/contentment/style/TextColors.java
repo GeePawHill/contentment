@@ -11,6 +11,12 @@ public class TextColors
 {
 	public static final String KEY = "TextColor";
 	
+	public static Style color(String nickname,Paint both, Double opacity)
+	{
+		return color(nickname,both,both,opacity);
+	}
+
+	
 	public static Style color(String nickname,Paint stroke, Paint fill, Double opacity)
 	{
 		StyleApplier applier = new StyleApplier() {

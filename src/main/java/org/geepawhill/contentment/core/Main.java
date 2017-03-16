@@ -1,18 +1,22 @@
 package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.actor.Arrow;
-import org.geepawhill.contentment.actor.Label;
 import org.geepawhill.contentment.actor.LabelBox;
+import org.geepawhill.contentment.actor.Letters;
 import org.geepawhill.contentment.actor.OvalText;
 import org.geepawhill.contentment.actor.Spot;
 import org.geepawhill.contentment.actor.TargetBox;
 import org.geepawhill.contentment.actor.Title;
+import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.format.Style;
+import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.jfx.ScaleListener;
 import org.geepawhill.contentment.jfx.StageMaximizedListener;
 import org.geepawhill.contentment.step.CommonSteps;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.ShapePen;
+import org.geepawhill.contentment.style.TextColors;
+import org.geepawhill.contentment.style.TextFont;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -21,8 +25,11 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -45,25 +52,17 @@ public class Main extends Application
 			makeTools();
 
 			Pane canvas = new Pane();
-			String image = ClassLoader.getSystemResource("mottled2.jpg").toExternalForm();
-			// root.setStyle("-fx-background-image: url('" + image + "'); " +
-			// "-fx-background-position: center center; " +
-			// "-fx-background-repeat: repeat;");
+			BackgroundFill fill = new BackgroundFill(Color.BLACK, null, null);
+			canvas.setBackground(new Background(fill));
 			root.setCenter(canvas);
 			scaledCanvas = new Group();
 			canvas.getChildren().add(scaledCanvas);
 			forceLetterBox(stage, stage.getScene(), canvas, scaledCanvas);
 			makeGuides();
 
-			// Sequence sequence = new Sequence();
-			// Stroke stroke = new Stroke(new PointPair(100d,200d,300d,400d));
-			// stroke.sketch(sequence, new FixedTiming(2000d));
-
 			sequence = new Sequence();
 			common = new CommonSteps(sequence);
-//			Letters letters = new Letters("thing thid.", new Point(400d, 400d));
-//			letters.sketch(sequence, new FixedTiming(1000));
-			 makeScripts();
+			makeScripts();
 
 			player = new Player(scaledCanvas);
 			player.reset(sequence);
@@ -78,8 +77,8 @@ public class Main extends Application
 	private void makeScripts()
 	{
 		addBaseComplications(sequence);
-		 interactiveStabilization(sequence);
-		 agentAndPokes();
+		interactiveStabilization(sequence);
+		agentAndPokes();
 	}
 
 	private void agentAndPokes()
@@ -88,17 +87,21 @@ public class Main extends Application
 		Style greenLine = ShapePen.third();
 		Title tale = new Title("Agent: Anything With Susceptability & Unpredictability");
 		LabelBox agent = new LabelBox("Agent", 800d, 520d);
-		Label teammate = new Label("Teammate", 800d, 520d);
-		Label practice = new Label("Practice", 800d, 800d);
-		Label coach = new Label("Coach", 800d, 275d);
-		Label software = new Label("Software", 500d, 300d);
-		Label hardware = new Label("Hardware", 1300d, 600d);
-		Label policy = new Label("Policy", 1100d, 300d);
-		Label personnel = new Label("Staff", 500d, 750d);
-		Label date = new Label("Date", 1300d, 450d);
-		Label framework = new Label("Framework", 300d, 600d);
-		Label tools = new Label("Tools", 300d, 450d);
-		Label orgchart = new Label("Org Chart", 1100d, 750d);
+		
+		Style agentColors = TextColors.color("Agent", Color.CHARTREUSE, .5d);
+		Style agentFont = TextFont.largeHand();
+		Format agentFormat = new Format("Agent",agentColors,agentFont);
+		Letters teammate = new Letters("Teammate", new Point( 800d, 520d),agentFormat);
+		Letters practice = new Letters("Practice", new Point( 800d, 800d),agentFormat);
+		Letters coach = new Letters("Coach", new Point( 800d, 275d),agentFormat);
+		Letters software = new Letters("Software", new Point( 500d, 300d),agentFormat);
+		Letters hardware = new Letters("Hardware", new Point( 1300d, 600d),agentFormat);
+		Letters policy = new Letters("Policy", new Point( 1100d, 300d),agentFormat);
+		Letters personnel = new Letters("Staff", new Point( 500d, 750d),agentFormat);
+		Letters date = new Letters("Date", new Point( 1300d, 450d),agentFormat);
+		Letters framework = new Letters("Framework", new Point( 300d, 600d),agentFormat);
+		Letters tools = new Letters("Tools", new Point( 300d, 450d),agentFormat);
+		Letters orgchart = new Letters("Org Chart", new Point( 1100d, 750d),agentFormat);
 
 		common.clear();
 		common.show(tale);
@@ -109,37 +112,37 @@ public class Main extends Application
 		common.stop();
 		common.hide(agent);
 		common.set(greenLine);
-		teammate.fadeIn(sequence,500d);
+		teammate.fadeIn(sequence, 500d);
 		common.stop();
 		tale.setText(sequence, "That Includes The Daily Practice");
-		practice.fadeIn(sequence,300d);
+		practice.fadeIn(sequence, 300d);
 		common.stop();
 		tale.setText(sequence, "Software We Use For Making");
-		software.fadeIn(sequence,300d);
+		software.fadeIn(sequence, 300d);
 		common.stop();
 		tale.setText(sequence, "Or The Hardware We Use For Making");
-		hardware.fadeIn(sequence,300d);
+		hardware.fadeIn(sequence, 300d);
 		common.stop();
 		tale.setText(sequence, "Corporate Policy Is An Agent");
-		policy.fadeIn(sequence,300d);
+		policy.fadeIn(sequence, 300d);
 		common.stop();
 		tale.setText(sequence, "The Staffing Demand & Supply");
-		personnel.fadeIn(sequence,300d);
+		personnel.fadeIn(sequence, 300d);
 		common.stop();
 		tale.setText(sequence, "Everything About The Market, Like Shipping Date");
-		date.fadeIn(sequence,300d);
+		date.fadeIn(sequence, 300d);
 		common.stop();
 		tale.setText(sequence, "The Conceptual Framework The Team Uses");
-		framework.fadeIn(sequence,300d);
+		framework.fadeIn(sequence, 300d);
 		common.stop();
 		tale.setText(sequence, "The Tools We Use");
-		tools.fadeIn(sequence,300d);
+		tools.fadeIn(sequence, 300d);
 		common.stop();
 		tale.setText(sequence, "The Hierarchy We Live In");
-		orgchart.fadeIn(sequence,300d);
+		orgchart.fadeIn(sequence, 300d);
 		common.stop();
 		tale.setText(sequence, "And, Yes, The Coach Is An Agent, Too");
-		coach.fadeIn(sequence,300d);
+		coach.fadeIn(sequence, 300d);
 		common.stop();
 		tale.setText(sequence, "Watch Just One Poke...");
 		common.stop();
@@ -157,11 +160,11 @@ public class Main extends Application
 		poke(teammate, date, 1300d, 450d);
 	}
 
-	private void poke(Label from, Label to, double newX, double newY)
+	private void poke(Letters from, Letters to, double newX, double newY)
 	{
 		Arrow arrow = new Arrow(from, false, to, true);
-		arrow.sketch(sequence,400d);
-		sequence.unmarked(to.move(newX, newY));
+		arrow.sketch(sequence, 400d);
+		to.move(sequence,newX, newY);
 		common.hide(arrow);
 	}
 
@@ -189,7 +192,7 @@ public class Main extends Application
 		common.set(org.geepawhill.contentment.style.TextFont.font("?", new Font("Century Gothic", 24d), 1d, .5d));
 		common.set(Dash.dash("Dash", 11d));
 		common.set(ShapePen.thinFirst());
-		target.sketch(sequence,1d);
+		target.sketch(sequence, 1d);
 
 		common.set(blueLine);
 		common.set(Dash.solid());
@@ -198,7 +201,7 @@ public class Main extends Application
 		common.stop();
 
 		poke1Source.place(sequence);
-		poke1.sketch(sequence,1000d);
+		poke1.sketch(sequence, 1000d);
 		common.stop();
 		tale.setText(sequence, "Agents Respond Unpredictably");
 		sequence.add(agent.move(900d, 400d));
@@ -206,13 +209,13 @@ public class Main extends Application
 		tale.setText(sequence, "Whoops: Better Try Another Poke");
 		poke2Source.place(sequence);
 		common.set(redLine);
-		poke2.sketch(sequence,1000d);
+		poke2.sketch(sequence, 1000d);
 		sequence.add(agent.move(1000d, 500d));
 		common.stop();
 		tale.setText(sequence, "Almost there!");
 		poke3Source.place(sequence);
 		common.set(greenLine);
-		poke3.sketch(sequence,1000d);
+		poke3.sketch(sequence, 1000d);
 		sequence.unmarked(agent.move(1100d, 450d));
 		tale.setText(sequence, "Made it!!");
 		common.stop();
@@ -237,7 +240,7 @@ public class Main extends Application
 		LabelBox a4 = new LabelBox("A", 1000d, 400d);
 		LabelBox a5 = new LabelBox("A", 1200d, 300d);
 		LabelBox a6 = new LabelBox("A", 1400d, 200d);
-		
+
 		Arrow poke1 = new Arrow(coach, false, a1, true);
 		Arrow poke2 = new Arrow(coach, false, a2, true);
 		Arrow poke3 = new Arrow(coach, false, a3, true);
@@ -292,14 +295,14 @@ public class Main extends Application
 		common.set(ShapePen.second());
 		coach.sketch(sequence, 1000d);
 		common.stop();
-		poke.sketch(sequence,1000d);
+		poke.sketch(sequence, 1000d);
 		common.saveStyles();
 		common.set(org.geepawhill.contentment.style.TextFont.font("?", new Font("Buxton Sketch", 40d), 1d, .5d));
 		common.set(greenLine);
 		common.set(Dash.dash("Dash", 10d));
 		practice.sketch(sequence, 1000d);
 		common.set(Dash.solid());
-		change.sketch(sequence,1d);
+		change.sketch(sequence, 1d);
 		common.restoreStyles();
 		common.stop();
 		tale.setText(sequence, "Complication: There are always multiple agents.");
@@ -312,12 +315,12 @@ public class Main extends Application
 		a5.sketch(sequence, 1d);
 		a6.sketch(sequence, 1d);
 		common.set(blueLine);
-		poke1.sketch(sequence,1d);
-		poke2.sketch(sequence,1d);
-		poke3.sketch(sequence,1d);
-		poke4.sketch(sequence,1d);
-		poke5.sketch(sequence,1d);
-		poke6.sketch(sequence,1d);
+		poke1.sketch(sequence, 1d);
+		poke2.sketch(sequence, 1d);
+		poke3.sketch(sequence, 1d);
+		poke4.sketch(sequence, 1d);
+		poke5.sketch(sequence, 1d);
+		poke6.sketch(sequence, 1d);
 		common.stop();
 		tale.setText(sequence, "Complication: There are always multiple practices.");
 		common.set(Dash.dash("Dash", 10d));
@@ -328,47 +331,47 @@ public class Main extends Application
 		p4.sketch(sequence, 1d);
 		p5.sketch(sequence, 1d);
 		p6.sketch(sequence, 1d);
-		c1.sketch(sequence,1d);
-		c2.sketch(sequence,1d);
-		c3.sketch(sequence,1d);
-		c4.sketch(sequence,1d);
-		c5.sketch(sequence,1d);
-		c6.sketch(sequence,1d);
+		c1.sketch(sequence, 1d);
+		c2.sketch(sequence, 1d);
+		c3.sketch(sequence, 1d);
+		c4.sketch(sequence, 1d);
+		c5.sketch(sequence, 1d);
+		c6.sketch(sequence, 1d);
 		common.stop();
 
 		tale.setText(sequence, "Complication: Most agents change multiple practices.");
 		common.set(Dash.dash("Dash", 10d));
 		common.set(greenLine);
-		c11.sketch(sequence,200d);
-		c12.sketch(sequence,200d);
-		c13.sketch(sequence,200d);
-		c14.sketch(sequence,200d);
-		c15.sketch(sequence,200d);
-		c22.sketch(sequence,200d);
-		c23.sketch(sequence,200d);
-		c24.sketch(sequence,200d);
-		c25.sketch(sequence,200d);
-		c26.sketch(sequence,200d);
+		c11.sketch(sequence, 200d);
+		c12.sketch(sequence, 200d);
+		c13.sketch(sequence, 200d);
+		c14.sketch(sequence, 200d);
+		c15.sketch(sequence, 200d);
+		c22.sketch(sequence, 200d);
+		c23.sketch(sequence, 200d);
+		c24.sketch(sequence, 200d);
+		c25.sketch(sequence, 200d);
+		c26.sketch(sequence, 200d);
 		common.stop();
 
 		common.saveStyles();
 		common.set(Dash.dash("Dash", 3d));
 		common.set(ShapePen.thinFourth());
 		tale.setText(sequence, "Complication: The agents are interrelated.");
-		i1.sketch(sequence,300d);
-		i2.sketch(sequence,300d);
-		i3.sketch(sequence,300d);
-		i4.sketch(sequence,300d);
-		i5.sketch(sequence,300d);
-		i6.sketch(sequence,300d);
+		i1.sketch(sequence, 300d);
+		i2.sketch(sequence, 300d);
+		i3.sketch(sequence, 300d);
+		i4.sketch(sequence, 300d);
+		i5.sketch(sequence, 300d);
+		i6.sketch(sequence, 300d);
 		common.stop();
 		tale.setText(sequence, "Complication: The practices are interrelated.");
-		pi1.sketch(sequence,300d);
-		pi2.sketch(sequence,300d);
-		pi3.sketch(sequence,300d);
-		pi4.sketch(sequence,300d);
-		pi5.sketch(sequence,300d);
-		pi6.sketch(sequence,300d);
+		pi1.sketch(sequence, 300d);
+		pi2.sketch(sequence, 300d);
+		pi3.sketch(sequence, 300d);
+		pi4.sketch(sequence, 300d);
+		pi5.sketch(sequence, 300d);
+		pi6.sketch(sequence, 300d);
 		common.stop();
 		common.restoreStyles();
 	}
@@ -407,7 +410,7 @@ public class Main extends Application
 	{
 		ToolBar tools = new ToolBar();
 		tools.setOrientation(Orientation.VERTICAL);
-		
+
 		Button test = new Button("**");
 		test.setOnAction(event -> makeScripts());
 		tools.getItems().add(test);

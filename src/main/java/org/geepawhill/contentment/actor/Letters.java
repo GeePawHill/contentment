@@ -7,14 +7,18 @@ import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.model.Actor;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.Entrance;
+import org.geepawhill.contentment.step.FadeStep;
 import org.geepawhill.contentment.step.LettersStep;
+import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.style.TextColors;
 import org.geepawhill.contentment.style.TextFont;
 import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.utility.Names;
 
+import javafx.animation.TranslateTransition;
 import javafx.scene.Group;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 public class Letters implements Actor
 {
@@ -24,7 +28,7 @@ public class Letters implements Actor
 	private Point center;
 	private Text text;
 	private Format format;
-
+	
 	public Letters(String source, Point center)
 	{
 		this(source,center,new Format("Unspecified",TextColors.unspecified(),TextFont.unspecified()));
@@ -48,6 +52,26 @@ public class Letters implements Actor
 		sequence.add(new LettersStep(timing, source, center, text, format));
 		return sequence;
 	}
+	
+	public void fadeIn(Sequence sequence,double ms)
+	{
+		LettersStep lettersStep = new LettersStep(FixedTiming.INSTANT, source, center, text, format);
+		group().setOpacity(0d);
+		sequence.add(lettersStep);
+		sequence.add(new Entrance(this));
+		sequence.add(new FadeStep(this,ms) );
+	}
+
+	public void move(Sequence sequence, double newX, double newY)
+	{
+		TranslateTransition transition = new TranslateTransition();
+		transition.setNode(group);
+		transition.setToX(newX - center.x);
+		transition.setToY(newY - center.y);
+		transition.setDuration(Duration.millis(1000d));
+		sequence.add(new TransitionStep(transition));
+	}
+
 
 	@Override
 	public String nickname()
