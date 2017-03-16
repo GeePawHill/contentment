@@ -15,7 +15,6 @@ import org.geepawhill.contentment.jfx.StageMaximizedListener;
 import org.geepawhill.contentment.step.CommonSteps;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
-import org.geepawhill.contentment.style.ShapePen;
 import org.geepawhill.contentment.style.TextColors;
 import org.geepawhill.contentment.style.TextFont;
 
@@ -33,7 +32,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Main extends Application
@@ -85,32 +83,26 @@ public class Main extends Application
 
 	private void agentAndPokes()
 	{
-		Style blueLine = ShapePen.second();
-		Style greenLine = ShapePen.third();
 		Title tale = new Title("Agent: Anything With Susceptability & Unpredictability");
-		LabelBox agent = new LabelBox("Agent", new Point(800d, 520d),agentFormat());
-		
-		Letters teammate = new Letters("Teammate", new Point( 800d, 520d),agentFormat());
-		Letters practice = new Letters("Practice", new Point( 800d, 800d),agentFormat());
-		Letters coach = new Letters("Coach", new Point( 800d, 275d),agentFormat());
-		Letters software = new Letters("Software", new Point( 500d, 300d),agentFormat());
-		Letters hardware = new Letters("Hardware", new Point( 1300d, 600d),agentFormat());
-		Letters policy = new Letters("Policy", new Point( 1100d, 300d),agentFormat());
-		Letters personnel = new Letters("Staff", new Point( 500d, 750d),agentFormat());
-		Letters date = new Letters("Date", new Point( 1300d, 450d),agentFormat());
-		Letters framework = new Letters("Framework", new Point( 300d, 600d),agentFormat());
-		Letters tools = new Letters("Tools", new Point( 300d, 450d),agentFormat());
-		Letters orgchart = new Letters("Org Chart", new Point( 1100d, 750d),agentFormat());
+		LabelBox agent = new LabelBox("Agent", new Point(800d, 520d), agentFormat());
+
+		Letters teammate = new Letters("Teammate", new Point(800d, 520d), agentFormat());
+		Letters practice = new Letters("Practice", new Point(800d, 800d), agentFormat());
+		Letters coach = new Letters("Coach", new Point(800d, 275d), agentFormat());
+		Letters software = new Letters("Software", new Point(500d, 300d), agentFormat());
+		Letters hardware = new Letters("Hardware", new Point(1300d, 600d), agentFormat());
+		Letters policy = new Letters("Policy", new Point(1100d, 300d), agentFormat());
+		Letters personnel = new Letters("Staff", new Point(500d, 750d), agentFormat());
+		Letters date = new Letters("Date", new Point(1300d, 450d), agentFormat());
+		Letters framework = new Letters("Framework", new Point(300d, 600d), agentFormat());
+		Letters tools = new Letters("Tools", new Point(300d, 450d), agentFormat());
+		Letters orgchart = new Letters("Org Chart", new Point(1100d, 750d), agentFormat());
 
 		common.clear();
 		common.show(tale);
-		common.set(blueLine);
-		common.set(Dash.solid());
-		common.set(org.geepawhill.contentment.style.TextFont.font("?", new Font("Buxton Sketch", 60d), 1d, .5d));
 		agent.sketch(sequence, 1d);
 		common.stop();
 		common.hide(agent);
-		common.set(greenLine);
 		teammate.fadeIn(sequence, 500d);
 		common.stop();
 		tale.setText(sequence, "That Includes The Daily Practice");
@@ -163,69 +155,38 @@ public class Main extends Application
 	{
 		Style agentColors = TextColors.color("Agent", Color.CHARTREUSE, .8d);
 		Style agentFont = TextFont.largeHand();
-		Style agentFrame = Frames.frame("Agent",Color.CHARTREUSE,5d,.8d);
+		Style agentFrame = Frames.frame("Agent", Color.CHARTREUSE, 5d, .8d);
 		Style agentDash = Dash.solid();
-		Format agentFormat = new Format("Agent",agentColors,agentFont,agentFrame,agentDash);
+		Format agentFormat = new Format("Agent", agentColors, agentFont, agentFrame, agentDash);
 		return agentFormat;
-	}
-	
-	private Format coachFormat()
-	{
-		return new Format("Coach",agentFormat(),
-				TextColors.color("Coach", Color.LIGHTSKYBLUE, .8d),
-				Frames.frame("Coach", Color.LIGHTSKYBLUE, 5d, .8d));
-	}
-	
-	private Format pokeFormat(Paint paint)
-	{
-		return new Format(pokeFormat(),Frames.frame("Poke", paint, 5d, .8d));
-	}
-	
-	private Format pokeFormat()
-	{
-		return new Format("Poke",agentFormat(),
-				Dash.solid(),
-				Frames.frame("Coach", Color.SLATEBLUE, 5d, .8d));
 	}
 
 	private void poke(Letters from, Letters to, double newX, double newY)
 	{
-		Arrow arrow = new Arrow(from, false, to, true,pokeFormat());
+		Arrow arrow = new Arrow(from, false, to, true, pokeFormat());
 		arrow.sketch(sequence, 400d);
-		to.move(sequence,newX, newY);
+		to.move(sequence, newX, newY);
 		common.hide(arrow);
 	}
 
-
 	private void interactiveStabilization(Sequence sequence)
 	{
-		Style redLine = ShapePen.first();
-		Style blueLine = ShapePen.second();
-		Style greenLine = ShapePen.third();
-
 		Title tale = new Title("Agents Are Susceptible To Pokes");
-		LabelBox agent = new LabelBox("Agent", new Point(800d, 450d),agentFormat());
-		TargetBox target = new TargetBox("Target", new Point(1050d, 350d),targetFormat());
+		LabelBox agent = new LabelBox("Agent", new Point(800d, 450d), agentFormat());
+		TargetBox target = new TargetBox("Target", new Point(1050d, 350d), targetFormat());
 
 		Spot poke1Source = new Spot(400d, 450d);
 		Spot poke2Source = new Spot(800d, 200d);
 		Spot poke3Source = new Spot(800d, 600d);
 
-		Arrow poke1 = new Arrow(poke1Source, false, agent, true,pokeFormat(Color.RED));
-		Arrow poke2 = new Arrow(poke2Source, false, agent, true,pokeFormat(Color.BLUE));
-		Arrow poke3 = new Arrow(poke3Source, false, agent, true,pokeFormat(Color.GREEN));
+		Arrow poke1 = new Arrow(poke1Source, false, agent, true, pokeFormat(Color.RED));
+		Arrow poke2 = new Arrow(poke2Source, false, agent, true, pokeFormat(Color.BLUE));
+		Arrow poke3 = new Arrow(poke3Source, false, agent, true, pokeFormat(Color.GREEN));
 
 		common.clear();
 		common.show(tale);
-		common.set(redLine);
-		common.set(org.geepawhill.contentment.style.TextFont.font("?", new Font("Century Gothic", 24d), 1d, .5d));
-		common.set(Dash.dash("Dash", 11d));
-		common.set(ShapePen.thinFirst());
 		target.sketch(sequence, 1d);
 
-		common.set(blueLine);
-		common.set(Dash.solid());
-		common.set(org.geepawhill.contentment.style.TextFont.font("?", new Font("Buxton Sketch", 60d), 1d, .5d));
 		agent.sketch(sequence, 1d);
 		common.stop();
 
@@ -237,48 +198,32 @@ public class Main extends Application
 		common.stop();
 		tale.setText(sequence, "Whoops: Better Try Another Poke");
 		poke2Source.place(sequence);
-		common.set(redLine);
 		poke2.sketch(sequence, 1000d);
 		sequence.add(agent.move(1000d, 500d));
 		common.stop();
 		tale.setText(sequence, "Almost there!");
 		poke3Source.place(sequence);
-		common.set(greenLine);
 		poke3.sketch(sequence, 1000d);
 		sequence.unmarked(agent.move(1100d, 450d));
 		tale.setText(sequence, "Made it!!");
 		common.stop();
-
-	}
-
-	private Format targetFormat()
-	{
-		return new Format(
-				Frames.frame("Target", Color.WHITE, 2d, .8d),
-				TextFont.mediumSans(),
-				TextColors.color("Target", Color.WHITE, .8d),
-				Dash.dash("dash", 5d)
-				);
 	}
 
 	private void addBaseComplications(Sequence sequence)
 	{
-		Style redLine = ShapePen.first();
-		Style blueLine = ShapePen.second();
-		Style greenLine = ShapePen.third();
 		Title tale = new Title("A Simple Change Model");
-		LabelBox agent = new LabelBox("Agent", new Point(800d, 450d),agentFormat());
-		OvalText practice = new OvalText("Practice", new Point(800d,.75 * 900d),practiceFormat());
-		Arrow change = new Arrow(agent, false, practice, true,changeFormat());
-		LabelBox coach = new LabelBox("Coach", new Point(800d, 200d),coachFormat());
+		LabelBox agent = new LabelBox("Agent", new Point(800d, 450d), agentFormat());
+		OvalText practice = new OvalText("Practice", new Point(800d, .75 * 900d), practiceFormat());
+		Arrow change = new Arrow(agent, false, practice, true, changeFormat());
+		LabelBox coach = new LabelBox("Coach", new Point(800d, 200d), coachFormat());
 		Arrow poke = new Arrow(coach, false, agent, true, pokeFormat());
 
-		LabelBox a1 = new LabelBox("A", new Point(200d, 200d),agentFormat());
-		LabelBox a2 = new LabelBox("A", new Point(400d, 300d),agentFormat());
-		LabelBox a3 = new LabelBox("A", new Point(600d, 400d),agentFormat());
-		LabelBox a4 = new LabelBox("A", new Point(1000d, 400d),agentFormat());
-		LabelBox a5 = new LabelBox("A", new Point(1200d, 300d),agentFormat());
-		LabelBox a6 = new LabelBox("A", new Point(1400d, 200d),agentFormat());
+		LabelBox a1 = new LabelBox("A", new Point(200d, 200d), agentFormat());
+		LabelBox a2 = new LabelBox("A", new Point(400d, 300d), agentFormat());
+		LabelBox a3 = new LabelBox("A", new Point(600d, 400d), agentFormat());
+		LabelBox a4 = new LabelBox("A", new Point(1000d, 400d), agentFormat());
+		LabelBox a5 = new LabelBox("A", new Point(1200d, 300d), agentFormat());
+		LabelBox a6 = new LabelBox("A", new Point(1400d, 200d), agentFormat());
 
 		Arrow poke1 = new Arrow(coach, false, a1, true, pokeFormat());
 		Arrow poke2 = new Arrow(coach, false, a2, true, pokeFormat());
@@ -287,12 +232,12 @@ public class Main extends Application
 		Arrow poke5 = new Arrow(coach, false, a5, true, pokeFormat());
 		Arrow poke6 = new Arrow(coach, false, a6, true, pokeFormat());
 
-		OvalText p1 = new OvalText("P", new Point(200d,400d),practiceFormat());
-		OvalText p2 = new OvalText("P", new Point(400d,500d),practiceFormat());
-		OvalText p3 = new OvalText("P", new Point(600d,600d),practiceFormat());
-		OvalText p4 = new OvalText("P", new Point(1000d,600d),practiceFormat());
-		OvalText p5 = new OvalText("P", new Point(1200d,500d),practiceFormat());
-		OvalText p6 = new OvalText("P", new Point(1400d,400d),practiceFormat());
+		OvalText p1 = new OvalText("P", new Point(200d, 400d), practiceFormat());
+		OvalText p2 = new OvalText("P", new Point(400d, 500d), practiceFormat());
+		OvalText p3 = new OvalText("P", new Point(600d, 600d), practiceFormat());
+		OvalText p4 = new OvalText("P", new Point(1000d, 600d), practiceFormat());
+		OvalText p5 = new OvalText("P", new Point(1200d, 500d), practiceFormat());
+		OvalText p6 = new OvalText("P", new Point(1400d, 400d), practiceFormat());
 
 		Arrow c1 = new Arrow(a1, false, p1, true, changeFormat());
 		Arrow c2 = new Arrow(a2, false, p2, true, changeFormat());
@@ -328,32 +273,20 @@ public class Main extends Application
 		Arrow pi6 = new Arrow(p5, false, p6, false, relationFormat());
 
 		common.show(tale);
-		common.set(redLine);
 		agent.sketch(sequence, 1000d);
-		common.set(blueLine);
-		common.set(ShapePen.second());
 		coach.sketch(sequence, 1000d);
 		common.stop();
 		poke.sketch(sequence, 1000d);
-		common.saveStyles();
-		common.set(org.geepawhill.contentment.style.TextFont.font("?", new Font("Buxton Sketch", 40d), 1d, .5d));
-		common.set(greenLine);
-		common.set(Dash.dash("Dash", 10d));
 		practice.sketch(sequence, 1000d);
-		common.set(Dash.solid());
 		change.sketch(sequence, 1000d);
-		common.restoreStyles();
 		common.stop();
 		tale.setText(sequence, "Complication: There are always multiple agents.");
-		common.set(org.geepawhill.contentment.style.TextFont.font("?", new Font("Buxton Sketch", 30d), 1d, .5d));
-		common.set(redLine);
 		a1.sketch(sequence, 1d);
 		a2.sketch(sequence, 1d);
 		a3.sketch(sequence, 1d);
 		a4.sketch(sequence, 1d);
 		a5.sketch(sequence, 1d);
 		a6.sketch(sequence, 1d);
-		common.set(blueLine);
 		poke1.sketch(sequence, 1d);
 		poke2.sketch(sequence, 1d);
 		poke3.sketch(sequence, 1d);
@@ -362,8 +295,6 @@ public class Main extends Application
 		poke6.sketch(sequence, 1d);
 		common.stop();
 		tale.setText(sequence, "Complication: There are always multiple practices.");
-		common.set(Dash.dash("Dash", 10d));
-		common.set(greenLine);
 		p1.sketch(sequence, 1d);
 		p2.sketch(sequence, 1d);
 		p3.sketch(sequence, 1d);
@@ -379,8 +310,6 @@ public class Main extends Application
 		common.stop();
 
 		tale.setText(sequence, "Complication: Most agents change multiple practices.");
-		common.set(Dash.dash("Dash", 10d));
-		common.set(greenLine);
 		c12.sketch(sequence, 200d);
 		c22.sketch(sequence, 200d);
 		common.stop();
@@ -394,9 +323,6 @@ public class Main extends Application
 		c26.sketch(sequence, 1d);
 		common.stop();
 
-		common.saveStyles();
-		common.set(Dash.dash("Dash", 3d));
-		common.set(ShapePen.thinFourth());
 		tale.setText(sequence, "Complication: The agents are interrelated.");
 		i1.sketch(sequence, 1000d);
 		common.stop();
@@ -415,17 +341,34 @@ public class Main extends Application
 		pi5.sketch(sequence, 1d);
 		pi6.sketch(sequence, 1d);
 		common.stop();
-		common.restoreStyles();
 	}
 
+	private Format targetFormat()
+	{
+		return new Format(Frames.frame("Target", Color.WHITE, 2d, .8d), TextFont.mediumSans(),
+				TextColors.color("Target", Color.WHITE, .8d), Dash.dash("dash", 5d));
+	}
+
+	private Format coachFormat()
+	{
+		return new Format("Coach", agentFormat(), TextColors.color("Coach", Color.LIGHTSKYBLUE, .8d),
+				Frames.frame("Coach", Color.LIGHTSKYBLUE, 5d, .8d));
+	}
+
+	private Format pokeFormat(Paint paint)
+	{
+		return new Format(pokeFormat(), Frames.frame("Poke", paint, 5d, .8d));
+	}
+
+	private Format pokeFormat()
+	{
+		return new Format("Poke", agentFormat(), Dash.solid(), Frames.frame("Coach", Color.SLATEBLUE, 5d, .8d));
+	}
 
 	private Format practiceFormat()
 	{
-		return new Format(
-				Frames.frame("Practice", Color.TOMATO, 4d, .8d),
-				TextColors.color("Practice",Color.TOMATO,.8d),
-				Dash.dash("dash",4d),
-				TextFont.largeHand());
+		return new Format(Frames.frame("Practice", Color.TOMATO, 4d, .8d), TextColors.color("Practice", Color.TOMATO, .8d),
+				Dash.dash("dash", 4d), TextFont.largeHand());
 	}
 
 	private Format relationFormat()

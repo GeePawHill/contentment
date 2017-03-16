@@ -4,8 +4,6 @@ package org.geepawhill.contentment.actor;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
-import org.geepawhill.contentment.step.SetStyleStep;
-import org.geepawhill.contentment.style.ShapePen;
 import org.geepawhill.contentment.style.TextColors;
 import org.geepawhill.contentment.style.TextFont;
 import org.geepawhill.contentment.test.ContextOutline;
@@ -46,7 +44,6 @@ public class LettersTest extends SequenceTester
 	private Sequence sketch()
 	{
 		Sequence sequence = new Sequence();
-		sequence.add(new SetStyleStep(ShapePen.first()));
 		return stroke.sketch(sequence,new FixedTiming(1d));
 	}
 }

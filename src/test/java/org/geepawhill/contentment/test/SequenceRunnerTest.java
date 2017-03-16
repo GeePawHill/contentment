@@ -1,10 +1,11 @@
 package org.geepawhill.contentment.test;
 
+import org.geepawhill.contentment.actor.Stroke;
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.step.RestoreStylesStep;
-import org.geepawhill.contentment.step.SaveStylesStep;
-import org.geepawhill.contentment.step.SetStyleStep;
-import org.geepawhill.contentment.style.ShapePen;
+import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.step.Entrance;
+import org.geepawhill.contentment.style.Frames;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -24,23 +25,30 @@ public class SequenceRunnerTest extends ApplicationTest
 		runner.prepareWindow(stage);
 		
 		sequence = new Sequence();
-		sequence.add(new SaveStylesStep());
-		sequence.add(new SetStyleStep(ShapePen.second()));
-		sequence.add(new RestoreStylesStep());
+		sequence.add(
+				new Entrance(
+						new Stroke(
+								new PointPair(0d,0d,100d,100d),
+								new Format(Frames.unspecified()
+								)
+						)
+				)
+				);
 	}
 	
 	@Test
 	public void playSequence()
 	{
 		ContextOutline play = runner.waitForPlay(sequence);
-		play.assertKey("Styles."+ShapePen.KEY,ShapePen.second().toString());
+		System.out.println(play.asText());
+		play.assertKey("Actors.Stroke_1");
 	}
 	
 	@Test
 	public void afterSequence()
 	{
 		ContextOutline after = runner.waitForAfter(sequence);
-		after.assertKey("Styles."+ShapePen.KEY,ShapePen.second().toString());
+		after.assertKey("Actors.Stroke_1");
 	}
 	
 	@Test
@@ -48,6 +56,6 @@ public class SequenceRunnerTest extends ApplicationTest
 	{
 		runner.waitForPlay(sequence);
 		ContextOutline before = runner.waitForBefore(sequence);
-		before.assertKey("Styles."+ShapePen.KEY,ShapePen.first().toString());
+		before.assertKeyAbsent("Actors.Stroke_1");
 	}
 }

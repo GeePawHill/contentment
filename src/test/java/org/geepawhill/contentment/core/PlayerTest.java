@@ -2,7 +2,6 @@ package org.geepawhill.contentment.core;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.geepawhill.contentment.model.PlayState;
@@ -341,15 +340,6 @@ public class PlayerTest
 		player.dump(dump);
 		assertEquals("0", dump.find("Player.Current").getValue());
 		assertEquals("Before", dump.find("Player.State").getValue());
-	}
-
-	@Test
-	public void dumpsStyles()
-	{
-		KvOutline dump = new KvOutline();
-		player.reset(new Sequence(nonStopFirst));
-		player.dump(dump);
-		assertNotNull("Does not include Styles.", dump.find("Styles"));
 	}
 
 	private void assertAfter()

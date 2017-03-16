@@ -125,4 +125,14 @@ public class ContextOutline implements Outline<KeyValue>
 		return source.find(fullKey);
 	}
 
+	public void assertKeyAbsent(String key)
+	{
+		KeyValue found = source.find(key);
+		if(found==null) return;
+		source.dump("Outline");
+		String message = "Key prsent should be absent: "+key+": ["+found.getValue()+"]";
+		System.out.println(message);
+		fail(message);
+	}
+
 }

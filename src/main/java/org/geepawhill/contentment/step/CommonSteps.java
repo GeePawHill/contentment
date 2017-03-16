@@ -1,12 +1,11 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.format.Style;
 import org.geepawhill.contentment.model.Actor;
 
 public class CommonSteps
 {
-	
+
 	private Sequence sequence;
 
 	public CommonSteps(Sequence sequence)
@@ -18,7 +17,7 @@ public class CommonSteps
 	{
 		sequence.add(new ClearStep());
 	}
-	
+
 	public void hide(Actor actor)
 	{
 		sequence.add(new HideStep(actor.group()));
@@ -28,27 +27,10 @@ public class CommonSteps
 	{
 		sequence.add(new ShowStep(actor.group()));
 	}
-	
-	public void set(Style style)
-	{
-		sequence.add(new SetStyleStep(style));
-	}
 
-	
 	public void stop()
 	{
 		sequence.add(new StopStep());
 	}
-
-	public void saveStyles()
-	{
-		sequence.unmarked(new SaveStylesStep());
-	}
-
-	public void restoreStyles()
-	{
-		sequence.unmarked(new RestoreStylesStep());
-	}
-
 
 }

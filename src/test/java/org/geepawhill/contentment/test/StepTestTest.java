@@ -1,6 +1,9 @@
 package org.geepawhill.contentment.test;
 
-import org.geepawhill.contentment.style.ShapePen;
+import org.geepawhill.contentment.actor.Stroke;
+import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.style.Frames;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -17,14 +20,14 @@ public class StepTestTest extends SequenceTester
 	{
 		playOnly = new TestLambdaStep(null,null,(context,onFinished) -> 
 		{
-			context.styles.set(ShapePen.first());
+			context.actors.add(new Stroke(new PointPair(0d,0d,100d,100d),new Format(Frames.unspecified())));
 			onFinished.run();
 		});
 		
 		
 		afterOnly = new TestLambdaStep(null,(context,onFinished) -> 
 		{
-			context.styles.set(ShapePen.first());
+			context.actors.add(new Stroke(new PointPair(0d,0d,100d,100d),new Format(Frames.unspecified())));
 		},
 		null);
 
