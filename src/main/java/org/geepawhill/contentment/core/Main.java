@@ -99,7 +99,7 @@ public class Main extends Application
 		common.show(tale);
 		common.set(blueLine);
 		common.set(Dash.solid());
-		common.set(org.geepawhill.contentment.style.Font.font("?", new Font("Buxton Sketch", 60d)));
+		common.set(org.geepawhill.contentment.style.Typeface.font("?", new Font("Buxton Sketch", 60d)));
 		agent.sketch(sequence, 1d);
 		common.stop();
 		common.hide(agent);
@@ -181,14 +181,14 @@ public class Main extends Application
 		common.clear();
 		common.show(tale);
 		common.set(redLine);
-		common.set(org.geepawhill.contentment.style.Font.font("?", new Font("Century Gothic", 24d)));
+		common.set(org.geepawhill.contentment.style.Typeface.font("?", new Font("Century Gothic", 24d)));
 		common.set(Dash.dash("Dash", 11d));
 		common.set(ShapePen.thinFirst());
 		target.sketch(sequence,1d);
 
 		common.set(blueLine);
 		common.set(Dash.solid());
-		common.set(org.geepawhill.contentment.style.Font.font("?", new Font("Buxton Sketch", 60d)));
+		common.set(org.geepawhill.contentment.style.Typeface.font("?", new Font("Buxton Sketch", 60d)));
 		agent.sketch(sequence, 1d);
 		common.stop();
 
@@ -289,7 +289,7 @@ public class Main extends Application
 		common.stop();
 		poke.sketch(sequence,1000d);
 		common.saveStyles();
-		common.set(org.geepawhill.contentment.style.Font.font("?", new Font("Buxton Sketch", 40d)));
+		common.set(org.geepawhill.contentment.style.Typeface.font("?", new Font("Buxton Sketch", 40d)));
 		common.set(greenLine);
 		common.set(Dash.dash("Dash", 10d));
 		practice.sketch(sequence, 1000d);
@@ -298,7 +298,7 @@ public class Main extends Application
 		common.restoreStyles();
 		common.stop();
 		tale.setText(sequence, "Complication: There are always multiple agents.");
-		common.set(org.geepawhill.contentment.style.Font.font("?", new Font("Buxton Sketch", 30d)));
+		common.set(org.geepawhill.contentment.style.Typeface.font("?", new Font("Buxton Sketch", 30d)));
 		common.set(redLine);
 		a1.sketch(sequence, 1d);
 		a2.sketch(sequence, 1d);

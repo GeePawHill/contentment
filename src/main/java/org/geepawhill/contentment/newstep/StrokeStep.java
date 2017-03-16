@@ -78,8 +78,8 @@ public class StrokeStep implements Step
 		}
 		else
 			line.setVisible(true);
-		context.apply(ShapePen.KIND, line);
-		context.apply(Dash.KIND, line);
+		context.apply(ShapePen.KEY, line);
+		context.apply(Dash.KEY, line);
 		line.setStartX(points.from.x);
 		line.setStartY(points.from.y);
 		line.setEndX(points.partialX(fraction));

@@ -15,7 +15,7 @@ public class ContextTest
 		Context context = new Context(new Group());
 		ContextOutline outline = new ContextOutline(context.outline());
 		outline.baseKey("Styles");
-		outline.assertBase(ShapePen.KIND);
+		outline.assertBase(ShapePen.KEY);
 	}
 
 }

@@ -8,7 +8,7 @@ import javafx.scene.shape.Shape;
 public class Dash
 {
 
-	public static final String KIND = "Dash";
+	public static final String KEY = "Dash";
 
 	public static Style solid()
 	{
@@ -19,7 +19,7 @@ public class Dash
 				shape.getStrokeDashArray().clear();;
 			} 
 		};
-		return new Style(KIND,"SOLID", applier, "SOLID");		
+		return new Style(KEY,"SOLID", applier, "SOLID");		
 	}
 
 	public static Style dash(String nickname, Double... dash)
@@ -40,7 +40,7 @@ public class Dash
 			value+=dashItem;
 			isFirst=false;
 		}
-		return new Style(KIND,nickname, applier, value);		
+		return new Style(KEY,nickname, applier, value);		
 	}
 
 }

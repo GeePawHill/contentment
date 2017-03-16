@@ -80,7 +80,7 @@ public class OvalStep implements Step
 		}
 		else
 			ellipse.setVisible(true);
-		context.apply(ShapePen.KIND, ellipse);
+		context.apply(ShapePen.KEY, ellipse);
 		ellipse.setCenterX(points.centerX());
 		ellipse.setCenterY(points.centerY());
 		ellipse.setRadiusX((points.width()/2d)+HMARGIN * fraction);

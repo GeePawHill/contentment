@@ -33,14 +33,14 @@ public class SequenceRunnerTest extends ApplicationTest
 	public void playSequence()
 	{
 		ContextOutline play = runner.waitForPlay(sequence);
-		play.assertKey("Styles."+ShapePen.KIND,ShapePen.second().toString());
+		play.assertKey("Styles."+ShapePen.KEY,ShapePen.second().toString());
 	}
 	
 	@Test
 	public void afterSequence()
 	{
 		ContextOutline after = runner.waitForAfter(sequence);
-		after.assertKey("Styles."+ShapePen.KIND,ShapePen.second().toString());
+		after.assertKey("Styles."+ShapePen.KEY,ShapePen.second().toString());
 	}
 	
 	@Test
@@ -48,6 +48,6 @@ public class SequenceRunnerTest extends ApplicationTest
 	{
 		runner.waitForPlay(sequence);
 		ContextOutline before = runner.waitForBefore(sequence);
-		before.assertKey("Styles."+ShapePen.KIND,ShapePen.first().toString());
+		before.assertKey("Styles."+ShapePen.KEY,ShapePen.first().toString());
 	}
 }

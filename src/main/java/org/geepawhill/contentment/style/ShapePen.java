@@ -9,7 +9,7 @@ import javafx.scene.shape.Shape;
 
 public class ShapePen
 {
-	static public String KIND = "ShapePen";
+	static public String KEY = "ShapePen";
 	
 	static public Style pen(String nickname, Paint line,Paint fill, double width, double opacity)
 	{
@@ -24,7 +24,7 @@ public class ShapePen
 			} 
 		};
 		String value = "Line: "+line.toString()+" Fill: "+fill.toString()+" Width: "+width+" Opacity: "+opacity;
-		return new Style(KIND, nickname, applier, value);
+		return new Style(KEY, nickname, applier, value);
 	}
 
 	public static Style first()

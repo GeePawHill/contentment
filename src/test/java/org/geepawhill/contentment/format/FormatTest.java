@@ -7,8 +7,6 @@ import org.geepawhill.contentment.style.Opacity;
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.scene.paint.Color;
-
 public class FormatTest
 {
 	
