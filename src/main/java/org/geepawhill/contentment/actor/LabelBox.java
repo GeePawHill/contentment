@@ -51,7 +51,7 @@ public class LabelBox implements Actor
 		westStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 		southStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 		eastStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		this.group = JfxUtility.makeGroup(this, text, northStep.line(), westStep.line(), southStep.line(), eastStep.line());
+		this.group = JfxUtility.makeGroup(this, text, northStep.shape(), westStep.shape(), southStep.shape(), eastStep.shape());
 	}
 
 	public String nickname()

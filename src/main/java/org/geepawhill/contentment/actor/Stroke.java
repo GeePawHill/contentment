@@ -25,7 +25,7 @@ public class Stroke implements Actor
 	{
 		this.nickname = Names.make(getClass());
 		this.step = new StrokeStep(new RelativeTiming(1d), points, format);
-		this.group = new Group(step.line());
+		this.group = new Group(step.shape());
 	}
 
 	public Sequence sketch(Sequence sequence, FixedTiming timing)
@@ -48,13 +48,13 @@ public class Stroke implements Actor
 	{
 		ActorOutliner outliner = new ActorOutliner(this, output);
 		outliner.start();
-		outliner.startNode(step.line());
-		if (outliner.visibility(step.line()))
+		outliner.startNode(step.shape());
+		if (outliner.visibility(step.shape()))
 		{
-			outliner.bounds(step.line());
-			outliner.opacity(step.line());
-			outliner.strokeWidth(step.line());
-			outliner.lineColor(step.line());
+			outliner.bounds(step.shape());
+			outliner.opacity(step.shape());
+			outliner.strokeWidth(step.shape());
+			outliner.lineColor(step.shape());
 		}
 		outliner.endNode();
 		outliner.end();

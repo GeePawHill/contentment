@@ -4,15 +4,16 @@ import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.model.OnFinished;
-import org.geepawhill.contentment.model.Step;
+import org.geepawhill.contentment.model.ShapeStep;
 import org.geepawhill.contentment.model.Timing;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 
 import javafx.animation.Transition;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape;
 
-public class StrokeStep implements Step
+public class StrokeStep implements ShapeStep
 {
 
 	private Timing timing;
@@ -34,7 +35,8 @@ public class StrokeStep implements Step
 		this.points = points; 
 	}
 	
-	public Line line()
+	@Override
+	public Shape shape()
 	{
 		return line;
 	}

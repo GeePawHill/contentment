@@ -22,7 +22,6 @@ import org.geepawhill.contentment.utility.Names;
 
 import javafx.animation.TranslateTransition;
 import javafx.scene.Group;
-import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
 public class Arrow implements Actor
@@ -43,31 +42,6 @@ public class Arrow implements Actor
 	private boolean pointAtTo;
 
 	private ArrowComputer computer;
-	public Line getMain()
-	{
-		return mainStep.line();
-	}
-
-	public Line getFromTop()
-	{
-		return fromTopStep.line();
-	}
-
-	public Line getFromBottom()
-	{
-		return fromBottomStep.line();
-	}
-
-	public Line getToTop()
-	{
-		return toTopStep.line();
-	}
-
-	public Line getToBottom()
-	{
-		return toBottomStep.line();
-	}
-
 	private ArrowPoints points;
 
 	private ArrayList<Step> steps;
@@ -96,16 +70,16 @@ public class Arrow implements Actor
 			toBottomStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),format);
 			steps.add(toBottomStep);
 		}
-		group.getChildren().add(getMain());
+		group.getChildren().add(mainStep.shape());
 		if(pointAtFrom)
 		{
-			group.getChildren().add(getFromTop());
-			group.getChildren().add(getFromBottom());
+			group.getChildren().add(fromTopStep.shape());
+			group.getChildren().add(fromBottomStep.shape());
 		}
 		if(pointAtTo)
 		{
-			group.getChildren().add(getToTop());
-			group.getChildren().add(getToBottom());
+			group.getChildren().add(toTopStep.shape());
+			group.getChildren().add(toBottomStep.shape());
 		}
 	}
 
