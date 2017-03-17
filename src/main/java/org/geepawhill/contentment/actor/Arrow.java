@@ -43,38 +43,69 @@ public class Arrow implements Actor
 	private boolean pointAtTo;
 
 	private ArrowComputer computer;
-	private Line main;
-	private Line fromTop;
-	private Line fromBottom;
-	private Line toTop;
-	private Line toBottom;
+	public Line getMain()
+	{
+		return mainStep.line();
+	}
+
+	public Line getFromTop()
+	{
+		return fromTopStep.line();
+	}
+
+	public Line getFromBottom()
+	{
+		return fromBottomStep.line();
+	}
+
+	public Line getToTop()
+	{
+		return toTopStep.line();
+	}
+
+	public Line getToBottom()
+	{
+		return toBottomStep.line();
+	}
+
 	private ArrowPoints points;
 
-	private Format format;
+	private ArrayList<Step> steps;
 
 	public Arrow(Actor from, boolean pointAtFrom, Actor to, boolean pointAtTo,Format format)
 	{
-		this.format = format;
 		this.nickname = Names.make(getClass());
 		this.pointAtFrom = pointAtFrom;
 		this.pointAtTo = pointAtTo;
 		this.computer = new NodeArrowComputer(from.group(),to.group());
 		this.group = new Group();
-		this.main = new Line();
-		group.getChildren().add(main);
+		steps = new ArrayList<>();
+		mainStep = new StrokeStep(new RelativeTiming(.8d),new PointPair(0d,0d,0d,0d),format);
+		steps.add(mainStep);
 		if(pointAtFrom)
 		{
-			this.fromTop = new Line();
-			this.fromBottom = new Line();
-			group.getChildren().add(fromTop);
-			group.getChildren().add(fromBottom);
+			fromTopStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),format);
+			steps.add(fromTopStep);
+			fromBottomStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),format);
+			steps.add(fromBottomStep);
 		}
 		if(pointAtTo)
 		{
-			this.toTop = new Line();
-			this.toBottom = new Line();
-			group.getChildren().add(toTop);
-			group.getChildren().add(toBottom);
+			toTopStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),format);
+			steps.add(toTopStep);
+			toBottomStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),format);
+			steps.add(toBottomStep);
+		}
+		group.getChildren().add(getMain());
+		if(pointAtFrom)
+		{
+			group.getChildren().add(getFromTop());
+			group.getChildren().add(getFromBottom());
+		}
+		if(pointAtTo)
+		{
+			group.getChildren().add(getToTop());
+			group.getChildren().add(getToBottom());
 		}
 	}
 
@@ -92,28 +123,7 @@ public class Arrow implements Actor
 	{
 		sequence.add(new Entrance(this));
 		sequence.add(new OneWayStep((context) -> boundsChanged()));
-		ArrayList<Step> steps = new ArrayList<>();
-		mainStep = new StrokeStep(new RelativeTiming(.8d),new PointPair(0d,0d,0d,0d),main,format);
-		steps.add(mainStep);
-		sequence.add(mainStep);
-		if(pointAtFrom)
-		{
-			fromTopStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),fromTop,format);
-			steps.add(fromTopStep);
-			sequence.add(fromTopStep);
-			fromBottomStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),fromBottom,format);
-			steps.add(fromBottomStep);
-			sequence.add(fromBottomStep);
-		}
-		if(pointAtTo)
-		{
-			toTopStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),toTop,format);
-			steps.add(toTopStep);
-			sequence.add(toTopStep);
-			toBottomStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),toBottom,format);
-			steps.add(toBottomStep);
-			sequence.add(toBottomStep);
-		}
+		for(Step step : steps) sequence.add(step);
 		new TimingBuilder().build(ms,steps.toArray(new Step[0]));
 	}
 	

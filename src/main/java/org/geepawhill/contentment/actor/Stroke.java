@@ -9,33 +9,31 @@ import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.timing.FixedTiming;
+import org.geepawhill.contentment.timing.RelativeTiming;
+import org.geepawhill.contentment.timing.TimingBuilder;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
-import javafx.scene.shape.Line;
 
 public class Stroke implements Actor
 {
 	private final String nickname;
-	public final Line line;
-	private PointPair points;
+	public final StrokeStep step;
 	private final Group group;
-	private Format format;
 
 	public Stroke(PointPair points, Format format)
 	{
-		this.format = format;
 		this.nickname = Names.make(getClass());
-		this.points = points;
-		this.line = new Line();
-		this.group = new Group(line);
+		this.step = new StrokeStep(new RelativeTiming(1d), points, format);
+		this.group = new Group(step.line());
 	}
 
 	public Sequence sketch(Sequence sequence, FixedTiming timing)
 	{
 		if (sequence == null) sequence = new Sequence();
 		sequence.add(new Entrance(this));
-		sequence.add(new StrokeStep(timing, points, line, format));
+		sequence.add(step);
+		new TimingBuilder().build(timing.getAbsolute(), step);
 		return sequence;
 	}
 
@@ -50,13 +48,13 @@ public class Stroke implements Actor
 	{
 		ActorOutliner outliner = new ActorOutliner(this, output);
 		outliner.start();
-		outliner.startNode(line);
-		if (outliner.visibility(line))
+		outliner.startNode(step.line());
+		if (outliner.visibility(step.line()))
 		{
-			outliner.bounds(line);
-			outliner.opacity(line);
-			outliner.strokeWidth(line);
-			outliner.lineColor(line);
+			outliner.bounds(step.line());
+			outliner.opacity(step.line());
+			outliner.strokeWidth(step.line());
+			outliner.lineColor(step.line());
 		}
 		outliner.endNode();
 		outliner.end();

@@ -20,7 +20,6 @@ import org.geepawhill.contentment.utility.Names;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
-import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -28,38 +27,33 @@ public class LabelBox implements Actor
 {
 	final String nickname;
 	final String source;
-	
+
 	private final Group group;
 	private Text text;
-	private Line north;
-	private Line south;
-	private Line east;
-	private Line west;
-	
 
 	private Point center;
-	
+
 	private StrokeStep northStep;
 	private StrokeStep southStep;
 	private StrokeStep westStep;
 	private StrokeStep eastStep;
 	private Format format;
-	
+
 	public LabelBox(String source, Point center, Format format)
 	{
-		this.format = format;
 		this.nickname = Names.make(getClass());
 		this.center = center;
 		this.source = source;
+		this.format = format;
 		text = new Text();
 		text.setTextOrigin(VPos.CENTER);
-		north = new Line();
-		south = new Line();
-		east = new Line();
-		west = new Line();
-		this.group = JfxUtility.makeGroup(this,text,north,west,south,east);
+		northStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		westStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		southStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		eastStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		this.group = JfxUtility.makeGroup(this, text, northStep.line(), westStep.line(), southStep.line(), eastStep.line());
 	}
-	
+
 	public String nickname()
 	{
 		return nickname;
@@ -73,20 +67,16 @@ public class LabelBox implements Actor
 	public void sketch(Sequence sequence, double ms)
 	{
 		LettersStep lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, text, format);
-		northStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),north, format);
-		westStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),west, format);
-		southStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),south,format);
-		eastStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),east, format);
-		new TimingBuilder().build(ms, lettersStep,northStep,westStep,southStep,eastStep);
+		new TimingBuilder().build(ms, lettersStep, northStep, westStep, southStep, eastStep);
 		sequence.add(new Entrance(this));
 		sequence.add(lettersStep);
-		sequence.add(new BoundsStep(text,this::boundsChanged));
+		sequence.add(new BoundsStep(text, this::boundsChanged));
 		sequence.add(northStep);
 		sequence.add(eastStep);
 		sequence.add(southStep);
 		sequence.add(westStep);
 	}
-	
+
 	private void boundsChanged(PointPair pair)
 	{
 		PointPair grow = pair.grow(4d);
@@ -95,13 +85,13 @@ public class LabelBox implements Actor
 		southStep.setPoints(grow.southLine());
 		eastStep.setPoints(grow.eastLine());
 	}
-	
-	public Step move(double newX,double newY)
+
+	public Step move(double newX, double newY)
 	{
 		TranslateTransition transition = new TranslateTransition();
 		transition.setNode(group);
-		transition.setToX(newX-center.x);
-		transition.setToY(newY-center.y);
+		transition.setToX(newX - center.x);
+		transition.setToY(newY - center.y);
 		transition.setDuration(Duration.millis(1000d));
 		return new TransitionStep(transition);
 	}

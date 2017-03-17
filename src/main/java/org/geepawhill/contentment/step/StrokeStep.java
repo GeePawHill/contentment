@@ -15,23 +15,28 @@ import javafx.scene.shape.Line;
 public class StrokeStep implements Step
 {
 
-	private final Timing timing;
+	private Timing timing;
 	private PointPair points;
 	private final Line line;
 	private Transition transition;
 	private Format format;
 	
-	public StrokeStep(Timing timing, PointPair points, Line line, Format format)
+	public StrokeStep(Timing timing, PointPair points, Format format)
 	{
 		this.timing = timing;
 		this.points = points;
-		this.line = line;
+		this.line = new Line();
 		this.format = format;
 	}
 	
 	public void setPoints(PointPair points)
 	{
 		this.points = points; 
+	}
+	
+	public Line line()
+	{
+		return line;
 	}
 
 	@Override
