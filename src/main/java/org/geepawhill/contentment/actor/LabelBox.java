@@ -10,6 +10,7 @@ import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.BoundsStep;
 import org.geepawhill.contentment.step.Entrance;
+import org.geepawhill.contentment.step.HandStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.step.TransitionStep;
@@ -33,10 +34,10 @@ public class LabelBox implements Actor
 
 	private Point center;
 
-	private StrokeStep northStep;
-	private StrokeStep southStep;
-	private StrokeStep westStep;
-	private StrokeStep eastStep;
+	private HandStep northStep;
+	private HandStep southStep;
+	private HandStep westStep;
+	private HandStep eastStep;
 	private Format format;
 
 	public LabelBox(String source, Point center, Format format)
@@ -47,10 +48,10 @@ public class LabelBox implements Actor
 		this.format = format;
 		text = new Text();
 		text.setTextOrigin(VPos.CENTER);
-		northStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		westStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		southStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		eastStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		northStep = new HandStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		westStep = new HandStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		southStep = new HandStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		eastStep = new HandStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 		this.group = JfxUtility.makeGroup(this, text, northStep.shape(), westStep.shape(), southStep.shape(), eastStep.shape());
 	}
 

@@ -13,6 +13,7 @@ import org.geepawhill.contentment.model.Actor;
 import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.Entrance;
+import org.geepawhill.contentment.step.HandStep;
 import org.geepawhill.contentment.step.OneWayStep;
 import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.step.TransitionStep;
@@ -32,7 +33,7 @@ public class Arrow implements Actor
 
 	private Point center;
 
-	private StrokeStep mainStep;
+	private HandStep mainStep;
 	private StrokeStep fromTopStep;
 	private StrokeStep fromBottomStep;
 	private StrokeStep toTopStep;
@@ -54,7 +55,7 @@ public class Arrow implements Actor
 		this.computer = new NodeArrowComputer(from.group(),to.group());
 		this.group = new Group();
 		steps = new ArrayList<>();
-		mainStep = new StrokeStep(new RelativeTiming(.8d),new PointPair(0d,0d,0d,0d),format);
+		mainStep = new HandStep(new RelativeTiming(.9d),new PointPair(0d,0d,0d,0d),format);
 		steps.add(mainStep);
 		if(pointAtFrom)
 		{
@@ -70,7 +71,7 @@ public class Arrow implements Actor
 			toBottomStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),format);
 			steps.add(toBottomStep);
 		}
-		group.getChildren().add(mainStep.shape());
+		group.getChildren().add(mainStep.node());
 		if(pointAtFrom)
 		{
 			group.getChildren().add(fromTopStep.shape());

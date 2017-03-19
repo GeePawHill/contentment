@@ -1,5 +1,7 @@
 package org.geepawhill.contentment.geometry;
 
+import java.util.Random;
+
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
@@ -175,5 +177,30 @@ public class PointPair
 	{
 		return new PointPair(from.x,from.y,from.x,to.y);
 	}
+
+	public PointPair canonical()
+	{
+		double newFromX = from.x>to.x ? to.x : from.x;
+		double newToX = from.x>to.x ? from.x : to.x;
+		double newFromY = from.y>to.y ? to.y : from.y;
+		double newToY = from.y>to.y ? from.y : to.y;
+		return new PointPair(newFromX,newFromY,newToX,newToY);
+	}
+	
+	public String toString()
+	{
+		return from.toString()+" "+to.toString();
+	}
+
+	public Point partial(double fraction)
+	{
+		return new Point(partialX(fraction),partialY(fraction));
+	}
+
+	public double distance()
+	{
+		return Math.sqrt(width()*width()+height()*height());
+	}
+
 
 }
