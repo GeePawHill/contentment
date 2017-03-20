@@ -28,16 +28,17 @@ public class BezierInterpolator
 
 	private Path path;
 	private ArrayList<Segment> segments;
+	private double fractionPerStep;
 
 	public BezierInterpolator(Path path)
 	{
 		this.path = path;
 	}
 
-	public void clear(PointPair points)
+	public void clear(PointPair points, Point start)
 	{
 		path.getElements().clear();
-		path.getElements().add(new MoveTo(points.from.x,points.from.y));
+		path.getElements().add(new MoveTo(start.x,start.y));
 		segments = new ArrayList<>();
 	}
 	
@@ -89,7 +90,7 @@ public class BezierInterpolator
 	    secondFDY = 6 * ay * (h * h * h) + 2 * by * (h * h);
 	
 	    thirdFDX = 6 * ax * (h * h * h);
-	    thirdFDY = 6 * ay * (h * h * h);    
+	    thirdFDY = 6 * ay * (h * h * h);
 	
 	
 	    for (i = 0; i < numSteps; i++) {
@@ -104,16 +105,19 @@ public class BezierInterpolator
 	        secondFDY += thirdFDY;
 	        segments.add(new Segment(jiggler.jiggle(new Point(pointX,pointY)),segments.size()*h));
 	    }
+	    fractionPerStep = 1d / (double)segments.size();
 	}
 
 	public void interpolate(double fraction)
 	{
-		for(Segment segment : segments)
+		for(int i=0;i<segments.size();i++)
 		{
+			Segment segment = segments.get(i);
 			if(segment.finished) continue;
+			double segmentFraction = ((double)i)*fractionPerStep;
 			path.getElements().add(new LineTo(segment.move.x,segment.move.y));
 			segment.finished=true;
-			if(segment.fraction>fraction) break;
+			if(segmentFraction>fraction) break;
 		}
 	}
 

@@ -1,9 +1,8 @@
 package org.geepawhill.contentment.step;
 
-import java.util.Random;
-
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.geometry.Jiggler;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.BezierInterpolator;
@@ -18,23 +17,23 @@ import javafx.scene.Node;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Shape;
 
-public class HandStep implements ShapeStep
+public class HandOvalStep implements ShapeStep
 {
 	private Timing timing;
 	private PointPair points;
 	private final Path path;
 	private Transition transition;
 	private Format format;
-	private Random random;
 	private BezierInterpolator interpolator;
+	private Jiggler controlJiggler;
+	private Jiggler northJiggler;
 
-	public HandStep(Timing timing, PointPair points, Format format)
+	public HandOvalStep(Timing timing, PointPair points, Format format)
 	{
 		this.timing = timing;
 		this.points = points;
 		this.path = new Path();
 		this.format = format;
-		this.random = new Random();
 		this.interpolator = new BezierInterpolator(path);
 	}
 
@@ -43,9 +42,13 @@ public class HandStep implements ShapeStep
 		this.points = points;
 		format.apply(Frames.KEY, path);
 		format.apply(Dash.KEY, path);
-		interpolator.clear(points, points.northwest());
-		int count = (int) (points.distance() * .2d);
-		interpolator.addCurve(chooseControlPoints(), count);
+		interpolator.clear(points, points.north());
+		northJiggler = new Jiggler(.5d, 6d);
+		controlJiggler = new Jiggler(.2d, 25d);
+		int count = (int) (points.distance() * .5d);
+		Jiggler jiggler = new Jiggler();//(.1d, 3d);
+		interpolator.addCurve(eastHalfPoints(), count, jiggler);
+		interpolator.addCurve(westHalfPoints(), count, jiggler);
 	}
 
 	@Override
@@ -98,12 +101,26 @@ public class HandStep implements ShapeStep
 		interpolator.interpolate(fraction);
 	}
 
-	public Point[] chooseControlPoints()
+	public Point[] eastHalfPoints()
 	{
 		Point[] result = new Point[]
 		{
-				points.from, points.partial(random.nextDouble()).jiggle(random, 1d, 10),
-				points.partial(random.nextDouble()).jiggle(random, 1d, 10), points.to
+				points.north(), 
+				controlJiggler.jiggle(points.northeast()),
+				controlJiggler.jiggle(points.southeast()), 
+				points.south(),
+		};
+		return result;
+	}
+
+	public Point[] westHalfPoints()
+	{
+		Point[] result = new Point[]
+		{
+				points.south(), 
+				controlJiggler.jiggle(points.southwest()),
+				controlJiggler.jiggle(points.northwest()), 
+				northJiggler.jiggle(points.north()),
 		};
 		return result;
 	}

@@ -76,6 +76,9 @@ public class Main extends Application
 
 	private void makeScripts()
 	{
+//		OvalText practice = new OvalText("Practice", new Point(800d, .75 * 900d), practiceFormat());
+//		practice.sketch(sequence, 1000d);
+
 		addBaseComplications(sequence);
 		interactiveStabilization(sequence);
 		agentAndPokes();

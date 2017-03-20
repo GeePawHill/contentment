@@ -72,7 +72,7 @@ public class PointPair
 
 	public Point northeast()
 	{
-		return new Point(from.x, to.y);
+		return new Point(to.x, from.y);
 	}
 
 	public Point northwest()
@@ -138,7 +138,12 @@ public class PointPair
 
 	public PointPair grow(double delta)
 	{
-		return new PointPair(from.x-delta,from.y-delta,to.x+delta,to.y+delta);
+		return grow(delta,delta);
+	}
+	
+	public PointPair grow(double deltaX,double deltaY)
+	{
+		return new PointPair(from.x-deltaX,from.y-deltaY,to.x+deltaX,to.y+deltaY);
 	}
 	
 	public PointPair change(double deltaLeft,double deltaTop,double deltaRight,double deltaBottom)
