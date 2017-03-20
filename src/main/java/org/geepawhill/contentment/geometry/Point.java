@@ -54,7 +54,7 @@ public class Point
 		return to.y - y;
 	}	
 	
-	public Point jiggle(Random random, double probability, int variance)
+	public Point jiggle(Random random, double probability, double variance)
 	{
 		double newX = x;
 		double newY = y;

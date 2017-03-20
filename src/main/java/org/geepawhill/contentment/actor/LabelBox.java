@@ -12,7 +12,6 @@ import org.geepawhill.contentment.step.BoundsStep;
 import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.step.HandStep;
 import org.geepawhill.contentment.step.LettersStep;
-import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.TimingBuilder;

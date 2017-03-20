@@ -1,7 +1,5 @@
 package org.geepawhill.contentment.geometry;
 
-import java.util.Random;
-
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
