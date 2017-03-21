@@ -44,7 +44,7 @@ public class HandOvalStep implements ShapeStep
 		format.apply(Dash.KEY, path);
 		interpolator.clear(points, points.north());
 		northJiggler = new Jiggler(.5d, 6d);
-		controlJiggler = new Jiggler(.2d, 25d);
+		controlJiggler = new Jiggler(.4d, 30d);
 		int count = (int) (points.distance() * .5d);
 		Jiggler jiggler = new Jiggler();//(.1d, 3d);
 		interpolator.addCurve(eastHalfPoints(), count, jiggler);
