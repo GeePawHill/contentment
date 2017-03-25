@@ -10,6 +10,8 @@ import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.step.FadeStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.TransitionStep;
+import org.geepawhill.contentment.style.TextColors;
+import org.geepawhill.contentment.style.TextFont;
 import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.utility.Names;
 
@@ -36,7 +38,7 @@ public class Letters implements Actor
 		this.text = new Text();
 		this.group = new Group(text);
 	}
-
+	
 	public Sequence sketch(Sequence sequence, FixedTiming timing)
 	{
 		if (sequence == null) sequence = new Sequence();

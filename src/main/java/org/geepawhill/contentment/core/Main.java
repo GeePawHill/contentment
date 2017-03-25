@@ -1,5 +1,6 @@
 package org.geepawhill.contentment.core;
 
+import org.controlsfx.control.HiddenSidesPane;
 import org.geepawhill.contentment.actor.Arrow;
 import org.geepawhill.contentment.actor.LabelBox;
 import org.geepawhill.contentment.actor.Letters;
@@ -20,11 +21,14 @@ import org.geepawhill.contentment.style.TextFont;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
+import javafx.geometry.Side;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -36,10 +40,10 @@ import javafx.stage.Stage;
 
 public class Main extends Application
 {
-	private BorderPane root;
+	private HiddenSidesPane pane;
 	private Player player;
 	private Group guides;
-	private Group scaledCanvas;
+	private Group page;
 	private Sequence sequence;
 	private CommonSteps common;
 
@@ -48,23 +52,25 @@ public class Main extends Application
 	{
 		try
 		{
-			root = prepareStage(stage);
+			pane = prepareStage(stage);
 			makeTools();
 
 			Pane canvas = new Pane();
 			BackgroundFill fill = new BackgroundFill(Color.BLACK, null, null);
 			canvas.setBackground(new Background(fill));
-			root.setCenter(canvas);
-			scaledCanvas = new Group();
-			canvas.getChildren().add(scaledCanvas);
-			forceLetterBox(stage, stage.getScene(), canvas, scaledCanvas);
+			pane.setContent(canvas);
+			page = new Group();
+			canvas.setOnMouseClicked((event) -> mouseClicked(event));
+			canvas.getChildren().add(page);
+			forceLetterBox(stage, stage.getScene(), canvas, page);
 			makeGuides();
+			toggleLines();
 
 			sequence = new Sequence();
 			common = new CommonSteps(sequence);
 			makeScripts();
 
-			player = new Player(scaledCanvas);
+			player = new Player(page);
 			player.reset(sequence);
 		}
 		catch (Exception e)
@@ -74,14 +80,17 @@ public class Main extends Application
 		}
 	}
 
+	private void mouseClicked(MouseEvent event)
+	{
+		player.playOne();
+	}
+
 	private void makeScripts()
 	{
-//		OvalText practice = new OvalText("Practice", new Point(800d, .75 * 900d), practiceFormat());
-//		practice.sketch(sequence, 1000d);
-
 		addBaseComplications(sequence);
 		interactiveStabilization(sequence);
 		agentAndPokes();
+		new GeekNeeqOne(sequence).add();
 	}
 
 	private void agentAndPokes()
@@ -388,9 +397,11 @@ public class Main extends Application
 	{
 		guides = new Group();
 		Line diagonalOne = new Line(0d, 0d, 1600d, 900d);
+		diagonalOne.setFill(Color.WHITE);
 		diagonalOne.getStrokeDashArray().clear();
 		diagonalOne.getStrokeDashArray().add(8d);
 		Line diagonalTwo = new Line(0d, 900d, 1600d, 0d);
+		diagonalTwo.setFill(Color.WHITE);
 		diagonalTwo.getStrokeDashArray().clear();
 		diagonalTwo.getStrokeDashArray().add(8d);
 		guides.getChildren().addAll(diagonalOne, diagonalTwo);
@@ -418,6 +429,10 @@ public class Main extends Application
 	{
 		ToolBar tools = new ToolBar();
 		tools.setOrientation(Orientation.VERTICAL);
+		
+		Button pin = new Button("Pin");
+		pin.setOnAction(event -> pinToolBar());
+		tools.getItems().add(pin);
 
 		Button test = new Button("**");
 		test.setOnAction(event -> makeScripts());
@@ -459,22 +474,30 @@ public class Main extends Application
 		guideLines.setOnAction(event -> toggleLines());
 		tools.getItems().add(guideLines);
 
-		root.setRight(tools);
+		pane.setRight(tools);
+		pane.setPinnedSide(Side.RIGHT);
+	}
+
+	private void pinToolBar()
+	{
+		Side side = pane.getPinnedSide();
+		pane.setPinnedSide(side==Side.RIGHT ? null : Side.RIGHT);
 	}
 
 	public void toggleLines()
 	{
-		if (scaledCanvas.getChildren().contains(guides))
+		if (page.getChildren().contains(guides))
 		{
-			scaledCanvas.getChildren().remove(guides);
+			page.getChildren().remove(guides);
 		}
 		else
-			scaledCanvas.getChildren().add(guides);
+			page.getChildren().add(guides);
 	}
 
-	private BorderPane prepareStage(Stage stage)
+	private HiddenSidesPane prepareStage(Stage stage)
 	{
-		BorderPane root = new BorderPane();
+		HiddenSidesPane root = new HiddenSidesPane();
+//		BorderPane root = new BorderPane();
 		stage.setScene(new Scene(root));
 		stage.setMaximized(true);
 		stage.show();

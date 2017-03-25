@@ -29,6 +29,11 @@
 			<artifactId>testfx-junit</artifactId>
 			<version>4.0.4-alpha</version>
 		</dependency>
+		<dependency>
+			<groupId>org.controlsfx</groupId>
+			<artifactId>controlsfx</artifactId>
+			<version>8.40.12</version>
+		</dependency>
 
 
 	</dependencies>

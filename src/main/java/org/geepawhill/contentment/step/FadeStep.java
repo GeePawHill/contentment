@@ -20,7 +20,6 @@ public class FadeStep implements Step
 	{
 		this.actor = actor;
 		this.ms = ms;
-
 	}
 
 	@Override

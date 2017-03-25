@@ -33,4 +33,10 @@ public class CommonSteps
 		sequence.add(new StopStep());
 	}
 
+	public void delay(double d)
+	{
+//		sequence.add(new TransitionStep(new ContextTransition(context, interpolator, ms)));
+		
+	}
+
 }
