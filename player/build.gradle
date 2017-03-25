@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+	compile group: 'org.controlsfx', name: 'controlsfx', version: '8.40.12'
+	testCompile group: 'org.testfx', name: 'testfx-core', version: '4.0.4-alpha'
+	testCompile group: 'org.testfx', name: 'testfx-junit', version: '4.0.4-alpha'
+    compile 'junit:junit:4.12'
+}

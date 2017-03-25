@@ -1,2 +1,2 @@
-# contentment
-This is the contentment content presentation system.
+# contentment_v0
+This is the latest gradle-ized contentment project.

@@ -43,7 +43,7 @@ public class PointPairTest
 	{
 		PointPair pair = new PointPair(50d,150d,200d,400d);
 		assertEquals(new Point(50d,150d),pair.northwest());
-		assertEquals(new Point(50d,400d),pair.northeast());
+		assertEquals(new Point(200d,150d),pair.northeast());
 		assertEquals(new Point(125d,150d),pair.north());
 		assertEquals(new Point(50d,400d),pair.southwest());
 		assertEquals(new Point(200d,400d),pair.southeast());
