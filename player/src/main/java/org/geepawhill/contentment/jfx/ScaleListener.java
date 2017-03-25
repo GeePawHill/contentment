@@ -8,30 +8,24 @@ import javafx.scene.transform.Scale;
 
 public class ScaleListener implements ChangeListener<Number>
 {
-	private final Pane canvas;
-	private Group scalingGroup;
+	private final Pane host;
+	private Group child;
 
-	public ScaleListener(Pane canvas, Group scalingGroup)
+	public ScaleListener(Pane host, Group child)
 	{
-		this.canvas = canvas;
-		this.scalingGroup = scalingGroup;
+		this.host = host;
+		this.child = child;
 	}
 
 	@Override
-	public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue)
+	public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
 	{
-		changed();
-	}
-
-	public void changed()
-	{
-		final double newWidth = canvas.getWidth();
-		final double newHeight = canvas.getHeight();
+		final double newWidth = host.getWidth();
+		final double newHeight = host.getHeight();
 		double scaleFactor = newWidth / newHeight > 16d / 9d ? newHeight / 900d : newWidth / 1600d;
 		Scale newScale = new Scale(scaleFactor, scaleFactor);
 		newScale.setPivotX(0);
 		newScale.setPivotY(0);
-		scalingGroup.getTransforms().setAll(newScale);
+		child.getTransforms().setAll(newScale);
 	}
-
 }
