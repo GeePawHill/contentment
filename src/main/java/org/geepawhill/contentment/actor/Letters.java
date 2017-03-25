@@ -10,8 +10,6 @@ import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.step.FadeStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.TransitionStep;
-import org.geepawhill.contentment.style.TextColors;
-import org.geepawhill.contentment.style.TextFont;
 import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.utility.Names;
 
