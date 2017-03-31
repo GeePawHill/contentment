@@ -35,8 +35,21 @@ public class CommonSteps
 
 	public void delay(double d)
 	{
-//		sequence.add(new TransitionStep(new ContextTransition(context, interpolator, ms)));
-		
+		sequence.add(new DelayStep(d));
+	}
+	
+	public void mark(double seconds)
+	{
+		mark(0d,seconds);
+	}
+	
+	public void mark(double minutes,double seconds)
+	{
+		double adjusted = (minutes*60d+seconds)*1000d;
+		double here = sequence.runTime();
+		double delay = adjusted-here;
+		if(delay<0) delay = 1d;
+		sequence.add(new DelayStep(delay));
 	}
 
 }

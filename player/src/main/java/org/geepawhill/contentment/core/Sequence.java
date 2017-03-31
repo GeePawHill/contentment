@@ -57,4 +57,14 @@ public class Sequence
 	{
 		return steps.get(index) instanceof StopStep;
 	}
+
+	public double runTime()
+	{
+		double result = 0d;
+		for(Step step : steps)
+		{
+			result += step.timing().getAbsolute();
+		}
+		return result;
+	}
 }
