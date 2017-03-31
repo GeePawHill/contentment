@@ -26,7 +26,7 @@ public class InteractiveStabilization
 	
 	public void add()
 	{
-		Title tale = new Title("Agents Are Susceptible To Pokes");
+		Title tale = new Title();
 		LabelBox agent = new LabelBox("Agent", new Point(800d, 450d), shared.agentFormat());
 		TargetBox target = new TargetBox("Target", new Point(1050d, 350d), shared.targetFormat());
 
@@ -40,6 +40,7 @@ public class InteractiveStabilization
 
 		common.clear();
 		common.show(tale);
+		tale.setText(sequence,"Agents Are Susceptible To Pokes");
 		target.sketch(sequence, 1d);
 
 		agent.sketch(sequence, 1d);

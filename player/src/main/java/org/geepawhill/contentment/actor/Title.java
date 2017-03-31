@@ -27,10 +27,10 @@ public class Title implements Actor
 //	private final double GREEN = (double) 0xbe / (double) 0xff;
 //	private final double BLUE = (double) 0x8b / (double) 0xff;
 	
-	public Title(String value)
+	public Title()
 	{
 		this.nickname = Names.make(getClass());
-		text = new Text(800d, FROM_Y + YINSET, value);
+		text = new Text(800d, FROM_Y + YINSET, "");
 		rectangle = new Rectangle(XMARGIN, FROM_Y, 1600d - XMARGIN - XINSET, 30d + 2 * YINSET);
 		this.group = JfxUtility.makeGroup(this,rectangle,text);
 		rectangle.setHeight(50d + 2 * YINSET);
@@ -39,6 +39,11 @@ public class Title implements Actor
 		rectangle.setStroke(Color.color(.9d, .9d, .9d));
 		rectangle.setArcHeight(40d);
 		rectangle.setArcWidth(40d);
+	}
+	
+	public void show(Sequence sequence,String value)
+	{
+		sequence.add(new SetTitleStep(text,value));
 	}
 	
 	public String nickname()

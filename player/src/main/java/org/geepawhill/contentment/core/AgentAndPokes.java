@@ -22,7 +22,7 @@ public class AgentAndPokes
 	
 	public void add()
 	{
-		Title tale = new Title("Agent: Anything With Susceptability & Unpredictability");
+		Title tale = new Title();
 		LabelBox agent = new LabelBox("Agent", new Point(800d, 520d), shared.agentFormat());
 
 		Letters teammate = new Letters("Teammate", new Point(800d, 520d), shared.agentFormat());
@@ -39,6 +39,7 @@ public class AgentAndPokes
 
 		common.clear();
 		common.show(tale);
+		tale.setText(sequence, "Agent: Anything With Susceptability & Unpredictability");
 		agent.sketch(sequence, 1d);
 		common.stop();
 		common.hide(agent);

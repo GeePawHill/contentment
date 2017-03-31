@@ -23,7 +23,7 @@ public class BaseComplications
 
 	public void add()
 	{
-		Title tale = new Title("A Simple Change Model");
+		Title tale = new Title();
 		LabelBox agent = new LabelBox("Agent", new Point(800d, 450d), shared.agentFormat());
 		OvalText practice = new OvalText("Practice", new Point(800d, .75 * 900d), shared.practiceFormat());
 		Arrow change = new Arrow(agent, false, practice, true, shared.changeFormat());
@@ -85,6 +85,7 @@ public class BaseComplications
 		Arrow pi6 = new Arrow(p5, false, p6, false, shared.relationFormat());
 
 		common.show(tale);
+		tale.setText(sequence, "A Simple Change Model");
 		agent.sketch(sequence, 1000d);
 		coach.sketch(sequence, 1000d);
 		common.stop();

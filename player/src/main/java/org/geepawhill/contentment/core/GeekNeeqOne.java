@@ -32,8 +32,9 @@ public class GeekNeeqOne
 		
 		common.clear();
 		
-		Title title = new Title("Geek-Neeq #1");
+		Title title = new Title();
 		common.show(title);
+		title.setText(sequence,"Geek-Neeq #1");
 		
 		Letters technique = new Letters("Technique",new Point(1200d,VQUARTER*3),main);
 		technique.fadeIn(sequence,1000d);
