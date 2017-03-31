@@ -4,8 +4,7 @@ import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.format.Style;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
-import org.geepawhill.contentment.style.TextColors;
-import org.geepawhill.contentment.style.TextFont;
+import org.geepawhill.contentment.style.TypeFace;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -15,8 +14,8 @@ public class SharedChangingThings
 
 	Format agentFormat()
 	{
-		Style agentColors = TextColors.color("Agent", Color.CHARTREUSE, .8d);
-		Style agentFont = TextFont.largeHand();
+		Style agentColors = TypeFace.color("Agent", Color.CHARTREUSE, .8d);
+		Style agentFont = TypeFace.largeHand();
 		Style agentFrame = Frames.frame("Agent", Color.CHARTREUSE, 5d, .8d);
 		Style agentDash = Dash.solid();
 		Format agentFormat = new Format("Agent", agentColors, agentFont, agentFrame, agentDash);
@@ -25,13 +24,15 @@ public class SharedChangingThings
 
 	Format targetFormat()
 	{
-		return new Format(Frames.frame("Target", Color.WHITE, 2d, .8d), TextFont.mediumSans(),
-				TextColors.color("Target", Color.WHITE, .8d), Dash.dash("dash", 5d));
+		return new Format(Frames.frame("Target", Color.WHITE, 2d, .8d), 
+				TypeFace.mediumSans(),
+				TypeFace.color("Target", Color.WHITE, .8d),
+				Dash.dash("dash", 5d));
 	}
 
 	Format coachFormat()
 	{
-		return new Format("Coach", agentFormat(), TextColors.color("Coach", Color.LIGHTSKYBLUE, .8d),
+		return new Format("Coach", agentFormat(), TypeFace.color("Coach", Color.LIGHTSKYBLUE, .8d),
 				Frames.frame("Coach", Color.LIGHTSKYBLUE, 5d, .8d));
 	}
 
@@ -47,8 +48,8 @@ public class SharedChangingThings
 
 	Format practiceFormat()
 	{
-		return new Format(Frames.frame("Practice", Color.TOMATO, 4d, .8d), TextColors.color("Practice", Color.TOMATO, .8d),
-				Dash.dash("dash", 4d), TextFont.largeHand());
+		return new Format(Frames.frame("Practice", Color.TOMATO, 4d, .8d), TypeFace.color("Practice", Color.TOMATO, .8d),
+				Dash.dash("dash", 4d), TypeFace.largeHand());
 	}
 
 	Format relationFormat()

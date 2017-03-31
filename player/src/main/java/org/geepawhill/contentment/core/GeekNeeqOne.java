@@ -1,12 +1,13 @@
 package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.actor.Letters;
+import org.geepawhill.contentment.actor.Placeholder;
 import org.geepawhill.contentment.actor.Title;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
+import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.CommonSteps;
-import org.geepawhill.contentment.style.TextColors;
-import org.geepawhill.contentment.style.TextFont;
+import org.geepawhill.contentment.style.TypeFace;
 
 import javafx.scene.paint.Color;
 
@@ -17,7 +18,7 @@ public class GeekNeeqOne
 	
 	private Sequence sequence;
 	
-	Format main = new Format( TextColors.color("main", Color.YELLOW, .8d), TextFont.largeHand());
+	private Format main = new Format( TypeFace.color("main", Color.YELLOW, .8d), TypeFace.largeHand());
 
 	private CommonSteps common;
 
@@ -35,6 +36,9 @@ public class GeekNeeqOne
 		Title title = new Title();
 		common.show(title);
 		title.setText(sequence,"Geek-Neeq #1");
+		
+		Placeholder visible = new Placeholder("Visible Man",new PointPair(200d,200d,500d,500d));
+		visible.sketch(sequence, 1d);
 		
 		Letters technique = new Letters("Technique",new Point(1200d,VQUARTER*3),main);
 		technique.fadeIn(sequence,1000d);

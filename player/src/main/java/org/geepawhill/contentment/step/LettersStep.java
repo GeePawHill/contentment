@@ -6,8 +6,7 @@ import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.model.OnFinished;
 import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.model.Timing;
-import org.geepawhill.contentment.style.TextColors;
-import org.geepawhill.contentment.style.TextFont;
+import org.geepawhill.contentment.style.TypeFace;
 
 import javafx.animation.Transition;
 import javafx.scene.text.Text;
@@ -77,8 +76,8 @@ public class LettersStep implements Step
 		}
 		else
 			text.setVisible(true);
-		format.apply(TextFont.KEY, text);
-		format.apply(TextColors.KEY, text);
+		format.apply(TypeFace.FACE, text);
+		format.apply(TypeFace.COLOR, text);
 		String newText = letters.substring(0, (int) (fraction * letters.length()));
 		text.setText(newText);
 		text.setX(center.x - text.getBoundsInParent().getWidth() / 2d);
