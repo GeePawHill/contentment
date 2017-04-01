@@ -15,9 +15,9 @@ public class DelayStep implements Step
 	private double ms;
 	Transition transition;
 	
-	static class NoopTransition extends Transition
+	static class NoOpTransition extends Transition
 	{
-		public NoopTransition(double ms,OnFinished onFinished)
+		public NoOpTransition(double ms,OnFinished onFinished)
 		{
 			setCycleDuration(Duration.millis(ms));
 			setOnFinished( event -> onFinished.run() );
@@ -48,12 +48,12 @@ public class DelayStep implements Step
 	@Override
 	public void play(Context context, OnFinished onFinished)
 	{
-		if(context.skippingMarks==true)
+		if(context.skipKeyframes==true)
 		{
 			onFinished.run();
 			return;
 		}
-		new NoopTransition(ms,onFinished).play();
+		new NoOpTransition(ms,onFinished).play();
 	}
 
 	@Override

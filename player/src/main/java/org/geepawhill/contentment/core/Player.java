@@ -92,7 +92,7 @@ public class Player
 
 	public void play()
 	{
-		context.skippingMarks=false;
+		context.skipKeyframes=false;
 		isChaining = true;
 		switch (state)
 		{
@@ -134,7 +134,7 @@ public class Player
 
 	public void playOne()
 	{
-		context.skippingMarks=true;
+		context.skipKeyframes=true;
 		isChaining = false;
 		switch (state)
 		{

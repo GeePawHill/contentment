@@ -43,12 +43,12 @@ public class GeekNeeqOne
 		
 		Letters technique = new Letters("Technique",new Point(1200d,VQUARTER*3),main);
 		technique.fadeIn(sequence,1000d);
-		common.mark(5d);
+		common.keryframe(5d);
 		common.stop();
 		
 		Letters pattern = new Letters("Implementation Pattern",new Point(1200d,VQUARTER*2),main);
 		pattern.fadeIn(sequence,1000d);
-		common.mark(15d);
+		common.keryframe(15d);
 		common.stop();
 		
 		Letters principle = new Letters("Principle", new Point(1200d,VQUARTER),main);

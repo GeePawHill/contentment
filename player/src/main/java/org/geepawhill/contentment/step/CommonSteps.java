@@ -38,12 +38,12 @@ public class CommonSteps
 		sequence.add(new DelayStep(d));
 	}
 	
-	public void mark(double seconds)
+	public void keryframe(double seconds)
 	{
-		mark(0d,seconds);
+		keyframe(0d,seconds);
 	}
 	
-	public void mark(double minutes,double seconds)
+	public void keyframe(double minutes,double seconds)
 	{
 		double adjusted = (minutes*60d+seconds)*1000d;
 		double here = sequence.runTime();

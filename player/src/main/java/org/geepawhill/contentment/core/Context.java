@@ -9,13 +9,13 @@ public class Context
 
 	public final Actors actors;
 	public final Group canvas;
-	public boolean skippingMarks;
+	public boolean skipKeyframes;
 
 	public Context(Group canvas)
 	{
 		this.canvas = canvas;
 		this.actors = new Actors();
-		this.skippingMarks = false;
+		this.skipKeyframes = false;
 	}
 
 	public void outline(KvOutline output)
