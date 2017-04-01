@@ -92,6 +92,7 @@ public class Player
 
 	public void play()
 	{
+		context.skippingMarks=false;
 		isChaining = true;
 		switch (state)
 		{
@@ -133,6 +134,7 @@ public class Player
 
 	public void playOne()
 	{
+		context.skippingMarks=true;
 		isChaining = false;
 		switch (state)
 		{

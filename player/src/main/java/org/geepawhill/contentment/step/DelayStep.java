@@ -48,6 +48,11 @@ public class DelayStep implements Step
 	@Override
 	public void play(Context context, OnFinished onFinished)
 	{
+		if(context.skippingMarks==true)
+		{
+			onFinished.run();
+			return;
+		}
 		new NoopTransition(ms,onFinished).play();
 	}
 
