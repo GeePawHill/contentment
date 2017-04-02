@@ -38,7 +38,7 @@ public class CommonSteps
 		sequence.add(new DelayStep(d));
 	}
 	
-	public void keryframe(double seconds)
+	public void keyframe(double seconds)
 	{
 		keyframe(0d,seconds);
 	}

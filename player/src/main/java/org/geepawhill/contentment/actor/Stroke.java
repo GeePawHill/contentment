@@ -5,6 +5,7 @@ import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.model.Actor;
+import org.geepawhill.contentment.model.Timing;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.step.StrokeStep;
@@ -28,7 +29,7 @@ public class Stroke implements Actor
 		this.group = new Group(step.shape());
 	}
 
-	public Sequence sketch(Sequence sequence, FixedTiming timing)
+	public Sequence sketch(Sequence sequence, Timing timing)
 	{
 		if (sequence == null) sequence = new Sequence();
 		sequence.add(new Entrance(this));

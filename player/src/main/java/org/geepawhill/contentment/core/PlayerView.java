@@ -63,7 +63,8 @@ public class PlayerView
 //		new BaseComplications(sequence).add();
 //		new InteractiveStabilization(sequence).add();
 //		new AgentAndPokes(sequence).add();
-		new GeekNeeqOne(sequence).add();
+//		new GeekNeeqOne(sequence).add();
+		new VisibleGeekLa1(sequence).add();
 		player.reset(sequence);
 	}
 	

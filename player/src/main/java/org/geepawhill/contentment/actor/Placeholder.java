@@ -2,6 +2,7 @@ package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.model.Actor;
@@ -39,6 +40,11 @@ public class Placeholder implements Actor
 	private StrokeStep eastStep;
 	private Format format;
 	
+	
+	public Placeholder(String source, Point center, double width, double height)
+	{
+		this(source,PointPair.centerAt(center,width,height));
+	}
 
 	public Placeholder(String source, PointPair bounds)
 	{
