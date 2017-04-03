@@ -13,8 +13,6 @@ public class PointPair
 	public static double PANEL_HEIGHT = 900d;
 	public static double CENTER_X	=	PANEL_WIDTH/2;
 	public static double CENTER_Y	=	PANEL_HEIGHT/2;
-	public static int FRAMES = 8;
-	public static int CENTER_FRAME = 4;
 	
 	public static PointPair hline(int numerator,int denominator)
 	{
@@ -32,74 +30,6 @@ public class PointPair
 		return vline( ((double)numerator)/((double)denominator) );
 	}
 	
-	public static PointPair N_S = new PointPair(CENTER_X,0d,CENTER_X,PANEL_HEIGHT);
-	public static PointPair E_W = new PointPair(0d,CENTER_Y,PANEL_WIDTH,CENTER_Y);
-	public static PointPair NE_SW = new PointPair(PANEL_WIDTH,0d,0d,PANEL_HEIGHT);
-	public static PointPair SE_NW = new PointPair(0d,0d,PANEL_WIDTH,PANEL_HEIGHT);
-	public static PointPair NNE_WSW = new PointPair(.75d*PANEL_WIDTH,0d,.25*PANEL_WIDTH,PANEL_HEIGHT);
-	
-	public static PointPair hline(int index)
-	{
-		return hline(CENTER_FRAME+index,FRAMES);
-	}
-	
-	public static Point north(int index)
-	{
-		return N_S.intersects(hline(-index));
-	}
-	
-	public static Point south(int index)
-	{
-		return N_S.intersects(hline(index));
-	}
-	
-	public static Point northeast(int index)
-	{
-		return NE_SW.intersects(hline(-index));
-	}
-	
-	public static Point southwest(int index)
-	{
-		return NE_SW.intersects(hline(index));
-	}
-	
-	public static Point southeast(int index)
-	{
-		return SE_NW.intersects(hline(index));
-	}
-	
-	public static Point northwest(int index)
-	{
-		return SE_NW.intersects(hline(-index));
-	}
-	
-	public static Point northnortheast(int index)
-	{
-		return NNE_WSW.intersects(hline(-index));
-	}
-
-	public static Point westsouthwest(int index)
-	{
-		return NNE_WSW.intersects(hline(index));
-	}
-
-	
-	public static PointPair vline(int index)
-	{
-		return vline(CENTER_FRAME+index,FRAMES);
-	}
-	
-	public static Point east(int index)
-	{
-		return E_W.intersects(vline(index));
-	}
-	
-	public static Point west(int index)
-	{
-		return E_W.intersects(vline(-index));
-	}
-	
-
 	public static PointPair vline(double fraction)
 	{
 		double x = PANEL_WIDTH*fraction;

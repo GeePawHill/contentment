@@ -9,7 +9,6 @@ import org.geepawhill.contentment.model.Timing;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.step.StrokeStep;
-import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.TimingBuilder;
 import org.geepawhill.contentment.utility.Names;
