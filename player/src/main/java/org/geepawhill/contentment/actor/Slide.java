@@ -60,11 +60,14 @@ public class Slide implements Actor
 		private Group group;
 		private List<Node> old;
 		private List<Node> texts;
+		private double scale;
+		private double oldScale;
 		
-		public FlipStep(Group group,List<Node> texts)
+		public FlipStep(Group group,List<Node> texts, double scale)
 		{
 			this.texts = texts;
 			this.group = group;
+			this.scale = scale;
 			old = new ArrayList<>();
 		}
 
@@ -73,6 +76,8 @@ public class Slide implements Actor
 		{
 			group.getChildren().clear();
 			group.getChildren().addAll(old);
+			group.setScaleX(oldScale);
+			group.setScaleY(oldScale);
 		}
 
 		@Override
@@ -80,16 +85,24 @@ public class Slide implements Actor
 		{
 			old.clear();
 			old.addAll(group.getChildren());
+			oldScale = group.getScaleX();
 			group.getChildren().clear();
 			group.getChildren().addAll(texts);
+			group.setScaleX(scale);
+			group.setScaleY(scale);
 		}
 		
 	}
 	
+	final static double HMARGIN = 30d;
+	final static double VMARGIN = 30d;
+	
 	public void flip(Sequence sequence, String[] slides)
 	{
 		List<Node> texts = makeTextBoxes(slides);
-		sequence.add(new FlipStep(group,texts));
+		double rawHeight = texts.get(texts.size()-1).getBoundsInParent().getMaxY();
+		double scale = (900d-2*VMARGIN)/rawHeight;
+		sequence.add(new FlipStep(group,texts, scale));
 	}
 	
 	static class LineFormatter
@@ -101,14 +114,17 @@ public class Slide implements Actor
 		
 		public void align(Text text)
 		{
-			if(alignment==HPos.LEFT) return;
+			if(alignment==HPos.LEFT)
+			{
+				text.setTranslateX(HMARGIN);
+			}
 			if(alignment==HPos.RIGHT)
 			{
-				text.setTranslateX( 1600d-text.getBoundsInLocal().getWidth());
+				text.setTranslateX( 1600d-HMARGIN-text.getBoundsInLocal().getWidth());
 			}
 			if(alignment==HPos.CENTER)
 			{
-				text.setTranslateX( 800d-text.getBoundsInLocal().getWidth()/2d);
+				text.setTranslateX( 800d-HMARGIN-text.getBoundsInLocal().getWidth()/2d);
 			}
 		}
 	}
@@ -116,7 +132,7 @@ public class Slide implements Actor
 	private List<Node> makeTextBoxes(String[] slides)
 	{
 		ArrayList<Node> texts = new ArrayList<>();
-		double nextY = 0d;
+		double nextY = VMARGIN;
 		for(String line : slides)
 		{
 			LineFormatter formatter = getLineFormatter(line);
