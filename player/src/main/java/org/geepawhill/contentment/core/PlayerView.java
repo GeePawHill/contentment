@@ -9,6 +9,8 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -52,12 +54,18 @@ public class PlayerView
 		scalingPane.heightProperty().addListener(listener);
 		player = new Player(canvas);
 		
-		scalingPane.setOnMouseClicked((event) -> player.playOne());
+		scalingPane.setOnMouseClicked((event) -> mouseClicked(event));
 		scalingPane.getChildren().add(canvas);
 		
 		return JfxUtility.makeAnchorFor(scalingPane);
 	}
 	
+	private void mouseClicked(MouseEvent event)
+	{
+		if(event.getButton()==MouseButton.SECONDARY) player.backward();
+		else player.playOne();	
+		}
+
 	private void makeScripts(Sequence sequence)
 	{
 //		new BaseComplications(sequence).add();

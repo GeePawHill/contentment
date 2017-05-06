@@ -78,6 +78,8 @@ public class Slide implements Actor
 		@Override
 		public void after(Context context)
 		{
+			old.clear();
+			old.addAll(group.getChildren());
 			group.getChildren().clear();
 			group.getChildren().addAll(texts);
 		}
