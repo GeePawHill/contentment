@@ -18,9 +18,6 @@ public class BasicOutline<T> implements Outline<T>
 		indent = 1;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.geepawhill.contentment.tree.Tree#indent()
-	 */
 	@Override
 	public void indent()
 	{
@@ -31,18 +28,12 @@ public class BasicOutline<T> implements Outline<T>
 		indent += 1;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.geepawhill.contentment.tree.Tree#append(T)
-	 */
 	@Override
 	public void append(T data)
 	{
 		items.add(new Line<T>(indent, data));
 	}
 
-	/* (non-Javadoc)
-	 * @see org.geepawhill.contentment.tree.Tree#dedent()
-	 */
 	@Override
 	public void dedent()
 	{
@@ -50,18 +41,12 @@ public class BasicOutline<T> implements Outline<T>
 		if (indent == 0) throw new RuntimeException("Too many dedents!");
 	}
 
-	/* (non-Javadoc)
-	 * @see org.geepawhill.contentment.tree.Tree#asList()
-	 */
 	@Override
 	public List<Line<T>> asList()
 	{
 		return items;
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.geepawhill.contentment.tree.Tree#asLeafList()
-	 */
 	@Override
 	public List<T> asLeafList()
 	{
@@ -84,9 +69,6 @@ public class BasicOutline<T> implements Outline<T>
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.geepawhill.contentment.tree.Tree#asText(java.lang.String)
-	 */
 	@Override
 	public String asText(String root)
 	{
@@ -100,9 +82,6 @@ public class BasicOutline<T> implements Outline<T>
 		return result.toString();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.geepawhill.contentment.tree.Tree#asTree(javafx.scene.control.TreeItem)
-	 */
 	@Override
 	public TreeItem<T> asTree(TreeItem<T> root)
 	{
