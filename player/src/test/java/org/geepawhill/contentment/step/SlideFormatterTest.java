@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public class SlideFormatterTest
 {
@@ -39,78 +40,78 @@ public class SlideFormatterTest
 	@Test
 	public void markupStripped()
 	{
-		for(SlideFormat item : formatter.layout(samples))
+		for(Text text : formatter.layout(samples))
 		{
-			assertEquals("Line",item.text.getText());
+			assertEquals("Line",text.getText());
 		}
 	}
 	
 	@Test
 	public void titleAttributes()
 	{
-		SlideFormat format = formatter.layout("Line").get(0);
-		assertEquals(new Font("Buxton Sketch",100d),format.text.getFont());
-		assertEquals(Color.YELLOW,format.text.getStroke());
-		assertEquals(Color.YELLOW,format.text.getFill());
+		Text text = formatter.layout("Line").get(0);
+		assertEquals(new Font("Buxton Sketch",100d),text.getFont());
+		assertEquals(Color.YELLOW,text.getStroke());
+		assertEquals(Color.YELLOW,text.getFill());
 	}
 	
 	@Test
 	public void oneAttributes()
 	{
-		SlideFormat format = formatter.layout("+Line").get(0);
-		assertEquals(new Font("Buxton Sketch",80d),format.text.getFont());
-		assertEquals(Color.YELLOWGREEN,format.text.getStroke());
-		assertEquals(Color.YELLOWGREEN,format.text.getFill());
+		Text text = formatter.layout("+Line").get(0);
+		assertEquals(new Font("Buxton Sketch",80d),text.getFont());
+		assertEquals(Color.YELLOWGREEN,text.getStroke());
+		assertEquals(Color.YELLOWGREEN,text.getFill());
 	}
 	
 	@Test
 	public void twoAttributes()
 	{
-		SlideFormat format = formatter.layout("++Line").get(0);
-		assertEquals(new Font("Buxton Sketch",60d),format.text.getFont());
-		assertEquals(Color.BLUE,format.text.getStroke());
-		assertEquals(Color.BLUE,format.text.getFill());
+		Text text = formatter.layout("++Line").get(0);
+		assertEquals(new Font("Buxton Sketch",60d),text.getFont());
+		assertEquals(Color.BLUE,text.getStroke());
+		assertEquals(Color.BLUE,text.getFill());
 	}
 	
 	@Test
 	public void threeAttributes()
 	{
-		SlideFormat format = formatter.layout("+++Line").get(0);
-		assertEquals(new Font("Buxton Sketch",40d),format.text.getFont());
-		assertEquals(Color.RED,format.text.getStroke());
-		assertEquals(Color.RED,format.text.getFill());
+		Text text = formatter.layout("+++Line").get(0);
+		assertEquals(new Font("Buxton Sketch",40d),text.getFont());
+		assertEquals(Color.RED,text.getStroke());
+		assertEquals(Color.RED,text.getFill());
 	}
 	
 	@Test
 	public void centerAttributes()
 	{
-		SlideFormat format = formatter.layout("=Line").get(0);
-		assertEquals(new Font("Buxton Sketch",100d),format.text.getFont());
-		assertEquals(Color.YELLOW,format.text.getStroke());
-		assertEquals(Color.YELLOW,format.text.getFill());
+		Text text = formatter.layout("=Line").get(0);
+		assertEquals(new Font("Buxton Sketch",100d),text.getFont());
+		assertEquals(Color.YELLOW,text.getStroke());
+		assertEquals(Color.YELLOW,text.getFill());
 	}
 	
 	@Test
 	public void verticalStack()
 	{
-		List<SlideFormat> formats = formatter.layout(samples);
+		List<Text> texts = formatter.layout(samples);
 		double lastY=SlideFormatter.VMARGIN;
-		for(SlideFormat format : formats)
+		for(Text text : texts)
 		{
-			assertEquals(lastY,format.text.getY(),0.5d);
-			lastY = format.text.getBoundsInParent().getMaxY();
+			assertEquals(lastY,text.getY(),0.5d);
+			lastY = text.getBoundsInParent().getMaxY();
 		}
 	}
 	
 	@Test
 	public void alignments()
 	{
-		List<SlideFormat> formats = formatter.layout(samples);
-		assertLeft(formats.get(0));
-		assertRight(formats.get(1));
-		assertLeft(formats.get(2));
-		assertIndent(formats.get(3));
-		assertCentered(formats.get(4));
+		List<Text> texts = formatter.layout(samples);
+		assertLeft(texts.get(0));
+		assertRight(texts.get(1));
+		assertLeft(texts.get(2));
+		assertIndent(texts.get(3));
+		assertCentered(texts.get(4));
 	}
 	
 	@Test
@@ -134,7 +135,7 @@ public class SlideFormatterTest
 				"=14find the parts of agility that work",
 				};
 
-		List<SlideFormat> formats = formatter.layout(longSlide);
+		List<Text> formats = formatter.layout(longSlide);
 		assertLeft(formats.get(0));
 		assertRight(formats.get(1));
 		assertLeft(formats.get(2));
@@ -153,29 +154,24 @@ public class SlideFormatterTest
 
 	}
 
-
-	private void assertLeft(SlideFormat format)
+	private void assertLeft(Text text)
 	{
-		assertEquals(SlideFormat.Layout.LEFT,format.layout);
-		assertEquals(SlideFormatter.HMARGIN, format.text.getX(),.5d);
+		assertEquals(SlideFormatter.HMARGIN, text.getX(),.5d);
 	}
 
-	private void assertIndent(SlideFormat format)
+	private void assertIndent(Text text)
 	{
-		assertEquals(SlideFormat.Layout.INDENT,format.layout);
-		assertEquals(SlideFormatter.HMARGIN*2, format.text.getX(),.5d);
+		assertEquals(SlideFormatter.HMARGIN*2, text.getX(),.5d);
 	}
 
-	private void assertCentered(SlideFormat format)
+	private void assertCentered(Text text)
 	{
-		assertEquals(SlideFormat.Layout.CENTER,format.layout);
-		assertEquals(800d, (format.text.getBoundsInParent().getMinX()+format.text.getBoundsInParent().getMaxX())/2d,.5d);
+		assertEquals(800d, (text.getBoundsInParent().getMinX()+text.getBoundsInParent().getMaxX())/2d,.5d);
 	}
 
-	private void assertRight(SlideFormat format)
+	private void assertRight(Text text)
 	{
-		assertEquals(SlideFormat.Layout.RIGHT,format.layout);
-		assertEquals(1600d-SlideFormatter.HMARGIN, format.text.getBoundsInParent().getMaxX(),1d);
+		assertEquals(1600d-SlideFormatter.HMARGIN, text.getBoundsInParent().getMaxX(),1d);
 	}
 
 }

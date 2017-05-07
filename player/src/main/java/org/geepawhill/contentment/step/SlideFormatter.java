@@ -2,12 +2,11 @@ package org.geepawhill.contentment.step;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.geepawhill.contentment.step.SlideFormat.Layout;
+import org.geepawhill.contentment.step.SlideLine.Layout;
 
-import javafx.geometry.VPos;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Scale;
 import javafx.scene.transform.Translate;
@@ -18,92 +17,105 @@ public class SlideFormatter
 	public static final double VMARGIN = 20d;
 	public static final double HMARGIN = 40d;
 
-	public List<SlideFormat> layout(String... lines)
+	private ArrayList<SlideLine> lines;
+	
+	public List<Text> layout(String... source)
 	{
-		ArrayList<SlideFormat> formats = new ArrayList<>();
-		double lastY = VMARGIN;
-		for(String line : lines)
-		{
-			SlideFormat format = new SlideFormat();
-			format.text = new Text();
-			format.text.setTextOrigin(VPos.TOP);
-			format.text.setY(lastY);
-			if(line.startsWith("+++"))
-			{
-				format.text.setText(line.substring(3));
-				format.text.setFont(new Font("Buxton Sketch",40d));
-				format.text.setStroke(Color.RED);
-				format.text.setFill(Color.RED);
-				format.layout = Layout.INDENT;
-			}
-			else if(line.startsWith("++"))
-			{
-				format.text.setText(line.substring(2));
-				format.text.setFont(new Font("Buxton Sketch",60d));
-				format.text.setStroke(Color.BLUE);
-				format.text.setFill(Color.BLUE);			
-				format.layout = Layout.LEFT;
-			}
-			else if (line.startsWith("+"))
-			{
-				format.text.setText(line.substring(1));
-				format.text.setFont(new Font("Buxton Sketch",80d));
-				format.text.setStroke(Color.YELLOWGREEN);
-				format.text.setFill(Color.YELLOWGREEN);
-				format.layout = Layout.RIGHT;
+		return layoutFormats(source).stream().map((format) -> format.text).collect(Collectors.toList());
+	}
 
-			}
-			else if (line.startsWith("="))
-			{
-				format.layout = Layout.CENTER;
-				format.text.setText(line.substring(1));
-				format.text.setFont(new Font("Buxton Sketch",100d));
-				format.text.setStroke(Color.YELLOW);
-				format.text.setFill(Color.YELLOW);			}
-			else
-			{
-				format.layout = Layout.LEFT;
-				format.text.setText(line);
-				format.text.setFont(new Font("Buxton Sketch",100d));
-				format.text.setStroke(Color.YELLOW);
-				format.text.setFill(Color.YELLOW);
-			}
-			lastY = format.text.getBoundsInParent().getMaxY();
-			formats.add(format);
-		}
-		
-		double scale = 1d;
-		if(lastY>900d)
+	public List<SlideLine> layoutFormats(String... source)
+	{
+		lines = new ArrayList<>();
+		addFormats(source);
+		double maxY = distributeVertically();
+		double scale = performScaling(maxY);
+		layoutHorizontally(scale);
+		return lines;
+	}
+
+	private void layoutHorizontally(double scale)
+	{
+		for (SlideLine line : lines)
 		{
-			scale = 900d/lastY;
-			System.out.println("Scale: "+scale);
-			lastY = VMARGIN;
-			for(SlideFormat format : formats)
-			{
-				format.text.getTransforms().add(new Scale(scale,scale));
-				lastY= format.text.getBoundsInParent().getMaxY();
-			}
-			
-		}
-		for(SlideFormat format : formats)
-		{
-			switch(format.layout)
+			switch (line.layout)
 			{
 			case LEFT:
-				format.text.setX(HMARGIN);
+				line.text.setX(HMARGIN);
 				break;
 			case RIGHT:
-				format.text.getTransforms().add(new Translate((1600d-HMARGIN)/scale-format.text.getBoundsInLocal().getWidth(),0d));
+				line.text.getTransforms()
+						.add(new Translate((1600d - HMARGIN) / scale - line.text.getBoundsInLocal().getWidth(), 0d));
 				break;
 			case CENTER:
-				format.text.getTransforms().add(new Translate(800d/scale-format.text.getBoundsInLocal().getWidth()/2d,0d));
+				line.text.getTransforms()
+						.add(new Translate(800d / scale - line.text.getBoundsInLocal().getWidth() / 2d, 0d));
 				break;
 			case INDENT:
-				format.text.setX(2d*HMARGIN);
+				line.text.setX(2d * HMARGIN);
 				break;
 			}
 		}
-		return formats;
+	}
+
+	private double performScaling(double maxY)
+	{
+		if (maxY <= 900d) return 1d;
+		double scale = 900d / maxY;
+		for (SlideLine line : lines)
+		{
+			line.text.getTransforms().add(new Scale(scale, scale));
+		}
+		return scale;
+	}
+
+	private void addFormats(String... sources)
+	{
+		for (String source : sources)
+		{
+			addFormat(source);
+		}
+	}
+
+	private double distributeVertically()
+	{
+		double nextY = VMARGIN;
+		for(SlideLine line : lines)
+		{
+			nextY = line.setAndIncrementY(nextY);
+		}
+		return nextY;
+	}
+
+	private SlideLine addFormat(String source)
+	{
+		SlideLine line = makeFormat(source);
+		lines.add(line);
+		return line;
+	}
+
+	private SlideLine makeFormat(String source)
+	{
+		if (source.startsWith("+++"))
+		{
+			return new SlideLine(source, 3, 40d, Color.RED, Layout.INDENT);
+		}
+		else if (source.startsWith("++"))
+		{
+			return new SlideLine(source, 2, 60d, Color.BLUE, Layout.LEFT);
+		}
+		else if (source.startsWith("+"))
+		{
+			return new SlideLine(source, 1, 80d, Color.YELLOWGREEN, Layout.RIGHT);
+		}
+		else if (source.startsWith("="))
+		{
+			return new SlideLine(source, 1, 100d, Color.YELLOW, Layout.CENTER);
+		}
+		else
+		{
+			return new SlideLine(source, 0, 100d, Color.YELLOW, Layout.LEFT);
+		}
 	}
 
 }
