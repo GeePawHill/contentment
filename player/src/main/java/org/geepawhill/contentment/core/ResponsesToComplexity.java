@@ -47,6 +47,26 @@ public class ResponsesToComplexity
 			"=Software Development Excellence",
 			"=(Suspect All Systems)"
 	};
+	
+	String[] slide3 = {
+	"Complexity Blah-Blah-Blah",
+	"+There’s Tons Of Theory",
+	"++non-linear dynamics, chaos theory (math)",
+	"++complex adaptive systems (systems theory)",
+	"++ecology, organism (biology)",
+	"++the mangle (science studies)",
+	"++anything & everything (history)",
+	"+We Need *Practice*",
+	"++actual direct advice",
+	"++a pause in the flavor wars",
+	"++no rulesets or drop-in systems",
+	"++forces & relationships",
+	"+And We Already Have Some",
+	"++we can see the entire agile movement as a response",
+	"++find the parts of agility that work",
+	"++try to add new and different parts"
+	};
+
 
 	
 	public ResponsesToComplexity(Sequence sequence)
@@ -57,12 +77,13 @@ public class ResponsesToComplexity
 
 	public void add()
 	{
-		
 		common.clear();
 		Slide slide = new Slide();
 		slide.show(sequence,slide1);
 		common.stop();
 		slide.flip(sequence,slide2);
+		common.stop();
+		slide.flip(sequence,slide3);
 	}
 	
 }
