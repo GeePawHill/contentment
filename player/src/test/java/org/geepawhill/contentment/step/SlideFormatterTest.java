@@ -76,7 +76,7 @@ public class SlideFormatterTest
 	public void threeAttributes()
 	{
 		SlideFormat format = formatter.layout("+++Line").get(0);
-		assertEquals(new Font("Buxton Sketch",50d),format.text.getFont());
+		assertEquals(new Font("Buxton Sketch",40d),format.text.getFont());
 		assertEquals(Color.RED,format.text.getStroke());
 		assertEquals(Color.RED,format.text.getFill());
 	}
@@ -106,11 +106,76 @@ public class SlideFormatterTest
 	public void alignments()
 	{
 		List<SlideFormat> formats = formatter.layout(samples);
-		assertEquals(SlideFormat.Layout.LEFT,formats.get(0).layout);
-		assertEquals(SlideFormat.Layout.RIGHT,formats.get(1).layout);
-		assertEquals(SlideFormat.Layout.LEFT,formats.get(2).layout);
-		assertEquals(SlideFormat.Layout.INDENT,formats.get(3).layout);
-		assertEquals(SlideFormat.Layout.CENTER,formats.get(4).layout);
+		assertLeft(formats.get(0));
+		assertRight(formats.get(1));
+		assertLeft(formats.get(2));
+		assertIndent(formats.get(3));
+		assertCentered(formats.get(4));
+	}
+	
+	@Test
+	public void longSlideAlignments()
+	{
+		String[] longSlide = {
+				"0Complexity Blah-Blah-Blah",
+				"+1There’s Tons Of Theory",
+				"++2non-linear dynamics, chaos theory (math)",
+				"++3complex adaptive systems (systems theory)",
+				"++4ecology, organism (biology)",
+				"++5the mangle (science studies)",
+				"++6anything & everything (history)",
+				"+7We Need *Practice*",
+				"++8actual direct advice",
+				"++9a pause in the flavor wars",
+				"++10no rulesets or drop-in systems",
+				"++11forces & relationships",
+				"+12And We Already Have Some",
+				"=13we can see the entire agile movement as a response",
+				"=14find the parts of agility that work",
+				};
+
+		List<SlideFormat> formats = formatter.layout(longSlide);
+		assertLeft(formats.get(0));
+		assertRight(formats.get(1));
+		assertLeft(formats.get(2));
+		assertLeft(formats.get(3));
+		assertLeft(formats.get(4));
+		assertLeft(formats.get(5));
+		assertLeft(formats.get(6));
+		assertRight(formats.get(7));
+		assertLeft(formats.get(8));
+		assertLeft(formats.get(9));
+		assertLeft(formats.get(10));
+		assertLeft(formats.get(11));
+		assertRight(formats.get(12));
+		assertCentered(formats.get(13));
+		assertCentered(formats.get(14));
+
+	}
+
+
+	private void assertLeft(SlideFormat format)
+	{
+		assertEquals(SlideFormat.Layout.LEFT,format.layout);
+		assertEquals(SlideFormatter.HMARGIN, format.text.getX(),.5d);
+	}
+
+	private void assertIndent(SlideFormat format)
+	{
+		assertEquals(SlideFormat.Layout.INDENT,format.layout);
+		assertEquals(SlideFormatter.HMARGIN*2, format.text.getX(),.5d);
+	}
+
+	private void assertCentered(SlideFormat format)
+	{
+		assertEquals(SlideFormat.Layout.CENTER,format.layout);
+		assertEquals(800d, (format.text.getBoundsInParent().getMinX()+format.text.getBoundsInParent().getMaxX())/2d,.5d);
+	}
+
+	private void assertRight(SlideFormat format)
+	{
+		assertEquals(SlideFormat.Layout.RIGHT,format.layout);
+		assertEquals(1600d-SlideFormatter.HMARGIN, format.text.getBoundsInParent().getMaxX(),1d);
 	}
 
 }

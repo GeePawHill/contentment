@@ -96,7 +96,7 @@ public class SlideFormatter
 				format.text.getTransforms().add(new Translate((1600d-HMARGIN)/scale-format.text.getBoundsInLocal().getWidth(),0d));
 				break;
 			case CENTER:
-				format.text.setX(800d-HMARGIN/2d -format.text.getBoundsInLocal().getWidth()/2d);
+				format.text.getTransforms().add(new Translate(800d/scale-format.text.getBoundsInLocal().getWidth()/2d,0d));
 				break;
 			case INDENT:
 				format.text.setX(2d*HMARGIN);
