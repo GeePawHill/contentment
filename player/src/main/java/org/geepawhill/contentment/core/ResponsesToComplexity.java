@@ -1,7 +1,11 @@
 package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.actor.Slide;
+import org.geepawhill.contentment.actors.ClipArt;
+import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.CommonSteps;
+
+import javafx.scene.image.Image;
 
 public class ResponsesToComplexity
 {
@@ -208,7 +212,7 @@ public class ResponsesToComplexity
 			},
 	};
 
-	String[][] seeing =
+	String[][] seeing1 =
 	{
 			{
 					"Optimize For Seeing",
@@ -222,6 +226,10 @@ public class ResponsesToComplexity
 					"+++the users",
 					"+++the process",
 			},
+	};
+	
+	String[][] seeing2 = 
+		{
 			{
 					"Seeing: Praxis",
 					"++retrospectives",
@@ -276,7 +284,13 @@ public class ResponsesToComplexity
 //		showBlock(complexity);
 //		showBlock(collaboration);
 //		showBlock(change);
-		showBlock(seeing);
+		slideActor.show(sequence, seeing1[0]);
+		Image image = new Image("/org/geepawhill/scripts/you-are-here.jpg",740d,900d,true,true);
+		ClipArt art = new ClipArt(image, new PointPair(800d,20d,1580d,880d));
+		art.flip(sequence);
+		common.stop();
+		common.hide(art);
+		showBlock(seeing2);
 		showBlock(conclusion);
 		showBlock(flockAndFlows);
 	}
