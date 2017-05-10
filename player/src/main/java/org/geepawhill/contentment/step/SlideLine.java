@@ -20,6 +20,8 @@ public class SlideLine
 //		text.setFont(new Font("Caveat Brush", size));
 //		text.setFont(new Font("Gloria Hallelujah", size));
 		text.setFont(new Font("GoodDog", size));
+//		text.setFont(new Font("WCManoNegraBta-Bold", size));
+//		text.setFont(new Font("BelligerentMadness", size));
 		text.setStroke(paint);
 		text.setFill(paint);
 		this.layout = layout;

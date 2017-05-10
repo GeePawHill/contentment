@@ -20,6 +20,8 @@ public class Main extends Application
 			preloadFontFile("/org/geepawhill/scripts/CaveatBrush-Regular.TTF");
 			preloadFontFile("/org/geepawhill/scripts/gloriahallelujah.TTF");
 			preloadFontFile("/org/geepawhill/scripts/GoodDog.otf");
+			preloadFontFile("/org/geepawhill/scripts/belligerent.ttf");
+			preloadFontFile("/org/geepawhill/scripts/WCManoNegraBoldBta.otf");
 			for(String family : Font.getFamilies())
 			{
 				System.out.println(family);
