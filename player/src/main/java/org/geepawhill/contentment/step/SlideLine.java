@@ -3,6 +3,8 @@ package org.geepawhill.contentment.step;
 import javafx.geometry.VPos;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class SlideLine
@@ -19,7 +21,8 @@ public class SlideLine
 //		text.setFont(new Font("Samuels hand bold", size));
 //		text.setFont(new Font("Caveat Brush", size));
 //		text.setFont(new Font("Gloria Hallelujah", size));
-		text.setFont(new Font("GoodDog", size));
+//		text.setFont(new Font("GoodDog", size));
+		text.setFont(Font.font("GoodDog", FontWeight.NORMAL, FontPosture.ITALIC,size));
 //		text.setFont(new Font("WCManoNegraBta-Bold", size));
 //		text.setFont(new Font("BelligerentMadness", size));
 		text.setStroke(paint);

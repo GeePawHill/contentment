@@ -60,7 +60,7 @@ public class SlideFormatter
 
 	private double performScaling(double maxY)
 	{
-		if (maxY <= 900d) return 1d;
+		if (maxY <= 600d) return 1d;
 		double scale = 900d / maxY;
 		for (SlideLine line : lines)
 		{
@@ -102,19 +102,19 @@ public class SlideFormatter
 		}
 		else if (source.startsWith("++"))
 		{
-			return new SlideLine(source, 2, 60d, Color.BLUE, Layout.LEFT);
+			return new SlideLine(source, 2, 60d, Color.rgb(0,176,240), Layout.LEFT);
 		}
 		else if (source.startsWith("+"))
 		{
-			return new SlideLine(source, 1, 80d, Color.YELLOWGREEN, Layout.RIGHT);
+			return new SlideLine(source, 1, 80d, Color.rgb(71,240,48), Layout.RIGHT);
 		}
 		else if (source.startsWith("="))
 		{
-			return new SlideLine(source, 1, 100d, Color.YELLOW, Layout.CENTER);
+			return new SlideLine(source, 1, 100d, Color.rgb(255, 255, 0), Layout.CENTER);
 		}
 		else
 		{
-			return new SlideLine(source, 0, 100d, Color.YELLOW, Layout.LEFT);
+			return new SlideLine(source, 0, 100d, Color.rgb(255, 255, 0), Layout.LEFT);
 		}
 	}
 

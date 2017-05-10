@@ -43,7 +43,7 @@ public class ResponsesToComplexity
 			},
 		};
 	
-	String[][] block1 = 
+	String[][] complexity = 
 		{
 
 			{
@@ -87,7 +87,10 @@ public class ResponsesToComplexity
 					"++s/w development is still *harder*",
 					" ",
 					"=in professional s/w development: ",
-					"=all-in, all-the-time, all-around, complexity",
+					"=all-in, ",
+					"=all-the-time,",
+					"=all-around,",
+					"=complexity",
 			},
 			{
 					"Suspect All Systems!",
@@ -115,20 +118,15 @@ public class ResponsesToComplexity
 					"++it is not possible",
 					"++replace “try harder” with “try different”",
 					"=The Only Possible Approach:",
-					"=take a step and look around you to see what changes",
+					"=change something",
+					"=see what happens",
 			}
 	};
 
-	String[][] block2 =
+	String[][] collaboration =
 	{
 			{
 					"Optimize For Collaboration",
-					"+We Are In Constant Need Of Ideas",
-					"++most ideas come from domain-bridging",
-					"+++we map from some other domain into our system",
-					"+++A is to B as A’ is to B’",
-					"++more domains means more ideas",
-					"++more people in play means more domains",
 					"+We Need Ties For Stability",
 					"++metaphor: star network vs distributed network",
 					"++humans – alone – don’t handle this all that well",
@@ -137,6 +135,12 @@ public class ResponsesToComplexity
 					"++no one human is on all the time",
 					"++accepting peaks and valleys work well for us",
 					"++some synchronization happens, but the more we are, the less it stops the show",
+					"+We Are In Constant Need Of Ideas",
+					"++most ideas come from domain-bridging",
+					"+++we map from some other domain into our system",
+					"+++A is to B as A’ is to B’",
+					"++more domains means more ideas",
+					"++more people in play means more domains",
 			},
 			{
 					"Collaboration: Praxis",
@@ -146,7 +150,7 @@ public class ResponsesToComplexity
 			},
 			{
 					"Collaboration: Contra",
-					"++/“standard/” meetings: waiting to start, all-hands, status reporting",
+					"++“standard” meetings: waiting to start, all-hands, status reporting",
 					"++no unprotected hours",
 					"++F2D2 substitutes: email, templated documents, tracking systems",
 					"++conflict suppression",
@@ -161,83 +165,84 @@ public class ResponsesToComplexity
 			}
 	};
 
-	String[][] block3 =
+	String[][] change =
 	{
 			{
-					"Optimize For Motion",
-					"+The Move of ‘Move Then Sense’",
-					"++one way to say it: maneuverability",
-					"+++how quickly can we change our mind",
-					"+++how committed are we to a given future",
-					"+Factors In Motion",
+					"Optimize For Change",
+					"+The Change of Change-Then-See",
+					"++*embrace* change, don't block it",
+					"++emphasize maneuverability",
+					"++emphasize constant reset",
+					"+Avoid Committed Paths",
 					"++how trustworthy is what i’m standing on?",
 					"++how easy is it for me to stand somewhere else?",
 					"++how many paths are there out of here?",
-					"+We Need Perpetual Freshness",
+					"+Perpetual Freshness",
 					"++in a greenfield world, we’re always free to act",
 					"++in a pre-committed world, we are often self-constrained",
 					"++local change-control structures slide easily towards global ones",
+					"++change for change's sake? well. yes."
 			},
 			{
-					"Motion: Praxis",
-					"+embrace rework",
-					"+commit to experimentation",
-					"+WIP policing – quick & easy blocking",
-					"+multi-exit step choices",
-					"+express standards as problems, not solutions",
+					"Change: Praxis",
+					"++embrace rework",
+					"++commit to experimentation",
+					"++WIP policing – quick & easy blocking",
+					"++multi-exit step choices",
+					"++express standards as problems, not solutions",
 			},
 			{
-					"Motion: Contra",
+					"Change: Contra",
 					"++responsibility/authority mismatching",
 					"++unanimity requirement",
 					"++premature decision-making",
+					"++parallel development as usually practiced today",
+					"++missing decision-makers",
 
 			},
 			{
-					"Motion: Indications",
+					"Change: Indications",
 					"++the sense of interruptedness",
 					"++frequency: pushes, deploys, releases",
 					"++the geepaw guarantee",
 			},
 	};
 
-	String[][] block4 =
+	String[][] seeing =
 	{
 			{
-					"Optimize For Sensing",
-					"+The Landscape Changes Under Us",
-					"+even the cartoon understates this",
-					"+we habitually understate: ",
-					"+number of agents",
-					"+range of change",
-					"+Obvious Areas",
-					"+the code",
-					"+the team",
-					"+the periphery",
-					"+the users",
-					"+the process",
+					"Optimize For Seeing",
+					"++even the cartoon understates this",
+					"+++number of agents",
+					"+++range of change",
+					"++Obvious Areas",
+					"+++the code",
+					"+++the team",
+					"+++the periphery",
+					"+++the users",
+					"+++the process",
 			},
 			{
-					"Sensing: Praxis",
-					"+retrospectives",
-					"+actual users",
-					"+continuous – integration, deployment, release",
-					"+same room",
+					"Seeing: Praxis",
+					"++retrospectives",
+					"++actual users",
+					"++continuous – integration, deployment, release",
+					"++same room",
 
 			},
 			{
-					"Sensing: Contra",
-					"+preferencing numerics, especially velocity",
-					"+“fat release” policy",
-					"+conflict suppression",
-					"+external QA",
+					"Seeing: Contra",
+					"++preferencing numerics, especially velocity",
+					"++“fat release” policy",
+					"++conflict suppression",
+					"++external QA",
 
 			},
 			{
-					"Sensing: Indications",
-					"+consensus in description",
-					"+ferocious rigor against flickers & build breaks",
-					"+surprise in relationships",
+					"Seeing: Indications",
+					"++consensus in description",
+					"++ferocious rigor against flickers & build breaks",
+					"++surprise in relationships",
 			}
 	};
 
@@ -245,10 +250,11 @@ public class ResponsesToComplexity
 	{
 			{
 					"It's Clear: The Way Forward Is Unclear",
-					"+Move-Then-Sense Everywhere",
-					"+code, tests, process, relationships",
-					"+experiment as a way of life",
-					"+change for the sake of change?",
+					"++Change-Then-See Everywhere",
+					"+++code, tests, process, relationships",
+					"+++experiment as a way of life",
+					"+++reset frequently & cheerfully",
+					" ",
 					"=optimize for collaboration",
 					"=optimize for motion",
 					"=optimize for sensing",
@@ -265,12 +271,12 @@ public class ResponsesToComplexity
 	{
 		common.clear();
 		slideActor = new Slide();
-		showBlock(geepaw);
-		showBlock(flockAndFlows);
-		showBlock(block1);
-		showBlock(block2);
-		showBlock(block3);
-		showBlock(block4);
+//		showBlock(geepaw);
+//		showBlock(flockAndFlows);
+//		showBlock(complexity);
+//		showBlock(collaboration);
+//		showBlock(change);
+		showBlock(seeing);
 		showBlock(conclusion);
 		showBlock(flockAndFlows);
 	}
