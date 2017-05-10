@@ -16,11 +16,21 @@ public class Main extends Application
 	{
 		try
 		{
+			preloadFontFile("/org/geepawhill/scripts/SAMUELS.TTF");
+			preloadFontFile("/org/geepawhill/scripts/CaveatBrush-Regular.TTF");
+			preloadFontFile("/org/geepawhill/scripts/gloriahallelujah.TTF");
+			preloadFontFile("/org/geepawhill/scripts/GoodDog.otf");
+			for(String family : Font.getFamilies())
+			{
+				System.out.println(family);
+				for(String fontname : Font.getFontNames(family))
+				{
+					System.out.println("\t"+fontname);
+				}
+			}
+
 			PlayerView mainView = new PlayerView(stage);
 			Scene scene = new Scene(mainView.getNode());
-			URL resource = Main.class.getResource("/org/geepawhill/scripts/something.ttf");
-			System.out.println(resource);
-			Font font = Font.loadFont(resource.toExternalForm(), 10);
 			stage.setScene(scene);
 			stage.setMaximized(true);
 			stage.setFullScreenExitHint("");
@@ -31,6 +41,11 @@ public class Main extends Application
 			e.printStackTrace();
 			Platform.exit();
 		}
+	}
+
+	private void preloadFontFile(String fontfile)
+	{
+		Font.loadFont(Main.class.getResource(fontfile).toExternalForm(), 50);
 	}
 
 	public static void main(String[] args)

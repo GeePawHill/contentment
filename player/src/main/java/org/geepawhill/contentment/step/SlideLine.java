@@ -16,7 +16,10 @@ public class SlideLine
 	{
 		text = new Text(line.substring(start));
 		text.setTextOrigin(VPos.TOP);
-		text.setFont(new Font("Buxton Sketch", size));
+//		text.setFont(new Font("Samuels hand bold", size));
+//		text.setFont(new Font("Caveat Brush", size));
+//		text.setFont(new Font("Gloria Hallelujah", size));
+		text.setFont(new Font("GoodDog", size));
 		text.setStroke(paint);
 		text.setFill(paint);
 		this.layout = layout;

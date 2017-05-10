@@ -41,7 +41,7 @@ public class TypeFace
 
 	public static Style largeHand()
 	{
-		return font("LargeHand", new Font("Buxton Sketch", 60d), 2d, .5d);
+		return font("LargeHand", new Font("GoodDog", 60d), 2d, .5d);
 	}
 
 	public static Style mediumSans()
