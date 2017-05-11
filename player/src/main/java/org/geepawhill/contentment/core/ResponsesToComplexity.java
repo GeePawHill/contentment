@@ -31,9 +31,9 @@ public class ResponsesToComplexity
 					"++mostly VBCA’s nowadays, ones you know",
 			},
 	};
-	
-	String[][] flockAndFlows = 
-		{
+
+	String[][] flockAndFlows =
+	{
 			{
 					"The Flock & The Three Flows",
 					"+Valued Results",
@@ -45,11 +45,10 @@ public class ResponsesToComplexity
 					"=Software Development Excellence",
 					"=(Suspect All Systems)"
 			},
-		};
-	
-	String[][] complexity = 
-		{
+	};
 
+	String[][] complexity =
+	{
 			{
 					"Complexity Blah-Blah-Blah",
 					"+There’s Tons Of Theory",
@@ -63,38 +62,6 @@ public class ResponsesToComplexity
 					"++a pause in the flavor wars",
 					"++no rulesets or drop-in systems",
 					"++forces & relationships",
-					"+And We Already Have Some",
-					"++we can see the entire agile movement as a response",
-					"++find the parts of agility that work",
-					"++try to add new and different parts"
-			},
-			{
-					"Three Hard Ideas",
-					"+Intricacy Is Not Complexity",
-					"++not just pool with more balls",
-					"+++these balls have agency",
-					"+++these pockets move unpredictably",
-					"+++this table changes its shape",
-					"+The Predictability Knee",
-					"++linear vs non-linear",
-					"++distance to horizon",
-					"++eventual positive result isn’t guaranteed",
-					"+Step Tree vs Step Sequence",
-					"++the landscape moves *fast*",
-					"++we must genuinely re-assess after every single step",
-			},
-			{
-					"The Hardest Sale",
-					"+Code Is Not Coding Is Not Software Development",
-					"++code is intricate",
-					"++coding is damned hard",
-					"++s/w development is still *harder*",
-					" ",
-					"=in professional s/w development: ",
-					"=all-in, ",
-					"=all-the-time,",
-					"=all-around,",
-					"=complexity",
 			},
 			{
 					"Suspect All Systems!",
@@ -110,6 +77,35 @@ public class ResponsesToComplexity
 					"+++change *anything*  that isn’t working, and some things that are",
 					"+++argue a little, experiment a lot more",
 					"+++plausibility -> practice -> success -> acceptance",
+			},
+			{
+					"The Stock Metaphor: Plan This Trip",
+					"+We have...",
+					"+++... a US road atlas",
+					"+++... a beater car",
+					"+++... two mechanics",
+					"+++... four drivers",
+					"+++... three bosses",
+					"+++... five hundred dollars",
+					"+The Challenge",
+					"++We need to go from SF to NY in 15 days",
+					"++Plot a course",
+					"++Estimate every waypoint within a day",
+					"++Get to New York!",
+			},
+			{
+					"The Map Exploded",
+					"+A Hard Problem, But Not A Complex One",
+					"++the resource list is stable",
+					"++the locations are stable",
+					"+++SF",
+					"+++NY",
+					"+++every stop in between",
+					"++number & quality of roads",
+					"+(Not Included In Photo)",
+					"++that problem is too short",
+					"++mechanics can't fix everything",
+					"++the rules are often a huge problem",
 			},
 			{
 					"The Broadest Pattern",
@@ -227,9 +223,9 @@ public class ResponsesToComplexity
 					"+++the process",
 			},
 	};
-	
-	String[][] seeing2 = 
-		{
+
+	String[][] seeing2 =
+	{
 			{
 					"Seeing: Praxis",
 					"++retrospectives",
@@ -279,14 +275,14 @@ public class ResponsesToComplexity
 	{
 		common.clear();
 		slideActor = new Slide();
-//		showBlock(geepaw);
-//		showBlock(flockAndFlows);
-//		showBlock(complexity);
-//		showBlock(collaboration);
-//		showBlock(change);
+		showBlock(geepaw);
+		showBlock(flockAndFlows);
+		showBlock(complexity);
+		showBlock(collaboration);
+		showBlock(change);
 		slideActor.show(sequence, seeing1[0]);
-		Image image = new Image("/org/geepawhill/scripts/you-are-here.jpg",740d,900d,true,true);
-		ClipArt art = new ClipArt(image, new PointPair(800d,20d,1580d,880d));
+		Image image = new Image("/org/geepawhill/scripts/you-are-here.jpg", 740d, 900d, true, true);
+		ClipArt art = new ClipArt(image, new PointPair(800d, 20d, 1580d, 880d));
 		art.flip(sequence);
 		common.stop();
 		common.hide(art);

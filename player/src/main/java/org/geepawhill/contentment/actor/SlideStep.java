@@ -31,9 +31,12 @@ class SlideStep implements Instant
 	public void before(Context context)
 	{
 		group.getChildren().clear();
+		System.out.println("Before: "+oldNodes.size());
 		for(Node node : oldNodes)
 		{
 			group.getChildren().add(node);
+			Text t = (Text)node;
+			System.out.println("Restore: "+t.getText());
 		}
 	}
 
@@ -46,6 +49,12 @@ class SlideStep implements Instant
 		}
 		oldNodes.clear();
 		oldNodes.addAll(group.getChildren());
+		System.out.println("After: "+oldNodes.size());
+		for(Node node : oldNodes)
+		{
+			Text t = (Text)node;
+			System.out.println("Save: "+t.getText());
+		}
 		group.getChildren().clear();
 		group.getChildren().addAll(texts);
 	}
