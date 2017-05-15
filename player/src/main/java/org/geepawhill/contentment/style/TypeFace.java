@@ -33,6 +33,11 @@ public class TypeFace
 		};
 		return new Style(FACE, nickname, applier, font.getFamily() + " " + font.getSize());
 	}
+	
+	public static Style smallHand()
+	{
+		return font("SmallHand", new Font("Buxton Sketch", 22d), 1d, 1d);
+	}
 
 	public static Style mediumHand()
 	{

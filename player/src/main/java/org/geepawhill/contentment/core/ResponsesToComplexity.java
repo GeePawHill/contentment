@@ -1,11 +1,21 @@
 package org.geepawhill.contentment.core;
 
+import org.geepawhill.contentment.actor.Arrow;
+import org.geepawhill.contentment.actor.Letters;
+import org.geepawhill.contentment.actor.OvalText;
 import org.geepawhill.contentment.actor.Slide;
 import org.geepawhill.contentment.actors.ClipArt;
+import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.CommonSteps;
+import org.geepawhill.contentment.style.Dash;
+import org.geepawhill.contentment.style.Frames;
+import org.geepawhill.contentment.style.TypeFace;
+import org.geepawhill.contentment.timing.FixedTiming;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public class ResponsesToComplexity
 {
@@ -265,6 +275,10 @@ public class ResponsesToComplexity
 			}
 	};
 
+	private OvalText[] ovals;
+
+	private Format lineFormat;
+
 	public ResponsesToComplexity(Sequence sequence)
 	{
 		this.sequence = sequence;
@@ -273,22 +287,145 @@ public class ResponsesToComplexity
 
 	public void add()
 	{
+		Format labelFormat = new Format(TypeFace.mediumHand(), TypeFace.color("", Color.LIGHTBLUE, 1d));
+		Format smallLabelFormat = new Format(TypeFace.smallHand(), TypeFace.color("", Color.GREEN, 1d));
+		lineFormat = new Format(Frames.frame("", Color.GOLD, 2d, 1d), Dash.dash("", 3d));
+		Format ovalFormat = new Format(TypeFace.largeHand(), TypeFace.color("", Color.RED, 1d), Dash.solid(),
+				Frames.frame("", Color.RED, 3d, 1d));
 		common.clear();
-		slideActor = new Slide();
-		showBlock(geepaw);
-		showBlock(flockAndFlows);
-		showBlock(complexity);
-		showBlock(collaboration);
-		showBlock(change);
-		slideActor.show(sequence, seeing1[0]);
-		Image image = new Image("/org/geepawhill/scripts/you-are-here.jpg", 740d, 900d, true, true);
-		ClipArt art = new ClipArt(image, new PointPair(800d, 20d, 1580d, 880d));
+		Image image = new Image("/org/geepawhill/scripts/usOutline.png", 1500d, 800d, true, true);
+		ClipArt art = new ClipArt(image, new PointPair(150d, 50d, 1550d, 850d));
 		art.flip(sequence);
+		Image redBall = new Image("/org/geepawhill/scripts/redBall.png", 50d, 50d, true, true);
+		ClipArt sf = new ClipArt(redBall, new PointPair(200d, 400d, 0d, 0d));
+		Letters sfLetters = new Letters("San Francisco", new Point(245d, 390d), labelFormat);
+		sfLetters.sketch(sequence, FixedTiming.INSTANT);
+		sf.flip(sequence);
+		ClipArt ny = new ClipArt(redBall, new PointPair(1280d, 200d, 0d, 0d));
+		Letters nyLetters = new Letters("New York", new Point(1300d, 200d), labelFormat);
+		nyLetters.sketch(sequence, FixedTiming.INSTANT);
+		ny.flip(sequence);
 		common.stop();
-		common.hide(art);
-		showBlock(seeing2);
-		showBlock(conclusion);
-		showBlock(flockAndFlows);
+
+		Image blueBall = new Image("/org/geepawhill/scripts/blueBall.png", 25d, 25d, true, true);
+		ClipArt reno = new ClipArt(blueBall, new PointPair(320d, 360d, 0d, 0d));
+		reno.flip(sequence);
+		Letters renoLetters = new Letters("Reno", new Point(320d, 360d), smallLabelFormat);
+		renoLetters.sketch(sequence, FixedTiming.INSTANT);
+		reno.flip(sequence);
+
+		ClipArt lasVegas = new ClipArt(blueBall, new PointPair(340d, 420d, 0d, 0d));
+		lasVegas.flip(sequence);
+		Letters lasVegasLetters = new Letters("Las Vegas", new Point(340, 420d), smallLabelFormat);
+		lasVegasLetters.sketch(sequence, FixedTiming.INSTANT);
+		lasVegas.flip(sequence);
+
+		ClipArt saltLake = new ClipArt(blueBall, new PointPair(440d, 400d, 0d, 0d));
+		saltLake.flip(sequence);
+		Letters saltLakeLetters = new Letters("Salt Lake", new Point(440, 400d), smallLabelFormat);
+		saltLakeLetters.sketch(sequence, FixedTiming.INSTANT);
+		saltLake.flip(sequence);
+
+		ClipArt grandCanyon = new ClipArt(blueBall, new PointPair(410d, 480d, 0d, 0d));
+		grandCanyon.flip(sequence);
+		Letters grandCanyonLetters = new Letters("Grand Canyon", new Point(410d, 480d), smallLabelFormat);
+		grandCanyonLetters.sketch(sequence, FixedTiming.INSTANT);
+		grandCanyon.flip(sequence);
+		common.stop();
+
+		Arrow sfReno = new Arrow(sf, false, reno, true, lineFormat);
+		sfReno.sketch(sequence, 1d);
+
+		Arrow sfLasVegas = new Arrow(sf, false, lasVegas, true, lineFormat);
+		sfLasVegas.sketch(sequence, 1d);
+
+		Arrow renoSaltLake = new Arrow(reno, false, saltLake, true, lineFormat);
+		renoSaltLake.sketch(sequence, 1d);
+
+		Arrow lasVegasGrandCanyon = new Arrow(lasVegas, false, grandCanyon, true, lineFormat);
+		lasVegasGrandCanyon.sketch(sequence, 1d);
+
+		Arrow lasVegasSaltLake = new Arrow(lasVegas, false, saltLake, true, lineFormat);
+		lasVegasSaltLake.sketch(sequence, 1d);
+		common.stop();
+		common.clear();
+
+
+		Point points[] =
+		{
+				new Point(220d, 400d),
+				new Point(375d, 608d),
+				new Point(510d, 208d),
+				new Point(570d, 448d),
+				new Point(810d, 224d),
+				new Point(600d, 688d),
+				new Point(860d, 668d),
+				new Point(1020d, 400d),
+				new Point(1275d, 256d),
+				new Point(1120d, 608d),
+				new Point(1370d, 588d),
+				// new Point(1000d,200d),
+				// new Point(910d,440d),
+				// new Point(1100d,300d),
+				// new Point(1130d,420d),
+				new Point(1500d, 352d),
+		};
+
+		ovals = new OvalText[points.length];
+
+		int i = 0;
+		for (Point point : points)
+		{
+			ovals[i] = new OvalText("" + i, points[i], ovalFormat);
+			ovals[i].sketch(sequence, 1d);
+			i += 1;
+		}
+
+		Arrow a0_1 = arrow(0, 1);
+		Arrow a0_2 = arrow(0, 2);
+		Arrow a0_3 = arrow(0, 3);
+		Arrow a1_5 = arrow(1, 5);
+		Arrow a2_3 = arrow(2, 3);
+		Arrow a2_4 = arrow(2, 4);
+		Arrow a3_7 = arrow(3, 7);
+		Arrow a4_7 = arrow(4, 7);
+		Arrow a6_9 = arrow(6, 9);
+		Arrow a6_7 = arrow(6, 7);
+		Arrow a5_6 = arrow(5, 6);
+		Arrow a7_8 = arrow(7, 8);
+		Arrow a9_10 = arrow(9,10);
+		Arrow a10_11 = arrow(10,11);
+		Arrow a8_11 = arrow(8,11);
+
+		// Arrow aB = new Arrow(otA,false,otB,true,lineFormat);
+		// aB.sketch(sequence,1d);
+
+		common.stop();
+
+		// slideActor = new Slide();
+		// showBlock(geepaw);
+		// showBlock(flockAndFlows);
+		// showBlock(complexity);
+		// showBlock(collaboration);
+		// showBlock(change);
+		// slideActor.show(sequence, seeing1[0]);
+		// Image image = new Image("/org/geepawhill/scripts/you-are-here.jpg",
+		// 740d, 900d, true, true);
+		// ClipArt art = new ClipArt(image, new PointPair(800d, 20d, 1580d,
+		// 880d));
+		// art.flip(sequence);
+		// common.stop();
+		// common.hide(art);
+		// showBlock(seeing2);
+		// showBlock(conclusion);
+		// showBlock(flockAndFlows);
+	}
+
+	private Arrow arrow(int from, int to)
+	{
+		Arrow arrow = new Arrow(ovals[from], false, ovals[to], true, lineFormat);
+		arrow.sketch(sequence, 1d);
+		return arrow;
 	}
 
 	public void showBlock(String[][] blocks)
