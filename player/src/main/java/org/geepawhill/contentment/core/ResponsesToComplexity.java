@@ -16,6 +16,7 @@ import org.geepawhill.contentment.timing.FixedTiming;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class ResponsesToComplexity
 {
@@ -289,7 +290,7 @@ public class ResponsesToComplexity
 	{
 		Format labelFormat = new Format(TypeFace.mediumHand(), TypeFace.color("", Color.LIGHTBLUE, 1d));
 		Format smallLabelFormat = new Format(TypeFace.smallHand(), TypeFace.color("", Color.GREEN, 1d));
-		lineFormat = new Format(Frames.frame("", Color.GOLD, 2d, 1d), Dash.dash("", 3d));
+		lineFormat = new Format(Frames.frame("", Color.AQUAMARINE, 2d, 1d), Dash.dash("", 3d));
 		Format ovalFormat = new Format(TypeFace.largeHand(), TypeFace.color("", Color.RED, 1d), Dash.solid(),
 				Frames.frame("", Color.RED, 3d, 1d));
 		common.clear();
@@ -397,28 +398,20 @@ public class ResponsesToComplexity
 		Arrow a10_11 = arrow(10,11);
 		Arrow a8_11 = arrow(8,11);
 
-		// Arrow aB = new Arrow(otA,false,otB,true,lineFormat);
-		// aB.sketch(sequence,1d);
-
 		common.stop();
-
-		// slideActor = new Slide();
-		// showBlock(geepaw);
-		// showBlock(flockAndFlows);
-		// showBlock(complexity);
-		// showBlock(collaboration);
-		// showBlock(change);
-		// slideActor.show(sequence, seeing1[0]);
-		// Image image = new Image("/org/geepawhill/scripts/you-are-here.jpg",
-		// 740d, 900d, true, true);
-		// ClipArt art = new ClipArt(image, new PointPair(800d, 20d, 1580d,
-		// 880d));
-		// art.flip(sequence);
-		// common.stop();
-		// common.hide(art);
-		// showBlock(seeing2);
-		// showBlock(conclusion);
-		// showBlock(flockAndFlows);
+		Paint highlight = Color.GOLD;
+		common.reColor(ovals[0], highlight);
+		common.reColor(a0_3, highlight);
+		common.reColor(ovals[3], highlight);
+		common.reColor(a3_7, highlight);
+		common.reColor(ovals[7], highlight);
+		common.reColor(a7_8, highlight);
+		common.reColor(ovals[8], highlight);
+		common.reColor(a8_11, highlight);
+		common.reColor(ovals[11],highlight);
+		
+		common.stop();
+		
 	}
 
 	private Arrow arrow(int from, int to)

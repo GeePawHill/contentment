@@ -16,6 +16,7 @@ import org.geepawhill.contentment.timing.TimingBuilder;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
 public class OvalText implements Actor
@@ -40,7 +41,8 @@ public class OvalText implements Actor
 		ovalStep = new HandOvalStep(new RelativeTiming(.4d), new PointPair(0d, 0d, 0d, 0d), format);
 		this.group = JfxUtility.makeGroup(this, text, ovalStep.shape());
 	}
-
+	
+	
 	public String nickname()
 	{
 		return nickname;

@@ -1,7 +1,10 @@
 package org.geepawhill.contentment.step;
 
+import org.geepawhill.contentment.actor.ColorFlipStep;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.model.Actor;
+
+import javafx.scene.paint.Paint;
 
 public class CommonSteps
 {
@@ -51,5 +54,11 @@ public class CommonSteps
 		if(delay<0) delay = 1d;
 		sequence.add(new DelayStep(delay));
 	}
+	
+	public void reColor(Actor actor,Paint paint)
+	{
+		sequence.add(new ColorFlipStep(actor,paint));
+	}
+
 
 }
