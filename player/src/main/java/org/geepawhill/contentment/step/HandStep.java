@@ -43,7 +43,7 @@ public class HandStep implements ShapeStep
 		this.points = points;
 		format.apply(Frames.KEY, path);
 		format.apply(Dash.KEY, path);
-		interpolator.clear(points, points.northwest());
+		interpolator.clear(points.northwest());
 		int count = (int) (points.distance() * .2d);
 		interpolator.addCurve(chooseControlPoints(), count);
 	}
