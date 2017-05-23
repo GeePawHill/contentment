@@ -24,7 +24,7 @@ public class BezierInterpolator
 	}
 
 	private Path path;
-	private ArrayList<Segment> segments;
+	public ArrayList<Segment> segments;
 	private double fractionPerStep;
 
 	public BezierInterpolator(Path path)

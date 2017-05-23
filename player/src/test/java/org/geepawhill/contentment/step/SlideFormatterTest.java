@@ -50,45 +50,45 @@ public class SlideFormatterTest
 	public void titleAttributes()
 	{
 		Text text = formatter.layout("Line").get(0);
-		assertEquals(new Font("Buxton Sketch",100d),text.getFont());
-		assertEquals(Color.YELLOW,text.getStroke());
-		assertEquals(Color.YELLOW,text.getFill());
+		assertEquals(new Font(SlideLine.BASE_FONT,100d),text.getFont());
+		assertEquals(SlideFormatter.PAINT_TITLE,text.getStroke());
+		assertEquals(SlideFormatter.PAINT_TITLE,text.getFill());
 	}
 	
 	@Test
 	public void oneAttributes()
 	{
 		Text text = formatter.layout("+Line").get(0);
-		assertEquals(new Font("Buxton Sketch",80d),text.getFont());
-		assertEquals(Color.YELLOWGREEN,text.getStroke());
-		assertEquals(Color.YELLOWGREEN,text.getFill());
+		assertEquals(new Font(SlideLine.BASE_FONT,80d),text.getFont());
+		assertEquals(SlideFormatter.PAINT_1,text.getStroke());
+		assertEquals(SlideFormatter.PAINT_1,text.getFill());
 	}
 	
 	@Test
 	public void twoAttributes()
 	{
 		Text text = formatter.layout("++Line").get(0);
-		assertEquals(new Font("Buxton Sketch",60d),text.getFont());
-		assertEquals(Color.BLUE,text.getStroke());
-		assertEquals(Color.BLUE,text.getFill());
+		assertEquals(new Font(SlideLine.BASE_FONT,60d),text.getFont());
+		assertEquals(SlideFormatter.PAINT_2,text.getStroke());
+		assertEquals(SlideFormatter.PAINT_2,text.getFill());
 	}
 	
 	@Test
 	public void threeAttributes()
 	{
 		Text text = formatter.layout("+++Line").get(0);
-		assertEquals(new Font("Buxton Sketch",40d),text.getFont());
-		assertEquals(Color.RED,text.getStroke());
-		assertEquals(Color.RED,text.getFill());
+		assertEquals(new Font(SlideLine.BASE_FONT,40d),text.getFont());
+		assertEquals(SlideFormatter.PAINT_3,text.getStroke());
+		assertEquals(SlideFormatter.PAINT_3,text.getFill());
 	}
 	
 	@Test
 	public void centerAttributes()
 	{
 		Text text = formatter.layout("=Line").get(0);
-		assertEquals(new Font("Buxton Sketch",100d),text.getFont());
-		assertEquals(Color.YELLOW,text.getStroke());
-		assertEquals(Color.YELLOW,text.getFill());
+		assertEquals(new Font(SlideLine.BASE_FONT,100d),text.getFont());
+		assertEquals(SlideFormatter.PAINT_TITLE,text.getStroke());
+		assertEquals(SlideFormatter.PAINT_TITLE,text.getFill());
 	}
 	
 	@Test

@@ -14,6 +14,8 @@ public class SlideLine
 	public final Text text;
 	public final Layout layout;
 	
+	static public final String BASE_FONT = "Buxton Sketch";
+	
 	public SlideLine(String line, int start, double size, Paint paint, Layout layout)
 	{
 		text = new Text(line.substring(start));
@@ -22,9 +24,10 @@ public class SlideLine
 //		text.setFont(new Font("Caveat Brush", size));
 //		text.setFont(new Font("Gloria Hallelujah", size));
 //		text.setFont(new Font("GoodDog", size));
-		text.setFont(Font.font("GoodDog", FontWeight.NORMAL, FontPosture.ITALIC,size));
+//		text.setFont(Font.font("GoodDog", FontWeight.NORMAL, FontPosture.ITALIC,size));
 //		text.setFont(new Font("WCManoNegraBta-Bold", size));
 //		text.setFont(new Font("BelligerentMadness", size));
+		text.setFont(new Font(BASE_FONT,size));
 		text.setStroke(paint);
 		text.setFill(paint);
 		this.layout = layout;

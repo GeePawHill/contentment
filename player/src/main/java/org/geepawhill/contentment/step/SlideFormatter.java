@@ -14,6 +14,10 @@ import javafx.scene.transform.Translate;
 public class SlideFormatter
 {
 
+	public static final Color PAINT_TITLE = Color.rgb(255, 255, 0);
+	public static final Color PAINT_1 = Color.rgb(71,240,48);
+	public static final Color PAINT_2 = Color.rgb(0,176,240);
+	public static final Color PAINT_3 = Color.RED;
 	public static final double VMARGIN = 20d;
 	public static final double HMARGIN = 40d;
 
@@ -98,23 +102,23 @@ public class SlideFormatter
 	{
 		if (source.startsWith("+++"))
 		{
-			return new SlideLine(source, 3, 40d, Color.RED, Layout.INDENT);
+			return new SlideLine(source, 3, 40d, PAINT_3, Layout.INDENT);
 		}
 		else if (source.startsWith("++"))
 		{
-			return new SlideLine(source, 2, 60d, Color.rgb(0,176,240), Layout.LEFT);
+			return new SlideLine(source, 2, 60d, PAINT_2, Layout.LEFT);
 		}
 		else if (source.startsWith("+"))
 		{
-			return new SlideLine(source, 1, 80d, Color.rgb(71,240,48), Layout.RIGHT);
+			return new SlideLine(source, 1, 80d, PAINT_1, Layout.RIGHT);
 		}
 		else if (source.startsWith("="))
 		{
-			return new SlideLine(source, 1, 100d, Color.rgb(255, 255, 0), Layout.CENTER);
+			return new SlideLine(source, 1, 100d, PAINT_TITLE, Layout.CENTER);
 		}
 		else
 		{
-			return new SlideLine(source, 0, 100d, Color.rgb(255, 255, 0), Layout.LEFT);
+			return new SlideLine(source, 0, 100d, PAINT_TITLE, Layout.LEFT);
 		}
 	}
 
