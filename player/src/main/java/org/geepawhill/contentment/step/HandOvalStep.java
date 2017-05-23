@@ -28,10 +28,10 @@ public class HandOvalStep implements ShapeStep
 	private Jiggler controlJiggler;
 	private Jiggler northJiggler;
 
-	public HandOvalStep(Timing timing, PointPair points, Format format)
+	public HandOvalStep(Timing timing, Format format)
 	{
 		this.timing = timing;
-		this.points = points;
+		this.points = null;
 		this.path = new Path();
 		this.format = format;
 		this.interpolator = new BezierInterpolator(path);

@@ -38,7 +38,7 @@ public class OvalText implements Actor
 		this.source = source;
 		this.format = format;
 		text = new Text(center.x, center.y, "");
-		ovalStep = new HandOvalStep(new RelativeTiming(.4d), new PointPair(0d, 0d, 0d, 0d), format);
+		ovalStep = new HandOvalStep(new RelativeTiming(.4d), format);
 		this.group = JfxUtility.makeGroup(this, text, ovalStep.shape());
 	}
 	
