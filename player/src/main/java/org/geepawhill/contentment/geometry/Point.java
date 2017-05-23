@@ -73,4 +73,14 @@ public class Point
 		return new Point(newX,newY);
 	}
 
+	public Point add(double xmove, double ymove)
+	{
+		return new Point(x+xmove,y+ymove);
+	}
+
+	public Point add(Point add)
+	{
+		return add(add.x,add.y);
+	}
+
 }

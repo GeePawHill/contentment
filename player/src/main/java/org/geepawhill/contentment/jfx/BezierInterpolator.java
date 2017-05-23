@@ -67,29 +67,26 @@ public class BezierInterpolator
 
 		/* Compute forward differences from Bezier points and "h" */
 
-		double pointX = dx;
-		double pointY = dy;
+		Point cubic = new Point(dx,dy);
 
 		double firstFDX = ax * (h * h * h) + bx * (h * h) + cx * h;
 		double firstFDY = ay * (h * h * h) + by * (h * h) + cy * h;
+		Point cubicDifference = new Point(firstFDX,firstFDY);
 
 		double secondFDX = 6 * ax * (h * h * h) + 2 * bx * (h * h);
 		double secondFDY = 6 * ay * (h * h * h) + 2 * by * (h * h);
+		Point quadraticDifference = new Point(secondFDX,secondFDY);
 
 		double thirdFDX = 6 * ax * (h * h * h);
 		double thirdFDY = 6 * ay * (h * h * h);
+		Point linearDifference = new Point(thirdFDX,thirdFDY);
 
 		for (int i = 0; i < numSteps; i++)
 		{
-			pointX += firstFDX;
-			pointY += firstFDY;
-
-			firstFDX += secondFDX;
-			firstFDY += secondFDY;
-
-			secondFDX += thirdFDX;
-			secondFDY += thirdFDY;
-			segments.add(new Segment(jiggler.jiggle(new Point(pointX, pointY))));
+			cubic = cubic.add(cubicDifference);
+			cubicDifference = cubicDifference.add(quadraticDifference);
+			quadraticDifference = quadraticDifference.add(linearDifference);
+			segments.add(new Segment(jiggler.jiggle(cubic)));
 		}
 		fractionPerStep = 1d / (double) segments.size();
 	}
@@ -105,5 +102,10 @@ public class BezierInterpolator
 			segment.finished = true;
 			if (segmentFraction > fraction) break;
 		}
+	}
+	
+	public void interpolate2(double fraction)
+	{
+		
 	}
 }
