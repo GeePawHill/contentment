@@ -1,8 +1,8 @@
 package org.geepawhill.contentment.step;
 
+import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.ColorFlipStep;
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.model.Actor;
 
 import javafx.scene.paint.Paint;
 

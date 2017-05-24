@@ -1,12 +1,12 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.OnFinished;
+import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
-import org.geepawhill.contentment.model.OnFinished;
-import org.geepawhill.contentment.model.Step;
-import org.geepawhill.contentment.model.Timing;
 import org.geepawhill.contentment.style.TypeFace;
+import org.geepawhill.contentment.timing.Timing;
 
 import javafx.animation.Transition;
 import javafx.scene.text.Text;

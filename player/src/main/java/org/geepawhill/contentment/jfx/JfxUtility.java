@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.jfx;
 
+import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.model.Actor;
 
 import javafx.scene.Group;
 import javafx.scene.Node;

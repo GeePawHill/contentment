@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.model.Actor;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.Entrance;
 

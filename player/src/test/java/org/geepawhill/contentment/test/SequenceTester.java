@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.test;
 
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.model.Step;
+import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.outline.KeyValue;
 import org.geepawhill.contentment.outline.KvVisualMatcher;
 import org.geepawhill.contentment.step.Instant;

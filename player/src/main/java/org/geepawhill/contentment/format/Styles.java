@@ -2,8 +2,8 @@ package org.geepawhill.contentment.format;
 
 import java.util.HashMap;
 
-import org.geepawhill.contentment.model.Outliner;
 import org.geepawhill.contentment.outline.KvOutline;
+import org.geepawhill.contentment.outline.Outliner;
 
 public class Styles implements Outliner
 {

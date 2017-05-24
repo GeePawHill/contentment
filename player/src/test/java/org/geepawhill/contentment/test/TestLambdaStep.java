@@ -1,9 +1,9 @@
 package org.geepawhill.contentment.test;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.model.OnFinished;
-import org.geepawhill.contentment.model.Step;
-import org.geepawhill.contentment.model.Timing;
+import org.geepawhill.contentment.core.OnFinished;
+import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.timing.Timing;
 
 class TestLambdaStep implements Step {
 	

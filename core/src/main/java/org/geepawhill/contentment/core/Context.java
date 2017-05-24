@@ -1,5 +1,6 @@
 package org.geepawhill.contentment.core;
 
+import org.geepawhill.contentment.actor.Actors;
 import org.geepawhill.contentment.outline.KvOutline;
 
 import javafx.scene.Group;

@@ -1,6 +1,4 @@
-package org.geepawhill.contentment.model;
-
-import org.geepawhill.contentment.timing.FixedTiming;
+package org.geepawhill.contentment.timing;
 
 public interface Timing
 {

@@ -1,15 +1,13 @@
 package org.geepawhill.contentment.actor;
 
-import org.geepawhill.contentment.core.ActorOutliner;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.model.Actor;
-import org.geepawhill.contentment.model.Timing;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.timing.RelativeTiming;
+import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.timing.TimingBuilder;
 import org.geepawhill.contentment.utility.Names;
 

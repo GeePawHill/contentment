@@ -1,4 +1,6 @@
-package org.geepawhill.contentment.model;
+package org.geepawhill.contentment.actor;
+
+import org.geepawhill.contentment.outline.Outliner;
 
 import javafx.scene.Group;
 

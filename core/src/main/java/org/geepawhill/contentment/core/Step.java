@@ -1,6 +1,6 @@
-package org.geepawhill.contentment.model;
+package org.geepawhill.contentment.core;
 
-import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.timing.Timing;
 
 public interface Step
 {

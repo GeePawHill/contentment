@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.model.PlayState;
-import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.outline.KvOutline;
 
 import javafx.scene.Group;

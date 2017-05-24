@@ -1,12 +1,11 @@
 package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.JfxUtility;
-import org.geepawhill.contentment.model.Actor;
-import org.geepawhill.contentment.model.Step;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.BoundsStep;
 import org.geepawhill.contentment.step.Entrance;

@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.format;
 
-import org.geepawhill.contentment.model.Outliner;
 import org.geepawhill.contentment.outline.KvOutline;
+import org.geepawhill.contentment.outline.Outliner;
 
 import javafx.scene.shape.Shape;
 

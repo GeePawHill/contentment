@@ -1,8 +1,8 @@
 package org.geepawhill.contentment.step;
 
+import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.jfx.JfxUtility;
-import org.geepawhill.contentment.model.Actor;
 
 public class Entrance implements Instant
 {

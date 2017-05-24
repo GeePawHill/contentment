@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.model.Actor;
 import org.geepawhill.contentment.step.Instant;
 
 import javafx.scene.Node;

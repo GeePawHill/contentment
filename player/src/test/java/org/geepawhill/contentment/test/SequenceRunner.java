@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.model.Step;
+import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.application.Platform;

@@ -1,17 +1,15 @@
 package org.geepawhill.contentment.actor;
 
-import org.geepawhill.contentment.core.ActorOutliner;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
-import org.geepawhill.contentment.model.Actor;
-import org.geepawhill.contentment.model.Timing;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.step.FadeStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.timing.FixedTiming;
+import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.animation.TranslateTransition;

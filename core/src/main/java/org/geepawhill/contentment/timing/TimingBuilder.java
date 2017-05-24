@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.timing;
 
-import org.geepawhill.contentment.model.Step;
-import org.geepawhill.contentment.model.Timing;
+import org.geepawhill.contentment.core.Step;
 
 public class TimingBuilder
 {
