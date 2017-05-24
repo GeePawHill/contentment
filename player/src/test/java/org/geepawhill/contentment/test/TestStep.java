@@ -11,7 +11,6 @@ public class TestStep implements Step
 	
 	public boolean isBefore;
 	public boolean isPlaying;
-	public boolean isPaused;
 	public boolean isChanged;
 	private OnFinished onFinished;
 	
@@ -20,7 +19,6 @@ public class TestStep implements Step
 	{
 		isBefore=true;
 		isPlaying=false;
-		isPaused=false;
 		isChanged=false;
 	}
 
@@ -30,7 +28,6 @@ public class TestStep implements Step
 		isBefore=false;
 		isPlaying=false;
 		isChanged=true;
-		isPaused=false;
 	}
 
 	@Override
@@ -39,7 +36,6 @@ public class TestStep implements Step
 		isBefore=true;
 		isPlaying=false;
 		isChanged=true;
-		isPaused=false;
 	}
 	
 	@Override
@@ -51,24 +47,10 @@ public class TestStep implements Step
 		isChanged=true;
 	}
 	
-	@Override
-	public void pause(Context context)
-	{
-		isChanged=true;
-		isPaused=true;
-	}
-
-	@Override
-	public void resume(Context context) {
-		isPaused=false;
-		isChanged=true;
-	}
-
 	public void finishPlaying()
 	{
 		isPlaying=false;
 		isBefore=false;
-		isPaused=false;
 		onFinished.run();
 		
 	}

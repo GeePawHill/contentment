@@ -50,16 +50,6 @@ public class SetTitleStep implements Step
 	}
 
 	@Override
-	public void pause(Context context)
-	{
-	}
-
-	@Override
-	public void resume(Context context)
-	{
-	}
-
-	@Override
 	public Timing timing()
 	{
 		return FixedTiming.INSTANT;

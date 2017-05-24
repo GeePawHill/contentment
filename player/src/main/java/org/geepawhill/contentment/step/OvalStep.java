@@ -58,18 +58,6 @@ public class OvalStep implements Step
 	}
 
 	@Override
-	public void pause(Context context)
-	{
-		transition.pause();
-	}
-
-	@Override
-	public void resume(Context context)
-	{
-		transition.play();
-	}
-
-	@Override
 	public Timing timing()
 	{
 		return timing;

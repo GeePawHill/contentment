@@ -44,16 +44,4 @@ public class ShowStep implements Step
 		after(context);
 		onFinished.run();
 	}
-
-	@Override
-	public void pause(Context context)
-	{
-	}
-
-	@Override
-	public void resume(Context context)
-	{
-	}
-
-
 }

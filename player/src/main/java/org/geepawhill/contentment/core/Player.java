@@ -52,7 +52,6 @@ public class Player
 			return;
 		case Playing:
 		case Before:
-		case Paused:
 			incrementToMarkedOrLast();
 		}
 	}
@@ -64,7 +63,6 @@ public class Player
 		default:
 		case After:
 		case Playing:
-		case Paused:
 		case Before:
 			decrementToMarkedOrZero();
 		}
@@ -103,26 +101,6 @@ public class Player
 		case Before:
 			playCurrent();
 			return;
-		case Paused:
-			resumeCurrent();
-			return;
-		}
-	}
-
-	public void pause()
-	{
-		switch (state)
-		{
-		default:
-		case After:
-		case Before:
-			return;
-		case Paused:
-			resumeCurrent();
-			return;
-		case Playing:
-			pauseCurrent();
-			return;
 		}
 	}
 
@@ -144,9 +122,6 @@ public class Player
 			return;
 		case Before:
 			playCurrent();
-			return;
-		case Paused:
-			resumeCurrent();
 			return;
 		}
 	}
@@ -202,22 +177,10 @@ public class Player
 		return current == size() - 1;
 	}
 
-	private void resumeCurrent()
-	{
-		state = PlayState.Playing;
-		currentStep().resume(context);
-	}
-
 	private void playCurrent()
 	{
 		state = PlayState.Playing;
 		currentStep().play(context, this::onFinished);
-	}
-
-	private void pauseCurrent()
-	{
-		state = PlayState.Paused;
-		currentStep().pause(context);
 	}
 
 	private void onFinished()

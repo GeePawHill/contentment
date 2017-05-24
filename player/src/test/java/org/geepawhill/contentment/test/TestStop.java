@@ -47,19 +47,6 @@ public class TestStop extends StopStep
 		isChanged=true;
 	}
 	
-	@Override
-	public void pause(Context context)
-	{
-		isChanged=true;
-		isPaused=true;
-	}
-
-	@Override
-	public void resume(Context context) {
-		isPaused=false;
-		isChanged=true;
-	}
-
 	public void finishPlaying()
 	{
 		isPlaying=false;

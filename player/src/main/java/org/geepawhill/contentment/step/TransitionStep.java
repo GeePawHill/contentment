@@ -43,17 +43,4 @@ public class TransitionStep implements Step
 		transition.setOnFinished((event) -> onFinished.run());
 		transition.play();
 	}
-
-	@Override
-	public void pause(Context context)
-	{
-		transition.pause();
-	}
-
-	@Override
-	public void resume(Context context)
-	{
-		transition.play();
-	}
-
 }
