@@ -1,3 +1,5 @@
-include 'contentment'
 include 'player'
-include 'script'
+include 'core'
+include 'geepaw'
+include 'demo'
+

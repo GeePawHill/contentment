@@ -10,5 +10,4 @@ dependencies {
 	testCompile group: 'org.testfx', name: 'testfx-junit', version: '4.0.4-alpha'
 	testCompile 'org.assertj:assertj-core:3.6.2'
     compile 'junit:junit:4.12'
-	compile project(':core')
 }
