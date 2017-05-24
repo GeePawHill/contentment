@@ -16,7 +16,6 @@ import org.geepawhill.contentment.timing.TimingBuilder;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
 public class OvalText implements Actor

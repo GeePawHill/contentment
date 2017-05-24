@@ -351,7 +351,6 @@ public class ResponsesToComplexity
 		common.stop();
 		common.clear();
 
-
 		Point points[] =
 		{
 				new Point(220d, 400d),
@@ -374,29 +373,27 @@ public class ResponsesToComplexity
 
 		ovals = new OvalText[points.length];
 
-		int i = 0;
-		for (Point point : points)
+		for (int i = 0; i < points.length; i++)
 		{
 			ovals[i] = new OvalText("" + i, points[i], ovalFormat);
 			ovals[i].sketch(sequence, 1d);
-			i += 1;
 		}
 
-		Arrow a0_1 = arrow(0, 1);
-		Arrow a0_2 = arrow(0, 2);
+		arrow(0, 1);
+		arrow(0, 2);
 		Arrow a0_3 = arrow(0, 3);
-		Arrow a1_5 = arrow(1, 5);
-		Arrow a2_3 = arrow(2, 3);
-		Arrow a2_4 = arrow(2, 4);
+		arrow(1, 5);
+		arrow(2, 3);
+		arrow(2, 4);
 		Arrow a3_7 = arrow(3, 7);
-		Arrow a4_7 = arrow(4, 7);
-		Arrow a6_9 = arrow(6, 9);
-		Arrow a6_7 = arrow(6, 7);
-		Arrow a5_6 = arrow(5, 6);
+		arrow(4, 7);
+		arrow(6, 9);
+		arrow(6, 7);
+		arrow(5, 6);
 		Arrow a7_8 = arrow(7, 8);
-		Arrow a9_10 = arrow(9,10);
-		Arrow a10_11 = arrow(10,11);
-		Arrow a8_11 = arrow(8,11);
+		arrow(9, 10);
+		arrow(10, 11);
+		Arrow a8_11 = arrow(8, 11);
 
 		common.stop();
 		Paint highlight = Color.GOLD;
@@ -408,10 +405,10 @@ public class ResponsesToComplexity
 		common.reColor(a7_8, highlight);
 		common.reColor(ovals[8], highlight);
 		common.reColor(a8_11, highlight);
-		common.reColor(ovals[11],highlight);
-		
+		common.reColor(ovals[11], highlight);
+
 		common.stop();
-		
+
 	}
 
 	private Arrow arrow(int from, int to)

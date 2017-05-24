@@ -68,11 +68,11 @@ public class PlayerView
 
 	private void makeScripts(Sequence sequence)
 	{
-//		new BaseComplications(sequence).add();
-//		new InteractiveStabilization(sequence).add();
-//		new AgentAndPokes(sequence).add();
-//		new GeekNeeqOne(sequence).add();
-//		new VisibleGeekLa1(sequence).add();
+		new BaseComplications(sequence).add();
+		new InteractiveStabilization(sequence).add();
+		new AgentAndPokes(sequence).add();
+		new GeekNeeqOne(sequence).add();
+		new VisibleGeekLa1(sequence).add();
 		new ResponsesToComplexity(sequence).add();
 		player.reset(sequence);
 	}
@@ -101,10 +101,6 @@ public class PlayerView
 		Button play = new Button(">");
 		play.setOnAction(event -> player.play());
 		tools.getItems().add(play);
-
-		Button pause = new Button("||");
-		pause.setOnAction(event -> player.pause());
-		tools.getItems().add(pause);
 
 		Button playOne = new Button(">|");
 		playOne.setOnAction(event -> player.playOne());

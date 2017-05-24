@@ -1,13 +1,12 @@
 package org.geepawhill.contentment.step;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 

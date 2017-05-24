@@ -1,7 +1,5 @@
 package org.geepawhill.contentment.core;
 
-import java.net.URL;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
