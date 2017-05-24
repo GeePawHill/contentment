@@ -14,6 +14,7 @@ public class Main extends Application
 	{
 		try
 		{
+			CoreInterface i = null;
 			preloadFontFile("/org/geepawhill/scripts/SAMUELS.TTF");
 			preloadFontFile("/org/geepawhill/scripts/CaveatBrush-Regular.TTF");
 			preloadFontFile("/org/geepawhill/scripts/gloriahallelujah.TTF");

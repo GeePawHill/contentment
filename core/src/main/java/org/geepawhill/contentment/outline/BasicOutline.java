@@ -3,8 +3,6 @@ package org.geepawhill.contentment.outline;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.geepawhill.contentment.model.Outline;
-
 import javafx.scene.control.TreeItem;
 
 public class BasicOutline<T> implements Outline<T>

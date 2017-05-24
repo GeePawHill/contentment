@@ -4,10 +4,10 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import org.geepawhill.contentment.model.Outline;
 import org.geepawhill.contentment.outline.KeyValue;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.outline.Line;
+import org.geepawhill.contentment.outline.Outline;
 
 import javafx.scene.control.TreeItem;
 
