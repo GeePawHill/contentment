@@ -1,7 +1,5 @@
 package org.geepawhill.contentment.geepaw;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class GeePawInterfaceTest
