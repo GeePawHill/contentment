@@ -2,11 +2,16 @@ package org.geepawhill.contentment.outline;
 
 import java.util.Comparator;
 
-public class ValueItemComparator implements Comparator<ValueItem>
+public class ValueItemComparator 
 {
 
-	@Override
 	public int compare(ValueItem o1, ValueItem o2)
+	{
+		int result = compareKeys(o1,o2);
+		return result==0 ? o1.value.compareTo(o2.value) : result;
+	}
+	
+	public int compareKeys(ValueItem o1, ValueItem o2)
 	{
 		int result = o1.keys.length - o2.keys.length;
 		if(result!=0) return result;
@@ -15,7 +20,7 @@ public class ValueItemComparator implements Comparator<ValueItem>
 			result = o1.keys[k].compareTo(o2.keys[k]);
 			if(result!=0) return result;
 		}
-		return o1.value.compareTo(o2.value);
+		return 0;
 	}
 	
 }
