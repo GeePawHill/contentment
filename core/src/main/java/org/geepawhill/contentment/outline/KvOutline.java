@@ -16,22 +16,22 @@ public class KvOutline implements Outline<KeyValue>
 	
 	public void append(String key)
 	{
-		append(new KeyValue(key));
+		add(new KeyValue(key));
 	}
 	
 	public void append(String key,String value)
 	{
-		append(new KeyValue(key,value));
+		add(new KeyValue(key,value));
 	}
 	
 	public void append(String key,Boolean bool)
 	{
-		append(new KeyValue(key,bool.toString()));
+		add(new KeyValue(key,bool.toString()));
 	}
 	
 	public void append(String key,Double d)
 	{
-		append(new KeyValue(key,d.toString()));
+		add(new KeyValue(key,d.toString()));
 	}
 	
 	@Override
@@ -41,9 +41,9 @@ public class KvOutline implements Outline<KeyValue>
 	}
 
 	@Override
-	public void append(KeyValue data)
+	public void add(KeyValue data)
 	{
-		tree.append(data);
+		tree.add(data);
 	}
 
 	@Override

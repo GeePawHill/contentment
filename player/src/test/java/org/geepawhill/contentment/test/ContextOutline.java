@@ -90,9 +90,9 @@ public class ContextOutline implements Outline<KeyValue>
 	}
 
 	@Override
-	public void append(KeyValue data)
+	public void add(KeyValue data)
 	{
-		source.append(data);
+		source.add(data);
 		
 	}
 

@@ -67,7 +67,7 @@ public class KvMatcherTest
 	
 	private void appendExpected(String key,String value)
 	{
-		expected.append(new KeyValue(key,value));
+		expected.add(new KeyValue(key,value));
 	}
 	
 	private void appendExpected(String key)
@@ -78,7 +78,7 @@ public class KvMatcherTest
 
 	private void appendActual(String key,String value)
 	{
-		actual.append(new KeyValue(key,value));
+		actual.add(new KeyValue(key,value));
 	}
 	
 	private void appendActual(String key)

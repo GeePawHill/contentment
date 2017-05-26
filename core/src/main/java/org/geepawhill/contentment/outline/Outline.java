@@ -9,7 +9,7 @@ public interface Outline<T>
 
 	void indent();
 
-	void append(T data);
+	void add(T data);
 
 	void dedent();
 

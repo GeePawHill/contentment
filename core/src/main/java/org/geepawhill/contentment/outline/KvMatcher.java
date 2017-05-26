@@ -128,10 +128,10 @@ public class KvMatcher
 	{
 		if (!messages.isEmpty())
 		{
-			result.details.append(new KvDifference(type, "", ""));
+			result.details.add(new KvDifference(type, "", ""));
 			result.details.indent();
 			for (KvDifference message : messages)
-				result.details.append(message);
+				result.details.add(message);
 			result.details.dedent();
 		}
 	}

@@ -31,7 +31,7 @@ public class TreeOutputTest
 	@Test
 	public void asListSingleItem()
 	{
-		tree.append("Item 1");
+		tree.add("Item 1");
 		List<Line<String>> list = tree.asList();
 		assertEquals(1,list.size());
 		assertEquals("Item 1",list.get(0).data);
@@ -41,9 +41,9 @@ public class TreeOutputTest
 	@Test
 	public void asListIndent()
 	{
-		tree.append("Item 1");
+		tree.add("Item 1");
 		tree.indent();
-		tree.append("Item 1.1");
+		tree.add("Item 1.1");
 		List<Line<String>> list = tree.asList();
 		assertEquals(2,list.size());
 		assertEquals("Item 1",list.get(0).data);
@@ -55,12 +55,12 @@ public class TreeOutputTest
 	@Test
 	public void indentDedent()
 	{
-		tree.append("Item 1");
+		tree.add("Item 1");
 		tree.indent();
-		tree.append("Item 1.1");
-		tree.append("Item 1.2");
+		tree.add("Item 1.1");
+		tree.add("Item 1.2");
 		tree.dedent();
-		tree.append("Item 2");
+		tree.add("Item 2");
 		List<Line<String>> list = tree.asList();
 		assertEquals(4,list.size());
 		assertEquals("Item 1",list.get(0).data);
@@ -76,9 +76,9 @@ public class TreeOutputTest
 	@Test
 	public void asText()
 	{
-		tree.append("Item 1");
+		tree.add("Item 1");
 		tree.indent();
-		tree.append("Item 1.1");
+		tree.add("Item 1.1");
 		tree.dedent();
 		String actual = tree.asText("Root");
 		assertEquals("Root\n"
@@ -89,12 +89,12 @@ public class TreeOutputTest
 	@Test
 	public void asTree()
 	{
-		tree.append("Item 1");
+		tree.add("Item 1");
 		tree.indent();
-		tree.append("Item 1.1");
-		tree.append("Item 1.2");
+		tree.add("Item 1.1");
+		tree.add("Item 1.2");
 		tree.dedent();
-		tree.append("Item 2");
+		tree.add("Item 2");
 		TreeItem<String> root = new TreeItem<String>("Root");
 		tree.asTree(root);
 	}

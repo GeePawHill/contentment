@@ -22,6 +22,17 @@ public class ValueTree
 		this.items = new ArrayList<>();
 		this.keysNow = new ArrayList<>();
 	}
+	
+	public int size()
+	{
+		return items.size();
+	}
+	
+	public ValueItem get(int index)
+	{
+		return items.get(index);
+	}
+
 
 	public void add(String item)
 	{

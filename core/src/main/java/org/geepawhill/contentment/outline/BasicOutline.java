@@ -27,7 +27,7 @@ public class BasicOutline<T> implements Outline<T>
 	}
 
 	@Override
-	public void append(T data)
+	public void add(T data)
 	{
 		items.add(new Line<T>(indent, data));
 	}
