@@ -81,7 +81,6 @@ public class ValueTreeTest
 		assertItem(0,NO_KEYS,"root0");
 		assertItem(1,keys("root0") , "child");
 		assertItem(2,NO_KEYS,"root1");
-		tree.printFormatted();
 	}
 	
 	public void assertItem(int index,String[] keys, String value)
