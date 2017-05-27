@@ -2,9 +2,11 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.jfx.JfxUtility;
+import org.geepawhill.contentment.timing.Timing;
 
-public class Entrance implements Instant
+public class Entrance implements Step
 {
 	
 	private Actor actor;
@@ -15,7 +17,7 @@ public class Entrance implements Instant
 	}
 
 	@Override
-	public void before(Context context)
+	public void unplay(Context context)
 	{
 		JfxUtility.removeIfNeeded(context,actor.group());
 		context.actors.remove(actor);
@@ -26,6 +28,19 @@ public class Entrance implements Instant
 	{
 		context.actors.add(actor);
 		JfxUtility.addIfNeeded(context, actor.group());
+	}
+
+	@Override
+	public void play(Context context, OnFinished onFinished)
+	{
+		after(context);
+		onFinished.run();
+	}
+
+	@Override
+	public Timing timing()
+	{
+		return Timing.INSTANT;
 	}
 
 }

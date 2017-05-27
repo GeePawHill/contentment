@@ -1,14 +1,16 @@
 package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.step.Instant;
+import org.geepawhill.contentment.core.OnFinished;
+import org.geepawhill.contentment.step.Step;
+import org.geepawhill.contentment.timing.Timing;
 
 import javafx.scene.Node;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 
-public class ColorFlipStep implements Instant
+public class ColorFlipStep implements Step
 {
 	
 	private Paint old;
@@ -22,7 +24,7 @@ public class ColorFlipStep implements Instant
 	}
 
 	@Override
-	public void before(Context context)
+	public void unplay(Context context)
 	{
 		for(Node node : actor.group().getChildren())
 		{
@@ -59,6 +61,19 @@ public class ColorFlipStep implements Instant
 			}
 		}
 		
+	}
+
+	@Override
+	public void play(Context context, OnFinished onFinished)
+	{
+		after(context);
+		onFinished.run();
+	}
+
+	@Override
+	public Timing timing()
+	{
+		return Timing.INSTANT;
 	}
 	
 }

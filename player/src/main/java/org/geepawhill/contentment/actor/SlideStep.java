@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.step.Instant;
-import org.geepawhill.contentment.step.SlideLine;
+import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.step.SlideFormatter;
+import org.geepawhill.contentment.step.SlideLine;
+import org.geepawhill.contentment.step.Step;
+import org.geepawhill.contentment.timing.Timing;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 
-class SlideStep implements Instant
+class SlideStep implements Step
 {
 	private Group group;
 	private List<Text> texts;
@@ -28,7 +30,7 @@ class SlideStep implements Instant
 	}
 
 	@Override
-	public void before(Context context)
+	public void unplay(Context context)
 	{
 		group.getChildren().clear();
 		System.out.println("Before: "+oldNodes.size());
@@ -57,6 +59,19 @@ class SlideStep implements Instant
 		}
 		group.getChildren().clear();
 		group.getChildren().addAll(texts);
+	}
+
+	@Override
+	public void play(Context context, OnFinished onFinished)
+	{
+		after(context);
+		onFinished.run();
+	}
+
+	@Override
+	public Timing timing()
+	{
+		return Timing.INSTANT;
 	}
 	
 }

@@ -2,8 +2,6 @@ package org.geepawhill.contentment.core;
 
 import static org.junit.Assert.assertEquals;
 
-import org.geepawhill.contentment.step.InstantStep;
-import org.geepawhill.contentment.test.TestInstant;
 import org.geepawhill.contentment.test.TestStep;
 import org.junit.Test;
 
@@ -22,20 +20,4 @@ public class SequenceTest
 		assertEquals(2,new Sequence(new TestStep(),new TestStep()).size());
 	}
 	
-	@Test
-	public void add()
-	{
-		Sequence sequence = new Sequence();
-		sequence.add(new InstantStep(new TestInstant()));
-		assertEquals(1,sequence.size());
-	}
-
-	@Test
-	public void addInstant()
-	{
-		Sequence sequence = new Sequence();
-		sequence.add(new TestInstant());
-		assertEquals(1,sequence.size());
-	}
-
 }

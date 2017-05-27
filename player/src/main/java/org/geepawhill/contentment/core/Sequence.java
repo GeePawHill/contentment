@@ -2,8 +2,6 @@ package org.geepawhill.contentment.core;
 
 import java.util.ArrayList;
 
-import org.geepawhill.contentment.step.Instant;
-import org.geepawhill.contentment.step.InstantStep;
 import org.geepawhill.contentment.step.Step;
 
 
@@ -40,11 +38,6 @@ public class Sequence
 	public void add(Step step)
 	{
 		steps.add(step);
-	}
-	
-	public void add(Instant instant)
-	{
-		steps.add(new InstantStep(instant));
 	}
 	
 	public double runTime()

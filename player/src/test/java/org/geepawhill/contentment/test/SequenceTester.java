@@ -3,8 +3,6 @@ package org.geepawhill.contentment.test;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.outline.KeyValue;
 import org.geepawhill.contentment.outline.KvVisualMatcher;
-import org.geepawhill.contentment.step.Instant;
-import org.geepawhill.contentment.step.InstantStep;
 import org.geepawhill.contentment.step.Step;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -24,11 +22,6 @@ public class SequenceTester extends ApplicationTest
 		runner.prepareWindow(stage);
 	}
 	
-	public ContextOutline play(Instant instant)
-	{
-		return play(new InstantStep(instant));
-	}
-
 	public ContextOutline play(Step step)
 	{
 		return play(new Sequence(step));
@@ -64,11 +57,6 @@ public class SequenceTester extends ApplicationTest
 		matcher.assertEqual(message, expected, actual);
 	}
 
-	public void assertBeforeEqualsPlayBefore(Instant instant)
-	{
-		assertBeforeEqualsPlayBefore(new InstantStep(instant));
-	}
-
 	public void assertBeforeEqualsPlayBefore(Step step)
 	{
 		assertBeforeEqualsPlayBefore(new Sequence(step));
@@ -82,11 +70,6 @@ public class SequenceTester extends ApplicationTest
 		assertOutlines("Before not equal to Play Before.", runner.beforeAll, before);
 	}
 	
-	public void assertBeforeEqualsAfterBefore(Instant instant)
-	{
-		assertBeforeEqualsAfterBefore(new InstantStep(instant));
-	}
-
 	public void assertBeforeEqualsAfterBefore(Step step)
 	{
 		assertBeforeEqualsAfterBefore(new Sequence(step));
@@ -100,11 +83,6 @@ public class SequenceTester extends ApplicationTest
 		assertOutlines("Before not equal to After Before.", runner.beforeAll, before);
 	}
 	
-	public void assertAfterEqualsPlay(Instant instant)
-	{
-		assertAfterEqualsPlay(new InstantStep(instant));
-	}
-
 	public void assertAfterEqualsPlay(Step step)
 	{
 		assertAfterEqualsPlay(new Sequence(step));
@@ -117,11 +95,6 @@ public class SequenceTester extends ApplicationTest
 		runner.resetContext();
 		ContextOutline play = play(sequence);
 		assertOutlines("After not equal to play.", after, play);
-	}
-
-	public void assertContractValid(Instant step)
-	{
-		assertContractValid(new Sequence(new InstantStep(step)));
 	}
 
 	public void assertContractValid(Step step)
