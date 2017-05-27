@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.actor.Actors;
-import org.geepawhill.contentment.outline.KvOutline;
 
 import javafx.scene.Group;
 
@@ -19,15 +18,4 @@ public class Context
 		this.skipKeyframes = false;
 	}
 
-	public void outline(KvOutline output)
-	{
-		actors.outline(output);
-	}
-
-	public KvOutline outline()
-	{
-		KvOutline output = new KvOutline();
-		outline(output);
-		return output;
-	}
 }

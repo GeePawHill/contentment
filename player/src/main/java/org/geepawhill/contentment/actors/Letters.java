@@ -1,11 +1,11 @@
 package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.actor.ActorOutliner;
+import org.geepawhill.contentment.actor.NodeOutliner;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
-import org.geepawhill.contentment.outline.KvOutline;
+import org.geepawhill.contentment.outline.ValueTree;
 import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.step.FadeStep;
 import org.geepawhill.contentment.step.LettersStep;
@@ -71,16 +71,15 @@ public class Letters implements Actor
 		return nickname;
 	}
 
-	@Override
-	public void outline(KvOutline output)
+	public void outline(ValueTree tree)
 	{
-		ActorOutliner outliner = new ActorOutliner(this, output);
+		NodeOutliner outliner = new NodeOutliner(this,tree);
 		outliner.start();
-		outliner.append("Source", source);
+		outliner.add("Source", source);
 		outliner.startNode(text);
 		if (outliner.visibility(text))
 		{
-			outliner.append("Current", text.getText());
+			outliner.add("Current", text.getText());
 			outliner.bounds(text);
 			outliner.opacity(text);
 			outliner.strokeWidth(text);

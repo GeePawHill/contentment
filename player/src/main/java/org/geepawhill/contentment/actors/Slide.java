@@ -2,7 +2,6 @@ package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.Entrance;
 
 import javafx.scene.Group;
@@ -15,11 +14,6 @@ public class Slide implements Actor
 	public Slide()
 	{
 		group = new Group();
-	}
-
-	@Override
-	public void outline(KvOutline output)
-	{
 	}
 
 	@Override

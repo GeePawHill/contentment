@@ -5,11 +5,13 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+@Ignore
 public class SlideFormatterTest
 {
 	

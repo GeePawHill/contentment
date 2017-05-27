@@ -6,7 +6,6 @@ import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.JfxUtility;
-import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.BoundsStep;
 import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.step.HandOvalStep;
@@ -45,12 +44,6 @@ public class OvalText implements Actor
 	public String nickname()
 	{
 		return nickname;
-	}
-
-	@Override
-	public void outline(KvOutline output)
-	{
-
 	}
 
 	public void sketch(Sequence sequence, double ms)

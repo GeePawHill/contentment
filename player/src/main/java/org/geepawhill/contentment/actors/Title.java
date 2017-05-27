@@ -3,7 +3,6 @@ package org.geepawhill.contentment.actors;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.jfx.JfxUtility;
-import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.SetTitleStep;
 import org.geepawhill.contentment.utility.Names;
 
@@ -51,12 +50,6 @@ public class Title implements Actor
 		return nickname;
 	}
 	
-	@Override
-	public void outline(KvOutline output)
-	{
-		
-	}
-
 	@Override
 	public Group group()
 	{

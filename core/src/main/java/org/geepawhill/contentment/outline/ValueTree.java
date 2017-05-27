@@ -38,6 +38,14 @@ public class ValueTree
 	{
 		items.add(new ValueItem(keysNow.toArray(new String[] {}), item));
 	}
+	
+	public void add(String item, String value)
+	{
+		add(item);
+		indent();
+		add(value);
+		dedent();
+	}
 
 	public void indent()
 	{

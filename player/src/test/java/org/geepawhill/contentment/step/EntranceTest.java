@@ -1,11 +1,9 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.actors.Spot;
-import org.geepawhill.contentment.test.SequenceTester;
 import org.junit.Before;
-import org.junit.Test;
 
-public class EntranceTest extends SequenceTester
+public class EntranceTest
 {
 
 	private Spot spot;
@@ -18,10 +16,4 @@ public class EntranceTest extends SequenceTester
 		entrance = new Entrance(spot);
 	}
 	
-	@Test
-	public void contract()
-	{
-		assertContractValid(entrance);
-	}
-
 }

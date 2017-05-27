@@ -3,7 +3,6 @@ package org.geepawhill.contentment.actors;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.step.ShowStep;
 import org.geepawhill.contentment.utility.Names;
@@ -33,12 +32,6 @@ public class Spot implements Actor
 	public String nickname()
 	{
 		return nickname;
-	}
-	
-	@Override
-	public void outline(KvOutline output)
-	{
-		output.append(nickname,"("+circle.getCenterX()+","+circle.getCenterY()+")");
 	}
 	
 	@Override

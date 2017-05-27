@@ -1,11 +1,8 @@
 package org.geepawhill.contentment.format;
 
-import org.geepawhill.contentment.outline.KvOutline;
-import org.geepawhill.contentment.outline.Outliner;
-
 import javafx.scene.shape.Shape;
 
-public class Style implements Outliner
+public class Style
 {
 	private final StyleApplier applier;
 	
@@ -32,12 +29,6 @@ public class Style implements Outliner
 		applier.apply(shape);
 	}
 	
-	@Override
-	public void outline(KvOutline output)
-	{
-		output.append(key,toString());
-	}
-
 	public String key()
 	{
 		return key;

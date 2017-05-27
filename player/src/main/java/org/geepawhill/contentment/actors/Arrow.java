@@ -9,7 +9,6 @@ import org.geepawhill.contentment.connector.arrow.NodeArrowComputer;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.step.HandStep;
 import org.geepawhill.contentment.step.OneWayStep;
@@ -81,11 +80,6 @@ public class Arrow implements Actor
 	public String nickname()
 	{
 		return nickname;
-	}
-
-	@Override
-	public void outline(KvOutline output)
-	{
 	}
 
 	public void sketch(Sequence sequence, double ms)

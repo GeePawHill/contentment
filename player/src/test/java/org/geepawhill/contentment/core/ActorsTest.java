@@ -63,13 +63,4 @@ public class ActorsTest
 		assertFalse(iterator.hasNext());
 	}
 	
-	@Test
-	public void outline()
-	{
-		actors.add(box1);
-		KvOutline output = new KvOutline();
-		actors.outline(output);
-		assertEquals("Spot_1 = (0.0,0.0)",output.find("Actors.Spot_1").toString());
-	}
-
 }

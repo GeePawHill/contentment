@@ -3,7 +3,6 @@ package org.geepawhill.contentment.actors;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.Entrance;
 
 import javafx.scene.Group;
@@ -29,13 +28,6 @@ public class ClipArt implements Actor
 	public void flip(Sequence sequence)
 	{
 		sequence.add(new Entrance(this));
-	}
-
-	@Override
-	public void outline(KvOutline output)
-	{
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

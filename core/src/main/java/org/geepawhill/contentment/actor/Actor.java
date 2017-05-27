@@ -1,10 +1,9 @@
 package org.geepawhill.contentment.actor;
 
-import org.geepawhill.contentment.outline.Outliner;
 
 import javafx.scene.Group;
 
-public interface Actor extends Outliner
+public interface Actor
 {
 	public Group group();
 	public String nickname();
