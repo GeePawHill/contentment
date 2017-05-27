@@ -53,7 +53,7 @@ public class GeekNeeqOne
 		
 		Letters principle = new Letters("Principle", new Point(1200d,VQUARTER),main);
 		principle.fadeIn(sequence, 1000d);
-		common.delay(5000d);
+		common.stop();
 	}
 	
 }

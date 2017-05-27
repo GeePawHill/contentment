@@ -2,6 +2,7 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.ColorFlipStep;
+import org.geepawhill.contentment.core.Animator;
 import org.geepawhill.contentment.core.Sequence;
 
 import javafx.scene.paint.Paint;
@@ -59,6 +60,4 @@ public class CommonSteps
 	{
 		sequence.add(new ColorFlipStep(actor,paint));
 	}
-
-
 }

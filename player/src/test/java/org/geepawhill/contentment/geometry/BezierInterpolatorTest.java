@@ -52,7 +52,6 @@ public class BezierInterpolatorTest
 		assertThat(lastPoint.y).isCloseTo(controls[3].y, within(0.1));
 		
 		Point firstPoint = interpolator.segments.get(0).move;
-		System.out.println(firstPoint);
 	}
 
 }

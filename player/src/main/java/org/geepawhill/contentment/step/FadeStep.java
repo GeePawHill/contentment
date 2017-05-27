@@ -1,47 +1,45 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.core.Animator;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.Timing;
-
-import javafx.animation.Transition;
 
 public class FadeStep implements Step
 {
 
 	private Actor actor;
 	private double ms;
-	private Transition transition;
+	private Animator animator;
 
 	public FadeStep(Actor actor, double ms)
 	{
 		this.actor = actor;
 		this.ms = ms;
+		this.animator = new Animator();
 	}
 
 	@Override
 	public void after(Context context)
 	{
-		doFade(1.0d, context);
+		doFade(context, 1.0d);
 	}
 
 	@Override
 	public void unplay(Context context)
 	{
-		doFade(0.0d, context);
+		doFade(context, 0.0d);
 	}
 
 	@Override
 	public void play(Context context, OnFinished onFinished)
 	{
-		transition = new ContextTransition(context, this::doFade, ms);
-		transition.setOnFinished((event) -> onFinished.run());
-		transition.play();
+		animator.play(context,onFinished,ms,this::doFade);
 	}
 
-	private void doFade(double fraction, Context context)
+	private void doFade(Context context, double fraction)
 	{
 		if (fraction <0.0001d)
 		{
