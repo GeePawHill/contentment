@@ -1,13 +1,13 @@
-package org.geepawhill.contentment.actor;
+package org.geepawhill.contentment.actors;
 
 import java.util.ArrayList;
 
-import org.geepawhill.contentment.actor.arrow.ArrowComputer;
-import org.geepawhill.contentment.actor.arrow.ArrowPoints;
-import org.geepawhill.contentment.actor.arrow.NodeArrowComputer;
+import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.connector.arrow.ArrowComputer;
+import org.geepawhill.contentment.connector.arrow.ArrowPoints;
+import org.geepawhill.contentment.connector.arrow.NodeArrowComputer;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.Entrance;
@@ -15,22 +15,17 @@ import org.geepawhill.contentment.step.HandStep;
 import org.geepawhill.contentment.step.OneWayStep;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.StrokeStep;
-import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.TimingBuilder;
 import org.geepawhill.contentment.utility.Names;
 
-import javafx.animation.TranslateTransition;
 import javafx.scene.Group;
-import javafx.util.Duration;
 
 public class Arrow implements Actor
 {
 	final String nickname;
 	
 	private final Group group;
-
-	private Point center;
 
 	private HandStep mainStep;
 	private StrokeStep fromTopStep;
@@ -117,16 +112,6 @@ public class Arrow implements Actor
 		}
 	}
 	
-	public Step move(double newX,double newY)
-	{
-		TranslateTransition transition = new TranslateTransition();
-		transition.setNode(group);
-		transition.setToX(newX-center.x);
-		transition.setToY(newY-center.y);
-		transition.setDuration(Duration.millis(1000d));
-		return new TransitionStep(transition);
-	}
-
 	@Override
 	public Group group()
 	{

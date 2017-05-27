@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Actors;
-import org.geepawhill.contentment.actor.Spot;
+import org.geepawhill.contentment.actors.Spot;
 import org.geepawhill.contentment.outline.KvOutline;
 import org.junit.Before;
 import org.junit.Test;

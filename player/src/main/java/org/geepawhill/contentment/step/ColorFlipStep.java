@@ -1,5 +1,6 @@
-package org.geepawhill.contentment.actor;
+package org.geepawhill.contentment.step;
 
+import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.step.Step;

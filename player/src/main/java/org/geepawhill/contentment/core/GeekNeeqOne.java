@@ -1,8 +1,8 @@
 package org.geepawhill.contentment.core;
 
-import org.geepawhill.contentment.actor.Letters;
-import org.geepawhill.contentment.actor.Placeholder;
-import org.geepawhill.contentment.actor.Title;
+import org.geepawhill.contentment.actors.Letters;
+import org.geepawhill.contentment.actors.Placeholder;
+import org.geepawhill.contentment.actors.Title;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;

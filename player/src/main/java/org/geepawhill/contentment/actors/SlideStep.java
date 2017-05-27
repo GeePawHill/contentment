@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.actor;
+package org.geepawhill.contentment.actors;
 
 import java.util.ArrayList;
 import java.util.List;

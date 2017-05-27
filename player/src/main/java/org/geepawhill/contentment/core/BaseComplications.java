@@ -1,9 +1,9 @@
 package org.geepawhill.contentment.core;
 
-import org.geepawhill.contentment.actor.Arrow;
-import org.geepawhill.contentment.actor.LabelBox;
-import org.geepawhill.contentment.actor.OvalText;
-import org.geepawhill.contentment.actor.Title;
+import org.geepawhill.contentment.actors.Arrow;
+import org.geepawhill.contentment.actors.LabelBox;
+import org.geepawhill.contentment.actors.OvalText;
+import org.geepawhill.contentment.actors.Title;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.step.CommonSteps;
 

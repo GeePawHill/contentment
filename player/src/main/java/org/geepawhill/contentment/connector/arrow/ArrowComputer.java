@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.actor.arrow;
+package org.geepawhill.contentment.connector.arrow;
 
 public interface ArrowComputer
 {

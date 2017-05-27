@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.actor;
 
 
+import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;

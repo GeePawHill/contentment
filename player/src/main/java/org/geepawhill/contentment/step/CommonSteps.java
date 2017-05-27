@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.actor.ColorFlipStep;
 import org.geepawhill.contentment.core.Animator;
 import org.geepawhill.contentment.core.Sequence;
 
