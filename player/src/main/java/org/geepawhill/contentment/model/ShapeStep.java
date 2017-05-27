@@ -1,6 +1,6 @@
 package org.geepawhill.contentment.model;
 
-import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.step.Step;
 
 import javafx.scene.shape.Shape;
 

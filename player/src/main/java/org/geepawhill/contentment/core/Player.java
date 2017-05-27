@@ -2,6 +2,7 @@ package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.model.PlayState;
 import org.geepawhill.contentment.outline.KvOutline;
+import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.StopStep;
 
 import javafx.scene.Group;
@@ -80,7 +81,7 @@ public class Player
 			else
 				forward();
 		}
-		currentStep().before(context);
+		currentStep().unplay(context);
 		state = PlayState.Before;
 		if (skipPastLast)
 		{
@@ -135,14 +136,14 @@ public class Player
 	{
 		do
 		{
-			currentStep().before(context);
+			currentStep().unplay(context);
 			current-=1;
 		}
 		while(current()>0 && !currentIsMarked());
 		if(current()<0) current=0;
 		if(current()==0)
 		{
-			currentStep().before(context);
+			currentStep().unplay(context);
 		}
 		state = PlayState.Before;
 	}

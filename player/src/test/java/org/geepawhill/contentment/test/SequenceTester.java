@@ -1,11 +1,11 @@
 package org.geepawhill.contentment.test;
 
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.outline.KeyValue;
 import org.geepawhill.contentment.outline.KvVisualMatcher;
 import org.geepawhill.contentment.step.Instant;
 import org.geepawhill.contentment.step.InstantStep;
+import org.geepawhill.contentment.step.Step;
 import org.testfx.framework.junit.ApplicationTest;
 
 import javafx.stage.Stage;

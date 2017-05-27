@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.geepawhill.contentment.step.Instant;
 import org.geepawhill.contentment.step.InstantStep;
+import org.geepawhill.contentment.step.Step;
 
 
 public class Sequence

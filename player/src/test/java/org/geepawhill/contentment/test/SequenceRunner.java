@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.application.Platform;
@@ -101,7 +101,7 @@ public class SequenceRunner
 			@Override
 			public void accept(CountDownLatch latch)
 			{
-				step.before(context);
+				step.unplay(context);
 				latch.countDown();
 			}
 		};

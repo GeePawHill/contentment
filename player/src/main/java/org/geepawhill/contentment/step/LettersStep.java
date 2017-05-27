@@ -2,7 +2,6 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.core.Step;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.style.TypeFace;
@@ -37,7 +36,7 @@ public class LettersStep implements Step
 	}
 
 	@Override
-	public void before(Context context)
+	public void unplay(Context context)
 	{
 		interpolate(0d, context);
 	}

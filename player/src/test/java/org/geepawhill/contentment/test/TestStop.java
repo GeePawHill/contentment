@@ -31,7 +31,7 @@ public class TestStop extends StopStep
 	}
 
 	@Override
-	public void before(Context context)
+	public void unplay(Context context)
 	{
 		isBefore=true;
 		isPlaying=false;

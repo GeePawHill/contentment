@@ -64,7 +64,7 @@ public class HandOvalStep implements ShapeStep
 	}
 
 	@Override
-	public void before(Context context)
+	public void unplay(Context context)
 	{
 		interpolate(0d, context);
 	}

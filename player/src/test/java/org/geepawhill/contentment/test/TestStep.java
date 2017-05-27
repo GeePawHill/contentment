@@ -2,7 +2,7 @@ package org.geepawhill.contentment.test;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.core.Step;
+import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.Timing;
 
@@ -31,7 +31,7 @@ public class TestStep implements Step
 	}
 
 	@Override
-	public void before(Context context)
+	public void unplay(Context context)
 	{
 		isBefore=true;
 		isPlaying=false;
