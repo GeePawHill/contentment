@@ -1,7 +1,5 @@
 package org.geepawhill.contentment.outline;
 
-import java.util.Comparator;
-
 public class ValueItemComparator 
 {
 

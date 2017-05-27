@@ -60,7 +60,7 @@ public class InteractiveStabilization
 		tale.setText(sequence, "Almost there!");
 		poke3Source.place(sequence);
 		poke3.sketch(sequence, 1000d);
-		sequence.unmarked(agent.move(1100d, 450d));
+		sequence.add(agent.move(1100d, 450d));
 		tale.setText(sequence, "Made it!!");
 		common.stop();
 

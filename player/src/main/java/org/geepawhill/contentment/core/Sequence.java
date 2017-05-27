@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.geepawhill.contentment.step.Instant;
 import org.geepawhill.contentment.step.InstantStep;
-import org.geepawhill.contentment.step.StopStep;
 
 
 public class Sequence
@@ -32,14 +31,9 @@ public class Sequence
 		return steps.get(index);
 	}
 	
-	public void unmarked(Step step)
+	public void add(Sequence sequence)
 	{
-		add(step);
-	}
-	
-	public void unmarked(Instant instant)
-	{
-		add(instant);
+		steps.addAll(sequence.steps);
 	}
 	
 	public void add(Step step)
@@ -52,11 +46,6 @@ public class Sequence
 		steps.add(new InstantStep(instant));
 	}
 	
-	public boolean isMarked(int index)
-	{
-		return steps.get(index) instanceof StopStep;
-	}
-
 	public double runTime()
 	{
 		double result = 0d;

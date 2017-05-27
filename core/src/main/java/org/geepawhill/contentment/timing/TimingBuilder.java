@@ -9,7 +9,7 @@ public class TimingBuilder
 	public static final String ABSOLUTE_OVERRUN = "Absolutes are bigger than allocated.";
 	private double accumulatedAbsolute;
 	private double accumulatedRelative;
-
+	
 	public double build(double total, Step... steps)
 	{
 		Timing[] timings = new Timing[steps.length];
