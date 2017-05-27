@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.geepawhill.contentment.model.PlayState;
-import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.test.TestStep;
 import org.geepawhill.contentment.test.TestStop;
 import org.junit.Before;
@@ -286,16 +285,6 @@ public class PlayerTest
 		assertTrue(stopFirst.isBefore);
 		assertEquals(stopFirst, player.currentStep());
 		assertBefore();
-	}
-
-	@Test
-	public void dumpsCurrentAndState()
-	{
-		KvOutline dump = new KvOutline();
-		player.reset(new Sequence(nonStopFirst));
-		player.dump(dump);
-		assertEquals("0", dump.find("Player.Current").getValue());
-		assertEquals("Before", dump.find("Player.State").getValue());
 	}
 
 	private void assertAfter()

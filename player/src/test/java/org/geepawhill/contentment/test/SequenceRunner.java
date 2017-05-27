@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class SequenceRunner
 {
 	public Context context;
-	public ContextOutline beforeAll;
+//	public ContextOutline beforeAll;
 	public Group group;
 
 	public void prepareWindow(Stage stage)

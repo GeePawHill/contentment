@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.model.PlayState;
-import org.geepawhill.contentment.outline.KvOutline;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.StopStep;
 
@@ -222,15 +221,6 @@ public class Player
 	public void allButEnd()
 	{
 		seek(sequence.size() - 1);
-	}
-
-	public void dump(KvOutline dump)
-	{
-		dump.append("Player");
-		dump.indent();
-		dump.append("State",state.name());
-		dump.append("Current",Integer.toString(current));
-		dump.dedent();
 	}
 
 }
