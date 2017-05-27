@@ -11,14 +11,14 @@ public class FadeStep implements Step
 {
 
 	private Actor actor;
-	private double ms;
 	private Animator animator;
+	private FixedTiming timing;
 
 	public FadeStep(Actor actor, double ms)
 	{
 		this.actor = actor;
-		this.ms = ms;
 		this.animator = new Animator();
+		this.timing = new FixedTiming(ms);
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class FadeStep implements Step
 	@Override
 	public void play(Context context, OnFinished onFinished)
 	{
-		animator.play(context,onFinished,ms,this::doFade);
+		animator.play(context,onFinished,timing.getAbsolute(),this::doFade);
 	}
 
 	private void doFade(Context context, double fraction)
@@ -54,7 +54,7 @@ public class FadeStep implements Step
 	@Override
 	public Timing timing()
 	{
-		return new FixedTiming(ms);
+		return timing;
 	}
 
 }
