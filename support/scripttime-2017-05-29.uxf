@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>320</y>
+      <w>210</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>/Actor/
+--
+Group group()
+Sequence draw(Timing timing)
+ValueTree values()
+Point intersect(Point from)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>320</y>
+      <w>170</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>Universals
+--
+Sequence sequence
+--
+cue()
+keyframe(seconds)
+fadeIn(ms,actor)
+fadeOut(ms,actor)
+enter(actor)
+exit(actor)
+distributeTime(ms)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>530</x>
+      <y>140</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>/Script/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>840</x>
+      <y>110</y>
+      <w>170</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Sequence
+--
+add(Step step)
+add(Sequence sequence)
+int size()
+Step get(int index)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>110</y>
+      <w>300</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>/Step/
+--
+jumpBefore(Context context)
+play(Context context, OnFinished onFinished)
+jumpAfter(Context context)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1000</x>
+      <y>110</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>160</y>
+      <w>160</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>140.0;160.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>620</x>
+      <y>140</y>
+      <w>240</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>220.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>440</x>
+      <y>160</y>
+      <w>160</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;160.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>620</x>
+      <y>10</y>
+      <w>300</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Scripts stuff steps and sequences into +sequences. They use Actors and the Universals object to make those steps &amp; sequences.
+bg=gray
+fg=red
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>230</x>
+      <y>470</y>
+      <w>230</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Actors own groups of JavaFx nodes which they provide Steps &amp; Sequences to manipulate.
+bg=gray
+fg=red
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>850</x>
+      <y>360</y>
+      <w>260</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Some actions are super-common, and either don't use an actor
+or are agnostic about the nature of the actor. These live in the Universals object.
+bg=gray
+fg=red
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

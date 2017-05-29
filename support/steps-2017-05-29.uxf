@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>10</y>
+      <w>170</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>EnterStep
+--
+EnterStep(Actor actor)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>380</x>
+      <y>0</y>
+      <w>290</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>add/remove Actor to the Context and the JavaFx Scene graph.
+adds are always Visible=true, Opacity=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>230</x>
+      <y>10</y>
+      <w>100</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>ExitStep
+--
+ExitStep(Actor actor)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>100</y>
+      <w>420</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>RuntimeValueStep&lt;T&gt;
+--
+RuntimeValue( Producer&lt;T&gt; producer, Consumer&lt;T&gt; consumer)
+RuntimeValue( T literal, Consumer&lt;T&gt; consumer )</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>480</x>
+      <y>90</y>
+      <w>300</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Often a Step needs data from another Step that can only be determined after the first Step has run. That's this step's job.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>200</y>
+      <w>340</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>FadeStep
+--
+FadeStep(Timing timing, Actor actor, double opacity)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>410</x>
+      <y>200</y>
+      <w>270</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Change an Actor's opacity, possibly across a stretch of time.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>290</y>
+      <w>410</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>LetterStep
+--
+LetterStep(Timing timing, Point at, Format format, String source)
+LetterStep(Timing timing, Point at, Format format)
+void changeSource(String source)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>490</x>
+      <y>290</y>
+      <w>410</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>StrokeStep
+--
+StrokeStep(Timing timing, Format format, PointPair source)
+StrokeStep(Timing timing, Format format)
+void changePoints(PointPair points)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>550</x>
+      <y>370</y>
+      <w>250</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Draw strings &amp; letters, possibly across time.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>450</y>
+      <w>410</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>TransformStep
+--
+TransformStep(Timing timing, Actor actor, Transform transform) </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>470</x>
+      <y>450</y>
+      <w>190</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Translate, scale, or rotate an Actor.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>530</y>
+      <w>410</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>ColorStep
+--
+ColorStep(Timing timing, Actor actor, Paint paint)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>470</x>
+      <y>530</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Change all of the Nodes in this Actor to use the given Paint.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>620</y>
+      <w>250</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>DelayStep
+--
+DelayStep(double ms)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>320</x>
+      <y>620</y>
+      <w>310</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Stall w/o doing anything. Not usually created directly, but used by the keyframe mechanism.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>700</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>CueStep
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>160</x>
+      <y>690</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>A marker for "play one cue" mode.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>340</x>
+      <y>760</y>
+      <w>100</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>950</x>
+      <y>290</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>BezierStep
+--
+BezierStep(Timing timing, Format format, PointQuad source)
+BezierStep(Timing timing, </panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

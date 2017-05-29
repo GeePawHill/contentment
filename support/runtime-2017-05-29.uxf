@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>830</x>
+      <y>240</y>
+      <w>300</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>/Step/
+--
+jumpBefore(Context context)
+play(Context context, OnFinished onFinished)
+jumpAfter(Context context)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>550</x>
+      <y>240</y>
+      <w>170</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Sequence
+--
+add(Step step)
+add(Sequence sequence)
+int size()
+Step get(int index)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>370</y>
+      <w>100</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Context
+--
+Actors actors()
+Group canvas</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>240</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>230</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Player</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>440</x>
+      <y>240</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>250</y>
+      <w>30</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>50</x>
+      <y>280</y>
+      <w>280</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>At run-time, a player creates a context. and runs a Sequence
+bg=gray
+fg=red
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>550</x>
+      <y>380</y>
+      <w>200</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>A sequence is just a very dumb st of Steps.
+bg=gray
+fg=red
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>830</x>
+      <y>370</y>
+      <w>310</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Steps are the atoms. Steps can be played asynchronously, or jumped to before they played or after they played synchronously.
+bg=gray
+fg=red
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -15,17 +15,17 @@ public class LettersStep implements Step
 
 	private final Timing timing;
 	private final Point center;
-	private final String letters;
+	private final String source;
 	private final Text text;
 	private Transition transition;
 	private Format format;
 
-	public LettersStep(Timing timing, String letters, Point center, Text text, Format format)
+	public LettersStep(Timing timing, String source, Point center, Text text, Format format)
 	{
 		this.timing = timing;
 		this.center = center;
 		this.text = text;
-		this.letters = letters;
+		this.source = source;
 		this.format = format;
 	}
 
@@ -65,8 +65,8 @@ public class LettersStep implements Step
 			text.setVisible(true);
 		format.apply(TypeFace.FACE, text);
 		format.apply(TypeFace.COLOR, text);
-		String newText = letters.substring(0, (int) (fraction * letters.length()));
-		text.setText(newText);
+		String partialSource = source.substring(0, (int) (fraction * source.length()));
+		text.setText(partialSource);
 		text.setX(center.x - text.getBoundsInParent().getWidth() / 2d);
 		text.setY(center.y);
 	}

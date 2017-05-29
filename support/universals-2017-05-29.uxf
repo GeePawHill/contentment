@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>90</y>
+      <w>170</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>Universals
+--
+Universals(Sequence sequence)
+cue()
+keyframe(seconds)
+fadeIn(ms,actor)
+fadeOut(ms,actor)
+enter(actor)
+exit(actor)
+distributeTime(ms)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>310</x>
+      <y>90</y>
+      <w>390</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>cue adds a CueStep.
+keyframe adds a delay to make time line up with a specified time
+fadeIn/fadeOut are entrance and exit
+enter/exit are the same but instant
+distributeTime takes a fixed number of ms and distributes the relative steps in the sequnce to fill that time.</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
