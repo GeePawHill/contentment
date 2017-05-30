@@ -8,6 +8,7 @@ import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.timing.Timing;
 
 import javafx.animation.Transition;
+import javafx.geometry.VPos;
 import javafx.scene.text.Text;
 
 public class LettersStep implements Step
@@ -16,15 +17,15 @@ public class LettersStep implements Step
 	private final Timing timing;
 	private final Point center;
 	private final String source;
-	private final Text text;
+	public final Text text;
 	private Transition transition;
 	private Format format;
 
-	public LettersStep(Timing timing, String source, Point center, Text text, Format format)
+	public LettersStep(Timing timing, String source, Point center, Format format)
 	{
 		this.timing = timing;
 		this.center = center;
-		this.text = text;
+		this.text = new Text();
 		this.source = source;
 		this.format = format;
 	}
@@ -63,6 +64,7 @@ public class LettersStep implements Step
 		}
 		else
 			text.setVisible(true);
+		text.setTextOrigin(VPos.CENTER);
 		format.apply(TypeFace.FACE, text);
 		format.apply(TypeFace.COLOR, text);
 		String partialSource = source.substring(0, (int) (fraction * source.length()));

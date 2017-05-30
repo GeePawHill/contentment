@@ -28,7 +28,6 @@ public class LabelBox implements Actor
 	final String source;
 
 	private final Group group;
-	private Text text;
 
 	private Point center;
 
@@ -37,6 +36,7 @@ public class LabelBox implements Actor
 	private HandStep westStep;
 	private HandStep eastStep;
 	private Format format;
+	private LettersStep lettersStep;
 
 	public LabelBox(String source, Point center, Format format)
 	{
@@ -44,13 +44,12 @@ public class LabelBox implements Actor
 		this.center = center;
 		this.source = source;
 		this.format = format;
-		text = new Text();
-		text.setTextOrigin(VPos.CENTER);
+		lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, format);
 		northStep = new HandStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 		westStep = new HandStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 		southStep = new HandStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 		eastStep = new HandStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		this.group = JfxUtility.makeGroup(this, text, northStep.shape(), westStep.shape(), southStep.shape(), eastStep.shape());
+		this.group = JfxUtility.makeGroup(this, lettersStep.text, northStep.shape(), westStep.shape(), southStep.shape(), eastStep.shape());
 	}
 
 	public String nickname()
@@ -60,11 +59,10 @@ public class LabelBox implements Actor
 
 	public void sketch(Sequence sequence, double ms)
 	{
-		LettersStep lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, text, format);
 		new TimingBuilder().build(ms, lettersStep, northStep, westStep, southStep, eastStep);
 		sequence.add(new Entrance(this));
 		sequence.add(lettersStep);
-		sequence.add(new BoundsStep(text, this::boundsChanged));
+		sequence.add(new BoundsStep(lettersStep.text, this::boundsChanged));
 		sequence.add(northStep);
 		sequence.add(eastStep);
 		sequence.add(southStep);

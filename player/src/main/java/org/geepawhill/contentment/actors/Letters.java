@@ -11,12 +11,13 @@ import org.geepawhill.contentment.step.FadeStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.timing.FixedTiming;
+import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.Timing;
+import org.geepawhill.contentment.timing.TimingBuilder;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.animation.TranslateTransition;
 import javafx.scene.Group;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class Letters implements Actor
@@ -25,34 +26,36 @@ public class Letters implements Actor
 	private final Group group;
 	private String source;
 	private Point center;
-	private Text text;
+	private LettersStep step;
 	private Format format;
+	private TimingBuilder timingBuilder;
 
 	public Letters(String source, Point center, Format format)
 	{
 		this.format = format;
 		this.nickname = Names.make(getClass());
+		this.step = new LettersStep(new RelativeTiming(1d), source, center, format);
 		this.source = source;
 		this.center = center;
-		this.text = new Text();
-		this.group = new Group(text);
+		this.group = new Group(step.text);
+		this.timingBuilder = new TimingBuilder();
 	}
-	
-	public Sequence sketch(Sequence sequence, Timing timing)
+
+	public void sketch(Sequence sequence, Timing timing)
 	{
 		if (sequence == null) sequence = new Sequence();
 		sequence.add(new Entrance(this));
-		sequence.add(new LettersStep(timing, source, center, text, format));
-		return sequence;
+		timingBuilder.build(timing.getAbsolute(), step);
+		sequence.add(step);
 	}
 
 	public void fadeIn(Sequence sequence, double ms)
 	{
-		LettersStep lettersStep = new LettersStep(FixedTiming.INSTANT, source, center, text, format);
 		group().setOpacity(0d);
-		sequence.add(lettersStep);
+		sequence.add(step);
 		sequence.add(new Entrance(this));
 		sequence.add(new FadeStep(this, ms));
+		timingBuilder.build(1d,step);
 	}
 
 	public void move(Sequence sequence, double newX, double newY)
@@ -73,18 +76,15 @@ public class Letters implements Actor
 
 	public void outline(ValueTree tree)
 	{
-		NodeOutliner outliner = new NodeOutliner(this,tree);
+		NodeOutliner outliner = new NodeOutliner(this, tree);
 		outliner.start();
 		outliner.add("Source", source);
-		outliner.startNode(text);
-		if (outliner.visibility(text))
-		{
-			outliner.add("Current", text.getText());
-			outliner.bounds(text);
-			outliner.opacity(text);
-			outliner.strokeWidth(text);
-			outliner.lineColor(text);
-		}
+		outliner.startNode(step.text);
+		outliner.add("Current", step.text.getText());
+		outliner.bounds(step.text);
+		outliner.opacity(step.text);
+		outliner.strokeWidth(step.text);
+		outliner.lineColor(step.text);
 		outliner.endNode();
 		outliner.end();
 	}

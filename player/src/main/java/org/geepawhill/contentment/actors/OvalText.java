@@ -23,11 +23,11 @@ public class OvalText implements Actor
 	final String source;
 
 	private final Group group;
-	private Text text;
 	private Point center;
 
 	private HandOvalStep ovalStep;
 	private Format format;
+	private LettersStep lettersStep;
 
 	public OvalText(String source, Point center, Format format)
 	{
@@ -35,9 +35,9 @@ public class OvalText implements Actor
 		this.center = center;
 		this.source = source;
 		this.format = format;
-		text = new Text(center.x, center.y, "");
+		lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, format);
 		ovalStep = new HandOvalStep(new RelativeTiming(.4d), format);
-		this.group = JfxUtility.makeGroup(this, text, ovalStep.shape());
+		this.group = JfxUtility.makeGroup(this, lettersStep.text, ovalStep.shape());
 	}
 	
 	
@@ -48,11 +48,10 @@ public class OvalText implements Actor
 
 	public void sketch(Sequence sequence, double ms)
 	{
-		LettersStep lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, text, format);
 		new TimingBuilder().build(ms, lettersStep, ovalStep);
 		sequence.add(new Entrance(this));
 		sequence.add(lettersStep);
-		sequence.add(new BoundsStep(text, this::boundsChanged));
+		sequence.add(new BoundsStep(lettersStep.text, this::boundsChanged));
 		sequence.add(ovalStep);
 	}
 
