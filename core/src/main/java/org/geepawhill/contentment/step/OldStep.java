@@ -16,7 +16,7 @@ public class OldStep implements Step
 	@Override
 	public void after(Context context)
 	{
-		step.play(0d, context, NO_FINISH);
+		step.play(0d, context, OnFinished.NONE);
 	}
 
 	@Override
