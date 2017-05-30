@@ -7,7 +7,6 @@ import javafx.scene.shape.Shape;
 
 public class Dash
 {
-
 	public static final String KEY = "Dash";
 
 	public static Style solid()

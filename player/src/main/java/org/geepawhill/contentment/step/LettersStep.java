@@ -1,5 +1,6 @@
 package org.geepawhill.contentment.step;
 
+import org.geepawhill.contentment.core.Animator;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.format.Format;
@@ -13,12 +14,10 @@ import javafx.scene.text.Text;
 
 public class LettersStep implements Step
 {
-
 	private final Timing timing;
 	private final Point center;
 	private final String source;
 	public final Text text;
-	private Transition transition;
 	private Format format;
 
 	public LettersStep(Timing timing, String source, Point center, Format format)
@@ -33,21 +32,19 @@ public class LettersStep implements Step
 	@Override
 	public void after(Context context)
 	{
-		interpolate(1d, context);
+		interpolate(context, 1d);
 	}
 
 	@Override
 	public void unplay(Context context)
 	{
-		interpolate(0d, context);
+		interpolate(context, 0d);
 	}
 
 	@Override
 	public void play(Context context, OnFinished onFinished)
 	{
-		transition = new ContextTransition(context, this::interpolate, timing().getAbsolute());
-		transition.setOnFinished((event) -> onFinished.run());
-		transition.play();
+		new Animator().play(context,onFinished,timing.getAbsolute(),this::interpolate);
 	}
 
 	@Override
@@ -56,14 +53,12 @@ public class LettersStep implements Step
 		return timing;
 	}
 
-	private void interpolate(double fraction, Context context)
+	public void interpolate(Context context, double fraction)
 	{
 		if (fraction == 0d)
 		{
-			text.setVisible(false);
+			text.setText("");
 		}
-		else
-			text.setVisible(true);
 		text.setTextOrigin(VPos.CENTER);
 		format.apply(TypeFace.FACE, text);
 		format.apply(TypeFace.COLOR, text);
