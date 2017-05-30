@@ -1,12 +1,17 @@
 package org.geepawhill.contentment.core;
 
+import org.geepawhill.contentment.actors.Arrow;
+import org.geepawhill.contentment.actors.LabelBox;
 import org.geepawhill.contentment.actors.Letters;
+import org.geepawhill.contentment.actors.OvalText;
 import org.geepawhill.contentment.actors.Placeholder;
 import org.geepawhill.contentment.actors.Title;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Grid;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.step.CommonSteps;
+import org.geepawhill.contentment.style.Dash;
+import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.timing.FixedTiming;
 
@@ -41,19 +46,20 @@ public class DemoScript
 		title.setText(sequence, "This is a title!");
 		common.stop();
 		
-		Format firstFormat = new Format(TypeFace.largeHand(),TypeFace.color("", Color.RED, 1d));
+		Format firstFormat = new Format(TypeFace.largeHand(),TypeFace.color("", Color.RED, 1d),Frames.frame("",Color.RED,5d,1d),Dash.solid());
 		Letters theseAreLetters = new Letters("These are letters.",new Point(800d,450d),firstFormat);
 		theseAreLetters.fadeIn(sequence, 1d);
 		common.stop();
 		
-		Format secondFormat = new Format(firstFormat,TypeFace.color("", Color.GREEN, 1d));
+		Format secondFormat = new Format(firstFormat,TypeFace.color("", Color.GREEN, 1d),Frames.frame("",Color.GREEN,5d,1d));
 		Letters fadedIn = new Letters("They can fade in.",new Point(800d, 500d),secondFormat);
 		fadedIn.fadeIn(sequence, 500d);
 		common.stop();
 		
-		Format thirdFormat = new Format(firstFormat,TypeFace.color("", Color.BLUE, 1d));
+		Format thirdFormat = new Format(firstFormat,TypeFace.color("", Color.BLUE, 1d),Frames.frame("",Color.BLUE,5d,1d));
 		Letters sketchedIn = new Letters("They can sketch in.",new Point(800d, 550d),thirdFormat);
 		sketchedIn.sketch(sequence, new FixedTiming(1000d));
+		common.stop();
 		
 		Format fourthFormat = new Format(TypeFace.mediumSans(),TypeFace.color("", Color.WHITE, 1d));
 		Letters altFont = new Letters("Letters have font.",new Point(800d,600d),fourthFormat);
@@ -64,6 +70,25 @@ public class DemoScript
 		altOpacity.fadeIn(sequence, 1d);
 		
 		common.stop();
+		common.clear();
+		
+		common.show(title);
+		title.setText(sequence,"There are other actors.");
+		common.stop();
+		
+		LabelBox box = new LabelBox(LabelBox.class.getSimpleName(),new Point(400d,300d),firstFormat);
+		box.sketch(sequence, 2000d);
+		common.stop();
+		
+		OvalText oval = new OvalText(OvalText.class.getSimpleName(),new Point(800d,300d),secondFormat);
+		oval.sketch(sequence, 1d);
+		common.stop();
+		
+		Arrow arrow = new Arrow(box,false,oval,true,thirdFormat);
+		arrow.sketch(sequence, 1000d);
+		common.stop();
+		
+		
 		
 	}
 
