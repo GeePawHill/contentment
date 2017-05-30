@@ -17,23 +17,23 @@ public class Entrance implements Step
 	}
 
 	@Override
-	public void unplay(Context context)
+	public void undo(Context context)
 	{
 		JfxUtility.removeIfNeeded(context,actor.group());
 		context.actors.remove(actor);
 	}
 
 	@Override
-	public void after(Context context)
+	public void instant(Context context)
 	{
 		context.actors.add(actor);
 		JfxUtility.addIfNeeded(context, actor.group());
 	}
 
 	@Override
-	public void play(Context context, OnFinished onFinished)
+	public void slow(Context context, OnFinished onFinished)
 	{
-		after(context);
+		instant(context);
 		onFinished.run();
 	}
 

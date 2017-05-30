@@ -22,19 +22,19 @@ public class FadeStep implements Step
 	}
 
 	@Override
-	public void after(Context context)
+	public void instant(Context context)
 	{
 		doFade(context, 1.0d);
 	}
 
 	@Override
-	public void unplay(Context context)
+	public void undo(Context context)
 	{
 		doFade(context, 0.0d);
 	}
 
 	@Override
-	public void play(Context context, OnFinished onFinished)
+	public void slow(Context context, OnFinished onFinished)
 	{
 		animator.play(context,onFinished,timing.getAbsolute(),this::doFade);
 	}

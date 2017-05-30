@@ -23,7 +23,7 @@ public class TestStep implements Step
 	}
 
 	@Override
-	public void after(Context context)
+	public void instant(Context context)
 	{
 		isBefore=false;
 		isPlaying=false;
@@ -31,7 +31,7 @@ public class TestStep implements Step
 	}
 
 	@Override
-	public void unplay(Context context)
+	public void undo(Context context)
 	{
 		isBefore=true;
 		isPlaying=false;
@@ -39,7 +39,7 @@ public class TestStep implements Step
 	}
 	
 	@Override
-	public void play(Context context, OnFinished onFinished)
+	public void slow(Context context, OnFinished onFinished)
 	{
 		this.onFinished = onFinished;
 		isBefore=false;

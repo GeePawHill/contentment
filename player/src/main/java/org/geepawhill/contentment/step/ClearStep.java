@@ -26,14 +26,14 @@ public class ClearStep implements Step
 	}
 
 	@Override
-	public void after(Context context)
+	public void instant(Context context)
 	{
 		nodes.addAll(context.canvas.getChildren());
 		context.canvas.getChildren().clear();
 	}
 
 	@Override
-	public void unplay(Context context)
+	public void undo(Context context)
 	{
 		for(Node node : nodes)
 		{
@@ -43,9 +43,9 @@ public class ClearStep implements Step
 	}
 
 	@Override
-	public void play(Context context, OnFinished onFinished)
+	public void slow(Context context, OnFinished onFinished)
 	{
-		after(context);
+		instant(context);
 		onFinished.run();
 	}
 

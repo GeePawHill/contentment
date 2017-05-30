@@ -24,22 +24,22 @@ public class HideStep implements Step
 	}
 
 	@Override
-	public void after(Context context)
+	public void instant(Context context)
 	{
 		group.setVisible(false);
 	}
 
 	@Override
-	public void unplay(Context context)
+	public void undo(Context context)
 	{
 		group.setVisible(true);
 
 	}
 
 	@Override
-	public void play(Context context, OnFinished onFinished)
+	public void slow(Context context, OnFinished onFinished)
 	{
-		after(context);
+		instant(context);
 		onFinished.run();
 	}
 }

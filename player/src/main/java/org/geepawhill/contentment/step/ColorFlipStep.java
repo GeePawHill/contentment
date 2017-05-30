@@ -25,7 +25,7 @@ public class ColorFlipStep implements Step
 	}
 
 	@Override
-	public void unplay(Context context)
+	public void undo(Context context)
 	{
 		for(Node node : actor.group().getChildren())
 		{
@@ -44,7 +44,7 @@ public class ColorFlipStep implements Step
 	}
 
 	@Override
-	public void after(Context context)
+	public void instant(Context context)
 	{
 		old = null;
 		for(Node node : actor.group().getChildren())
@@ -65,9 +65,9 @@ public class ColorFlipStep implements Step
 	}
 
 	@Override
-	public void play(Context context, OnFinished onFinished)
+	public void slow(Context context, OnFinished onFinished)
 	{
-		after(context);
+		instant(context);
 		onFinished.run();
 	}
 

@@ -29,22 +29,22 @@ public class SetTitleStep implements Step
 	}
 
 	@Override
-	public void after(Context context)
+	public void instant(Context context)
 	{
 		previous = text.getText();
 		changeText(source);
 	}
 
 	@Override
-	public void unplay(Context context)
+	public void undo(Context context)
 	{
 		changeText(previous);
 	}
 
 	@Override
-	public void play(Context context, OnFinished onFinished)
+	public void slow(Context context, OnFinished onFinished)
 	{
-		after(context);
+		instant(context);
 		onFinished.run();
 	}
 

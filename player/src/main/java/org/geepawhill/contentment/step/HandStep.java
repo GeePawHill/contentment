@@ -55,19 +55,19 @@ public class HandStep implements ShapeStep
 	}
 
 	@Override
-	public void after(Context context)
+	public void instant(Context context)
 	{
 		interpolate(1d, context);
 	}
 
 	@Override
-	public void unplay(Context context)
+	public void undo(Context context)
 	{
 		interpolate(0d, context);
 	}
 
 	@Override
-	public void play(Context context, OnFinished onFinished)
+	public void slow(Context context, OnFinished onFinished)
 	{
 		transition = new ContextTransition(context, this::interpolate, timing().getAbsolute());
 		transition.setOnFinished((event) -> onFinished.run());

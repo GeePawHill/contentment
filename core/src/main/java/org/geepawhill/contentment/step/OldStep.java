@@ -14,20 +14,20 @@ public class OldStep implements Step
 	}
 
 	@Override
-	public void after(Context context)
+	public void instant(Context context)
 	{
 		step.play(0d, context, OnFinished.NONE);
 	}
 
 	@Override
-	public void unplay(Context context)
+	public void undo(Context context)
 	{
 		step.unplay(context);
 		
 	}
 
 	@Override
-	public void play(Context context, OnFinished onFinished)
+	public void slow(Context context, OnFinished onFinished)
 	{
 		step.play(step.timing().getAbsolute(), context, onFinished);
 	}

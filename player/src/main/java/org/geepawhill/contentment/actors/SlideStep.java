@@ -30,7 +30,7 @@ class SlideStep implements Step
 	}
 
 	@Override
-	public void unplay(Context context)
+	public void undo(Context context)
 	{
 		group.getChildren().clear();
 		System.out.println("Before: "+oldNodes.size());
@@ -43,7 +43,7 @@ class SlideStep implements Step
 	}
 
 	@Override
-	public void after(Context context)
+	public void instant(Context context)
 	{
 		for(SlideLine format : new SlideFormatter().layoutFormats(lines))
 		{
@@ -62,9 +62,9 @@ class SlideStep implements Step
 	}
 
 	@Override
-	public void play(Context context, OnFinished onFinished)
+	public void slow(Context context, OnFinished onFinished)
 	{
-		after(context);
+		instant(context);
 		onFinished.run();
 	}
 

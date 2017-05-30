@@ -25,19 +25,19 @@ class TestLambdaStep implements Step {
 		
 	}
 	@Override
-	public void after(Context context)
+	public void instant(Context context)
 	{
 		if(after!=null) after.run(context,null);
 	}
 
 	@Override
-	public void unplay(Context context)
+	public void undo(Context context)
 	{
 		if(before!=null) before.run(context, null);
 	}
 
 	@Override
-	public void play(Context context, OnFinished onFinished)
+	public void slow(Context context, OnFinished onFinished)
 	{
 		if(play!=null) play.run(context, onFinished);
 	}

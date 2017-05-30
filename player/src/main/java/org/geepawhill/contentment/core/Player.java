@@ -80,7 +80,7 @@ public class Player
 			else
 				forward();
 		}
-		currentStep().unplay(context);
+		currentStep().undo(context);
 		state = PlayState.Before;
 		if (skipPastLast)
 		{
@@ -135,14 +135,14 @@ public class Player
 	{
 		do
 		{
-			currentStep().unplay(context);
+			currentStep().undo(context);
 			current-=1;
 		}
 		while(current()>0 && !currentIsMarked());
 		if(current()<0) current=0;
 		if(current()==0)
 		{
-			currentStep().unplay(context);
+			currentStep().undo(context);
 		}
 		state = PlayState.Before;
 	}
@@ -151,7 +151,7 @@ public class Player
 	{
 		do
 		{
-			currentStep().after(context);
+			currentStep().instant(context);
 			if (!currentIsLast())
 			{
 				current += 1;
@@ -159,7 +159,7 @@ public class Player
 			}
 			else
 			{
-				currentStep().after(context);
+				currentStep().instant(context);
 				state = PlayState.After;
 				return;
 			}
@@ -180,7 +180,7 @@ public class Player
 	private void playCurrent()
 	{
 		state = PlayState.Playing;
-		currentStep().play(context, this::onFinished);
+		currentStep().slow(context, this::onFinished);
 	}
 
 	private void onFinished()

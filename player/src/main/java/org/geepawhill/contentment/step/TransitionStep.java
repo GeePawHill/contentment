@@ -25,19 +25,19 @@ public class TransitionStep implements Step
 	}
 
 	@Override
-	public void after(Context context)
+	public void instant(Context context)
 	{
 		transition.jumpTo(Duration.millis(10000d));
 	}
 
 	@Override
-	public void unplay(Context context)
+	public void undo(Context context)
 	{
 		transition.jumpTo(Duration.millis(0));
 	}
 
 	@Override
-	public void play(Context context, OnFinished onFinished)
+	public void slow(Context context, OnFinished onFinished)
 	{
 		transition.setOnFinished((event) -> onFinished.run());
 		transition.play();

@@ -8,7 +8,6 @@ import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.timing.Timing;
 
-import javafx.animation.Transition;
 import javafx.geometry.VPos;
 import javafx.scene.text.Text;
 
@@ -30,19 +29,19 @@ public class LettersStep implements Step
 	}
 
 	@Override
-	public void after(Context context)
+	public void instant(Context context)
 	{
 		interpolate(context, 1d);
 	}
 
 	@Override
-	public void unplay(Context context)
+	public void undo(Context context)
 	{
 		interpolate(context, 0d);
 	}
 
 	@Override
-	public void play(Context context, OnFinished onFinished)
+	public void slow(Context context, OnFinished onFinished)
 	{
 		new Animator().play(context,onFinished,timing.getAbsolute(),this::interpolate);
 	}

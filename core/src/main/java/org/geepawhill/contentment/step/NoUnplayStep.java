@@ -22,18 +22,18 @@ public class NoUnplayStep implements Step
 	}
 	
 	@Override
-	public void after(Context context)
+	public void instant(Context context)
 	{
 		animator.play(context, null, 0d, interpolator);
 	}
 
 	@Override
-	public void unplay(Context context)
+	public void undo(Context context)
 	{
 	}
 
 	@Override
-	public void play(Context context, OnFinished onFinished)
+	public void slow(Context context, OnFinished onFinished)
 	{
 		animator.play(context,onFinished,0d,interpolator);
 	}
