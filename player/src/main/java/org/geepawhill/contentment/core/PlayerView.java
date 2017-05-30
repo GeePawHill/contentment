@@ -68,12 +68,13 @@ public class PlayerView
 
 	private void makeScripts(Sequence sequence)
 	{
-		new BaseComplications(sequence).add();
-		new InteractiveStabilization(sequence).add();
-		new AgentAndPokes(sequence).add();
-		new ResponsesToComplexity(sequence).add();
-		new VisibleGeekLa1(sequence).add();
-		new GeekNeeqOne(sequence).add();
+		new DemoScript(sequence).add();
+//		new BaseComplications(sequence).add();
+//		new InteractiveStabilization(sequence).add();
+//		new AgentAndPokes(sequence).add();
+//		new ResponsesToComplexity(sequence).add();
+//		new VisibleGeekLa1(sequence).add();
+//		new GeekNeeqOne(sequence).add();
 		player.reset(sequence);
 	}
 	
