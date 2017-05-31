@@ -25,7 +25,7 @@ public class ShowStep implements Step
 	}
 
 	@Override
-	public void instant(Context context)
+	public void fast(Context context)
 	{
 		JfxUtility.addIfNeeded(context, group);
 		group.setVisible(true);
@@ -40,7 +40,7 @@ public class ShowStep implements Step
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		instant(context);
+		fast(context);
 		onFinished.run();
 	}
 }

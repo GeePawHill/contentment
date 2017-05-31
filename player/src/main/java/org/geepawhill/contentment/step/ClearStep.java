@@ -26,7 +26,7 @@ public class ClearStep implements Step
 	}
 
 	@Override
-	public void instant(Context context)
+	public void fast(Context context)
 	{
 		nodes.addAll(context.canvas.getChildren());
 		context.canvas.getChildren().clear();
@@ -45,7 +45,7 @@ public class ClearStep implements Step
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		instant(context);
+		fast(context);
 		onFinished.run();
 	}
 

@@ -24,7 +24,7 @@ public class Entrance implements Step
 	}
 
 	@Override
-	public void instant(Context context)
+	public void fast(Context context)
 	{
 		context.actors.add(actor);
 		JfxUtility.addIfNeeded(context, actor.group());
@@ -33,7 +33,7 @@ public class Entrance implements Step
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		instant(context);
+		fast(context);
 		onFinished.run();
 	}
 

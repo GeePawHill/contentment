@@ -42,7 +42,7 @@ public class StrokeStep implements ShapeStep
 	}
 
 	@Override
-	public void instant(Context context)
+	public void fast(Context context)
 	{
 		interpolate(1d,context);
 	}

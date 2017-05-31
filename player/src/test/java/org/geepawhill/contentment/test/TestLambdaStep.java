@@ -25,7 +25,7 @@ class TestLambdaStep implements Step {
 		
 	}
 	@Override
-	public void instant(Context context)
+	public void fast(Context context)
 	{
 		if(after!=null) after.run(context,null);
 	}

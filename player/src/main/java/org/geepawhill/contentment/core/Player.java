@@ -151,7 +151,7 @@ public class Player
 	{
 		do
 		{
-			currentStep().instant(context);
+			currentStep().fast(context);
 			if (!currentIsLast())
 			{
 				current += 1;
@@ -159,7 +159,7 @@ public class Player
 			}
 			else
 			{
-				currentStep().instant(context);
+				currentStep().fast(context);
 				state = PlayState.After;
 				return;
 			}

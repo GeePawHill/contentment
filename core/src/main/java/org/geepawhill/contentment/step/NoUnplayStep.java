@@ -22,7 +22,7 @@ public class NoUnplayStep implements Step
 	}
 	
 	@Override
-	public void instant(Context context)
+	public void fast(Context context)
 	{
 		animator.play(context, null, 0d, interpolator);
 	}

@@ -35,7 +35,7 @@ public class DelayStep implements Step
 	}
 
 	@Override
-	public void instant(Context context)
+	public void fast(Context context)
 	{
 	}
 

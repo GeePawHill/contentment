@@ -29,7 +29,7 @@ public class LettersStep implements Step
 	}
 
 	@Override
-	public void instant(Context context)
+	public void fast(Context context)
 	{
 		interpolate(context, 1d);
 	}

@@ -23,7 +23,7 @@ public class TestStop extends StopStep
 	}
 
 	@Override
-	public void instant(Context context)
+	public void fast(Context context)
 	{
 		isBefore=false;
 		isPlaying=false;

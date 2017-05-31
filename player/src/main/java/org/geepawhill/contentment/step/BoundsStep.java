@@ -22,7 +22,7 @@ public class BoundsStep implements Step
 	}
 
 	@Override
-	public void instant(Context context)
+	public void fast(Context context)
 	{
 		onCollected.accept(new PointPair(source.getBoundsInParent()));
 	}
@@ -35,7 +35,7 @@ public class BoundsStep implements Step
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		instant(context);
+		fast(context);
 		onFinished.run();
 	}
 

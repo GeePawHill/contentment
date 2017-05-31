@@ -14,7 +14,7 @@ public class OldStep implements Step
 	}
 
 	@Override
-	public void instant(Context context)
+	public void fast(Context context)
 	{
 		step.play(0d, context, OnFinished.NONE);
 	}

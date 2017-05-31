@@ -25,7 +25,7 @@ public class TransitionStep implements Step
 	}
 
 	@Override
-	public void instant(Context context)
+	public void fast(Context context)
 	{
 		transition.jumpTo(Duration.millis(10000d));
 	}

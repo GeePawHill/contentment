@@ -29,7 +29,7 @@ public class SetTitleStep implements Step
 	}
 
 	@Override
-	public void instant(Context context)
+	public void fast(Context context)
 	{
 		previous = text.getText();
 		changeText(source);
@@ -44,7 +44,7 @@ public class SetTitleStep implements Step
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		instant(context);
+		fast(context);
 		onFinished.run();
 	}
 

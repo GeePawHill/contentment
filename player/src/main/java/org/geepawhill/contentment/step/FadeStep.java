@@ -22,7 +22,7 @@ public class FadeStep implements Step
 	}
 
 	@Override
-	public void instant(Context context)
+	public void fast(Context context)
 	{
 		doFade(context, 1.0d);
 	}

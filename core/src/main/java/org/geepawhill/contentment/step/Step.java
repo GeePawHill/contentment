@@ -6,8 +6,8 @@ import org.geepawhill.contentment.timing.Timing;
 
 public interface Step
 {
-	public void instant(Context context);
-	public void undo(Context context);
 	public void slow(Context context, OnFinished onFinished);
+	public void fast(Context context);
+	public void undo(Context context);
 	public Timing timing();
 }
