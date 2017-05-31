@@ -1,12 +1,6 @@
 package org.geepawhill.contentment.test;
 
-import org.geepawhill.contentment.actors.Stroke;
-import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.style.Frames;
-import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.Test;
 
 @Ignore
 public class StepTestTest // extends SequenceTester

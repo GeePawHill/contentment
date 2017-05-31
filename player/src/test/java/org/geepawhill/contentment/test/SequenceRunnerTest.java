@@ -7,7 +7,6 @@ import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.style.Frames;
 import org.junit.Ignore;
-import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
 import javafx.stage.Stage;

@@ -4,10 +4,8 @@ import org.geepawhill.contentment.actors.Arrow;
 import org.geepawhill.contentment.actors.LabelBox;
 import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.actors.OvalText;
-import org.geepawhill.contentment.actors.Placeholder;
 import org.geepawhill.contentment.actors.Title;
 import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.geometry.Grid;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.step.CommonSteps;
 import org.geepawhill.contentment.style.Dash;
@@ -19,21 +17,14 @@ import javafx.scene.paint.Color;
 
 public class DemoScript
 {
-	private static final double VQUARTER = 1080d/4d;
-	
 	private Sequence sequence;
 	
-	private Format main = new Format( TypeFace.color("main", Color.YELLOW, .8d), TypeFace.largeHand());
-
 	private CommonSteps common;
-
-	private Grid grid;
 
 	public DemoScript(Sequence sequence)
 	{
 		this.sequence = sequence;
 		this.common = new CommonSteps(sequence);
-		this.grid = new Grid(8,4,50d,50d);
 	}
 
 	public void add()

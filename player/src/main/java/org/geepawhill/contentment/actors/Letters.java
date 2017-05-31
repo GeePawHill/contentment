@@ -10,7 +10,6 @@ import org.geepawhill.contentment.step.Entrance;
 import org.geepawhill.contentment.step.FadeStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.TransitionStep;
-import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.timing.TimingBuilder;
@@ -27,12 +26,10 @@ public class Letters implements Actor
 	private String source;
 	private Point center;
 	private LettersStep step;
-	private Format format;
 	private TimingBuilder timingBuilder;
 
 	public Letters(String source, Point center, Format format)
 	{
-		this.format = format;
 		this.nickname = Names.make(getClass());
 		this.step = new LettersStep(new RelativeTiming(1d), source, center, format);
 		this.source = source;

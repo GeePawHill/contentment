@@ -15,7 +15,6 @@ import org.geepawhill.contentment.timing.TimingBuilder;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
-import javafx.scene.text.Text;
 
 public class OvalText implements Actor
 {
@@ -23,18 +22,14 @@ public class OvalText implements Actor
 	final String source;
 
 	private final Group group;
-	private Point center;
 
 	private HandOvalStep ovalStep;
-	private Format format;
 	private LettersStep lettersStep;
 
 	public OvalText(String source, Point center, Format format)
 	{
 		this.nickname = Names.make(getClass());
-		this.center = center;
 		this.source = source;
-		this.format = format;
 		lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, format);
 		ovalStep = new HandOvalStep(new RelativeTiming(.4d), format);
 		this.group = JfxUtility.makeGroup(this, lettersStep.text, ovalStep.shape());

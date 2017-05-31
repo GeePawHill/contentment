@@ -17,9 +17,7 @@ import org.geepawhill.contentment.timing.TimingBuilder;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.animation.TranslateTransition;
-import javafx.geometry.VPos;
 import javafx.scene.Group;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class LabelBox implements Actor
@@ -35,7 +33,6 @@ public class LabelBox implements Actor
 	private HandStep southStep;
 	private HandStep westStep;
 	private HandStep eastStep;
-	private Format format;
 	private LettersStep lettersStep;
 
 	public LabelBox(String source, Point center, Format format)
@@ -43,7 +40,6 @@ public class LabelBox implements Actor
 		this.nickname = Names.make(getClass());
 		this.center = center;
 		this.source = source;
-		this.format = format;
 		lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, format);
 		northStep = new HandStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 		westStep = new HandStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);

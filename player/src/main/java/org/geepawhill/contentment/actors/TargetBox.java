@@ -17,9 +17,7 @@ import org.geepawhill.contentment.timing.TimingBuilder;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.animation.TranslateTransition;
-import javafx.geometry.VPos;
 import javafx.scene.Group;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class TargetBox implements Actor
@@ -35,12 +33,10 @@ public class TargetBox implements Actor
 	private StrokeStep southStep;
 	private StrokeStep westStep;
 	private StrokeStep eastStep;
-	private Format format;
 	private LettersStep lettersStep;
 
 	public TargetBox(String source, Point center, Format format)
 	{
-		this.format = format;
 		this.nickname = Names.make(getClass());
 		this.center = center;
 		this.source = source;
