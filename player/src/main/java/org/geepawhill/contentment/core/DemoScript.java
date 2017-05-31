@@ -21,13 +21,31 @@ public class DemoScript
 	
 	private CommonSteps common;
 
+	private Format firstFormat;
+
+	private Format secondFormat;
+
+	private Format thirdFormat;
+
+	private Format fourthFormat;
+
 	public DemoScript(Sequence sequence)
 	{
 		this.sequence = sequence;
 		this.common = new CommonSteps(sequence);
+		firstFormat = new Format(TypeFace.largeHand(),TypeFace.color("", Color.RED, 1d),Frames.frame("",Color.RED,5d,1d),Dash.solid());
+		secondFormat = new Format(firstFormat,TypeFace.color("", Color.GREEN, 1d),Frames.frame("",Color.GREEN,5d,1d));
+		thirdFormat = new Format(firstFormat,TypeFace.color("", Color.BLUE, 1d),Frames.frame("",Color.BLUE,5d,1d));
+		fourthFormat = new Format(TypeFace.mediumSans(),TypeFace.color("", Color.WHITE, 1d));
 	}
 
 	public void add()
+	{
+		scene1();
+		scene2();
+	}
+
+	private void scene1()
 	{
 		Title title = new Title();
 		sequence.add(title.flash());
@@ -37,31 +55,31 @@ public class DemoScript
 		sequence.add(title.change("This is a title!"));
 //		common.stop();
 		
-		Format firstFormat = new Format(TypeFace.largeHand(),TypeFace.color("", Color.RED, 1d),Frames.frame("",Color.RED,5d,1d),Dash.solid());
 		Letters theseAreLetters = new Letters("These are letters.",new Point(800d,450d),firstFormat);
 		theseAreLetters.fadeIn(sequence, 1d);
 	//	common.stop();
 		
-		Format secondFormat = new Format(firstFormat,TypeFace.color("", Color.GREEN, 1d),Frames.frame("",Color.GREEN,5d,1d));
 		Letters fadedIn = new Letters("They can fade in.",new Point(800d, 500d),secondFormat);
 		fadedIn.fadeIn(sequence, 500d);
 //		common.stop();
 		
-		Format thirdFormat = new Format(firstFormat,TypeFace.color("", Color.BLUE, 1d),Frames.frame("",Color.BLUE,5d,1d));
 		Letters sketchedIn = new Letters("They can sketch in.",new Point(800d, 550d),thirdFormat);
 		sketchedIn.sketch(sequence, new FixedTiming(1000d));
 //		common.stop();
 		
-		Format fourthFormat = new Format(TypeFace.mediumSans(),TypeFace.color("", Color.WHITE, 1d));
 		Letters altFont = new Letters("Letters have font.",new Point(800d,600d),fourthFormat);
-//		altFont.fadeIn(sequence, 1d);
+		altFont.fadeIn(sequence, 1d);
 		
 		Format fifthFormat = new Format(TypeFace.mediumSans(),TypeFace.color("", Color.WHITE, .3d));
 		Letters altOpacity = new Letters("And opacity",new Point(800d,650d),fifthFormat);
-//		altOpacity.fadeIn(sequence, 1d);
+		altOpacity.fadeIn(sequence, 1d);
 		common.stop();
 		common.clear();
-		
+	}
+	
+	private void scene2()
+	{
+		Title title = new Title();
 		sequence.add(title.flash());
 		sequence.add(title.change("There are other actors."));
 		common.stop();
@@ -77,8 +95,7 @@ public class DemoScript
 		Arrow arrow = new Arrow(box,false,oval,true,thirdFormat);
 		arrow.sketch(sequence, 1000d);
 		common.stop();
-		
-		sequence.dump();
+
 	}
 
 //	private void addHoldersFor(ArrayList<Placeholder> holders, int i)
