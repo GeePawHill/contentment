@@ -33,7 +33,6 @@ public class ClearStep implements Step
 		System.out.println("Clearing:");
 		for(Actor actor : actors)
 		{
-			System.out.println(actor);
 			context.canvas.getChildren().remove(actor.group());
 		}
 		context.canvas.getChildren().clear();
@@ -42,13 +41,10 @@ public class ClearStep implements Step
 	@Override
 	public void undo(Context context)
 	{
-		System.out.println("Clearing Undo:");
 		for(Actor actor : actors)
 		{
-			System.out.println(actor);
 			context.canvas.getChildren().add(actor.group());
 		}
-		System.out.println(actors.get(0).group().isVisible());
 		for(Node node : actors.get(0).group().getChildren())
 		{
 			System.out.println(node.isVisible());

@@ -306,7 +306,7 @@ public class ResponsesToComplexity
 		Letters nyLetters = new Letters("New York", new Point(1300d, 200d), labelFormat);
 		nyLetters.sketch(sequence, FixedTiming.INSTANT);
 		ny.flip(sequence);
-		common.stop();
+		common.cue();
 
 		Image blueBall = new Image("/org/geepawhill/scripts/blueBall.png", 25d, 25d, true, true);
 		ClipArt reno = new ClipArt(blueBall, new PointPair(320d, 360d, 0d, 0d));
@@ -332,7 +332,7 @@ public class ResponsesToComplexity
 		Letters grandCanyonLetters = new Letters("Grand Canyon", new Point(410d, 480d), smallLabelFormat);
 		grandCanyonLetters.sketch(sequence, FixedTiming.INSTANT);
 		grandCanyon.flip(sequence);
-		common.stop();
+		common.cue();
 
 		Arrow sfReno = new Arrow(sf, false, reno, true, lineFormat);
 		sfReno.sketch(sequence, 1d);
@@ -348,7 +348,7 @@ public class ResponsesToComplexity
 
 		Arrow lasVegasSaltLake = new Arrow(lasVegas, false, saltLake, true, lineFormat);
 		lasVegasSaltLake.sketch(sequence, 1d);
-		common.stop();
+		common.cue();
 		common.clear();
 
 		Point points[] =
@@ -395,7 +395,7 @@ public class ResponsesToComplexity
 		arrow(10, 11);
 		Arrow a8_11 = arrow(8, 11);
 
-		common.stop();
+		common.cue();
 		Paint highlight = Color.GOLD;
 		common.reColor(ovals[0], highlight);
 		common.reColor(a0_3, highlight);
@@ -407,7 +407,7 @@ public class ResponsesToComplexity
 		common.reColor(a8_11, highlight);
 		common.reColor(ovals[11], highlight);
 
-		common.stop();
+		common.cue();
 
 	}
 
@@ -423,7 +423,7 @@ public class ResponsesToComplexity
 		for (String[] slide : blocks)
 		{
 			slideActor.show(sequence, slide);
-			common.stop();
+			common.cue();
 		}
 	}
 

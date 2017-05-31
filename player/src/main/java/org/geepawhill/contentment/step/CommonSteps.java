@@ -30,9 +30,9 @@ public class CommonSteps
 		sequence.add(new ShowStep(actor.group()));
 	}
 
-	public void stop()
+	public void cue()
 	{
-		sequence.add(new StopStep());
+		sequence.add(new CueStep());
 	}
 
 	public void delay(double d)

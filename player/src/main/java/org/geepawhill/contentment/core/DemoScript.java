@@ -73,7 +73,7 @@ public class DemoScript
 		Format fifthFormat = new Format(TypeFace.mediumSans(),TypeFace.color("", Color.WHITE, .3d));
 		Letters altOpacity = new Letters("And opacity",new Point(800d,650d),fifthFormat);
 		altOpacity.fadeIn(sequence, 1d);
-		common.stop();
+		common.cue();
 		common.clear();
 	}
 	
@@ -82,42 +82,21 @@ public class DemoScript
 		Title title = new Title();
 		sequence.add(title.flash());
 		sequence.add(title.change("There are other actors."));
-		common.stop();
+		common.cue();
 		
 		LabelBox box = new LabelBox(LabelBox.class.getSimpleName(),new Point(400d,300d),firstFormat);
 		box.sketch(sequence, 2000d);
-		common.stop();
+		common.cue();
 		
 		OvalText oval = new OvalText(OvalText.class.getSimpleName(),new Point(800d,300d),secondFormat);
 		oval.sketch(sequence, 1d);
-		common.stop();
+		common.cue();
 		
 		Arrow arrow = new Arrow(box,false,oval,true,thirdFormat);
 		arrow.sketch(sequence, 1000d);
-		common.stop();
+		common.cue();
 
 	}
-
-//	private void addHoldersFor(ArrayList<Placeholder> holders, int i)
-//	{
-//		holders.add(makeHolder(PointPair.north(i)));
-//		if(i==0) return;
-//		holders.add(makeHolder(PointPair.northeast(i)));
-//		holders.add(makeHolder(PointPair.south(i)));
-//		holders.add(makeHolder(PointPair.southwest(i)));
-//		holders.add(makeHolder(PointPair.northwest(i)));
-//		holders.add(makeHolder(PointPair.southeast(i)));
-//		holders.add(makeHolder(PointPair.east(i)));
-//		holders.add(makeHolder(PointPair.west(i)));
-//		holders.add(makeHolder(PointPair.westsouthwest(i)));
-//		holders.add(makeHolder(PointPair.northnortheast(i)));
-//	}
-//	
-//	private Placeholder makeHolder(Point pair)
-//	{
-//		return new Placeholder("#",pair,25d,25d);
-//	}
-
 }
 
 

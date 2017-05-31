@@ -5,7 +5,7 @@ import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.Timing;
 
-public class StopStep implements Step
+public class CueStep implements Step
 {
 
 	@Override

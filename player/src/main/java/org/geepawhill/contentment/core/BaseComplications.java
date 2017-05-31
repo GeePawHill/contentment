@@ -88,11 +88,11 @@ public class BaseComplications
 		sequence.add(tale.change("A Simple Change Model"));
 		agent.sketch(sequence, 1000d);
 		coach.sketch(sequence, 1000d);
-		common.stop();
+		common.cue();
 		poke.sketch(sequence, 1000d);
 		practice.sketch(sequence, 1000d);
 		change.sketch(sequence, 1000d);
-		common.stop();
+		common.cue();
 		sequence.add(tale.change("Complication: There are always multiple agents."));
 		a1.sketch(sequence, 1d);
 		a2.sketch(sequence, 1d);
@@ -106,7 +106,7 @@ public class BaseComplications
 		poke4.sketch(sequence, 1d);
 		poke5.sketch(sequence, 1d);
 		poke6.sketch(sequence, 1d);
-		common.stop();
+		common.cue();
 		sequence.add(tale.change("Complication: There are always multiple practices."));
 		p1.sketch(sequence, 1d);
 		p2.sketch(sequence, 1d);
@@ -120,12 +120,12 @@ public class BaseComplications
 		c4.sketch(sequence, 1d);
 		c5.sketch(sequence, 1d);
 		c6.sketch(sequence, 1d);
-		common.stop();
+		common.cue();
 
 		sequence.add(tale.change("Complication: Most agents change multiple practices."));
 		c12.sketch(sequence, 200d);
 		c22.sketch(sequence, 200d);
-		common.stop();
+		common.cue();
 		c11.sketch(sequence, 1d);
 		c13.sketch(sequence, 1d);
 		c14.sketch(sequence, 1d);
@@ -134,26 +134,26 @@ public class BaseComplications
 		c24.sketch(sequence, 1d);
 		c25.sketch(sequence, 1d);
 		c26.sketch(sequence, 1d);
-		common.stop();
+		common.cue();
 
 		sequence.add(tale.change("Complication: The agents are interrelated."));
 		i1.sketch(sequence, 1000d);
-		common.stop();
+		common.cue();
 		i2.sketch(sequence, 1d);
 		i3.sketch(sequence, 1d);
 		i4.sketch(sequence, 1d);
 		i5.sketch(sequence, 1d);
 		i6.sketch(sequence, 1d);
-		common.stop();
+		common.cue();
 		sequence.add(tale.change("Complication: The practices are interrelated."));
 		pi1.sketch(sequence, 1000d);
-		common.stop();
+		common.cue();
 		pi2.sketch(sequence, 1d);
 		pi3.sketch(sequence, 1d);
 		pi4.sketch(sequence, 1d);
 		pi5.sketch(sequence, 1d);
 		pi6.sketch(sequence, 1d);
-		common.stop();
+		common.cue();
 	}
 
 

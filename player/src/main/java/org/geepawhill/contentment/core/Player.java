@@ -2,7 +2,7 @@ package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.model.PlayState;
 import org.geepawhill.contentment.step.Step;
-import org.geepawhill.contentment.step.StopStep;
+import org.geepawhill.contentment.step.CueStep;
 
 import javafx.scene.Group;
 
@@ -169,7 +169,7 @@ public class Player
 
 	private boolean currentIsMarked()
 	{
-		return sequence.steps.get(current) instanceof StopStep;
+		return sequence.steps.get(current) instanceof CueStep;
 	}
 
 	private boolean currentIsLast()
