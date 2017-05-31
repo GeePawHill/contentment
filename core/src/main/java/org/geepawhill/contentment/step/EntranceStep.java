@@ -3,15 +3,15 @@ package org.geepawhill.contentment.step;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.timing.Timing;
+import org.geepawhill.contentment.utility.JfxUtility;
 
-public class Entrance implements Step
+public class EntranceStep implements Step
 {
 	
 	private Actor actor;
 
-	public Entrance(Actor actor)
+	public EntranceStep(Actor actor)
 	{
 		this.actor = actor;
 	}
@@ -21,6 +21,12 @@ public class Entrance implements Step
 	{
 		JfxUtility.removeIfNeeded(context,actor.group());
 		context.actors.remove(actor);
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "Entrance: "+actor.nickname();
 	}
 
 	@Override

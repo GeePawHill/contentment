@@ -9,7 +9,7 @@ import org.geepawhill.contentment.connector.arrow.NodeArrowComputer;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.step.Entrance;
+import org.geepawhill.contentment.step.EntranceStep;
 import org.geepawhill.contentment.step.HandStep;
 import org.geepawhill.contentment.step.OneWayStep;
 import org.geepawhill.contentment.step.Step;
@@ -84,7 +84,7 @@ public class Arrow implements Actor
 
 	public void sketch(Sequence sequence, double ms)
 	{
-		sequence.add(new Entrance(this));
+		sequence.add(new EntranceStep(this));
 		sequence.add(new OneWayStep((context) -> boundsChanged()));
 		for(Step step : steps) sequence.add(step);
 		new TimingBuilder().build(ms,steps.toArray(new Step[0]));

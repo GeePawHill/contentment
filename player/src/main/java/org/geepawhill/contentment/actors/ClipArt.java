@@ -3,7 +3,7 @@ package org.geepawhill.contentment.actors;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.step.Entrance;
+import org.geepawhill.contentment.step.EntranceStep;
 
 import javafx.scene.Group;
 import javafx.scene.image.Image;
@@ -27,7 +27,7 @@ public class ClipArt implements Actor
 
 	public void flip(Sequence sequence)
 	{
-		sequence.add(new Entrance(this));
+		sequence.add(new EntranceStep(this));
 	}
 
 	@Override

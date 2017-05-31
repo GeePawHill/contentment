@@ -2,9 +2,9 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.Timing;
+import org.geepawhill.contentment.utility.JfxUtility;
 
 import javafx.scene.Group;
 

@@ -1,8 +1,8 @@
 package org.geepawhill.contentment.core;
 
 import org.controlsfx.control.HiddenSidesPane;
-import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.jfx.ScaleListener;
+import org.geepawhill.contentment.utility.JfxUtility;
 
 import javafx.geometry.Orientation;
 import javafx.scene.Group;

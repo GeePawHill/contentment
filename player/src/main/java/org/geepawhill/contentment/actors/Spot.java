@@ -3,7 +3,7 @@ package org.geepawhill.contentment.actors;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.step.Entrance;
+import org.geepawhill.contentment.step.EntranceStep;
 import org.geepawhill.contentment.step.ShowStep;
 import org.geepawhill.contentment.utility.Names;
 
@@ -42,7 +42,7 @@ public class Spot implements Actor
 	
 	public void place(Sequence sequence)
 	{
-		sequence.add(new Entrance(this));
+		sequence.add(new EntranceStep(this));
 		sequence.add(new ShowStep(group));
 	}
 	

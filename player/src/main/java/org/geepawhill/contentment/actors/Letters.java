@@ -6,7 +6,7 @@ import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.outline.ValueTree;
-import org.geepawhill.contentment.step.Entrance;
+import org.geepawhill.contentment.step.EntranceStep;
 import org.geepawhill.contentment.step.FadeStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.TransitionStep;
@@ -41,7 +41,7 @@ public class Letters implements Actor
 	public void sketch(Sequence sequence, Timing timing)
 	{
 		if (sequence == null) sequence = new Sequence();
-		sequence.add(new Entrance(this));
+		sequence.add(new EntranceStep(this));
 		timingBuilder.build(timing.getAbsolute(), step);
 		sequence.add(step);
 	}
@@ -50,7 +50,7 @@ public class Letters implements Actor
 	{
 		group().setOpacity(0d);
 		sequence.add(step);
-		sequence.add(new Entrance(this));
+		sequence.add(new EntranceStep(this));
 		sequence.add(new FadeStep(this, ms));
 		timingBuilder.build(1d,step);
 	}

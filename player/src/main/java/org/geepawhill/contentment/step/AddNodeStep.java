@@ -43,5 +43,13 @@ public class AddNodeStep implements Step
 	{
 		return Timing.INSTANT;
 	}
+	
+	@Override
+	public String toString()
+	{
+		String id = node.getId();
+		id = node.getClass().getSimpleName();
+		return "AddNode: "+id;
+	}
 
 }

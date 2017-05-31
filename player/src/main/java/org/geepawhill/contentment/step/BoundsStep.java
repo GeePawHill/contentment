@@ -44,5 +44,11 @@ public class BoundsStep implements Step
 	{
 		return FixedTiming.INSTANT;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "BoundsStep";
+	}
 
 }

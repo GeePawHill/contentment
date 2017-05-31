@@ -117,4 +117,9 @@ public class HandOvalStep implements ShapeStep
 	{
 		return path;
 	}
+	
+	public String toString()
+	{
+		return "HandOval: "+points;
+	}
 }

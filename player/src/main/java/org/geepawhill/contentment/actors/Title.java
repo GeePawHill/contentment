@@ -2,11 +2,11 @@ package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.step.AddNodeStep;
-import org.geepawhill.contentment.step.Entrance;
+import org.geepawhill.contentment.step.EntranceStep;
 import org.geepawhill.contentment.step.ChangeTitleStep;
 import org.geepawhill.contentment.step.Step;
+import org.geepawhill.contentment.utility.JfxUtility;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
@@ -57,7 +57,7 @@ public class Title implements Actor
 	public Sequence flash()
 	{
 		Step[] steps = new Step[] {
-				new Entrance(this),
+				new EntranceStep(this),
 				new AddNodeStep(group,rectangle),
 				new AddNodeStep(group,text),
 				new ChangeTitleStep(text,"")

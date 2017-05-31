@@ -5,9 +5,8 @@ import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.jfx.JfxUtility;
 import org.geepawhill.contentment.step.BoundsStep;
-import org.geepawhill.contentment.step.Entrance;
+import org.geepawhill.contentment.step.EntranceStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.style.Dash;
@@ -15,6 +14,7 @@ import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.TimingBuilder;
+import org.geepawhill.contentment.utility.JfxUtility;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.geometry.VPos;
@@ -68,7 +68,7 @@ public class Placeholder implements Actor
 	{
 		LettersStep lettersStep = new LettersStep(new RelativeTiming(.6d), source, bounds.grow(-32d).north(), format);
 		new TimingBuilder().build(ms, lettersStep, northStep, westStep, southStep, eastStep);
-		sequence.add(new Entrance(this));
+		sequence.add(new EntranceStep(this));
 		sequence.add(lettersStep);
 		sequence.add(new BoundsStep(text, this::boundsChanged));
 		sequence.add(northStep);

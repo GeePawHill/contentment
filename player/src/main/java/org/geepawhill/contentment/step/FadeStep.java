@@ -56,5 +56,10 @@ public class FadeStep implements Step
 	{
 		return timing;
 	}
+	
+	public String toString()
+	{
+		return "FadeStep: "+actor.nickname();
+	}
 
 }

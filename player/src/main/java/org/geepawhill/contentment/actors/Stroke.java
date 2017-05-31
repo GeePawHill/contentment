@@ -4,7 +4,7 @@ import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.step.Entrance;
+import org.geepawhill.contentment.step.EntranceStep;
 import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.Timing;
@@ -29,7 +29,7 @@ public class Stroke implements Actor
 	public Sequence sketch(Sequence sequence, Timing timing)
 	{
 		if (sequence == null) sequence = new Sequence();
-		sequence.add(new Entrance(this));
+		sequence.add(new EntranceStep(this));
 		sequence.add(step);
 		new TimingBuilder().build(timing.getAbsolute(), step);
 		return sequence;

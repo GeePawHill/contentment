@@ -49,4 +49,12 @@ public class Sequence
 		}
 		return result;
 	}
+	
+	public void dump()
+	{
+		for(Step step : steps)
+		{
+			System.out.println(step);
+		}
+	}
 }

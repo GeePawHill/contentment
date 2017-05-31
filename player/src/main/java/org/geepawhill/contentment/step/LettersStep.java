@@ -66,4 +66,9 @@ public class LettersStep implements Step
 		text.setX(center.x - text.getBoundsInParent().getWidth() / 2d);
 		text.setY(center.y);
 	}
+	
+	public String toString()
+	{
+		return "Letters: "+source;
+	}
 }

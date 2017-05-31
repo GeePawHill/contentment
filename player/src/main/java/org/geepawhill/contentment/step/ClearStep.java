@@ -1,22 +1,20 @@
 package org.geepawhill.contentment.step;
 
-import java.util.ArrayList;
-
+import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.actor.Actors;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.Timing;
 
-import javafx.scene.Node;
-
 public class ClearStep implements Step
 {
 	
-	private ArrayList<Node> nodes;
+	private Actors actors = new Actors();
 
 	public ClearStep()
 	{
-		nodes = new ArrayList<>();
+		actors = new Actors();
 	}
 	
 	@Override
@@ -28,18 +26,23 @@ public class ClearStep implements Step
 	@Override
 	public void fast(Context context)
 	{
-		nodes.addAll(context.canvas.getChildren());
+		actors.clear();
+		actors.addAll(context.actors);
+		for(Actor actor : actors)
+		{
+			context.canvas.getChildren().remove(actor.group());
+		}
 		context.canvas.getChildren().clear();
 	}
 
 	@Override
 	public void undo(Context context)
 	{
-		for(Node node : nodes)
+		for(Actor actor : actors)
 		{
-			context.canvas.getChildren().add(node);
+			context.canvas.getChildren().add(actor.group());
 		}
-		nodes.clear();
+		actors.clear();
 	}
 
 	@Override
@@ -47,6 +50,12 @@ public class ClearStep implements Step
 	{
 		fast(context);
 		onFinished.run();
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "Clear";
 	}
 
 }

@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.jfx;
+package org.geepawhill.contentment.utility;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Context;

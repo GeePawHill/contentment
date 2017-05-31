@@ -6,36 +6,46 @@ import java.util.Iterator;
 public class Actors implements Iterable<Actor>
 {
 	
-	private ArrayList<Actor> actors;
+	private ArrayList<Actor> items;
 	
 	public Actors()
 	{
-		actors = new ArrayList<>();
+		items = new ArrayList<>();
 	}
 
 	public int size()
 	{
-		return actors.size();
+		return items.size();
 	}
 	
 	public void add(Actor actor)
 	{
-		actors.add(actor);
+		items.add(actor);
 	}
 	
 	public void remove(Actor actor)
 	{
-		actors.remove(actor);
+		items.remove(actor);
 	}
 	
 	public Actor get(int i)
 	{
-		return actors.get(i);
+		return items.get(i);
 	}
 
 	@Override
 	public Iterator<Actor> iterator()
 	{
-		return actors.iterator();
+		return items.iterator();
+	}
+
+	public void addAll(Actors source)
+	{
+		items.addAll(source.items);
+	}
+
+	public void clear()
+	{
+		items.clear();
 	}
 }

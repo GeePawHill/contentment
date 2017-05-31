@@ -64,5 +64,11 @@ public class ChangeTitleStep implements Step
 	{
 		return Timing.INSTANT;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "ChangeTitle: "+source + " from: "+oldSource;
+	}
 
 }

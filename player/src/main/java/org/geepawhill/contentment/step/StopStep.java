@@ -29,5 +29,11 @@ public class StopStep implements Step
 	{
 		return FixedTiming.INSTANT;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "Cue";
+	}
 
 }

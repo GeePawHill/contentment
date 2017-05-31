@@ -4,7 +4,7 @@ import org.geepawhill.contentment.actors.Stroke;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.step.Entrance;
+import org.geepawhill.contentment.step.EntranceStep;
 import org.geepawhill.contentment.style.Frames;
 import org.junit.Ignore;
 import org.testfx.framework.junit.ApplicationTest;
@@ -27,7 +27,7 @@ public class SequenceRunnerTest extends ApplicationTest
 		
 		sequence = new Sequence();
 		sequence.add(
-				new Entrance(
+				new EntranceStep(
 						new Stroke(
 								new PointPair(0d,0d,100d,100d),
 								new Format(Frames.unspecified()
