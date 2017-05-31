@@ -30,11 +30,11 @@ public class DemoScript
 	public void add()
 	{
 		Title title = new Title();
-		common.show(title);
-		title.setText(sequence,"Demo Script");
+		sequence.add(title.flash());
+		sequence.add(title.change("Demo Script"));
 		common.stop();
 		
-		title.setText(sequence, "This is a title!");
+		sequence.add(title.change("This is a title!"));
 		common.stop();
 		
 		Format firstFormat = new Format(TypeFace.largeHand(),TypeFace.color("", Color.RED, 1d),Frames.frame("",Color.RED,5d,1d),Dash.solid());
@@ -63,8 +63,8 @@ public class DemoScript
 		common.stop();
 		common.clear();
 		
-		common.show(title);
-		title.setText(sequence,"There are other actors.");
+		sequence.add(title.flash());
+		sequence.add(title.change("There are other actors."));
 		common.stop();
 		
 		LabelBox box = new LabelBox(LabelBox.class.getSimpleName(),new Point(400d,300d),firstFormat);

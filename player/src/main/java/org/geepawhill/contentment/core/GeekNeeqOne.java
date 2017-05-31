@@ -34,8 +34,8 @@ public class GeekNeeqOne
 		common.clear();
 		
 		Title title = new Title();
-		common.show(title);
-		title.setText(sequence,"Geek-Neeq #1");
+		sequence.add(title.flash());
+		sequence.add(title.change("Geek-Neeq #1"));
 		
 		Placeholder visible = new Placeholder("Visible Man",new PointPair(200d,200d,500d,500d));
 		visible.sketch(sequence, 1d);

@@ -84,8 +84,8 @@ public class BaseComplications
 		Arrow pi5 = new Arrow(p4, false, p5, false, shared.relationFormat());
 		Arrow pi6 = new Arrow(p5, false, p6, false, shared.relationFormat());
 
-		common.show(tale);
-		tale.setText(sequence, "A Simple Change Model");
+		sequence.add(tale.flash());
+		sequence.add(tale.change("A Simple Change Model"));
 		agent.sketch(sequence, 1000d);
 		coach.sketch(sequence, 1000d);
 		common.stop();
@@ -93,7 +93,7 @@ public class BaseComplications
 		practice.sketch(sequence, 1000d);
 		change.sketch(sequence, 1000d);
 		common.stop();
-		tale.setText(sequence, "Complication: There are always multiple agents.");
+		sequence.add(tale.change("Complication: There are always multiple agents."));
 		a1.sketch(sequence, 1d);
 		a2.sketch(sequence, 1d);
 		a3.sketch(sequence, 1d);
@@ -107,7 +107,7 @@ public class BaseComplications
 		poke5.sketch(sequence, 1d);
 		poke6.sketch(sequence, 1d);
 		common.stop();
-		tale.setText(sequence, "Complication: There are always multiple practices.");
+		sequence.add(tale.change("Complication: There are always multiple practices."));
 		p1.sketch(sequence, 1d);
 		p2.sketch(sequence, 1d);
 		p3.sketch(sequence, 1d);
@@ -122,7 +122,7 @@ public class BaseComplications
 		c6.sketch(sequence, 1d);
 		common.stop();
 
-		tale.setText(sequence, "Complication: Most agents change multiple practices.");
+		sequence.add(tale.change("Complication: Most agents change multiple practices."));
 		c12.sketch(sequence, 200d);
 		c22.sketch(sequence, 200d);
 		common.stop();
@@ -136,7 +136,7 @@ public class BaseComplications
 		c26.sketch(sequence, 1d);
 		common.stop();
 
-		tale.setText(sequence, "Complication: The agents are interrelated.");
+		sequence.add(tale.change("Complication: The agents are interrelated."));
 		i1.sketch(sequence, 1000d);
 		common.stop();
 		i2.sketch(sequence, 1d);
@@ -145,7 +145,7 @@ public class BaseComplications
 		i5.sketch(sequence, 1d);
 		i6.sketch(sequence, 1d);
 		common.stop();
-		tale.setText(sequence, "Complication: The practices are interrelated.");
+		sequence.add(tale.change("Complication: The practices are interrelated."));
 		pi1.sketch(sequence, 1000d);
 		common.stop();
 		pi2.sketch(sequence, 1d);

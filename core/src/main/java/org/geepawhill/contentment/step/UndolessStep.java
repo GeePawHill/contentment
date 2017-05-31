@@ -7,14 +7,14 @@ import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.Timing;
 
-public class NoUnplayStep implements Step
+public class UndolessStep implements Step
 {
 	
 	private ContextInterpolator interpolator;
 	private Animator animator;
 	private FixedTiming timing;
 
-	public NoUnplayStep(ContextInterpolator interpolator)
+	public UndolessStep(ContextInterpolator interpolator)
 	{
 		this.interpolator = interpolator;
 		this.animator = new Animator();

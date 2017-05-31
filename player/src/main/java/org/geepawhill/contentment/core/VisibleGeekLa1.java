@@ -34,8 +34,8 @@ public class VisibleGeekLa1
 	public void add()
 	{
 		Title title = new Title();
-		common.show(title);
-		title.setText(sequence,"Visible Geek: Mp3 Dream #1");
+		sequence.add(title.flash());
+		sequence.add(title.change("Visible Geek: Mp3 Dream #1"));
 		
 		
 		Placeholder visible = new Placeholder("Visible Man",grid.area(6, 1, 2,2));

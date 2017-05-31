@@ -2,7 +2,6 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.Timing;
 
 import javafx.geometry.VPos;
@@ -12,33 +11,20 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
-public class SetTitleStep implements Step
+public class ChangeTitleStep implements Step
 {
 	
 	private Text text;
 	private String source;
-	private String previous;
+	private String oldSource;
 	
-	private final double YINSET = 20d;
-
-	public SetTitleStep(Text text,String source)
+	private static final double YINSET = 20d;
+	
+	public ChangeTitleStep(Text text, String source)
 	{
 		this.text = text;
 		this.source = source;
-		adjustTextSize();
-	}
-
-	@Override
-	public void fast(Context context)
-	{
-		previous = text.getText();
-		changeText(source);
-	}
-
-	@Override
-	public void undo(Context context)
-	{
-		changeText(previous);
+		this.oldSource ="";
 	}
 
 	@Override
@@ -49,13 +35,10 @@ public class SetTitleStep implements Step
 	}
 
 	@Override
-	public Timing timing()
+	public void fast(Context context)
 	{
-		return FixedTiming.INSTANT;
-	}
-	
-	private void adjustTextSize()
-	{
+		oldSource =text.getText();
+		text.setText(source);
 		Color color = Color.color(.9d, .9d, .9d);
 		text.setFill(color);
 		text.setStroke(color);
@@ -69,10 +52,17 @@ public class SetTitleStep implements Step
 		text.setStrokeLineCap(StrokeLineCap.ROUND);
 	}
 
-	private void changeText(String newValue)
+	@Override
+	public void undo(Context context)
 	{
-		text.setText(newValue);
-		adjustTextSize();
+		text.setText(oldSource);
+		oldSource = "";
+	}
+
+	@Override
+	public Timing timing()
+	{
+		return Timing.INSTANT;
 	}
 
 }

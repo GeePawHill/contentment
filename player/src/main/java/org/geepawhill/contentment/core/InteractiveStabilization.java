@@ -39,8 +39,8 @@ public class InteractiveStabilization
 		Arrow poke3 = new Arrow(poke3Source, false, agent, true, shared.pokeFormat(Color.GREEN));
 
 		common.clear();
-		common.show(tale);
-		tale.setText(sequence,"Agents Are Susceptible To Pokes");
+		sequence.add(tale.flash());
+		sequence.add(tale.change("Agents Are Susceptible To Pokes"));
 		target.sketch(sequence, 1d);
 
 		agent.sketch(sequence, 1d);
@@ -49,19 +49,19 @@ public class InteractiveStabilization
 		poke1Source.place(sequence);
 		poke1.sketch(sequence, 1000d);
 		common.stop();
-		tale.setText(sequence, "Agents Respond Unpredictably");
+		sequence.add(tale.change("Agents Respond Unpredictably"));
 		sequence.add(agent.move(900d, 400d));
 		common.stop();
-		tale.setText(sequence, "Whoops: Better Try Another Poke");
+		sequence.add(tale.change("Whoops: Better Try Another Poke"));
 		poke2Source.place(sequence);
 		poke2.sketch(sequence, 1000d);
 		sequence.add(agent.move(1000d, 500d));
 		common.stop();
-		tale.setText(sequence, "Almost there!");
+		sequence.add(tale.change("Almost there!"));
 		poke3Source.place(sequence);
 		poke3.sketch(sequence, 1000d);
 		sequence.add(agent.move(1100d, 450d));
-		tale.setText(sequence, "Made it!!");
+		sequence.add(tale.change("Made it!!"));
 		common.stop();
 
 	}
