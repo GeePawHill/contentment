@@ -3,15 +3,18 @@ package org.geepawhill.contentment.core;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.step.Step;
+import org.geepawhill.contentment.timing.Scheduler;
 
 
 public class Sequence
 {
 	ArrayList<Step> steps;
+	Scheduler scheduler;
 
 	public Sequence()
 	{
 		steps = new ArrayList<>();
+		scheduler = new Scheduler();
 	}
 
 	public Sequence(Step... steps)
@@ -38,6 +41,11 @@ public class Sequence
 	public void add(Step step)
 	{
 		steps.add(step);
+	}
+	
+	public void schedule(double ms)
+	{
+		scheduler.build(ms,steps);
 	}
 	
 	public double runTime()

@@ -31,7 +31,7 @@ public class Stroke implements Actor
 		if (sequence == null) sequence = new Sequence();
 		sequence.add(new EntranceStep(this));
 		sequence.add(step);
-		new Scheduler().build(timing.getAbsolute(), step);
+		sequence.schedule(timing.getAbsolute());
 		return sequence;
 	}
 
