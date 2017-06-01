@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.actor.Drawable;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.step.AddNodeStep;
 import org.geepawhill.contentment.step.EntranceStep;
@@ -14,7 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-public class Title implements Actor
+public class Title implements Drawable
 {
 	private static final double FROM_Y = 30d;
 	private final String nickname;
@@ -56,11 +57,12 @@ public class Title implements Actor
 
 	public Sequence flash()
 	{
-		Step[] steps = new Step[] {
+		Step[] steps = new Step[]
+		{
 				new EntranceStep(this),
-				new AddNodeStep(group,rectangle),
-				new AddNodeStep(group,text),
-				new ChangeTitleStep(text,"")
+				new AddNodeStep(group, rectangle),
+				new AddNodeStep(group, text),
+				new ChangeTitleStep(text, "")
 		};
 		return new Sequence(steps);
 	}
@@ -68,6 +70,12 @@ public class Title implements Actor
 	public Sequence change(String newSource)
 	{
 		return new Sequence(new ChangeTitleStep(text, newSource));
+	}
+
+	@Override
+	public Sequence draw(double ms)
+	{
+		return new Sequence(new AddNodeStep(group, rectangle), new AddNodeStep(group, text)).schedule(0d);
 	}
 
 }

@@ -48,20 +48,21 @@ public class DemoScript
 	private void scene1()
 	{
 		Title title = new Title();
-		sequence.add(title.flash());
+		common.flash(title);
 		sequence.add(title.change("Demo Script"));
-//		common.stop();
+		common.cue();
 		
 		sequence.add(title.change("This is a title!"));
 //		common.stop();
 		
 		Letters theseAreLetters = new Letters("These are letters.",new Point(800d,450d),firstFormat);
-		theseAreLetters.fadeIn(sequence, 1d);
+		common.flash(theseAreLetters);
+		//theseAreLetters.fadeIn(sequence, 1d);
 	//	common.stop();
 		
 		Letters fadedIn = new Letters("They can fade in.",new Point(800d, 500d),secondFormat);
-		fadedIn.fadeIn(sequence, 500d);
-//		common.stop();
+		common.fadeIn(1000d, fadedIn);
+		common.cue();
 		
 		Letters sketchedIn = new Letters("They can sketch in.",new Point(800d, 550d),thirdFormat);
 		sketchedIn.sketch(sequence, new FixedTiming(1000d));

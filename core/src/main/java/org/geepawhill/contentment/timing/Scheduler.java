@@ -7,7 +7,7 @@ import org.geepawhill.contentment.step.Step;
 public class Scheduler
 {
 
-	public static final String RELATIVES_BUT_NO_TOTAL = "Included relative timing with 0d parent.";
+	public static final String RELATIVES_BUT_NO_TOTAL = "Included relative timing with no absolute total.";
 	public static final String ABSOLUTE_OVERRUN = "Absolutes are bigger than allocated.";
 	private double accumulatedAbsolute;
 	private double accumulatedRelative;

@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.actor.Drawable;
 import org.geepawhill.contentment.actor.NodeOutliner;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
@@ -19,7 +20,7 @@ import javafx.animation.TranslateTransition;
 import javafx.scene.Group;
 import javafx.util.Duration;
 
-public class Letters implements Actor
+public class Letters implements Drawable
 {
 	private final String nickname;
 	private final Group group;
@@ -90,6 +91,18 @@ public class Letters implements Actor
 	public Group group()
 	{
 		return group;
+	}
+
+	@Override
+	public Sequence draw(double ms)
+	{
+		return new Sequence(step).schedule(ms);
+	}
+	
+	@Override
+	public String toString()
+	{
+		return nickname()+" ["+source+"]";
 	}
 
 }

@@ -19,7 +19,7 @@ public class Sequence
 
 	public Sequence(Step... steps)
 	{
-		this.steps = new ArrayList<Step>();
+		this();
 		for(Step step : steps) this.steps.add(step);
 	}
 
@@ -43,9 +43,10 @@ public class Sequence
 		steps.add(step);
 	}
 	
-	public void schedule(double ms)
+	public Sequence schedule(double ms)
 	{
 		scheduler.build(ms,steps);
+		return this;
 	}
 	
 	public double runTime()

@@ -8,7 +8,6 @@ import org.geepawhill.contentment.step.EntranceStep;
 import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.Timing;
-import org.geepawhill.contentment.timing.Scheduler;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;

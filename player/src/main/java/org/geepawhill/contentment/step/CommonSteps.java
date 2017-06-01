@@ -1,6 +1,9 @@
 package org.geepawhill.contentment.step;
 
+import java.security.acl.Group;
+
 import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.actor.Drawable;
 import org.geepawhill.contentment.core.Sequence;
 
 import javafx.scene.paint.Paint;
@@ -58,4 +61,34 @@ public class CommonSteps
 	{
 		sequence.add(new ColorFlipStep(actor,paint));
 	}
+	
+	public Sequence sketch(double ms,Drawable drawable)
+	{
+		Sequence result = new Sequence();
+		result.add(new EntranceStep(drawable));
+		result.add(drawable.draw(ms));
+		sequence.add(result);
+		return result;
+	}
+	
+	public Sequence flash(Drawable drawable)
+	{
+		Sequence result = new Sequence();
+		result.add(new EntranceStep(drawable));
+		result.add(drawable.draw(1d));
+		sequence.add(result);
+		return result;
+	}
+	
+	public Sequence fadeIn(double ms, Drawable drawable)
+	{
+		Sequence result = new Sequence();
+		result.add(new EntranceStep(drawable));
+		result.add(new SetStep<Double>(0d,(opacity) -> drawable.group().setOpacity(opacity)));
+		result.add(drawable.draw(1d));
+		result.add(new OpacityStep(ms,drawable,1d));
+		sequence.add(result);
+		return result;
+	}
+
 }
