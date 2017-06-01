@@ -15,7 +15,7 @@ import org.geepawhill.contentment.step.OneWayStep;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.timing.RelativeTiming;
-import org.geepawhill.contentment.timing.TimingBuilder;
+import org.geepawhill.contentment.timing.Scheduler;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
@@ -87,7 +87,7 @@ public class Arrow implements Actor
 		sequence.add(new EntranceStep(this));
 		sequence.add(new OneWayStep((context) -> boundsChanged()));
 		for(Step step : steps) sequence.add(step);
-		new TimingBuilder().build(ms,steps.toArray(new Step[0]));
+		new Scheduler().build(ms,steps.toArray(new Step[0]));
 	}
 	
 	private void boundsChanged()

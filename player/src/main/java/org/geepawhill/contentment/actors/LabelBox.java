@@ -12,7 +12,7 @@ import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.timing.RelativeTiming;
-import org.geepawhill.contentment.timing.TimingBuilder;
+import org.geepawhill.contentment.timing.Scheduler;
 import org.geepawhill.contentment.utility.JfxUtility;
 import org.geepawhill.contentment.utility.Names;
 
@@ -55,7 +55,7 @@ public class LabelBox implements Actor
 
 	public void sketch(Sequence sequence, double ms)
 	{
-		new TimingBuilder().build(ms, lettersStep, northStep, westStep, southStep, eastStep);
+		new Scheduler().build(ms, lettersStep, northStep, westStep, southStep, eastStep);
 		sequence.add(new EntranceStep(this));
 		sequence.add(lettersStep);
 		sequence.add(new BoundsStep(lettersStep.text, this::boundsChanged));

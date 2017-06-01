@@ -2,7 +2,7 @@ package org.geepawhill.contentment.timing;
 
 import org.geepawhill.contentment.step.Step;
 
-public class TimingBuilder
+public class Scheduler
 {
 
 	public static final String RELATIVES_BUT_NO_TOTAL = "Included relative timing with 0d parent.";

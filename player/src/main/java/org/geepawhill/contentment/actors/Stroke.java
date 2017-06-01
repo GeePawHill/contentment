@@ -8,7 +8,7 @@ import org.geepawhill.contentment.step.EntranceStep;
 import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.Timing;
-import org.geepawhill.contentment.timing.TimingBuilder;
+import org.geepawhill.contentment.timing.Scheduler;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
@@ -31,7 +31,7 @@ public class Stroke implements Actor
 		if (sequence == null) sequence = new Sequence();
 		sequence.add(new EntranceStep(this));
 		sequence.add(step);
-		new TimingBuilder().build(timing.getAbsolute(), step);
+		new Scheduler().build(timing.getAbsolute(), step);
 		return sequence;
 	}
 

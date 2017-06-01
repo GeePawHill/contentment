@@ -12,7 +12,7 @@ import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.Timing;
-import org.geepawhill.contentment.timing.TimingBuilder;
+import org.geepawhill.contentment.timing.Scheduler;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.animation.TranslateTransition;
@@ -26,7 +26,7 @@ public class Letters implements Actor
 	private String source;
 	private Point center;
 	private LettersStep step;
-	private TimingBuilder timingBuilder;
+	private Scheduler timingBuilder;
 
 	public Letters(String source, Point center, Format format)
 	{
@@ -35,7 +35,7 @@ public class Letters implements Actor
 		this.source = source;
 		this.center = center;
 		this.group = new Group(step.text);
-		this.timingBuilder = new TimingBuilder();
+		this.timingBuilder = new Scheduler();
 	}
 
 	public void sketch(Sequence sequence, Timing timing)

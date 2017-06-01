@@ -13,7 +13,7 @@ import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.timing.RelativeTiming;
-import org.geepawhill.contentment.timing.TimingBuilder;
+import org.geepawhill.contentment.timing.Scheduler;
 import org.geepawhill.contentment.utility.JfxUtility;
 import org.geepawhill.contentment.utility.Names;
 
@@ -67,7 +67,7 @@ public class Placeholder implements Actor
 	public void sketch(Sequence sequence, double ms)
 	{
 		LettersStep lettersStep = new LettersStep(new RelativeTiming(.6d), source, bounds.grow(-32d).north(), format);
-		new TimingBuilder().build(ms, lettersStep, northStep, westStep, southStep, eastStep);
+		new Scheduler().build(ms, lettersStep, northStep, westStep, southStep, eastStep);
 		sequence.add(new EntranceStep(this));
 		sequence.add(lettersStep);
 		sequence.add(new BoundsStep(text, this::boundsChanged));

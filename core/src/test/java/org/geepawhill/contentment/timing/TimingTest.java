@@ -12,7 +12,7 @@ public class TimingTest
 	Timing relative80;
 	Timing absolute20;
 	Timing absolute80;
-	TimingBuilder builder;
+	Scheduler builder;
 
 	@Before
 	public void before()
@@ -21,7 +21,7 @@ public class TimingTest
 		relative80 = new RelativeTiming(80d);
 		absolute20 = new FixedTiming(20d);
 		absolute80 = new FixedTiming(80d);
-		builder = new TimingBuilder();
+		builder = new Scheduler();
 	}
 
 	@Test
@@ -91,7 +91,7 @@ public class TimingTest
 		}
 		catch (RuntimeException e)
 		{
-			assertEquals(TimingBuilder.ABSOLUTE_OVERRUN, e.getMessage());
+			assertEquals(Scheduler.ABSOLUTE_OVERRUN, e.getMessage());
 		}
 	}
 	
@@ -105,7 +105,7 @@ public class TimingTest
 		}
 		catch (RuntimeException e)
 		{
-			assertEquals(TimingBuilder.RELATIVES_BUT_NO_TOTAL, e.getMessage());
+			assertEquals(Scheduler.RELATIVES_BUT_NO_TOTAL, e.getMessage());
 		}
 	}
 
