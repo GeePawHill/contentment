@@ -1,18 +1,21 @@
 package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.actors.Arrow;
+import org.geepawhill.contentment.actors.ClipArt;
 import org.geepawhill.contentment.actors.LabelBox;
 import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.actors.OvalText;
 import org.geepawhill.contentment.actors.Title;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
+import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.CommonSteps;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.timing.Timing;
 
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class DemoScript
@@ -103,6 +106,13 @@ public class DemoScript
 		
 		Arrow arrow3 = new Arrow(box3, true, oval3, true, thirdFormat);
 		common.flash(arrow3);
+		
+		Image image = new Image("/org/geepawhill/scripts/usOutline.png", 300d, 400d, true, true);
+		ClipArt art1 = new ClipArt(image,new PointPair(200d, 600d,0d,0d));
+		common.flash(art1);
+
+		ClipArt art3 = new ClipArt(image,new PointPair(1000d, 600d,0d,0d));
+		common.fadeIn(1000d,art3);
 
 		common.cue();
 	}
