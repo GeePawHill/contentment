@@ -1,6 +1,5 @@
 package org.geepawhill.contentment.actors;
 
-import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Drawable;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.geometry.PointPair;

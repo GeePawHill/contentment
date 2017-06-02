@@ -6,11 +6,8 @@ import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.outline.ValueTree;
-import org.geepawhill.contentment.step.EntranceStep;
-import org.geepawhill.contentment.step.FadeStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.TransitionStep;
-import org.geepawhill.contentment.timing.Scheduler;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
@@ -25,7 +22,6 @@ public class Letters implements Drawable
 	private String source;
 	private Point center;
 	private LettersStep step;
-	private Scheduler timingBuilder;
 
 	public Letters(String source, Point center, Format format)
 	{
@@ -34,24 +30,6 @@ public class Letters implements Drawable
 		this.source = source;
 		this.center = center;
 		this.group = new Group(step.text);
-		this.timingBuilder = new Scheduler();
-	}
-
-	public void sketch(Sequence sequence, Timing timing)
-	{
-		if (sequence == null) sequence = new Sequence();
-		sequence.add(new EntranceStep(this));
-		timingBuilder.schedule(timing.ms(), step);
-		sequence.add(step);
-	}
-
-	public void fadeIn(Sequence sequence, double ms)
-	{
-		group().setOpacity(0d);
-		sequence.add(step);
-		sequence.add(new EntranceStep(this));
-		sequence.add(new FadeStep(this, ms));
-		timingBuilder.schedule(1d,step);
 	}
 
 	public void move(Sequence sequence, double newX, double newY)

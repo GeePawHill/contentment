@@ -1,17 +1,16 @@
 package org.geepawhill.contentment.actors;
 
-import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.actor.Drawable;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.step.AddNodeStep;
 import org.geepawhill.contentment.step.BoundsStep;
-import org.geepawhill.contentment.step.EntranceStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.step.TransitionStep;
-import org.geepawhill.contentment.timing.Scheduler;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.JfxUtility;
 import org.geepawhill.contentment.utility.Names;
@@ -20,7 +19,7 @@ import javafx.animation.TranslateTransition;
 import javafx.scene.Group;
 import javafx.util.Duration;
 
-public class TargetBox implements Actor
+public class TargetBox implements Drawable
 {
 	final String nickname;
 	final String source;
@@ -53,18 +52,6 @@ public class TargetBox implements Actor
 		return nickname;
 	}
 
-	public void sketch(Sequence sequence, double ms)
-	{
-		new Scheduler().schedule(ms, lettersStep,northStep,westStep,southStep,eastStep);
-		sequence.add(new EntranceStep(this));
-		sequence.add(lettersStep);
-		sequence.add(new BoundsStep(lettersStep.text,this::boundsChanged));
-		sequence.add(northStep);
-		sequence.add(eastStep);
-		sequence.add(southStep);
-		sequence.add(westStep);
-	}
-	
 	private void boundsChanged(PointPair pair)
 	{
 		PointPair grow = pair.change(4d,4d,300d,300d);
@@ -88,6 +75,23 @@ public class TargetBox implements Actor
 	public Group group()
 	{
 		return group;
+	}
+
+	@Override
+	public Sequence draw(double ms)
+	{
+		Sequence sequence = new Sequence();
+		sequence.add(lettersStep);
+		sequence.add(new BoundsStep(lettersStep.text,this::boundsChanged));
+		sequence.add(new AddNodeStep(group, northStep.shape()));
+		sequence.add(northStep);
+		sequence.add(new AddNodeStep(group, eastStep.shape()));
+		sequence.add(eastStep);
+		sequence.add(new AddNodeStep(group, southStep.shape()));
+		sequence.add(southStep);
+		sequence.add(new AddNodeStep(group, westStep.shape()));
+		sequence.add(westStep);
+		return sequence.schedule(ms);
 	}
 
 }

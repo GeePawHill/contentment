@@ -20,16 +20,6 @@ public class CommonSteps
 		sequence.add(new ClearStep());
 	}
 
-	public void hide(Actor actor)
-	{
-		sequence.add(new HideStep(actor.group()));
-	}
-
-	public void show(Actor actor)
-	{
-		sequence.add(new ShowStep(actor.group()));
-	}
-
 	public void cue()
 	{
 		sequence.add(new CueStep());
@@ -59,25 +49,28 @@ public class CommonSteps
 		sequence.add(new ColorFlipStep(actor,paint));
 	}
 	
-	public Sequence sketch(double ms,Drawable drawable)
+	public void sketch(double ms,Drawable drawable)
 	{
 		Sequence result = new Sequence();
 		result.add(new EntranceStep(drawable));
 		result.add(drawable.draw(ms));
 		sequence.add(result);
-		return result;
 	}
 	
-	public Sequence flash(Drawable drawable)
+	public void appear(Drawable drawable)
 	{
 		Sequence result = new Sequence();
 		result.add(new EntranceStep(drawable));
 		result.add(drawable.draw(1d));
 		sequence.add(result);
-		return result;
 	}
 	
-	public Sequence fadeIn(double ms, Drawable drawable)
+	public void disappear(Drawable drawable)
+	{
+		sequence.add(new ExitStep(drawable));
+	}
+	
+	public void fadeIn(double ms, Drawable drawable)
 	{
 		Sequence result = new Sequence();
 		result.add(new EntranceStep(drawable));
@@ -85,7 +78,6 @@ public class CommonSteps
 		result.add(drawable.draw(ms));
 		result.add(new OpacityStep(ms,drawable,1d));
 		sequence.add(result);
-		return result;
 	}
 
 }

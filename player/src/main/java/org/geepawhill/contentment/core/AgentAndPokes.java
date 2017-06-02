@@ -19,7 +19,7 @@ public class AgentAndPokes
 		this.common = new CommonSteps(sequence);
 		this.shared = new SharedChangingThings();
 	}
-	
+
 	public void add()
 	{
 		Title tale = new Title();
@@ -38,42 +38,42 @@ public class AgentAndPokes
 		Letters orgchart = new Letters("Org Chart", new Point(1100d, 750d), shared.agentFormat());
 
 		common.clear();
-		sequence.add(tale.flash());
+		common.appear(tale);
 		sequence.add(tale.change("Agent: Anything With Susceptability & Unpredictability"));
-		agent.sketch(sequence, 1d);
+		common.appear(agent);
 		common.cue();
-		common.hide(agent);
-		teammate.fadeIn(sequence, 500d);
+		common.disappear(agent);
+		common.fadeIn(500d, teammate);
 		common.cue();
 		sequence.add(tale.change("That Includes The Daily Practice"));
-		practice.fadeIn(sequence, 300d);
+		common.fadeIn(300d, practice);
 		common.cue();
 		sequence.add(tale.change("Software We Use For Making"));
-		software.fadeIn(sequence, 300d);
+		common.fadeIn(300d, software);
 		common.cue();
 		sequence.add(tale.change("Or The Hardware We Use For Making"));
-		hardware.fadeIn(sequence, 300d);
+		common.fadeIn(300d, hardware);
 		common.cue();
 		sequence.add(tale.change("Corporate Policy Is An Agent"));
-		policy.fadeIn(sequence, 300d);
+		common.fadeIn(300d, policy);
 		common.cue();
 		sequence.add(tale.change("The Staffing Demand & Supply"));
-		personnel.fadeIn(sequence, 300d);
+		common.fadeIn(300d, personnel);
 		common.cue();
 		sequence.add(tale.change("Everything About The Market, Like Shipping Date"));
-		date.fadeIn(sequence, 300d);
+		common.fadeIn(300d, date);
 		common.cue();
 		sequence.add(tale.change("The Conceptual Framework The Team Uses"));
-		framework.fadeIn(sequence, 300d);
+		common.fadeIn(300d, framework);
 		common.cue();
 		sequence.add(tale.change("The Tools We Use"));
-		tools.fadeIn(sequence, 300d);
+		common.fadeIn(300d, tools);
 		common.cue();
 		sequence.add(tale.change("The Hierarchy We Live In"));
-		orgchart.fadeIn(sequence, 300d);
+		common.fadeIn(300d, orgchart);
 		common.cue();
 		sequence.add(tale.change("And, Yes, The Coach Is An Agent, Too"));
-		coach.fadeIn(sequence, 300d);
+		common.fadeIn(300d, coach);
 		common.cue();
 		sequence.add(tale.change("Watch Just One Poke..."));
 		common.cue();
@@ -90,14 +90,13 @@ public class AgentAndPokes
 		poke(framework, teammate, 830d, 550d);
 		poke(teammate, date, 1300d, 450d);
 	}
-	
+
 	private void poke(Letters from, Letters to, double newX, double newY)
 	{
 		Arrow arrow = new Arrow(from, false, to, true, shared.pokeFormat());
-		arrow.sketch(sequence, 400d);
+		common.sketch(400d, arrow);
 		to.move(sequence, newX, newY);
-		common.hide(arrow);
+		common.disappear(arrow);
 	}
-
 
 }

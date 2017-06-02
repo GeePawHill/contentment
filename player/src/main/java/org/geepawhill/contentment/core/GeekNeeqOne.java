@@ -38,21 +38,21 @@ public class GeekNeeqOne
 		sequence.add(title.change("Geek-Neeq #1"));
 		
 		Placeholder visible = new Placeholder("Visible Man",new PointPair(200d,200d,500d,500d));
-		visible.sketch(sequence, 1d);
+		common.appear(visible);
 		common.cue();
 		
 		Letters technique = new Letters("Technique",new Point(1200d,VQUARTER*3),main);
-		technique.fadeIn(sequence,1000d);
+		common.fadeIn(1000d,technique);
 		common.keyframe(5d);
 		common.cue();
 		
 		Letters pattern = new Letters("Implementation Pattern",new Point(1200d,VQUARTER*2),main);
-		pattern.fadeIn(sequence,1000d);
+		common.fadeIn(1000d,pattern);
 		common.keyframe(15d);
 		common.cue();
 		
 		Letters principle = new Letters("Principle", new Point(1200d,VQUARTER),main);
-		principle.fadeIn(sequence, 1000d);
+		common.fadeIn( 1000d,principle);
 		common.cue();
 	}
 	

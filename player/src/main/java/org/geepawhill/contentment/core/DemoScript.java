@@ -13,7 +13,6 @@ import org.geepawhill.contentment.step.CommonSteps;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
-import org.geepawhill.contentment.timing.Timing;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -48,7 +47,7 @@ public class DemoScript
 	private void scene1()
 	{
 		Title title = new Title();
-		common.flash(title);
+		common.appear(title);
 		sequence.add(title.change("This is a title!"));
 		common.cue();
 
@@ -56,13 +55,13 @@ public class DemoScript
 		common.cue();
 
 		Letters theseAreLetters = new Letters("These are letters.", new Point(800d, 450d), firstFormat);
-		common.flash(theseAreLetters);
+		common.appear(theseAreLetters);
 
 		Letters fadedIn = new Letters("They can fade in.", new Point(800d, 500d), secondFormat);
 		common.fadeIn(500d, fadedIn);
 
 		Letters sketchedIn = new Letters("They can sketch in.", new Point(800d, 550d), thirdFormat);
-		sketchedIn.sketch(sequence, Timing.ms(1000d));
+		common.sketch(1000d,sketchedIn);
 
 		Letters altFont = new Letters("Letters have font.", new Point(800d, 600d), fourthFormat);
 		common.fadeIn(500d,altFont);
@@ -87,7 +86,7 @@ public class DemoScript
 		common.fadeIn(500d, box2);
 		
 		LabelBox box3 = new LabelBox(LabelBox.class.getSimpleName(), new Point(1200d, 300d), firstFormat);
-		common.flash(box3);
+		common.appear(box3);
 
 		OvalText oval1 = new OvalText(OvalText.class.getSimpleName(), new Point(400d, 500d), secondFormat);
 		common.sketch(1000d, oval1);
@@ -96,7 +95,7 @@ public class DemoScript
 		common.fadeIn(500d, oval2);
 		
 		OvalText oval3 = new OvalText(OvalText.class.getSimpleName(), new Point(1200d, 500d), secondFormat);
-		common.flash(oval3);
+		common.appear(oval3);
 
 		Arrow arrow1 = new Arrow(box1, true, oval1, true, thirdFormat);
 		common.sketch(1000d, arrow1);
@@ -105,11 +104,11 @@ public class DemoScript
 		common.fadeIn(500d, arrow2);
 		
 		Arrow arrow3 = new Arrow(box3, true, oval3, true, thirdFormat);
-		common.flash(arrow3);
+		common.appear(arrow3);
 		
 		Image image = new Image("/org/geepawhill/scripts/usOutline.png", 300d, 400d, true, true);
 		ClipArt art1 = new ClipArt(image,new PointPair(200d, 600d,0d,0d));
-		common.flash(art1);
+		common.appear(art1);
 
 		ClipArt art3 = new ClipArt(image,new PointPair(1000d, 600d,0d,0d));
 		common.fadeIn(1000d,art3);
