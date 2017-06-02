@@ -30,5 +30,11 @@ public class RelativeTiming implements Timing
 	{
 		absolute = ms;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return String.format("%8.2f %8.2fms", ratio, absolute);
+	}
 
 }

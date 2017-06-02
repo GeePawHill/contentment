@@ -67,14 +67,14 @@ public class StrokeStep implements ShapeStep
 		return timing;
 	}
 	
+	@Override
+	public String toString()
+	{
+		return "Stroke: "+points;
+	}
+	
 	private void interpolate(double fraction, Context context)
 	{
-		if(fraction==0d)
-		{
-			line.setVisible(false);
-		}
-		else
-			line.setVisible(true);
 		format.apply(Frames.KEY, line);
 		format.apply(Dash.KEY, line);
 		line.setStartX(points.from.x);

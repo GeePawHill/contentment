@@ -9,7 +9,6 @@ import org.geepawhill.contentment.timing.Timing;
 
 public class UndolessStep implements Step
 {
-	
 	private ContextInterpolator interpolator;
 	private Animator animator;
 	private FixedTiming timing;

@@ -1,6 +1,5 @@
 package org.geepawhill.contentment.actors;
 
-import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Drawable;
 import org.geepawhill.contentment.actor.NodeOutliner;
 import org.geepawhill.contentment.core.Sequence;
@@ -12,8 +11,8 @@ import org.geepawhill.contentment.step.FadeStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.timing.RelativeTiming;
-import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.timing.Scheduler;
+import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.animation.TranslateTransition;

@@ -28,5 +28,11 @@ public class FixedTiming implements Timing
 	{
 		throw new RuntimeException("Attempt to change absolute timing.");
 	}
+	
+	@Override
+	public String toString()
+	{
+		return String.format("         %8.2fms", ms);
+	}
 
 }

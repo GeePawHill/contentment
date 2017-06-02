@@ -1,7 +1,5 @@
 package org.geepawhill.contentment.step;
 
-import java.security.acl.Group;
-
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Drawable;
 import org.geepawhill.contentment.core.Sequence;
@@ -10,7 +8,6 @@ import javafx.scene.paint.Paint;
 
 public class CommonSteps
 {
-
 	private Sequence sequence;
 
 	public CommonSteps(Sequence sequence)
@@ -84,8 +81,8 @@ public class CommonSteps
 	{
 		Sequence result = new Sequence();
 		result.add(new EntranceStep(drawable));
-		result.add(new SetStep<Double>(0d,(opacity) -> drawable.group().setOpacity(opacity)));
-		result.add(drawable.draw(1d));
+		result.add(new UndolessSetStep<Double>(0d,(opacity) -> drawable.group().setOpacity(opacity)));
+		result.add(drawable.draw(ms));
 		result.add(new OpacityStep(ms,drawable,1d));
 		sequence.add(result);
 		return result;

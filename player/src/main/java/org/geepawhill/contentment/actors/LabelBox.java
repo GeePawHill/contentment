@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.actor.Drawable;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
@@ -20,7 +21,7 @@ import javafx.animation.TranslateTransition;
 import javafx.scene.Group;
 import javafx.util.Duration;
 
-public class LabelBox implements Actor
+public class LabelBox implements Drawable
 {
 	final String nickname;
 	final String source;
@@ -64,7 +65,7 @@ public class LabelBox implements Actor
 		sequence.add(southStep);
 		sequence.add(westStep);
 	}
-
+	
 	private void boundsChanged(PointPair pair)
 	{
 		PointPair grow = pair.grow(4d);
@@ -88,6 +89,20 @@ public class LabelBox implements Actor
 	public Group group()
 	{
 		return group;
+	}
+
+	@Override
+	public Sequence draw(double ms)
+	{
+		Sequence sequence = new Sequence();
+		sequence.add(lettersStep);
+		sequence.add(new BoundsStep(lettersStep.text, this::boundsChanged));
+		sequence.add(northStep);
+		sequence.add(eastStep);
+		sequence.add(southStep);
+		sequence.add(westStep);
+		sequence.schedule(ms);
+		return sequence;
 	}
 
 }

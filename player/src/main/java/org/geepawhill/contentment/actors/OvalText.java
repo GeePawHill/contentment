@@ -1,6 +1,6 @@
 package org.geepawhill.contentment.actors;
 
-import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.actor.Drawable;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
@@ -16,7 +16,7 @@ import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
 
-public class OvalText implements Actor
+public class OvalText implements Drawable
 {
 	final String nickname;
 	final String source;
@@ -62,4 +62,14 @@ public class OvalText implements Actor
 		return group;
 	}
 
+
+	@Override
+	public Sequence draw(double ms)
+	{
+		Sequence sequence = new Sequence();
+		sequence.add(lettersStep);
+		sequence.add(new BoundsStep(lettersStep.text, this::boundsChanged));
+		sequence.add(ovalStep);
+		return sequence.schedule(ms);
+	}
 }

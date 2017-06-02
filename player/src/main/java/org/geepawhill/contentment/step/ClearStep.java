@@ -30,7 +30,6 @@ public class ClearStep implements Step
 	{
 		actors.clear();
 		actors.addAll(context.actors);
-		System.out.println("Clearing:");
 		for(Actor actor : actors)
 		{
 			context.canvas.getChildren().remove(actor.group());
@@ -44,10 +43,6 @@ public class ClearStep implements Step
 		for(Actor actor : actors)
 		{
 			context.canvas.getChildren().add(actor.group());
-		}
-		for(Node node : actors.get(0).group().getChildren())
-		{
-			System.out.println(node.isVisible());
 		}
 		actors.clear();
 	}

@@ -45,6 +45,7 @@ public class Scheduler
 			if (ratio != 0d)
 			{
 				double ms = (ratio * distribute) / accumulatedRelative;
+				if(ms<.1d) ms = .1d;
 				afterDistribution += ms;
 				timing.setAbsolute(ms);
 			}

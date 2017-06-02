@@ -1,22 +1,28 @@
 package org.geepawhill.contentment.step;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.timing.Timing;
 
-public class SetStep<T> implements Step
+public class UndolessSetStep<T> implements Step
 {
 	
-	private T literal;
-	private Consumer<T> setter;
+	private Consumer<T> consumer;
+	private Supplier<T> supplier;
+	T oldValue;
 
-	public SetStep(T literal,Consumer<T> setter)
+	public UndolessSetStep(T literal,Consumer<T> supplier)
 	{
-		this.literal = literal;
-		this.setter = setter;
-		
+		this( () -> literal, supplier);
+	}
+	
+	public UndolessSetStep(Supplier<T> supplier, Consumer<T> setter)
+	{
+		this.supplier = supplier;
+		this.consumer = setter;
 	}
 
 	@Override
@@ -24,13 +30,12 @@ public class SetStep<T> implements Step
 	{
 		fast(context);
 		onFinished.run();
-
 	}
 
 	@Override
 	public void fast(Context context)
 	{
-		setter.accept(literal);
+		consumer.accept(supplier.get());
 	}
 
 	@Override

@@ -95,6 +95,12 @@ public class HandStep implements ShapeStep
 		};
 		return result;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "Hand: "+new PointPair(points.from,points.to);
+	}
 
 	public Node node()
 	{

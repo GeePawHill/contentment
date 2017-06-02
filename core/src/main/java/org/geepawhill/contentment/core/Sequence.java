@@ -63,7 +63,7 @@ public class Sequence
 	{
 		for(Step step : steps)
 		{
-			System.out.println(step);
+			System.out.println(step.timing()+" "+step);
 		}
 	}
 }
