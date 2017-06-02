@@ -2,7 +2,7 @@ package org.geepawhill.contentment.timing;
 
 public class Timing
 {
-	static private final Timing INSTANT = ms(.1d);
+	static private final Timing INSTANT = ms(0d);
 	
 	private double weightOrMs;
 	
