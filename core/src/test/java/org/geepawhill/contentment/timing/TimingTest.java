@@ -38,7 +38,7 @@ public class TimingTest
 	@Test(expected = RuntimeException.class)
 	public void relativeThrowsIfUnset()
 	{
-		relative20.fixed();
+		relative20.ms();
 	}
 
 	@Test(expected = RuntimeException.class)
@@ -51,30 +51,30 @@ public class TimingTest
 	public void relativeSetsAbsolute()
 	{
 		relative20.fix(1000d);
-		assertEquals(1000d, relative20.fixed(), 1d);
+		assertEquals(1000d, relative20.ms(), 1d);
 	}
 
 	@Test
 	public void oneRelativeEatsAllTime()
 	{
 		assertEquals(300d, scheduler.schedule(300d, relative20), 0.1d);
-		assertEquals(300d, relative20.fixed(), 0.1d);
+		assertEquals(300d, relative20.ms(), 0.1d);
 	}
 
 	@Test
 	public void twoRelativesEatAllTime()
 	{
 		assertEquals(300d, scheduler.schedule(300d, relative20, relative80), 0.1d);
-		assertEquals(60d, relative20.fixed(), 0.1d);
-		assertEquals(240d, relative80.fixed(), 0.1d);
+		assertEquals(60d, relative20.ms(), 0.1d);
+		assertEquals(240d, relative80.ms(), 0.1d);
 	}
 	
 	@Test
 	public void absolutesAndRelativesCoexist()
 	{
 		assertEquals(300d, scheduler.schedule(300d, absolute80,absolute20,relative20, relative80), 0.1d);
-		assertEquals(40d, relative20.fixed(), 0.1d);
-		assertEquals(160d, relative80.fixed(), 0.1d);
+		assertEquals(40d, relative20.ms(), 0.1d);
+		assertEquals(160d, relative80.ms(), 0.1d);
 	}
 	
 	@Test
@@ -116,13 +116,13 @@ public class TimingTest
 	public void relativesGetMinimumTime()
 	{
 		scheduler.schedule(80d, absolute80,relative20);
-		assertThat(relative20.fixed()).isEqualTo(.1d);
+		assertThat(relative20.ms()).isEqualTo(.1d);
 	}
 	
 	private void assertFixed(Timing timing, double expected)
 	{
 		assertThat(timing.isWeighted()).isFalse();
-		assertThat(timing.fixed()).isCloseTo(expected, within(0.1d));
+		assertThat(timing.ms()).isCloseTo(expected, within(0.1d));
 	}
 
 	private void assertWeighted(Timing timing, double weight)

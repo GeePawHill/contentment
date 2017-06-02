@@ -54,7 +54,7 @@ public class Sequence
 		double result = 0d;
 		for(Step step : steps)
 		{
-			result += step.timing().fixed();
+			result += step.timing().ms();
 		}
 		return result;
 	}

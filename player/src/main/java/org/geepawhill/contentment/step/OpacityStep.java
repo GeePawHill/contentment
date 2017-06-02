@@ -24,7 +24,7 @@ public class OpacityStep implements Step
 	public void slow(Context context, OnFinished onFinished)
 	{
 		oldOpacity = actor.group().getOpacity();
-		new Animator().play(context,onFinished,timing.fixed(),this::interpolate);
+		new Animator().play(context,onFinished,timing.ms(),this::interpolate);
 	}
 
 	public void interpolate(Context context, double fraction)

@@ -69,7 +69,7 @@ public class HandStep implements ShapeStep
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		transition = new ContextTransition(context, this::interpolate, timing().fixed());
+		transition = new ContextTransition(context, this::interpolate, timing().ms());
 		transition.setOnFinished((event) -> onFinished.run());
 		transition.play();
 	}

@@ -77,7 +77,7 @@ public class Scheduler
 		{
 			if(!timing.isWeighted())
 			{
-				accumulatedAbsolute += timing.fixed();
+				accumulatedAbsolute += timing.ms();
 			}
 			else
 			{

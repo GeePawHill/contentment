@@ -41,7 +41,7 @@ public class Letters implements Drawable
 	{
 		if (sequence == null) sequence = new Sequence();
 		sequence.add(new EntranceStep(this));
-		timingBuilder.schedule(timing.fixed(), step);
+		timingBuilder.schedule(timing.ms(), step);
 		sequence.add(step);
 	}
 

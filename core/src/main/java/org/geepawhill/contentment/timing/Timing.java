@@ -37,7 +37,7 @@ public class Timing
 		return -weightOrMs;
 	}
 	
-	public double fixed()
+	public double ms()
 	{
 		if(isWeighted()) throw new RuntimeException("Asked for fixed from weighted Timing.");
 		return weightOrMs;

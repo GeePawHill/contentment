@@ -43,7 +43,7 @@ public class LettersStep implements Step
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		new Animator().play(context,onFinished,timing.fixed(),this::interpolate);
+		new Animator().play(context,onFinished,timing.ms(),this::interpolate);
 	}
 
 	@Override

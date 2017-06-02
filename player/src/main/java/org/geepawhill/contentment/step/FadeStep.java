@@ -35,7 +35,7 @@ public class FadeStep implements Step
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		animator.play(context,onFinished,timing.fixed(),this::doFade);
+		animator.play(context,onFinished,timing.ms(),this::doFade);
 	}
 
 	private void doFade(Context context, double fraction)
