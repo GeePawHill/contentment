@@ -12,12 +12,12 @@ public class Scheduler
 	private double accumulatedAbsolute;
 	private double accumulatedRelative;
 
-	public double build(double ms, ArrayList<Step> steps)
+	public double schedule(double ms, ArrayList<Step> steps)
 	{
-		return build(ms,steps.toArray(new Step[0]));
+		return schedule(ms,steps.toArray(new Step[0]));
 	}
 	
-	public double build(double total, Step... steps)
+	public double schedule(double total, Step... steps)
 	{
 		Timing[] timings = new Timing[steps.length];
 		int dest = 0;
@@ -25,10 +25,10 @@ public class Scheduler
 		{
 			timings[dest++] = step.timing();
 		}
-		return build(total, timings);
+		return schedule(total, timings);
 	}
 
-	public double build(double total, Timing... timings)
+	public double schedule(double total, Timing... timings)
 	{
 		gatherTotals(timings);
 		if (total == 0d) return noTotalSupplied();

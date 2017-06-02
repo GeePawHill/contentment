@@ -56,7 +56,7 @@ public class LabelBox implements Drawable
 
 	public void sketch(Sequence sequence, double ms)
 	{
-		new Scheduler().build(ms, lettersStep, northStep, westStep, southStep, eastStep);
+		new Scheduler().schedule(ms, lettersStep, northStep, westStep, southStep, eastStep);
 		sequence.add(new EntranceStep(this));
 		sequence.add(lettersStep);
 		sequence.add(new BoundsStep(lettersStep.text, this::boundsChanged));

@@ -80,7 +80,7 @@ public class Arrow implements Drawable
 		sequence.add(new OneWayStep((context) -> boundsChanged()));
 		for (Step step : steps)
 			sequence.add(step);
-		new Scheduler().build(ms, steps.toArray(new Step[0]));
+		new Scheduler().schedule(ms, steps.toArray(new Step[0]));
 	}
 
 	private void boundsChanged()

@@ -67,7 +67,7 @@ public class Placeholder implements Actor
 	public void sketch(Sequence sequence, double ms)
 	{
 		LettersStep lettersStep = new LettersStep(new RelativeTiming(.6d), source, bounds.grow(-32d).north(), format);
-		new Scheduler().build(ms, lettersStep, northStep, westStep, southStep, eastStep);
+		new Scheduler().schedule(ms, lettersStep, northStep, westStep, southStep, eastStep);
 		sequence.add(new EntranceStep(this));
 		sequence.add(lettersStep);
 		sequence.add(new BoundsStep(text, this::boundsChanged));

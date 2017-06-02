@@ -45,7 +45,7 @@ public class Sequence
 	
 	public Sequence schedule(double ms)
 	{
-		scheduler.build(ms,steps);
+		scheduler.schedule(ms,steps);
 		return this;
 	}
 	

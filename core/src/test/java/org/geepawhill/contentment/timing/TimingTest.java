@@ -1,5 +1,6 @@
 package org.geepawhill.contentment.timing;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -12,7 +13,7 @@ public class TimingTest
 	Timing relative80;
 	Timing absolute20;
 	Timing absolute80;
-	Scheduler builder;
+	Scheduler scheduler;
 
 	@Before
 	public void before()
@@ -21,7 +22,7 @@ public class TimingTest
 		relative80 = new RelativeTiming(80d);
 		absolute20 = new FixedTiming(20d);
 		absolute80 = new FixedTiming(80d);
-		builder = new Scheduler();
+		scheduler = new Scheduler();
 	}
 
 	@Test
@@ -54,14 +55,14 @@ public class TimingTest
 	@Test
 	public void oneRelativeEatsAllTime()
 	{
-		assertEquals(300d, builder.build(300d, relative20), 0.1d);
+		assertEquals(300d, scheduler.schedule(300d, relative20), 0.1d);
 		assertEquals(300d, relative20.getAbsolute(), 0.1d);
 	}
 
 	@Test
 	public void twoRelativesEatAllTime()
 	{
-		assertEquals(300d, builder.build(300d, relative20, relative80), 0.1d);
+		assertEquals(300d, scheduler.schedule(300d, relative20, relative80), 0.1d);
 		assertEquals(60d, relative20.getAbsolute(), 0.1d);
 		assertEquals(240d, relative80.getAbsolute(), 0.1d);
 	}
@@ -69,7 +70,7 @@ public class TimingTest
 	@Test
 	public void absolutesAndRelativesCoexist()
 	{
-		assertEquals(300d, builder.build(300d, absolute80,absolute20,relative20, relative80), 0.1d);
+		assertEquals(300d, scheduler.schedule(300d, absolute80,absolute20,relative20, relative80), 0.1d);
 		assertEquals(40d, relative20.getAbsolute(), 0.1d);
 		assertEquals(160d, relative80.getAbsolute(), 0.1d);
 	}
@@ -77,7 +78,7 @@ public class TimingTest
 	@Test
 	public void absolutesSumWithZeroTotal()
 	{
-		assertEquals(100d, builder.build(0d, absolute80,absolute20), 0.1d);
+		assertEquals(100d, scheduler.schedule(0d, absolute80,absolute20), 0.1d);
 	}
 
 
@@ -86,7 +87,7 @@ public class TimingTest
 	{
 		try
 		{
-			builder.build(80d, absolute20, absolute80);
+			scheduler.schedule(80d, absolute20, absolute80);
 			fail("Did not throw on absolute child overage.");
 		}
 		catch (RuntimeException e)
@@ -100,13 +101,20 @@ public class TimingTest
 	{
 		try
 		{
-			builder.build(0d, relative20, absolute80);
+			scheduler.schedule(0d, relative20, absolute80);
 			fail("Did not throw on relatives but no total.");
 		}
 		catch (RuntimeException e)
 		{
 			assertEquals(Scheduler.RELATIVES_BUT_NO_TOTAL, e.getMessage());
 		}
+	}
+	
+	@Test
+	public void relativesGetMinimumTime()
+	{
+		scheduler.schedule(80d, absolute80,relative20);
+		assertThat(relative20.getAbsolute()).isEqualTo(.1d);
 	}
 
 }

@@ -43,7 +43,7 @@ public class OvalText implements Drawable
 
 	public void sketch(Sequence sequence, double ms)
 	{
-		new Scheduler().build(ms, lettersStep, ovalStep);
+		new Scheduler().schedule(ms, lettersStep, ovalStep);
 		sequence.add(new EntranceStep(this));
 		sequence.add(lettersStep);
 		sequence.add(new BoundsStep(lettersStep.text, this::boundsChanged));

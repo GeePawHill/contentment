@@ -42,7 +42,7 @@ public class Letters implements Drawable
 	{
 		if (sequence == null) sequence = new Sequence();
 		sequence.add(new EntranceStep(this));
-		timingBuilder.build(timing.getAbsolute(), step);
+		timingBuilder.schedule(timing.getAbsolute(), step);
 		sequence.add(step);
 	}
 
@@ -52,7 +52,7 @@ public class Letters implements Drawable
 		sequence.add(step);
 		sequence.add(new EntranceStep(this));
 		sequence.add(new FadeStep(this, ms));
-		timingBuilder.build(1d,step);
+		timingBuilder.schedule(1d,step);
 	}
 
 	public void move(Sequence sequence, double newX, double newY)
