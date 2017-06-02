@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.timing;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -20,18 +21,19 @@ public class TimingTest
 	{
 		relative20 = Timing.weighted(20d);
 		relative80 = Timing.weighted(80d);
-		absolute20 = new FixedTiming(20d);
-		absolute80 = new FixedTiming(80d);
+		absolute20 = Timing.ms(20d);
+		absolute80 = Timing.ms(80d);
 		scheduler = new Scheduler();
 	}
 
 	@Test
 	public void constructors()
 	{
-		assertEquals(20d, relative20.weight(), .1d);
-		assertEquals(80d, relative80.weight(), .1d);
-		assertEquals(0d, absolute20.weight(), .1d);
+		assertWeighted(relative20,20d);
+		assertWeighted(relative80,80d);
+		assertFixed(absolute80, 80d);
 	}
+
 
 	@Test(expected = RuntimeException.class)
 	public void relativeThrowsIfUnset()
@@ -116,5 +118,18 @@ public class TimingTest
 		scheduler.schedule(80d, absolute80,relative20);
 		assertThat(relative20.fixed()).isEqualTo(.1d);
 	}
+	
+	private void assertFixed(Timing timing, double expected)
+	{
+		assertThat(timing.isWeighted()).isFalse();
+		assertThat(timing.fixed()).isCloseTo(expected, within(0.1d));
+	}
+
+	private void assertWeighted(Timing timing, double weight)
+	{
+		assertThat(timing.isWeighted()).isTrue();
+		assertThat(timing.weight()).isCloseTo(weight, within(0.1d));
+	}
+
 
 }

@@ -1,12 +1,19 @@
 package org.geepawhill.contentment.timing;
 
-public interface Timing
+public class Timing
 {
-	public Timing INSTANT = new FixedTiming(.1d);
+	static private final Timing INSTANT = ms(.1d);
+	
+	private double weightOrMs;
+	
+	private Timing(double weightOrMs)
+	{
+		this.weightOrMs = weightOrMs;
+	}
 	
 	static public Timing ms(double ms)
 	{
-		return new FixedTiming(ms);
+		return new Timing(ms);
 	}
 	
 	static public Timing instant()
@@ -16,11 +23,29 @@ public interface Timing
 	
 	static public Timing weighted(double weight)
 	{
-		return new RelativeTiming(weight);
+		return new Timing(-weight);
 	}
 	
-	public boolean isWeighted();
-	public double weight();
-	public double fixed();
-	public void fix(double ms);
+	public boolean isWeighted()
+	{
+		return weightOrMs<0d;
+	}
+	
+	public double weight()
+	{
+		if(!isWeighted()) throw new RuntimeException("Asked for weight from non-weighted Timing.");
+		return -weightOrMs;
+	}
+	
+	public double fixed()
+	{
+		if(isWeighted()) throw new RuntimeException("Asked for fixed from weighted Timing.");
+		return weightOrMs;
+	}
+	
+	public void fix(double ms)
+	{
+		if(!isWeighted()) throw new RuntimeException("Tried to fix Timing twice.");
+		weightOrMs = ms;
+	}
 }
