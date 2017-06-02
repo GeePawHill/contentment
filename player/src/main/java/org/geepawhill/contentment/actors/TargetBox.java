@@ -11,8 +11,8 @@ import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.step.TransitionStep;
-import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.Scheduler;
+import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.JfxUtility;
 import org.geepawhill.contentment.utility.Names;
 
@@ -40,11 +40,11 @@ public class TargetBox implements Actor
 		this.nickname = Names.make(getClass());
 		this.center = center;
 		this.source = source;
-		lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, format);
-		northStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),format);
-		westStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),format);
-		southStep = new StrokeStep(new RelativeTiming(.1d),new PointPair(0d,0d,0d,0d),format);
-		eastStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d,0d,0d,0d),format);
+		lettersStep = new LettersStep(Timing.weighted(.6d), source, center, format);
+		northStep = new StrokeStep(Timing.weighted(.1d),new PointPair(0d,0d,0d,0d),format);
+		westStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d,0d,0d,0d),format);
+		southStep = new StrokeStep(Timing.weighted(.1d),new PointPair(0d,0d,0d,0d),format);
+		eastStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d,0d,0d,0d),format);
 		this.group = JfxUtility.makeGroup(this,lettersStep.text,northStep.shape(),westStep.shape(),southStep.shape(),eastStep.shape());
 	}
 	

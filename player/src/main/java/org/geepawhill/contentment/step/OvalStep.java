@@ -51,7 +51,7 @@ public class OvalStep implements Step
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		transition = new ContextTransition( context,this::interpolate,timing().getAbsolute());
+		transition = new ContextTransition( context,this::interpolate,timing().fixed());
 		transition.setOnFinished((event) -> onFinished.run());
 		transition.play();
 	}

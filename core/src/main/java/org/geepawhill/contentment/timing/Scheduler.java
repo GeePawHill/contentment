@@ -41,13 +41,13 @@ public class Scheduler
 		double afterDistribution = accumulatedAbsolute;
 		for (Timing timing : timings)
 		{
-			double ratio = timing.getRatio();
+			double ratio = timing.weight();
 			if (ratio != 0d)
 			{
 				double ms = (ratio * distribute) / accumulatedRelative;
 				if(ms<.1d) ms = .1d;
 				afterDistribution += ms;
-				timing.setAbsolute(ms);
+				timing.fix(ms);
 			}
 		}
 		return afterDistribution;
@@ -72,13 +72,13 @@ public class Scheduler
 		accumulatedRelative = 0d;
 		for (Timing timing : timings)
 		{
-			if (timing.getRatio() == 0d)
+			if (timing.weight() == 0d)
 			{
-				accumulatedAbsolute += timing.getAbsolute();
+				accumulatedAbsolute += timing.fixed();
 			}
 			else
 			{
-				accumulatedRelative += timing.getRatio();
+				accumulatedRelative += timing.weight();
 			}
 		}
 	}

@@ -36,7 +36,6 @@ class SlideStep implements Step
 		for(Node node : oldNodes)
 		{
 			group.getChildren().add(node);
-			Text t = (Text)node;
 		}
 	}
 
@@ -49,10 +48,6 @@ class SlideStep implements Step
 		}
 		oldNodes.clear();
 		oldNodes.addAll(group.getChildren());
-		for(Node node : oldNodes)
-		{
-			Text t = (Text)node;
-		}
 		group.getChildren().clear();
 		group.getChildren().addAll(texts);
 	}
@@ -67,7 +62,7 @@ class SlideStep implements Step
 	@Override
 	public Timing timing()
 	{
-		return Timing.INSTANT;
+		return Timing.instant();
 	}
 	
 }

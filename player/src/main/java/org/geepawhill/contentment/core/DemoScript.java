@@ -11,7 +11,7 @@ import org.geepawhill.contentment.step.CommonSteps;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
-import org.geepawhill.contentment.timing.FixedTiming;
+import org.geepawhill.contentment.timing.Timing;
 
 import javafx.scene.paint.Color;
 
@@ -59,7 +59,7 @@ public class DemoScript
 		common.fadeIn(500d, fadedIn);
 
 		Letters sketchedIn = new Letters("They can sketch in.", new Point(800d, 550d), thirdFormat);
-		sketchedIn.sketch(sequence, new FixedTiming(1000d));
+		sketchedIn.sketch(sequence, Timing.ms(1000d));
 
 		Letters altFont = new Letters("Letters have font.", new Point(800d, 600d), fourthFormat);
 		common.fadeIn(500d,altFont);

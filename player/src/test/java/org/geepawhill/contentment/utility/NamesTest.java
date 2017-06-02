@@ -2,7 +2,6 @@ package org.geepawhill.contentment.utility;
 
 import static org.junit.Assert.assertEquals;
 
-import org.geepawhill.contentment.utility.Names;
 import org.junit.Before;
 import org.junit.Test;
 

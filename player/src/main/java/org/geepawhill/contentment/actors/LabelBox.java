@@ -1,6 +1,5 @@
 package org.geepawhill.contentment.actors;
 
-import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Drawable;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
@@ -12,8 +11,8 @@ import org.geepawhill.contentment.step.HandStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.TransitionStep;
-import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.Scheduler;
+import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.JfxUtility;
 import org.geepawhill.contentment.utility.Names;
 
@@ -41,11 +40,11 @@ public class LabelBox implements Drawable
 		this.nickname = Names.make(getClass());
 		this.center = center;
 		this.source = source;
-		lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, format);
-		northStep = new HandStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		westStep = new HandStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		southStep = new HandStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		eastStep = new HandStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		lettersStep = new LettersStep(Timing.weighted(.6d), source, center, format);
+		northStep = new HandStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		westStep = new HandStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		southStep = new HandStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		eastStep = new HandStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 		this.group = JfxUtility.makeGroup(this, lettersStep.text, northStep.shape(), westStep.shape(), southStep.shape(), eastStep.shape());
 	}
 

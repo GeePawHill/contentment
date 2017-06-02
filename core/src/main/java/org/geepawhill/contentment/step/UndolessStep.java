@@ -4,20 +4,19 @@ import org.geepawhill.contentment.core.Animator;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.ContextInterpolator;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.Timing;
 
 public class UndolessStep implements Step
 {
 	private ContextInterpolator interpolator;
 	private Animator animator;
-	private FixedTiming timing;
+	private Timing timing;
 
 	public UndolessStep(ContextInterpolator interpolator)
 	{
 		this.interpolator = interpolator;
 		this.animator = new Animator();
-		this.timing = new FixedTiming(0d);
+		this.timing = Timing.instant();
 	}
 	
 	@Override

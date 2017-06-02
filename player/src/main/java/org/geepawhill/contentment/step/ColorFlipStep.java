@@ -3,7 +3,6 @@ package org.geepawhill.contentment.step;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.timing.Timing;
 
 import javafx.scene.Node;
@@ -74,7 +73,7 @@ public class ColorFlipStep implements Step
 	@Override
 	public Timing timing()
 	{
-		return Timing.INSTANT;
+		return Timing.instant();
 	}
 	
 }

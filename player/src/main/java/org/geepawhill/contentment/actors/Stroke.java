@@ -6,7 +6,6 @@ import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.EntranceStep;
 import org.geepawhill.contentment.step.StrokeStep;
-import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
@@ -21,7 +20,7 @@ public class Stroke implements Actor
 	public Stroke(PointPair points, Format format)
 	{
 		this.nickname = Names.make(getClass());
-		this.step = new StrokeStep(new RelativeTiming(1d), points, format);
+		this.step = new StrokeStep(Timing.weighted(1d), points, format);
 		this.group = new Group(step.shape());
 	}
 
@@ -30,7 +29,7 @@ public class Stroke implements Actor
 		if (sequence == null) sequence = new Sequence();
 		sequence.add(new EntranceStep(this));
 		sequence.add(step);
-		sequence.schedule(timing.getAbsolute());
+		sequence.schedule(timing.fixed());
 		return sequence;
 	}
 

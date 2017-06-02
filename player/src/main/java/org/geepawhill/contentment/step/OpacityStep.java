@@ -4,7 +4,6 @@ import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Animator;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.Timing;
 
 public class OpacityStep implements Step
@@ -16,7 +15,7 @@ public class OpacityStep implements Step
 
 	public OpacityStep(double ms, Actor actor, double opacity)
 	{
-		this.timing = new FixedTiming(ms);
+		this.timing = Timing.ms(ms);
 		this.actor = actor;
 		this.opacity = opacity;
 	}
@@ -25,7 +24,7 @@ public class OpacityStep implements Step
 	public void slow(Context context, OnFinished onFinished)
 	{
 		oldOpacity = actor.group().getOpacity();
-		new Animator().play(context,onFinished,timing.getAbsolute(),this::interpolate);
+		new Animator().play(context,onFinished,timing.fixed(),this::interpolate);
 	}
 
 	public void interpolate(Context context, double fraction)

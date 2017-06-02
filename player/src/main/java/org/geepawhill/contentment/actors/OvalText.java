@@ -9,8 +9,8 @@ import org.geepawhill.contentment.step.BoundsStep;
 import org.geepawhill.contentment.step.EntranceStep;
 import org.geepawhill.contentment.step.HandOvalStep;
 import org.geepawhill.contentment.step.LettersStep;
-import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.Scheduler;
+import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.JfxUtility;
 import org.geepawhill.contentment.utility.Names;
 
@@ -30,8 +30,8 @@ public class OvalText implements Drawable
 	{
 		this.nickname = Names.make(getClass());
 		this.source = source;
-		lettersStep = new LettersStep(new RelativeTiming(.6d), source, center, format);
-		ovalStep = new HandOvalStep(new RelativeTiming(.4d), format);
+		lettersStep = new LettersStep(Timing.weighted(.6d), source, center, format);
+		ovalStep = new HandOvalStep(Timing.weighted(.4d), format);
 		this.group = JfxUtility.makeGroup(this, lettersStep.text, ovalStep.shape());
 	}
 	

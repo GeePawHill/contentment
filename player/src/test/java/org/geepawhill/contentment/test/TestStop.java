@@ -3,7 +3,6 @@ package org.geepawhill.contentment.test;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.step.CueStep;
-import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.Timing;
 
 public class TestStop extends CueStep
@@ -59,6 +58,6 @@ public class TestStop extends CueStep
 	@Override
 	public Timing timing()
 	{
-		return FixedTiming.INSTANT;
+		return Timing.instant();
 	}
 }

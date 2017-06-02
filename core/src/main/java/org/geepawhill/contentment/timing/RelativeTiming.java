@@ -2,33 +2,38 @@ package org.geepawhill.contentment.timing;
 
 public class RelativeTiming implements Timing
 {
-	
 	private double ratio;
 	private double absolute;
 
-	public RelativeTiming(double ratio)
+	RelativeTiming(double ratio)
 	{
 		this.ratio = ratio;
 		this.absolute = 0d;
 	}
 
 	@Override
-	public double getRatio()
+	public double weight()
 	{
 		return ratio;
 	}
 
 	@Override
-	public double getAbsolute()
+	public double fixed()
 	{
 		if(absolute==0d) throw new RuntimeException("0 absolute timing set!");
 		return absolute;
 	}
 
 	@Override
-	public void setAbsolute(double ms)
+	public void fix(double ms)
 	{
 		absolute = ms;
+	}
+	
+	@Override
+	public boolean isWeighted()
+	{
+		return absolute==0d;
 	}
 	
 	@Override

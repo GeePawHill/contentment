@@ -4,10 +4,7 @@ import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Actors;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.Timing;
-
-import javafx.scene.Node;
 
 public class ClearStep implements Step
 {
@@ -22,7 +19,7 @@ public class ClearStep implements Step
 	@Override
 	public Timing timing()
 	{
-		return FixedTiming.INSTANT;
+		return Timing.instant();
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.Timing;
 
 import javafx.animation.Transition;
@@ -58,7 +57,7 @@ public class DelayStep implements Step
 	@Override
 	public Timing timing()
 	{
-		return new FixedTiming(ms);
+		return Timing.ms(ms);
 	}
 
 }

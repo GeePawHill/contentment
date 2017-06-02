@@ -2,9 +2,25 @@ package org.geepawhill.contentment.timing;
 
 public interface Timing
 {
-	Timing INSTANT = new FixedTiming(.1d);
+	public Timing INSTANT = new FixedTiming(.1d);
 	
-	public double getRatio();
-	public double getAbsolute();
-	public void setAbsolute(double ms);
+	static public Timing ms(double ms)
+	{
+		return new FixedTiming(ms);
+	}
+	
+	static public Timing instant()
+	{
+		return INSTANT;
+	}
+	
+	static public Timing weighted(double weight)
+	{
+		return new RelativeTiming(weight);
+	}
+	
+	public boolean isWeighted();
+	public double weight();
+	public double fixed();
+	public void fix(double ms);
 }

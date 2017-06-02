@@ -17,8 +17,8 @@ import org.geepawhill.contentment.step.HandStep;
 import org.geepawhill.contentment.step.OneWayStep;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.StrokeStep;
-import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.Scheduler;
+import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
@@ -51,20 +51,20 @@ public class Arrow implements Drawable
 		this.computer = new NodeArrowComputer(from.group(), to.group());
 		this.group = new Group();
 		steps = new ArrayList<>();
-		mainStep = new HandStep(new RelativeTiming(.9d), new PointPair(0d, 0d, 0d, 0d), format);
+		mainStep = new HandStep(Timing.weighted(.9d), new PointPair(0d, 0d, 0d, 0d), format);
 		steps.add(mainStep);
 		if (pointAtFrom)
 		{
-			fromTopStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+			fromTopStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 			steps.add(fromTopStep);
-			fromBottomStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+			fromBottomStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 			steps.add(fromBottomStep);
 		}
 		if (pointAtTo)
 		{
-			toTopStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+			toTopStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 			steps.add(toTopStep);
-			toBottomStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+			toBottomStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 			steps.add(toBottomStep);
 		}
 	}

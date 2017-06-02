@@ -2,7 +2,6 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.Timing;
 
 import javafx.scene.Group;
@@ -20,7 +19,7 @@ public class HideStep implements Step
 	@Override
 	public Timing timing()
 	{
-		return FixedTiming.INSTANT;
+		return Timing.instant();
 	}
 
 	@Override

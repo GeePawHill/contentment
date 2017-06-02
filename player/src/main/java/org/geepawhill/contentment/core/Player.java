@@ -1,8 +1,8 @@
 package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.model.PlayState;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.CueStep;
+import org.geepawhill.contentment.step.Step;
 
 import javafx.scene.Group;
 

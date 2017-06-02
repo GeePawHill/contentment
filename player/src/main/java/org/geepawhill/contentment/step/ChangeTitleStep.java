@@ -62,7 +62,7 @@ public class ChangeTitleStep implements Step
 	@Override
 	public Timing timing()
 	{
-		return Timing.INSTANT;
+		return Timing.instant();
 	}
 	
 	@Override

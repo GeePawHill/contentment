@@ -12,8 +12,8 @@ import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
-import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.Scheduler;
+import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.JfxUtility;
 import org.geepawhill.contentment.utility.Names;
 
@@ -52,10 +52,10 @@ public class Placeholder implements Actor
 		this.source = source;
 		text = new Text();
 		text.setTextOrigin(VPos.CENTER);
-		northStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		westStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		southStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		eastStep = new StrokeStep(new RelativeTiming(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		northStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		westStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		southStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		eastStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 		this.group = JfxUtility.makeGroup(this, text, northStep.shape(), westStep.shape(), southStep.shape(), eastStep.shape());
 	}
 
@@ -66,7 +66,7 @@ public class Placeholder implements Actor
 
 	public void sketch(Sequence sequence, double ms)
 	{
-		LettersStep lettersStep = new LettersStep(new RelativeTiming(.6d), source, bounds.grow(-32d).north(), format);
+		LettersStep lettersStep = new LettersStep(Timing.weighted(.6d), source, bounds.grow(-32d).north(), format);
 		new Scheduler().schedule(ms, lettersStep, northStep, westStep, southStep, eastStep);
 		sequence.add(new EntranceStep(this));
 		sequence.add(lettersStep);

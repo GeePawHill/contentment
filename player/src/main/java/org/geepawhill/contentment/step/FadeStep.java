@@ -4,7 +4,6 @@ import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Animator;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.timing.FixedTiming;
 import org.geepawhill.contentment.timing.Timing;
 
 public class FadeStep implements Step
@@ -12,13 +11,13 @@ public class FadeStep implements Step
 
 	private Actor actor;
 	private Animator animator;
-	private FixedTiming timing;
+	private Timing timing;
 
 	public FadeStep(Actor actor, double ms)
 	{
 		this.actor = actor;
 		this.animator = new Animator();
-		this.timing = new FixedTiming(ms);
+		this.timing = Timing.ms(ms);
 	}
 
 	@Override
@@ -36,7 +35,7 @@ public class FadeStep implements Step
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		animator.play(context,onFinished,timing.getAbsolute(),this::doFade);
+		animator.play(context,onFinished,timing.fixed(),this::doFade);
 	}
 
 	private void doFade(Context context, double fraction)

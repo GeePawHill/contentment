@@ -5,26 +5,26 @@ public class FixedTiming implements Timing
 	
 	private double ms;
 
-	public FixedTiming(double ms)
+	FixedTiming(double ms)
 	{
 		this.ms = ms;
 		
 	}
 
 	@Override
-	public double getRatio()
+	public double weight()
 	{
 		return 0d;
 	}
 
 	@Override
-	public double getAbsolute()
+	public double fixed()
 	{
 		return ms;
 	}
 
 	@Override
-	public void setAbsolute(double ms)
+	public void fix(double ms)
 	{
 		throw new RuntimeException("Attempt to change absolute timing.");
 	}
@@ -33,6 +33,12 @@ public class FixedTiming implements Timing
 	public String toString()
 	{
 		return String.format("         %8.2fms", ms);
+	}
+
+	@Override
+	public boolean isWeighted()
+	{
+		return false;
 	}
 
 }

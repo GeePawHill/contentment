@@ -10,7 +10,6 @@ import org.geepawhill.contentment.step.EntranceStep;
 import org.geepawhill.contentment.step.FadeStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.TransitionStep;
-import org.geepawhill.contentment.timing.RelativeTiming;
 import org.geepawhill.contentment.timing.Scheduler;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
@@ -31,7 +30,7 @@ public class Letters implements Drawable
 	public Letters(String source, Point center, Format format)
 	{
 		this.nickname = Names.make(getClass());
-		this.step = new LettersStep(new RelativeTiming(1d), source, center, format);
+		this.step = new LettersStep(Timing.weighted(1d), source, center, format);
 		this.source = source;
 		this.center = center;
 		this.group = new Group(step.text);
@@ -42,7 +41,7 @@ public class Letters implements Drawable
 	{
 		if (sequence == null) sequence = new Sequence();
 		sequence.add(new EntranceStep(this));
-		timingBuilder.schedule(timing.getAbsolute(), step);
+		timingBuilder.schedule(timing.fixed(), step);
 		sequence.add(step);
 	}
 

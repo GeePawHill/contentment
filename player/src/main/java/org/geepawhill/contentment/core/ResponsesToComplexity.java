@@ -12,7 +12,7 @@ import org.geepawhill.contentment.step.CommonSteps;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
-import org.geepawhill.contentment.timing.FixedTiming;
+import org.geepawhill.contentment.timing.Timing;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -300,11 +300,11 @@ public class ResponsesToComplexity
 		Image redBall = new Image("/org/geepawhill/scripts/redBall.png", 50d, 50d, true, true);
 		ClipArt sf = new ClipArt(redBall, new PointPair(200d, 400d, 0d, 0d));
 		Letters sfLetters = new Letters("San Francisco", new Point(245d, 390d), labelFormat);
-		sfLetters.sketch(sequence, FixedTiming.INSTANT);
+		sfLetters.sketch(sequence, Timing.instant());
 		sf.flip(sequence);
 		ClipArt ny = new ClipArt(redBall, new PointPair(1280d, 200d, 0d, 0d));
 		Letters nyLetters = new Letters("New York", new Point(1300d, 200d), labelFormat);
-		nyLetters.sketch(sequence, FixedTiming.INSTANT);
+		nyLetters.sketch(sequence, Timing.instant());
 		ny.flip(sequence);
 		common.cue();
 
@@ -312,25 +312,25 @@ public class ResponsesToComplexity
 		ClipArt reno = new ClipArt(blueBall, new PointPair(320d, 360d, 0d, 0d));
 		reno.flip(sequence);
 		Letters renoLetters = new Letters("Reno", new Point(320d, 360d), smallLabelFormat);
-		renoLetters.sketch(sequence, FixedTiming.INSTANT);
+		renoLetters.sketch(sequence, Timing.instant());
 		reno.flip(sequence);
 
 		ClipArt lasVegas = new ClipArt(blueBall, new PointPair(340d, 420d, 0d, 0d));
 		lasVegas.flip(sequence);
 		Letters lasVegasLetters = new Letters("Las Vegas", new Point(340, 420d), smallLabelFormat);
-		lasVegasLetters.sketch(sequence, FixedTiming.INSTANT);
+		lasVegasLetters.sketch(sequence, Timing.instant());
 		lasVegas.flip(sequence);
 
 		ClipArt saltLake = new ClipArt(blueBall, new PointPair(440d, 400d, 0d, 0d));
 		saltLake.flip(sequence);
 		Letters saltLakeLetters = new Letters("Salt Lake", new Point(440, 400d), smallLabelFormat);
-		saltLakeLetters.sketch(sequence, FixedTiming.INSTANT);
+		saltLakeLetters.sketch(sequence, Timing.instant());
 		saltLake.flip(sequence);
 
 		ClipArt grandCanyon = new ClipArt(blueBall, new PointPair(410d, 480d, 0d, 0d));
 		grandCanyon.flip(sequence);
 		Letters grandCanyonLetters = new Letters("Grand Canyon", new Point(410d, 480d), smallLabelFormat);
-		grandCanyonLetters.sketch(sequence, FixedTiming.INSTANT);
+		grandCanyonLetters.sketch(sequence, Timing.instant());
 		grandCanyon.flip(sequence);
 		common.cue();
 
