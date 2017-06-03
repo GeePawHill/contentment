@@ -5,15 +5,13 @@ import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.step.AddNodeStep;
 import org.geepawhill.contentment.step.BoundsStep;
-import org.geepawhill.contentment.step.EntranceStep;
 import org.geepawhill.contentment.step.HandStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.TransitionStep;
-import org.geepawhill.contentment.timing.Scheduler;
 import org.geepawhill.contentment.timing.Timing;
-import org.geepawhill.contentment.utility.JfxUtility;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.animation.TranslateTransition;
@@ -40,12 +38,12 @@ public class LabelBox implements Actor
 		this.nickname = Names.make(getClass());
 		this.center = center;
 		this.source = source;
+		this.group = new Group();
 		lettersStep = new LettersStep(Timing.weighted(.6d), source, center, format);
 		northStep = new HandStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 		westStep = new HandStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 		southStep = new HandStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 		eastStep = new HandStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		this.group = JfxUtility.makeGroup(this, lettersStep.text, northStep.shape(), westStep.shape(), southStep.shape(), eastStep.shape());
 	}
 
 	public String nickname()
@@ -53,18 +51,6 @@ public class LabelBox implements Actor
 		return nickname;
 	}
 
-	public void sketch(Sequence sequence, double ms)
-	{
-		new Scheduler().schedule(ms, lettersStep, northStep, westStep, southStep, eastStep);
-		sequence.add(new EntranceStep(this));
-		sequence.add(lettersStep);
-		sequence.add(new BoundsStep(lettersStep.text, this::boundsChanged));
-		sequence.add(northStep);
-		sequence.add(eastStep);
-		sequence.add(southStep);
-		sequence.add(westStep);
-	}
-	
 	private void boundsChanged(PointPair pair)
 	{
 		PointPair grow = pair.grow(4d);
@@ -94,11 +80,16 @@ public class LabelBox implements Actor
 	public Sequence draw(double ms)
 	{
 		Sequence sequence = new Sequence();
+		sequence.add(new AddNodeStep(group,lettersStep));
 		sequence.add(lettersStep);
 		sequence.add(new BoundsStep(lettersStep.text, this::boundsChanged));
+		sequence.add(new AddNodeStep(group,northStep));
 		sequence.add(northStep);
+		sequence.add(new AddNodeStep(group,eastStep));
 		sequence.add(eastStep);
+		sequence.add(new AddNodeStep(group,southStep));
 		sequence.add(southStep);
+		sequence.add(new AddNodeStep(group,westStep));
 		sequence.add(westStep);
 		sequence.schedule(ms);
 		return sequence;

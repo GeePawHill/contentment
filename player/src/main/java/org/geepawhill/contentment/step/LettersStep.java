@@ -5,13 +5,15 @@ import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
+import org.geepawhill.contentment.model.ShapeStep;
 import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.timing.Timing;
 
 import javafx.geometry.VPos;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 
-public class LettersStep implements Step
+public class LettersStep implements ShapeStep
 {
 	private final Timing timing;
 	private final Point center;
@@ -70,5 +72,11 @@ public class LettersStep implements Step
 	public String toString()
 	{
 		return "Letters: "+source;
+	}
+
+	@Override
+	public Shape shape()
+	{
+		return text;
 	}
 }
