@@ -1,11 +1,9 @@
 package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.actor.NodeOutliner;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
-import org.geepawhill.contentment.outline.ValueTree;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.timing.Timing;
@@ -46,21 +44,6 @@ public class Letters implements Actor
 	public String nickname()
 	{
 		return nickname;
-	}
-
-	public void outline(ValueTree tree)
-	{
-		NodeOutliner outliner = new NodeOutliner(this, tree);
-		outliner.start();
-		outliner.add("Source", source);
-		outliner.startNode(step.text);
-		outliner.add("Current", step.text.getText());
-		outliner.bounds(step.text);
-		outliner.opacity(step.text);
-		outliner.strokeWidth(step.text);
-		outliner.lineColor(step.text);
-		outliner.endNode();
-		outliner.end();
 	}
 
 	@Override

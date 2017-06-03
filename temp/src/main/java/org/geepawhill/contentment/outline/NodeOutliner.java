@@ -1,5 +1,5 @@
-package org.geepawhill.contentment.actor;
-import org.geepawhill.contentment.outline.ValueTree;
+package org.geepawhill.contentment.outline;
+import org.geepawhill.contentment.actor.Actor;
 
 import javafx.geometry.Bounds;
 import javafx.scene.shape.Shape;
