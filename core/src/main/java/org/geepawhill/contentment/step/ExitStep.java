@@ -4,7 +4,6 @@ import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.timing.Timing;
-import org.geepawhill.contentment.utility.JfxUtility;
 
 public class ExitStep implements Step
 {
@@ -19,8 +18,7 @@ public class ExitStep implements Step
 	@Override
 	public void undo(Context context)
 	{
-		context.actors.add(actor);
-		JfxUtility.addIfNeeded(context,actor.group());
+		context.add(actor);
 	}
 	
 	@Override
@@ -32,8 +30,7 @@ public class ExitStep implements Step
 	@Override
 	public void fast(Context context)
 	{
-		JfxUtility.removeIfNeeded(context, actor.group());
-		context.actors.remove(actor);
+		context.remove(actor);
 	}
 
 	@Override
