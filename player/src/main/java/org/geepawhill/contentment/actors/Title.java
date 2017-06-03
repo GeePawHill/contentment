@@ -6,7 +6,6 @@ import org.geepawhill.contentment.step.AddNodeStep;
 import org.geepawhill.contentment.step.ChangeTitleStep;
 import org.geepawhill.contentment.step.EntranceStep;
 import org.geepawhill.contentment.step.Step;
-import org.geepawhill.contentment.utility.JfxUtility;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
@@ -34,7 +33,6 @@ public class Title implements Actor
 		this.nickname = Names.make(getClass());
 		text = new Text(800d, FROM_Y + YINSET, "");
 		rectangle = new Rectangle(XMARGIN, FROM_Y, 1600d - XMARGIN - XINSET, 30d + 2 * YINSET);
-		this.group = JfxUtility.makeGroup(this, rectangle, text);
 		rectangle.setHeight(50d + 2 * YINSET);
 		rectangle.setStrokeWidth(2d);
 		rectangle.setFill(Color.color(.3d, .3d, .3d));

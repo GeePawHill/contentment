@@ -12,7 +12,6 @@ import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.timing.Timing;
-import org.geepawhill.contentment.utility.JfxUtility;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.animation.TranslateTransition;
@@ -39,12 +38,12 @@ public class TargetBox implements Actor
 		this.nickname = Names.make(getClass());
 		this.center = center;
 		this.source = source;
+		this.group = new Group();
 		lettersStep = new LettersStep(Timing.weighted(.6d), source, center, format);
 		northStep = new StrokeStep(Timing.weighted(.1d),new PointPair(0d,0d,0d,0d),format);
 		westStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d,0d,0d,0d),format);
 		southStep = new StrokeStep(Timing.weighted(.1d),new PointPair(0d,0d,0d,0d),format);
 		eastStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d,0d,0d,0d),format);
-		this.group = JfxUtility.makeGroup(this,lettersStep.text,northStep.shape(),westStep.shape(),southStep.shape(),eastStep.shape());
 	}
 	
 	public String nickname()
@@ -81,15 +80,16 @@ public class TargetBox implements Actor
 	public Sequence draw(double ms)
 	{
 		Sequence sequence = new Sequence();
+		sequence.add(new AddNodeStep(group,lettersStep));
 		sequence.add(lettersStep);
 		sequence.add(new BoundsStep(lettersStep.text,this::boundsChanged));
-		sequence.add(new AddNodeStep(group, northStep.shape()));
+		sequence.add(new AddNodeStep(group, northStep));
 		sequence.add(northStep);
-		sequence.add(new AddNodeStep(group, eastStep.shape()));
+		sequence.add(new AddNodeStep(group, eastStep));
 		sequence.add(eastStep);
-		sequence.add(new AddNodeStep(group, southStep.shape()));
+		sequence.add(new AddNodeStep(group, southStep));
 		sequence.add(southStep);
-		sequence.add(new AddNodeStep(group, westStep.shape()));
+		sequence.add(new AddNodeStep(group, westStep));
 		sequence.add(westStep);
 		return sequence.schedule(ms);
 	}

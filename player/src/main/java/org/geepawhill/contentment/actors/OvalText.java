@@ -5,13 +5,13 @@ import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.step.AddNodeStep;
 import org.geepawhill.contentment.step.BoundsStep;
 import org.geepawhill.contentment.step.EntranceStep;
 import org.geepawhill.contentment.step.HandOvalStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.timing.Scheduler;
 import org.geepawhill.contentment.timing.Timing;
-import org.geepawhill.contentment.utility.JfxUtility;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
@@ -32,7 +32,7 @@ public class OvalText implements Actor
 		this.source = source;
 		lettersStep = new LettersStep(Timing.weighted(.6d), source, center, format);
 		ovalStep = new HandOvalStep(Timing.weighted(.4d), format);
-		this.group = JfxUtility.makeGroup(this, lettersStep.text, ovalStep.shape());
+		this.group = new Group();
 	}
 	
 	
@@ -67,8 +67,10 @@ public class OvalText implements Actor
 	public Sequence draw(double ms)
 	{
 		Sequence sequence = new Sequence();
+		sequence.add(new AddNodeStep(group,lettersStep));
 		sequence.add(lettersStep);
 		sequence.add(new BoundsStep(lettersStep.text, this::boundsChanged));
+		sequence.add(new AddNodeStep(group,ovalStep));
 		sequence.add(ovalStep);
 		return sequence.schedule(ms);
 	}
