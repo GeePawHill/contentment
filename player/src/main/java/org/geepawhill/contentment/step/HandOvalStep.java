@@ -89,7 +89,7 @@ public class HandOvalStep implements ShapeStep
 		interpolator.interpolate(fraction);
 	}
 
-	public Point[] eastHalfPoints()
+	private Point[] eastHalfPoints()
 	{
 		Point[] result = new Point[]
 		{

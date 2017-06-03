@@ -104,8 +104,4 @@ public class BezierInterpolator
 		}
 	}
 	
-	public void interpolate2(double fraction)
-	{
-		
-	}
 }
