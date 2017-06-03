@@ -31,6 +31,7 @@ public class Title implements Actor
 	public Title()
 	{
 		this.nickname = Names.make(getClass());
+		this.group = new Group();
 		text = new Text(800d, FROM_Y + YINSET, "");
 		rectangle = new Rectangle(XMARGIN, FROM_Y, 1600d - XMARGIN - XINSET, 30d + 2 * YINSET);
 		rectangle.setHeight(50d + 2 * YINSET);
