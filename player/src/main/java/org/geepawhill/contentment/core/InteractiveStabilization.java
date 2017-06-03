@@ -46,19 +46,19 @@ public class InteractiveStabilization
 		common.sketch( 1d,agent);
 		common.cue();
 
-		poke1Source.place(sequence);
+		common.appear(poke1Source);
 		common.sketch( 1000d,poke1);
 		common.cue();
 		sequence.add(tale.change("Agents Respond Unpredictably"));
 		sequence.add(agent.move(900d, 400d));
 		common.cue();
 		sequence.add(tale.change("Whoops: Better Try Another Poke"));
-		poke2Source.place(sequence);
+		common.appear(poke2Source);
 		common.sketch( 1000d,poke2);
 		sequence.add(agent.move(1000d, 500d));
 		common.cue();
 		sequence.add(tale.change("Almost there!"));
-		poke3Source.place(sequence);
+		common.appear(poke3Source);
 		common.sketch( 1000d,poke3);
 		sequence.add(agent.move(1100d, 450d));
 		sequence.add(tale.change("Made it!!"));

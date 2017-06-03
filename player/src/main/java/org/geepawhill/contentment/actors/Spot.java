@@ -1,16 +1,15 @@
 package org.geepawhill.contentment.actors;
 
-import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.actor.Drawable;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.step.EntranceStep;
-import org.geepawhill.contentment.step.ShowStep;
+import org.geepawhill.contentment.step.AddNodeStep;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
 import javafx.scene.shape.Circle;
 
-public class Spot implements Actor
+public class Spot implements Drawable
 {
 
 	final String nickname;
@@ -25,8 +24,8 @@ public class Spot implements Actor
 	public Spot(String name,double x, double y)
 	{
 		this.nickname = name;
+		this.group = new Group();
 		this.circle = new Circle(x,y,0d);
-		this.group = new Group(circle);
 	}
 	
 	public String nickname()
@@ -40,15 +39,15 @@ public class Spot implements Actor
 		return group;
 	}
 	
-	public void place(Sequence sequence)
-	{
-		sequence.add(new EntranceStep(this));
-		sequence.add(new ShowStep(group));
-	}
-	
 	public void animateDrawText(double fraction,Context context)
 	{
 		circle.setVisible(true);
+	}
+
+	@Override
+	public Sequence draw(double ms)
+	{
+		return new Sequence(new AddNodeStep(group,circle));
 	}
 
 }
