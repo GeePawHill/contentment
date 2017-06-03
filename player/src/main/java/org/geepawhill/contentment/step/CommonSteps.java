@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.actor.Drawable;
 import org.geepawhill.contentment.core.Sequence;
 
 import javafx.scene.paint.Paint;
@@ -49,7 +48,7 @@ public class CommonSteps
 		sequence.add(new ColorFlipStep(actor,paint));
 	}
 	
-	public void sketch(double ms,Drawable drawable)
+	public void sketch(double ms,Actor drawable)
 	{
 		Sequence result = new Sequence();
 		result.add(new EntranceStep(drawable));
@@ -57,7 +56,7 @@ public class CommonSteps
 		sequence.add(result);
 	}
 	
-	public void appear(Drawable drawable)
+	public void appear(Actor drawable)
 	{
 		Sequence result = new Sequence();
 		result.add(new EntranceStep(drawable));
@@ -65,12 +64,12 @@ public class CommonSteps
 		sequence.add(result);
 	}
 	
-	public void disappear(Drawable drawable)
+	public void disappear(Actor drawable)
 	{
 		sequence.add(new ExitStep(drawable));
 	}
 	
-	public void fadeIn(double ms, Drawable drawable)
+	public void fadeIn(double ms, Actor drawable)
 	{
 		Sequence result = new Sequence();
 		result.add(new EntranceStep(drawable));

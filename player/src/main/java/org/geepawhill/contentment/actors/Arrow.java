@@ -3,7 +3,6 @@ package org.geepawhill.contentment.actors;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.actor.Drawable;
 import org.geepawhill.contentment.connector.arrow.ArrowComputer;
 import org.geepawhill.contentment.connector.arrow.ArrowPoints;
 import org.geepawhill.contentment.connector.arrow.NodeArrowComputer;
@@ -23,7 +22,7 @@ import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
 
-public class Arrow implements Drawable
+public class Arrow implements Actor
 {
 	final String nickname;
 

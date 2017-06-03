@@ -4,7 +4,7 @@ import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.step.EntranceStep;
+import org.geepawhill.contentment.step.AddNodeStep;
 import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
@@ -24,15 +24,6 @@ public class Stroke implements Actor
 		this.group = new Group(step.shape());
 	}
 
-	public Sequence sketch(Sequence sequence, Timing timing)
-	{
-		if (sequence == null) sequence = new Sequence();
-		sequence.add(new EntranceStep(this));
-		sequence.add(step);
-		sequence.schedule(timing.ms());
-		return sequence;
-	}
-
 	@Override
 	public String nickname()
 	{
@@ -43,6 +34,12 @@ public class Stroke implements Actor
 	public Group group()
 	{
 		return group;
+	}
+
+	@Override
+	public Sequence draw(double ms)
+	{
+		return new Sequence(new AddNodeStep(group,step),step).schedule(ms);
 	}
 
 }

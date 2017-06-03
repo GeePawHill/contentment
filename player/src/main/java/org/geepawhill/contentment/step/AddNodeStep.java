@@ -2,6 +2,7 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
+import org.geepawhill.contentment.model.ShapeStep;
 import org.geepawhill.contentment.timing.Timing;
 
 import javafx.scene.Group;
@@ -12,7 +13,12 @@ public class AddNodeStep implements Step
 	
 	private Group group;
 	private Node node;
-
+	
+	public AddNodeStep(Group group, ShapeStep step)
+	{
+		this(group,step.shape());
+	}
+	
 	public AddNodeStep(Group group, Node node)
 	{
 		this.group = group;

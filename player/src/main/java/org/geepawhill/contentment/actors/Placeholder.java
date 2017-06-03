@@ -1,6 +1,6 @@
 package org.geepawhill.contentment.actors;
 
-import org.geepawhill.contentment.actor.Drawable;
+import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
@@ -18,7 +18,7 @@ import org.geepawhill.contentment.utility.Names;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 
-public class Placeholder implements Drawable
+public class Placeholder implements Actor
 {
 	final String nickname;
 	final String source;

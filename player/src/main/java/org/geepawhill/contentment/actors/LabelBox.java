@@ -1,6 +1,6 @@
 package org.geepawhill.contentment.actors;
 
-import org.geepawhill.contentment.actor.Drawable;
+import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
@@ -20,7 +20,7 @@ import javafx.animation.TranslateTransition;
 import javafx.scene.Group;
 import javafx.util.Duration;
 
-public class LabelBox implements Drawable
+public class LabelBox implements Actor
 {
 	final String nickname;
 	final String source;

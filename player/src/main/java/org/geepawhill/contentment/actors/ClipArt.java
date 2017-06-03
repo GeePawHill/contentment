@@ -1,6 +1,6 @@
 package org.geepawhill.contentment.actors;
 
-import org.geepawhill.contentment.actor.Drawable;
+import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AddNodeStep;
@@ -10,7 +10,7 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class ClipArt implements Drawable
+public class ClipArt implements Actor
 {
 	Group group;
 	Image image;

@@ -1,6 +1,6 @@
 package org.geepawhill.contentment.actors;
 
-import org.geepawhill.contentment.actor.Drawable;
+import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.NodeOutliner;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
@@ -15,7 +15,7 @@ import javafx.animation.TranslateTransition;
 import javafx.scene.Group;
 import javafx.util.Duration;
 
-public class Letters implements Drawable
+public class Letters implements Actor
 {
 	private final String nickname;
 	private final Group group;

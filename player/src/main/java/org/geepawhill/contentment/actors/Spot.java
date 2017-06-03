@@ -1,6 +1,6 @@
 package org.geepawhill.contentment.actors;
 
-import org.geepawhill.contentment.actor.Drawable;
+import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.step.AddNodeStep;
@@ -9,7 +9,7 @@ import org.geepawhill.contentment.utility.Names;
 import javafx.scene.Group;
 import javafx.scene.shape.Circle;
 
-public class Spot implements Drawable
+public class Spot implements Actor
 {
 
 	final String nickname;

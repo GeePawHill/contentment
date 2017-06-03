@@ -1,6 +1,6 @@
 package org.geepawhill.contentment.actors;
 
-import org.geepawhill.contentment.actor.Drawable;
+import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.step.AddNodeStep;
 import org.geepawhill.contentment.step.ChangeTitleStep;
@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-public class Title implements Drawable
+public class Title implements Actor
 {
 	private static final double FROM_Y = 30d;
 	private final String nickname;
