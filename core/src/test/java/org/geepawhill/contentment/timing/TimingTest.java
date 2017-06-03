@@ -10,86 +10,85 @@ import org.junit.Test;
 
 public class TimingTest
 {
-	Timing relative20;
-	Timing relative80;
-	Timing absolute20;
-	Timing absolute80;
+	Timing weighted20;
+	Timing wieghted80;
+	Timing fixed20;
+	Timing fixed80;
 	Scheduler scheduler;
 
 	@Before
 	public void before()
 	{
-		relative20 = Timing.weighted(20d);
-		relative80 = Timing.weighted(80d);
-		absolute20 = Timing.ms(20d);
-		absolute80 = Timing.ms(80d);
+		weighted20 = Timing.weighted(20d);
+		wieghted80 = Timing.weighted(80d);
+		fixed20 = Timing.ms(20d);
+		fixed80 = Timing.ms(80d);
 		scheduler = new Scheduler();
 	}
 
 	@Test
 	public void constructors()
 	{
-		assertWeighted(relative20,20d);
-		assertWeighted(relative80,80d);
-		assertFixed(absolute80, 80d);
+		assertWeighted(weighted20,20d);
+		assertFixed(fixed80, 80d);
 	}
 
 
 	@Test(expected = RuntimeException.class)
-	public void relativeThrowsIfUnset()
+	public void weightedThrowsOnGetIfUnset()
 	{
-		relative20.ms();
+		weighted20.ms();
 	}
 
 	@Test(expected = RuntimeException.class)
-	public void absoluteThrowsIfReset()
+	public void fixedThrowsIfSetTwice()
 	{
-		absolute20.fix(100d);
+		fixed20.fix(100d);
 	}
 
 	@Test
-	public void relativeSetsAbsolute()
+	public void weightedCanFix()
 	{
-		relative20.fix(1000d);
-		assertEquals(1000d, relative20.ms(), 1d);
+		weighted20.fix(1000d);
+		assertEquals(1000d, weighted20.ms(), 1d);
 	}
 
 	@Test
-	public void oneRelativeEatsAllTime()
+	public void oneWeightedEatsAllTime()
 	{
-		assertEquals(300d, scheduler.schedule(300d, relative20), 0.1d);
-		assertEquals(300d, relative20.ms(), 0.1d);
+		assertEquals(300d, scheduler.schedule(300d, weighted20), 0.1d);
+		assertEquals(300d, weighted20.ms(), 0.1d);
 	}
 
 	@Test
-	public void twoRelativesEatAllTime()
+	public void twoWeightedEatAllTime()
 	{
-		assertEquals(300d, scheduler.schedule(300d, relative20, relative80), 0.1d);
-		assertEquals(60d, relative20.ms(), 0.1d);
-		assertEquals(240d, relative80.ms(), 0.1d);
+		assertEquals(300d, scheduler.schedule(300d, weighted20, wieghted80), 0.1d);
+		assertEquals(60d, weighted20.ms(), 0.1d);
+		assertEquals(240d, wieghted80.ms(), 0.1d);
 	}
 	
 	@Test
-	public void absolutesAndRelativesCoexist()
+	public void fixedAndWeightedCoexist()
 	{
-		assertEquals(300d, scheduler.schedule(300d, absolute80,absolute20,relative20, relative80), 0.1d);
-		assertEquals(40d, relative20.ms(), 0.1d);
-		assertEquals(160d, relative80.ms(), 0.1d);
+		assertEquals(300d, scheduler.schedule(300d, fixed80,fixed20,weighted20, wieghted80), 0.1d);
+		assertEquals(40d, weighted20.ms(), 0.1d);
+		assertEquals(160d, wieghted80.ms(), 0.1d);
 	}
 	
 	@Test
-	public void absolutesSumWithZeroTotal()
+	public void fixedWithZeroJustSums()
 	{
-		assertEquals(100d, scheduler.schedule(0d, absolute80,absolute20), 0.1d);
+		assertEquals(100d, scheduler.schedule(0d, fixed80,fixed20), 0.1d);
 	}
 
 
 	@Test
-	public void throwsIfAbsolutesTooBig()
+	public void throwsIfFixedTooBig()
 	{
 		try
 		{
-			scheduler.schedule(80d, absolute20, absolute80);
+			scheduler.schedule(80d, fixed20, fixed80);
 			fail("Did not throw on absolute child overage.");
 		}
 		catch (RuntimeException e)
@@ -99,11 +98,11 @@ public class TimingTest
 	}
 	
 	@Test
-	public void throwsIfRelativesButNoTotal()
+	public void throwsIfRelativesButZeroTotal()
 	{
 		try
 		{
-			scheduler.schedule(0d, relative20, absolute80);
+			scheduler.schedule(0d, weighted20, fixed80);
 			fail("Did not throw on relatives but no total.");
 		}
 		catch (RuntimeException e)
@@ -113,10 +112,10 @@ public class TimingTest
 	}
 	
 	@Test
-	public void relativesGetMinimumTime()
+	public void weightedsGetMinimumTime()
 	{
-		scheduler.schedule(80d, absolute80,relative20);
-		assertThat(relative20.ms()).isEqualTo(.1d);
+		scheduler.schedule(80d, fixed80,weighted20);
+		assertThat(weighted20.ms()).isEqualTo(.1d);
 	}
 	
 	private void assertFixed(Timing timing, double expected)
@@ -130,6 +129,4 @@ public class TimingTest
 		assertThat(timing.isWeighted()).isTrue();
 		assertThat(timing.weight()).isCloseTo(weight, within(0.1d));
 	}
-
-
 }

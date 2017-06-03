@@ -14,9 +14,9 @@ public class Scheduler
 
 	public double schedule(double ms, ArrayList<Step> steps)
 	{
-		return schedule(ms,steps.toArray(new Step[0]));
+		return schedule(ms, steps.toArray(new Step[0]));
 	}
-	
+
 	public double schedule(double total, Step... steps)
 	{
 		Timing[] timings = new Timing[steps.length];
@@ -41,13 +41,13 @@ public class Scheduler
 		double afterDistribution = accumulatedAbsolute;
 		for (Timing timing : timings)
 		{
-			if(timing.isWeighted())
+			if (timing.isWeighted())
 			{
 				double ratio = timing.weight();
 				if (ratio != 0d)
 				{
 					double ms = (ratio * distribute) / accumulatedRelative;
-					if(ms<.1d) ms = .1d;
+					if (ms < .1d) ms = .1d;
 					afterDistribution += ms;
 					timing.fix(ms);
 				}
@@ -68,14 +68,14 @@ public class Scheduler
 		if (accumulatedRelative > 0d) { throw new RuntimeException(RELATIVES_BUT_NO_TOTAL); }
 		return accumulatedAbsolute;
 	}
-	
+
 	private void gatherTotals(Timing... timings)
 	{
 		accumulatedAbsolute = 0d;
 		accumulatedRelative = 0d;
 		for (Timing timing : timings)
 		{
-			if(!timing.isWeighted())
+			if (!timing.isWeighted())
 			{
 				accumulatedAbsolute += timing.ms();
 			}

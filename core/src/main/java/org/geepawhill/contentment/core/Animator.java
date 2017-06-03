@@ -12,6 +12,7 @@ public class Animator extends Transition
 	{
 		this.context = context;
 		this.interpolator = interpolator;
+		if(ms<.1d) ms=.1d;
 		setCycleDuration(Duration.millis(ms));
 		setOnFinished(onFinished != null ? (event) -> onFinished.run() : null);
 		play();

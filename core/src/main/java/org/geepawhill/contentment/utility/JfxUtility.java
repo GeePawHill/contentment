@@ -1,6 +1,5 @@
 package org.geepawhill.contentment.utility;
 
-import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Context;
 
 import javafx.scene.Group;
@@ -15,16 +14,6 @@ public class JfxUtility
 		{
 			context.canvas.getChildren().add(group);
 		}
-	}
-
-	public static Group makeGroup(Actor actor, Node... nodes)
-	{
-		Group group = new Group();
-		for (Node node : nodes)
-		{
-			group.getChildren().add(node);
-		}
-		return group;
 	}
 
 	public static void removeIfNeeded(Context context, Group group)
