@@ -48,4 +48,9 @@ public class Actors implements Iterable<Actor>
 	{
 		items.clear();
 	}
+	
+	public boolean contains(Actor actor)
+	{
+		return items.contains(actor);
+	}
 }

@@ -7,6 +7,8 @@ import java.util.function.Consumer;
 import org.geepawhill.contentment.core.Animator;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.ContextInterpolator;
+import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.step.Step;
 
 import javafx.application.Platform;
 import javafx.scene.Group;
@@ -25,12 +27,13 @@ public class JavaFxRunner
 		region.setMaxSize(1600d, 900d);
 		region.setMinSize(1600d, 900d);
 		group = new Group();
+		context = new Context(group);
 		region.getChildren().add(group);
 		stage.setScene(new Scene(region));
 		stage.show();
 	}
 
-	public void waitForPlay(Animator animator, double ms, ContextInterpolator interpolator)
+	public void play(Animator animator, double ms, ContextInterpolator interpolator)
 	{
 		Consumer<CountDownLatch> action = new Consumer<CountDownLatch>()
 		{
@@ -42,63 +45,71 @@ public class JavaFxRunner
 		};
 		actLater(action);
 	}
+	
+	public void undo(Sequence sequence)
+	{
+		for(int s= sequence.size()-1; s>=0; s--)
+		{
+			undo(sequence.get(s));
+		}
+	}
 
-	// public void waitForPlay(Sequence sequence)
-	// {
-	// for (int s = 0; s < sequence.size(); s++)
-	// {
-	// playWithLatch(sequence.get(s));
-	// }
-	// }
-	//
-	// public void waitForAfter(Sequence sequence)
-	// {
-	// for (int s = 0; s < sequence.size(); s++)
-	// {
-	// afterWithLatch(sequence.get(s));
-	// }
-	// }
+	public void fast(Sequence sequence)
+	{
+		for (int s = 0; s < sequence.size(); s++)
+		{
+			fast(sequence.get(s));
+		}
+	}
 
-	// private void playWithLatch(Step step)
-	// {
-	// Consumer<CountDownLatch> action = new Consumer<CountDownLatch>()
-	// {
-	// @Override
-	// public void accept(CountDownLatch latch)
-	// {
-	// step.play(context, () -> latch.countDown() );
-	// }
-	// };
-	// actLater(action);
-	// }
-	//
-	// private void afterWithLatch(Step step)
-	// {
-	// Consumer<CountDownLatch> action = new Consumer<CountDownLatch>()
-	// {
-	// @Override
-	// public void accept(CountDownLatch latch)
-	// {
-	// step.after(context);
-	// latch.countDown();
-	// }
-	// };
-	// actLater(action);
-	// }
-	//
-	// private void beforeWithLatch(Step step)
-	// {
-	// Consumer<CountDownLatch> action = new Consumer<CountDownLatch>()
-	// {
-	// @Override
-	// public void accept(CountDownLatch latch)
-	// {
-	// step.unplay(context);
-	// latch.countDown();
-	// }
-	// };
-	// actLater(action);
-	// }
+	public void slow(Sequence sequence)
+	{
+		for (int s = 0; s < sequence.size(); s++)
+		{
+			slow(sequence.get(s));
+		}
+	}
+
+	public void slow(Step step)
+	{
+		Consumer<CountDownLatch> action = new Consumer<CountDownLatch>()
+		{
+			@Override
+			public void accept(CountDownLatch latch)
+			{
+				step.slow(context, () -> latch.countDown());
+			}
+		};
+		actLater(action);
+	}
+
+	public void fast(Step step)
+	{
+		Consumer<CountDownLatch> action = new Consumer<CountDownLatch>()
+		{
+			@Override
+			public void accept(CountDownLatch latch)
+			{
+				step.fast(context);
+				latch.countDown();
+			}
+		};
+		actLater(action);
+	}
+
+	public void undo(Step step)
+	{
+		Consumer<CountDownLatch> action = new Consumer<CountDownLatch>()
+		{
+			@Override
+			public void accept(CountDownLatch latch)
+			{
+				step.undo(context);
+				latch.countDown();
+			}
+		};
+		actLater(action);
+	}
 
 	public void actLater(Consumer<CountDownLatch> action)
 	{

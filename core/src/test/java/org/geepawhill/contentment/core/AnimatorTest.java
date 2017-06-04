@@ -4,20 +4,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 
-import org.geepawhill.contentment.test.JavaFxRunner;
+import org.geepawhill.contentment.step.JavaFxTest;
 import org.geepawhill.contentment.test.Repeat;
 import org.geepawhill.contentment.test.RepeatRule;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
-import javafx.stage.Stage;
-
 @SuppressWarnings("unused")
-public class AnimatorTest extends ApplicationTest
+public class AnimatorTest extends JavaFxTest
 {
-	
-	private JavaFxRunner runner;
 	
 	ArrayList<Double> interpolatorCalls;
 	
@@ -25,11 +22,9 @@ public class AnimatorTest extends ApplicationTest
     public RepeatRule repeatRule = new RepeatRule();
 
 
-	@Override
-	public void start(Stage stage) throws Exception
+	@Before
+	public void before()
 	{
-		runner = new JavaFxRunner();
-		runner.prepareWindow(stage);
 		interpolatorCalls = new ArrayList<>();
 	}
 	
@@ -37,7 +32,7 @@ public class AnimatorTest extends ApplicationTest
 	public void animatorFinishesWithZeroTime()
 	{
 		Animator animator = new Animator();
-		runner.waitForPlay(animator, 0d, this::interpolator);
+		runner.play(animator, 0d, this::interpolator);
 		assertThat(interpolatorCalls).containsOnlyOnce(1d);
 	}
 	
@@ -46,7 +41,7 @@ public class AnimatorTest extends ApplicationTest
 	public void animatorCallsInterpolatorOften()
 	{
 		Animator animator = new Animator();
-		runner.waitForPlay(animator, 100d, this::interpolator);
+		runner.play(animator, 100d, this::interpolator);
 		assertThat(interpolatorCalls).containsOnlyOnce(1d);
 		assertThat(interpolatorCalls.size()).isGreaterThan(1);
 	}
