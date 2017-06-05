@@ -3,6 +3,7 @@ package org.geepawhill.contentment.step;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
@@ -78,7 +79,8 @@ public class StrokeStep implements ShapeStep
 		format.apply(Dash.KEY, line);
 		line.setStartX(points.from.x);
 		line.setStartY(points.from.y);
-		line.setEndX(points.partialX(fraction));
-		line.setEndY(points.partialY(fraction));
+		Point newEnd = points.along(fraction);
+		line.setEndX(newEnd.x);
+		line.setEndY(newEnd.y);
 	}
 }

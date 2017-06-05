@@ -1,6 +1,5 @@
 package org.geepawhill.contentment.geometry;
 
-import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 
@@ -8,33 +7,6 @@ public class PointPair
 {
 	public final Point from;
 	public final Point to;
-	
-	public static double PANEL_WIDTH = 1600d;
-	public static double PANEL_HEIGHT = 900d;
-	public static double CENTER_X	=	PANEL_WIDTH/2;
-	public static double CENTER_Y	=	PANEL_HEIGHT/2;
-	
-	public static PointPair hline(int numerator,int denominator)
-	{
-		return hline( ((double)numerator)/((double)denominator) );
-	}
-	
-	public static PointPair hline(double fraction)
-	{
-		double y = PANEL_HEIGHT*fraction;
-		return new PointPair(0d,y,PANEL_WIDTH,y);
-	}
-
-	public static PointPair vline(int numerator,int denominator)
-	{
-		return vline( ((double)numerator)/((double)denominator) );
-	}
-	
-	public static PointPair vline(double fraction)
-	{
-		double x = PANEL_WIDTH*fraction;
-		return new PointPair(x,0d,x,PANEL_HEIGHT);
-	}
 	
 	public PointPair(Point from, Point to)
 	{
@@ -57,9 +29,14 @@ public class PointPair
 		this(node.getBoundsInParent());
 	}
 
-	public Bounds asBounds()
+	public Point along(double fraction)
 	{
-		return new BoundingBox(from.x, from.y, to.x - from.x, to.y - from.y);
+		return from.along(fraction, to);
+	}
+
+	public double distance()
+	{
+		return from.distance(to);
 	}
 
 	public Point center()
@@ -115,16 +92,6 @@ public class PointPair
 	public Point southwest()
 	{
 		return new Point(from.x, to.y);
-	}
-
-	public double partialX(double fraction)
-	{
-		return from.x + (to.x - from.x) * fraction;
-	}
-
-	public double partialY(double fraction)
-	{
-		return from.y + (to.y - from.y) * fraction;
 	}
 
 	public Point intersects(PointPair other)
@@ -222,15 +189,6 @@ public class PointPair
 		return from.toString()+" "+to.toString();
 	}
 
-	public Point partial(double fraction)
-	{
-		return new Point(partialX(fraction),partialY(fraction));
-	}
-
-	public double distance()
-	{
-		return Math.sqrt(width()*width()+height()*height());
-	}
 
 	public static PointPair centerAt(Point center, double width, double height)
 	{

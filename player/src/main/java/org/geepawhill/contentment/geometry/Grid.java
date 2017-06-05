@@ -21,8 +21,8 @@ public class Grid
 		this.yCells = yCells;
 		this.xInset = xInset;
 		this.yInset = yInset;
-		this.xWidth = (PointPair.PANEL_WIDTH - 2*xInset)/xCells;
-		this.yHeight = (PointPair.PANEL_HEIGHT-2*yInset)/yCells;
+		this.xWidth = (ViewPort.WIDTH - 2*xInset)/xCells;
+		this.yHeight = (ViewPort.HEIGHT-2*yInset)/yCells;
 	}
 
 	public int xCells()

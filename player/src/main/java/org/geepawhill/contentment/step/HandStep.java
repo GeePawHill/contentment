@@ -89,8 +89,8 @@ public class HandStep implements ShapeStep
 	{
 		Point[] result = new Point[]
 		{
-				points.from, points.partial(random.nextDouble()).jiggle(random, 1d, 10),
-				points.partial(random.nextDouble()).jiggle(random, 1d, 10), points.to
+				points.from, points.along(random.nextDouble()).jiggle(random, 1d, 10),
+				points.along(random.nextDouble()).jiggle(random, 1d, 10), points.to
 		};
 		return result;
 	}
