@@ -111,7 +111,7 @@ public class Arrow implements Actor
 		sequence.add(new OneWayStep((context) -> boundsChanged()));
 		for (ShapeStep step : steps)
 		{
-			sequence.add(new AddNodeStep(group, step.shape()));
+			sequence.add(new AddNodeStep(group, step));
 			sequence.add(step);
 		}
 		sequence = sequence.schedule(ms);

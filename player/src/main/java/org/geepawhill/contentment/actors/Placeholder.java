@@ -77,16 +77,16 @@ public class Placeholder implements Actor
 	public Sequence draw(double ms)
 	{
 		Sequence sequence = new Sequence();
-		sequence.add(new AddNodeStep(group,lettersStep.text));
+		sequence.add(new AddNodeStep(group,lettersStep));
 		sequence.add(lettersStep);
 		sequence.add(new BoundsStep(lettersStep.text, this::boundsChanged));
-		sequence.add(new AddNodeStep(group,northStep.shape()));
+		sequence.add(new AddNodeStep(group,northStep));
 		sequence.add(northStep);
-		sequence.add(new AddNodeStep(group,eastStep.shape()));
+		sequence.add(new AddNodeStep(group,eastStep));
 		sequence.add(eastStep);
-		sequence.add(new AddNodeStep(group,southStep.shape()));
+		sequence.add(new AddNodeStep(group,southStep));
 		sequence.add(southStep);
-		sequence.add(new AddNodeStep(group,westStep.shape()));
+		sequence.add(new AddNodeStep(group,westStep));
 		sequence.add(westStep);
 		return sequence.schedule(ms);
 	}
