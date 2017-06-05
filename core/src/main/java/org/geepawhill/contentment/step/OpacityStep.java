@@ -29,7 +29,7 @@ public class OpacityStep implements Step
 
 	public void interpolate(Context context, double fraction)
 	{
-		double newOpacity = fraction * (oldOpacity+(opacity-oldOpacity));
+		double newOpacity =  (oldOpacity+(fraction *(opacity-oldOpacity)));
 		actor.group().setOpacity(newOpacity);
 	}
 

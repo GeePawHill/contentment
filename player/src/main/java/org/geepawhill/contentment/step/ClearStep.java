@@ -29,9 +29,8 @@ public class ClearStep implements Step
 		actors.addAll(context.actors);
 		for(Actor actor : actors)
 		{
-			context.canvas.getChildren().remove(actor.group());
+			context.remove(actor);
 		}
-		context.canvas.getChildren().clear();
 	}
 
 	@Override
@@ -39,7 +38,7 @@ public class ClearStep implements Step
 	{
 		for(Actor actor : actors)
 		{
-			context.canvas.getChildren().add(actor.group());
+			context.add(actor);
 		}
 		actors.clear();
 	}
