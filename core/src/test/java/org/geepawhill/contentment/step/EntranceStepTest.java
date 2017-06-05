@@ -2,12 +2,10 @@ package org.geepawhill.contentment.step;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.test.TestActor;
 import org.junit.Before;
 import org.junit.Test;
-
-import javafx.scene.Group;
 
 public class EntranceStepTest extends JavaFxTest
 {
@@ -15,35 +13,6 @@ public class EntranceStepTest extends JavaFxTest
 	private TestActor actor;
 	private Sequence sequence;
 
-	private static class TestActor implements Actor {
-		
-		private Group group;
-
-		public TestActor()
-		{
-			group = new Group();
-		}
-
-		@Override
-		public Group group()
-		{
-			return group;
-		}
-
-		@Override
-		public String nickname()
-		{
-			return "TestActor";
-		}
-
-		@Override
-		public Sequence draw(double ms)
-		{
-			return new Sequence();
-		}
-		
-	}
-	
 	@Before
 	public void before()
 	{

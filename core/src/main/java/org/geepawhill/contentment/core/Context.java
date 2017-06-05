@@ -11,6 +11,8 @@ public class Context
 	public final Actors actors;
 	public final Group canvas;
 	public boolean skipKeyframes;
+	
+	private ContextInterpolator after;
 
 	public Context(Group canvas)
 	{
@@ -36,5 +38,22 @@ public class Context
 		}
 		actors.remove(actor);
 	}
+	
+	public void setAfter(ContextInterpolator source)
+	{
+		after = source;
+	}
+	
+	public void clearAfter()
+	{
+		after=null;
+	}
+	
+	public ContextInterpolator wrap(ContextInterpolator source)
+	{
+		if(after==null) return source;
+		return new ParallelInterpolator(source,after);
+	}
+
 
 }
