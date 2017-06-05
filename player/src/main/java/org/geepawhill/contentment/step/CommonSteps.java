@@ -73,7 +73,7 @@ public class CommonSteps
 	{
 		Sequence result = new Sequence();
 		result.add(new EntranceStep(drawable));
-		result.add(new UndolessSetStep<Double>(0d,(opacity) -> drawable.group().setOpacity(opacity)));
+		result.add(new OpacityStep(0d,drawable,0d));
 		result.add(drawable.draw(ms));
 		result.add(new OpacityStep(ms,drawable,1d));
 		sequence.add(result);
