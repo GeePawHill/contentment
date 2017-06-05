@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.model;
+package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.step.Step;
 

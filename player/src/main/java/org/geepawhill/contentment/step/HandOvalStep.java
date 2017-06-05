@@ -7,7 +7,6 @@ import org.geepawhill.contentment.geometry.Jiggler;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.BezierInterpolator;
-import org.geepawhill.contentment.model.ShapeStep;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.timing.Timing;
