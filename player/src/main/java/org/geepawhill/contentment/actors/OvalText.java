@@ -7,10 +7,8 @@ import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AddNodeStep;
 import org.geepawhill.contentment.step.BoundsStep;
-import org.geepawhill.contentment.step.EntranceStep;
 import org.geepawhill.contentment.step.HandOvalStep;
 import org.geepawhill.contentment.step.LettersStep;
-import org.geepawhill.contentment.timing.Scheduler;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
@@ -41,15 +39,6 @@ public class OvalText implements Actor
 		return nickname;
 	}
 
-	public void sketch(Sequence sequence, double ms)
-	{
-		new Scheduler().schedule(ms, lettersStep, ovalStep);
-		sequence.add(new EntranceStep(this));
-		sequence.add(lettersStep);
-		sequence.add(new BoundsStep(lettersStep.text, this::boundsChanged));
-		sequence.add(ovalStep);
-	}
-
 	private void boundsChanged(PointPair pair)
 	{
 		PointPair grow = pair.grow(45d,8d);
@@ -69,7 +58,7 @@ public class OvalText implements Actor
 		Sequence sequence = new Sequence();
 		sequence.add(new AddNodeStep(group,lettersStep));
 		sequence.add(lettersStep);
-		sequence.add(new BoundsStep(lettersStep.text, this::boundsChanged));
+		sequence.add(new BoundsStep(lettersStep, this::boundsChanged));
 		sequence.add(new AddNodeStep(group,ovalStep));
 		sequence.add(ovalStep);
 		return sequence.schedule(ms);

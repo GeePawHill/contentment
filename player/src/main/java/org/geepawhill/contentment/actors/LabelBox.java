@@ -82,7 +82,7 @@ public class LabelBox implements Actor
 		Sequence sequence = new Sequence();
 		sequence.add(new AddNodeStep(group,lettersStep));
 		sequence.add(lettersStep);
-		sequence.add(new BoundsStep(lettersStep.text, this::boundsChanged));
+		sequence.add(new BoundsStep(lettersStep, this::boundsChanged));
 		sequence.add(new AddNodeStep(group,northStep));
 		sequence.add(northStep);
 		sequence.add(new AddNodeStep(group,eastStep));

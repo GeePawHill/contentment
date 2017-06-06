@@ -6,17 +6,15 @@ import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.connector.arrow.ArrowComputer;
 import org.geepawhill.contentment.connector.arrow.ArrowPoints;
 import org.geepawhill.contentment.connector.arrow.NodeArrowComputer;
+import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AddNodeStep;
-import org.geepawhill.contentment.step.EntranceStep;
+import org.geepawhill.contentment.step.ComputeStep;
 import org.geepawhill.contentment.step.HandStep;
-import org.geepawhill.contentment.step.OneWayStep;
 import org.geepawhill.contentment.step.ShapeStep;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.StrokeStep;
-import org.geepawhill.contentment.timing.Scheduler;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
@@ -73,16 +71,7 @@ public class Arrow implements Actor
 		return nickname;
 	}
 
-	public void sketch(Sequence sequence, double ms)
-	{
-		sequence.add(new EntranceStep(this));
-		sequence.add(new OneWayStep((context) -> boundsChanged()));
-		for (Step step : steps)
-			sequence.add(step);
-		new Scheduler().schedule(ms, steps.toArray(new Step[0]));
-	}
-
-	private void boundsChanged()
+	private void computePoints(Context context, double fraction)
 	{
 		points = computer.compute();
 		mainStep.setPoints(points.main);
@@ -108,7 +97,7 @@ public class Arrow implements Actor
 	public Sequence draw(double ms)
 	{
 		Sequence sequence = new Sequence();
-		sequence.add(new OneWayStep((context) -> boundsChanged()));
+		sequence.add(new ComputeStep(this::computePoints));
 		for (ShapeStep step : steps)
 		{
 			sequence.add(new AddNodeStep(group, step));

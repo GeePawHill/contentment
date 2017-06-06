@@ -60,16 +60,6 @@ public class TargetBox implements Actor
 		eastStep.setPoints(grow.eastLine());
 	}
 	
-	public Step move(double newX,double newY)
-	{
-		TranslateTransition transition = new TranslateTransition();
-		transition.setNode(group);
-		transition.setToX(newX-center.x);
-		transition.setToY(newY-center.y);
-		transition.setDuration(Duration.millis(1000d));
-		return new TransitionStep(transition);
-	}
-
 	@Override
 	public Group group()
 	{
@@ -82,7 +72,7 @@ public class TargetBox implements Actor
 		Sequence sequence = new Sequence();
 		sequence.add(new AddNodeStep(group,lettersStep));
 		sequence.add(lettersStep);
-		sequence.add(new BoundsStep(lettersStep.text,this::boundsChanged));
+		sequence.add(new BoundsStep(lettersStep,this::boundsChanged));
 		sequence.add(new AddNodeStep(group, northStep));
 		sequence.add(northStep);
 		sequence.add(new AddNodeStep(group, eastStep));

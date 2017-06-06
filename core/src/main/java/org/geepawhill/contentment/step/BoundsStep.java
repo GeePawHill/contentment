@@ -13,6 +13,11 @@ public class BoundsStep implements Step
 	
 	private Node source;
 	private PointPairConsumer onCollected;
+	
+	public BoundsStep(ShapeStep step,PointPairConsumer onCollected)
+	{
+		this(step.shape(),onCollected);
+	}
 
 	public BoundsStep(Node source,PointPairConsumer onCollected)
 	{

@@ -56,13 +56,13 @@ public class HandStep implements ShapeStep
 	@Override
 	public void fast(Context context)
 	{
-		interpolate(1d, context);
+		interpolate(context, 1d);
 	}
 
 	@Override
 	public void undo(Context context)
 	{
-		interpolate(0d, context);
+		interpolate(context,0d);
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class HandStep implements ShapeStep
 		return timing;
 	}
 
-	private void interpolate(double fraction, Context context)
+	private void interpolate(Context context, double fraction)
 	{
 		path.setVisible(fraction != 0d);
 		interpolator.interpolate(fraction);

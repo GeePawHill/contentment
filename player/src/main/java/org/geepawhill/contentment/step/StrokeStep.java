@@ -21,7 +21,7 @@ public class StrokeStep implements ShapeStep
 	private final Line line;
 	private Transition transition;
 	private Format format;
-	
+
 	public StrokeStep(Timing timing, PointPair points, Format format)
 	{
 		this.timing = timing;
@@ -29,12 +29,12 @@ public class StrokeStep implements ShapeStep
 		this.line = new Line();
 		this.format = format;
 	}
-	
+
 	public void setPoints(PointPair points)
 	{
-		this.points = points; 
+		this.points = points;
 	}
-	
+
 	@Override
 	public Shape shape()
 	{
@@ -44,19 +44,19 @@ public class StrokeStep implements ShapeStep
 	@Override
 	public void fast(Context context)
 	{
-		interpolate(1d,context);
+		interpolate(context,1d);
 	}
 
 	@Override
 	public void undo(Context context)
 	{
-		interpolate(0d,context);
+		interpolate(context, 0d);
 	}
 
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		transition = new ContextTransition( context,this::interpolate,timing().ms());
+		transition = new ContextTransition(context, this::interpolate, timing().ms());
 		transition.setOnFinished((event) -> onFinished.run());
 		transition.play();
 	}
@@ -66,14 +66,14 @@ public class StrokeStep implements ShapeStep
 	{
 		return timing;
 	}
-	
+
 	@Override
 	public String toString()
 	{
-		return "Stroke: "+points;
+		return "Stroke: " + points;
 	}
-	
-	private void interpolate(double fraction, Context context)
+
+	private void interpolate(Context context, double fraction)
 	{
 		format.apply(Frames.KEY, line);
 		format.apply(Dash.KEY, line);

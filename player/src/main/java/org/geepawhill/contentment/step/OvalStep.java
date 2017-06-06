@@ -39,13 +39,13 @@ public class OvalStep implements Step
 	@Override
 	public void fast(Context context)
 	{
-		interpolate(1d,context);
+		interpolate(context,1d);
 	}
 
 	@Override
 	public void undo(Context context)
 	{
-		interpolate(0d,context);
+		interpolate(context,0d);
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class OvalStep implements Step
 		return timing;
 	}
 	
-	private void interpolate(double fraction, Context context)
+	private void interpolate(Context context,double fraction)
 	{
 		if(fraction==0d)
 		{
