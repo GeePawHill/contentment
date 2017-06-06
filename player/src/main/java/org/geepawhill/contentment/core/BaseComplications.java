@@ -85,7 +85,7 @@ public class BaseComplications
 		Arrow pi5 = new Arrow(p4, false, p5, false, shared.relationFormat());
 		Arrow pi6 = new Arrow(p5, false, p6, false, shared.relationFormat());
 
-		sequence.add(tale.flash());
+		common.appear(tale);
 		sequence.add(tale.change("A Simple Change Model"));
 		common.sketch( 1000d,agent);
 		common.sketch( 1000d,coach);

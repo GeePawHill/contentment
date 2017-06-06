@@ -39,7 +39,7 @@ public class InteractiveStabilization
 		Arrow poke3 = new Arrow(poke3Source, false, agent, true, shared.pokeFormat(Color.GREEN));
 
 		common.clear();
-		sequence.add(tale.flash());
+		common.appear(tale);
 		sequence.add(tale.change("Agents Are Susceptible To Pokes"));
 		common.sketch( 1d,target);
 

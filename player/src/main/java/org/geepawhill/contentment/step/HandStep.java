@@ -13,7 +13,6 @@ import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.timing.Timing;
 
-import javafx.animation.Transition;
 import javafx.scene.Node;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Shape;
@@ -23,7 +22,6 @@ public class HandStep implements ShapeStep
 	private Timing timing;
 	private PointPair points;
 	private final Path path;
-	private Transition transition;
 	private Format format;
 	private Random random;
 	private BezierInterpolator interpolator;

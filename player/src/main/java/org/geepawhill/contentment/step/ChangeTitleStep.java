@@ -68,7 +68,7 @@ public class ChangeTitleStep implements Step
 	@Override
 	public String toString()
 	{
-		return "ChangeTitle: "+source + " from: "+oldSource;
+		return "ChangeTitle: "+source;
 	}
 
 }

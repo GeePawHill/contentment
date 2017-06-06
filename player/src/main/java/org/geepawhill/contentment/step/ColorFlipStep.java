@@ -39,7 +39,6 @@ public class ColorFlipStep implements Step
 				text.setFill(old);
 			}
 		}
-		
 	}
 
 	@Override

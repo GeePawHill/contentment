@@ -76,7 +76,7 @@ public class DemoScript
 	private void scene2()
 	{
 		Title title = new Title();
-		sequence.add(title.flash());
+		common.appear(title);
 		sequence.add(title.change("There are other actors."));
 
 		LabelBox box1 = new LabelBox(LabelBox.class.getSimpleName(), new Point(400d, 300d), firstFormat);

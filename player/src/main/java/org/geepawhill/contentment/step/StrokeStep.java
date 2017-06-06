@@ -10,7 +10,6 @@ import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.timing.Timing;
 
-import javafx.animation.Transition;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 

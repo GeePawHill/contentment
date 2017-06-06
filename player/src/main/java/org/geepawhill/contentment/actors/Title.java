@@ -25,9 +25,6 @@ public class Title implements Actor
 	private final double XINSET = 30d;
 	private final double YINSET = 20d;
 
-	// private final double GREEN = (double) 0xbe / (double) 0xff;
-	// private final double BLUE = (double) 0x8b / (double) 0xff;
-
 	public Title()
 	{
 		this.nickname = Names.make(getClass());
@@ -51,18 +48,6 @@ public class Title implements Actor
 	public Group group()
 	{
 		return group;
-	}
-
-	public Sequence flash()
-	{
-		Step[] steps = new Step[]
-		{
-				new EntranceStep(this),
-				new AddNodeStep(group, rectangle),
-				new AddNodeStep(group, text),
-				new ChangeTitleStep(text, "")
-		};
-		return new Sequence(steps);
 	}
 
 	public Sequence change(String newSource)
