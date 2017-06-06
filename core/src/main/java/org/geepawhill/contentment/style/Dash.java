@@ -1,45 +1,27 @@
 package org.geepawhill.contentment.style;
 
-import org.geepawhill.contentment.format.Style;
-import org.geepawhill.contentment.format.StyleApplier;
-
-import javafx.scene.shape.Shape;
+import java.util.Arrays;
+import java.util.List;
 
 public class Dash
 {
 	public static final String KEY = "Dash";
-
-	public static Style solid()
+	
+	public final List<Double> array;
+	
+	private Dash(Double... array)
 	{
-		StyleApplier applier = new StyleApplier() {
-			@Override
-			public void apply(Shape shape)
-			{
-				shape.getStrokeDashArray().clear();;
-			} 
-		};
-		return new Style(KEY,applier, "SOLID");		
+		this.array = Arrays.asList(array);
 	}
-
-	public static Style dash(Double... dash)
+	
+	public static Dash solid()
 	{
-		StyleApplier applier = new StyleApplier() {
-			@Override
-			public void apply(Shape shape)
-			{
-				shape.getStrokeDashArray().clear();
-				shape.getStrokeDashArray().addAll(dash);
-			} 
-		};
-		String value = "";
-		boolean isFirst = true;
-		for(Double dashItem : dash)
-		{
-			if(!isFirst) value+=", ";
-			value+=dashItem;
-			isFirst=false;
-		}
-		return new Style(KEY,applier, value);		
+		return new Dash(new Double[0]);
+	}
+	
+	public static Dash dash(Double... dash)
+	{
+		return new Dash(dash);
 	}
 
 }

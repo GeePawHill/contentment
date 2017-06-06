@@ -16,7 +16,7 @@ public class Frames
 		return frame(stroke,Color.TRANSPARENT,width,opacity);
 	}
 	
-	public static Style frame(Paint stroke,Double width, Double opacity, Style dash)
+	public static Style frame(Paint stroke,Double width, Double opacity, Dash dash)
 	{
 		return frame(stroke,Color.TRANSPARENT,width,opacity,dash);
 	}
@@ -26,7 +26,7 @@ public class Frames
 		return frame(stroke, fill, width, opacity, Dash.solid());
 	}
 
-	public static Style frame(Paint stroke,Paint fill, Double width, Double opacity, Style dash)
+	public static Style frame(Paint stroke,Paint fill, Double width, Double opacity, Dash dash)
 	{
 		StyleApplier applier = new StyleApplier() {
 			@Override
@@ -36,7 +36,8 @@ public class Frames
 				shape.setFill(fill);
 				shape.setStrokeWidth(width);
 				shape.setOpacity(opacity);
-				dash.apply(shape);
+				shape.getStrokeDashArray().clear();
+				shape.getStrokeDashArray().addAll(dash.array);
 			} 
 		};
 		String value = "Frame: "+stroke.toString()+" Fill: "+fill.toString()+" Opacity: "+opacity;

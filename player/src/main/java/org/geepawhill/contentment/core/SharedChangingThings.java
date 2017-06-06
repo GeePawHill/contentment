@@ -17,8 +17,7 @@ public class SharedChangingThings
 		Style agentColors = TypeFace.color("Agent", Color.CHARTREUSE, .8d);
 		Style agentFont = TypeFace.largeHand();
 		Style agentFrame = Frames.frame(Color.CHARTREUSE, 5d, .8d);
-		Style agentDash = Dash.solid();
-		Format agentFormat = new Format("Agent", agentColors, agentFont, agentFrame, agentDash);
+		Format agentFormat = new Format("Agent", agentColors, agentFont, agentFrame);
 		return agentFormat;
 	}
 
