@@ -40,7 +40,7 @@ public class ExitStepTest extends JavaFxTest
 	public void undoAdds()
 	{
 		runner.fast(sequence);
-		runner.undo(sequence.get(1));
+		runner.undo(sequence.last());
 		assertThat(runner.context.actors.contains(actor)).isTrue();
 		assertThat(runner.context.canvas.getChildren()).contains(actor.group);
 	}

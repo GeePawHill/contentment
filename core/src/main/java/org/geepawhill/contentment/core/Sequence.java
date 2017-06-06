@@ -33,6 +33,11 @@ public class Sequence
 		return steps.get(index);
 	}
 	
+	public Step last()
+	{
+		return steps.get(size()-1);
+	}
+	
 	public void add(Sequence sequence)
 	{
 		steps.addAll(sequence.steps);

@@ -8,15 +8,11 @@ import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AddNodeStep;
 import org.geepawhill.contentment.step.BoundsStep;
 import org.geepawhill.contentment.step.LettersStep;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.StrokeStep;
-import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
-import javafx.animation.TranslateTransition;
 import javafx.scene.Group;
-import javafx.util.Duration;
 
 public class TargetBox implements Actor
 {
@@ -25,8 +21,6 @@ public class TargetBox implements Actor
 	
 	private final Group group;
 
-	private Point center;
-	
 	private StrokeStep northStep;
 	private StrokeStep southStep;
 	private StrokeStep westStep;
@@ -36,7 +30,6 @@ public class TargetBox implements Actor
 	public TargetBox(String source, Point center, Format format)
 	{
 		this.nickname = Names.make(getClass());
-		this.center = center;
 		this.source = source;
 		this.group = new Group();
 		lettersStep = new LettersStep(Timing.weighted(.6d), source, center, format);

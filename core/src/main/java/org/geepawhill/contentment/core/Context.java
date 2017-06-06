@@ -20,7 +20,7 @@ public class Context
 		this.actors = new Actors();
 		this.skipKeyframes = false;
 	}
-
+	
 	public void add(Actor actor)
 	{
 		actors.add(actor);
