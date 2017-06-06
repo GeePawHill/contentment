@@ -10,7 +10,6 @@ import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.CommonSteps;
-import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 
@@ -31,10 +30,9 @@ public class DemoScript
 	{
 		this.sequence = sequence;
 		this.common = new CommonSteps(sequence);
-		firstFormat = new Format(TypeFace.largeHand(), TypeFace.color("", Color.RED, 1d), Frames.frame("", Color.RED, 5d, 1d),
-				Dash.solid());
-		secondFormat = new Format(firstFormat, TypeFace.color("", Color.GREEN, 1d), Frames.frame("", Color.GREEN, 5d, 1d));
-		thirdFormat = new Format(firstFormat, TypeFace.color("", Color.BLUE, 1d), Frames.frame("", Color.BLUE, 5d, 1d));
+		firstFormat = new Format(TypeFace.largeHand(), TypeFace.color("", Color.RED, 1d), Frames.frame(Color.RED, 5d, 1d));
+		secondFormat = new Format(firstFormat, TypeFace.color("", Color.GREEN, 1d), Frames.frame(Color.GREEN, 5d, 1d));
+		thirdFormat = new Format(firstFormat, TypeFace.color("", Color.BLUE, 1d), Frames.frame(Color.BLUE, 5d, 1d));
 		fourthFormat = new Format(TypeFace.mediumSans(), TypeFace.color("", Color.YELLOW, 1d));
 	}
 

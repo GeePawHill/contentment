@@ -11,13 +11,22 @@ public class Frames
 {
 	public static final String KEY = "Frame";
 	
-	
-	public static Style frame(String nickname,Paint stroke, Double width, Double opacity)
+	public static Style frame(Paint stroke,Double width, Double opacity)
 	{
-		return frame(nickname,stroke,Color.TRANSPARENT,width,opacity);
+		return frame(stroke,Color.TRANSPARENT,width,opacity);
+	}
+	
+	public static Style frame(Paint stroke,Double width, Double opacity, Style dash)
+	{
+		return frame(stroke,Color.TRANSPARENT,width,opacity,dash);
+	}
+	
+	public static Style frame(Paint stroke,Paint fill, Double width, Double opacity)
+	{
+		return frame(stroke, fill, width, opacity, Dash.solid());
 	}
 
-	public static Style frame(String nickname,Paint stroke, Paint fill, Double width, Double opacity)
+	public static Style frame(Paint stroke,Paint fill, Double width, Double opacity, Style dash)
 	{
 		StyleApplier applier = new StyleApplier() {
 			@Override
@@ -27,16 +36,17 @@ public class Frames
 				shape.setFill(fill);
 				shape.setStrokeWidth(width);
 				shape.setOpacity(opacity);
+				dash.apply(shape);
 			} 
 		};
 		String value = "Frame: "+stroke.toString()+" Fill: "+fill.toString()+" Opacity: "+opacity;
-		return new Style(KEY, nickname, applier, value);
+		return new Style(KEY, applier, value);
 		
 	}
 	
 	public static Style unspecified()
 	{
-		return frame("Unspecified",Color.WHITE,Color.TRANSPARENT, 1d, 1d);
+		return frame(Color.WHITE,Color.TRANSPARENT,1d, 1d);
 	}
 
 }

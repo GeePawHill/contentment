@@ -24,7 +24,7 @@ public class ShapePen
 			} 
 		};
 		String value = "Line: "+line.toString()+" Fill: "+fill.toString()+" Width: "+width+" Opacity: "+opacity;
-		return new Style(KEY, nickname, applier, value);
+		return new Style(KEY, applier, value);
 	}
 
 	public static Style first()

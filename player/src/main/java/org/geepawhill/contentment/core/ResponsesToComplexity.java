@@ -34,9 +34,9 @@ public class ResponsesToComplexity
 	{
 		Format labelFormat = new Format(TypeFace.mediumHand(), TypeFace.color("", Color.LIGHTBLUE, 1d));
 		Format smallLabelFormat = new Format(TypeFace.smallHand(), TypeFace.color("", Color.GREEN, 1d));
-		lineFormat = new Format(Frames.frame("", Color.AQUAMARINE, 2d, 1d), Dash.dash("", 3d));
+		lineFormat = new Format(Frames.frame(Color.AQUAMARINE, 2d, 1d, Dash.dash(3d)));
 		Format ovalFormat = new Format(TypeFace.largeHand(), TypeFace.color("", Color.RED, 1d), Dash.solid(),
-				Frames.frame("", Color.RED, 3d, 1d));
+				Frames.frame(Color.RED, 3d, 1d));
 		common.clear();
 		Image image = new Image("/org/geepawhill/scripts/usOutline.png", 1500d, 800d, true, true);
 		ClipArt art = new ClipArt(image, new PointPair(150d, 50d, 1550d, 850d));

@@ -5,7 +5,6 @@ import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.timing.Timing;
 
@@ -68,7 +67,6 @@ public class OvalStep implements Step
 		else
 			ellipse.setVisible(true);
 		format.apply(Frames.KEY,ellipse);
-		format.apply(Dash.KEY,ellipse);
 		ellipse.setCenterX(points.centerX());
 		ellipse.setCenterY(points.centerY());
 		ellipse.setRadiusX((points.width()/2d)+HMARGIN * fraction);

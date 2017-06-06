@@ -18,10 +18,10 @@ public class Dash
 				shape.getStrokeDashArray().clear();;
 			} 
 		};
-		return new Style(KEY,"SOLID", applier, "SOLID");		
+		return new Style(KEY,applier, "SOLID");		
 	}
 
-	public static Style dash(String nickname, Double... dash)
+	public static Style dash(Double... dash)
 	{
 		StyleApplier applier = new StyleApplier() {
 			@Override
@@ -39,7 +39,7 @@ public class Dash
 			value+=dashItem;
 			isFirst=false;
 		}
-		return new Style(KEY,nickname, applier, value);		
+		return new Style(KEY,applier, value);		
 	}
 
 }

@@ -9,7 +9,6 @@ import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.BezierInterpolator;
-import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.timing.Timing;
 
@@ -40,7 +39,6 @@ public class HandStep implements ShapeStep
 	{
 		this.points = points;
 		format.apply(Frames.KEY, path);
-		format.apply(Dash.KEY, path);
 		interpolator.clear(points.northwest());
 		int count = (int) (points.distance() * .2d);
 		interpolator.addCurve(chooseControlPoints(), count);

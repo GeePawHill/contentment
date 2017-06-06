@@ -11,7 +11,6 @@ import javafx.scene.text.Text;
 
 public class TypeFace
 {
-
 	public static final String FACE = "TextFont";
 	public static final String COLOR = "TextColor";
 
@@ -31,7 +30,7 @@ public class TypeFace
 				}
 			}
 		};
-		return new Style(FACE, nickname, applier, font.getFamily() + " " + font.getSize());
+		return new Style(FACE, applier, font.getFamily() + " " + font.getSize());
 	}
 	
 	public static Style smallHand()
@@ -82,7 +81,7 @@ public class TypeFace
 			} 
 		};
 		String value = "Stroke: "+stroke.toString()+" Fill: "+fill.toString()+" Opacity: "+opacity;
-		return new Style(COLOR, nickname, applier, value);
+		return new Style(COLOR, applier, value);
 		
 	}
 

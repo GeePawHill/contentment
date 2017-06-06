@@ -7,12 +7,10 @@ public class Style
 	private final StyleApplier applier;
 	
 	private final String key;
-	private final String nickname;
 	private final String value;
 
-	public Style(String key, String nickname, StyleApplier applier, String value)
+	public Style(String key, StyleApplier applier, String value)
 	{
-		this.nickname = nickname;
 		this.key = key;
 		this.applier = applier;
 		this.value = value;
@@ -21,7 +19,7 @@ public class Style
 	@Override
 	public String toString()
 	{
-		return nickname+" ("+value+")";
+		return key+" ("+value+")";
 	}
 
 	public void apply(Shape shape)

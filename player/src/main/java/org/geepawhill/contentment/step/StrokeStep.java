@@ -6,7 +6,6 @@ import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.timing.Timing;
 
@@ -73,7 +72,6 @@ public class StrokeStep implements ShapeStep
 	private void interpolate(Context context, double fraction)
 	{
 		format.apply(Frames.KEY, line);
-		format.apply(Dash.KEY, line);
 		line.setStartX(points.from.x);
 		line.setStartY(points.from.y);
 		Point newEnd = points.along(fraction);

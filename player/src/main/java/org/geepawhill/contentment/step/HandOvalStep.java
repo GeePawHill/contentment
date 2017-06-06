@@ -8,7 +8,6 @@ import org.geepawhill.contentment.geometry.Jiggler;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.BezierInterpolator;
-import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.timing.Timing;
 
@@ -39,7 +38,6 @@ public class HandOvalStep implements ShapeStep
 	{
 		this.points = points;
 		format.apply(Frames.KEY, path);
-		format.apply(Dash.KEY, path);
 		interpolator.clear(points.north());
 		northJiggler = new Jiggler(.5d, 6d);
 		controlJiggler = new Jiggler(.4d, 30d);
