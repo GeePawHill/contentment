@@ -1,36 +1,19 @@
 package org.geepawhill.contentment.step;
 
+import org.geepawhill.contentment.core.Animator;
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.ContextInterpolator;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.timing.Timing;
 
-import javafx.animation.Transition;
-import javafx.util.Duration;
-
 public class DelayStep implements Step
 {
-	
-	private double ms;
-	Transition transition;
-	
-	static class NoOpTransition extends Transition
-	{
-		public NoOpTransition(double ms,OnFinished onFinished)
-		{
-			setCycleDuration(Duration.millis(ms));
-			setOnFinished( event -> onFinished.run() );
-		}
 
-		@Override
-		protected void interpolate(double frac)
-		{
-		}
-		
-	}
+	private Timing timing;
 
 	public DelayStep(double ms)
 	{
-		this.ms = ms;
+		this.timing = Timing.ms(ms);
 	}
 
 	@Override
@@ -46,18 +29,25 @@ public class DelayStep implements Step
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		if(context.skipKeyframes==true)
+		if (context.isSkippingDelays() == true)
 		{
 			onFinished.run();
-			return;
 		}
-		new NoOpTransition(ms,onFinished).play();
+		else
+		{
+			new Animator().play(context, onFinished, timing.ms(), ContextInterpolator.NONE);
+		}
 	}
 
 	@Override
 	public Timing timing()
 	{
-		return Timing.ms(ms);
+		return timing;
+	}
+	
+	public void interpolate(Context context, double fraction)
+	{
+		System.out.println(fraction);
 	}
 
 }

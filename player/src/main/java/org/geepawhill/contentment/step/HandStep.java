@@ -2,6 +2,7 @@ package org.geepawhill.contentment.step;
 
 import java.util.Random;
 
+import org.geepawhill.contentment.core.Animator;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.format.Format;
@@ -68,9 +69,7 @@ public class HandStep implements ShapeStep
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		transition = new ContextTransition(context, this::interpolate, timing().ms());
-		transition.setOnFinished((event) -> onFinished.run());
-		transition.play();
+		new Animator().play(context, onFinished, timing.ms(), this::interpolate);
 	}
 
 	@Override

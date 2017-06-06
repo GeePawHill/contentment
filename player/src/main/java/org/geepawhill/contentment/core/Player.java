@@ -90,7 +90,7 @@ public class Player
 
 	public void play()
 	{
-		context.skipKeyframes=false;
+		context.skipDelays(false);
 		isChaining = true;
 		switch (state)
 		{
@@ -112,7 +112,7 @@ public class Player
 
 	public void playOne()
 	{
-		context.skipKeyframes=true;
+		context.skipDelays(true);
 		isChaining = false;
 		switch (state)
 		{
