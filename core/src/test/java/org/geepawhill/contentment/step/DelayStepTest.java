@@ -9,13 +9,13 @@ import org.junit.Test;
 
 public class DelayStepTest extends JavaFxTest
 {
-
+	
 	@Test
 	public void takesSomeTime()
 	{
 		LocalDateTime start = LocalDateTime.now(); 
 		runner.slow(new DelayStep(100d));
-		assertThat(Duration.between(start, LocalDateTime.now()).toMillis()).isStrictlyBetween(80L,120L);
+		assertThat(Duration.between(start, LocalDateTime.now()).toMillis()).isStrictlyBetween(80L,130L);
 	}
 	
 	@Test

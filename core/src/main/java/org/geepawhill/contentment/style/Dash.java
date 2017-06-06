@@ -5,8 +5,6 @@ import java.util.List;
 
 public class Dash
 {
-	public static final String KEY = "Dash";
-	
 	public final List<Double> array;
 	
 	private Dash(Double... array)

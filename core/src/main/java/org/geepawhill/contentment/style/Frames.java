@@ -40,7 +40,7 @@ public class Frames
 				shape.getStrokeDashArray().addAll(dash.array);
 			} 
 		};
-		String value = "Frame: "+stroke.toString()+" Fill: "+fill.toString()+" Opacity: "+opacity;
+		String value = "Frame: "+stroke.toString()+" Fill: "+fill.toString()+" Width: "+width +" Opacity: "+opacity+" Dash: "+dash;
 		return new Style(KEY, applier, value);
 		
 	}

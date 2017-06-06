@@ -3,7 +3,7 @@ package org.geepawhill.contentment.format;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import org.geepawhill.contentment.style.Opacity;
+import org.geepawhill.contentment.style.Frames;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +17,7 @@ public class FormatTest
 	@Before
 	public void before()
 	{
-		style = Opacity.opacity(.5d);
+		style = Frames.unspecified();
 		base = new Format("Base");
 		key = style.key();
 	}
@@ -33,7 +33,7 @@ public class FormatTest
 	{
 		assertNull(base.find(key));
 		base.put(style);
-		assertEquals(style,base.find(Opacity.KEY));
+		assertEquals(style,base.find(Frames.KEY));
 	}
 	
 	@Test
