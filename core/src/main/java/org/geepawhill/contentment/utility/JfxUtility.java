@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.utility;
 
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 
 public class JfxUtility
@@ -21,4 +22,17 @@ public class JfxUtility
 		return anchor;
 	}
 
+	public static boolean forEachDescendant(Node node, NodeProcessor processor)
+	{
+		if(!processor.accept(node)) return false;
+		if (node instanceof Parent)
+		{
+			Parent parent = (Parent) node;
+			for (Node child : parent.getChildrenUnmodifiable())
+			{
+				if (!forEachDescendant(child, processor)) return false;
+			}
+		}
+		return true;
+	}
 }

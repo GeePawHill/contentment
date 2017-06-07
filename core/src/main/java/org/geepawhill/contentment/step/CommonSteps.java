@@ -45,7 +45,7 @@ public class CommonSteps
 	
 	public void reColor(Actor actor,Paint paint)
 	{
-		sequence.add(new ColorFlipStep(actor,paint));
+		sequence.add(new ColorChangeStep(actor,paint));
 	}
 	
 	public void sketch(double ms,Actor drawable)
