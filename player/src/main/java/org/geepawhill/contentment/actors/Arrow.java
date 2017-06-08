@@ -11,6 +11,7 @@ import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AddNodeStep;
+import org.geepawhill.contentment.step.BezierStep;
 import org.geepawhill.contentment.step.ComputeStep;
 import org.geepawhill.contentment.step.HandStep;
 import org.geepawhill.contentment.step.ShapeStep;
@@ -26,7 +27,7 @@ public class Arrow implements Actor
 
 	private final Group group;
 
-	private HandStep mainStep;
+	private BezierStep mainStep;
 	private StrokeStep fromTopStep;
 	private StrokeStep fromBottomStep;
 	private StrokeStep toTopStep;
@@ -48,7 +49,7 @@ public class Arrow implements Actor
 		this.computer = new NodeArrowComputer(from.group(), to.group());
 		this.group = new Group();
 		steps = new ArrayList<>();
-		mainStep = new HandStep(Timing.weighted(.9d), new PointPair(0d, 0d, 0d, 0d), format);
+		mainStep = new BezierStep(Timing.weighted(.9d), new PointPair(0d, 0d, 0d, 0d), format);
 		steps.add(mainStep);
 		if (pointAtFrom)
 		{
