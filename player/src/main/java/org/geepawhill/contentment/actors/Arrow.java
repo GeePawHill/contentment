@@ -13,7 +13,6 @@ import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AddNodeStep;
 import org.geepawhill.contentment.step.BezierStep;
 import org.geepawhill.contentment.step.ComputeStep;
-import org.geepawhill.contentment.step.HandStep;
 import org.geepawhill.contentment.step.ShapeStep;
 import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.timing.Timing;

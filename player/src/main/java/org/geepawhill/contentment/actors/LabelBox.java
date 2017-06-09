@@ -8,7 +8,6 @@ import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AddNodeStep;
 import org.geepawhill.contentment.step.BezierStep;
 import org.geepawhill.contentment.step.BoundsStep;
-import org.geepawhill.contentment.step.HandStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.TransitionStep;
