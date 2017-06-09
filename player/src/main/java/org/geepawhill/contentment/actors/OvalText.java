@@ -3,11 +3,13 @@ package org.geepawhill.contentment.actors;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.geometry.Bezier;
+import org.geepawhill.contentment.geometry.Jiggler;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AddNodeStep;
+import org.geepawhill.contentment.step.BezierStep;
 import org.geepawhill.contentment.step.BoundsStep;
-import org.geepawhill.contentment.step.HandOvalStep;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
@@ -21,15 +23,24 @@ public class OvalText implements Actor
 
 	private final Group group;
 
-	private HandOvalStep ovalStep;
 	private LettersStep lettersStep;
+	private BezierStep eastStep;
+	private BezierStep westStep;
+	
+	private Jiggler controlJiggler;
+	private Jiggler northJiggler;
+
 
 	public OvalText(String source, Point center, Format format)
 	{
 		this.nickname = Names.make(getClass());
 		this.source = source;
+		this.northJiggler = new Jiggler(.5d, 6d);
+		this.controlJiggler = new Jiggler(.4d, 30d);
+
 		lettersStep = new LettersStep(Timing.weighted(.6d), source, center, format);
-		ovalStep = new HandOvalStep(Timing.weighted(.4d), format);
+		eastStep = new BezierStep(Timing.weighted(.2d),new PointPair(0d,0d,0d,0d),format);
+		westStep = new BezierStep(Timing.weighted(.2d),new PointPair(0d,0d,0d,0d),format);
 		this.group = new Group();
 	}
 	
@@ -42,7 +53,8 @@ public class OvalText implements Actor
 	private void boundsChanged(PointPair pair)
 	{
 		PointPair grow = pair.grow(45d,8d);
-		ovalStep.setPoints(grow);
+		eastStep.setBezier(eastHalfPoints(grow));
+		westStep.setBezier(westHalfPoints(grow));
 	}
 
 	@Override
@@ -51,7 +63,6 @@ public class OvalText implements Actor
 		return group;
 	}
 
-
 	@Override
 	public Sequence draw(double ms)
 	{
@@ -59,8 +70,31 @@ public class OvalText implements Actor
 		sequence.add(new AddNodeStep(group,lettersStep));
 		sequence.add(lettersStep);
 		sequence.add(new BoundsStep(lettersStep, this::boundsChanged));
-		sequence.add(new AddNodeStep(group,ovalStep));
-		sequence.add(ovalStep);
+		sequence.add(new AddNodeStep(group,eastStep));
+		sequence.add(eastStep);
+		sequence.add(new AddNodeStep(group,westStep));
+		sequence.add(westStep);
 		return sequence.schedule(ms);
 	}
+	
+	private Bezier eastHalfPoints(PointPair points)
+	{
+		return new Bezier(
+				points.north(), 
+				controlJiggler.jiggle(points.northeast()),
+				controlJiggler.jiggle(points.southeast()), 
+				points.south()
+		);
+	}
+
+	public Bezier westHalfPoints(PointPair points)
+	{
+		return new Bezier(
+				points.south(), 
+				controlJiggler.jiggle(points.southwest()),
+				controlJiggler.jiggle(points.northwest()), 
+				northJiggler.jiggle(points.north())
+		);
+	}
+
 }
