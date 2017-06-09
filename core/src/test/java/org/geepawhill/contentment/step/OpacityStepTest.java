@@ -67,7 +67,7 @@ public class OpacityStepTest extends JavaFxTest
 	{
 		actor.group.setOpacity(0d);
 		runner.context.setAfter(this::gatherOpacity);
-		runner.slow(new OpacityStep(100d,actor,1d));
+		runner.slow(new OpacityStep(50d,actor,1d));
 		double lastOpacity = 0d;
 		for(Double opacity : opacities)
 		{

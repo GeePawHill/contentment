@@ -41,7 +41,7 @@ public class AnimatorTest extends JavaFxTest
 	public void animatorCallsInterpolatorOften()
 	{
 		Animator animator = new Animator();
-		runner.play(animator, 100d, this::interpolator);
+		runner.play(animator, 50d, this::interpolator);
 		assertThat(interpolatorCalls).containsOnlyOnce(1d);
 		assertThat(interpolatorCalls.size()).isGreaterThan(1);
 	}

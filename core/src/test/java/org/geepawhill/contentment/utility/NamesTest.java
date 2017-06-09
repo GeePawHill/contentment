@@ -33,5 +33,14 @@ public class NamesTest
 	{
 		assertEquals("String_1", Names.make(String.class));
 	}
+	
+	@Test
+	public void reset()
+	{
+		assertEquals("String_1", Names.make(String.class));
+		assertEquals("String_2", Names.make(String.class));
+		Names.reset();
+		assertEquals("String_1", Names.make(String.class));
+	}
 
 }
