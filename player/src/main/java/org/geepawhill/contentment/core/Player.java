@@ -112,6 +112,7 @@ public class Player
 
 	public void playOne()
 	{
+		System.out.println("PlayOne: "+state);
 		context.skipDelays(true);
 		isChaining = false;
 		switch (state)
@@ -203,7 +204,7 @@ public class Player
 				{
 					playCurrent();
 				}
-				state = PlayState.Before;
+				else state = PlayState.Before;
 			}
 		}
 	}
