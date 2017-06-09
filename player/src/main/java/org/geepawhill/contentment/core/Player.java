@@ -112,7 +112,6 @@ public class Player
 
 	public void playOne()
 	{
-		System.out.println("PlayOne: "+state);
 		context.skipDelays(true);
 		isChaining = false;
 		switch (state)

@@ -6,6 +6,7 @@ import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.actors.Title;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.step.CommonSteps;
+import org.geepawhill.contentment.step.MoveStep;
 
 public class AgentAndPokes
 {
@@ -44,34 +45,24 @@ public class AgentAndPokes
 		common.cue();
 		common.disappear(agent);
 		common.fadeIn(500d, teammate);
-		common.cue();
 		sequence.add(tale.change("That Includes The Daily Practice"));
 		common.fadeIn(300d, practice);
-		common.cue();
 		sequence.add(tale.change("Software We Use For Making"));
 		common.fadeIn(300d, software);
-		common.cue();
 		sequence.add(tale.change("Or The Hardware We Use For Making"));
 		common.fadeIn(300d, hardware);
-		common.cue();
 		sequence.add(tale.change("Corporate Policy Is An Agent"));
 		common.fadeIn(300d, policy);
-		common.cue();
 		sequence.add(tale.change("The Staffing Demand & Supply"));
 		common.fadeIn(300d, personnel);
-		common.cue();
 		sequence.add(tale.change("Everything About The Market, Like Shipping Date"));
 		common.fadeIn(300d, date);
-		common.cue();
 		sequence.add(tale.change("The Conceptual Framework The Team Uses"));
 		common.fadeIn(300d, framework);
-		common.cue();
 		sequence.add(tale.change("The Tools We Use"));
 		common.fadeIn(300d, tools);
-		common.cue();
 		sequence.add(tale.change("The Hierarchy We Live In"));
 		common.fadeIn(300d, orgchart);
-		common.cue();
 		sequence.add(tale.change("And, Yes, The Coach Is An Agent, Too"));
 		common.fadeIn(300d, coach);
 		common.cue();
@@ -95,7 +86,9 @@ public class AgentAndPokes
 	{
 		Arrow arrow = new Arrow(from, false, to, true, shared.pokeFormat());
 		common.sketch(400d, arrow);
-		to.move(sequence, newX, newY);
+		sequence.add(new MoveStep(1000d,to,new Point(newX,newY)));
+		common.cue();
+//		to.move(sequence, newX, newY);
 		common.disappear(arrow);
 	}
 

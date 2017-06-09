@@ -75,17 +75,6 @@ public class LabelBox implements Actor
 		);
 	}
 
-
-	public Step move(double newX, double newY)
-	{
-		TranslateTransition transition = new TranslateTransition();
-		transition.setNode(group);
-		transition.setToX(newX - center.x);
-		transition.setToY(newY - center.y);
-		transition.setDuration(Duration.millis(1000d));
-		return new TransitionStep(transition);
-	}
-
 	@Override
 	public Group group()
 	{
