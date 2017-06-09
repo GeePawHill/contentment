@@ -11,7 +11,6 @@ public class BezierSplit
 	{
 		this.fraction = t;
 		this.bezier = bezier;
-		double oneMinusT = 1d - t;
 		// P0_1 = (1-t)*P0 + t*P1
 		// P1_2 = (1-t)*P1 + t*P2
 		// P2_3 = (1-t)*P2 + t*P3

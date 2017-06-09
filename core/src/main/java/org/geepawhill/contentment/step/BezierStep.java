@@ -37,13 +37,11 @@ public class BezierStep implements ShapeStep
 		this.format = format;
 		this.random = new Random();
 	}
-
-	public void setPoints(PointPair points)
+	
+	public void setBezier(Bezier bezier)
 	{
-		this.points = points;
 		format.apply(Frames.KEY, path);
-		Point[] bpoints = chooseControlPoints();
-		bezier = new Bezier(bpoints[0],bpoints[1],bpoints[2],bpoints[3]);
+		this.bezier = bezier;
 		split = new BezierSplit(1d,bezier);
 	}
 

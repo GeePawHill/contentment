@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.utility;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
 
 import org.geepawhill.contentment.step.JavaFxTest;
 import org.junit.Before;
@@ -11,7 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
-public class ColorChngerTest extends JavaFxTest
+public class ColorChangerTest extends JavaFxTest
 {
 
 	private Line line;

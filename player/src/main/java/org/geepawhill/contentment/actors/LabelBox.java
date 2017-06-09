@@ -1,8 +1,11 @@
 package org.geepawhill.contentment.actors;
 
+import java.util.Random;
+
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AddNodeStep;
@@ -32,9 +35,13 @@ public class LabelBox implements Actor
 	private BezierStep westStep;
 	private BezierStep eastStep;
 	private LettersStep lettersStep;
+	private Random random;
+	
+
 
 	public LabelBox(String source, Point center, Format format)
 	{
+		this.random = new Random();
 		this.nickname = Names.make(getClass());
 		this.center = center;
 		this.source = source;
@@ -54,11 +61,20 @@ public class LabelBox implements Actor
 	private void boundsChanged(PointPair pair)
 	{
 		PointPair grow = pair.grow(4d);
-		northStep.setPoints(grow.northLine());
-		westStep.setPoints(grow.westLine());
-		southStep.setPoints(grow.southLine());
-		eastStep.setPoints(grow.eastLine());
+		northStep.setBezier(chooseControlPoints(grow.northLine()));
+		westStep.setBezier(chooseControlPoints(grow.westLine()));
+		southStep.setBezier(chooseControlPoints(grow.southLine()));
+		eastStep.setBezier(chooseControlPoints(grow.eastLine()));
 	}
+	
+	public Bezier chooseControlPoints(PointPair points)
+	{
+		return new Bezier(
+				points.from, points.along(random.nextDouble()).jiggle(random, 1d, 10),
+				points.along(random.nextDouble()).jiggle(random, 1d, 10), points.to
+		);
+	}
+
 
 	public Step move(double newX, double newY)
 	{

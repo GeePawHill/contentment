@@ -6,6 +6,11 @@ public class Bezier
 	public final Point handle1;
 	public final Point handle2;
 	public final Point end;
+	
+	public Bezier(PointPair points)
+	{
+		this(points.from,points.to);
+	}
 
 	public Bezier(Point start, Point end)
 	{

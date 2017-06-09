@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.actors;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.connector.arrow.ArrowComputer;
@@ -9,12 +10,12 @@ import org.geepawhill.contentment.connector.arrow.NodeArrowComputer;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AddNodeStep;
 import org.geepawhill.contentment.step.BezierStep;
 import org.geepawhill.contentment.step.ComputeStep;
 import org.geepawhill.contentment.step.ShapeStep;
-import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
@@ -27,10 +28,10 @@ public class Arrow implements Actor
 	private final Group group;
 
 	private BezierStep mainStep;
-	private StrokeStep fromTopStep;
-	private StrokeStep fromBottomStep;
-	private StrokeStep toTopStep;
-	private StrokeStep toBottomStep;
+	private BezierStep fromTopStep;
+	private BezierStep fromBottomStep;
+	private BezierStep toTopStep;
+	private BezierStep toBottomStep;
 
 	private boolean pointAtFrom;
 	private boolean pointAtTo;
@@ -40,8 +41,11 @@ public class Arrow implements Actor
 
 	private ArrayList<ShapeStep> steps;
 
+	private Random random;
+
 	public Arrow(Actor from, boolean pointAtFrom, Actor to, boolean pointAtTo, Format format)
 	{
+		this.random = new Random();
 		this.nickname = Names.make(getClass());
 		this.pointAtFrom = pointAtFrom;
 		this.pointAtTo = pointAtTo;
@@ -52,16 +56,16 @@ public class Arrow implements Actor
 		steps.add(mainStep);
 		if (pointAtFrom)
 		{
-			fromTopStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+			fromTopStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 			steps.add(fromTopStep);
-			fromBottomStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+			fromBottomStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 			steps.add(fromBottomStep);
 		}
 		if (pointAtTo)
 		{
-			toTopStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+			toTopStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 			steps.add(toTopStep);
-			toBottomStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+			toBottomStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 			steps.add(toBottomStep);
 		}
 	}
@@ -74,17 +78,25 @@ public class Arrow implements Actor
 	private void computePoints(Context context, double fraction)
 	{
 		points = computer.compute();
-		mainStep.setPoints(points.main);
+		mainStep.setBezier(chooseBezier(points.main));
 		if (pointAtFrom)
 		{
-			fromTopStep.setPoints(points.fromTop);
-			fromBottomStep.setPoints(points.fromBottom);
+			fromTopStep.setBezier(new Bezier(points.fromTop));
+			fromBottomStep.setBezier(new Bezier(points.fromBottom));
 		}
 		if (pointAtTo)
 		{
-			toTopStep.setPoints(points.toTop);
-			toBottomStep.setPoints(points.toBottom);
+			toTopStep.setBezier(new Bezier(points.toTop));
+			toBottomStep.setBezier(new Bezier(points.toBottom));
 		}
+	}
+	
+	public Bezier chooseBezier(PointPair points)
+	{
+		return new Bezier(
+				points.from, points.along(random.nextDouble()).jiggle(random, 1d, 10),
+				points.along(random.nextDouble()).jiggle(random, 1d, 10), points.to
+		);
 	}
 
 	@Override

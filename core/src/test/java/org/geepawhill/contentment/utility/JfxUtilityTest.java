@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.utility;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
@@ -10,7 +9,6 @@ import org.junit.Test;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.text.Text;
 
 public class JfxUtilityTest
