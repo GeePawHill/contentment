@@ -6,6 +6,7 @@ import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AddNodeStep;
+import org.geepawhill.contentment.step.BezierStep;
 import org.geepawhill.contentment.step.BoundsStep;
 import org.geepawhill.contentment.step.HandStep;
 import org.geepawhill.contentment.step.LettersStep;
@@ -27,10 +28,10 @@ public class LabelBox implements Actor
 
 	private Point center;
 
-	private HandStep northStep;
-	private HandStep southStep;
-	private HandStep westStep;
-	private HandStep eastStep;
+	private BezierStep northStep;
+	private BezierStep southStep;
+	private BezierStep westStep;
+	private BezierStep eastStep;
 	private LettersStep lettersStep;
 
 	public LabelBox(String source, Point center, Format format)
@@ -40,10 +41,10 @@ public class LabelBox implements Actor
 		this.source = source;
 		this.group = new Group();
 		lettersStep = new LettersStep(Timing.weighted(.6d), source, center, format);
-		northStep = new HandStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		westStep = new HandStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		southStep = new HandStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		eastStep = new HandStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		northStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		westStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		southStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		eastStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 	}
 
 	public String nickname()
