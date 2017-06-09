@@ -3,12 +3,13 @@ package org.geepawhill.contentment.actors;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AddNodeStep;
+import org.geepawhill.contentment.step.BezierStep;
 import org.geepawhill.contentment.step.BoundsStep;
 import org.geepawhill.contentment.step.LettersStep;
-import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
@@ -21,10 +22,10 @@ public class TargetBox implements Actor
 	
 	private final Group group;
 
-	private StrokeStep northStep;
-	private StrokeStep southStep;
-	private StrokeStep westStep;
-	private StrokeStep eastStep;
+	private BezierStep northStep;
+	private BezierStep southStep;
+	private BezierStep westStep;
+	private BezierStep eastStep;
 	private LettersStep lettersStep;
 
 	public TargetBox(String source, Point center, Format format)
@@ -33,10 +34,10 @@ public class TargetBox implements Actor
 		this.source = source;
 		this.group = new Group();
 		lettersStep = new LettersStep(Timing.weighted(.6d), source, center, format);
-		northStep = new StrokeStep(Timing.weighted(.1d),new PointPair(0d,0d,0d,0d),format);
-		westStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d,0d,0d,0d),format);
-		southStep = new StrokeStep(Timing.weighted(.1d),new PointPair(0d,0d,0d,0d),format);
-		eastStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d,0d,0d,0d),format);
+		northStep = new BezierStep(Timing.weighted(.1d),new PointPair(0d,0d,0d,0d),format);
+		westStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d,0d,0d,0d),format);
+		southStep = new BezierStep(Timing.weighted(.1d),new PointPair(0d,0d,0d,0d),format);
+		eastStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d,0d,0d,0d),format);
 	}
 	
 	public String nickname()
@@ -47,10 +48,10 @@ public class TargetBox implements Actor
 	private void boundsChanged(PointPair pair)
 	{
 		PointPair grow = pair.change(4d,4d,300d,300d);
-		northStep.setPoints(grow.northLine());
-		westStep.setPoints(grow.westLine());
-		southStep.setPoints(grow.southLine());
-		eastStep.setPoints(grow.eastLine());
+		northStep.setBezier(new Bezier(grow.northLine()));
+		westStep.setBezier(new Bezier(grow.westLine()));
+		southStep.setBezier(new Bezier(grow.southLine()));
+		eastStep.setBezier(new Bezier(grow.eastLine()));
 	}
 	
 	@Override

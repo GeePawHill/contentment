@@ -3,12 +3,13 @@ package org.geepawhill.contentment.actors;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AddNodeStep;
+import org.geepawhill.contentment.step.BezierStep;
 import org.geepawhill.contentment.step.BoundsStep;
 import org.geepawhill.contentment.step.LettersStep;
-import org.geepawhill.contentment.step.StrokeStep;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
@@ -27,10 +28,10 @@ public class Placeholder implements Actor
 
 	private PointPair bounds;
 
-	private StrokeStep northStep;
-	private StrokeStep southStep;
-	private StrokeStep westStep;
-	private StrokeStep eastStep;
+	private BezierStep northStep;
+	private BezierStep southStep;
+	private BezierStep westStep;
+	private BezierStep eastStep;
 	private Format format;
 	private LettersStep lettersStep;
 
@@ -47,10 +48,10 @@ public class Placeholder implements Actor
 		this.bounds = bounds;
 		this.source = source;
 		lettersStep = new LettersStep(Timing.weighted(.6d), source, bounds.grow(-32d).north(), format);
-		northStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		westStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		southStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		eastStep = new StrokeStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		northStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		westStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		southStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		eastStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
 		this.group = new Group();
 	}
 
@@ -61,10 +62,10 @@ public class Placeholder implements Actor
 
 	private void boundsChanged(PointPair pair)
 	{
-		northStep.setPoints(bounds.northLine());
-		westStep.setPoints(bounds.westLine());
-		southStep.setPoints(bounds.southLine());
-		eastStep.setPoints(bounds.eastLine());
+		northStep.setBezier(new Bezier(bounds.northLine()));
+		westStep.setBezier(new Bezier(bounds.westLine()));
+		southStep.setBezier(new Bezier(bounds.southLine()));
+		eastStep.setBezier(new Bezier(bounds.eastLine()));
 	}
 
 	@Override
