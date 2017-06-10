@@ -11,7 +11,7 @@ public class Context
 	public final Actors actors;
 	public final Group canvas;
 	private boolean skippingDelays;
-	
+
 	private ContextInterpolator after;
 
 	public Context(Group canvas)
@@ -20,7 +20,7 @@ public class Context
 		this.actors = new Actors();
 		this.skipDelays(false);
 	}
-	
+
 	public void skipDelays(boolean yesOrNo)
 	{
 		skippingDelays = yesOrNo;
@@ -30,7 +30,7 @@ public class Context
 	{
 		return skippingDelays;
 	}
-	
+
 	public void add(Actor actor)
 	{
 		actors.add(actor);
@@ -48,23 +48,21 @@ public class Context
 		}
 		actors.remove(actor);
 	}
-	
+
 	public void setAfter(ContextInterpolator source)
 	{
 		after = source;
 	}
-	
+
 	public void clearAfter()
 	{
-		after=null;
+		after = null;
 	}
-	
+
 	public ContextInterpolator wrap(ContextInterpolator source)
 	{
-		if(after==null) return source;
-		return new ParallelInterpolator(source,after);
+		if (after == null) return source;
+		return new ParallelInterpolator(source, after);
 	}
-	
-
 
 }

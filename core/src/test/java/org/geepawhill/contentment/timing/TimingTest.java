@@ -29,10 +29,9 @@ public class TimingTest
 	@Test
 	public void constructors()
 	{
-		assertWeighted(weighted20,20d);
+		assertWeighted(weighted20, 20d);
 		assertFixed(fixed80, 80d);
 	}
-
 
 	@Test(expected = RuntimeException.class)
 	public void weightedThrowsOnGetIfUnset()
@@ -67,21 +66,20 @@ public class TimingTest
 		assertEquals(60d, weighted20.ms(), 0.1d);
 		assertEquals(240d, wieghted80.ms(), 0.1d);
 	}
-	
+
 	@Test
 	public void fixedAndWeightedCoexist()
 	{
-		assertEquals(300d, scheduler.schedule(300d, fixed80,fixed20,weighted20, wieghted80), 0.1d);
+		assertEquals(300d, scheduler.schedule(300d, fixed80, fixed20, weighted20, wieghted80), 0.1d);
 		assertEquals(40d, weighted20.ms(), 0.1d);
 		assertEquals(160d, wieghted80.ms(), 0.1d);
 	}
-	
+
 	@Test
 	public void fixedWithZeroJustSums()
 	{
-		assertEquals(100d, scheduler.schedule(0d, fixed80,fixed20), 0.1d);
+		assertEquals(100d, scheduler.schedule(0d, fixed80, fixed20), 0.1d);
 	}
-
 
 	@Test
 	public void throwsIfFixedTooBig()
@@ -96,7 +94,7 @@ public class TimingTest
 			assertEquals(Scheduler.ABSOLUTE_OVERRUN, e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void throwsIfRelativesButZeroTotal()
 	{
@@ -110,14 +108,14 @@ public class TimingTest
 			assertEquals(Scheduler.RELATIVES_BUT_NO_TOTAL, e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void weightedsGetMinimumTime()
 	{
-		scheduler.schedule(80d, fixed80,weighted20);
+		scheduler.schedule(80d, fixed80, weighted20);
 		assertThat(weighted20.ms()).isEqualTo(.1d);
 	}
-	
+
 	private void assertFixed(Timing timing, double expected)
 	{
 		assertThat(timing.isWeighted()).isFalse();

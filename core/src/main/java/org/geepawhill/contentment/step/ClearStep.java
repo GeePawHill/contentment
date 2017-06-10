@@ -8,14 +8,14 @@ import org.geepawhill.contentment.timing.Timing;
 
 public class ClearStep implements Step
 {
-	
+
 	private Actors actors = new Actors();
 
 	public ClearStep()
 	{
 		actors = new Actors();
 	}
-	
+
 	@Override
 	public Timing timing()
 	{
@@ -27,7 +27,7 @@ public class ClearStep implements Step
 	{
 		actors.clear();
 		actors.addAll(context.actors);
-		for(Actor actor : actors)
+		for (Actor actor : actors)
 		{
 			context.remove(actor);
 		}
@@ -36,7 +36,7 @@ public class ClearStep implements Step
 	@Override
 	public void undo(Context context)
 	{
-		for(Actor actor : actors)
+		for (Actor actor : actors)
 		{
 			context.add(actor);
 		}
@@ -49,7 +49,7 @@ public class ClearStep implements Step
 		fast(context);
 		onFinished.run();
 	}
-	
+
 	@Override
 	public String toString()
 	{

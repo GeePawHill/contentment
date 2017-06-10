@@ -7,7 +7,7 @@ import org.geepawhill.contentment.timing.Timing;
 
 public class EntranceStep implements Step
 {
-	
+
 	private Actor actor;
 
 	public EntranceStep(Actor actor)
@@ -20,11 +20,11 @@ public class EntranceStep implements Step
 	{
 		context.remove(actor);
 	}
-	
+
 	@Override
 	public String toString()
 	{
-		return "Entrance: "+actor.nickname();
+		return "Entrance: " + actor.nickname();
 	}
 
 	@Override

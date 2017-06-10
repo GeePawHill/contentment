@@ -32,7 +32,7 @@ public class TypeFace
 		};
 		return new Style(FACE, applier, font.getFamily() + " " + font.getSize());
 	}
-	
+
 	public static Style smallHand()
 	{
 		return font("SmallHand", new Font("Buxton Sketch", 22d), 1d, 1d);
@@ -50,43 +50,43 @@ public class TypeFace
 
 	public static Style mediumSans()
 	{
-		return font("MediumSans", new Font("Arial",30d), 1d, .8d);
+		return font("MediumSans", new Font("Arial", 30d), 1d, .8d);
 	}
 
 	public static Style smallSans()
 	{
-		return font("SmallSans", new Font("Arial",15d), 1d, .8d);
+		return font("SmallSans", new Font("Arial", 15d), 1d, .8d);
 	}
 
 	public static Style smallFixed()
 	{
-		return font("SmallFixed",new Font("Consolas",15d),1d,1d);
+		return font("SmallFixed", new Font("Consolas", 15d), 1d, 1d);
 	}
 
-
-	public static Style color(String nickname,Paint both, Double opacity)
+	public static Style color(String nickname, Paint both, Double opacity)
 	{
-		return TypeFace.color(nickname,both,both,opacity);
+		return TypeFace.color(nickname, both, both, opacity);
 	}
 
-	public static Style color(String nickname,Paint stroke, Paint fill, Double opacity)
+	public static Style color(String nickname, Paint stroke, Paint fill, Double opacity)
 	{
-		StyleApplier applier = new StyleApplier() {
+		StyleApplier applier = new StyleApplier()
+		{
 			@Override
 			public void apply(Shape shape)
 			{
 				shape.setStroke(stroke);
 				shape.setFill(fill);
 				shape.setOpacity(opacity);
-			} 
+			}
 		};
-		String value = "Stroke: "+stroke.toString()+" Fill: "+fill.toString()+" Opacity: "+opacity;
+		String value = "Stroke: " + stroke.toString() + " Fill: " + fill.toString() + " Opacity: " + opacity;
 		return new Style(COLOR, applier, value);
-		
+
 	}
 
 	public static Style white()
 	{
-		return color("White",Color.WHITE,1d);
+		return color("White", Color.WHITE, 1d);
 	}
 }

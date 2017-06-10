@@ -22,10 +22,10 @@ public class AddNodeStep implements Step
 	{
 		this(group, step.shape());
 	}
-	
+
 	public AddNodeStep(Actor actor, Node node)
 	{
-		this(actor.group(),node);
+		this(actor.group(), node);
 	}
 
 	public AddNodeStep(Group group, Node node)

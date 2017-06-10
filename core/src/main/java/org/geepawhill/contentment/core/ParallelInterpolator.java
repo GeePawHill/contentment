@@ -16,7 +16,7 @@ public class ParallelInterpolator implements ContextInterpolator
 	public void interpolate(Context context, double fraction)
 	{
 		source.interpolate(context, fraction);
-		after.interpolate(context,fraction);
+		after.interpolate(context, fraction);
 	}
 
 }

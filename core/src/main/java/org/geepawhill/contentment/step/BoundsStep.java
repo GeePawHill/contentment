@@ -10,16 +10,16 @@ import javafx.scene.Node;
 
 public class BoundsStep implements Step
 {
-	
+
 	private Node source;
 	private PointPairConsumer onCollected;
-	
-	public BoundsStep(ShapeStep step,PointPairConsumer onCollected)
+
+	public BoundsStep(ShapeStep step, PointPairConsumer onCollected)
 	{
-		this(step.shape(),onCollected);
+		this(step.shape(), onCollected);
 	}
 
-	public BoundsStep(Node source,PointPairConsumer onCollected)
+	public BoundsStep(Node source, PointPairConsumer onCollected)
 	{
 		this.source = source;
 		this.onCollected = onCollected;
@@ -48,7 +48,7 @@ public class BoundsStep implements Step
 	{
 		return Timing.instant();
 	}
-	
+
 	@Override
 	public String toString()
 	{

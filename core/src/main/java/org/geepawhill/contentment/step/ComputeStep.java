@@ -7,13 +7,13 @@ import org.geepawhill.contentment.timing.Timing;
 
 public class ComputeStep implements Step
 {
-	
+
 	private ContextInterpolator interpolator;
 
 	public ComputeStep(ContextInterpolator interpolator)
 	{
 		this.interpolator = interpolator;
-		
+
 	}
 
 	@Override

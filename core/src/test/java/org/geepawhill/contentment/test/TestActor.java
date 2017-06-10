@@ -5,8 +5,9 @@ import org.geepawhill.contentment.core.Sequence;
 
 import javafx.scene.Group;
 
-public class TestActor implements Actor {
-	
+public class TestActor implements Actor
+{
+
 	public final Group group;
 
 	public TestActor()
@@ -31,5 +32,5 @@ public class TestActor implements Actor {
 	{
 		return new Sequence();
 	}
-	
+
 }

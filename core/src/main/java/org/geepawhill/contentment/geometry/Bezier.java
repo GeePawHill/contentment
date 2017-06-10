@@ -6,17 +6,17 @@ public class Bezier
 	public final Point handle1;
 	public final Point handle2;
 	public final Point end;
-	
+
 	public Bezier(PointPair points)
 	{
-		this(points.from,points.to);
+		this(points.from, points.to);
 	}
 
 	public Bezier(Point start, Point end)
 	{
-		PointPair pair = new PointPair(start,end);
-		this.handle1 = pair.along(1d/3d);
-		this.handle2 = pair.along(2d/3d);
+		PointPair pair = new PointPair(start, end);
+		this.handle1 = pair.along(1d / 3d);
+		this.handle2 = pair.along(2d / 3d);
 		this.start = start;
 		this.end = end;
 	}

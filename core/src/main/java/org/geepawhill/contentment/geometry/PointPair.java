@@ -7,7 +7,7 @@ public class PointPair
 {
 	public final Point from;
 	public final Point to;
-	
+
 	public PointPair(Point from, Point to)
 	{
 		this.from = from;
@@ -132,70 +132,68 @@ public class PointPair
 
 	public PointPair grow(double delta)
 	{
-		return grow(delta,delta);
+		return grow(delta, delta);
 	}
-	
-	public PointPair grow(double deltaX,double deltaY)
+
+	public PointPair grow(double deltaX, double deltaY)
 	{
-		return new PointPair(from.x-deltaX,from.y-deltaY,to.x+deltaX,to.y+deltaY);
+		return new PointPair(from.x - deltaX, from.y - deltaY, to.x + deltaX, to.y + deltaY);
 	}
-	
-	public PointPair change(double deltaLeft,double deltaTop,double deltaRight,double deltaBottom)
+
+	public PointPair change(double deltaLeft, double deltaTop, double deltaRight, double deltaBottom)
 	{
-		return new PointPair(from.x-deltaLeft,from.y-deltaTop,to.x+deltaRight,to.y+deltaBottom);
+		return new PointPair(from.x - deltaLeft, from.y - deltaTop, to.x + deltaRight, to.y + deltaBottom);
 	}
 
 	public double width()
 	{
-		return to.x-from.x;
+		return to.x - from.x;
 	}
-	
+
 	public double height()
 	{
-		return to.y-from.y;
+		return to.y - from.y;
 	}
 
 	public PointPair northLine()
 	{
-		return new PointPair(from.x,from.y,to.x,from.y);
+		return new PointPair(from.x, from.y, to.x, from.y);
 	}
 
 	public PointPair southLine()
 	{
-		return new PointPair(from.x,to.y,to.x,to.y);
+		return new PointPair(from.x, to.y, to.x, to.y);
 	}
 
 	public PointPair eastLine()
 	{
-		return new PointPair(to.x,from.y,to.x,to.y);
+		return new PointPair(to.x, from.y, to.x, to.y);
 	}
 
 	public PointPair westLine()
 	{
-		return new PointPair(from.x,from.y,from.x,to.y);
+		return new PointPair(from.x, from.y, from.x, to.y);
 	}
 
 	public PointPair canonical()
 	{
-		double newFromX = from.x>to.x ? to.x : from.x;
-		double newToX = from.x>to.x ? from.x : to.x;
-		double newFromY = from.y>to.y ? to.y : from.y;
-		double newToY = from.y>to.y ? from.y : to.y;
-		return new PointPair(newFromX,newFromY,newToX,newToY);
-	}
-	
-	public String toString()
-	{
-		return from.toString()+" "+to.toString();
+		double newFromX = from.x > to.x ? to.x : from.x;
+		double newToX = from.x > to.x ? from.x : to.x;
+		double newFromY = from.y > to.y ? to.y : from.y;
+		double newToY = from.y > to.y ? from.y : to.y;
+		return new PointPair(newFromX, newFromY, newToX, newToY);
 	}
 
+	public String toString()
+	{
+		return from.toString() + " " + to.toString();
+	}
 
 	public static PointPair centerAt(Point center, double width, double height)
 	{
-		Point from = new Point(center.x-width/2d,center.y-height/2d);
-		Point to = new Point(center.x+width/2d,center.y+height/2d);
-		return new PointPair(from,to);
+		Point from = new Point(center.x - width / 2d, center.y - height / 2d);
+		Point to = new Point(center.x + width / 2d, center.y + height / 2d);
+		return new PointPair(from, to);
 	}
-
 
 }

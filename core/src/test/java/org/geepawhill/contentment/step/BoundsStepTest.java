@@ -19,10 +19,10 @@ public class BoundsStepTest extends JavaFxTest
 	@Before
 	public void before()
 	{
-		rectangle = new Rectangle(100d,300d,500d,700d);
-		step = new BoundsStep(rectangle,this::collectBounds);
+		rectangle = new Rectangle(100d, 300d, 500d, 700d);
+		step = new BoundsStep(rectangle, this::collectBounds);
 	}
-	
+
 	public void collectBounds(PointPair result)
 	{
 		this.result = result;
@@ -32,13 +32,13 @@ public class BoundsStepTest extends JavaFxTest
 	public void slowCalls()
 	{
 		runner.slow(step);
-		assertThat(result.from).isEqualTo(new Point(100d,300d));
+		assertThat(result.from).isEqualTo(new Point(100d, 300d));
 	}
-	
+
 	@Test
 	public void fastCalls()
 	{
 		runner.fast(step);
-		assertThat(result.from).isEqualTo(new Point(100d,300d));
+		assertThat(result.from).isEqualTo(new Point(100d, 300d));
 	}
 }

@@ -28,7 +28,7 @@ public class CueStep implements Step
 	{
 		return Timing.instant();
 	}
-	
+
 	@Override
 	public String toString()
 	{

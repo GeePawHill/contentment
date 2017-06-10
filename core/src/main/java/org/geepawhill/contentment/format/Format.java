@@ -8,23 +8,23 @@ import javafx.scene.shape.Shape;
 
 public class Format
 {
-	private final HashMap<String,Style> overrides;
+	private final HashMap<String, Style> overrides;
 	public final String nickname;
 	public final Format base;
-	
+
 	public Format(Style... styles)
 	{
-		this(Names.make("Unspecified"+Format.class.getName()),styles);
+		this(Names.make("Unspecified" + Format.class.getName()), styles);
 	}
-	
+
 	public Format(Format base, Style... styles)
 	{
-		this(Names.make("Unspecified"+Format.class.getName()),base,styles);
+		this(Names.make("Unspecified" + Format.class.getName()), base, styles);
 	}
-	
-	public Format(String name,Style... styles)
+
+	public Format(String name, Style... styles)
 	{
-		this(name,null,styles);
+		this(name, null, styles);
 	}
 
 	public Format(String name, Format base, Style... styles)
@@ -32,16 +32,17 @@ public class Format
 		this.nickname = name;
 		this.base = base;
 		this.overrides = new HashMap<>();
-		for(Style style : styles) put(style);
+		for (Style style : styles)
+			put(style);
 	}
 
 	public Style find(String key)
 	{
 		Format candidate = this;
-		while(candidate!=null)
+		while (candidate != null)
 		{
 			Style result = candidate.overrides.get(key);
-			if(result!=null) return result;
+			if (result != null) return result;
 			candidate = candidate.base;
 		}
 		return null;
@@ -55,11 +56,11 @@ public class Format
 	public Style require(String key)
 	{
 		Style result = find(key);
-		if(result!=null) return result;
-		throw new MissingFormatException(key,nickname);
+		if (result != null) return result;
+		throw new MissingFormatException(key, nickname);
 	}
 
-	public void apply(String key, Shape	shape)
+	public void apply(String key, Shape shape)
 	{
 		require(key).apply(shape);
 	}

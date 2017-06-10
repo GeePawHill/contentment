@@ -45,10 +45,10 @@ public class JavaFxRunner
 		};
 		actLater(action);
 	}
-	
+
 	public void undo(Sequence sequence)
 	{
-		for(int s= sequence.size()-1; s>=0; s--)
+		for (int s = sequence.size() - 1; s >= 0; s--)
 		{
 			undo(sequence.get(s));
 		}

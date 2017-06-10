@@ -9,19 +9,19 @@ import javafx.scene.text.Text;
 
 public class ChangeCenteredTextStep implements Step
 {
-	
+
 	private Text text;
 	private String source;
 	private String oldSource;
-	
+
 	private PointPair points;
-	
+
 	public ChangeCenteredTextStep(Text text, String source, PointPair points)
 	{
 		this.text = text;
 		this.source = source;
 		this.points = points;
-		this.oldSource ="";
+		this.oldSource = "";
 	}
 
 	@Override
@@ -34,9 +34,9 @@ public class ChangeCenteredTextStep implements Step
 	@Override
 	public void fast(Context context)
 	{
-		oldSource =text.getText();
+		oldSource = text.getText();
 		text.setText(source);
-		text.setX(points.centerX()-text.getBoundsInLocal().getWidth() / 2d);
+		text.setX(points.centerX() - text.getBoundsInLocal().getWidth() / 2d);
 		text.setY(points.centerY());
 	}
 
@@ -52,11 +52,11 @@ public class ChangeCenteredTextStep implements Step
 	{
 		return Timing.instant();
 	}
-	
+
 	@Override
 	public String toString()
 	{
-		return "ChangeCenteredTextStep: "+source;
+		return "ChangeCenteredTextStep: " + source;
 	}
 
 }

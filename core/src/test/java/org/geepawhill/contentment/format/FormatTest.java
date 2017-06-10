@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class FormatTest
 {
-	
+
 	private Format base;
 	private Style style;
 	private String key;
@@ -21,8 +21,8 @@ public class FormatTest
 		base = new Format("Base");
 		key = style.key();
 	}
-	
-	@Test(expected=MissingFormatException.class)
+
+	@Test(expected = MissingFormatException.class)
 	public void throwsOnMissingStyle()
 	{
 		base.require(key);
@@ -33,21 +33,21 @@ public class FormatTest
 	{
 		assertNull(base.find(key));
 		base.put(style);
-		assertEquals(style,base.find(Frames.KEY));
+		assertEquals(style, base.find(Frames.KEY));
 	}
-	
+
 	@Test
 	public void hasBase()
 	{
-		Format derived = new Format("Derived",base);
-		assertEquals(base,derived.base);
+		Format derived = new Format("Derived", base);
+		assertEquals(base, derived.base);
 	}
-	
+
 	@Test
 	public void findsInBase()
 	{
 		base.put(style);
-		Format derived = new Format("Derived",base);
-		assertEquals(style,derived.find(key));
+		Format derived = new Format("Derived", base);
+		assertEquals(style, derived.find(key));
 	}
 }

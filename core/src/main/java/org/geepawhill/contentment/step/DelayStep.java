@@ -44,7 +44,7 @@ public class DelayStep implements Step
 	{
 		return timing;
 	}
-	
+
 	public void interpolate(Context context, double fraction)
 	{
 		System.out.println(fraction);

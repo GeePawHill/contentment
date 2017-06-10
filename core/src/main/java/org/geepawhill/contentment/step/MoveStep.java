@@ -38,9 +38,7 @@ public class MoveStep implements Step
 	{
 		translate = getOrAddTranslate(actor);
 		Point start = new PointPair(actor.group().getBoundsInLocal()).from;
-		translation = new PointPair(
-				translate.getX(),translate.getY(),
-				destination.x-start.x,destination.y-start.y);
+		translation = new PointPair(translate.getX(), translate.getY(), destination.x - start.x, destination.y - start.y);
 	}
 
 	public Translate getOrAddTranslate(Actor actor)

@@ -17,7 +17,7 @@ public class ComputeStepTest extends JavaFxTest
 	{
 		step = new ComputeStep(this::compute);
 	}
-	
+
 	public void compute(Context context, double fraction)
 	{
 		this.result = true;
@@ -29,7 +29,7 @@ public class ComputeStepTest extends JavaFxTest
 		runner.slow(step);
 		assertThat(result).isTrue();
 	}
-	
+
 	@Test
 	public void fastCalls()
 	{

@@ -33,7 +33,7 @@ public class NamesTest
 	{
 		assertEquals("String_1", Names.make(String.class));
 	}
-	
+
 	@Test
 	public void reset()
 	{

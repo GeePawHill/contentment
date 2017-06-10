@@ -16,17 +16,17 @@ public class ColorChangerTest extends JavaFxTest
 	private Line line;
 	private Text text;
 	private ColorChanger changer;
-	
+
 	@Before
 	public void before()
 	{
-		line = new Line(0d,0d,100d,100d);
+		line = new Line(0d, 0d, 100d, 100d);
 		line.setStroke(Color.RED);
 		line.setFill(Color.RED);
 		text = new Text();
 		text.setStroke(Color.RED);
 		text.setFill(Color.RED);
-		
+
 	}
 
 	@Test
@@ -38,7 +38,7 @@ public class ColorChangerTest extends JavaFxTest
 		assertThat(line.getFill()).isEqualTo(Color.RED);
 		assertThat(changer.result).isEqualTo(Color.RED);
 	}
-	
+
 	@Test
 	public void changesFillOnText()
 	{

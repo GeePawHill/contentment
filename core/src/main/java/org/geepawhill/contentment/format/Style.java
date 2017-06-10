@@ -5,7 +5,7 @@ import javafx.scene.shape.Shape;
 public class Style
 {
 	private final StyleApplier applier;
-	
+
 	private final String key;
 	private final String value;
 
@@ -19,14 +19,14 @@ public class Style
 	@Override
 	public String toString()
 	{
-		return key+" ("+value+")";
+		return key + " (" + value + ")";
 	}
 
 	public void apply(Shape shape)
 	{
 		applier.apply(shape);
 	}
-	
+
 	public String key()
 	{
 		return key;

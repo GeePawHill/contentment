@@ -44,7 +44,7 @@ public class LettersStep implements ShapeStep
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		new Animator().play(context,onFinished,timing.ms(),this::interpolate);
+		new Animator().play(context, onFinished, timing.ms(), this::interpolate);
 	}
 
 	@Override
@@ -67,10 +67,10 @@ public class LettersStep implements ShapeStep
 		text.setX(center.x - text.getBoundsInParent().getWidth() / 2d);
 		text.setY(center.y);
 	}
-	
+
 	public String toString()
 	{
-		return "Letters: "+source;
+		return "Letters: " + source;
 	}
 
 	@Override

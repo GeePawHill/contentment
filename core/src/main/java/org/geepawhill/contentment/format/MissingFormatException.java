@@ -4,9 +4,9 @@ package org.geepawhill.contentment.format;
 public class MissingFormatException extends RuntimeException
 {
 
-	public MissingFormatException(String style,String format)
+	public MissingFormatException(String style, String format)
 	{
-		super("Missing format '"+style+"' in format: '"+format+"'.");
+		super("Missing format '" + style + "' in format: '" + format + "'.");
 	}
 
 }

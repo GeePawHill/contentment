@@ -9,17 +9,17 @@ import org.junit.Test;
 
 public class ClearStepTest extends JavaFxTest
 {
-	
+
 	private TestActor actor1;
 	private TestActor actor2;
 	private Sequence sequence;
-	
+
 	@Before
 	public void before()
 	{
 		actor1 = new TestActor();
 		actor2 = new TestActor();
-		sequence = new Sequence(new EntranceStep(actor1), new EntranceStep(actor2),new ClearStep());
+		sequence = new Sequence(new EntranceStep(actor1), new EntranceStep(actor2), new ClearStep());
 	}
 
 	@Test
@@ -29,7 +29,7 @@ public class ClearStepTest extends JavaFxTest
 		assertThat(runner.context.actors.contains(actor1)).isFalse();
 		assertThat(runner.context.canvas.getChildren()).doesNotContain(actor1.group);
 	}
-	
+
 	@Test
 	public void fastRemoves()
 	{
@@ -37,7 +37,7 @@ public class ClearStepTest extends JavaFxTest
 		assertThat(runner.context.actors.contains(actor1)).isFalse();
 		assertThat(runner.context.canvas.getChildren()).doesNotContain(actor1.group);
 	}
-	
+
 	@Test
 	public void undoAdds()
 	{

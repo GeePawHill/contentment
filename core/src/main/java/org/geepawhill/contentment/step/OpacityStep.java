@@ -24,12 +24,12 @@ public class OpacityStep implements Step
 	public void slow(Context context, OnFinished onFinished)
 	{
 		oldOpacity = actor.group().getOpacity();
-		new Animator().play(context,onFinished,timing.ms(),this::interpolate);
+		new Animator().play(context, onFinished, timing.ms(), this::interpolate);
 	}
 
 	public void interpolate(Context context, double fraction)
 	{
-		double newOpacity =  (oldOpacity+(fraction *(opacity-oldOpacity)));
+		double newOpacity = (oldOpacity + (fraction * (opacity - oldOpacity)));
 		actor.group().setOpacity(newOpacity);
 	}
 
@@ -37,7 +37,7 @@ public class OpacityStep implements Step
 	public void fast(Context context)
 	{
 		oldOpacity = actor.group().getOpacity();
-		interpolate(context,1d);
+		interpolate(context, 1d);
 	}
 
 	@Override

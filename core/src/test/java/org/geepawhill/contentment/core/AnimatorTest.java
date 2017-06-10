@@ -15,19 +15,18 @@ import org.testfx.framework.junit.ApplicationTest;
 @SuppressWarnings("unused")
 public class AnimatorTest extends JavaFxTest
 {
-	
-	ArrayList<Double> interpolatorCalls;
-	
-	@Rule
-    public RepeatRule repeatRule = new RepeatRule();
 
+	ArrayList<Double> interpolatorCalls;
+
+	@Rule
+	public RepeatRule repeatRule = new RepeatRule();
 
 	@Before
 	public void before()
 	{
 		interpolatorCalls = new ArrayList<>();
 	}
-	
+
 	@Test
 	public void animatorFinishesWithZeroTime()
 	{
@@ -35,8 +34,8 @@ public class AnimatorTest extends JavaFxTest
 		runner.play(animator, 0d, this::interpolator);
 		assertThat(interpolatorCalls).containsOnlyOnce(1d);
 	}
-	
-//	@Repeat(100)
+
+	// @Repeat(100)
 	@Test
 	public void animatorCallsInterpolatorOften()
 	{
@@ -46,7 +45,6 @@ public class AnimatorTest extends JavaFxTest
 		assertThat(interpolatorCalls.size()).isGreaterThan(1);
 	}
 
-	
 	public void interpolator(Context context, double fraction)
 	{
 		interpolatorCalls.add(fraction);

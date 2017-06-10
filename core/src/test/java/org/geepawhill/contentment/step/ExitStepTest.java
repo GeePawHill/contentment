@@ -9,10 +9,10 @@ import org.junit.Test;
 
 public class ExitStepTest extends JavaFxTest
 {
-	
+
 	private TestActor actor;
 	private Sequence sequence;
-	
+
 	@Before
 	public void before()
 	{
@@ -27,7 +27,7 @@ public class ExitStepTest extends JavaFxTest
 		assertThat(runner.context.actors.contains(actor)).isFalse();
 		assertThat(runner.context.canvas.getChildren()).doesNotContain(actor.group);
 	}
-	
+
 	@Test
 	public void fastRemoves()
 	{
@@ -35,7 +35,7 @@ public class ExitStepTest extends JavaFxTest
 		assertThat(runner.context.actors.contains(actor)).isFalse();
 		assertThat(runner.context.canvas.getChildren()).doesNotContain(actor.group);
 	}
-	
+
 	@Test
 	public void undoAdds()
 	{

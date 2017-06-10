@@ -33,7 +33,7 @@ public class ColorChangeStep implements Step
 	{
 		old = changeColor(paint);
 	}
-	
+
 	private Paint changeColor(Paint paint)
 	{
 		ColorChanger colorChanger = new ColorChanger(paint);

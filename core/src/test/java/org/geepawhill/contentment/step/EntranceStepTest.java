@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class EntranceStepTest extends JavaFxTest
 {
-	
+
 	private TestActor actor;
 	private Sequence sequence;
 
@@ -27,7 +27,7 @@ public class EntranceStepTest extends JavaFxTest
 		assertThat(runner.context.actors.contains(actor)).isTrue();
 		assertThat(runner.context.canvas.getChildren()).contains(actor.group);
 	}
-	
+
 	@Test
 	public void fastAdds()
 	{
@@ -35,7 +35,7 @@ public class EntranceStepTest extends JavaFxTest
 		assertThat(runner.context.actors.contains(actor)).isTrue();
 		assertThat(runner.context.canvas.getChildren()).contains(actor.group);
 	}
-	
+
 	@Test
 	public void undoRemoves()
 	{

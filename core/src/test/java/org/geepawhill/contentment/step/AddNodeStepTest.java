@@ -11,7 +11,7 @@ import javafx.scene.text.Text;
 
 public class AddNodeStepTest extends JavaFxTest
 {
-	
+
 	private TestActor actor;
 	private Sequence sequence;
 	private Text text;
@@ -21,7 +21,7 @@ public class AddNodeStepTest extends JavaFxTest
 	{
 		actor = new TestActor();
 		text = new Text();
-		sequence = new Sequence(new EntranceStep(actor), new AddNodeStep(actor,text));
+		sequence = new Sequence(new EntranceStep(actor), new AddNodeStep(actor, text));
 	}
 
 	@Test
@@ -30,14 +30,14 @@ public class AddNodeStepTest extends JavaFxTest
 		runner.slow(sequence);
 		assertThat(actor.group.getChildren()).contains(text);
 	}
-	
+
 	@Test
 	public void fastAdds()
 	{
 		runner.fast(sequence);
 		assertThat(actor.group.getChildren()).contains(text);
 	}
-	
+
 	@Test
 	public void undoRemoves()
 	{

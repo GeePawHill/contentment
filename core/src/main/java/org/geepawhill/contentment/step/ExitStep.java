@@ -7,7 +7,7 @@ import org.geepawhill.contentment.timing.Timing;
 
 public class ExitStep implements Step
 {
-	
+
 	private Actor actor;
 
 	public ExitStep(Actor actor)
@@ -20,11 +20,11 @@ public class ExitStep implements Step
 	{
 		context.add(actor);
 	}
-	
+
 	@Override
 	public String toString()
 	{
-		return "Exit: "+actor.nickname();
+		return "Exit: " + actor.nickname();
 	}
 
 	@Override
@@ -45,6 +45,5 @@ public class ExitStep implements Step
 	{
 		return Timing.instant();
 	}
-
 
 }

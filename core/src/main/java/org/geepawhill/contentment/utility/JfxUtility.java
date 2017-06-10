@@ -24,7 +24,7 @@ public class JfxUtility
 
 	public static boolean forEachDescendant(Node node, NodeProcessor processor)
 	{
-		if(!processor.accept(node)) return false;
+		if (!processor.accept(node)) return false;
 		if (node instanceof Parent)
 		{
 			Parent parent = (Parent) node;

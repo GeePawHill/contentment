@@ -5,9 +5,9 @@ import java.util.Iterator;
 
 public class Actors implements Iterable<Actor>
 {
-	
+
 	private ArrayList<Actor> items;
-	
+
 	public Actors()
 	{
 		items = new ArrayList<>();
@@ -17,17 +17,17 @@ public class Actors implements Iterable<Actor>
 	{
 		return items.size();
 	}
-	
+
 	public void add(Actor actor)
 	{
 		items.add(actor);
 	}
-	
+
 	public void remove(Actor actor)
 	{
 		items.remove(actor);
 	}
-	
+
 	public Actor get(int i)
 	{
 		return items.get(i);
@@ -48,7 +48,7 @@ public class Actors implements Iterable<Actor>
 	{
 		items.clear();
 	}
-	
+
 	public boolean contains(Actor actor)
 	{
 		return items.contains(actor);
