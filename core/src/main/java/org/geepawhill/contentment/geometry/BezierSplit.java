@@ -38,7 +38,6 @@ public class BezierSplit
 	{
 		double oneMinusT = 1d - fraction;
 		return new Point(oneMinusT * first.x + fraction * second.x, oneMinusT * first.y + fraction * second.y);
-
 	}
 
 	public void setPathOnBefore(Path path)

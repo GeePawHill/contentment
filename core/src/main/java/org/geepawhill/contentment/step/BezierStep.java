@@ -73,7 +73,7 @@ public class BezierStep implements ShapeStep
 	{
 		format.apply(Frames.KEY, path);
 		split = new BezierSplit(fraction, split.bezier);
-		split.setPathOnBefore(path);
+		split.setPathToBefore(path);
 	}
 
 	@Override
