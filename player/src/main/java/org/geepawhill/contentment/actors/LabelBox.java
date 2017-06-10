@@ -40,10 +40,10 @@ public class LabelBox implements Actor
 		this.source = source;
 		this.group = new Group();
 		lettersStep = new LettersStep(Timing.weighted(.6d), source, center, format);
-		northStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
-		westStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
-		southStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
-		eastStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
+		northStep = new BezierStep(Timing.weighted(.1d), format);
+		westStep = new BezierStep(Timing.weighted(.1d), format);
+		southStep = new BezierStep(Timing.weighted(.1d), format);
+		eastStep = new BezierStep(Timing.weighted(.1d), format);
 	}
 
 	public String nickname()

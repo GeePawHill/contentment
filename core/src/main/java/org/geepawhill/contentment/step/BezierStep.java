@@ -20,10 +20,10 @@ public class BezierStep implements ShapeStep
 	public final Path path;
 	private final Format format;
 	private BezierSplit split;
-	
+
 	public BezierStep(Timing timing, Format format)
 	{
-		this(timing,format,new PointPair(0d,0d,0d,0d));
+		this(timing, format, new PointPair(0d, 0d, 0d, 0d));
 	}
 
 	public BezierStep(Timing timing, Format format, PointPair points)
@@ -31,13 +31,12 @@ public class BezierStep implements ShapeStep
 		this.timing = timing;
 		this.path = new Path();
 		this.format = format;
-		this.split = new BezierSplit(0d,new Bezier(points.from,points.to));
+		this.split = new BezierSplit(0d, new Bezier(points.from, points.to));
 	}
-	
+
 	public void changeBezier(Bezier bezier)
 	{
-		format.apply(Frames.KEY, path);
-		split = new BezierSplit(1d,bezier);
+		split = new BezierSplit(1d, bezier);
 	}
 
 	@Override
@@ -55,7 +54,7 @@ public class BezierStep implements ShapeStep
 	@Override
 	public void undo(Context context)
 	{
-		interpolate(context,0d);
+		interpolate(context, 0d);
 	}
 
 	@Override
@@ -72,14 +71,15 @@ public class BezierStep implements ShapeStep
 
 	private void interpolate(Context context, double fraction)
 	{
-		split = new BezierSplit(fraction,split.bezier);
+		format.apply(Frames.KEY, path);
+		split = new BezierSplit(fraction, split.bezier);
 		split.setPathOnBefore(path);
 	}
 
 	@Override
 	public String toString()
 	{
-		return "Bezier: "+split.bezier;
+		return "Bezier: " + split.bezier;
 	}
 
 	public Node node()

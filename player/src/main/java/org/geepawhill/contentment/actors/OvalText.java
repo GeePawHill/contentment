@@ -26,10 +26,9 @@ public class OvalText implements Actor
 	private LettersStep lettersStep;
 	private BezierStep eastStep;
 	private BezierStep westStep;
-	
+
 	private Jiggler controlJiggler;
 	private Jiggler northJiggler;
-
 
 	public OvalText(String source, Point center, Format format)
 	{
@@ -39,12 +38,11 @@ public class OvalText implements Actor
 		this.controlJiggler = new Jiggler(.4d, 30d);
 
 		lettersStep = new LettersStep(Timing.weighted(.6d), source, center, format);
-		eastStep = new BezierStep(Timing.weighted(.2d),format,new PointPair(0d,0d,0d,0d));
-		westStep = new BezierStep(Timing.weighted(.2d),format,new PointPair(0d,0d,0d,0d));
+		eastStep = new BezierStep(Timing.weighted(.2d), format);
+		westStep = new BezierStep(Timing.weighted(.2d), format);
 		this.group = new Group();
 	}
-	
-	
+
 	public String nickname()
 	{
 		return nickname;
@@ -52,7 +50,7 @@ public class OvalText implements Actor
 
 	private void boundsChanged(PointPair pair)
 	{
-		PointPair grow = pair.grow(45d,8d);
+		PointPair grow = pair.grow(45d, 8d);
 		eastStep.changeBezier(eastHalfPoints(grow));
 		westStep.changeBezier(westHalfPoints(grow));
 	}
@@ -67,34 +65,26 @@ public class OvalText implements Actor
 	public Sequence draw(double ms)
 	{
 		Sequence sequence = new Sequence();
-		sequence.add(new AddNodeStep(group,lettersStep));
+		sequence.add(new AddNodeStep(group, lettersStep));
 		sequence.add(lettersStep);
 		sequence.add(new BoundsStep(lettersStep, this::boundsChanged));
-		sequence.add(new AddNodeStep(group,eastStep));
+		sequence.add(new AddNodeStep(group, eastStep));
 		sequence.add(eastStep);
-		sequence.add(new AddNodeStep(group,westStep));
+		sequence.add(new AddNodeStep(group, westStep));
 		sequence.add(westStep);
 		return sequence.schedule(ms);
 	}
-	
+
 	private Bezier eastHalfPoints(PointPair points)
 	{
-		return new Bezier(
-				points.north(), 
-				controlJiggler.jiggle(points.northeast()),
-				controlJiggler.jiggle(points.southeast()), 
-				points.south()
-		);
+		return new Bezier(points.north(), controlJiggler.jiggle(points.northeast()), controlJiggler.jiggle(points.southeast()),
+				points.south());
 	}
 
 	public Bezier westHalfPoints(PointPair points)
 	{
-		return new Bezier(
-				points.south(), 
-				controlJiggler.jiggle(points.southwest()),
-				controlJiggler.jiggle(points.northwest()), 
-				northJiggler.jiggle(points.north())
-		);
+		return new Bezier(points.south(), controlJiggler.jiggle(points.southwest()), controlJiggler.jiggle(points.northwest()),
+				northJiggler.jiggle(points.north()));
 	}
 
 }

@@ -19,7 +19,7 @@ public class TargetBox implements Actor
 {
 	final String nickname;
 	final String source;
-	
+
 	private final Group group;
 
 	private BezierStep northStep;
@@ -34,12 +34,12 @@ public class TargetBox implements Actor
 		this.source = source;
 		this.group = new Group();
 		lettersStep = new LettersStep(Timing.weighted(.6d), source, center, format);
-		northStep = new BezierStep(Timing.weighted(.1d),format,new PointPair(0d,0d,0d,0d));
-		westStep = new BezierStep(Timing.weighted(.1d), format,new PointPair(0d,0d,0d,0d));
-		southStep = new BezierStep(Timing.weighted(.1d),format,new PointPair(0d,0d,0d,0d));
-		eastStep = new BezierStep(Timing.weighted(.1d), format,new PointPair(0d,0d,0d,0d));
+		northStep = new BezierStep(Timing.weighted(.1d), format);
+		westStep = new BezierStep(Timing.weighted(.1d), format);
+		southStep = new BezierStep(Timing.weighted(.1d), format);
+		eastStep = new BezierStep(Timing.weighted(.1d), format);
 	}
-	
+
 	public String nickname()
 	{
 		return nickname;
@@ -47,13 +47,13 @@ public class TargetBox implements Actor
 
 	private void boundsChanged(PointPair pair)
 	{
-		PointPair grow = pair.change(4d,4d,300d,300d);
+		PointPair grow = pair.change(4d, 4d, 300d, 300d);
 		northStep.changeBezier(new Bezier(grow.northLine()));
 		westStep.changeBezier(new Bezier(grow.westLine()));
 		southStep.changeBezier(new Bezier(grow.southLine()));
 		eastStep.changeBezier(new Bezier(grow.eastLine()));
 	}
-	
+
 	@Override
 	public Group group()
 	{
@@ -64,9 +64,9 @@ public class TargetBox implements Actor
 	public Sequence draw(double ms)
 	{
 		Sequence sequence = new Sequence();
-		sequence.add(new AddNodeStep(group,lettersStep));
+		sequence.add(new AddNodeStep(group, lettersStep));
 		sequence.add(lettersStep);
-		sequence.add(new BoundsStep(lettersStep,this::boundsChanged));
+		sequence.add(new BoundsStep(lettersStep, this::boundsChanged));
 		sequence.add(new AddNodeStep(group, northStep));
 		sequence.add(northStep);
 		sequence.add(new AddNodeStep(group, eastStep));

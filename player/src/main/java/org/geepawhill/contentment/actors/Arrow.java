@@ -52,20 +52,20 @@ public class Arrow implements Actor
 		this.computer = new NodeArrowComputer(from.group(), to.group());
 		this.group = new Group();
 		steps = new ArrayList<>();
-		mainStep = new BezierStep(Timing.weighted(.9d), format, new PointPair(0d, 0d, 0d, 0d));
+		mainStep = new BezierStep(Timing.weighted(.9d), format);
 		steps.add(mainStep);
 		if (pointAtFrom)
 		{
-			fromTopStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
+			fromTopStep = new BezierStep(Timing.weighted(.1d), format);
 			steps.add(fromTopStep);
-			fromBottomStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
+			fromBottomStep = new BezierStep(Timing.weighted(.1d), format);
 			steps.add(fromBottomStep);
 		}
 		if (pointAtTo)
 		{
-			toTopStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
+			toTopStep = new BezierStep(Timing.weighted(.1d), format);
 			steps.add(toTopStep);
-			toBottomStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
+			toBottomStep = new BezierStep(Timing.weighted(.1d), format);
 			steps.add(toBottomStep);
 		}
 	}
