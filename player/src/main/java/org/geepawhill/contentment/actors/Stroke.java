@@ -20,7 +20,7 @@ public class Stroke implements Actor
 	public Stroke(PointPair points, Format format)
 	{
 		this.nickname = Names.make(getClass());
-		this.step = new BezierStep(Timing.weighted(1d), points, format);
+		this.step = new BezierStep(Timing.weighted(1d), format, points);
 		this.group = new Group(step.shape());
 	}
 

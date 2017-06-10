@@ -34,10 +34,10 @@ public class TargetBox implements Actor
 		this.source = source;
 		this.group = new Group();
 		lettersStep = new LettersStep(Timing.weighted(.6d), source, center, format);
-		northStep = new BezierStep(Timing.weighted(.1d),new PointPair(0d,0d,0d,0d),format);
-		westStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d,0d,0d,0d),format);
-		southStep = new BezierStep(Timing.weighted(.1d),new PointPair(0d,0d,0d,0d),format);
-		eastStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d,0d,0d,0d),format);
+		northStep = new BezierStep(Timing.weighted(.1d),format,new PointPair(0d,0d,0d,0d));
+		westStep = new BezierStep(Timing.weighted(.1d), format,new PointPair(0d,0d,0d,0d));
+		southStep = new BezierStep(Timing.weighted(.1d),format,new PointPair(0d,0d,0d,0d));
+		eastStep = new BezierStep(Timing.weighted(.1d), format,new PointPair(0d,0d,0d,0d));
 	}
 	
 	public String nickname()
@@ -48,10 +48,10 @@ public class TargetBox implements Actor
 	private void boundsChanged(PointPair pair)
 	{
 		PointPair grow = pair.change(4d,4d,300d,300d);
-		northStep.setBezier(new Bezier(grow.northLine()));
-		westStep.setBezier(new Bezier(grow.westLine()));
-		southStep.setBezier(new Bezier(grow.southLine()));
-		eastStep.setBezier(new Bezier(grow.eastLine()));
+		northStep.changeBezier(new Bezier(grow.northLine()));
+		westStep.changeBezier(new Bezier(grow.westLine()));
+		southStep.changeBezier(new Bezier(grow.southLine()));
+		eastStep.changeBezier(new Bezier(grow.eastLine()));
 	}
 	
 	@Override

@@ -48,10 +48,10 @@ public class Placeholder implements Actor
 		this.bounds = bounds;
 		this.source = source;
 		lettersStep = new LettersStep(Timing.weighted(.6d), source, bounds.grow(-32d).north(), format);
-		northStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		westStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		southStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		eastStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		northStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
+		westStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
+		southStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
+		eastStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
 		this.group = new Group();
 	}
 
@@ -62,10 +62,10 @@ public class Placeholder implements Actor
 
 	private void boundsChanged(PointPair pair)
 	{
-		northStep.setBezier(new Bezier(bounds.northLine()));
-		westStep.setBezier(new Bezier(bounds.westLine()));
-		southStep.setBezier(new Bezier(bounds.southLine()));
-		eastStep.setBezier(new Bezier(bounds.eastLine()));
+		northStep.changeBezier(new Bezier(bounds.northLine()));
+		westStep.changeBezier(new Bezier(bounds.westLine()));
+		southStep.changeBezier(new Bezier(bounds.southLine()));
+		eastStep.changeBezier(new Bezier(bounds.eastLine()));
 	}
 
 	@Override

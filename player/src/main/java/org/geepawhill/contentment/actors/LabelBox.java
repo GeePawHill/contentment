@@ -24,8 +24,6 @@ public class LabelBox implements Actor
 
 	private final Group group;
 
-	private Point center;
-
 	private BezierStep northStep;
 	private BezierStep southStep;
 	private BezierStep westStep;
@@ -39,14 +37,13 @@ public class LabelBox implements Actor
 	{
 		this.random = new Random();
 		this.nickname = Names.make(getClass());
-		this.center = center;
 		this.source = source;
 		this.group = new Group();
 		lettersStep = new LettersStep(Timing.weighted(.6d), source, center, format);
-		northStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		westStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		southStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
-		eastStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+		northStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
+		westStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
+		southStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
+		eastStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
 	}
 
 	public String nickname()
@@ -57,10 +54,10 @@ public class LabelBox implements Actor
 	private void boundsChanged(PointPair pair)
 	{
 		PointPair grow = pair.grow(4d);
-		northStep.setBezier(chooseControlPoints(grow.northLine()));
-		westStep.setBezier(chooseControlPoints(grow.westLine()));
-		southStep.setBezier(chooseControlPoints(grow.southLine()));
-		eastStep.setBezier(chooseControlPoints(grow.eastLine()));
+		northStep.changeBezier(chooseControlPoints(grow.northLine()));
+		westStep.changeBezier(chooseControlPoints(grow.westLine()));
+		southStep.changeBezier(chooseControlPoints(grow.southLine()));
+		eastStep.changeBezier(chooseControlPoints(grow.eastLine()));
 	}
 	
 	public Bezier chooseControlPoints(PointPair points)

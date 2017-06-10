@@ -39,8 +39,8 @@ public class OvalText implements Actor
 		this.controlJiggler = new Jiggler(.4d, 30d);
 
 		lettersStep = new LettersStep(Timing.weighted(.6d), source, center, format);
-		eastStep = new BezierStep(Timing.weighted(.2d),new PointPair(0d,0d,0d,0d),format);
-		westStep = new BezierStep(Timing.weighted(.2d),new PointPair(0d,0d,0d,0d),format);
+		eastStep = new BezierStep(Timing.weighted(.2d),format,new PointPair(0d,0d,0d,0d));
+		westStep = new BezierStep(Timing.weighted(.2d),format,new PointPair(0d,0d,0d,0d));
 		this.group = new Group();
 	}
 	
@@ -53,8 +53,8 @@ public class OvalText implements Actor
 	private void boundsChanged(PointPair pair)
 	{
 		PointPair grow = pair.grow(45d,8d);
-		eastStep.setBezier(eastHalfPoints(grow));
-		westStep.setBezier(westHalfPoints(grow));
+		eastStep.changeBezier(eastHalfPoints(grow));
+		westStep.changeBezier(westHalfPoints(grow));
 	}
 
 	@Override

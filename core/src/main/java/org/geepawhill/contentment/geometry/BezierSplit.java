@@ -1,5 +1,9 @@
 package org.geepawhill.contentment.geometry;
 
+import javafx.scene.shape.CubicCurveTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+
 public class BezierSplit
 {
 	public final double fraction;
@@ -38,5 +42,15 @@ public class BezierSplit
 				oneMinusT * first.y + fraction * second.y
 				);
 
+	}
+
+	public void setPathOnBefore(Path path)
+	{
+		path.getElements().clear();
+		path.getElements().add(new MoveTo(before.start.x,before.start.y));
+		path.getElements().add(new CubicCurveTo(
+				before.handle1.x, before.handle1.y,
+				before.handle2.x, before.handle2.y,
+				before.end.x,before.end.y));
 	}
 }

@@ -11,31 +11,32 @@ import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.timing.Timing;
 
 import javafx.scene.Node;
-import javafx.scene.shape.CubicCurveTo;
-import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Shape;
 
 public class BezierStep implements ShapeStep
 {
-	private Timing timing;
-	private final Path path;
-	private Format format;
-	Bezier bezier;
+	private final Timing timing;
+	public final Path path;
+	private final Format format;
 	private BezierSplit split;
+	
+	public BezierStep(Timing timing, Format format)
+	{
+		this(timing,format,new PointPair(0d,0d,0d,0d));
+	}
 
-	public BezierStep(Timing timing, PointPair points, Format format)
+	public BezierStep(Timing timing, Format format, PointPair points)
 	{
 		this.timing = timing;
-		this.bezier = new Bezier(points);
 		this.path = new Path();
 		this.format = format;
+		this.split = new BezierSplit(0d,new Bezier(points.from,points.to));
 	}
 	
-	public void setBezier(Bezier bezier)
+	public void changeBezier(Bezier bezier)
 	{
 		format.apply(Frames.KEY, path);
-		this.bezier = bezier;
 		split = new BezierSplit(1d,bezier);
 	}
 
@@ -71,21 +72,14 @@ public class BezierStep implements ShapeStep
 
 	private void interpolate(Context context, double fraction)
 	{
-		path.setVisible(fraction != 0d);
 		split = new BezierSplit(fraction,split.bezier);
-		path.getElements().clear();
-		path.getElements().add(new MoveTo(split.before.start.x,split.before.start.y));
-		path.getElements().add(new CubicCurveTo(
-				split.before.handle1.x, split.before.handle1.y,
-				split.before.handle2.x, split.before.handle2.y,
-				split.before.end.x,split.before.end.y));
-		
+		split.setPathOnBefore(path);
 	}
 
 	@Override
 	public String toString()
 	{
-		return "Bezier: "+bezier;
+		return "Bezier: "+split.bezier;
 	}
 
 	public Node node()

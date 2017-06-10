@@ -52,20 +52,20 @@ public class Arrow implements Actor
 		this.computer = new NodeArrowComputer(from.group(), to.group());
 		this.group = new Group();
 		steps = new ArrayList<>();
-		mainStep = new BezierStep(Timing.weighted(.9d), new PointPair(0d, 0d, 0d, 0d), format);
+		mainStep = new BezierStep(Timing.weighted(.9d), format, new PointPair(0d, 0d, 0d, 0d));
 		steps.add(mainStep);
 		if (pointAtFrom)
 		{
-			fromTopStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+			fromTopStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
 			steps.add(fromTopStep);
-			fromBottomStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+			fromBottomStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
 			steps.add(fromBottomStep);
 		}
 		if (pointAtTo)
 		{
-			toTopStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+			toTopStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
 			steps.add(toTopStep);
-			toBottomStep = new BezierStep(Timing.weighted(.1d), new PointPair(0d, 0d, 0d, 0d), format);
+			toBottomStep = new BezierStep(Timing.weighted(.1d), format, new PointPair(0d, 0d, 0d, 0d));
 			steps.add(toBottomStep);
 		}
 	}
@@ -78,16 +78,16 @@ public class Arrow implements Actor
 	private void computePoints(Context context, double fraction)
 	{
 		points = computer.compute();
-		mainStep.setBezier(chooseBezier(points.main));
+		mainStep.changeBezier(chooseBezier(points.main));
 		if (pointAtFrom)
 		{
-			fromTopStep.setBezier(new Bezier(points.fromTop));
-			fromBottomStep.setBezier(new Bezier(points.fromBottom));
+			fromTopStep.changeBezier(new Bezier(points.fromTop));
+			fromBottomStep.changeBezier(new Bezier(points.fromBottom));
 		}
 		if (pointAtTo)
 		{
-			toTopStep.setBezier(new Bezier(points.toTop));
-			toBottomStep.setBezier(new Bezier(points.toBottom));
+			toTopStep.changeBezier(new Bezier(points.toTop));
+			toBottomStep.changeBezier(new Bezier(points.toBottom));
 		}
 	}
 	
