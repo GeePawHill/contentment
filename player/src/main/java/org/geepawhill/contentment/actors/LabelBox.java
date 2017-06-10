@@ -12,14 +12,10 @@ import org.geepawhill.contentment.step.AddNodeStep;
 import org.geepawhill.contentment.step.BezierStep;
 import org.geepawhill.contentment.step.BoundsStep;
 import org.geepawhill.contentment.step.LettersStep;
-import org.geepawhill.contentment.step.Step;
-import org.geepawhill.contentment.step.TransitionStep;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
-import javafx.animation.TranslateTransition;
 import javafx.scene.Group;
-import javafx.util.Duration;
 
 public class LabelBox implements Actor
 {
