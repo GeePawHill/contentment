@@ -3,5 +3,5 @@ include 'core'
 include 'geepaw'
 include 'demo'
 include 'temp'
-
+include 'support'
 
