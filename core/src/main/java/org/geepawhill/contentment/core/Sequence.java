@@ -2,6 +2,8 @@ package org.geepawhill.contentment.core;
 
 import java.util.ArrayList;
 
+import org.geepawhill.contentment.step.Fast;
+import org.geepawhill.contentment.step.FastStep;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.timing.Scheduler;
 
@@ -41,6 +43,11 @@ public class Sequence
 	{
 		steps.add(step);
 		return this;
+	}
+	
+	public Sequence add(Fast fast)
+	{
+		return add(new FastStep(fast));
 	}
 
 	public Sequence schedule(double ms)
