@@ -21,7 +21,7 @@ public class AddNodeStepTest extends JavaFxTest
 	{
 		actor = new TestActor();
 		text = new Text();
-		sequence = new Sequence(new EntranceStep(actor), new AddNodeStep(actor, text));
+		sequence = new Sequence().add(new EntranceStep(actor)).add(new AddNodeStep(actor, text));
 	}
 
 	@Test

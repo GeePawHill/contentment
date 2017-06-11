@@ -40,7 +40,7 @@ public class Letters implements Actor
 	@Override
 	public Sequence draw(double ms)
 	{
-		return new Sequence(step).schedule(ms);
+		return new Sequence().add(step).schedule(ms);
 	}
 	
 	@Override

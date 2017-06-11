@@ -67,13 +67,13 @@ public class Title implements Actor
 
 	public Sequence change(String newSource)
 	{
-		return new Sequence(new ChangeCenteredTextStep(text, newSource, points));
+		return new Sequence().add(new ChangeCenteredTextStep(text, newSource, points));
 	}
 
 	@Override
 	public Sequence draw(double ms)
 	{
-		return new Sequence(new AddNodeStep(group, rectangle), new AddNodeStep(group, text)).schedule(0d);
+		return new Sequence().add(new AddNodeStep(group, rectangle)).add(new AddNodeStep(group, text)).schedule(0d);
 	}
 
 }

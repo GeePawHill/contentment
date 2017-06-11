@@ -33,7 +33,8 @@ public class PlayerTest
 		nonStopSecond = new TestStep();
 		stopSecond = new TestStop();
 		nonStopThird = new TestStep();
-		mixedSequence = new Sequence(nonStopFirst, stopFirst, nonStopSecond, stopSecond, nonStopThird);		canvas = new Group();
+		mixedSequence = new Sequence().add(nonStopFirst).add(stopFirst).add(nonStopSecond).add( stopSecond).add( nonStopThird);
+		canvas = new Group();
 		player = new Player(canvas);
 	}
 
@@ -73,7 +74,7 @@ public class PlayerTest
 	@Test
 	public void forwardBreaksPlaying()
 	{
-		player.reset(new Sequence(nonStopFirst));
+		player.reset(new Sequence().add(nonStopFirst));
 		player.play();
 		assertTrue(nonStopFirst.isPlaying);
 		player.forward();
@@ -84,7 +85,7 @@ public class PlayerTest
 	@Test
 	public void backwardBreaksPlaying()
 	{
-		player.reset(new Sequence(nonStopFirst));
+		player.reset(new Sequence().add(nonStopFirst));
 		player.play();
 		assertTrue(nonStopFirst.isPlaying);
 		player.backward();
@@ -95,7 +96,7 @@ public class PlayerTest
 	@Test
 	public void forwardBeforeStopGoesToBeforeNextStop()
 	{
-		player.reset(new Sequence(nonStopFirst, stopFirst));
+		player.reset(new Sequence().add(nonStopFirst).add( stopFirst));
 		player.forward();
 		assertFalse(nonStopFirst.isPlaying);
 		assertFalse(nonStopFirst.isBefore);
@@ -106,7 +107,7 @@ public class PlayerTest
 	@Test
 	public void playOneBeforeStopGoesToBeforeNextStop()
 	{
-		player.reset(new Sequence(nonStopFirst, stopFirst));
+		player.reset(new Sequence().add(nonStopFirst).add( stopFirst));
 		player.playOne();
 		nonStopFirst.finishPlaying();
 		assertFalse(nonStopFirst.isPlaying);
@@ -118,7 +119,7 @@ public class PlayerTest
 	@Test
 	public void forwardOnStopGoesToBeforeNextStop()
 	{
-		player.reset(new Sequence(stopFirst, nonStopFirst, stopSecond));
+		player.reset(new Sequence().add(stopFirst).add( nonStopFirst).add( stopSecond));
 		player.forward();
 		assertFalse(stopFirst.isPlaying);
 		assertFalse(stopFirst.isBefore);
@@ -131,7 +132,7 @@ public class PlayerTest
 	@Test
 	public void playOneOnStopGoesToBeforeNextStop()
 	{
-		player.reset(new Sequence(stopFirst, nonStopFirst, stopSecond));
+		player.reset(new Sequence().add(stopFirst).add( nonStopFirst).add( stopSecond));
 		player.playOne();
 		stopFirst.finishPlaying();
 		nonStopFirst.finishPlaying();
@@ -146,7 +147,7 @@ public class PlayerTest
 	@Test
 	public void forwardOnLastStopGoesToEnd()
 	{
-		player.reset(new Sequence(stopFirst, nonStopSecond, nonStopThird));
+		player.reset(new Sequence().add(stopFirst).add(nonStopSecond).add( nonStopThird));
 		player.forward();
 		assertFalse(stopFirst.isPlaying);
 		assertFalse(stopFirst.isBefore);
@@ -161,7 +162,7 @@ public class PlayerTest
 	@Test
 	public void backwardWithNoStopGoesToZero()
 	{
-		player.reset(new Sequence(nonStopFirst, nonStopSecond));
+		player.reset(new Sequence().add(nonStopFirst).add( nonStopSecond));
 		player.forward();
 		player.backward();
 		assertFalse(nonStopSecond.isPlaying);
@@ -175,7 +176,7 @@ public class PlayerTest
 	@Test
 	public void backwardOnStopGoesBeforePreviousStop()
 	{
-		player.reset(new Sequence(stopFirst, stopSecond));
+		player.reset(new Sequence().add(stopFirst).add( stopSecond));
 		player.forward();
 		player.backward();
 		assertFalse(stopSecond.isPlaying);
@@ -189,7 +190,7 @@ public class PlayerTest
 	@Test
 	public void backwardOnNonStopGoesBeforePreviousStop()
 	{
-		player.reset(new Sequence(stopFirst, nonStopSecond));
+		player.reset(new Sequence().add(stopFirst).add( nonStopSecond));
 		player.forward();
 		player.backward();
 		assertFalse(nonStopSecond.isPlaying);
@@ -203,7 +204,7 @@ public class PlayerTest
 	@Test
 	public void backwardBeforeStopGoesBeforePreviousStop()
 	{
-		player.reset(new Sequence(stopFirst, nonStopFirst, stopSecond));
+		player.reset(new Sequence().add(stopFirst).add( nonStopFirst).add( stopSecond));
 		player.forward();
 		player.backward();
 		assertFalse(stopSecond.isPlaying);
@@ -219,7 +220,7 @@ public class PlayerTest
 	@Test
 	public void backwardSkGoesBeforePreviousStop()
 	{
-		player.reset(new Sequence(stopFirst, stopSecond));
+		player.reset(new Sequence().add(stopFirst).add( stopSecond));
 		player.forward();
 		player.backward();
 		assertFalse(stopSecond.isPlaying);
@@ -233,7 +234,7 @@ public class PlayerTest
 	@Test
 	public void playOneOnLastStopGoesToEnd()
 	{
-		player.reset(new Sequence(stopFirst, nonStopSecond, nonStopThird));
+		player.reset(new Sequence().add(stopFirst).add( nonStopSecond).add( nonStopThird));
 		player.playOne();
 		stopFirst.finishPlaying();
 		nonStopSecond.finishPlaying();
@@ -251,7 +252,7 @@ public class PlayerTest
 	@Test
 	public void forwardNoopsAtEnd()
 	{
-		player.reset(new Sequence(nonStopFirst));
+		player.reset(new Sequence().add(nonStopFirst));
 		player.forward();
 		assertEquals(nonStopFirst, player.currentStep());
 		assertFalse(nonStopFirst.isBefore);
@@ -265,7 +266,7 @@ public class PlayerTest
 	@Test
 	public void backwardNoopsAtBegin()
 	{
-		player.reset(new Sequence(nonStopFirst));
+		player.reset(new Sequence().add(nonStopFirst));
 		player.backward();
 		assertEquals(nonStopFirst, player.currentStep());
 		assertTrue(nonStopFirst.isBefore);
@@ -275,7 +276,7 @@ public class PlayerTest
 	@Test
 	public void playOneStopsChainingWhilePlaying()
 	{
-		player.reset(new Sequence(nonStopFirst, nonStopSecond, stopFirst));
+		player.reset(new Sequence().add(nonStopFirst).add( nonStopSecond).add( stopFirst));
 		player.play();
 		nonStopFirst.finishPlaying();
 		assertTrue(nonStopSecond.isPlaying);

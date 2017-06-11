@@ -27,7 +27,7 @@ public class ClipArt implements Actor
 	@Override
 	public Sequence draw(double ms)
 	{
-		return new Sequence( new AddNodeStep(group, view) );
+		return new Sequence().add(new AddNodeStep(group, view) );
 	}
 	
 	public void flip(Sequence sequence)

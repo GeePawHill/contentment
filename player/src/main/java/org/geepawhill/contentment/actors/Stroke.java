@@ -39,7 +39,7 @@ public class Stroke implements Actor
 	@Override
 	public Sequence draw(double ms)
 	{
-		return new Sequence(new AddNodeStep(group,step),step).schedule(ms);
+		return new Sequence().add(new AddNodeStep(group,step)).add(step).schedule(ms);
 	}
 
 }

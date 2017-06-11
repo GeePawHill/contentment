@@ -22,7 +22,7 @@ public class OpacityStepTest extends JavaFxTest
 	public void before()
 	{
 		actor = new TestActor();
-		sequence = new Sequence(new EntranceStep(actor), new OpacityStep(1d, actor, 0d));
+		sequence = new Sequence().add(new EntranceStep(actor)).add(new OpacityStep(1d, actor, 0d));
 		opacities = new ArrayList<>();
 	}
 

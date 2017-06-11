@@ -16,13 +16,6 @@ public class Sequence
 		scheduler = new Scheduler();
 	}
 
-	public Sequence(Step... steps)
-	{
-		this();
-		for (Step step : steps)
-			this.steps.add(step);
-	}
-
 	public int size()
 	{
 		return steps.size();
@@ -38,14 +31,16 @@ public class Sequence
 		return steps.get(size() - 1);
 	}
 
-	public void add(Sequence sequence)
+	public Sequence add(Sequence sequence)
 	{
 		steps.addAll(sequence.steps);
+		return this;
 	}
 
-	public void add(Step step)
+	public Sequence add(Step step)
 	{
 		steps.add(step);
+		return this;
 	}
 
 	public Sequence schedule(double ms)

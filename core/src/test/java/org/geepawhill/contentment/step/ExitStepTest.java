@@ -17,7 +17,7 @@ public class ExitStepTest extends JavaFxTest
 	public void before()
 	{
 		actor = new TestActor();
-		sequence = new Sequence(new EntranceStep(actor), new ExitStep(actor));
+		sequence = new Sequence().add(new EntranceStep(actor)).add(new ExitStep(actor));
 	}
 
 	@Test
