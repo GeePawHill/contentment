@@ -19,7 +19,7 @@ public class ClearStepTest extends JavaFxTest
 	{
 		actor1 = new TestActor();
 		actor2 = new TestActor();
-		sequence = new Sequence().add(new EntranceStep(actor1)).add( new EntranceStep(actor2)).add(new ClearStep());
+		sequence = new Sequence().add(new Entrance(actor1)).add( new Entrance(actor2)).add(new Clear());
 	}
 
 	@Test

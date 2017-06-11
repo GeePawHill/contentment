@@ -5,7 +5,7 @@ import org.geepawhill.contentment.geometry.PointPair;
 
 import javafx.scene.text.Text;
 
-public class ChangeCenteredTextStep implements Fast
+public class ChangeCentered implements Fast
 {
 
 	private Text text;
@@ -14,7 +14,7 @@ public class ChangeCenteredTextStep implements Fast
 
 	private PointPair points;
 
-	public ChangeCenteredTextStep(Text text, String source, PointPair points)
+	public ChangeCentered(Text text, String source, PointPair points)
 	{
 		this.text = text;
 		this.source = source;

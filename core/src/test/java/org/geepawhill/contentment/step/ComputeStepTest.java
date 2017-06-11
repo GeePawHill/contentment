@@ -11,12 +11,12 @@ public class ComputeStepTest extends JavaFxTest
 {
 
 	private boolean result;
-	private ComputeStep step;
+	private Compute step;
 
 	@Before
 	public void before()
 	{
-		step = new ComputeStep(this::compute);
+		step = new Compute(this::compute);
 	}
 
 	public void compute(Context context, double fraction)

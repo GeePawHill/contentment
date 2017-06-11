@@ -7,14 +7,14 @@ import org.geepawhill.contentment.utility.JfxUtility;
 
 import javafx.scene.paint.Paint;
 
-public class ColorChangeStep implements Fast
+public class ChangeColor implements Fast
 {
 
 	private Actor actor;
 	private Paint paint;
 	private Paint old;
 
-	public ColorChangeStep(Actor actor, Paint paint)
+	public ChangeColor(Actor actor, Paint paint)
 	{
 		this.actor = actor;
 		this.paint = paint;

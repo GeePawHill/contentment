@@ -6,9 +6,9 @@ import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.step.AddNodeStep;
+import org.geepawhill.contentment.step.AddNode;
 import org.geepawhill.contentment.step.BezierStep;
-import org.geepawhill.contentment.step.BoundsStep;
+import org.geepawhill.contentment.step.SetBounds;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
@@ -78,16 +78,16 @@ public class Placeholder implements Actor
 	public Sequence draw(double ms)
 	{
 		Sequence sequence = new Sequence();
-		sequence.add(new AddNodeStep(group,lettersStep));
+		sequence.add(new AddNode(group,lettersStep));
 		sequence.add(lettersStep);
-		sequence.add(new BoundsStep(lettersStep, this::boundsChanged));
-		sequence.add(new AddNodeStep(group,northStep));
+		sequence.add(new SetBounds(lettersStep, this::boundsChanged));
+		sequence.add(new AddNode(group,northStep));
 		sequence.add(northStep);
-		sequence.add(new AddNodeStep(group,eastStep));
+		sequence.add(new AddNode(group,eastStep));
 		sequence.add(eastStep);
-		sequence.add(new AddNodeStep(group,southStep));
+		sequence.add(new AddNode(group,southStep));
 		sequence.add(southStep);
-		sequence.add(new AddNodeStep(group,westStep));
+		sequence.add(new AddNode(group,westStep));
 		sequence.add(westStep);
 		return sequence.schedule(ms);
 	}

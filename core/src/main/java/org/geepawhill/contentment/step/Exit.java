@@ -3,12 +3,12 @@ package org.geepawhill.contentment.step;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Context;
 
-public class ExitStep implements Fast
+public class Exit implements Fast
 {
 
 	private Actor actor;
 
-	public ExitStep(Actor actor)
+	public Exit(Actor actor)
 	{
 		this.actor = actor;
 	}

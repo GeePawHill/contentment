@@ -6,18 +6,18 @@ import org.geepawhill.contentment.geometry.PointPairConsumer;
 
 import javafx.scene.Node;
 
-public class BoundsStep implements Fast
+public class SetBounds implements Fast
 {
 
 	private Node source;
 	private PointPairConsumer onCollected;
 
-	public BoundsStep(ShapeStep step, PointPairConsumer onCollected)
+	public SetBounds(ShapeStep step, PointPairConsumer onCollected)
 	{
 		this(step.shape(), onCollected);
 	}
 
-	public BoundsStep(Node source, PointPairConsumer onCollected)
+	public SetBounds(Node source, PointPairConsumer onCollected)
 	{
 		this.source = source;
 		this.onCollected = onCollected;

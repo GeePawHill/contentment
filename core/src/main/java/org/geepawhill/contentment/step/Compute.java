@@ -3,12 +3,12 @@ package org.geepawhill.contentment.step;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.ContextInterpolator;
 
-public class ComputeStep implements Fast
+public class Compute implements Fast
 {
 
 	private ContextInterpolator interpolator;
 
-	public ComputeStep(ContextInterpolator interpolator)
+	public Compute(ContextInterpolator interpolator)
 	{
 		this.interpolator = interpolator;
 

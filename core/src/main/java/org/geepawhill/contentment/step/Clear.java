@@ -4,12 +4,12 @@ import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Actors;
 import org.geepawhill.contentment.core.Context;
 
-public class ClearStep implements Fast
+public class Clear implements Fast
 {
 
 	private Actors actors = new Actors();
 
-	public ClearStep()
+	public Clear()
 	{
 		actors = new Actors();
 	}

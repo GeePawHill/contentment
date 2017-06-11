@@ -21,7 +21,7 @@ public class BoundsStepTest extends JavaFxTest
 	public void before()
 	{
 		rectangle = new Rectangle(100d, 300d, 500d, 700d);
-		BoundsStep step = new BoundsStep(rectangle, this::collectBounds);
+		SetBounds step = new SetBounds(rectangle, this::collectBounds);
 		sequence = new Sequence().add(step);
 	}
 

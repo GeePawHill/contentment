@@ -16,7 +16,7 @@ public class CommonSteps
 
 	public void clear()
 	{
-		sequence.add(new ClearStep());
+		sequence.add(new Clear());
 	}
 
 	public void cue()
@@ -45,13 +45,13 @@ public class CommonSteps
 
 	public void reColor(Actor actor, Paint paint)
 	{
-		sequence.add(new ColorChangeStep(actor, paint));
+		sequence.add(new ChangeColor(actor, paint));
 	}
 
 	public void sketch(double ms, Actor drawable)
 	{
 		Sequence result = new Sequence();
-		result.add(new EntranceStep(drawable));
+		result.add(new Entrance(drawable));
 		result.add(drawable.draw(ms));
 		sequence.add(result);
 	}
@@ -59,20 +59,20 @@ public class CommonSteps
 	public void appear(Actor drawable)
 	{
 		Sequence result = new Sequence();
-		result.add(new EntranceStep(drawable));
+		result.add(new Entrance(drawable));
 		result.add(drawable.draw(1d));
 		sequence.add(result);
 	}
 
 	public void disappear(Actor drawable)
 	{
-		sequence.add(new ExitStep(drawable));
+		sequence.add(new Exit(drawable));
 	}
 
 	public void fadeIn(double ms, Actor drawable)
 	{
 		Sequence result = new Sequence();
-		result.add(new EntranceStep(drawable));
+		result.add(new Entrance(drawable));
 		result.add(new OpacityStep(0d, drawable, 0d));
 		result.add(drawable.draw(ms));
 		result.add(new OpacityStep(ms, drawable, 1d));

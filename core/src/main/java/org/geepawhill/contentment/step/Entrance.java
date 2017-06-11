@@ -3,12 +3,12 @@ package org.geepawhill.contentment.step;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Context;
 
-public class EntranceStep implements Fast
+public class Entrance implements Fast
 {
 
 	private Actor actor;
 
-	public EntranceStep(Actor actor)
+	public Entrance(Actor actor)
 	{
 		this.actor = actor;
 	}

@@ -7,9 +7,9 @@ import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Jiggler;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.step.AddNodeStep;
+import org.geepawhill.contentment.step.AddNode;
 import org.geepawhill.contentment.step.BezierStep;
-import org.geepawhill.contentment.step.BoundsStep;
+import org.geepawhill.contentment.step.SetBounds;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
@@ -65,12 +65,12 @@ public class OvalText implements Actor
 	public Sequence draw(double ms)
 	{
 		Sequence sequence = new Sequence();
-		sequence.add(new AddNodeStep(group, lettersStep));
+		sequence.add(new AddNode(group, lettersStep));
 		sequence.add(lettersStep);
-		sequence.add(new BoundsStep(lettersStep, this::boundsChanged));
-		sequence.add(new AddNodeStep(group, eastStep));
+		sequence.add(new SetBounds(lettersStep, this::boundsChanged));
+		sequence.add(new AddNode(group, eastStep));
 		sequence.add(eastStep);
-		sequence.add(new AddNodeStep(group, westStep));
+		sequence.add(new AddNode(group, westStep));
 		sequence.add(westStep);
 		return sequence.schedule(ms);
 	}

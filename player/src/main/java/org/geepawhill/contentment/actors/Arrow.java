@@ -12,9 +12,9 @@ import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.step.AddNodeStep;
+import org.geepawhill.contentment.step.AddNode;
 import org.geepawhill.contentment.step.BezierStep;
-import org.geepawhill.contentment.step.ComputeStep;
+import org.geepawhill.contentment.step.Compute;
 import org.geepawhill.contentment.step.ShapeStep;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
@@ -109,10 +109,10 @@ public class Arrow implements Actor
 	public Sequence draw(double ms)
 	{
 		Sequence sequence = new Sequence();
-		sequence.add(new ComputeStep(this::computePoints));
+		sequence.add(new Compute(this::computePoints));
 		for (ShapeStep step : steps)
 		{
-			sequence.add(new AddNodeStep(group, step));
+			sequence.add(new AddNode(group, step));
 			sequence.add(step);
 		}
 		sequence = sequence.schedule(ms);

@@ -17,7 +17,7 @@ public class EntranceStepTest extends JavaFxTest
 	public void before()
 	{
 		actor = new TestActor();
-		sequence = new Sequence().add(new EntranceStep(actor));
+		sequence = new Sequence().add(new Entrance(actor));
 	}
 
 	@Test

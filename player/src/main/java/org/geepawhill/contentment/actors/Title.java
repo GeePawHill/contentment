@@ -4,8 +4,8 @@ import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.geometry.ViewPort;
-import org.geepawhill.contentment.step.AddNodeStep;
-import org.geepawhill.contentment.step.ChangeCenteredTextStep;
+import org.geepawhill.contentment.step.AddNode;
+import org.geepawhill.contentment.step.ChangeCentered;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.geometry.VPos;
@@ -67,13 +67,13 @@ public class Title implements Actor
 
 	public Sequence change(String newSource)
 	{
-		return new Sequence().add(new ChangeCenteredTextStep(text, newSource, points));
+		return new Sequence().add(new ChangeCentered(text, newSource, points));
 	}
 
 	@Override
 	public Sequence draw(double ms)
 	{
-		return new Sequence().add(new AddNodeStep(group, rectangle)).add(new AddNodeStep(group, text)).schedule(0d);
+		return new Sequence().add(new AddNode(group, rectangle)).add(new AddNode(group, text)).schedule(0d);
 	}
 
 }

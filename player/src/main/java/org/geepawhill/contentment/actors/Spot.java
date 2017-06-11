@@ -3,7 +3,7 @@ package org.geepawhill.contentment.actors;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
-import org.geepawhill.contentment.step.AddNodeStep;
+import org.geepawhill.contentment.step.AddNode;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
@@ -47,7 +47,7 @@ public class Spot implements Actor
 	@Override
 	public Sequence draw(double ms)
 	{
-		return new Sequence().add(new AddNodeStep(group,circle));
+		return new Sequence().add(new AddNode(group,circle));
 	}
 
 }
