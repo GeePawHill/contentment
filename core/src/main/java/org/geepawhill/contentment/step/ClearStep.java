@@ -3,10 +3,8 @@ package org.geepawhill.contentment.step;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Actors;
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.timing.Timing;
 
-public class ClearStep implements Step
+public class ClearStep implements Fast
 {
 
 	private Actors actors = new Actors();
@@ -14,12 +12,6 @@ public class ClearStep implements Step
 	public ClearStep()
 	{
 		actors = new Actors();
-	}
-
-	@Override
-	public Timing timing()
-	{
-		return Timing.instant();
 	}
 
 	@Override
@@ -41,13 +33,6 @@ public class ClearStep implements Step
 			context.add(actor);
 		}
 		actors.clear();
-	}
-
-	@Override
-	public void slow(Context context, OnFinished onFinished)
-	{
-		fast(context);
-		onFinished.run();
 	}
 
 	@Override

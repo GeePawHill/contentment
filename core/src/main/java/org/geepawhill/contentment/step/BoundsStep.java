@@ -1,14 +1,12 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.geometry.PointPairConsumer;
-import org.geepawhill.contentment.timing.Timing;
 
 import javafx.scene.Node;
 
-public class BoundsStep implements Step
+public class BoundsStep implements Fast
 {
 
 	private Node source;
@@ -34,19 +32,6 @@ public class BoundsStep implements Step
 	@Override
 	public void undo(Context context)
 	{
-	}
-
-	@Override
-	public void slow(Context context, OnFinished onFinished)
-	{
-		fast(context);
-		onFinished.run();
-	}
-
-	@Override
-	public Timing timing()
-	{
-		return Timing.instant();
 	}
 
 	@Override

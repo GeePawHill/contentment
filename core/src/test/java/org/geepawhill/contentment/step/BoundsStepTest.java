@@ -2,6 +2,7 @@ package org.geepawhill.contentment.step;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.junit.Before;
@@ -14,13 +15,14 @@ public class BoundsStepTest extends JavaFxTest
 
 	private Rectangle rectangle;
 	private PointPair result;
-	private BoundsStep step;
+	private Sequence sequence;
 
 	@Before
 	public void before()
 	{
 		rectangle = new Rectangle(100d, 300d, 500d, 700d);
-		step = new BoundsStep(rectangle, this::collectBounds);
+		BoundsStep step = new BoundsStep(rectangle, this::collectBounds);
+		sequence = new Sequence().add(step);
 	}
 
 	public void collectBounds(PointPair result)
@@ -31,14 +33,14 @@ public class BoundsStepTest extends JavaFxTest
 	@Test
 	public void slowCalls()
 	{
-		runner.slow(step);
+		runner.slow(sequence);
 		assertThat(result.from).isEqualTo(new Point(100d, 300d));
 	}
 
 	@Test
 	public void fastCalls()
 	{
-		runner.fast(step);
+		runner.fast(sequence);
 		assertThat(result.from).isEqualTo(new Point(100d, 300d));
 	}
 }

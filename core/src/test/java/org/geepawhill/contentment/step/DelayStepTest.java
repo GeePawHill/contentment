@@ -15,7 +15,7 @@ public class DelayStepTest extends JavaFxTest
 	{
 		LocalDateTime start = LocalDateTime.now();
 		runner.slow(new DelayStep(100d));
-		assertThat(Duration.between(start, LocalDateTime.now()).toMillis()).isStrictlyBetween(80L, 130L);
+		assertThat(Duration.between(start, LocalDateTime.now()).toMillis()).isStrictlyBetween(80L, 140L);
 	}
 
 	@Test

@@ -1,13 +1,11 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.timing.Timing;
 
 import javafx.scene.text.Text;
 
-public class ChangeCenteredTextStep implements Step
+public class ChangeCenteredTextStep implements Fast
 {
 
 	private Text text;
@@ -25,13 +23,6 @@ public class ChangeCenteredTextStep implements Step
 	}
 
 	@Override
-	public void slow(Context context, OnFinished onFinished)
-	{
-		fast(context);
-		onFinished.run();
-	}
-
-	@Override
 	public void fast(Context context)
 	{
 		oldSource = text.getText();
@@ -45,12 +36,6 @@ public class ChangeCenteredTextStep implements Step
 	{
 		text.setText(oldSource);
 		oldSource = "";
-	}
-
-	@Override
-	public Timing timing()
-	{
-		return Timing.instant();
 	}
 
 	@Override
