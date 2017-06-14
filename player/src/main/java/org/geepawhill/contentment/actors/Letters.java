@@ -8,6 +8,7 @@ import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
+import javafx.geometry.HPos;
 import javafx.scene.Group;
 
 public class Letters implements Actor
@@ -19,8 +20,13 @@ public class Letters implements Actor
 
 	public Letters(String source, Point center, Format format)
 	{
+		this(source,center,format,HPos.CENTER);
+	}
+
+	public Letters(String source, Point center, Format format, HPos align)
+	{
 		this.nickname = Names.make(getClass());
-		this.step = new LettersStep(Timing.weighted(1d), source, center, format);
+		this.step = new LettersStep(Timing.weighted(1d), source, center, format, align);
 		this.source = source;
 		this.group = new Group(step.text);
 	}

@@ -3,11 +3,13 @@ package org.geepawhill.contentment.step;
 import org.geepawhill.contentment.core.Animator;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
+import org.geepawhill.contentment.format.Aligner;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.timing.Timing;
 
+import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
@@ -19,14 +21,21 @@ public class LettersStep implements ShapeStep
 	private final String source;
 	public final Text text;
 	private Format format;
+	private Aligner aligner;
 
 	public LettersStep(Timing timing, String source, Point center, Format format)
+	{
+		this(timing,source,center,format,HPos.CENTER);
+	}
+
+	public LettersStep(Timing timing, String source, Point center, Format format, HPos align)
 	{
 		this.timing = timing;
 		this.center = center;
 		this.text = new Text();
 		this.source = source;
 		this.format = format;
+		this.aligner = Aligner.align(align);
 	}
 
 	@Override
@@ -64,8 +73,9 @@ public class LettersStep implements ShapeStep
 		format.apply(TypeFace.COLOR, text);
 		String partialSource = source.substring(0, (int) (fraction * source.length()));
 		text.setText(partialSource);
-		text.setX(center.x - text.getBoundsInParent().getWidth() / 2d);
-		text.setY(center.y);
+		aligner.align(center, text);
+//		text.setX(center.x - text.getBoundsInParent().getWidth() / 2d);
+//		text.setY(center.y);
 	}
 
 	public String toString()

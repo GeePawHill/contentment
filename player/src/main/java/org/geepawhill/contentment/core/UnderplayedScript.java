@@ -13,6 +13,7 @@ import org.geepawhill.contentment.step.CommonSteps;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 
+import javafx.geometry.HPos;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
@@ -25,6 +26,8 @@ public class UnderplayedScript
 	private Format secondFormat;
 	private Format thirdFormat;
 	private Format fourthFormat;
+	
+	private double lastLineY;
 
 	public UnderplayedScript(Sequence sequence)
 	{
@@ -49,6 +52,11 @@ public class UnderplayedScript
 		sequence.add(title.change("Five Underplayed TDD Premises"));
 		common.cue();
 		
+		firstLine("Right-Aligned",firstFormat);
+		line("Anothr line",firstFormat);
+		line("Still another",secondFormat);
+		common.fadeIn(500d, new Letters("Right-Aligned",new Point(1500d,200d),firstFormat,HPos.RIGHT));
+		
 		
 
 		sequence.add(title.change("Its text can change."));
@@ -71,6 +79,22 @@ public class UnderplayedScript
 		common.fadeIn(500d,altOpacity);
 		common.cue();
 		common.clear();
+	}
+	
+	private Letters firstLine(String text, Format format)
+	{
+		lastLineY = 200d;
+		return line(text,format);
+	}
+	
+	
+
+	private Letters line(String text, Format format)
+	{
+		Letters line = new Letters(text,new Point(1500d,lastLineY),format,HPos.RIGHT);
+		common.fadeIn(500d, line);
+		lastLineY += 100d;
+		return line;
 	}
 
 	private void scene2()
