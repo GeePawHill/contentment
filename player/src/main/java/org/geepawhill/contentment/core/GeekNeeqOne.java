@@ -18,7 +18,7 @@ public class GeekNeeqOne
 	
 	private Sequence sequence;
 	
-	private Format main = new Format( TypeFace.color("main", Color.YELLOW, .8d), TypeFace.largeHand());
+	private Format main = new Format( TypeFace.color(Color.YELLOW, .8d), TypeFace.largeHand());
 
 	private CommonSteps common;
 

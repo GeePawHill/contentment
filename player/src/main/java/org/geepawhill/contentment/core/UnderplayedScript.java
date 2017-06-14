@@ -16,7 +16,7 @@ import org.geepawhill.contentment.style.TypeFace;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-public class DemoScript
+public class UnderplayedScript
 {
 	private Sequence sequence;
 	private CommonSteps common;
@@ -26,7 +26,7 @@ public class DemoScript
 	private Format thirdFormat;
 	private Format fourthFormat;
 
-	public DemoScript(Sequence sequence)
+	public UnderplayedScript(Sequence sequence)
 	{
 		this.sequence = sequence;
 		this.common = new CommonSteps(sequence);
@@ -46,8 +46,10 @@ public class DemoScript
 	{
 		Title title = new Title();
 		common.appear(title);
-		sequence.add(title.change("This is a title!"));
+		sequence.add(title.change("Five Underplayed TDD Premises"));
 		common.cue();
+		
+		
 
 		sequence.add(title.change("Its text can change."));
 		common.cue();

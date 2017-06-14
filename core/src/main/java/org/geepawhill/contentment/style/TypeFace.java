@@ -14,7 +14,7 @@ public class TypeFace
 	public static final String FACE = "TextFont";
 	public static final String COLOR = "TextColor";
 
-	static public Style font(String nickname, Font font, Double width, Double opacity)
+	static public Style font(Font font, Double width, Double opacity)
 	{
 		StyleApplier applier = new StyleApplier()
 		{
@@ -35,40 +35,40 @@ public class TypeFace
 
 	public static Style smallHand()
 	{
-		return font("SmallHand", new Font("Buxton Sketch", 22d), 1d, 1d);
+		return font(new Font("Buxton Sketch", 22d), 1d, 1d);
 	}
 
 	public static Style mediumHand()
 	{
-		return font("MediumHand", new Font("Buxton Sketch", 30d), 1d, .5d);
+		return font(new Font("Buxton Sketch", 30d), 1d, .5d);
 	}
 
 	public static Style largeHand()
 	{
-		return font("LargeHand", new Font("GoodDog", 60d), 2d, .5d);
+		return font(new Font("GoodDog", 60d), 2d, .5d);
 	}
 
 	public static Style mediumSans()
 	{
-		return font("MediumSans", new Font("Arial", 30d), 1d, .8d);
+		return font(new Font("Arial", 30d), 1d, .8d);
 	}
 
 	public static Style smallSans()
 	{
-		return font("SmallSans", new Font("Arial", 15d), 1d, .8d);
+		return font(new Font("Arial", 15d), 1d, .8d);
 	}
 
 	public static Style smallFixed()
 	{
-		return font("SmallFixed", new Font("Consolas", 15d), 1d, 1d);
+		return font(new Font("Consolas", 15d), 1d, 1d);
 	}
 
-	public static Style color(String nickname, Paint both, Double opacity)
+	public static Style color(Paint both, Double opacity)
 	{
-		return TypeFace.color(nickname, both, both, opacity);
+		return TypeFace.color(both, both, opacity);
 	}
 
-	public static Style color(String nickname, Paint stroke, Paint fill, Double opacity)
+	public static Style color(Paint stroke, Paint fill, Double opacity)
 	{
 		StyleApplier applier = new StyleApplier()
 		{
@@ -87,6 +87,6 @@ public class TypeFace
 
 	public static Style white()
 	{
-		return color("White", Color.WHITE, 1d);
+		return color(Color.WHITE, 1d);
 	}
 }

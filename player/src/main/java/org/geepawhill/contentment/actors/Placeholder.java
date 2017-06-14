@@ -42,7 +42,7 @@ public class Placeholder implements Actor
 
 	public Placeholder(String source, PointPair bounds)
 	{
-		this.format = new Format(TypeFace.color(source, Color.YELLOW, 1d), TypeFace.smallFixed(),
+		this.format = new Format(TypeFace.color(Color.YELLOW, 1d), TypeFace.smallFixed(),
 				Frames.frame(Color.YELLOW, 1d, 1d, Dash.dash(4d, 4d)));
 		this.nickname = Names.make(getClass());
 		this.bounds = bounds;

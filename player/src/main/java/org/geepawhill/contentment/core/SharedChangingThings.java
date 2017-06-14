@@ -14,7 +14,7 @@ public class SharedChangingThings
 
 	Format agentFormat()
 	{
-		Style agentColors = TypeFace.color("Agent", Color.CHARTREUSE, .8d);
+		Style agentColors = TypeFace.color(Color.CHARTREUSE, .8d);
 		Style agentFont = TypeFace.largeHand();
 		Style agentFrame = Frames.frame(Color.CHARTREUSE, 5d, .8d);
 		Format agentFormat = new Format("Agent", agentColors, agentFont, agentFrame);
@@ -23,12 +23,12 @@ public class SharedChangingThings
 
 	Format targetFormat()
 	{
-		return new Format(Frames.frame(Color.WHITE, 2d, .8d, Dash.dash(4d,4d)), TypeFace.mediumSans(), TypeFace.color("Target", Color.WHITE, .8d));
+		return new Format(Frames.frame(Color.WHITE, 2d, .8d, Dash.dash(4d,4d)), TypeFace.mediumSans(), TypeFace.color(Color.WHITE, .8d));
 	}
 
 	Format coachFormat()
 	{
-		return new Format("Coach", agentFormat(), TypeFace.color("Coach", Color.LIGHTSKYBLUE, .8d),
+		return new Format("Coach", agentFormat(), TypeFace.color(Color.LIGHTSKYBLUE, .8d),
 				Frames.frame(Color.LIGHTSKYBLUE, 5d, .8d));
 	}
 
@@ -44,7 +44,7 @@ public class SharedChangingThings
 
 	Format practiceFormat()
 	{
-		return new Format(Frames.frame(Color.TOMATO, 4d, .8d, Dash.dash(4d)), TypeFace.color("Practice", Color.TOMATO, .8d),
+		return new Format(Frames.frame(Color.TOMATO, 4d, .8d, Dash.dash(4d)), TypeFace.color(Color.TOMATO, .8d),
 				TypeFace.largeHand());
 	}
 
