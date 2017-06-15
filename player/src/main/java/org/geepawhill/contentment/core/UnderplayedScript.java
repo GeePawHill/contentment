@@ -50,10 +50,12 @@ public class UnderplayedScript
 
 	public void add()
 	{
-		scene1();
+		// scene1();
+		// money();
+		judgment();
 	}
 
-	private void scene1()
+	private void intro()
 	{
 		head("Five Underplayed Premises");
 		common.keyframe(16d);
@@ -116,6 +118,109 @@ public class UnderplayedScript
 		
 
 	}
+
+	private void money()
+	{
+		common.clear();
+		head("The Money Premise");
+		common.keyframe(08d);
+		lead("we're in this for the money");
+		common.keyframe(18d);
+		sub("more features faster...");
+		sub("...means...");
+		sub("...more money!");
+
+		common.keyframe(34d);
+		head("What's TDD *Not* About?");
+		common.keyframe(38d);
+		sub("intellectual purity");
+		common.keyframe(41d);
+		sub("art & beauty");
+		common.keyframe(42d);
+		sub("good citizenship");
+		common.keyframe(44d);
+		sub("morality");
+		
+		common.keyframe(54d);
+		lead("Test To Move Features Faster");
+		
+		common.keyframe(01d,08d);
+		head("How's The Money Premise Work?");
+		common.keyframe(01d,10d);
+		sub("only what we need");
+		common.keyframe(01d,15d);
+		sub("only what we really run");
+		sub("nothing slow");
+		sub("nothing flickery");
+		common.keyframe(01d,23d);
+		lead("no hard tests");
+		common.keyframe(01d,32d);
+		sub("easy to read");
+		sub("easy to write");
+		sub("easy to grasp");
+		
+		common.keyframe(01d,36d);
+		Letters moral = new Letters("We're In This For The Money",new Point(ViewPort.CENTERX,800d),moralFormat);
+		common.fadeIn(500d, moral);
+		common.cue();
+	}
+
+	
+	private void judgment()
+	{
+		common.clear();
+		head("Never And Always");
+		common.keyframe(04d);
+		lead("(a very long time)");
+		sub("never say never?");
+		sub("ummm");
+		sub("very rarely say never!");
+		common.keyframe(15d);
+		head("The Judgment Premise");
+		common.keyframe(17d);
+		lead("no algorithms...");
+		common.keyframe(20d);
+		sub("... for rolling code");
+		common.keyframe(22d);
+		sub("... for designing code");
+		common.keyframe(25d);
+		sub("... for TDD");
+		
+		common.keyframe(37d);
+		lead("that's good news");
+		common.keyframe(43d);
+		sub("better jobs");
+		common.keyframe(50d);
+		sub("way better lives");
+		
+		common.keyframe(57d);
+		head("The Judgment Premise");
+		sub("we rely on human judgment");
+		sub("absolutely");
+		sub("irrevocably");
+		sub("invariably");
+		sub("continuously");
+		common.keyframe(1d,4d);
+		sub("happily");
+		common.keyframe(01d,10d);
+		head("How Does Judgment Work?");
+		common.keyframe(01d,17d);
+		sub("which test to write");
+		common.keyframe(01d,20d);
+		sub("how to say it best");
+		common.keyframe(01d,26d);
+		sub("what's too awkward");
+		common.keyframe(01d,32d);
+		sub("test through vs around");
+		common.keyframe(01d,58d);
+		sub("when to refactor");
+		common.keyframe(02d,01d);
+		sub("when to bull on through");
+		common.keyframe(02d,03d);
+		moral("Judgment Premise","We Rely On Human Judgment");
+		common.cue();
+	}
+
 	
 	private Letters line(String text, Format format)
 	{
@@ -125,6 +230,20 @@ public class UnderplayedScript
 		lines.add(line);
 		return line;
 	}
+	
+	private void moral(String text)
+	{
+		Letters moral = new Letters(text,new Point(ViewPort.CENTERX,690d),moralFormat);
+		common.fadeIn(500d, moral);
+	}
+	
+	private void moral(String text1,String text2)
+	{
+		moral(text1);
+		Letters moral = new Letters(text2,new Point(ViewPort.CENTERX,780d),moralFormat);
+		common.fadeIn(500d, moral);
+	}
+
 	
 	private void clearLines()
 	{
@@ -139,6 +258,12 @@ public class UnderplayedScript
 	private void head(String text)
 	{
 		clearLines();
+		line(text,columnFormat);
+	}
+	
+	private void lead(String text)
+	{
+		lastLineY+=30d;
 		line(text,columnFormat);
 	}
 
