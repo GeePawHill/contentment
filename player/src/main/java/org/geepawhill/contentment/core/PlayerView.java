@@ -5,6 +5,7 @@ import org.geepawhill.contentment.jfx.ScaleListener;
 import org.geepawhill.contentment.utility.JfxUtility;
 
 import javafx.geometry.Orientation;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -62,6 +63,11 @@ public class PlayerView
 	
 	private void mouseClicked(MouseEvent event)
 	{
+		if(event.isShiftDown() && event.getButton()==MouseButton.PRIMARY)
+		{
+			player.play();
+			return;
+		}
 		if(event.getButton()==MouseButton.SECONDARY) player.backward();
 		else player.playOne();	
 		}
@@ -71,11 +77,11 @@ public class PlayerView
 //		new DemoScript(sequence).add();
 //		new BaseComplications(sequence).add();
 		new UnderplayedScript(sequence).add();
-		new InteractiveStabilization(sequence).add();
-		new AgentAndPokes(sequence).add();
-		new ResponsesToComplexity(sequence).add();
-		new VisibleGeekLa1(sequence).add();
-		new GeekNeeqOne(sequence).add();
+//		new InteractiveStabilization(sequence).add();
+//		new AgentAndPokes(sequence).add();
+//		new ResponsesToComplexity(sequence).add();
+//		new VisibleGeekLa1(sequence).add();
+//		new GeekNeeqOne(sequence).add();
 		player.reset(sequence);
 	}
 	
@@ -85,7 +91,7 @@ public class PlayerView
 		tools.setOrientation(Orientation.VERTICAL);
 		
 		Button full = new Button("Full");
-		full.setOnAction(event -> stage.setFullScreen(true));
+		full.setOnAction(event -> makeFullScreen());
 		tools.getItems().add(full);
 		
 		Button test = new Button("**");
@@ -121,6 +127,12 @@ public class PlayerView
 		tools.getItems().add(allButEnd);
 
 		return tools;
+	}
+
+	private void makeFullScreen()
+	{
+		stage.setFullScreen(true);
+		stage.getScene().setCursor(Cursor.NONE);
 	}
 
 }

@@ -1,5 +1,7 @@
 package org.geepawhill.contentment.core;
 
+import java.util.ArrayList;
+
 import org.geepawhill.contentment.actors.Arrow;
 import org.geepawhill.contentment.actors.ClipArt;
 import org.geepawhill.contentment.actors.LabelBox;
@@ -9,6 +11,7 @@ import org.geepawhill.contentment.actors.Title;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.geometry.ViewPort;
 import org.geepawhill.contentment.step.CommonSteps;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
@@ -16,127 +19,132 @@ import org.geepawhill.contentment.style.TypeFace;
 import javafx.geometry.HPos;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class UnderplayedScript
 {
 	private Sequence sequence;
 	private CommonSteps common;
 
-	private Format firstFormat;
-	private Format secondFormat;
-	private Format thirdFormat;
+	private Format columnFormat;
+	private Format subFormat;
+	private Format moralFormat;
 	private Format fourthFormat;
-	
+
+	private ArrayList<Letters> lines;
 	private double lastLineY;
 
 	public UnderplayedScript(Sequence sequence)
 	{
 		this.sequence = sequence;
 		this.common = new CommonSteps(sequence);
-		firstFormat = new Format(TypeFace.largeHand(), TypeFace.color(Color.RED, 1d), Frames.frame(Color.RED, 5d, 1d));
-		secondFormat = new Format(firstFormat, TypeFace.color(Color.GREEN, 1d), Frames.frame(Color.GREEN, 5d, 1d));
-		thirdFormat = new Format(firstFormat, TypeFace.color(Color.BLUE, 1d), Frames.frame(Color.BLUE, 5d, 1d));
+		this.lines = new ArrayList<>();
+		Font largeFont = new Font("GoodDog",100d);
+		Font mediumFont = new Font("GoodDog",80d);
+		Font moralFont = new Font("GoodDog",120d);
+		columnFormat = new Format(TypeFace.font(largeFont, 3d, 1d), TypeFace.color(Color.RED, 1d), Frames.frame(Color.RED, 5d, 1d));
+		subFormat = new Format(columnFormat, TypeFace.font(mediumFont,2d,1d), TypeFace.color(Color.GREENYELLOW, 1d), Frames.frame(Color.GREEN, 5d, 1d));
+		moralFormat = new Format(TypeFace.font(moralFont,5d,1d), TypeFace.color(Color.LIGHTBLUE, Color.BLUE, 1d), Frames.frame(Color.BLUE, 5d, 1d));
 		fourthFormat = new Format(TypeFace.mediumSans(), TypeFace.color(Color.YELLOW, 1d));
 	}
 
 	public void add()
 	{
 		scene1();
-		scene2();
 	}
 
 	private void scene1()
 	{
-		Title title = new Title();
-		common.appear(title);
-		sequence.add(title.change("Five Underplayed TDD Premises"));
+		head("Five Underplayed Premises");
+		common.keyframe(16d);
+		head("TDD'er for 20 years");
+		common.keyframe(20d);
+		sub("doing");
+		sub("learning");
+		sub("teaching");
+		sub("arguing (w/alcohol)");
+
+		common.keyframe(28d);
+		head("Programming *is* TDD");
+		common.keyframe(36d);
+		sub("continuous integration");
+		sub("small steps");
+		sub("merciless refactoring");
+		sub("microtesting");
+		sub("small objects & methods");
+
+		common.keyframe(44d);
+		head("There are different TDD styles");
+		sub("chicago vs london");
+		sub("story vs micro");
+		sub("and so on");
+		common.keyframe(54d);
+		head("GeePaw's Style...");
+		common.keyframe(1d,0d);
+		sub("...huge emphasis on microtests");
+		common.keyframe(1d,8d);
+		sub("...rare usage of auto-mocking tools");
+		common.keyframe(1d,16d);
+		sub("...think my way in");
+		common.keyframe(1d,30d);
+		sub("...test drive my way back out");
+		
+		common.keyframe(1d,41d);
+		head("Five Underplayed Premises");
+		common.keyframe(1d,46d);
+		sub("the money premise");
+		sub("the judgment premise");
+		sub("the chaining premise");
+		sub("the correlation premise");
+		sub("the driving premise");
+		
+		common.keyframe(1d,56d);
+		head("Underplayed?");
+		common.keyframe(2d,03d);
+		sub("mentioned in passing");
+		sub("modeled much of the time");
+		sub("not called out sharply");
+		common.keyframe(2d,15d);
+		head("It's Easy To Be Distracted");
+		sub("look at the pretty lights!");
+		sub("the premises need hammering");
+		
+		common.keyframe(2d,22d);
+		Letters moral = new Letters("Premises Front & Center",new Point(ViewPort.CENTERX,800d),moralFormat);
+		common.fadeIn(500d, moral);
 		common.cue();
 		
-		firstLine("Right-Aligned",firstFormat);
-		line("Anothr line",firstFormat);
-		line("Still another",secondFormat);
-		common.fadeIn(500d, new Letters("Right-Aligned",new Point(1500d,200d),firstFormat,HPos.RIGHT));
-		
-		
 
-		sequence.add(title.change("Its text can change."));
-		common.cue();
-
-		Letters theseAreLetters = new Letters("These are letters.", new Point(800d, 450d), firstFormat);
-		common.appear(theseAreLetters);
-
-		Letters fadedIn = new Letters("They can fade in.", new Point(800d, 500d), secondFormat);
-		common.fadeIn(500d, fadedIn);
-
-		Letters sketchedIn = new Letters("They can sketch in.", new Point(800d, 550d), thirdFormat);
-		common.sketch(1000d,sketchedIn);
-
-		Letters altFont = new Letters("Letters have font.", new Point(800d, 600d), fourthFormat);
-		common.fadeIn(500d,altFont);
-
-		Format fifthFormat = new Format(TypeFace.mediumSans(), TypeFace.color(Color.YELLOW, .3d));
-		Letters altOpacity = new Letters("And opacity", new Point(800d, 650d), fifthFormat);
-		common.fadeIn(500d,altOpacity);
-		common.cue();
-		common.clear();
 	}
 	
-	private Letters firstLine(String text, Format format)
-	{
-		lastLineY = 200d;
-		return line(text,format);
-	}
-	
-	
-
 	private Letters line(String text, Format format)
 	{
-		Letters line = new Letters(text,new Point(1500d,lastLineY),format,HPos.RIGHT);
-		common.fadeIn(500d, line);
-		lastLineY += 100d;
+		Letters line = new Letters(text,new Point(1550d,lastLineY),format,HPos.RIGHT);
+		common.fadeIn(400d, line);
+		lastLineY += 80d;
+		lines.add(line);
 		return line;
 	}
-
-	private void scene2()
+	
+	private void clearLines()
 	{
-		Title title = new Title();
-		common.appear(title);
-		sequence.add(title.change("There are other actors."));
-
-		LabelBox box1 = new LabelBox(LabelBox.class.getSimpleName(), new Point(400d, 300d), firstFormat);
-		common.sketch(1000d, box1);
-
-		LabelBox box2 = new LabelBox(LabelBox.class.getSimpleName(), new Point(800d, 300d), firstFormat);
-		common.fadeIn(500d, box2);
-		
-		LabelBox box3 = new LabelBox(LabelBox.class.getSimpleName(), new Point(1200d, 300d), firstFormat);
-		common.appear(box3);
-
-		OvalText oval1 = new OvalText(OvalText.class.getSimpleName(), new Point(400d, 500d), secondFormat);
-		common.sketch(1000d, oval1);
-
-		OvalText oval2 = new OvalText(OvalText.class.getSimpleName(), new Point(800d, 500d), secondFormat);
-		common.fadeIn(500d, oval2);
-		
-		OvalText oval3 = new OvalText(OvalText.class.getSimpleName(), new Point(1200d, 500d), secondFormat);
-		common.appear(oval3);
-
-		Arrow arrow1 = new Arrow(box1, true, oval1, true, thirdFormat);
-		common.sketch(1000d, arrow1);
-
-		Arrow arrow2 = new Arrow(box2, true, oval2, true, thirdFormat);
-		common.fadeIn(500d, arrow2);
-		
-		Arrow arrow3 = new Arrow(box3, true, oval3, true, thirdFormat);
-		common.appear(arrow3);
-		
-		Image image = new Image("/org/geepawhill/scripts/usOutline.png", 300d, 400d, true, true);
-		ClipArt art1 = new ClipArt(image,new PointPair(200d, 600d,0d,0d));
-		common.appear(art1);
-
-		ClipArt art3 = new ClipArt(image,new PointPair(1000d, 600d,0d,0d));
-		common.fadeIn(1000d,art3);
-
-		common.cue();
+		lastLineY=100d;
+		for(Letters line : lines)
+		{
+			common.disappear(line);
+		}
+		lines.clear();
 	}
+	
+	private void head(String text)
+	{
+		clearLines();
+		line(text,columnFormat);
+	}
+
+	private void sub(String text)
+	{
+		line(text,subFormat);
+	}
+
 }

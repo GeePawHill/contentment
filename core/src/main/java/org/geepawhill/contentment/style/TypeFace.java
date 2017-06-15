@@ -40,12 +40,12 @@ public class TypeFace
 
 	public static Style mediumHand()
 	{
-		return font(new Font("Buxton Sketch", 30d), 1d, .5d);
+		return font(new Font("GoodDog", 50d), 2d, 1d);
 	}
 
 	public static Style largeHand()
 	{
-		return font(new Font("GoodDog", 60d), 2d, .5d);
+		return font(new Font("GoodDog", 60d), 2d, 1d);
 	}
 
 	public static Style mediumSans()
