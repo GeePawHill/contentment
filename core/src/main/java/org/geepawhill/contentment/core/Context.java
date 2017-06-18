@@ -1,7 +1,5 @@
 package org.geepawhill.contentment.core;
 
-import java.time.LocalDateTime;
-
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Actors;
 

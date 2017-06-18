@@ -2,22 +2,15 @@ package org.geepawhill.contentment.core;
 
 import java.util.ArrayList;
 
-import org.geepawhill.contentment.actors.Arrow;
-import org.geepawhill.contentment.actors.ClipArt;
-import org.geepawhill.contentment.actors.LabelBox;
 import org.geepawhill.contentment.actors.Letters;
-import org.geepawhill.contentment.actors.OvalText;
-import org.geepawhill.contentment.actors.Title;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
-import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.geometry.ViewPort;
 import org.geepawhill.contentment.step.CommonSteps;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 
 import javafx.geometry.HPos;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -50,9 +43,9 @@ public class UnderplayedScript
 
 	public void add()
 	{
-		// scene1();
+		 intro();
 		// money();
-		judgment();
+//		judgment();
 	}
 
 	private void intro()
