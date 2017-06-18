@@ -9,32 +9,32 @@ import org.junit.Test;
 
 import javafx.scene.Group;
 
-public class VerseTest
+public class PhraseTest
 {
-	private Verse empty;
-	private Verse onlyOne;
-	private Verse both;
+	private Phrase empty;
+	private Phrase onlyOne;
+	private Phrase both;
 	private Context context = new Context(new Group());
-	private TestPlayable one;
-	private TestPlayable two;
+	private TestNote one;
+	private TestNote two;
 	private boolean gotFinish;
 	private OnFinished recordFinish;
 
 	@Before
 	public void before()
 	{
-		one = new TestPlayable(1L);
-		two = new TestPlayable(9L);
+		one = new TestNote(1L);
+		two = new TestNote(9L);
 
-		empty = new Verse();
+		empty = new Phrase();
 
-		onlyOne = new Verse();
+		onlyOne = new Phrase();
 		onlyOne.add(one);
 
-		both = new Verse();
+		both = new Phrase();
 		both.add(one);
 		both.add(two);
-
+		
 		gotFinish = false;
 
 		recordFinish = () -> gotFinish = true;
@@ -104,18 +104,18 @@ public class VerseTest
 		assertThat(gotFinish).isTrue();
 	}
 
-	private void assertPlayed(TestPlayable playable)
+	private void assertPlayed(TestNote playable)
 	{
-		assertThat(playable.state).isEqualTo(TestPlayable.State.Played);
+		assertThat(playable.state).isEqualTo(TestNote.State.Played);
 	}
 
-	private void assertUndone(TestPlayable playable)
+	private void assertUndone(TestNote playable)
 	{
-		assertThat(playable.state).isEqualTo(TestPlayable.State.Undone);
+		assertThat(playable.state).isEqualTo(TestNote.State.Undone);
 	}
 
-	private void assertPlaying(TestPlayable playable)
+	private void assertPlaying(TestNote playable)
 	{
-		assertThat(playable.state).isEqualTo(TestPlayable.State.Playing);
+		assertThat(playable.state).isEqualTo(TestNote.State.Playing);
 	}
 }

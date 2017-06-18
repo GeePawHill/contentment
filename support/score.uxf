@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>740</x>
+      <x>980</x>
       <y>440</y>
       <w>100</w>
       <h>30</h>
@@ -41,14 +41,15 @@ unplay(context)</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>510</x>
-      <y>270</y>
+      <x>550</x>
+      <y>430</y>
       <w>150</w>
-      <h>90</h>
+      <h>50</h>
     </coordinates>
     <panel_attributes>Verse
 --
-cueInMovement()
+add(Playable)
+
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -62,7 +63,10 @@ cueInMovement()
     </coordinates>
     <panel_attributes>Song
 --
-cueInSong
+add(at,verse)
+fastTo(target)
+slowTo(target)
+undoTo(target)
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -80,17 +84,6 @@ cueInSong
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>960</x>
-      <y>440</y>
-      <w>100</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>Phrase</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
       <x>200</x>
@@ -104,46 +97,24 @@ cueInSong
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>270</y>
-      <w>130</w>
-      <h>30</h>
+      <x>620</x>
+      <y>300</y>
+      <w>180</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;110.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>650</x>
-      <y>270</y>
-      <w>150</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0;160.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>890</x>
       <y>340</y>
-      <w>130</w>
+      <w>160</w>
       <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0;110.0;50.0;110.0;100.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>780</x>
-      <y>340</y>
-      <w>140</w>
-      <h>120</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>120.0;10.0;120.0;50.0;10.0;50.0;10.0;100.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;140.0;50.0;140.0;100.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -297,17 +268,6 @@ unplay(context,target)
     <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>360</x>
-      <y>140</y>
-      <w>250</w>
-      <h>150</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0;230.0;60.0;230.0;130.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
       <x>90</x>
@@ -328,5 +288,16 @@ lastSong
 lastVerse
 </panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>340</y>
+      <w>260</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>240.0;10.0;240.0;50.0;10.0;50.0;10.0;90.0</additional_attributes>
   </element>
 </diagram>

@@ -3,7 +3,7 @@ package org.geepawhill.contentment.perform;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 
-public class TestPlayable implements Playable
+public class TestNote implements Playable
 {
 	static public enum State
 	{
@@ -15,17 +15,17 @@ public class TestPlayable implements Playable
 	private long ms;
 	private boolean autoFinish;
 
-	public TestPlayable()
+	public TestNote()
 	{
 		this(0, false);
 	}
 
-	public TestPlayable(long ms)
+	public TestNote(long ms)
 	{
 		this(ms,false);
 	}
 	
-	public TestPlayable(long ms,boolean autoFinish)
+	public TestNote(long ms,boolean autoFinish)
 	{
 		this.ms = ms;
 		this.ms = ms;
