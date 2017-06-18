@@ -46,7 +46,7 @@ unplay(context)</panel_attributes>
       <w>150</w>
       <h>90</h>
     </coordinates>
-    <panel_attributes>Phrase
+    <panel_attributes>Verse
 --
 cueInMovement()
 </panel_attributes>
@@ -60,7 +60,7 @@ cueInMovement()
       <w>100</w>
       <h>90</h>
     </coordinates>
-    <panel_attributes>Movement
+    <panel_attributes>Song
 --
 cueInSong
 </panel_attributes>
@@ -74,7 +74,7 @@ cueInSong
       <w>120</w>
       <h>90</h>
     </coordinates>
-    <panel_attributes>Song
+    <panel_attributes>Score
 --
 </panel_attributes>
     <additional_attributes/>
@@ -87,7 +87,7 @@ cueInSong
       <w>100</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>Melody</panel_attributes>
+    <panel_attributes>Phrase</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -306,5 +306,27 @@ unplay(context,target)
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;60.0;230.0;60.0;230.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>390</y>
+      <w>130</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>Performance
+--
+load(score)
+playTo(target)
+forwardTo(target)
+backTo(target)
+--
+start
+end
+lastSong
+lastVerse
+</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
