@@ -18,12 +18,6 @@ public class RhythmTest extends JavaFxTest
 	}
 
 	@Test
-	public void newIsNotVideo()
-	{
-		assertThat(rhythm.isMedia()).isFalse();
-	}
-	
-	@Test
 	public void newBeatIsZero()
 	{
 		assertThat(rhythm.beat()).isEqualTo(0L);

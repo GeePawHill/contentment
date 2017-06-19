@@ -1,8 +1,5 @@
 package org.geepawhill.contentment.rhythm;
 
-import java.io.File;
-import java.time.LocalDateTime;
-
 import javafx.application.Platform;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
@@ -21,31 +18,53 @@ public class Rhythm
 
 	private SimpleLongProperty beatProperty;
 	private Text timing;
-	private Media media;
 	private MediaPlayer player;
 	private MediaView mediaView;
-
+	private Media noMedia;
+	
+	static String noMediaUrl = Rhythm.class.getClassLoader().getResource("org/contentment/geepawhill/rhythm/blackHandbraked.mp4").toString();
+	
 	public Rhythm()
 	{
 		beatProperty = new SimpleLongProperty(0L);
-		timing = new Text("Timing");
-		timing.setFont(new Font("Consolas",30d));
-		timing.setStroke(Color.BLUE);
-		timing.setFill(Color.BLUE);
-		media = new Media(new File("../core/src/main/resources/blackHandbraked.mp4").toURI().toString());
-		player = new MediaPlayer(media);
-		mediaView = new MediaView(player);
-		player.setAutoPlay(true);
+		timing = makeTimingText();
+		noMedia = new Media(noMediaUrl);
+//		noMedia = new Media(new File("/01faceoverCut.mp4").toURI().toString());
+		mediaView = new MediaView();
+		loadMedia(noMedia);
 	}
 
-	public boolean isMedia()
+	public void loadMedia(Media media)
 	{
-		return false;
+		player = new MediaPlayer(media);
+		player.setAutoPlay(false);
+		mediaView.setMediaPlayer(player);
+		player.pause();
+		seekHard(0);
 	}
 
+	private Text makeTimingText()
+	{
+		Text text = new Text("00000000");
+		text.setFont(new Font("Consolas",30d));
+		text.setStroke(Color.BLUE);
+		text.setFill(Color.BLUE);
+		return text; 
+	}
+	
 	public LongProperty beatProperty()
 	{
 		return beatProperty;
+	}
+	
+	public void play()
+	{
+		player.play();
+	}
+	
+	public void pause()
+	{
+		player.pause();
 	}
 
 	public long beat()
@@ -62,12 +81,6 @@ public class Rhythm
 	public void seekSoft(long ms)
 	{
 		if(beat()<ms) seekHard(ms);
-	}
-
-	public void start()
-	{
-		seekHard(0L);
-		player.play();
 	}
 
 	public void update()

@@ -90,6 +90,7 @@ public class Player
 
 	public void play()
 	{
+		context.rhythm.play();
 		context.skipDelays(false);
 		isChaining = true;
 		switch (state)
