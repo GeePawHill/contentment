@@ -31,7 +31,7 @@ public class RhythmTest
 	@Test
 	public void seekChangesClock()
 	{
-		rhythm.seek(100L);
+		rhythm.seekHard(100L);
 		assertThat(rhythm.beat()).isEqualTo(100L);
 	}
 	

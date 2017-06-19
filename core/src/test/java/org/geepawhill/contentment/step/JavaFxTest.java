@@ -1,5 +1,6 @@
 package org.geepawhill.contentment.step;
 
+import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.test.JavaFxRunner;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -15,6 +16,11 @@ public abstract class JavaFxTest extends ApplicationTest
 	{
 		runner = new JavaFxRunner();
 		runner.prepareWindow(stage);
+	}
+
+	public Context getContext()
+	{
+		return runner.context;
 	}
 
 }

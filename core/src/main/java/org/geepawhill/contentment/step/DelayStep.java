@@ -8,7 +8,6 @@ import org.geepawhill.contentment.timing.Timing;
 
 public class DelayStep implements Step
 {
-
 	private Timing timing;
 
 	public DelayStep(double ms)

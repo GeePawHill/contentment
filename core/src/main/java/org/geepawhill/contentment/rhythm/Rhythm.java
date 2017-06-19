@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.rhythm;
 
 import java.io.File;
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 import javafx.application.Platform;
@@ -15,12 +14,12 @@ import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 public class Rhythm
 {
 
 	private SimpleLongProperty beatProperty;
-	private LocalDateTime then;
 	private Text timing;
 	private Media media;
 	private MediaPlayer player;
@@ -29,8 +28,7 @@ public class Rhythm
 	public Rhythm()
 	{
 		beatProperty = new SimpleLongProperty(0L);
-		then = LocalDateTime.now();
-		timing = new Text("Hi There");
+		timing = new Text("Timing");
 		timing.setFont(new Font("Consolas",30d));
 		timing.setStroke(Color.BLUE);
 		timing.setFill(Color.BLUE);
@@ -55,26 +53,39 @@ public class Rhythm
 		return beatProperty.get();
 	}
 
-	public void seek(long ms)
+	public void seekHard(long ms)
 	{
 		beatProperty.set(ms);
+		player.seek(Duration.millis(ms));
+	}
+	
+	public void seekSoft(long ms)
+	{
+		if(beat()<ms) seekHard(ms);
 	}
 
 	public void start()
 	{
-		then = LocalDateTime.now();
+		seekHard(0L);
+		player.play();
 	}
 
 	public void update()
 	{
-		LocalDateTime now = LocalDateTime.now();
-		beatProperty.set(Duration.between(then, now).toMillis());
+		beatProperty.set(getPlayerTime());
 		Platform.runLater( () -> timing.setText(String.format("%8d", beat())));
+	}
+
+	private long getPlayerTime()
+	{
+		long playerOffset = (long)player.getCurrentTime().toMillis();
+		long cycleCount = (long)player.getCurrentCount();
+		long cycleTime = (long)player.getCurrentTime().toMillis();
+		return playerOffset+cycleTime*cycleCount;
 	}
 
 	public Node view(Pane owner)
 	{
-		
 		mediaView.fitWidthProperty().bind(owner.widthProperty());
 		mediaView.fitHeightProperty().bind(owner.heightProperty());
 		return mediaView;
