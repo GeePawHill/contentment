@@ -43,9 +43,9 @@ public class ChordTest
 	@Test
 	public void maxesMs()
 	{
-		assertThat(empty.ms()).isEqualTo(0L);
-		assertThat(onlyOne.ms()).isEqualTo(1L);
-		assertThat(both.ms()).isEqualTo(9L);
+		assertThat(empty.timing().ms()).isEqualTo(0L);
+		assertThat(onlyOne.timing().ms()).isEqualTo(1L);
+		assertThat(both.timing().ms()).isEqualTo(9L);
 	}
 
 	@Test
@@ -104,18 +104,18 @@ public class ChordTest
 		assertThat(gotFinish).isTrue();
 	}
 
-	private void assertPlayed(TestNote playable)
+	private void assertPlayed(TestNote Step)
 	{
-		assertThat(playable.state).isEqualTo(TestNote.State.Played);
+		assertThat(Step.state).isEqualTo(TestNote.State.Played);
 	}
 
-	private void assertUndone(TestNote playable)
+	private void assertUndone(TestNote Step)
 	{
-		assertThat(playable.state).isEqualTo(TestNote.State.Undone);
+		assertThat(Step.state).isEqualTo(TestNote.State.Undone);
 	}
 
-	private void assertPlaying(TestNote playable)
+	private void assertPlaying(TestNote Step)
 	{
-		assertThat(playable.state).isEqualTo(TestNote.State.Playing);
+		assertThat(Step.state).isEqualTo(TestNote.State.Playing);
 	}
 }

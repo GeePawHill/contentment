@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
+import org.geepawhill.contentment.step.Step;
+import org.geepawhill.contentment.timing.Timing;
 
-public class Chord implements Playable
+public class Chord implements Step
 {
-	private final ArrayList<Playable> playables;
+	private final ArrayList<Step> playables;
 	private long ms;
 	private OnFinished onFinished;
 	private int finished;
@@ -18,24 +20,24 @@ public class Chord implements Playable
 		this.ms=0L;
 	}
 
-	public void add(Playable playable)
+	public void add(Step Step)
 	{
-		playables.add(playable);
-		if(playable.ms()>ms) ms = playable.ms();
+		playables.add(Step);
+		if(Step.timing().ms()>ms) ms = (long)Step.timing().ms();
 	}
 
 	@Override
-	public long ms()
+	public Timing timing()
 	{
-		return ms;
+		return Timing.ms(ms);
 	}
 
 	@Override
 	public void fast(Context context)
 	{
-		for(Playable playable : playables)
+		for(Step Step : playables)
 		{
-			playable.fast(context);
+			Step.fast(context);
 		}
 	}
 
@@ -53,9 +55,9 @@ public class Chord implements Playable
 	{
 		this.onFinished = onFinished;
 		this.finished = 0;
-		for(Playable playable : playables)
+		for(Step Step : playables)
 		{
-			playable.slow(context, ()->next());
+			Step.slow(context, ()->next());
 		}
 	}
 	

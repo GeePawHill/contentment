@@ -2,19 +2,16 @@ package org.geepawhill.contentment.perform;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
+import org.geepawhill.contentment.step.JavaFxTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.scene.Group;
-
-public class PhraseTest
+public class PhraseTest extends JavaFxTest
 {
 	private Phrase empty;
 	private Phrase onlyOne;
 	private Phrase both;
-	private Context context = new Context(new Group());
 	private TestNote one;
 	private TestNote two;
 	private boolean gotFinish;
@@ -43,22 +40,22 @@ public class PhraseTest
 	@Test
 	public void sumsMs()
 	{
-		assertThat(empty.ms()).isEqualTo(0L);
-		assertThat(onlyOne.ms()).isEqualTo(1L);
-		assertThat(both.ms()).isEqualTo(10L);
+		assertThat(empty.timing().ms()).isEqualTo(0L);
+		assertThat(onlyOne.timing().ms()).isEqualTo(1L);
+		assertThat(both.timing().ms()).isEqualTo(10L);
 	}
 
 	@Test
 	public void fastOne()
 	{
-		onlyOne.fast(context);
+		onlyOne.fast(getContext());
 		assertPlayed(one);
 	}
 
 	@Test
 	public void fastBoth()
 	{
-		both.fast(context);
+		both.fast(getContext());
 		assertPlayed(one);
 		assertPlayed(two);
 	}
@@ -66,16 +63,16 @@ public class PhraseTest
 	@Test
 	public void undoOne()
 	{
-		onlyOne.fast(context);
-		onlyOne.undo(context);
+		onlyOne.fast(getContext());
+		onlyOne.undo(getContext());
 		assertUndone(one);
 	}
 
 	@Test
 	public void undoBoth()
 	{
-		both.fast(context);
-		both.undo(context);
+		both.fast(getContext());
+		both.undo(getContext());
 		assertUndone(one);
 		assertUndone(two);
 	}
@@ -83,9 +80,9 @@ public class PhraseTest
 	@Test
 	public void slowOne()
 	{
-		onlyOne.slow(context, recordFinish);
+		onlyOne.slow(getContext(), recordFinish);
 		assertPlaying(one);
-		one.finish(context);
+		one.finish(getContext());
 		assertPlayed(one);
 		assertThat(gotFinish).isTrue();
 	}
@@ -93,29 +90,30 @@ public class PhraseTest
 	@Test
 	public void slowBoth()
 	{
-		both.slow(context, recordFinish);
+		both.slow(getContext(), recordFinish);
 		assertPlaying(one);
 		assertUndone(two);
-		one.finish(context);
+		one.finish(getContext());
 		assertPlayed(one);
 		assertPlaying(two);
-		two.finish(context);
+		two.finish(getContext());
 		assertPlayed(two);
 		assertThat(gotFinish).isTrue();
 	}
 
-	private void assertPlayed(TestNote playable)
+	private void assertPlayed(TestNote Step)
 	{
-		assertThat(playable.state).isEqualTo(TestNote.State.Played);
+		assertThat(Step.state).isEqualTo(TestNote.State.Played);
 	}
 
-	private void assertUndone(TestNote playable)
+	private void assertUndone(TestNote Step)
 	{
-		assertThat(playable.state).isEqualTo(TestNote.State.Undone);
+		assertThat(Step.state).isEqualTo(TestNote.State.Undone);
 	}
 
-	private void assertPlaying(TestNote playable)
+	private void assertPlaying(TestNote Step)
 	{
-		assertThat(playable.state).isEqualTo(TestNote.State.Playing);
+		assertThat(Step.state).isEqualTo(TestNote.State.Playing);
 	}
+
 }

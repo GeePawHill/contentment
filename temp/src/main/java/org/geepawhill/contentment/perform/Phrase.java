@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
+import org.geepawhill.contentment.step.Step;
+import org.geepawhill.contentment.timing.Timing;
 
-public class Phrase implements Playable
+public class Phrase implements Step
 {
-	private final ArrayList<Playable> playables;
+	private final ArrayList<Step> playables;
 	private long ms;
 	
 	public Phrase()
@@ -16,24 +18,24 @@ public class Phrase implements Playable
 		this.ms=0L;
 	}
 
-	public void add(Playable playable)
+	public void add(Step Step)
 	{
-		playables.add(playable);
-		ms+=playable.ms();
+		playables.add(Step);
+		ms+=Step.timing().ms();
 	}
 
 	@Override
-	public long ms()
+	public Timing timing()
 	{
-		return ms;
+		return Timing.ms(ms);
 	}
 
 	@Override
 	public void fast(Context context)
 	{
-		for(Playable playable : playables)
+		for(Step Step : playables)
 		{
-			playable.fast(context);
+			Step.fast(context);
 		}
 	}
 

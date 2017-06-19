@@ -2,8 +2,10 @@ package org.geepawhill.contentment.perform;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
+import org.geepawhill.contentment.step.Step;
+import org.geepawhill.contentment.timing.Timing;
 
-public class TestNote implements Playable
+public class TestNote implements Step
 {
 	static public enum State
 	{
@@ -35,9 +37,9 @@ public class TestNote implements Playable
 	}
 	
 	@Override
-	public long ms()
+	public Timing timing()
 	{
-		return ms;
+		return Timing.ms(ms);
 	}
 
 	@Override
@@ -90,7 +92,7 @@ public class TestNote implements Playable
 		switch (state)
 		{
 		case Playing:
-			if (onFinished == null) throw new RuntimeException("No onFinished handler for playable.");
+			if (onFinished == null) throw new RuntimeException("No onFinished handler for Step.");
 			onFinished.run();
 			state = State.Played;
 			break;
@@ -101,7 +103,7 @@ public class TestNote implements Playable
 
 	private void badChange(String change)
 	{
-		throw new RuntimeException(change + " called on " + state + " playable.");
+		throw new RuntimeException(change + " called on " + state + " Step.");
 	}
 
 }

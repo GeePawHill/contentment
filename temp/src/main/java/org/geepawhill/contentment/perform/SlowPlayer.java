@@ -4,15 +4,16 @@ import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
+import org.geepawhill.contentment.step.Step;
 
 class SlowPlayer
 {
 	private int current;
 	private OnFinished onFinished;
-	private ArrayList<Playable> playables;
+	private ArrayList<Step> playables;
 	private Context context;
 	
-	public SlowPlayer(Context context, OnFinished onFinished, ArrayList<Playable> playables)
+	public SlowPlayer(Context context, OnFinished onFinished, ArrayList<Step> playables)
 	{
 		this.context = context;
 		this.onFinished = onFinished;
