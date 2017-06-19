@@ -1,20 +1,17 @@
-package org.geepawhill.contentment.perform;
+package org.geepawhill.contentment.step;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
+import org.geepawhill.contentment.step.JavaFxTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.scene.Group;
-
-public class ChordTest
+public class PhraseTest extends JavaFxTest
 {
-	private Chord empty;
-	private Chord onlyOne;
-	private Chord both;
-	private Context context = new Context(new Group());
+	private Phrase empty;
+	private Phrase onlyOne;
+	private Phrase both;
 	private TestNote one;
 	private TestNote two;
 	private boolean gotFinish;
@@ -26,12 +23,12 @@ public class ChordTest
 		one = new TestNote(1L);
 		two = new TestNote(9L);
 
-		empty = new Chord();
+		empty = new Phrase();
 
-		onlyOne = new Chord();
+		onlyOne = new Phrase();
 		onlyOne.add(one);
 
-		both = new Chord();
+		both = new Phrase();
 		both.add(one);
 		both.add(two);
 		
@@ -41,24 +38,24 @@ public class ChordTest
 	}
 
 	@Test
-	public void maxesMs()
+	public void sumsMs()
 	{
 		assertThat(empty.timing().ms()).isEqualTo(0L);
 		assertThat(onlyOne.timing().ms()).isEqualTo(1L);
-		assertThat(both.timing().ms()).isEqualTo(9L);
+		assertThat(both.timing().ms()).isEqualTo(10L);
 	}
 
 	@Test
 	public void fastOne()
 	{
-		onlyOne.fast(context);
+		onlyOne.fast(getContext());
 		assertPlayed(one);
 	}
 
 	@Test
 	public void fastBoth()
 	{
-		both.fast(context);
+		both.fast(getContext());
 		assertPlayed(one);
 		assertPlayed(two);
 	}
@@ -66,16 +63,16 @@ public class ChordTest
 	@Test
 	public void undoOne()
 	{
-		onlyOne.fast(context);
-		onlyOne.undo(context);
+		onlyOne.fast(getContext());
+		onlyOne.undo(getContext());
 		assertUndone(one);
 	}
 
 	@Test
 	public void undoBoth()
 	{
-		both.fast(context);
-		both.undo(context);
+		both.fast(getContext());
+		both.undo(getContext());
 		assertUndone(one);
 		assertUndone(two);
 	}
@@ -83,9 +80,9 @@ public class ChordTest
 	@Test
 	public void slowOne()
 	{
-		onlyOne.slow(context, recordFinish);
+		onlyOne.slow(getContext(), recordFinish);
 		assertPlaying(one);
-		one.finish(context);
+		one.finish(getContext());
 		assertPlayed(one);
 		assertThat(gotFinish).isTrue();
 	}
@@ -93,13 +90,13 @@ public class ChordTest
 	@Test
 	public void slowBoth()
 	{
-		both.slow(context, recordFinish);
+		both.slow(getContext(), recordFinish);
 		assertPlaying(one);
-		assertPlaying(two);
-		one.finish(context);
-		assertThat(gotFinish).isFalse();
-		two.finish(context);
+		assertUndone(two);
+		one.finish(getContext());
 		assertPlayed(one);
+		assertPlaying(two);
+		two.finish(getContext());
 		assertPlayed(two);
 		assertThat(gotFinish).isTrue();
 	}
@@ -118,4 +115,5 @@ public class ChordTest
 	{
 		assertThat(Step.state).isEqualTo(TestNote.State.Playing);
 	}
+
 }

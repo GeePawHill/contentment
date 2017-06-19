@@ -1,18 +1,19 @@
-package org.geepawhill.contentment.perform;
+package org.geepawhill.contentment.step;
 
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.timing.Timing;
 
-public class Phrase implements Step
+public class Chord implements Step
 {
 	private final ArrayList<Step> playables;
 	private long ms;
+	private OnFinished onFinished;
+	private int finished;
 	
-	public Phrase()
+	public Chord()
 	{
 		this.playables = new ArrayList<>();
 		this.ms=0L;
@@ -21,7 +22,7 @@ public class Phrase implements Step
 	public void add(Step Step)
 	{
 		playables.add(Step);
-		ms+=Step.timing().ms();
+		if(Step.timing().ms()>ms) ms = (long)Step.timing().ms();
 	}
 
 	@Override
@@ -51,7 +52,18 @@ public class Phrase implements Step
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		new SlowPlayer(context,onFinished,playables);
+		this.onFinished = onFinished;
+		this.finished = 0;
+		for(Step Step : playables)
+		{
+			Step.slow(context, ()->next());
+		}
+	}
+	
+	private void next()
+	{
+		finished+=1;
+		if(finished==playables.size()) onFinished.run();
 	}
 	
 }

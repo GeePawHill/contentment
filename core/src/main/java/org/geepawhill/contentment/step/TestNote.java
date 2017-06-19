@@ -1,8 +1,7 @@
-package org.geepawhill.contentment.perform;
+package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.timing.Timing;
 
 public class TestNote implements Step

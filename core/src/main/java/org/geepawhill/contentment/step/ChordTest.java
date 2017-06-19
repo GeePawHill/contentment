@@ -1,17 +1,20 @@
-package org.geepawhill.contentment.perform;
+package org.geepawhill.contentment.step;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.step.JavaFxTest;
 import org.junit.Before;
 import org.junit.Test;
 
-public class PhraseTest extends JavaFxTest
+import javafx.scene.Group;
+
+public class ChordTest
 {
-	private Phrase empty;
-	private Phrase onlyOne;
-	private Phrase both;
+	private Chord empty;
+	private Chord onlyOne;
+	private Chord both;
+	private Context context = new Context(new Group());
 	private TestNote one;
 	private TestNote two;
 	private boolean gotFinish;
@@ -23,12 +26,12 @@ public class PhraseTest extends JavaFxTest
 		one = new TestNote(1L);
 		two = new TestNote(9L);
 
-		empty = new Phrase();
+		empty = new Chord();
 
-		onlyOne = new Phrase();
+		onlyOne = new Chord();
 		onlyOne.add(one);
 
-		both = new Phrase();
+		both = new Chord();
 		both.add(one);
 		both.add(two);
 		
@@ -38,24 +41,24 @@ public class PhraseTest extends JavaFxTest
 	}
 
 	@Test
-	public void sumsMs()
+	public void maxesMs()
 	{
 		assertThat(empty.timing().ms()).isEqualTo(0L);
 		assertThat(onlyOne.timing().ms()).isEqualTo(1L);
-		assertThat(both.timing().ms()).isEqualTo(10L);
+		assertThat(both.timing().ms()).isEqualTo(9L);
 	}
 
 	@Test
 	public void fastOne()
 	{
-		onlyOne.fast(getContext());
+		onlyOne.fast(context);
 		assertPlayed(one);
 	}
 
 	@Test
 	public void fastBoth()
 	{
-		both.fast(getContext());
+		both.fast(context);
 		assertPlayed(one);
 		assertPlayed(two);
 	}
@@ -63,16 +66,16 @@ public class PhraseTest extends JavaFxTest
 	@Test
 	public void undoOne()
 	{
-		onlyOne.fast(getContext());
-		onlyOne.undo(getContext());
+		onlyOne.fast(context);
+		onlyOne.undo(context);
 		assertUndone(one);
 	}
 
 	@Test
 	public void undoBoth()
 	{
-		both.fast(getContext());
-		both.undo(getContext());
+		both.fast(context);
+		both.undo(context);
 		assertUndone(one);
 		assertUndone(two);
 	}
@@ -80,9 +83,9 @@ public class PhraseTest extends JavaFxTest
 	@Test
 	public void slowOne()
 	{
-		onlyOne.slow(getContext(), recordFinish);
+		onlyOne.slow(context, recordFinish);
 		assertPlaying(one);
-		one.finish(getContext());
+		one.finish(context);
 		assertPlayed(one);
 		assertThat(gotFinish).isTrue();
 	}
@@ -90,13 +93,13 @@ public class PhraseTest extends JavaFxTest
 	@Test
 	public void slowBoth()
 	{
-		both.slow(getContext(), recordFinish);
+		both.slow(context, recordFinish);
 		assertPlaying(one);
-		assertUndone(two);
-		one.finish(getContext());
-		assertPlayed(one);
 		assertPlaying(two);
-		two.finish(getContext());
+		one.finish(context);
+		assertThat(gotFinish).isFalse();
+		two.finish(context);
+		assertPlayed(one);
 		assertPlayed(two);
 		assertThat(gotFinish).isTrue();
 	}
@@ -115,5 +118,4 @@ public class PhraseTest extends JavaFxTest
 	{
 		assertThat(Step.state).isEqualTo(TestNote.State.Playing);
 	}
-
 }
