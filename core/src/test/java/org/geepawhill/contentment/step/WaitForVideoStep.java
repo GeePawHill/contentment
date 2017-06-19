@@ -8,9 +8,10 @@ import org.geepawhill.contentment.timing.Timing;
 
 public class WaitForVideoStep implements Step
 {
-	
+
 	private long beat;
 	private OnFinished onFinished;
+	private Animator animator;
 
 	public WaitForVideoStep(long beat)
 	{
@@ -20,14 +21,26 @@ public class WaitForVideoStep implements Step
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
+		System.out.println("start wait: " + context.rhythm.beat());
 		this.onFinished = onFinished;
-		new Animator().play(context,OnFinished.NONE,(double)beat*2d,this::updateBeat);
+		this.animator = new Animator();
+		animator.play(context, OnFinished.NONE, (double) beat * 2d, this::updateBeat);
 	}
 	
+	private void finishAndDie()
+	{
+		animator.stop();
+		onFinished.run();
+	}
+
 	private void updateBeat(Context context, double fraction)
 	{
 		context.rhythm.update();
-		if(context.rhythm.beat()>=beat) onFinished.run();
+		if (context.rhythm.beat() >= beat)
+		{
+			System.out.println("finish wait: "+context.rhythm.beat());
+			finishAndDie();
+		}
 	}
 
 	@Override

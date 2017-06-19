@@ -62,13 +62,15 @@ public class UnderplayedScript
 		{
 		}
 		head("Five Underplayed Premises");
-		sequence.add(new WaitForVideoStep(16000));
+		sequence.add(new WaitForVideoStep(3000));
 		head("TDD'er for 20 years");
-		common.keyframe(20d);
+		sequence.add(new WaitForVideoStep(5000));
 		sub("doing");
 		sub("learning");
 		sub("teaching");
 		sub("arguing (w/alcohol)");
+
+		sequence.add(new WaitForVideoStep(28000));
 
 		common.keyframe(28d);
 		head("Programming *is* TDD");
