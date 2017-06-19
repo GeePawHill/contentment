@@ -185,6 +185,7 @@ public class Player
 
 	private void onFinished()
 	{
+		context.rhythm.update();
 		if (currentIsLast())
 		{
 			state = PlayState.After;

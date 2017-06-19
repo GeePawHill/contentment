@@ -2,21 +2,17 @@ package org.geepawhill.contentment.core;
 
 import org.controlsfx.control.HiddenSidesPane;
 import org.geepawhill.contentment.jfx.ScaleListener;
-import org.geepawhill.contentment.utility.JfxUtility;
 
 import javafx.geometry.Orientation;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class PlayerView
@@ -42,23 +38,25 @@ public class PlayerView
 		return root;
 	}
 
-	private AnchorPane makeViewport()
+	private Pane makeViewport()
 	{
-		Pane scalingPane = new Pane();
-		
-		BackgroundFill fill = new BackgroundFill(Color.BLACK, null, null);
-		scalingPane.setBackground(new Background(fill));
+		Pane owner = new Pane();
+		owner.setPrefSize(1600d, 900d);
 		
 		Group canvas = new Group();
-		ScaleListener listener = new ScaleListener(scalingPane,canvas);
-		scalingPane.widthProperty().addListener(listener);
-		scalingPane.heightProperty().addListener(listener);
 		player = new Player(canvas);
 		
-		scalingPane.setOnMouseClicked((event) -> mouseClicked(event));
-		scalingPane.getChildren().add(canvas);
+		ScaleListener listener = new ScaleListener(owner,canvas);
+		owner.widthProperty().addListener(listener);
+		owner.heightProperty().addListener(listener);
 		
-		return JfxUtility.makeAnchorFor(scalingPane);
+		owner.setOnMouseClicked((event) -> mouseClicked(event));
+		
+		Node media = player.context.rhythm.view(owner);
+		owner.getChildren().add(media);
+		owner.getChildren().add(canvas);
+		owner.getChildren().add(player.context.rhythm.timingView());
+		return owner;
 	}
 	
 	private void mouseClicked(MouseEvent event)
