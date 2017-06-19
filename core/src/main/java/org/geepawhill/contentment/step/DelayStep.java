@@ -47,7 +47,7 @@ public class DelayStep implements Step
 
 	public void interpolate(Context context, double fraction)
 	{
-		System.out.println(fraction);
+		context.rhythm.update();
 	}
 
 }

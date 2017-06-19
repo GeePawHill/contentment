@@ -1,6 +1,5 @@
 package org.geepawhill.contentment.core;
 
-import org.controlsfx.control.HiddenSidesPane;
 import org.geepawhill.contentment.jfx.ScaleListener;
 
 import javafx.geometry.Orientation;
@@ -12,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -19,19 +19,25 @@ public class PlayerView
 {
 	private Player player;
 	private Sequence sequence;
-	private HiddenSidesPane root;
+	private BorderPane root;
 	private Stage stage;
+	private Group canvas;
+	private ToolBar tools;
 	
 	public PlayerView(Stage stage)
 	{
 		this.stage = stage;
+		canvas = new Group();
+		player = new Player(canvas);
+		tools = makeTools();
+		stage.fullScreenProperty().addListener((source,o,n) -> undoFullScreen(n));
 	}
 
 	public Parent getNode()
 	{
-		root = new HiddenSidesPane();
-		root.setRight(makeTools());
-		root.setContent(makeViewport());
+		root = new BorderPane();
+		root.setTop(makeTools());
+		root.setCenter(makeViewport());
 		
 		sequence = new Sequence();
 		makeScripts(sequence);
@@ -42,9 +48,6 @@ public class PlayerView
 	{
 		Pane owner = new Pane();
 		owner.setPrefSize(1600d, 900d);
-		
-		Group canvas = new Group();
-		player = new Player(canvas);
 		
 		ScaleListener listener = new ScaleListener(owner,canvas);
 		owner.widthProperty().addListener(listener);
@@ -86,10 +89,12 @@ public class PlayerView
 	private ToolBar makeTools()
 	{
 		ToolBar tools = new ToolBar();
-		tools.setOrientation(Orientation.VERTICAL);
+		tools.setOrientation(Orientation.HORIZONTAL);
+		
+		tools.getItems().add(player.context.rhythm.timingView());
 		
 		Button full = new Button("Full");
-		full.setOnAction(event -> makeFullScreen());
+		full.setOnAction(event -> stage.setFullScreen(true));
 		tools.getItems().add(full);
 		
 		Button test = new Button("**");
@@ -127,10 +132,18 @@ public class PlayerView
 		return tools;
 	}
 
-	private void makeFullScreen()
+	private void undoFullScreen(Boolean newValue)
 	{
-		stage.setFullScreen(true);
-		stage.getScene().setCursor(Cursor.NONE);
+		if(newValue==false)
+		{
+			root.setTop(tools);
+			stage.getScene().setCursor(Cursor.DEFAULT);
+		}
+		else
+		{
+			root.setTop(null);
+			stage.getScene().setCursor(Cursor.NONE);
+		}	
 	}
 
 }
