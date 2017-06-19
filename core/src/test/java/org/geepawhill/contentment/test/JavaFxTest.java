@@ -1,7 +1,6 @@
-package org.geepawhill.contentment.step;
+package org.geepawhill.contentment.test;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.test.JavaFxRunner;
 import org.testfx.framework.junit.ApplicationTest;
 
 import javafx.stage.Stage;

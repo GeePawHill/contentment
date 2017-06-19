@@ -3,7 +3,7 @@ package org.geepawhill.contentment.step;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.step.JavaFxTest;
+import org.geepawhill.contentment.test.JavaFxTest;
 import org.junit.Before;
 import org.junit.Test;
 

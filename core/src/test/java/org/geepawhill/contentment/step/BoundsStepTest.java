@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.test.JavaFxTest;
 import org.junit.Before;
 import org.junit.Test;
 

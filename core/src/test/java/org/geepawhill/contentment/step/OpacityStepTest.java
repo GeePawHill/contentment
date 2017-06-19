@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.test.JavaFxTest;
 import org.geepawhill.contentment.test.TestActor;
 import org.junit.Before;
 import org.junit.Test;

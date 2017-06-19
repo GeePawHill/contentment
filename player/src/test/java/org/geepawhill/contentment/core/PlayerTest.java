@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.geepawhill.contentment.model.PlayState;
+import org.geepawhill.contentment.test.JavaFxTest;
 import org.geepawhill.contentment.test.TestStep;
 import org.geepawhill.contentment.test.TestStop;
 import org.junit.Before;
@@ -12,7 +13,7 @@ import org.junit.Test;
 
 import javafx.scene.Group;
 
-public class PlayerTest
+public class PlayerTest extends JavaFxTest
 {
 	TestStep nonStopFirst;
 	TestStop stopFirst;

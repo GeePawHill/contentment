@@ -2,10 +2,11 @@ package org.geepawhill.contentment.rhythm;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.geepawhill.contentment.test.JavaFxTest;
 import org.junit.Before;
 import org.junit.Test;
 
-public class RhythmTest
+public class RhythmTest extends JavaFxTest
 {
 	
 	private Rhythm rhythm;
@@ -34,23 +35,4 @@ public class RhythmTest
 		rhythm.seekHard(100L);
 		assertThat(rhythm.beat()).isEqualTo(100L);
 	}
-	
-	@Test
-	public void nonVideoUpdate()
-	{
-		rhythm.start();
-		try
-		{
-			Thread.sleep(100L);
-		}
-		catch (InterruptedException expected)
-		{
-		}
-		rhythm.update();
-		assertThat(rhythm.beat()).isGreaterThan(100L);
-	}
-	
-	
-	
-
 }
