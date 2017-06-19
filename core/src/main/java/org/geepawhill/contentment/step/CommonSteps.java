@@ -23,7 +23,7 @@ public class CommonSteps
 	{
 		sequence.add(new CueStep());
 	}
-
+	
 	public void delay(double d)
 	{
 		sequence.add(new DelayStep(d));

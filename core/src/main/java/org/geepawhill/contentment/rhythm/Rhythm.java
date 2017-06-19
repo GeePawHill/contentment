@@ -29,20 +29,23 @@ public class Rhythm
 		beatProperty = new SimpleLongProperty(0L);
 		timing = makeTimingText();
 		noMedia = new Media(noMediaUrl);
-//		noMedia = new Media(new File("/01faceoverCut.mp4").toURI().toString());
 		mediaView = new MediaView();
 		loadMedia(noMedia);
 	}
 
 	public void loadMedia(Media media)
 	{
-		player = new MediaPlayer(media);
-		player.setAutoPlay(false);
-		mediaView.setMediaPlayer(player);
-		player.pause();
-		seekHard(0);
+		MediaPlayer newPlayer = new MediaPlayer(media);
+		newPlayer.setAutoPlay(true);
+		newPlayer.setOnReady(()->videoReady(newPlayer));
 	}
 
+	private void videoReady(MediaPlayer newPlayer)
+	{
+		mediaView.setMediaPlayer(newPlayer);
+		player = newPlayer;
+	}
+	
 	private Text makeTimingText()
 	{
 		Text text = new Text("00000000");
@@ -82,7 +85,7 @@ public class Rhythm
 	{
 		if(beat()<ms) seekHard(ms);
 	}
-
+	
 	public void update()
 	{
 		beatProperty.set(getPlayerTime());
@@ -108,5 +111,4 @@ public class Rhythm
 	{
 		return timing;
 	}
-
 }

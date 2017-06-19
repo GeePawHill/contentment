@@ -1,5 +1,8 @@
 package org.geepawhill.contentment.core;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.actors.Letters;
@@ -7,6 +10,7 @@ import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.ViewPort;
 import org.geepawhill.contentment.step.CommonSteps;
+import org.geepawhill.contentment.step.WaitForVideoStep;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 
@@ -22,7 +26,6 @@ public class UnderplayedScript
 	private Format columnFormat;
 	private Format subFormat;
 	private Format moralFormat;
-	private Format fourthFormat;
 
 	private ArrayList<Letters> lines;
 	private double lastLineY;
@@ -38,7 +41,6 @@ public class UnderplayedScript
 		columnFormat = new Format(TypeFace.font(largeFont, 3d, 1d), TypeFace.color(Color.RED, 1d), Frames.frame(Color.RED, 5d, 1d));
 		subFormat = new Format(columnFormat, TypeFace.font(mediumFont,2d,1d), TypeFace.color(Color.GREENYELLOW, 1d), Frames.frame(Color.GREEN, 5d, 1d));
 		moralFormat = new Format(TypeFace.font(moralFont,5d,1d), TypeFace.color(Color.LIGHTBLUE, Color.BLUE, 1d), Frames.frame(Color.BLUE, 5d, 1d));
-		fourthFormat = new Format(TypeFace.mediumSans(), TypeFace.color(Color.YELLOW, 1d));
 	}
 
 	public void add()
@@ -50,8 +52,17 @@ public class UnderplayedScript
 
 	private void intro()
 	{
+		URL resource;
+		try
+		{
+			resource = new File("/01faceoverCut.mp4").toURI().toURL();
+			sequence.add(new ChangeMediaStep(resource));
+		}
+		catch (MalformedURLException e)
+		{
+		}
 		head("Five Underplayed Premises");
-		common.keyframe(16d);
+		sequence.add(new WaitForVideoStep(16000));
 		head("TDD'er for 20 years");
 		common.keyframe(20d);
 		sub("doing");
