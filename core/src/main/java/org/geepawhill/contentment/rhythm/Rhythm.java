@@ -40,20 +40,6 @@ public class Rhythm
 		newPlayer.setOnReady(()->videoReady(newPlayer));
 	}
 
-	private void videoReady(MediaPlayer newPlayer)
-	{
-		mediaView.setMediaPlayer(newPlayer);
-		player = newPlayer;
-	}
-	
-	private Text makeTimingText()
-	{
-		Text text = new Text("00000000");
-		text.setFont(new Font("Consolas",30d));
-		text.setStroke(Color.BLUE);
-		text.setFill(Color.BLUE);
-		return text; 
-	}
 	
 	public LongProperty beatProperty()
 	{
@@ -110,5 +96,20 @@ public class Rhythm
 	public Node timingView()
 	{
 		return timing;
+	}
+	
+	private void videoReady(MediaPlayer newPlayer)
+	{
+		mediaView.setMediaPlayer(newPlayer);
+		player = newPlayer;
+	}
+	
+	private Text makeTimingText()
+	{
+		Text text = new Text("00000000");
+		text.setFont(new Font("Consolas",30d));
+		text.setStroke(Color.BLUE);
+		text.setFill(Color.BLUE);
+		return text; 
 	}
 }

@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.model.PlayState;
+import org.geepawhill.contentment.step.CueMarker;
 import org.geepawhill.contentment.step.CueStep;
 import org.geepawhill.contentment.step.Step;
 
@@ -40,7 +41,8 @@ public class Player
 	public void reset(Sequence sequence)
 	{
 		this.sequence = sequence;
-		while(current!=0) backward();
+		while (current != 0)
+			backward();
 	}
 
 	public void forward()
@@ -75,10 +77,8 @@ public class Player
 		if (target < 0) target = 0;
 		while (target != current)
 		{
-			if (target < current)
-				backward();
-			else
-				forward();
+			if (target < current) backward();
+			else forward();
 		}
 		currentStep().undo(context);
 		state = PlayState.Before;
@@ -137,11 +137,11 @@ public class Player
 		do
 		{
 			currentStep().undo(context);
-			current-=1;
+			current -= 1;
 		}
-		while(current()>0 && !currentIsMarked());
-		if(current()<0) current=0;
-		if(current()==0)
+		while (current() > 0 && !currentIsMarked());
+		if (current() < 0) current = 0;
+		if (current() == 0)
 		{
 			currentStep().undo(context);
 		}
@@ -170,7 +170,7 @@ public class Player
 
 	private boolean currentIsMarked()
 	{
-		return sequence.steps.get(current) instanceof CueStep;
+		return sequence.steps.get(current) instanceof CueMarker;
 	}
 
 	private boolean currentIsLast()
@@ -181,6 +181,7 @@ public class Player
 	private void playCurrent()
 	{
 		state = PlayState.Playing;
+		context.rhythm.play();
 		currentStep().slow(context, this::onFinished);
 	}
 
@@ -200,12 +201,16 @@ public class Player
 			}
 			else
 			{
-				current+=1;
-				if(!currentIsMarked())
+				current += 1;
+				if (!currentIsMarked())
 				{
 					playCurrent();
 				}
-				else state = PlayState.Before;
+				else
+				{
+					context.rhythm.pause();
+					state = PlayState.Before;
+				}
 			}
 		}
 	}

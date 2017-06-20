@@ -6,7 +6,7 @@ import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.timing.Timing;
 
-public class WaitForVideoStep implements Step
+public class WaitForVideoStep implements Step, CueMarker
 {
 
 	private long beat;
@@ -38,7 +38,6 @@ public class WaitForVideoStep implements Step
 		context.rhythm.update();
 		if (context.rhythm.beat() >= beat)
 		{
-			System.out.println("finish wait: "+context.rhythm.beat());
 			finishAndDie();
 		}
 	}

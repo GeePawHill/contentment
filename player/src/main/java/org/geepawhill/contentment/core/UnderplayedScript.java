@@ -52,6 +52,7 @@ public class UnderplayedScript
 
 	private void intro()
 	{
+		head("Five Underplayed Premises");
 		URL resource;
 		try
 		{
@@ -61,10 +62,9 @@ public class UnderplayedScript
 		catch (MalformedURLException e)
 		{
 		}
-		head("Five Underplayed Premises");
-		sequence.add(new WaitForVideoStep(3000));
-		head("TDD'er for 20 years");
 		sequence.add(new WaitForVideoStep(5000));
+		head("TDD'er for 20 years");
+		sequence.add(new WaitForVideoStep(10000));
 		sub("doing");
 		sub("learning");
 		sub("teaching");

@@ -4,7 +4,7 @@ import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.timing.Timing;
 
-public class CueStep implements Step
+public class CueStep implements Step, CueMarker
 {
 
 	@Override
