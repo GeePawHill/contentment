@@ -2,6 +2,7 @@ package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.jfx.ScaleListener;
 
+import javafx.application.Platform;
 import javafx.geometry.Orientation;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -12,6 +13,9 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class PlayerView
@@ -22,14 +26,15 @@ public class PlayerView
 	private Stage stage;
 	private Group canvas;
 	private ToolBar tools;
-	
+	private Text timing;
+
 	public PlayerView(Stage stage)
 	{
 		this.stage = stage;
 		canvas = new Group();
 		player = new Player(canvas);
 		tools = makeTools();
-		stage.fullScreenProperty().addListener((source,o,n) -> undoFullScreen(n));
+		stage.fullScreenProperty().addListener((source, o, n) -> undoFullScreen(n));
 	}
 
 	public Parent getNode()
@@ -37,7 +42,7 @@ public class PlayerView
 		root = new BorderPane();
 		root.setTop(makeTools());
 		root.setCenter(makeViewport());
-		
+
 		sequence = new Sequence();
 		makeScripts(sequence);
 		return root;
@@ -47,54 +52,58 @@ public class PlayerView
 	{
 		Pane owner = new Pane();
 		owner.setPrefSize(1600d, 900d);
-		
-		ScaleListener listener = new ScaleListener(owner,canvas);
+
+		ScaleListener listener = new ScaleListener(owner, canvas);
 		owner.widthProperty().addListener(listener);
 		owner.heightProperty().addListener(listener);
-		
+
 		owner.setOnMouseClicked((event) -> mouseClicked(event));
-		
+
 		owner.getChildren().add(canvas);
-		owner.getChildren().add(player.context.rhythm.timingView());
 		return owner;
 	}
-	
+
 	private void mouseClicked(MouseEvent event)
 	{
-		if(event.isShiftDown() && event.getButton()==MouseButton.PRIMARY)
+		if (event.isShiftDown() && event.getButton() == MouseButton.PRIMARY)
 		{
 			player.play();
 			return;
 		}
-		if(event.getButton()==MouseButton.SECONDARY) player.backward();
-		else player.playOne();	
-		}
+		if (event.getButton() == MouseButton.SECONDARY) player.backward();
+		else player.playOne();
+	}
 
 	private void makeScripts(Sequence sequence)
 	{
-//		new DemoVideo3(sequence).add();
-//		new DemoScript(sequence).add();
-//		new BaseComplications(sequence).add();
+		// new DemoVideo3(sequence).add();
+		// new DemoScript(sequence).add();
+		// new BaseComplications(sequence).add();
 		new UnderplayedScript(sequence).add();
-//		new InteractiveStabilization(sequence).add();
-//		new AgentAndPokes(sequence).add();
-//		new ResponsesToComplexity(sequence).add();
-//		new VisibleGeekLa1(sequence).add();
-//		new GeekNeeqOne(sequence).add();
+		// new InteractiveStabilization(sequence).add();
+		// new AgentAndPokes(sequence).add();
+		// new ResponsesToComplexity(sequence).add();
+		// new VisibleGeekLa1(sequence).add();
+		// new GeekNeeqOne(sequence).add();
 		player.reset(sequence);
 	}
-	
+
 	private ToolBar makeTools()
 	{
 		ToolBar tools = new ToolBar();
 		tools.setOrientation(Orientation.HORIZONTAL);
-		
-		tools.getItems().add(player.context.rhythm.timingView());
-		
+
+		timing = new Text("00000000");
+		timing.setFont(new Font("Consolas", 30d));
+		timing.setStroke(Color.BLUE);
+		timing.setFill(Color.BLUE);
+		player.context.rhythm.beatProperty().addListener((p, o, n) -> beatChanged(n));
+		tools.getItems().add(timing);
+
 		Button full = new Button("Full");
 		full.setOnAction(event -> stage.setFullScreen(true));
 		tools.getItems().add(full);
-		
+
 		Button test = new Button("**");
 		test.setOnAction(event -> makeScripts(sequence));
 		tools.getItems().add(test);
@@ -130,9 +139,14 @@ public class PlayerView
 		return tools;
 	}
 
+	private void beatChanged(Number beat)
+	{
+		Platform.runLater(()->timing.setText(String.format("%8d", beat.longValue())));
+	}
+
 	private void undoFullScreen(Boolean newValue)
 	{
-		if(newValue==false)
+		if (newValue == false)
 		{
 			root.setTop(tools);
 			stage.getScene().setCursor(Cursor.DEFAULT);
@@ -141,7 +155,7 @@ public class PlayerView
 		{
 			root.setTop(null);
 			stage.getScene().setCursor(Cursor.NONE);
-		}	
+		}
 	}
 
 }
