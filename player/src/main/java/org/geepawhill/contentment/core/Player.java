@@ -2,7 +2,6 @@ package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.model.PlayState;
 import org.geepawhill.contentment.step.CueMarker;
-import org.geepawhill.contentment.step.CueStep;
 import org.geepawhill.contentment.step.Step;
 
 import javafx.scene.Group;
@@ -90,7 +89,6 @@ public class Player
 
 	public void play()
 	{
-		context.rhythm.play();
 		context.skipDelays(false);
 		isChaining = true;
 		switch (state)
@@ -181,7 +179,6 @@ public class Player
 	private void playCurrent()
 	{
 		state = PlayState.Playing;
-		context.rhythm.play();
 		currentStep().slow(context, this::onFinished);
 	}
 
@@ -208,7 +205,6 @@ public class Player
 				}
 				else
 				{
-					context.rhythm.pause();
 					state = PlayState.Before;
 				}
 			}

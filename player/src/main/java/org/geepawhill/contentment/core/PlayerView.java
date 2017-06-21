@@ -5,7 +5,6 @@ import org.geepawhill.contentment.jfx.ScaleListener;
 import javafx.geometry.Orientation;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
@@ -55,8 +54,6 @@ public class PlayerView
 		
 		owner.setOnMouseClicked((event) -> mouseClicked(event));
 		
-		Node media = player.context.rhythm.view(owner);
-		owner.getChildren().add(media);
 		owner.getChildren().add(canvas);
 		owner.getChildren().add(player.context.rhythm.timingView());
 		return owner;

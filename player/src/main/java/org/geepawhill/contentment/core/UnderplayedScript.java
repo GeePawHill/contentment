@@ -1,8 +1,5 @@
 package org.geepawhill.contentment.core;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.actors.Letters;
@@ -53,15 +50,6 @@ public class UnderplayedScript
 	private void intro()
 	{
 		head("Five Underplayed Premises");
-		URL resource;
-		try
-		{
-			resource = new File("/01faceoverCut.mp4").toURI().toURL();
-			sequence.add(new ChangeMediaStep(resource));
-		}
-		catch (MalformedURLException e)
-		{
-		}
 		sequence.add(new WaitForVideoStep(5000));
 		head("TDD'er for 20 years");
 		sequence.add(new WaitForVideoStep(10000));
