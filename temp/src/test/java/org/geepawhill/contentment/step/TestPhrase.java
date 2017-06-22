@@ -1,20 +1,21 @@
-package org.geepawhill.contentment.test;
+package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.timing.Timing;
 
-public class TestStep implements Step
+public class TestPhrase extends Phrase
 {
 	
 	public boolean isBefore;
 	public boolean isPlaying;
 	private OnFinished onFinished;
+	private Timing timing;
 	
 	
-	public TestStep()
+	public TestPhrase(Timing timing)
 	{
+		this.timing = timing;
 		isBefore=true;
 		isPlaying=false;
 	}
@@ -51,7 +52,7 @@ public class TestStep implements Step
 	@Override
 	public Timing timing()
 	{
-		return Timing.instant();
+		return timing;
 	}
 
 }

@@ -7,35 +7,36 @@ import org.geepawhill.contentment.timing.Timing;
 public class SyncStep implements Step, Sync
 {
 	private long target;
-	private Timing timing;
+	private final Phrase phrase;
 
-	public SyncStep(long target, long ms)
+	public SyncStep(long target, long ms, Phrase phrase)
 	{
 		this.target = target;
-		this.timing = Timing.ms((double)ms);
+		this.phrase = phrase;
 	}
 	
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		// TODO Auto-generated method stub
-
+		phrase.slow(context, onFinished);
 	}
 
 	@Override
 	public void fast(Context context)
 	{
+		phrase.fast(context);
 	}
 
 	@Override
 	public void undo(Context context)
 	{
+		phrase.undo(context);
 	}
 
 	@Override
 	public Timing timing()
 	{
-		return timing;
+		return phrase.timing();
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.step;
 
-import java.util.function.IntPredicate;
-
+import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.rhythm.Rhythm;
 
@@ -16,11 +15,13 @@ public class SyncPlayer
 	private int next;
 	private Rhythm rhythm;
 	private final SimpleObjectProperty<State> stateProperty;
+	private Context context;
 	
 	public SyncPlayer(Group canvas, Rhythm rhythm)
 	{
 		this.rhythm = rhythm;
 		this.stateProperty = new SimpleObjectProperty<>(State.Stepping);
+		this.context = new Context(canvas,rhythm);
 	}
 
 	public void load(Sequence sequence)
@@ -43,6 +44,7 @@ public class SyncPlayer
 
 	public void forward()
 	{
+		mustBeStepping();
 		if(next==sequence.size()-1)
 		{
 			SyncStep previous = getSync(sequence.size()-1);
@@ -66,6 +68,7 @@ public class SyncPlayer
 
 	public void backward()
 	{
+		mustBeStepping();
 		if(next==0)
 		{
 			setBeat(0);
@@ -74,7 +77,6 @@ public class SyncPlayer
 		}
 		next-=1;
 		setBeat(nextSync().target());
-		
 	}
 
 	public long getBeat()
@@ -91,5 +93,38 @@ public class SyncPlayer
 	{
 		return stateProperty.get();
 	}
+
+	public void playOne()
+	{
+		mustBeStepping();
+		stateProperty.set(State.Playing);
+		nextSync().slow(context, this::onPlayOneFinished);
+	}
+
+	public void onPlayOneFinished()
+	{
+		stateProperty.set(State.Stepping);
+		next+=1;
+	}
 	
+	private void mustBeStepping()
+	{
+		if(getState()!=State.Stepping) throw new RuntimeException("Playing when should be Stepping.");
+	}
+
+	public void play()
+	{
+		mustBeStepping();
+		stateProperty.set(State.Playing);
+		nextSync().slow(context, this::onPlayFinished);
+	}
+	
+	public void onPlayFinished()
+	{
+		stateProperty.set(State.Stepping);
+		next+=1;
+		if(getNext()==sequence.size()) return;
+		nextSync().slow(context, this::onPlayFinished);
+	}
+
 }
