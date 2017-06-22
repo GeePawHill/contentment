@@ -32,6 +32,7 @@ public class SyncPlayerTest
 	public void loadPositionsAtZero()
 	{
 		player.load(sequence);
+		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
 		assertThat(player.getNext()).isEqualTo(0);
 		assertThat(player.beat()).isEqualTo(0);
 	}
@@ -41,6 +42,7 @@ public class SyncPlayerTest
 	{
 		player.load(sequence);
 		player.forward();
+		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
 		assertThat(player.getNext()).isEqualTo(1);
 		assertThat(player.beat()).isEqualTo(500);
 	}
@@ -54,6 +56,7 @@ public class SyncPlayerTest
 		player.forward();
 		assertThat(player.getNext()).isEqualTo(3);
 		assertThat(player.beat()).isEqualTo(800);
+		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
 	}
 	
 	@Test
@@ -65,6 +68,7 @@ public class SyncPlayerTest
 		player.backward();
 		assertThat(player.getNext()).isEqualTo(1);
 		assertThat(player.beat()).isEqualTo(500);
+		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
 	}
 	
 	@Test
@@ -74,6 +78,7 @@ public class SyncPlayerTest
 		player.backward();
 		assertThat(player.getNext()).isEqualTo(0);
 		assertThat(player.beat()).isEqualTo(0);
+		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
 	}
 
 }

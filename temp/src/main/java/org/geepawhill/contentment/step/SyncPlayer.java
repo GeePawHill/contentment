@@ -1,19 +1,26 @@
 package org.geepawhill.contentment.step;
 
+import java.util.function.IntPredicate;
+
 import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.rhythm.Rhythm;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Group;
 
 public class SyncPlayer
 {
+	public enum State { Stepping, Playing }
+	
 	private Sequence sequence;
 	private int next;
 	private Rhythm rhythm;
+	private final SimpleObjectProperty<State> stateProperty;
 	
 	public SyncPlayer(Group canvas, Rhythm rhythm)
 	{
 		this.rhythm = rhythm;
+		this.stateProperty = new SimpleObjectProperty<>(State.Stepping);
 	}
 
 	public void load(Sequence sequence)
@@ -21,6 +28,7 @@ public class SyncPlayer
 		this.sequence = sequence;
 		this.next = 0;
 		setBeat(0);
+		stateProperty.set(State.Stepping);
 	}
 
 	public int getNext()
@@ -77,6 +85,11 @@ public class SyncPlayer
 	public void setBeat(long beat)
 	{
 		rhythm.seekHard(beat);
+	}
+
+	public State getState()
+	{
+		return stateProperty.get();
 	}
 	
 }
