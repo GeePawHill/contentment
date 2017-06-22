@@ -179,6 +179,7 @@ public class Player
 	private void playCurrent()
 	{
 		state = PlayState.Playing;
+		if(!context.rhythm.isPlaying()) context.rhythm.play();
 		currentStep().slow(context, this::onFinished);
 	}
 
@@ -188,6 +189,7 @@ public class Player
 		if (currentIsLast())
 		{
 			state = PlayState.After;
+			context.rhythm.pause();
 		}
 		else
 		{
@@ -224,6 +226,11 @@ public class Player
 	public void allButEnd()
 	{
 		seek(sequence.size() - 1);
+	}
+
+	public boolean isPlaying()
+	{
+		return context.rhythm.isPlaying();
 	}
 
 }

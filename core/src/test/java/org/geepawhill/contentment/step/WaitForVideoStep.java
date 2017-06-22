@@ -21,7 +21,6 @@ public class WaitForVideoStep implements Step, CueMarker
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		System.out.println("start wait: " + context.rhythm.beat());
 		this.onFinished = onFinished;
 		this.animator = new Animator();
 		animator.play(context, OnFinished.NONE, (double) beat * 2d, this::updateBeat);

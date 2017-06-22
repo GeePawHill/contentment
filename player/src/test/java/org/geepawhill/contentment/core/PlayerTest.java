@@ -1,5 +1,6 @@
 package org.geepawhill.contentment.core;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -42,21 +43,32 @@ public class PlayerTest extends JavaFxTest
 	@Test
 	public void newIsEmpty()
 	{
-		assertEquals(0, player.size());
+		assertThat(player.size()).isEqualTo(0);
+		assertThat(player.current()).isEqualTo(0);
+		assertBefore();
+		assertThat(player.isPlaying()).isFalse();
 	}
-
+	
 	@Test
-	public void newIsBeforeAll()
+	public void resetIsBeforeAll()
 	{
-		assertEquals(0, player.current());
+		player.reset(mixedSequence);
 		assertBefore();
 	}
 
 	@Test
-	public void loadLoads()
+	public void resetChangesCount()
 	{
 		player.reset(mixedSequence);
 		assertEquals(5, player.size());
+	}
+	
+	@Test
+	public void playStartsClock()
+	{
+		player.reset(mixedSequence);
+		player.play();
+		assertThat(player.isPlaying()).isTrue();
 	}
 
 	@Test
@@ -291,11 +303,11 @@ public class PlayerTest extends JavaFxTest
 
 	private void assertAfter()
 	{
-		assertEquals(PlayState.After, player.state());
+		assertThat(player.state()).isEqualTo(PlayState.After);
 	}
 
 	private void assertBefore()
 	{
-		assertEquals(PlayState.Before, player.state());
+		assertThat(player.state()).isEqualTo(PlayState.Before);
 	}
 }

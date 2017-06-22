@@ -77,4 +77,9 @@ public class SimpleRhythm implements Rhythm
 		startedPauseAt = beat();
 		isPlaying=false;
 	}
+
+	public boolean isPlaying()
+	{
+		return isPlaying;
+	}
 }
