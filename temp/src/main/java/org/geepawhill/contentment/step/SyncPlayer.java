@@ -12,7 +12,7 @@ public class SyncPlayer
 	
 	public SyncPlayer()
 	{
-		this.beatProperty = new SimpleLongProperty(0); 
+		this.beatProperty = new SimpleLongProperty(0);
 	}
 
 	public void load(Sequence sequence)

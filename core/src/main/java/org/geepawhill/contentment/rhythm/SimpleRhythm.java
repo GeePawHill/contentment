@@ -78,6 +78,7 @@ public class SimpleRhythm implements Rhythm
 		isPlaying=false;
 	}
 
+	@Override
 	public boolean isPlaying()
 	{
 		return isPlaying;

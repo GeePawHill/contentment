@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.model.PlayState;
+import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.step.CueMarker;
 import org.geepawhill.contentment.step.Step;
 
@@ -19,7 +20,7 @@ public class Player
 	public Player(Group canvas)
 	{
 		this.stateProperty = new SimpleObjectProperty<>(PlayState.Before);
-		context = new Context(canvas);
+		context = new Context(canvas, new SimpleRhythm());
 		sequence = new Sequence();
 		current = 0;
 	}
