@@ -34,8 +34,8 @@ public class WaitForVideoStep implements Step, CueMarker
 
 	private void updateBeat(Context context, double fraction)
 	{
-		context.rhythm.update();
-		if (context.rhythm.beat() >= beat)
+		context.getRhythm().update();
+		if (context.getRhythm().beat() >= beat)
 		{
 			finishAndDie();
 		}
@@ -44,7 +44,7 @@ public class WaitForVideoStep implements Step, CueMarker
 	@Override
 	public void fast(Context context)
 	{
-		context.rhythm.seekHard(beat);
+		context.getRhythm().seekHard(beat);
 	}
 
 	@Override

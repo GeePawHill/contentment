@@ -3,8 +3,12 @@ package org.geepawhill.contentment.step;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.rhythm.Rhythm;
+import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.junit.Before;
 import org.junit.Test;
+
+import javafx.scene.Group;
 
 public class SyncPlayerTest
 {
@@ -19,7 +23,9 @@ public class SyncPlayerTest
 		sequence.add(new SyncStep(300,100));
 		sequence.add(new SyncStep(500,100));
 		sequence.add(new SyncStep(700,100));
-		player = new SyncPlayer();
+		Group canvas = new Group();
+		Rhythm rhythm = new SimpleRhythm();
+		player = new SyncPlayer(canvas,rhythm);
 	}
 
 	@Test

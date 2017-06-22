@@ -13,7 +13,7 @@ public class Context
 	public final Actors actors;
 	public final Group canvas;
 	private boolean skippingDelays;
-	public final Rhythm rhythm;
+	private final Rhythm rhythm;
 
 	private ContextInterpolator after;
 
@@ -67,6 +67,11 @@ public class Context
 	{
 		if (after == null) return source;
 		return new ParallelInterpolator(source, after);
+	}
+
+	public Rhythm getRhythm()
+	{
+		return rhythm;
 	}
 
 }

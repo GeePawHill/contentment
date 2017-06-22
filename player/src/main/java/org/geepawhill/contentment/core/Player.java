@@ -187,17 +187,17 @@ public class Player
 	private void playCurrent()
 	{
 		setState(PlayState.Playing);
-		if(!context.rhythm.isPlaying()) context.rhythm.play();
+		if(!context.getRhythm().isPlaying()) context.getRhythm().play();
 		currentStep().slow(context, this::onFinished);
 	}
 
 	private void onFinished()
 	{
-		context.rhythm.update();
+		context.getRhythm().update();
 		if (currentIsLast())
 		{
 			setState(PlayState.After);
-			context.rhythm.pause();
+			context.getRhythm().pause();
 		}
 		else
 		{
@@ -238,7 +238,7 @@ public class Player
 
 	public boolean isPlaying()
 	{
-		return context.rhythm.isPlaying();
+		return context.getRhythm().isPlaying();
 	}
 
 	public PlayState getState()

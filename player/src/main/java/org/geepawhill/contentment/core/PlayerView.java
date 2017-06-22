@@ -97,7 +97,7 @@ public class PlayerView
 		timing.setFont(new Font("Consolas", 30d));
 		timing.setStroke(Color.BLUE);
 		timing.setFill(Color.BLUE);
-		player.context.rhythm.beatProperty().addListener((p, o, n) -> beatChanged(n));
+		player.context.getRhythm().beatProperty().addListener((p, o, n) -> beatChanged(n));
 		tools.getItems().add(timing);
 
 		Button full = new Button("Full");

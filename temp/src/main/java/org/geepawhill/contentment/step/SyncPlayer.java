@@ -1,18 +1,19 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.rhythm.Rhythm;
 
-import javafx.beans.property.SimpleLongProperty;
+import javafx.scene.Group;
 
 public class SyncPlayer
 {
 	private Sequence sequence;
 	private int next;
-	private final SimpleLongProperty beatProperty;
+	private Rhythm rhythm;
 	
-	public SyncPlayer()
+	public SyncPlayer(Group canvas, Rhythm rhythm)
 	{
-		this.beatProperty = new SimpleLongProperty(0);
+		this.rhythm = rhythm;
 	}
 
 	public void load(Sequence sequence)
@@ -70,13 +71,12 @@ public class SyncPlayer
 
 	public long getBeat()
 	{
-		return beatProperty.get();
+		return rhythm.beat();
 	}
 
 	public void setBeat(long beat)
 	{
-		beatProperty.set(beat);
+		rhythm.seekHard(beat);
 	}
-
-
+	
 }
