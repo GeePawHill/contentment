@@ -2,7 +2,7 @@ package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Actors;
-import org.geepawhill.contentment.rhythm.Rhythm;
+import org.geepawhill.contentment.rhythm.SimpleRhythm;
 
 import javafx.scene.Group;
 
@@ -12,7 +12,7 @@ public class Context
 	public final Actors actors;
 	public final Group canvas;
 	private boolean skippingDelays;
-	public final Rhythm rhythm;
+	public final SimpleRhythm rhythm;
 
 	private ContextInterpolator after;
 
@@ -20,7 +20,7 @@ public class Context
 	{
 		this.canvas = canvas;
 		this.actors = new Actors();
-		this.rhythm = new Rhythm();
+		this.rhythm = new SimpleRhythm();
 		this.skipDelays(false);
 	}
 	

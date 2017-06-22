@@ -1,45 +1,21 @@
 package org.geepawhill.contentment.rhythm;
 
 import javafx.beans.property.LongProperty;
-import javafx.beans.property.SimpleLongProperty;
 
-public class Rhythm
+public interface Rhythm
 {
-	private SimpleLongProperty beatProperty;
-	
-	
-	public Rhythm()
-	{
-		beatProperty = new SimpleLongProperty(0L);
-	}
 
-	public LongProperty beatProperty()
-	{
-		return beatProperty;
-	}
-	
-	public long beat()
-	{
-		return beatProperty.get();
-	}
+	LongProperty beatProperty();
 
-	public void seekHard(long ms)
-	{
-		beatProperty.set(ms);
-	}
-	
-	public void seekSoft(long ms)
-	{
-		if(beat()<ms) seekHard(ms);
-	}
-	
-	public void update()
-	{
-		beatProperty.set(getPlayerTime());
-	}
+	long beat();
 
-	private long getPlayerTime()
-	{
-		return 1L;
-	}
+	void seekHard(long ms);
+
+	void seekSoft(long ms);
+
+	void update();
+
+	void play();
+	
+	void pause();
 }
