@@ -4,6 +4,8 @@ import org.geepawhill.contentment.model.PlayState;
 import org.geepawhill.contentment.step.CueMarker;
 import org.geepawhill.contentment.step.Step;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Group;
 
 public class Player
@@ -11,15 +13,15 @@ public class Player
 	public Context context;
 	Sequence sequence;
 	private int current;
-	private PlayState state;
+	private final SimpleObjectProperty<PlayState> stateProperty;
 	private boolean isChaining;
 
 	public Player(Group canvas)
 	{
+		this.stateProperty = new SimpleObjectProperty<>(PlayState.Before);
 		context = new Context(canvas);
 		sequence = new Sequence();
 		current = 0;
-		state = PlayState.Before;
 	}
 
 	public int size()
@@ -31,10 +33,15 @@ public class Player
 	{
 		return current;
 	}
-
+	
+	public ObjectProperty<PlayState> stateProperty()
+	{
+		return stateProperty;
+	}
+	
 	public PlayState state()
 	{
-		return state;
+		return getState();
 	}
 
 	public void reset(Sequence sequence)
@@ -46,7 +53,7 @@ public class Player
 
 	public void forward()
 	{
-		switch (state)
+		switch (getState())
 		{
 		default:
 		case After:
@@ -59,7 +66,7 @@ public class Player
 
 	public void backward()
 	{
-		switch (state)
+		switch (getState())
 		{
 		default:
 		case After:
@@ -80,7 +87,7 @@ public class Player
 			else forward();
 		}
 		currentStep().undo(context);
-		state = PlayState.Before;
+		setState(PlayState.Before);
 		if (skipPastLast)
 		{
 			incrementToMarkedOrLast();
@@ -91,7 +98,7 @@ public class Player
 	{
 		context.skipDelays(false);
 		isChaining = true;
-		switch (state)
+		switch (getState())
 		{
 		default:
 		case After:
@@ -113,7 +120,7 @@ public class Player
 	{
 		context.skipDelays(true);
 		isChaining = false;
-		switch (state)
+		switch (getState())
 		{
 		default:
 		case After:
@@ -143,7 +150,7 @@ public class Player
 		{
 			currentStep().undo(context);
 		}
-		state = PlayState.Before;
+		setState(PlayState.Before);
 	}
 
 	private void incrementToMarkedOrLast()
@@ -154,12 +161,12 @@ public class Player
 			if (!currentIsLast())
 			{
 				current += 1;
-				state = PlayState.Before;
+				setState(PlayState.Before);
 			}
 			else
 			{
 				currentStep().fast(context);
-				state = PlayState.After;
+				setState(PlayState.After);
 				return;
 			}
 		}
@@ -178,7 +185,7 @@ public class Player
 
 	private void playCurrent()
 	{
-		state = PlayState.Playing;
+		setState(PlayState.Playing);
 		if(!context.rhythm.isPlaying()) context.rhythm.play();
 		currentStep().slow(context, this::onFinished);
 	}
@@ -188,7 +195,7 @@ public class Player
 		context.rhythm.update();
 		if (currentIsLast())
 		{
-			state = PlayState.After;
+			setState(PlayState.After);
 			context.rhythm.pause();
 		}
 		else
@@ -207,7 +214,7 @@ public class Player
 				}
 				else
 				{
-					state = PlayState.Before;
+					setState(PlayState.Before);
 				}
 			}
 		}
@@ -231,6 +238,16 @@ public class Player
 	public boolean isPlaying()
 	{
 		return context.rhythm.isPlaying();
+	}
+
+	public PlayState getState()
+	{
+		return this.stateProperty.get();
+	}
+
+	public void setState(PlayState state)
+	{
+		this.stateProperty.set(state);
 	}
 
 }
