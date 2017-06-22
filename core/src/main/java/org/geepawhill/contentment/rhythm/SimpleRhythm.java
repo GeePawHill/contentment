@@ -66,7 +66,6 @@ public class SimpleRhythm implements Rhythm
 	{
 		if(isPlaying) throw new RuntimeException("Can't play when already playing.");
 		startedPlayingAt = LocalDateTime.now();
-		System.out.println("Playing: "+startedPlayingAt.toLocalTime());
 		isPlaying=true;
 		update();
 	}

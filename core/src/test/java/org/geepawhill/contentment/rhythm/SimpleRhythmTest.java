@@ -8,6 +8,7 @@ import org.junit.Test;
 
 public class SimpleRhythmTest extends JavaFxTest
 {
+	final static long SHORT_TIME = 20;
 	
 	private SimpleRhythm rhythm;
 
@@ -47,15 +48,15 @@ public class SimpleRhythmTest extends JavaFxTest
 	public void changesBeatWhenPlayed() throws InterruptedException
 	{
 		rhythm.play();
-		Thread.sleep(100);
-		assertThat(rhythm.beat()).isGreaterThanOrEqualTo(100);
+		Thread.sleep(SHORT_TIME);
+		assertThat(rhythm.beat()).isGreaterThanOrEqualTo(SHORT_TIME);
 	}
 	
 	@Test
 	public void pauseDoesntChangeBeat() throws InterruptedException
 	{
 		long atPause = rhythm.beat();
-		Thread.sleep(100);
+		Thread.sleep(SHORT_TIME);
 		assertThat(rhythm.beat()).isEqualTo(atPause);
 	}
 	
@@ -63,10 +64,10 @@ public class SimpleRhythmTest extends JavaFxTest
 	public void pausePauses() throws InterruptedException
 	{
 		rhythm.play();
-		Thread.sleep(100);
+		Thread.sleep(SHORT_TIME);
 		rhythm.pause();
 		long atPause = rhythm.beat();
-		Thread.sleep(100);
+		Thread.sleep(SHORT_TIME);
 		rhythm.update();
 		assertThat(rhythm.beat()).isEqualTo(atPause);
 	}
@@ -75,11 +76,11 @@ public class SimpleRhythmTest extends JavaFxTest
 	public void playAfterPauseWorks() throws InterruptedException
 	{
 		rhythm.play();
-		Thread.sleep(100);
+		Thread.sleep(SHORT_TIME);
 		rhythm.pause();
 		long atPause = rhythm.beat();
 		rhythm.play();
-		Thread.sleep(100);
-		assertThat(rhythm.beat()).isGreaterThanOrEqualTo(100+atPause);
+		Thread.sleep(SHORT_TIME);
+		assertThat(rhythm.beat()).isGreaterThanOrEqualTo(SHORT_TIME+atPause);
 	}
 }
