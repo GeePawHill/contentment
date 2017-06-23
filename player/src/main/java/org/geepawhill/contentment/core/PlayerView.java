@@ -52,6 +52,10 @@ public class PlayerView
 	{
 		Pane owner = new Pane();
 		owner.setPrefSize(1600d, 900d);
+		
+		// media background
+		
+		// non-media background
 
 		ScaleListener listener = new ScaleListener(owner, canvas);
 		owner.widthProperty().addListener(listener);

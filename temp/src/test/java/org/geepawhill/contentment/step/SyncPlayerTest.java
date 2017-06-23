@@ -131,4 +131,29 @@ public class SyncPlayerTest
 		assertThat(player.getNext()).isEqualTo(3);
 	}
 
+	@Test
+	public void end()
+	{
+		player.load(script);
+		player.end();
+		assertThat(player.getNext()).isEqualTo(3);
+	}
+	
+	@Test
+	public void start()
+	{
+		player.load(script);
+		player.forward();
+		player.forward();
+		player.start();
+		assertThat(player.getNext()).isEqualTo(0);
+	}
+	
+	@Test
+	public void last()
+	{
+		player.load(script);
+		player.last();
+		assertThat(player.getNext()).isEqualTo(2);
+	}
 }

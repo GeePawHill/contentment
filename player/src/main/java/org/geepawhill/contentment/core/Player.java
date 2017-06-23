@@ -35,7 +35,7 @@ public class Player
 		return current;
 	}
 	
-	public ObjectProperty<PlayState> stateProperty()
+	private ObjectProperty<PlayState> stateProperty()
 	{
 		return stateProperty;
 	}

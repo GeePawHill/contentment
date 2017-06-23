@@ -8,19 +8,22 @@ import javafx.scene.Group;
 
 public class SyncPlayer
 {
-	public enum State { Stepping, Playing }
-	
+	public enum State
+	{
+		Stepping, Playing
+	}
+
 	private Script script;
 	private int next;
 	private Rhythm rhythm;
 	private final SimpleObjectProperty<State> stateProperty;
 	private Context context;
-	
-	public SyncPlayer(Group canvas, Rhythm rhythm)
+
+	public SyncPlayer(Group canvas, Rhythm defaultRhythm)
 	{
-		this.rhythm = rhythm;
+		this.rhythm = defaultRhythm;
 		this.stateProperty = new SimpleObjectProperty<>(State.Stepping);
-		this.context = new Context(canvas,rhythm);
+		this.context = new Context(canvas, defaultRhythm);
 	}
 
 	public void load(Script script)
@@ -44,11 +47,11 @@ public class SyncPlayer
 	public void forward()
 	{
 		mustBeStepping();
-		next+=1;
-		if(next==script.size())
+		next += 1;
+		if (next == script.size())
 		{
-			SyncStep previous = getSync(script.size()-1);
-			rhythm.seekHard(previous.target()+(long)previous.timing().ms());
+			SyncStep previous = getSync(script.size() - 1);
+			rhythm.seekHard(previous.target() + (long) previous.timing().ms());
 			return;
 		}
 		rhythm.seekHard(nextSync().target());
@@ -58,22 +61,22 @@ public class SyncPlayer
 	{
 		return getSync(next);
 	}
-	
+
 	private SyncStep getSync(int sync)
 	{
-		return (SyncStep)script.get(sync);
+		return (SyncStep) script.get(sync);
 	}
 
 	public void backward()
 	{
 		mustBeStepping();
-		if(next==0)
+		if (next == 0)
 		{
 			rhythm.seekHard((long) 0);
-			next=0;
+			next = 0;
 			return;
 		}
-		next-=1;
+		next -= 1;
 		rhythm.seekHard(nextSync().target());
 	}
 
@@ -97,12 +100,12 @@ public class SyncPlayer
 	public void onPlayOneFinished()
 	{
 		stateProperty.set(State.Stepping);
-		next+=1;
+		next += 1;
 	}
-	
+
 	private void mustBeStepping()
 	{
-		if(getState()!=State.Stepping) throw new RuntimeException("Playing when should be Stepping.");
+		if (getState() != State.Stepping) throw new RuntimeException("Playing when should be Stepping.");
 	}
 
 	public void play()
@@ -111,13 +114,39 @@ public class SyncPlayer
 		stateProperty.set(State.Playing);
 		nextSync().slow(context, this::onPlayFinished);
 	}
-	
+
 	public void onPlayFinished()
 	{
 		stateProperty.set(State.Stepping);
-		next+=1;
-		if(getNext()==script.size()) return;
+		next += 1;
+		if (getNext() == script.size()) return;
 		nextSync().slow(context, this::onPlayFinished);
 	}
 
+	public void end()
+	{
+		mustBeStepping();
+		while (getNext() != script.size())
+		{
+			nextSync().fast(context);
+			next += 1;
+		}
+	}
+
+	public void start()
+	{
+		mustBeStepping();
+		while(getNext() != 0)
+		{
+			next-=1;
+			nextSync().undo(context);
+		}
+	}
+
+	public void last()
+	{
+		mustBeStepping();
+		end();
+		backward();
+	}
 }

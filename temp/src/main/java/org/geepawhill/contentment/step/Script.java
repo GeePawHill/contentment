@@ -2,17 +2,13 @@ package org.geepawhill.contentment.step;
 
 import java.util.ArrayList;
 
-import org.geepawhill.contentment.timing.Scheduler;
-
 public class Script
 {
 	ArrayList<SyncStep> steps;
-	Scheduler scheduler;
 
 	public Script()
 	{
 		steps = new ArrayList<>();
-		scheduler = new Scheduler();
 	}
 
 	public int size()
