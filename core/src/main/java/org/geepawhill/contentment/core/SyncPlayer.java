@@ -102,9 +102,12 @@ public class SyncPlayer
 	public void playOne()
 	{
 		mustBeStepping();
-		stateProperty.set(State.Playing);
-		rhythm.play();
-		nextSync().slow(context, this::onPlayOneFinished);
+		if (next < script.size())
+		{
+			rhythm.play();
+			stateProperty.set(State.Playing);
+			nextSync().slow(context, this::onPlayOneFinished);
+		}
 	}
 
 	public void onPlayOneFinished()
@@ -112,6 +115,12 @@ public class SyncPlayer
 		rhythm.pause();
 		stateProperty.set(State.Stepping);
 		next += 1;
+		if (next == script.size())
+		{
+			SyncStep previous = getSync(script.size() - 1);
+			rhythm.seekHard(previous.target() + (long) previous.timing().ms());
+		}
+		else rhythm.seekHard(nextSync().target());
 	}
 
 	private void mustBeStepping()

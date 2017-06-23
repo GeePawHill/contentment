@@ -73,6 +73,19 @@ public class SyncPlayerTest
 	}
 	
 	@Test
+	public void playOneAtEndNoOps()
+	{
+		player.load(script);
+		player.forward();
+		player.forward();
+		player.forward();
+		player.playOne();
+		assertThat(player.getNext()).isEqualTo(3);
+		assertThat(player.beat()).isEqualTo(800);
+		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
+	}
+	
+	@Test
 	public void backwardBackwards()
 	{
 		player.load(script);
