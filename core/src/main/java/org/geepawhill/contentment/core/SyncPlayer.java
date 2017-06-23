@@ -138,8 +138,7 @@ public class SyncPlayer
 		mustBeStepping();
 		while (getNext() != script.size())
 		{
-			nextSync().fast(context);
-			next += 1;
+			forward();
 		}
 	}
 
@@ -148,8 +147,7 @@ public class SyncPlayer
 		mustBeStepping();
 		while (getNext() != 0)
 		{
-			next -= 1;
-			nextSync().undo(context);
+			backward();
 		}
 	}
 

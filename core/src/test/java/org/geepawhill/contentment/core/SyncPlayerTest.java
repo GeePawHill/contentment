@@ -27,7 +27,7 @@ public class SyncPlayerTest
 		script = new Script();
 
 		first = new TestPhrase(Timing.ms(100d));
-		script.add(new SyncStep(300,first));
+		script.add(new SyncStep(0,first));
 		
 		second = new TestPhrase(Timing.ms(100d));
 		script.add(new SyncStep(500,second));
@@ -173,6 +173,8 @@ public class SyncPlayerTest
 		player.forward();
 		player.start();
 		assertThat(player.getNext()).isEqualTo(0);
+		assertThat(first.isBefore).isTrue();
+		assertThat(player.getBeat()).isEqualTo(0);
 	}
 	
 	@Test

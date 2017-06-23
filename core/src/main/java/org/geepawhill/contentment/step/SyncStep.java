@@ -8,6 +8,11 @@ public class SyncStep implements Step, Sync
 {
 	private long target;
 	private final Phrase phrase;
+	
+	public SyncStep(Phrase phrase)
+	{
+		this(0,phrase);
+	}
 
 	public SyncStep(long target, Phrase phrase)
 	{
