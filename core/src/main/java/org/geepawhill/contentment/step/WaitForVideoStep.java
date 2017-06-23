@@ -33,7 +33,6 @@ public class WaitForVideoStep implements Step, CueMarker
 
 	private void updateBeat(Context context, double fraction)
 	{
-		context.getRhythm().update();
 		if (context.getRhythm().beat() >= beat)
 		{
 			finishAndDie();

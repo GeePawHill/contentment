@@ -48,6 +48,7 @@ public class SyncPlayer
 	public void forward()
 	{
 		mustBeStepping();
+		nextSync().fast(context);
 		next += 1;
 		if (next == script.size())
 		{
@@ -78,6 +79,7 @@ public class SyncPlayer
 			return;
 		}
 		next -= 1;
+		nextSync().undo(context);
 		rhythm.seekHard(nextSync().target());
 	}
 

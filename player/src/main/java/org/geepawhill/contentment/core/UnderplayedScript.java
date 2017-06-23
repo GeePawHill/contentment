@@ -117,13 +117,14 @@ public class UnderplayedScript
 	{
 		Phrase phrase = new Phrase();
 		phrase.add(new WaitForVideoStep(3000));
+		lastLineY = 100d;
 		phrase.add(head("Five Underplayed Premises"));
-		phrase.add(new WaitForVideoStep(5000));
-		phrase.add(head("TDD'er for 20 years"));
-		phrase.add(sub("doing"));
-		phrase.add(sub("learning"));
-		phrase.add(sub("teaching"));
-		phrase.add(sub("arguing (w/alcohol)"));
+//		phrase.add(new WaitForVideoStep(5000));
+//		phrase.add(head("TDD'er for 20 years"));
+//		phrase.add(sub("doing"));
+//		phrase.add(sub("learning"));
+//		phrase.add(sub("teaching"));
+//		phrase.add(sub("arguing (w/alcohol)"));
 		return phrase;
 	}
 //
@@ -269,7 +270,7 @@ public class UnderplayedScript
 	private Phrase head(String text)
 	{
 		Phrase phrase = new Phrase();
-		phrase.add(clearLines());
+		if(!lines.isEmpty()) phrase.add(clearLines());
 		phrase.add(line(text,columnFormat));
 		return phrase;
 	}

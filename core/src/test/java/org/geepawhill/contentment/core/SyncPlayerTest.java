@@ -54,6 +54,7 @@ public class SyncPlayerTest
 	{
 		player.load(script);
 		player.forward();
+		assertThat(first.isBefore).isFalse();
 		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
 		assertThat(player.getNext()).isEqualTo(1);
 		assertThat(player.beat()).isEqualTo(500);
@@ -78,6 +79,8 @@ public class SyncPlayerTest
 		player.forward();
 		player.forward();
 		player.backward();
+		assertThat(first.isBefore).isFalse();
+		assertThat(second.isBefore).isTrue();
 		assertThat(player.getNext()).isEqualTo(1);
 		assertThat(player.beat()).isEqualTo(500);
 		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);

@@ -38,15 +38,10 @@ public class Timed implements Step
 	@Override
 	public Timing timing()
 	{
-		schedule();
+		scheduler.schedule(ms, playables);
 		return Timing.ms(ms);
 	}
 	
-	private void schedule()
-	{
-		scheduler.schedule(ms, playables);
-	}
-
 	@Override
 	public void fast(Context context)
 	{

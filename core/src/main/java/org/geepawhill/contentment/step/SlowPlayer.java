@@ -20,19 +20,40 @@ class SlowPlayer
 		this.playables = playables;
 		this.name = name;
 		this.current = 0;
-		if (playables.isEmpty()) onFinished.run();
-		else playables.get(current).slow(context, () -> next());
+		if (playables.isEmpty())
+		{
+			System.out.println("Empty?");
+			onFinished.run();
+		}
+		else
+		{
+			System.out.println(name+": Started");
+			Step step = playables.get(current);
+			step.slow(context, () -> next());
+		}
 	}
 
 	private void next()
 	{
+		dumpCurrent();
 		current += 1;
-		if (current == playables.size()) onFinished.run();
+		if (current == playables.size())
+		{
+			System.out.println(name+": Finished.");
+			onFinished.run();
+		}
 		else
 		{
 			Step step = playables.get(current);
-			System.out.println(name + ": " + step.getClass().getSimpleName());
 			step.slow(context, () -> next());
 		}
+	}
+	
+	private void dumpCurrent()
+	{
+		Step step = playables.get(current);
+		System.out.print(name+": "+current+" "+step.getClass().getSimpleName());
+		if(step instanceof LettersStep) System.out.print(" "+((LettersStep)step).text.getText());
+		System.out.println();
 	}
 }
