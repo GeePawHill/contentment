@@ -2,7 +2,6 @@ package org.geepawhill.contentment.step;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.rhythm.Rhythm;
 import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.timing.Timing;
@@ -14,7 +13,7 @@ import javafx.scene.Group;
 public class SyncPlayerTest
 {
 	
-	private Sequence sequence;
+	private Script script;
 	private SyncPlayer player;
 	private TestPhrase first;
 	private TestPhrase second;
@@ -23,16 +22,16 @@ public class SyncPlayerTest
 	@Before
 	public void before()
 	{
-		sequence = new Sequence();
+		script = new Script();
 
 		first = new TestPhrase(Timing.ms(100d));
-		sequence.add(new SyncStep(300,100,first));
+		script.add(new SyncStep(300,100,first));
 		
 		second = new TestPhrase(Timing.ms(100d));
-		sequence.add(new SyncStep(500,100,second));
+		script.add(new SyncStep(500,100,second));
 		
 		third = new TestPhrase(Timing.ms(100d));
-		sequence.add(new SyncStep(700,100,third));
+		script.add(new SyncStep(700,100,third));
 		
 		Group canvas = new Group();
 		Rhythm rhythm = new SimpleRhythm();
@@ -42,7 +41,7 @@ public class SyncPlayerTest
 	@Test
 	public void loadPositionsAtZero()
 	{
-		player.load(sequence);
+		player.load(script);
 		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
 		assertThat(player.getNext()).isEqualTo(0);
 		assertThat(player.beat()).isEqualTo(0);
@@ -51,7 +50,7 @@ public class SyncPlayerTest
 	@Test
 	public void forwardForwards()
 	{
-		player.load(sequence);
+		player.load(script);
 		player.forward();
 		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
 		assertThat(player.getNext()).isEqualTo(1);
@@ -61,8 +60,9 @@ public class SyncPlayerTest
 	@Test
 	public void forwardAtEndNoOps()
 	{
-		player.load(sequence);
+		player.load(script);
 		player.forward();
+		System.out.println(player.getNext());
 		player.forward();
 		player.forward();
 		assertThat(player.getNext()).isEqualTo(3);
@@ -73,7 +73,7 @@ public class SyncPlayerTest
 	@Test
 	public void backwardBackwards()
 	{
-		player.load(sequence);
+		player.load(script);
 		player.forward();
 		player.forward();
 		player.backward();
@@ -85,7 +85,7 @@ public class SyncPlayerTest
 	@Test
 	public void backwardAtBeginningNoOps()
 	{
-		player.load(sequence);
+		player.load(script);
 		player.backward();
 		assertThat(player.getNext()).isEqualTo(0);
 		assertThat(player.beat()).isEqualTo(0);
@@ -95,7 +95,7 @@ public class SyncPlayerTest
 	@Test
 	public void playOneDoes()
 	{
-		player.load(sequence);
+		player.load(script);
 		player.playOne();
 		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Playing);
 		assertThat(first.isPlaying).isTrue();
@@ -108,7 +108,7 @@ public class SyncPlayerTest
 	@Test
 	public void playOneThroughEndDoes()
 	{
-		player.load(sequence);
+		player.load(script);
 		player.playOne();
 		first.finishPlaying();
 		player.playOne();
@@ -122,7 +122,7 @@ public class SyncPlayerTest
 	@Test
 	public void playPlaysAll()
 	{
-		player.load(sequence);
+		player.load(script);
 		player.play();
 		first.finishPlaying();
 		second.finishPlaying();

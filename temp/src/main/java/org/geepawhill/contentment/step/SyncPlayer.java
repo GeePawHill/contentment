@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.rhythm.Rhythm;
 
 import javafx.beans.property.SimpleObjectProperty;
@@ -11,7 +10,7 @@ public class SyncPlayer
 {
 	public enum State { Stepping, Playing }
 	
-	private Sequence sequence;
+	private Script script;
 	private int next;
 	private Rhythm rhythm;
 	private final SimpleObjectProperty<State> stateProperty;
@@ -24,11 +23,11 @@ public class SyncPlayer
 		this.context = new Context(canvas,rhythm);
 	}
 
-	public void load(Sequence sequence)
+	public void load(Script script)
 	{
-		this.sequence = sequence;
+		this.script = script;
 		this.next = 0;
-		setBeat(0);
+		rhythm.seekHard((long) 0);
 		stateProperty.set(State.Stepping);
 	}
 
@@ -45,15 +44,14 @@ public class SyncPlayer
 	public void forward()
 	{
 		mustBeStepping();
-		if(next==sequence.size()-1)
+		next+=1;
+		if(next==script.size())
 		{
-			SyncStep previous = getSync(sequence.size()-1);
-			setBeat(previous.target()+(long)previous.timing().ms());
-			next+=1;
+			SyncStep previous = getSync(script.size()-1);
+			rhythm.seekHard(previous.target()+(long)previous.timing().ms());
 			return;
 		}
-		next+=1;
-		setBeat(nextSync().target());
+		rhythm.seekHard(nextSync().target());
 	}
 
 	private SyncStep nextSync()
@@ -63,7 +61,7 @@ public class SyncPlayer
 	
 	private SyncStep getSync(int sync)
 	{
-		return (SyncStep)sequence.get(sync);
+		return (SyncStep)script.get(sync);
 	}
 
 	public void backward()
@@ -71,22 +69,17 @@ public class SyncPlayer
 		mustBeStepping();
 		if(next==0)
 		{
-			setBeat(0);
+			rhythm.seekHard((long) 0);
 			next=0;
 			return;
 		}
 		next-=1;
-		setBeat(nextSync().target());
+		rhythm.seekHard(nextSync().target());
 	}
 
 	public long getBeat()
 	{
 		return rhythm.beat();
-	}
-
-	public void setBeat(long beat)
-	{
-		rhythm.seekHard(beat);
 	}
 
 	public State getState()
@@ -123,7 +116,7 @@ public class SyncPlayer
 	{
 		stateProperty.set(State.Stepping);
 		next+=1;
-		if(getNext()==sequence.size()) return;
+		if(getNext()==script.size()) return;
 		nextSync().slow(context, this::onPlayFinished);
 	}
 
