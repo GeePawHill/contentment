@@ -1,7 +1,7 @@
-package org.geepawhill.contentment.step;
+package org.geepawhill.contentment.core;
 
-import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.rhythm.Rhythm;
+import org.geepawhill.contentment.step.SyncStep;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Group;

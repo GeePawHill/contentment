@@ -1,6 +1,8 @@
-package org.geepawhill.contentment.step;
+package org.geepawhill.contentment.core;
 
 import java.util.ArrayList;
+
+import org.geepawhill.contentment.step.SyncStep;
 
 public class Script
 {

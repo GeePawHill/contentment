@@ -1,9 +1,11 @@
-package org.geepawhill.contentment.step;
+package org.geepawhill.contentment.core;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.geepawhill.contentment.rhythm.Rhythm;
 import org.geepawhill.contentment.rhythm.SimpleRhythm;
+import org.geepawhill.contentment.step.SyncStep;
+import org.geepawhill.contentment.test.TestPhrase;
 import org.geepawhill.contentment.timing.Timing;
 import org.junit.Before;
 import org.junit.Test;
