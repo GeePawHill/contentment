@@ -9,7 +9,7 @@ public class SyncStep implements Step, Sync
 	private long target;
 	private final Phrase phrase;
 
-	public SyncStep(long target, long ms, Phrase phrase)
+	public SyncStep(long target, Phrase phrase)
 	{
 		this.target = target;
 		this.phrase = phrase;

@@ -27,13 +27,13 @@ public class SyncPlayerTest
 		script = new Script();
 
 		first = new TestPhrase(Timing.ms(100d));
-		script.add(new SyncStep(300,100,first));
+		script.add(new SyncStep(300,first));
 		
 		second = new TestPhrase(Timing.ms(100d));
-		script.add(new SyncStep(500,100,second));
+		script.add(new SyncStep(500,second));
 		
 		third = new TestPhrase(Timing.ms(100d));
-		script.add(new SyncStep(700,100,third));
+		script.add(new SyncStep(700,third));
 		
 		Group canvas = new Group();
 		Rhythm rhythm = new SimpleRhythm();
