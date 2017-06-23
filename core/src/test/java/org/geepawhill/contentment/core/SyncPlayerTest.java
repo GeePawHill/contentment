@@ -121,6 +121,16 @@ public class SyncPlayerTest
 	}
 	
 	@Test
+	public void playOneHandlesRhythm()
+	{
+		player.load(script);
+		player.playOne();
+		assertThat(player.getRhythm().isPlaying()).isTrue();
+		first.finishPlaying();
+		assertThat(player.getRhythm().isPlaying()).isFalse();
+	}
+	
+	@Test
 	public void playPlaysAll()
 	{
 		player.load(script);
@@ -130,6 +140,18 @@ public class SyncPlayerTest
 		third.finishPlaying();
 		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
 		assertThat(player.getNext()).isEqualTo(3);
+	}
+	
+	@Test
+	public void playHandlesRhythm()
+	{
+		player.load(script);
+		player.play();
+		assertThat(player.getRhythm().isPlaying()).isTrue();
+		first.finishPlaying();
+		second.finishPlaying();
+		third.finishPlaying();
+		assertThat(player.getRhythm().isPlaying()).isFalse();
 	}
 
 	@Test

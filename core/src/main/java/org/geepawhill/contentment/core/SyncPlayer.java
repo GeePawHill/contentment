@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.rhythm.Rhythm;
+import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.step.SyncStep;
 
 import javafx.beans.property.SimpleObjectProperty;
@@ -94,11 +95,13 @@ public class SyncPlayer
 	{
 		mustBeStepping();
 		stateProperty.set(State.Playing);
+		rhythm.play();
 		nextSync().slow(context, this::onPlayOneFinished);
 	}
 
 	public void onPlayOneFinished()
 	{
+		rhythm.pause();
 		stateProperty.set(State.Stepping);
 		next += 1;
 	}
@@ -111,6 +114,7 @@ public class SyncPlayer
 	public void play()
 	{
 		mustBeStepping();
+		rhythm.play();
 		stateProperty.set(State.Playing);
 		nextSync().slow(context, this::onPlayFinished);
 	}
@@ -119,7 +123,11 @@ public class SyncPlayer
 	{
 		stateProperty.set(State.Stepping);
 		next += 1;
-		if (getNext() == script.size()) return;
+		if (getNext() == script.size())
+		{
+			rhythm.pause();
+			return;
+		}
 		nextSync().slow(context, this::onPlayFinished);
 	}
 
@@ -136,9 +144,9 @@ public class SyncPlayer
 	public void start()
 	{
 		mustBeStepping();
-		while(getNext() != 0)
+		while (getNext() != 0)
 		{
-			next-=1;
+			next -= 1;
 			nextSync().undo(context);
 		}
 	}
@@ -148,5 +156,10 @@ public class SyncPlayer
 		mustBeStepping();
 		end();
 		backward();
+	}
+
+	public Rhythm getRhythm()
+	{
+		return rhythm;
 	}
 }

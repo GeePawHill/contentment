@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.jfx.ScaleListener;
+import org.geepawhill.contentment.rhythm.SimpleRhythm;
 
 import javafx.application.Platform;
 import javafx.geometry.Orientation;
@@ -20,7 +21,7 @@ import javafx.stage.Stage;
 
 public class PlayerView
 {
-	private Player player;
+	private SyncPlayer player;
 	private Sequence sequence;
 	private BorderPane root;
 	private Stage stage;
@@ -32,7 +33,7 @@ public class PlayerView
 	{
 		this.stage = stage;
 		canvas = new Group();
-		player = new Player(canvas);
+		player = new SyncPlayer(canvas,new SimpleRhythm());
 		tools = makeTools();
 		stage.fullScreenProperty().addListener((source, o, n) -> undoFullScreen(n));
 	}
@@ -80,16 +81,17 @@ public class PlayerView
 
 	private void makeScripts(Sequence sequence)
 	{
+		player.load(new UnderplayedScript().make());
 		// new DemoVideo3(sequence).add();
 		// new DemoScript(sequence).add();
 		// new BaseComplications(sequence).add();
-		new UnderplayedScript(sequence).add();
+		new UnderplayedScript().add();
 		// new InteractiveStabilization(sequence).add();
 		// new AgentAndPokes(sequence).add();
 		// new ResponsesToComplexity(sequence).add();
 		// new VisibleGeekLa1(sequence).add();
 		// new GeekNeeqOne(sequence).add();
-		player.reset(sequence);
+	//	player.reset(sequence);
 	}
 
 	private ToolBar makeTools()
@@ -101,7 +103,7 @@ public class PlayerView
 		timing.setFont(new Font("Consolas", 30d));
 		timing.setStroke(Color.BLUE);
 		timing.setFill(Color.BLUE);
-		player.context.getRhythm().beatProperty().addListener((p, o, n) -> beatChanged(n));
+		player.getRhythm().beatProperty().addListener((p, o, n) -> beatChanged(n));
 		tools.getItems().add(timing);
 
 		Button full = new Button("Full");
@@ -113,7 +115,7 @@ public class PlayerView
 		tools.getItems().add(test);
 
 		Button home = new Button("||<--");
-		home.setOnAction(event -> player.home());
+		home.setOnAction(event -> player.start());
 		tools.getItems().add(home);
 
 		Button backwards = new Button("<--");
@@ -137,7 +139,7 @@ public class PlayerView
 		tools.getItems().add(end);
 
 		Button allButEnd = new Button("-->.");
-		allButEnd.setOnAction(event -> player.allButEnd());
+		allButEnd.setOnAction(event -> player.last());
 		tools.getItems().add(allButEnd);
 
 		return tools;

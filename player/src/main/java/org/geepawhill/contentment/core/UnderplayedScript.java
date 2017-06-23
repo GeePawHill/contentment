@@ -11,6 +11,7 @@ import org.geepawhill.contentment.geometry.ViewPort;
 import org.geepawhill.contentment.step.CommonSteps;
 import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.step.SyncStep;
+import org.geepawhill.contentment.step.Universals;
 import org.geepawhill.contentment.step.WaitForVideoStep;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
@@ -21,9 +22,6 @@ import javafx.scene.text.Font;
 
 public class UnderplayedScript
 {
-	private Sequence sequence;
-	private CommonSteps common;
-
 	private Format columnFormat;
 	private Format subFormat;
 	private Format moralFormat;
@@ -31,10 +29,8 @@ public class UnderplayedScript
 	private ArrayList<Letters> lines;
 	private double lastLineY;
 
-	public UnderplayedScript(Sequence sequence)
+	public UnderplayedScript()
 	{
-		this.sequence = sequence;
-		this.common = new CommonSteps(sequence);
 		this.lines = new ArrayList<>();
 		Font largeFont = new Font("GoodDog",100d);
 		Font mediumFont = new Font("GoodDog",80d);
@@ -46,7 +42,7 @@ public class UnderplayedScript
 
 	public void add()
 	{
-		 intro();
+//		 intro();
 		// money();
 //		judgment();
 	}
@@ -58,64 +54,64 @@ public class UnderplayedScript
 		return script;
 	}
 
-	private void intro()
-	{
-		opening();
-
-		sequence.add(new WaitForVideoStep(28000));
-
-		common.keyframe(28d);
-		head("Programming *is* TDD");
-		common.keyframe(36d);
-		sub("continuous integration");
-		sub("small steps");
-		sub("merciless refactoring");
-		sub("microtesting");
-		sub("small objects & methods");
-
-		common.keyframe(44d);
-		head("There are different TDD styles");
-		sub("chicago vs london");
-		sub("story vs micro");
-		sub("and so on");
-		common.keyframe(54d);
-		head("GeePaw's Style...");
-		common.keyframe(1d,0d);
-		sub("...huge emphasis on microtests");
-		common.keyframe(1d,8d);
-		sub("...rare usage of auto-mocking tools");
-		common.keyframe(1d,16d);
-		sub("...think my way in");
-		common.keyframe(1d,30d);
-		sub("...test drive my way back out");
-		
-		common.keyframe(1d,41d);
-		head("Five Underplayed Premises");
-		common.keyframe(1d,46d);
-		sub("the money premise");
-		sub("the judgment premise");
-		sub("the chaining premise");
-		sub("the correlation premise");
-		sub("the driving premise");
-		
-		common.keyframe(1d,56d);
-		head("Underplayed?");
-		common.keyframe(2d,03d);
-		sub("mentioned in passing");
-		sub("modeled much of the time");
-		sub("not called out sharply");
-		common.keyframe(2d,15d);
-		head("It's Easy To Be Distracted");
-		sub("look at the pretty lights!");
-		sub("the premises need hammering");
-		
-		common.keyframe(2d,22d);
-		Letters moral = new Letters("Premises Front & Center",new Point(ViewPort.CENTERX,800d),moralFormat);
-		common.fadeIn(500d, moral);
-		common.cue();
-		
-
-	}
+//	private void intro()
+//	{
+//		opening();
+//
+//		sequence.add(new WaitForVideoStep(28000));
+//
+//		common.keyframe(28d);
+//		head("Programming *is* TDD");
+//		common.keyframe(36d);
+//		sub("continuous integration");
+//		sub("small steps");
+//		sub("merciless refactoring");
+//		sub("microtesting");
+//		sub("small objects & methods");
+//
+//		common.keyframe(44d);
+//		head("There are different TDD styles");
+//		sub("chicago vs london");
+//		sub("story vs micro");
+//		sub("and so on");
+//		common.keyframe(54d);
+//		head("GeePaw's Style...");
+//		common.keyframe(1d,0d);
+//		sub("...huge emphasis on microtests");
+//		common.keyframe(1d,8d);
+//		sub("...rare usage of auto-mocking tools");
+//		common.keyframe(1d,16d);
+//		sub("...think my way in");
+//		common.keyframe(1d,30d);
+//		sub("...test drive my way back out");
+//		
+//		common.keyframe(1d,41d);
+//		head("Five Underplayed Premises");
+//		common.keyframe(1d,46d);
+//		sub("the money premise");
+//		sub("the judgment premise");
+//		sub("the chaining premise");
+//		sub("the correlation premise");
+//		sub("the driving premise");
+//		
+//		common.keyframe(1d,56d);
+//		head("Underplayed?");
+//		common.keyframe(2d,03d);
+//		sub("mentioned in passing");
+//		sub("modeled much of the time");
+//		sub("not called out sharply");
+//		common.keyframe(2d,15d);
+//		head("It's Easy To Be Distracted");
+//		sub("look at the pretty lights!");
+//		sub("the premises need hammering");
+//		
+//		common.keyframe(2d,22d);
+//		Letters moral = new Letters("Premises Front & Center",new Point(ViewPort.CENTERX,800d),moralFormat);
+//		common.fadeIn(500d, moral);
+//		common.cue();
+//		
+//
+//	}
 
 	private Phrase opening()
 	{
@@ -244,18 +240,18 @@ public class UnderplayedScript
 		return phrase;
 	}
 	
-	private void moral(String text)
-	{
-		Letters moral = new Letters(text,new Point(ViewPort.CENTERX,690d),moralFormat);
-		common.fadeIn(500d, moral);
-	}
-	
-	private void moral(String text1,String text2)
-	{
-		moral(text1);
-		Letters moral = new Letters(text2,new Point(ViewPort.CENTERX,780d),moralFormat);
-		common.fadeIn(500d, moral);
-	}
+//	private void moral(String text)
+//	{
+//		Letters moral = new Letters(text,new Point(ViewPort.CENTERX,690d),moralFormat);
+//		common.fadeIn(500d, moral);
+//	}
+//	
+//	private void moral(String text1,String text2)
+//	{
+//		moral(text1);
+//		Letters moral = new Letters(text2,new Point(ViewPort.CENTERX,780d),moralFormat);
+//		common.fadeIn(500d, moral);
+//	}
 
 	
 	private void clearLines()
@@ -263,7 +259,7 @@ public class UnderplayedScript
 		lastLineY=100d;
 		for(Letters line : lines)
 		{
-			common.disappear(line);
+			Universals.disappear(line);
 		}
 		lines.clear();
 	}
