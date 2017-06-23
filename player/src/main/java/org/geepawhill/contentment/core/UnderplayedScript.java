@@ -116,10 +116,10 @@ public class UnderplayedScript
 	private Phrase opening()
 	{
 		Phrase phrase = new Phrase();
+		phrase.add(new WaitForVideoStep(3000));
 		phrase.add(head("Five Underplayed Premises"));
 		phrase.add(new WaitForVideoStep(5000));
 		phrase.add(head("TDD'er for 20 years"));
-		phrase.add(new WaitForVideoStep(10000));
 		phrase.add(sub("doing"));
 		phrase.add(sub("learning"));
 		phrase.add(sub("teaching"));
@@ -234,7 +234,7 @@ public class UnderplayedScript
 	{
 		Phrase phrase = new Phrase();
 		Letters line = new Letters(text,new Point(1550d,lastLineY),format,HPos.RIGHT);
-		phrase.add(fadeIn(400d, line));
+		phrase.add(appear(line));
 		lastLineY += 80d;
 		lines.add(line);
 		return phrase;
@@ -254,20 +254,24 @@ public class UnderplayedScript
 //	}
 
 	
-	private void clearLines()
+	private Phrase clearLines()
 	{
+		Phrase phrase = new Phrase();
 		lastLineY=100d;
 		for(Letters line : lines)
 		{
-			Universals.disappear(line);
+			phrase.add(disappear(line));
 		}
 		lines.clear();
+		return phrase;
 	}
 	
 	private Phrase head(String text)
 	{
-		clearLines();
-		return line(text,columnFormat);
+		Phrase phrase = new Phrase();
+		phrase.add(clearLines());
+		phrase.add(line(text,columnFormat));
+		return phrase;
 	}
 	
 	private Phrase lead(String text)

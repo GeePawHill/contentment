@@ -20,7 +20,8 @@ class SlowPlayer
 		this.playables = playables;
 		this.name = name;
 		this.current = 0;
-		playables.get(current).slow(context, () -> next());
+		if (playables.isEmpty()) onFinished.run();
+		else playables.get(current).slow(context, () -> next());
 	}
 
 	private void next()
@@ -30,7 +31,7 @@ class SlowPlayer
 		else
 		{
 			Step step = playables.get(current);
-			System.out.println(name+": "+step.getClass().getSimpleName());
+			System.out.println(name + ": " + step.getClass().getSimpleName());
 			step.slow(context, () -> next());
 		}
 	}
