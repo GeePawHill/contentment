@@ -48,15 +48,21 @@ public class SyncPlayer
 	public void forward()
 	{
 		mustBeStepping();
-		nextSync().fast(context);
-		next += 1;
-		if (next == script.size())
+		if (next < script.size())
 		{
-			SyncStep previous = getSync(script.size() - 1);
-			rhythm.seekHard(previous.target() + (long) previous.timing().ms());
-			return;
+			nextSync().fast(context);
+			next += 1;
+			if (next == script.size())
+			{
+				SyncStep previous = getSync(script.size() - 1);
+				rhythm.seekHard(previous.target() + (long) previous.timing().ms());
+				return;
+			}
+			else
+			{
+				rhythm.seekHard(nextSync().target());
+			}
 		}
-		rhythm.seekHard(nextSync().target());
 	}
 
 	private SyncStep nextSync()
