@@ -37,5 +37,11 @@ public class FastStep implements Step
 	{
 		return Timing.instant();
 	}
+	
+	@Override
+	public String toString()
+	{
+		return fast+" (fast)";
+	}
 
 }

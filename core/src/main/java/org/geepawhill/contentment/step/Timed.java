@@ -66,4 +66,10 @@ public class Timed implements Step
 		new SlowPlayer(context,onFinished,playables, name);
 	}
 	
+	@Override
+	public String toString()
+	{
+		return name;
+	}
+	
 }

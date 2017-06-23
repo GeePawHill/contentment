@@ -57,5 +57,11 @@ public class WaitForVideoStep implements Step, CueMarker
 	{
 		return Timing.ms(beat);
 	}
+	
+	@Override
+	public String toString()
+	{
+		return WaitForVideoStep.class.getSimpleName()+" "+beat;
+	}
 
 }

@@ -116,15 +116,15 @@ public class UnderplayedScript
 	private Phrase opening()
 	{
 		Phrase phrase = new Phrase();
-		phrase.add(new WaitForVideoStep(3000));
 		lastLineY = 100d;
 		phrase.add(head("Five Underplayed Premises"));
-//		phrase.add(new WaitForVideoStep(5000));
-//		phrase.add(head("TDD'er for 20 years"));
-//		phrase.add(sub("doing"));
-//		phrase.add(sub("learning"));
-//		phrase.add(sub("teaching"));
-//		phrase.add(sub("arguing (w/alcohol)"));
+		phrase.add(new WaitForVideoStep(3000));
+		phrase.add(head("TDD'er for 20 years"));
+		phrase.add(new WaitForVideoStep(5000));
+		phrase.add(sub("doing"));
+		phrase.add(sub("learning"));
+		phrase.add(sub("teaching"));
+		phrase.add(sub("arguing (w/alcohol)"));
 		return phrase;
 	}
 //

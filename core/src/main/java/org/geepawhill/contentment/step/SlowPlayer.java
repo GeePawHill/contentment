@@ -39,7 +39,7 @@ class SlowPlayer
 		current += 1;
 		if (current == playables.size())
 		{
-			System.out.println(name+": Finished.");
+//			System.out.println(name+": Finished.");
 			onFinished.run();
 		}
 		else
@@ -52,8 +52,7 @@ class SlowPlayer
 	private void dumpCurrent()
 	{
 		Step step = playables.get(current);
-		System.out.print(name+": "+current+" "+step.getClass().getSimpleName());
-		if(step instanceof LettersStep) System.out.print(" "+((LettersStep)step).text.getText());
+		System.out.print(name+": "+current+" "+step);
 		System.out.println();
 	}
 }
