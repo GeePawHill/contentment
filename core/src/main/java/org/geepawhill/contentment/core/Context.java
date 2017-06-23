@@ -21,7 +21,7 @@ public class Context
 	{
 		this.canvas = canvas;
 		this.actors = new Actors();
-		this.rhythm = new SimpleRhythm();
+		this.rhythm = rhythm;
 		this.skipDelays(false);
 	}
 	

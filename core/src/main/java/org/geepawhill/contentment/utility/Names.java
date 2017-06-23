@@ -11,6 +11,11 @@ public class Names
 	{
 		return make(clazz.getSimpleName());
 	}
+	
+	public static String make(Object object)
+	{
+		return make(object.getClass().getSimpleName());
+	}
 
 	public static String make(String simpleName)
 	{

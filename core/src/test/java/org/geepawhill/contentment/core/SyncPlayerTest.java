@@ -64,7 +64,6 @@ public class SyncPlayerTest
 	{
 		player.load(script);
 		player.forward();
-		System.out.println(player.getNext());
 		player.forward();
 		player.forward();
 		assertThat(player.getNext()).isEqualTo(3);

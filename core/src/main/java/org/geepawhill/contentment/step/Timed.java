@@ -6,15 +6,18 @@ import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.timing.Scheduler;
 import org.geepawhill.contentment.timing.Timing;
+import org.geepawhill.contentment.utility.Names;
 
 public class Timed implements Step
 {
 	private final Scheduler scheduler;
 	private final ArrayList<Step> playables;
 	private double ms;
+	private String name;
 	
 	public Timed(double ms)
 	{
+		this.name = Names.make(Timed.class);
 		this.playables = new ArrayList<>();
 		this.ms=ms;
 		this.scheduler = new Scheduler();
@@ -65,7 +68,7 @@ public class Timed implements Step
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		new SlowPlayer(context,onFinished,playables);
+		new SlowPlayer(context,onFinished,playables, name);
 	}
 	
 }
