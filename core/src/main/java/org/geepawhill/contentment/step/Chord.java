@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
+import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.timing.Timing;
 
 public class Chord implements Step
@@ -19,12 +20,27 @@ public class Chord implements Step
 		this.ms=0L;
 	}
 
-	public void add(Step Step)
+	public Chord add(Step Step)
 	{
 		playables.add(Step);
 		if(Step.timing().ms()>ms) ms = (long)Step.timing().ms();
+		return this;
 	}
-
+	
+	public Chord add(Fast fast)
+	{
+		playables.add(new FastStep(fast));
+		return this;
+	}
+	
+	public Chord add(Sequence sequence)
+	{
+		for(int i=0;i<sequence.size();i++)
+		{
+			add(sequence.get(i));
+		}
+		return this;
+	}
 	@Override
 	public Timing timing()
 	{

@@ -21,19 +21,19 @@ public class Timed implements Step
 		this.scheduler = new Scheduler();
 	}
 
-	public Step add(Step Step)
+	public Timed add(Step Step)
 	{
 		playables.add(Step);
 		return this;
 	}
 	
-	public Step add(Fast fast)
+	public Timed add(Fast fast)
 	{
 		playables.add(new FastStep(fast));
 		return this;
 	}
 	
-	public Step add(Sequence sequence)
+	public Timed add(Sequence sequence)
 	{
 		for(int i=0;i<sequence.size();i++)
 		{

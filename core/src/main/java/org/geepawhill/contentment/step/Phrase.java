@@ -18,14 +18,20 @@ public class Phrase implements Step
 		this.ms=0L;
 	}
 
-	public Step add(Step Step)
+	public Phrase add(Step Step)
 	{
 		playables.add(Step);
 		ms+=Step.timing().ms();
 		return this;
 	}
 	
-	public Step add(Sequence sequence)
+	public Phrase add(Fast fast)
+	{
+		playables.add(new FastStep(fast));
+		return this;
+	}
+	
+	public Phrase add(Sequence sequence)
 	{
 		for(int i=0;i<sequence.size();i++)
 		{
