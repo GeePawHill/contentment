@@ -7,7 +7,6 @@ import java.util.function.Consumer;
 import org.geepawhill.contentment.core.Animator;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.ContextInterpolator;
-import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.step.Step;
 
@@ -45,30 +44,6 @@ public class JavaFxRunner
 			}
 		};
 		actLater(action);
-	}
-
-	public void undo(Sequence sequence)
-	{
-		for (int s = sequence.size() - 1; s >= 0; s--)
-		{
-			undo(sequence.get(s));
-		}
-	}
-
-	public void fast(Sequence sequence)
-	{
-		for (int s = 0; s < sequence.size(); s++)
-		{
-			fast(sequence.get(s));
-		}
-	}
-
-	public void slow(Sequence sequence)
-	{
-		for (int s = 0; s < sequence.size(); s++)
-		{
-			slow(sequence.get(s));
-		}
 	}
 
 	public void slow(Step step)

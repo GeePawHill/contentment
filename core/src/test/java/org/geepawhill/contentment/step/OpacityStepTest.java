@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.within;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.test.JavaFxTest;
 import org.geepawhill.contentment.test.TestActor;
 import org.junit.Before;
@@ -16,14 +15,14 @@ public class OpacityStepTest extends JavaFxTest
 {
 
 	private TestActor actor;
-	private Sequence sequence;
+	private Phrase sequence;
 	private ArrayList<Double> opacities;
 
 	@Before
 	public void before()
 	{
 		actor = new TestActor();
-		sequence = new Sequence().add(new Entrance(actor)).add(new OpacityStep(1d, actor, 0d));
+		sequence = new Phrase().add(new Entrance(actor)).add(new OpacityStep(1d, actor, 0d));
 		opacities = new ArrayList<>();
 	}
 

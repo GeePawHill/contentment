@@ -2,7 +2,6 @@ package org.geepawhill.contentment.step;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.test.JavaFxTest;
 import org.geepawhill.contentment.test.TestActor;
 import org.junit.Before;
@@ -12,13 +11,13 @@ public class EntranceStepTest extends JavaFxTest
 {
 
 	private TestActor actor;
-	private Sequence sequence;
+	private Phrase sequence;
 
 	@Before
 	public void before()
 	{
 		actor = new TestActor();
-		sequence = new Sequence().add(new Entrance(actor));
+		sequence = new Phrase().add(new Entrance(actor));
 	}
 
 	@Test

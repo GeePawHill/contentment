@@ -2,7 +2,6 @@ package org.geepawhill.contentment.step;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.test.JavaFxTest;
@@ -13,17 +12,16 @@ import javafx.scene.shape.Rectangle;
 
 public class BoundsStepTest extends JavaFxTest
 {
-
 	private Rectangle rectangle;
 	private PointPair result;
-	private Sequence sequence;
+	private Phrase sequence;
 
 	@Before
 	public void before()
 	{
 		rectangle = new Rectangle(100d, 300d, 500d, 700d);
 		SetBounds step = new SetBounds(rectangle, this::collectBounds);
-		sequence = new Sequence().add(step);
+		sequence = new Phrase().add(step);
 	}
 
 	public void collectBounds(PointPair result)

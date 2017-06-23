@@ -3,7 +3,6 @@ package org.geepawhill.contentment.step;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.test.JavaFxTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,14 +27,14 @@ public class ComputeStepTest extends JavaFxTest
 	@Test
 	public void slowCalls()
 	{
-		runner.slow(new Sequence().add(step));
+		runner.slow(new Phrase().add(step));
 		assertThat(result).isTrue();
 	}
 
 	@Test
 	public void fastCalls()
 	{
-		runner.fast(new Sequence().add(step));
+		runner.fast(new Phrase().add(step));
 		assertThat(result).isTrue();
 	}
 }
