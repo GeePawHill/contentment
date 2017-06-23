@@ -1,7 +1,8 @@
 package org.geepawhill.contentment.test;
 
 import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.step.Phrase;
+import org.geepawhill.contentment.step.Step;
 
 import javafx.scene.Group;
 
@@ -28,9 +29,9 @@ public class TestActor implements Actor
 	}
 
 	@Override
-	public Sequence draw(double ms)
+	public Step draw(double ms)
 	{
-		return new Sequence();
+		return new Phrase();
 	}
 
 }

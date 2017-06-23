@@ -6,6 +6,8 @@ import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.geometry.ViewPort;
 import org.geepawhill.contentment.step.AddNode;
 import org.geepawhill.contentment.step.ChangeCentered;
+import org.geepawhill.contentment.step.Step;
+import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.geometry.VPos;
@@ -71,9 +73,12 @@ public class Title implements Actor
 	}
 
 	@Override
-	public Sequence draw(double ms)
+	public Step draw(double ms)
 	{
-		return new Sequence().add(new AddNode(group, rectangle)).add(new AddNode(group, text)).schedule(0d);
+		Timed sequence = new Timed(ms);
+		sequence.add(new AddNode(group, rectangle));
+		sequence.add(new AddNode(group, text));
+		return sequence;
 	}
 
 }

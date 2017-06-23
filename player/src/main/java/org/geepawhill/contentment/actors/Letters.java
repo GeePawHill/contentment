@@ -5,6 +5,8 @@ import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.step.LettersStep;
+import org.geepawhill.contentment.step.Step;
+import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
@@ -44,9 +46,9 @@ public class Letters implements Actor
 	}
 
 	@Override
-	public Sequence draw(double ms)
+	public Step draw(double ms)
 	{
-		return new Sequence().add(step).schedule(ms);
+		return new Timed(ms).add(step);
 	}
 	
 	@Override

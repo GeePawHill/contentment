@@ -5,23 +5,31 @@ import java.util.ArrayList;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.timing.Scheduler;
 import org.geepawhill.contentment.timing.Timing;
 
-public class Phrase implements Step
+public class Timed implements Step
 {
+	private final Scheduler scheduler;
 	private final ArrayList<Step> playables;
-	private long ms;
+	private double ms;
 	
-	public Phrase()
+	public Timed(double ms)
 	{
 		this.playables = new ArrayList<>();
-		this.ms=0L;
+		this.ms=ms;
+		this.scheduler = new Scheduler();
 	}
 
 	public Step add(Step Step)
 	{
 		playables.add(Step);
-		ms+=Step.timing().ms();
+		return this;
+	}
+	
+	public Step add(Fast fast)
+	{
+		playables.add(new FastStep(fast));
 		return this;
 	}
 	
@@ -37,7 +45,13 @@ public class Phrase implements Step
 	@Override
 	public Timing timing()
 	{
+		schedule();
 		return Timing.ms(ms);
+	}
+	
+	private void schedule()
+	{
+		scheduler.schedule(ms, playables);
 	}
 
 	@Override

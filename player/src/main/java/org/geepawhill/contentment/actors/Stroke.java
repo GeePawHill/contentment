@@ -6,6 +6,8 @@ import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AddNode;
 import org.geepawhill.contentment.step.BezierStep;
+import org.geepawhill.contentment.step.Step;
+import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
@@ -37,9 +39,12 @@ public class Stroke implements Actor
 	}
 
 	@Override
-	public Sequence draw(double ms)
+	public Step draw(double ms)
 	{
-		return new Sequence().add(new AddNode(group,step)).add(step).schedule(ms);
+		Timed sequence = new Timed(ms);
+		sequence.add(new AddNode(group,step));
+		sequence.add(step);
+		return sequence;
 	}
 
 }

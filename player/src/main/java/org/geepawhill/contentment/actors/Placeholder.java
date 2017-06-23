@@ -9,6 +9,8 @@ import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AddNode;
 import org.geepawhill.contentment.step.BezierStep;
 import org.geepawhill.contentment.step.SetBounds;
+import org.geepawhill.contentment.step.Step;
+import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.step.LettersStep;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
@@ -75,9 +77,9 @@ public class Placeholder implements Actor
 	}
 
 	@Override
-	public Sequence draw(double ms)
+	public Step draw(double ms)
 	{
-		Sequence sequence = new Sequence();
+		Timed sequence = new Timed(ms);
 		sequence.add(new AddNode(group,lettersStep));
 		sequence.add(lettersStep);
 		sequence.add(new SetBounds(lettersStep, this::boundsChanged));
@@ -89,7 +91,7 @@ public class Placeholder implements Actor
 		sequence.add(southStep);
 		sequence.add(new AddNode(group,westStep));
 		sequence.add(westStep);
-		return sequence.schedule(ms);
+		return sequence;
 	}
 
 }

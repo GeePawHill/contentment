@@ -5,6 +5,8 @@ import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AddNode;
 import org.geepawhill.contentment.step.Entrance;
+import org.geepawhill.contentment.step.FastStep;
+import org.geepawhill.contentment.step.Step;
 
 import javafx.scene.Group;
 import javafx.scene.image.Image;
@@ -25,9 +27,9 @@ public class ClipArt implements Actor
 	}
 	
 	@Override
-	public Sequence draw(double ms)
+	public Step draw(double ms)
 	{
-		return new Sequence().add(new AddNode(group, view) );
+		return new FastStep(new AddNode(group, view));
 	}
 	
 	public void flip(Sequence sequence)

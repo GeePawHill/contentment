@@ -5,12 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.test.JavaFxTest;
-import org.geepawhill.contentment.test.Repeat;
 import org.geepawhill.contentment.test.RepeatRule;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.testfx.framework.junit.ApplicationTest;
 
 @SuppressWarnings("unused")
 public class AnimatorTest extends JavaFxTest

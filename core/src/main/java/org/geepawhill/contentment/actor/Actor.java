@@ -1,6 +1,6 @@
 package org.geepawhill.contentment.actor;
 
-import org.geepawhill.contentment.core.Sequence;
+import org.geepawhill.contentment.step.Step;
 
 import javafx.scene.Group;
 
@@ -10,6 +10,6 @@ public interface Actor
 
 	public String nickname();
 
-	public Sequence draw(double ms);
+	public Step draw(double ms);
 
 }
