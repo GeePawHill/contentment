@@ -3,7 +3,6 @@ package org.geepawhill.contentment.actors;
 import java.util.Random;
 
 import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Point;
