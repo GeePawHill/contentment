@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.timing.Timing;
 
 public class Chord implements Step
@@ -33,14 +32,6 @@ public class Chord implements Step
 		return this;
 	}
 	
-	public Chord add(Sequence sequence)
-	{
-		for(int i=0;i<sequence.size();i++)
-		{
-			add(sequence.get(i));
-		}
-		return this;
-	}
 	@Override
 	public Timing timing()
 	{

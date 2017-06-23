@@ -1,11 +1,11 @@
 package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.core.Sequence;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.geometry.ViewPort;
 import org.geepawhill.contentment.step.AddNode;
 import org.geepawhill.contentment.step.ChangeCentered;
+import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.utility.Names;
@@ -67,9 +67,9 @@ public class Title implements Actor
 		return group;
 	}
 
-	public Sequence change(String newSource)
+	public Step change(String newSource)
 	{
-		return new Sequence().add(new ChangeCentered(text, newSource, points));
+		return new Phrase().add(new ChangeCentered(text, newSource, points));
 	}
 
 	@Override
