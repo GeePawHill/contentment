@@ -22,6 +22,7 @@ public class LettersStep implements ShapeStep
 	public final Text text;
 	private Format format;
 	private Aligner aligner;
+	private Object oldPartialSource;
 
 	public LettersStep(Timing timing, String source, Point center, Format format)
 	{
@@ -32,7 +33,7 @@ public class LettersStep implements ShapeStep
 	{
 		this.timing = timing;
 		this.center = center;
-		this.text = new Text();
+		this.text = new Text(" ");
 		this.source = source;
 		this.format = format;
 		this.aligner = Aligner.align(align);
@@ -68,14 +69,14 @@ public class LettersStep implements ShapeStep
 		{
 			text.setText("");
 		}
+		String partialSource = source.substring(0, (int) (fraction * source.length()));
+		if(partialSource.equals(oldPartialSource)) return;
+		oldPartialSource=partialSource;
 		text.setTextOrigin(VPos.CENTER);
 		format.apply(TypeFace.FACE, text);
 		format.apply(TypeFace.COLOR, text);
-		String partialSource = source.substring(0, (int) (fraction * source.length()));
 		text.setText(partialSource);
 		aligner.align(center, text);
-//		text.setX(center.x - text.getBoundsInParent().getWidth() / 2d);
-//		text.setY(center.y);
 	}
 
 	public String toString()

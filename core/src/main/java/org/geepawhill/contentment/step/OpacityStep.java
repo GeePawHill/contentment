@@ -51,5 +51,10 @@ public class OpacityStep implements Step
 	{
 		return timing;
 	}
+	
+	public String toString()
+	{
+		return "Opacity = "+opacity+" ("+timing+")";
+	}
 
 }

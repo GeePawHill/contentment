@@ -45,7 +45,7 @@ public class SyncPlayerTest
 	{
 		player.load(script);
 		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
-		assertThat(player.getNext()).isEqualTo(0);
+		assertThat(player.atStart()).isEqualTo(true);
 		assertThat(player.beat()).isEqualTo(0);
 	}
 	
@@ -56,7 +56,7 @@ public class SyncPlayerTest
 		player.forward();
 		assertThat(first.isBefore).isFalse();
 		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
-		assertThat(player.getNext()).isEqualTo(1);
+		assertThat(player.position()).isEqualTo(1);
 		assertThat(player.beat()).isEqualTo(500);
 	}
 	
@@ -64,11 +64,10 @@ public class SyncPlayerTest
 	public void forwardAtEndNoOps()
 	{
 		player.load(script);
+		player.end();
 		player.forward();
-		player.forward();
-		player.forward();
-		assertThat(player.getNext()).isEqualTo(3);
-		assertThat(player.beat()).isEqualTo(800);
+		assertThat(player.atEnd()).isTrue();
+		assertThat(player.beat()).isEqualTo(Rhythm.MAX);
 		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
 	}
 	
@@ -76,12 +75,11 @@ public class SyncPlayerTest
 	public void playOneAtEndNoOps()
 	{
 		player.load(script);
-		player.forward();
-		player.forward();
-		player.forward();
+		player.end();
+		assertThat(player.atEnd()).isTrue();
 		player.playOne();
-		assertThat(player.getNext()).isEqualTo(3);
-		assertThat(player.beat()).isEqualTo(800);
+		assertThat(player.atEnd()).isTrue();
+		assertThat(player.beat()).isEqualTo(Rhythm.MAX);
 		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
 	}
 	
@@ -90,12 +88,11 @@ public class SyncPlayerTest
 	{
 		player.load(script);
 		player.forward();
-		player.forward();
 		player.backward();
-		assertThat(first.isBefore).isFalse();
+		assertThat(first.isBefore).isTrue();
 		assertThat(second.isBefore).isTrue();
-		assertThat(player.getNext()).isEqualTo(1);
-		assertThat(player.beat()).isEqualTo(500);
+		assertThat(player.atStart()).isTrue();
+		assertThat(player.beat()).isEqualTo(0);
 		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
 	}
 	
@@ -104,8 +101,19 @@ public class SyncPlayerTest
 	{
 		player.load(script);
 		player.backward();
-		assertThat(player.getNext()).isEqualTo(0);
+		assertThat(player.atStart()).isTrue();
 		assertThat(player.beat()).isEqualTo(0);
+		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
+	}
+	
+	@Test
+	public void backwardAtEndWorks()
+	{
+		player.load(script);
+		player.end();
+		player.backward();
+		assertThat(player.position()).isEqualTo(2);
+		assertThat(player.beat()).isEqualTo(700);
 		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
 	}
 	
@@ -119,7 +127,7 @@ public class SyncPlayerTest
 		first.finishPlaying();
 		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
 		assertThat(first.isBefore).isFalse();
-		assertThat(player.getNext()).isEqualTo(1);
+		assertThat(player.position()).isEqualTo(1);
 	}
 	
 	@Test
@@ -133,7 +141,7 @@ public class SyncPlayerTest
 		player.playOne();
 		third.finishPlaying();
 		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
-		assertThat(player.getNext()).isEqualTo(3);
+		assertThat(player.position()).isEqualTo(3);
 	}
 	
 	@Test
@@ -144,6 +152,7 @@ public class SyncPlayerTest
 		assertThat(player.getRhythm().isPlaying()).isTrue();
 		first.finishPlaying();
 		assertThat(player.getRhythm().isPlaying()).isFalse();
+		assertThat(first.isBefore).isFalse();
 	}
 	
 	@Test
@@ -155,7 +164,7 @@ public class SyncPlayerTest
 		second.finishPlaying();
 		third.finishPlaying();
 		assertThat(player.getState()).isEqualTo(SyncPlayer.State.Stepping);
-		assertThat(player.getNext()).isEqualTo(3);
+		assertThat(player.atEnd()).isTrue();
 	}
 	
 	@Test
@@ -175,7 +184,8 @@ public class SyncPlayerTest
 	{
 		player.load(script);
 		player.end();
-		assertThat(player.getNext()).isEqualTo(3);
+		assertThat(player.atEnd()).isTrue();
+		assertThat(player.beat()).isEqualTo(Rhythm.MAX);
 	}
 	
 	@Test
@@ -183,9 +193,8 @@ public class SyncPlayerTest
 	{
 		player.load(script);
 		player.forward();
-		player.forward();
 		player.start();
-		assertThat(player.getNext()).isEqualTo(0);
+		assertThat(player.atStart()).isTrue();
 		assertThat(first.isBefore).isTrue();
 		assertThat(player.getBeat()).isEqualTo(0);
 	}
@@ -195,6 +204,6 @@ public class SyncPlayerTest
 	{
 		player.load(script);
 		player.last();
-		assertThat(player.getNext()).isEqualTo(2);
+		assertThat(player.position()).isEqualTo(2);
 	}
 }

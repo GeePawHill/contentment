@@ -1,12 +1,16 @@
 package org.geepawhill.contentment.core;
 
+import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.ScaleListener;
+import org.geepawhill.contentment.rhythm.Rhythm;
 import org.geepawhill.contentment.rhythm.SimpleRhythm;
+import org.geepawhill.contentment.utility.JfxUtility;
 
 import javafx.application.Platform;
 import javafx.geometry.Orientation;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
@@ -33,7 +37,7 @@ public class PlayerView
 	{
 		this.stage = stage;
 		canvas = new Group();
-		player = new SyncPlayer(canvas,new SimpleRhythm());
+		player = new SyncPlayer(canvas, new SimpleRhythm());
 		tools = makeTools();
 		stage.fullScreenProperty().addListener((source, o, n) -> undoFullScreen(n));
 	}
@@ -53,9 +57,9 @@ public class PlayerView
 	{
 		Pane owner = new Pane();
 		owner.setPrefSize(1600d, 900d);
-		
+
 		// media background
-		
+
 		// non-media background
 
 		ScaleListener listener = new ScaleListener(owner, canvas);
@@ -90,7 +94,7 @@ public class PlayerView
 		// new ResponsesToComplexity(sequence).add();
 		// new VisibleGeekLa1(sequence).add();
 		// new GeekNeeqOne(sequence).add();
-	//	player.reset(sequence);
+		// player.reset(sequence);
 	}
 
 	private ToolBar makeTools()
@@ -104,6 +108,7 @@ public class PlayerView
 		timing.setFill(Color.BLUE);
 		player.getRhythm().beatProperty().addListener((p, o, n) -> beatChanged(n));
 		tools.getItems().add(timing);
+		beatChanged(0);
 
 		Button full = new Button("Full");
 		full.setOnAction(event -> stage.setFullScreen(true));
@@ -112,6 +117,10 @@ public class PlayerView
 		Button home = new Button("||<--");
 		home.setOnAction(event -> player.start());
 		tools.getItems().add(home);
+
+		Button oneOff = new Button("OneOff");
+		oneOff.setOnAction(event -> oneOff());
+		tools.getItems().add(oneOff);
 
 		Button backwards = new Button("<--");
 		backwards.setOnAction(event -> player.backward());
@@ -140,9 +149,38 @@ public class PlayerView
 		return tools;
 	}
 
+	private void oneOff()
+	{
+		JfxUtility.capture(stage.getScene().getRoot());
+		dumpNode(canvas, 0);
+	}
+
+
+	private void dumpNode(Node node, int indent)
+	{
+		String tabs = "";
+		for (int i = 0; i < indent; i++)
+			tabs += "\t";
+		System.out.print(tabs + node.getClass().getSimpleName());
+		System.out.print(" " + new PointPair(node.getBoundsInParent()));
+		System.out.println();
+		if (node instanceof Parent)
+		{
+			Parent parent = (Parent) node;
+			for (Node child : parent.getChildrenUnmodifiable())
+			{
+				dumpNode(child, indent + 1);
+			}
+		}
+	}
+
 	private void beatChanged(Number beat)
 	{
-		Platform.runLater(()->timing.setText(String.format("%8d", beat.longValue())));
+		String text = String.format("%8d", beat.longValue());
+		if (beat.longValue() == 0) text = "   Start";
+		if (beat.longValue() == Rhythm.MAX) text = "     End";
+		final String newText = text;
+		Platform.runLater(() -> timing.setText(newText));
 	}
 
 	private void undoFullScreen(Boolean newValue)

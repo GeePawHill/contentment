@@ -1,9 +1,10 @@
 package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.rhythm.Rhythm;
-import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.step.SyncStep;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Group;
 
@@ -15,78 +16,82 @@ public class SyncPlayer
 	}
 
 	private Script script;
-	private int next;
+	private int position;
 	private Rhythm rhythm;
-	private final SimpleObjectProperty<State> stateProperty;
 	private Context context;
+	private final SimpleObjectProperty<State> stateProperty;
+	private final SimpleBooleanProperty atStartProperty;
+	private final SimpleBooleanProperty atEndProperty;
 
 	public SyncPlayer(Group canvas, Rhythm defaultRhythm)
 	{
 		this.rhythm = defaultRhythm;
 		this.stateProperty = new SimpleObjectProperty<>(State.Stepping);
 		this.context = new Context(canvas, defaultRhythm);
+		this.atStartProperty = new SimpleBooleanProperty(true);
+		this.atEndProperty = new SimpleBooleanProperty(false);
+		this.position=0;
 	}
 
 	public void load(Script script)
 	{
 		this.script = script;
-		this.next = 0;
+		this.setPosition(0);
 		rhythm.seekHard((long) 0);
 		stateProperty.set(State.Stepping);
 	}
-
-	public int getNext()
+	
+	public int position()
 	{
-		return next;
+		return position;
 	}
 
 	public long beat()
 	{
 		return getBeat();
 	}
+	
+	public BooleanProperty atStartProperty()
+	{
+		return atStartProperty;
+	}
+	
+	public BooleanProperty atEndProperty()
+	{
+		return atEndProperty;
+	}
 
 	public void forward()
 	{
 		mustBeStepping();
-		if (next < script.size())
+		if(!atEnd())
 		{
 			nextSync().fast(context);
-			next += 1;
-			if (next == script.size())
-			{
-				SyncStep previous = getSync(script.size() - 1);
-				rhythm.seekHard(previous.target() + (long) previous.timing().ms());
-				return;
-			}
-			else
-			{
-				rhythm.seekHard(nextSync().target());
-			}
+			setPosition(position() + 1);
+			if(atEnd()) rhythm.seekHard(Rhythm.MAX);
+			else rhythm.seekHard(nextSync().target());
 		}
 	}
 
 	private SyncStep nextSync()
 	{
-		return getSync(next);
+		return getSync(position());
 	}
 
 	private SyncStep getSync(int sync)
 	{
-		return (SyncStep) script.get(sync);
+		return script.get(sync);
 	}
 
 	public void backward()
 	{
 		mustBeStepping();
-		if (next == 0)
+		if (!atStart())
 		{
-			rhythm.seekHard((long) 0);
-			next = 0;
-			return;
+			setPosition(position() - 1);
+			nextSync().undo(context);
+			rhythm.seekHard(nextSync().target());
 		}
-		next -= 1;
-		nextSync().undo(context);
-		rhythm.seekHard(nextSync().target());
 	}
 
 	public long getBeat()
@@ -102,10 +107,10 @@ public class SyncPlayer
 	public void playOne()
 	{
 		mustBeStepping();
-		if (next < script.size())
+		if(!atEnd())
 		{
-			rhythm.play();
 			stateProperty.set(State.Playing);
+			rhythm.play();
 			nextSync().slow(context, this::onPlayOneFinished);
 		}
 	}
@@ -113,14 +118,10 @@ public class SyncPlayer
 	public void onPlayOneFinished()
 	{
 		rhythm.pause();
-		stateProperty.set(State.Stepping);
-		next += 1;
-		if (next == script.size())
-		{
-			SyncStep previous = getSync(script.size() - 1);
-			rhythm.seekHard(previous.target() + (long) previous.timing().ms());
-		}
+		setPosition(position() + 1);
+		if(atEnd()) rhythm.seekHard(Rhythm.MAX);
 		else rhythm.seekHard(nextSync().target());
+		stateProperty.set(State.Stepping);
 	}
 
 	private void mustBeStepping()
@@ -131,27 +132,33 @@ public class SyncPlayer
 	public void play()
 	{
 		mustBeStepping();
-		rhythm.play();
-		stateProperty.set(State.Playing);
-		nextSync().slow(context, this::onPlayFinished);
+		if(!atEnd())
+		{
+			stateProperty.set(State.Playing);
+			rhythm.play();
+			nextSync().slow(context, this::onPlayFinished);
+		}
 	}
 
 	public void onPlayFinished()
 	{
-		stateProperty.set(State.Stepping);
-		next += 1;
-		if (getNext() == script.size())
+		setPosition(position() + 1);
+		if(!atEnd())
+		{
+			nextSync().slow(context, this::onPlayFinished);
+		}
+		else
 		{
 			rhythm.pause();
-			return;
+			rhythm.seekHard(Rhythm.MAX);
+			stateProperty.set(State.Stepping);
 		}
-		nextSync().slow(context, this::onPlayFinished);
 	}
 
 	public void end()
 	{
 		mustBeStepping();
-		while (getNext() != script.size())
+		while (position() < script.size())
 		{
 			forward();
 		}
@@ -160,7 +167,7 @@ public class SyncPlayer
 	public void start()
 	{
 		mustBeStepping();
-		while (getNext() != 0)
+		while (position() != 0)
 		{
 			backward();
 		}
@@ -176,5 +183,22 @@ public class SyncPlayer
 	public Rhythm getRhythm()
 	{
 		return rhythm;
+	}
+
+	public void setPosition(int position)
+	{
+		this.position = position;
+		atStartProperty.set(position==0);
+		atEndProperty.set(position==script.size());
+	}
+	
+	public boolean atStart()
+	{
+		return atStartProperty.get();
+	}
+	
+	public boolean atEnd()
+	{
+		return atEndProperty.get();
 	}
 }

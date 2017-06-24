@@ -26,7 +26,7 @@ public class Aligner
 		{
 			default:
 			case CENTER:
-				text.setX(point.x - text.getBoundsInParent().getWidth() / 2d);
+				text.setX(point.x - text.getBoundsInLocal().getWidth() / 2d);
 				text.setY(point.y);
 				break;
 			case LEFT:
@@ -34,7 +34,7 @@ public class Aligner
 				text.setY(point.y);
 				break;
 			case RIGHT:
-				text.setX(point.x - text.getBoundsInParent().getWidth());
+				text.setX(point.x - text.getBoundsInLocal().getWidth());
 				text.setY(point.y);
 				break;
 		}

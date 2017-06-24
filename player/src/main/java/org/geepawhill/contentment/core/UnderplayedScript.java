@@ -1,18 +1,15 @@
 package org.geepawhill.contentment.core;
 
-import java.util.ArrayList;
+import static org.geepawhill.contentment.step.Universals.disappear;
+import static org.geepawhill.contentment.step.Universals.fadeIn;
 
-import static org.geepawhill.contentment.step.Universals.*;
+import java.util.ArrayList;
 
 import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
-import org.geepawhill.contentment.geometry.ViewPort;
-import org.geepawhill.contentment.step.CommonSteps;
 import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.step.SyncStep;
-import org.geepawhill.contentment.step.Universals;
-import org.geepawhill.contentment.step.WaitForVideoStep;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 
@@ -54,7 +51,8 @@ public class UnderplayedScript
 	{
 		Script script = new Script();
 		script.add(new SyncStep(0, opening()));
-		script.add(new SyncStep(3000,style()));
+		script.add(new SyncStep(3000,programmingIsTdd()));
+		script.add(new SyncStep(5000,style()));
 		return script;
 	}
 
@@ -128,7 +126,14 @@ public class UnderplayedScript
 	private Phrase style()
 	{
 		Phrase phrase = new Phrase();
-		phrase.add(head("There are different TDD styles"));
+		phrase.add(head("Programming *is* TDD"));
+		return phrase;
+	}
+	
+	private Phrase programmingIsTdd()
+	{
+		Phrase phrase = new Phrase();
+		phrase.add(head("There Are Styles Of TDD"));
 		return phrase;
 	}
 
@@ -239,8 +244,8 @@ public class UnderplayedScript
 	private Phrase line(String text, Format format)
 	{
 		Phrase phrase = new Phrase();
-		Letters line = new Letters(text, new Point(1550d, lastLineY), format, HPos.RIGHT);
-		phrase.add(appear(line));
+		Letters line = new Letters(text, new Point(1000d, lastLineY), format, HPos.CENTER);
+		phrase.add(fadeIn(500d,line));
 		lastLineY += 80d;
 		lines.add(line);
 		return phrase;

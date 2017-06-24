@@ -5,6 +5,8 @@ import javafx.beans.property.LongProperty;
 public interface Rhythm
 {
 
+	static final long MAX = Long.MAX_VALUE;
+
 	LongProperty beatProperty();
 
 	long beat();

@@ -12,6 +12,7 @@ public class Main extends Application
 	@Override
 	public void start(Stage stage)
 	{
+		System.out.println(System.getProperty("java.version"));
 		try
 		{
 			preloadFontFile("/org/geepawhill/scripts/SAMUELS.TTF");
@@ -24,7 +25,7 @@ public class Main extends Application
 			PlayerView mainView = new PlayerView(stage);
 			Scene scene = new Scene(mainView.getNode());
 			stage.setScene(scene);
-			stage.setMaximized(true);
+//			stage.setMaximized(true);
 			stage.setFullScreenExitHint("");
 			stage.show();
 		}

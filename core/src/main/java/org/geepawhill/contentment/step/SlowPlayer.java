@@ -22,12 +22,12 @@ class SlowPlayer
 		this.current = 0;
 		if (playables.isEmpty())
 		{
-			System.out.println("Empty?");
+//			System.out.println("Empty?");
 			onFinished.run();
 		}
 		else
 		{
-			System.out.println(name+": Started");
+//			System.out.println(name+": Started");
 			Step step = playables.get(current);
 			step.slow(context, () -> next());
 		}
@@ -35,7 +35,7 @@ class SlowPlayer
 
 	private void next()
 	{
-		dumpCurrent();
+//		dumpCurrent();
 		current += 1;
 		if (current == playables.size())
 		{

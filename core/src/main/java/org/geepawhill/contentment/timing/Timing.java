@@ -48,4 +48,10 @@ public class Timing
 		if (!isWeighted()) throw new RuntimeException("Tried to fix Timing twice.");
 		weightOrMs = ms;
 	}
+	
+	public String toString()
+	{
+		if(isWeighted()) return String.format("%.0fw",-weightOrMs);
+		else return String.format("%.0fm", weightOrMs);
+	}
 }
