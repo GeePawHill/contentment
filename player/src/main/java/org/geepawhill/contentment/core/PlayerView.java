@@ -85,7 +85,6 @@ public class PlayerView
 		// new DemoVideo3(sequence).add();
 		// new DemoScript(sequence).add();
 		// new BaseComplications(sequence).add();
-		new UnderplayedScript().add();
 		// new InteractiveStabilization(sequence).add();
 		// new AgentAndPokes(sequence).add();
 		// new ResponsesToComplexity(sequence).add();
@@ -109,10 +108,6 @@ public class PlayerView
 		Button full = new Button("Full");
 		full.setOnAction(event -> stage.setFullScreen(true));
 		tools.getItems().add(full);
-
-		Button test = new Button("**");
-		test.setOnAction(event -> makeScripts(sequence));
-		tools.getItems().add(test);
 
 		Button home = new Button("||<--");
 		home.setOnAction(event -> player.start());
