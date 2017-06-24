@@ -11,8 +11,6 @@ public interface Rhythm
 
 	void seekHard(long ms);
 
-	void seekSoft(long ms);
-
 	void update();
 
 	void play();

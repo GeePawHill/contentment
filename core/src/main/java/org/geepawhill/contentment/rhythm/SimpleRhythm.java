@@ -43,12 +43,6 @@ public class SimpleRhythm implements Rhythm
 	}
 	
 	@Override
-	public void seekSoft(long ms)
-	{
-		if(beat()<ms) seekHard(ms);
-	}
-	
-	@Override
 	public void update()
 	{
 		long newBeat = getPlayerTime();
