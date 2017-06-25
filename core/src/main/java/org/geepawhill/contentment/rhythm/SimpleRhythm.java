@@ -77,4 +77,9 @@ public class SimpleRhythm implements Rhythm
 	{
 		return isPlaying;
 	}
+
+	@Override
+	public void waitForEnd()
+	{
+	}
 }

@@ -20,4 +20,6 @@ public interface Rhythm
 	void pause();
 
 	boolean isPlaying();
+
+	void waitForEnd();
 }

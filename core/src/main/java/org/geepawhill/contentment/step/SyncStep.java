@@ -35,11 +35,6 @@ public class SyncStep
 		phrase.undo(context);
 	}
 
-	public Timing timing()
-	{
-		return phrase.timing();
-	}
-
 	public long target()
 	{
 		return target;

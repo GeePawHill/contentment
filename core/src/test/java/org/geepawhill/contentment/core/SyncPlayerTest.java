@@ -2,6 +2,9 @@ package org.geepawhill.contentment.core;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 import org.geepawhill.contentment.rhythm.Rhythm;
 import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.step.SyncStep;
@@ -21,6 +24,7 @@ public class SyncPlayerTest
 	private TestPhrase second;
 	private TestPhrase third;
 
+	
 	@Before
 	public void before()
 	{
@@ -205,5 +209,31 @@ public class SyncPlayerTest
 		player.load(script);
 		player.last();
 		assertThat(player.position()).isEqualTo(2);
+	}
+	
+	@Test
+	public  void playOneTakesFullTime()
+	{
+		player.load(script);
+		LocalDateTime start = LocalDateTime.now();
+		player.playOne();
+		first.finishPlaying();
+		while(player.getState()==SyncPlayer.State.Playing);
+		Duration elapsed = Duration.between(start,LocalDateTime.now());
+		assertThat(elapsed.toMillis()).isBetween(500L, 600L);
+	}
+	
+	@Test
+	public void playTakesFullTime()
+	{
+		player.load(script);
+		LocalDateTime start = LocalDateTime.now();
+		player.play();
+		first.finishPlaying();
+		second.finishPlaying();
+		third.finishPlaying();
+		while(player.getState()==SyncPlayer.State.Playing);
+		Duration elapsed = Duration.between(start,LocalDateTime.now());
+		assertThat(elapsed.toMillis()).isBetween(700L,770L);
 	}
 }
