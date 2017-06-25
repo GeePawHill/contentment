@@ -23,6 +23,8 @@ public class SyncPlayer
 	private final SimpleObjectProperty<State> stateProperty;
 	private final SimpleBooleanProperty atStartProperty;
 	private final SimpleBooleanProperty atEndProperty;
+	private Animator animator;
+	private long waitBeat;
 
 	public SyncPlayer(Group canvas, Rhythm defaultRhythm)
 	{
@@ -118,11 +120,10 @@ public class SyncPlayer
 
 	public void onPlayOneFinished()
 	{
-		setPosition(position()+1);
-		if(!atEnd())
+		setPosition(position() + 1);
+		if (!atEnd())
 		{
-			waitForBeat(nextSync().target());
-			rhythm.pause();
+			playOneWaitForBeat(nextSync().target());
 		}
 		else
 		{
@@ -131,11 +132,6 @@ public class SyncPlayer
 			rhythm.seekHard(Rhythm.MAX);
 		}
 		stateProperty.set(State.Stepping);
-	}
-	
-	private void waitForBeat(long beat)
-	{
-		while(rhythm.beat()<beat);
 	}
 
 	private void mustBeStepping()
@@ -156,18 +152,17 @@ public class SyncPlayer
 
 	public void onPlayFinished()
 	{
-		setPosition(position()+1);
-		if(!atEnd())
+		setPosition(position() + 1);
+		if (!atEnd())
 		{
-			waitForBeat(nextSync().target());
-			nextSync().slow(context, this::onPlayFinished);
+			playWaitForBeat(nextSync().target());
 		}
 		else
 		{
 			rhythm.pause();
 			rhythm.seekHard(Rhythm.MAX);
+			stateProperty.set(State.Stepping);
 		}
-		stateProperty.set(State.Stepping);
 	}
 
 	public void end()
@@ -221,4 +216,53 @@ public class SyncPlayer
 	{
 		return stateProperty;
 	}
+	
+	private void playWaitForBeat(long beat)
+	{
+		System.out.println("Waiting for: "+beat);
+		waitBeat = beat;
+		animator = new Animator();
+		animator.play(context, OnFinished.NONE, (double) beat * 2d, this::playUpdateBeat);
+	}
+	
+	private void playOneWaitForBeat(long beat)
+	{
+		System.out.println("Waiting for: "+beat);
+		waitBeat = beat;
+		animator = new Animator();
+		animator.play(context, OnFinished.NONE, (double) beat * 2d, this::updateBeat);
+	}
+	
+	private void playUpdateBeat(Context context, double fraction)
+	{
+		if (context.getRhythm().beat() >= waitBeat)
+		{
+			playFinishAndDie();
+		}
+	}
+	
+	private void playFinishAndDie()
+	{
+		animator.stop();
+		System.out.println("Finished at: "+context.getRhythm().beat());
+		nextSync().slow(context, this::onPlayFinished);
+	}
+	
+	private void updateBeat(Context context, double fraction)
+	{
+		if (context.getRhythm().beat() >= waitBeat)
+		{
+			finishAndDie();
+		}
+	}
+
+	private void finishAndDie()
+	{
+		animator.stop();
+		rhythm.pause();
+		System.out.println("Finished at: "+context.getRhythm().beat());
+		stateProperty.set(State.Stepping);
+	}
+
+
 }
