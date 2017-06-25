@@ -25,7 +25,7 @@ public class Main extends Application
 			PlayerView mainView = new PlayerView(stage);
 			Scene scene = new Scene(mainView.getNode());
 			stage.setScene(scene);
-//			stage.setMaximized(true);
+			stage.setMaximized(true);
 			stage.setFullScreenExitHint("");
 			stage.show();
 		}

@@ -65,6 +65,7 @@ public class PlayerView
 		ScaleListener listener = new ScaleListener(owner, canvas);
 		owner.widthProperty().addListener(listener);
 		owner.heightProperty().addListener(listener);
+		listener.changed(null, 300, 300);
 
 		owner.setOnMouseClicked((event) -> mouseClicked(event));
 
