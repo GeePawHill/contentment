@@ -219,7 +219,6 @@ public class SyncPlayer
 	
 	private void playWaitForBeat(long beat)
 	{
-		System.out.println("Waiting for: "+beat);
 		waitBeat = beat;
 		animator = new Animator();
 		animator.play(context, OnFinished.NONE, (double) beat * 2d, this::playUpdateBeat);
@@ -244,7 +243,6 @@ public class SyncPlayer
 	private void playFinishAndDie()
 	{
 		animator.stop();
-		System.out.println("Finished at: "+context.getRhythm().beat());
 		nextSync().slow(context, this::onPlayFinished);
 	}
 	
@@ -260,7 +258,6 @@ public class SyncPlayer
 	{
 		animator.stop();
 		rhythm.pause();
-		System.out.println("Finished at: "+context.getRhythm().beat());
 		stateProperty.set(State.Stepping);
 	}
 

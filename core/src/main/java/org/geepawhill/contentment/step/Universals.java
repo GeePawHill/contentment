@@ -53,7 +53,7 @@ public class Universals
 		Phrase result = new Phrase();
 		result.add(new Entrance(drawable));
 		result.add(new OpacityStep(0d, drawable, 0d));
-		result.add(drawable.draw(ms));
+		result.add(drawable.draw(1d));
 		result.add(new OpacityStep(ms, drawable, 1d));
 		return result;
 	}

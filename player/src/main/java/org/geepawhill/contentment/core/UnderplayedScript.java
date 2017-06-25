@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.core;
 
-import static org.geepawhill.contentment.step.Universals.disappear;
-import static org.geepawhill.contentment.step.Universals.fadeIn;
+import static org.geepawhill.contentment.step.Universals.*;
 
 import java.util.ArrayList;
 
@@ -244,8 +243,8 @@ public class UnderplayedScript
 	private Phrase line(String text, Format format)
 	{
 		Phrase phrase = new Phrase();
-		Letters line = new Letters(text, new Point(1000d, lastLineY), format, HPos.CENTER);
-		phrase.add(fadeIn(500d,line));
+		Letters line = new Letters(text, new Point(1550d, lastLineY), format, HPos.RIGHT);
+		phrase.add(sketch(500d,line));
 		lastLineY += 80d;
 		lines.add(line);
 		return phrase;
