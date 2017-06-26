@@ -7,6 +7,9 @@ import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.utility.JfxUtility;
 
 import javafx.application.Platform;
+import javafx.beans.binding.Binding;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.geometry.Orientation;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -102,7 +105,7 @@ public class PlayerView
 	{
 		ToolBar tools = new ToolBar();
 		tools.setOrientation(Orientation.HORIZONTAL);
-
+		
 		timing = new Text("00000000");
 		timing.setFont(new Font("Consolas", 30d));
 		timing.setStroke(Color.BLUE);
@@ -129,14 +132,19 @@ public class PlayerView
 
 		Button play = new Button(">");
 		play.setOnAction(event -> player.play());
+		
+		BooleanBinding trueIfPlaying = Bindings.createBooleanBinding(() -> player.getState()==SyncPlayer.State.Playing,player.stateProperty());
+		play.disableProperty().bind(trueIfPlaying);
 		tools.getItems().add(play);
 
 		Button playOne = new Button(">|");
 		playOne.setOnAction(event -> player.playOne());
+		playOne.disableProperty().bind(trueIfPlaying);
 		tools.getItems().add(playOne);
 
 		Button forwards = new Button("-->");
 		forwards.setOnAction(event -> player.forward());
+		forwards.disableProperty().bind(trueIfPlaying);
 		tools.getItems().add(forwards);
 
 		Button end = new Button("-->||");
@@ -155,7 +163,6 @@ public class PlayerView
 		JfxUtility.capture(stage.getScene().getRoot());
 		dumpNode(canvas, 0);
 	}
-
 
 	private void dumpNode(Node node, int indent)
 	{
