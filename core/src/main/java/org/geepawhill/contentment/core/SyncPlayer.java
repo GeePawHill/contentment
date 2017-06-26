@@ -130,8 +130,8 @@ public class SyncPlayer
 			rhythm.waitForEnd();
 			rhythm.pause();
 			rhythm.seekHard(Rhythm.MAX);
+			stateProperty.set(State.Stepping);
 		}
-		stateProperty.set(State.Stepping);
 	}
 
 	private void mustBeStepping()
@@ -226,7 +226,6 @@ public class SyncPlayer
 	
 	private void playOneWaitForBeat(long beat)
 	{
-		System.out.println("Waiting for: "+beat);
 		waitBeat = beat;
 		animator = new Animator();
 		animator.play(context, OnFinished.NONE, (double) beat * 2d, this::updateBeat);
