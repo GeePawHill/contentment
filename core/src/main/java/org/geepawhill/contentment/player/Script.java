@@ -1,9 +1,13 @@
 package org.geepawhill.contentment.player;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.rhythm.Rhythm;
 import org.geepawhill.contentment.rhythm.SimpleRhythm;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class Script
 {
@@ -40,5 +44,14 @@ public class Script
 	public Rhythm rhythm()
 	{
 		return rhythm;
+	}
+
+	public MediaPlayer getMediaPlayer()
+	{
+		Media m = new Media(new File("/01faceoverCut.mp4").toURI().toString());
+		MediaPlayer p = new MediaPlayer(m);
+		p.setCycleCount(Integer.MAX_VALUE);
+		p.play();
+		return p;
 	}
 }

@@ -1,5 +1,7 @@
 package org.geepawhill.contentment.core;
 
+import java.io.File;
+
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.ScaleListener;
 import org.geepawhill.contentment.player.Player;
@@ -21,6 +23,9 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -33,6 +38,7 @@ public class MainView
 	private Stage stage;
 	private ToolBar tools;
 	private Text timing;
+	private MediaView media;
 
 	public MainView(Stage stage, Player player)
 	{
@@ -59,11 +65,12 @@ public class MainView
 		
 		player.scriptProperty().addListener((p,o,n)->scriptChanged());
 
-		// media background
-		
+		media = new MediaView();
+		owner.getChildren().add(media);
+
 		// non-media background
 
-		ScaleListener listener = new ScaleListener(owner, player.context().canvas);
+		ScaleListener listener = new ScaleListener(owner, player.context().canvas, media);
 		owner.widthProperty().addListener(listener);
 		owner.heightProperty().addListener(listener);
 		listener.changed(null, 300, 300);
@@ -78,6 +85,7 @@ public class MainView
 	{
 		player.getRhythm().beatProperty().addListener((p, o, n) -> beatChanged(n));
 		beatChanged(0);
+		media.setMediaPlayer(player.getScript().getMediaPlayer());
 	}
 
 	private void mouseClicked(MouseEvent event)
