@@ -1,12 +1,10 @@
-package org.geepawhill.contentment.core;
+package org.geepawhill.contentment.player;
 
 import java.util.ArrayList;
 
-import org.geepawhill.contentment.step.SyncStep;
-
 public class Script
 {
-	ArrayList<SyncStep> steps;
+	ArrayList<Keyframe> steps;
 
 	public Script()
 	{
@@ -18,12 +16,12 @@ public class Script
 		return steps.size();
 	}
 
-	public SyncStep get(int index)
+	public Keyframe get(int index)
 	{
 		return steps.get(index);
 	}
 
-	public Script add(SyncStep step)
+	public Script add(Keyframe step)
 	{
 		steps.add(step);
 		return this;

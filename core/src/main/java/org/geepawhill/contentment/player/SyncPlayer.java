@@ -1,7 +1,7 @@
-package org.geepawhill.contentment.core;
+package org.geepawhill.contentment.player;
 
+import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.rhythm.Rhythm;
-import org.geepawhill.contentment.step.SyncStep;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
@@ -79,19 +79,19 @@ public class SyncPlayer
 		mustBeStepping();
 		if (!atEnd())
 		{
-			nextSync().fast(context);
+			nextSync().phrase.fast(context);
 			setPosition(position() + 1);
 			if (atEnd()) rhythm.seekHard(Rhythm.MAX);
-			else rhythm.seekHard(nextSync().target());
+			else rhythm.seekHard(nextSync().target);
 		}
 	}
 
-	private SyncStep nextSync()
+	private Keyframe nextSync()
 	{
 		return getSync(position());
 	}
 
-	private SyncStep getSync(int sync)
+	private Keyframe getSync(int sync)
 	{
 		return script.get(sync);
 	}
@@ -102,8 +102,8 @@ public class SyncPlayer
 		if (!atStart())
 		{
 			setPosition(position() - 1);
-			nextSync().undo(context);
-			rhythm.seekHard(nextSync().target());
+			nextSync().phrase.undo(context);
+			rhythm.seekHard(nextSync().target);
 		}
 	}
 
@@ -124,7 +124,7 @@ public class SyncPlayer
 		{
 			stateProperty.set(State.Playing);
 			rhythm.play();
-			new BeatWaiter(context, nextSync().phrase(), this::isPlayOneDone, this::newPlayOneFinished).play();
+			new BeatWaiter(context, nextSync().phrase, this::isPlayOneDone, this::newPlayOneFinished).play();
 		}
 	}
 
@@ -132,7 +132,7 @@ public class SyncPlayer
 	{
 		if (position < script.size() - 1)
 		{
-			if (rhythm.beat() >= getSync(position + 1).target()) return true;
+			if (rhythm.beat() >= getSync(position + 1).target) return true;
 			else return false;
 		}
 		else
@@ -153,7 +153,7 @@ public class SyncPlayer
 		setPosition(position()+1);
 		if(!atEnd())
 		{
-			new BeatWaiter(context, nextSync().phrase(), this::isPlayOneDone, this::newPlayFinished).play();
+			new BeatWaiter(context, nextSync().phrase, this::isPlayOneDone, this::newPlayFinished).play();
 		}
 		else
 		{
@@ -174,7 +174,7 @@ public class SyncPlayer
 		{
 			stateProperty.set(State.Playing);
 			rhythm.play();
-			new BeatWaiter(context, nextSync().phrase(), this::isPlayOneDone, this::newPlayFinished).play();
+			new BeatWaiter(context, nextSync().phrase, this::isPlayOneDone, this::newPlayFinished).play();
 		}
 	}
 

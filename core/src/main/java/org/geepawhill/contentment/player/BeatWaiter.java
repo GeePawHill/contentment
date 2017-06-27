@@ -1,7 +1,9 @@
-package org.geepawhill.contentment.core;
+package org.geepawhill.contentment.player;
 
 import java.util.function.Supplier;
 
+import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.step.Step;
 
 import javafx.animation.Transition;

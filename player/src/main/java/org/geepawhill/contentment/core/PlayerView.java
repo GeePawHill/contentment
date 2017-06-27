@@ -2,6 +2,7 @@ package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.ScaleListener;
+import org.geepawhill.contentment.player.SyncPlayer;
 import org.geepawhill.contentment.rhythm.Rhythm;
 import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.utility.JfxUtility;
@@ -28,7 +29,6 @@ import javafx.stage.Stage;
 public class PlayerView
 {
 	private SyncPlayer player;
-	private Sequence sequence;
 	private BorderPane root;
 	private Stage stage;
 	private Group canvas;
@@ -50,8 +50,7 @@ public class PlayerView
 		root.setTop(makeTools());
 		root.setCenter(makeViewport());
 
-		sequence = new Sequence();
-		makeScripts(sequence);
+		makeScripts();
 		return root;
 	}
 
@@ -86,18 +85,9 @@ public class PlayerView
 		else player.playOne();
 	}
 
-	private void makeScripts(Sequence sequence)
+	private void makeScripts()
 	{
 		player.load(new UnderplayedScript().make());
-		// new DemoVideo3(sequence).add();
-		// new DemoScript(sequence).add();
-		// new BaseComplications(sequence).add();
-		// new InteractiveStabilization(sequence).add();
-		// new AgentAndPokes(sequence).add();
-		// new ResponsesToComplexity(sequence).add();
-		// new VisibleGeekLa1(sequence).add();
-		// new GeekNeeqOne(sequence).add();
-		// player.reset(sequence);
 	}
 
 	private ToolBar makeTools()

@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
+import org.geepawhill.contentment.player.Script;
+import org.geepawhill.contentment.player.Keyframe;
 import org.geepawhill.contentment.step.Phrase;
-import org.geepawhill.contentment.step.SyncStep;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 
@@ -49,9 +50,9 @@ public class UnderplayedScript
 	public Script make()
 	{
 		Script script = new Script();
-		script.add(new SyncStep(0, opening()));
-		script.add(new SyncStep(3000,programmingIsTdd()));
-		script.add(new SyncStep(5000,style()));
+		script.add(new Keyframe(0, opening()));
+		script.add(new Keyframe(3000,programmingIsTdd()));
+		script.add(new Keyframe(5000,style()));
 		return script;
 	}
 
