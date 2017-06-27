@@ -11,23 +11,19 @@ class SlowPlayer
 	private OnFinished onFinished;
 	private ArrayList<Step> playables;
 	private Context context;
-	private String name;
 
-	public SlowPlayer(Context context, OnFinished onFinished, ArrayList<Step> playables, String name)
+	public SlowPlayer(Context context, OnFinished onFinished, ArrayList<Step> playables)
 	{
 		this.context = context;
 		this.onFinished = onFinished;
 		this.playables = playables;
-		this.name = name;
 		this.current = 0;
 		if (playables.isEmpty())
 		{
-//			System.out.println("Empty?");
 			onFinished.run();
 		}
 		else
 		{
-//			System.out.println(name+": Started");
 			Step step = playables.get(current);
 			step.slow(context, () -> next());
 		}

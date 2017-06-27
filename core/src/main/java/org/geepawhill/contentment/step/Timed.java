@@ -63,7 +63,7 @@ public class Timed implements Step
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		new SlowPlayer(context,onFinished,playables, name);
+		new SlowPlayer(context,onFinished,playables);
 	}
 	
 	@Override
