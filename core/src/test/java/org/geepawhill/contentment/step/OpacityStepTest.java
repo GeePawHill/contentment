@@ -52,7 +52,7 @@ public class OpacityStepTest extends JavaFxTest
 	public void interpolatorGoesDown()
 	{
 		actor.group.setOpacity(.5d);
-		runner.context.setAfter(this::gatherOpacity);
+		runner.context.setExtra(this::gatherOpacity);
 		runner.slow(new OpacityStep(100d, actor, 0d));
 		double lastOpacity = .5d;
 		for (Double opacity : opacities)
@@ -66,7 +66,7 @@ public class OpacityStepTest extends JavaFxTest
 	public void interpolatorGoesUp()
 	{
 		actor.group.setOpacity(0d);
-		runner.context.setAfter(this::gatherOpacity);
+		runner.context.setExtra(this::gatherOpacity);
 		runner.slow(new OpacityStep(50d, actor, 1d));
 		double lastOpacity = 0d;
 		for (Double opacity : opacities)

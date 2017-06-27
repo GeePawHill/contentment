@@ -2,36 +2,22 @@ package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Actors;
-import org.geepawhill.contentment.rhythm.Rhythm;
 
 import javafx.scene.Group;
 
 public class Context
 {
-
 	public final Actors actors;
 	public final Group canvas;
-	private boolean skippingDelays;
 
-	private ContextInterpolator after;
+	private ContextInterpolator extra;
 
 	public Context(Group canvas)
 	{
 		this.canvas = canvas;
 		this.actors = new Actors();
-		this.skipDelays(false);
 	}
 	
-	public void skipDelays(boolean yesOrNo)
-	{
-		skippingDelays = yesOrNo;
-	}
-
-	public boolean isSkippingDelays()
-	{
-		return skippingDelays;
-	}
-
 	public void add(Actor actor)
 	{
 		actors.add(actor);
@@ -50,19 +36,14 @@ public class Context
 		actors.remove(actor);
 	}
 
-	public void setAfter(ContextInterpolator source)
+	public void setExtra(ContextInterpolator extra)
 	{
-		after = source;
-	}
-
-	public void clearAfter()
-	{
-		after = null;
+		this.extra = extra;
 	}
 
 	public ContextInterpolator wrap(ContextInterpolator source)
 	{
-		if (after == null) return source;
-		return new ParallelInterpolator(source, after);
+		if (extra == null) return source;
+		return new ParallelInterpolator(source, extra);
 	}
 }

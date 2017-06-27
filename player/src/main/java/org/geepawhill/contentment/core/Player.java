@@ -100,7 +100,6 @@ public class Player
 
 	public void play()
 	{
-		context.skipDelays(false);
 		isChaining = true;
 		switch (getState())
 		{
@@ -122,7 +121,6 @@ public class Player
 
 	public void playOne()
 	{
-		context.skipDelays(true);
 		isChaining = false;
 		switch (getState())
 		{
