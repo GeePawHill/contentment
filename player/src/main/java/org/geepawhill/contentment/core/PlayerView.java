@@ -3,6 +3,7 @@ package org.geepawhill.contentment.core;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.ScaleListener;
 import org.geepawhill.contentment.player.Player;
+import org.geepawhill.contentment.player.PlayerState;
 import org.geepawhill.contentment.rhythm.Rhythm;
 import org.geepawhill.contentment.utility.JfxUtility;
 
@@ -127,7 +128,7 @@ public class PlayerView
 		Button play = new Button(">");
 		play.setOnAction(event -> player.play());
 		
-		BooleanBinding trueIfPlaying = Bindings.createBooleanBinding(() -> player.getState()==Player.State.Playing,player.stateProperty());
+		BooleanBinding trueIfPlaying = Bindings.createBooleanBinding(() -> player.getState()==PlayerState.Playing,player.stateProperty());
 		play.disableProperty().bind(trueIfPlaying);
 		tools.getItems().add(play);
 

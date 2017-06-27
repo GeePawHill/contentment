@@ -11,17 +11,12 @@ import javafx.scene.Group;
 
 public class Player
 {
-	public enum State
-	{
-		Stepping, Playing
-	}
-
 	private int position;
 	private Context context;
 	
 	
 	private final SimpleObjectProperty<Script> scriptProperty;
-	private final SimpleObjectProperty<State> stateProperty;
+	private final SimpleObjectProperty<PlayerState> stateProperty;
 	private final SimpleBooleanProperty atStartProperty;
 	private final SimpleBooleanProperty atEndProperty;
 
@@ -29,7 +24,7 @@ public class Player
 	{
 		this.atStartProperty = new SimpleBooleanProperty(true);
 		this.atEndProperty = new SimpleBooleanProperty(false);
-		this.stateProperty = new SimpleObjectProperty<>(State.Stepping);
+		this.stateProperty = new SimpleObjectProperty<>(PlayerState.Stepping);
 		this.scriptProperty = new SimpleObjectProperty<>(new Script());
 		this.context = new Context(canvas);
 		this.position = 0;
@@ -60,17 +55,12 @@ public class Player
 		this.scriptProperty.set(script);
 		this.setPosition(0);
 		getRhythm().seekHard((long) 0);
-		stateProperty.set(State.Stepping);
+		stateProperty.set(PlayerState.Stepping);
 	}
 
 	public int position()
 	{
 		return position;
-	}
-
-	public long beat()
-	{
-		return getBeat();
 	}
 
 	public void forward()
@@ -106,12 +96,7 @@ public class Player
 		}
 	}
 
-	public long getBeat()
-	{
-		return getRhythm().beat();
-	}
-
-	public State getState()
+	public PlayerState getState()
 	{
 		return stateProperty.get();
 	}
@@ -121,7 +106,7 @@ public class Player
 		mustBeStepping();
 		if (!atEnd())
 		{
-			stateProperty.set(State.Playing);
+			stateProperty.set(PlayerState.Playing);
 			getRhythm().play();
 			new BeatWaiter(context, nextSync().phrase, this::isPlayOneDone, this::newPlayOneFinished).play();
 		}
@@ -143,7 +128,7 @@ public class Player
 	public void newPlayOneFinished()
 	{
 		getRhythm().pause();
-		stateProperty.set(State.Stepping);
+		stateProperty.set(PlayerState.Stepping);
 		setPosition(position() + 1);
 	}
 	
@@ -157,13 +142,13 @@ public class Player
 		else
 		{
 			getRhythm().pause();
-			stateProperty.set(State.Stepping);
+			stateProperty.set(PlayerState.Stepping);
 		}
 	}
 
 	private void mustBeStepping()
 	{
-		if (getState() != State.Stepping) throw new RuntimeException("Playing when should be Stepping.");
+		if (getState() != PlayerState.Stepping) throw new RuntimeException("Playing when should be Stepping.");
 	}
 
 	public void play()
@@ -171,7 +156,7 @@ public class Player
 		mustBeStepping();
 		if (!atEnd())
 		{
-			stateProperty.set(State.Playing);
+			stateProperty.set(PlayerState.Playing);
 			getRhythm().play();
 			new BeatWaiter(context, nextSync().phrase, this::isPlayOneDone, this::newPlayFinished).play();
 		}
@@ -215,7 +200,7 @@ public class Player
 	}
 
 
-	public ObjectProperty<Player.State> stateProperty()
+	public ObjectProperty<PlayerState> stateProperty()
 	{
 		return stateProperty;
 	}
