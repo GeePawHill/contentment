@@ -12,9 +12,9 @@ public class Context
 
 	private ContextInterpolator extra;
 
-	public Context(Group canvas)
+	public Context()
 	{
-		this.canvas = canvas;
+		this.canvas = new Group();
 		this.actors = new Actors();
 	}
 	

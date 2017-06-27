@@ -10,7 +10,6 @@ import org.geepawhill.contentment.core.ContextInterpolator;
 import org.geepawhill.contentment.step.Step;
 
 import javafx.application.Platform;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -18,16 +17,14 @@ import javafx.stage.Stage;
 public class JavaFxRunner
 {
 	public Context context;
-	public Group group;
 
 	public void prepareWindow(Stage stage)
 	{
 		Pane region = new Pane();
 		region.setMaxSize(1600d, 900d);
 		region.setMinSize(1600d, 900d);
-		group = new Group();
-		context = new Context(group);
-		region.getChildren().add(group);
+		context = new Context();
+		region.getChildren().add(context.canvas);
 		stage.setScene(new Scene(region));
 		stage.show();
 	}

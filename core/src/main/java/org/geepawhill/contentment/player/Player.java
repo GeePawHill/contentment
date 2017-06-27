@@ -7,27 +7,30 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.scene.Group;
 
 public class Player
 {
 	private int position;
 	private Context context;
 	
-	
 	private final SimpleObjectProperty<Script> scriptProperty;
 	private final SimpleObjectProperty<PlayerState> stateProperty;
 	private final SimpleBooleanProperty atStartProperty;
 	private final SimpleBooleanProperty atEndProperty;
 
-	public Player(Group canvas)
+	public Player()
 	{
 		this.atStartProperty = new SimpleBooleanProperty(true);
 		this.atEndProperty = new SimpleBooleanProperty(false);
 		this.stateProperty = new SimpleObjectProperty<>(PlayerState.Stepping);
 		this.scriptProperty = new SimpleObjectProperty<>(new Script());
-		this.context = new Context(canvas);
+		this.context = new Context();
 		this.position = 0;
+	}
+	
+	public Context context()
+	{
+		return context;
 	}
 	
 	public BooleanProperty atStartProperty()

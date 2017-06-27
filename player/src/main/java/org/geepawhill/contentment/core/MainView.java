@@ -26,21 +26,19 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class PlayerView
+public class MainView
 {
 	private Player player;
 	private BorderPane root;
 	private Stage stage;
-	private Group canvas;
 	private ToolBar tools;
 	private Text timing;
 
-	public PlayerView(Stage stage)
+	public MainView(Stage stage, Player player)
 	{
 		this.stage = stage;
-		canvas = new Group();
-		player = new Player(canvas);
-		tools = makeTools();
+		this.player = player;
+		this.tools = makeTools();
 		stage.fullScreenProperty().addListener((source, o, n) -> undoFullScreen(n));
 	}
 
@@ -62,17 +60,17 @@ public class PlayerView
 		player.scriptProperty().addListener((p,o,n)->scriptChanged());
 
 		// media background
-
+		
 		// non-media background
 
-		ScaleListener listener = new ScaleListener(owner, canvas);
+		ScaleListener listener = new ScaleListener(owner, player.context().canvas);
 		owner.widthProperty().addListener(listener);
 		owner.heightProperty().addListener(listener);
 		listener.changed(null, 300, 300);
 
 		owner.setOnMouseClicked((event) -> mouseClicked(event));
 
-		owner.getChildren().add(canvas);
+		owner.getChildren().add(player.context().canvas);
 		return owner;
 	}
 
@@ -156,7 +154,7 @@ public class PlayerView
 	private void oneOff()
 	{
 		JfxUtility.capture(stage.getScene().getRoot());
-		dumpNode(canvas, 0);
+		dumpNode(player.context().canvas, 0);
 	}
 
 	private void dumpNode(Node node, int indent)
@@ -199,5 +197,6 @@ public class PlayerView
 			stage.getScene().setCursor(Cursor.NONE);
 		}
 	}
+
 
 }

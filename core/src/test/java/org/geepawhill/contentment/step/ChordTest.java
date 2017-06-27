@@ -7,14 +7,12 @@ import org.geepawhill.contentment.core.OnFinished;
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.scene.Group;
-
 public class ChordTest
 {
 	private Chord empty;
 	private Chord onlyOne;
 	private Chord both;
-	private Context context = new Context(new Group());
+	private Context context;
 	private TestNote one;
 	private TestNote two;
 	private boolean gotFinish;
@@ -23,6 +21,8 @@ public class ChordTest
 	@Before
 	public void before()
 	{
+		
+		context = new Context();
 		one = new TestNote(1L);
 		two = new TestNote(9L);
 

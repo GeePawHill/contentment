@@ -1,5 +1,7 @@
 package org.geepawhill.contentment.core;
 
+import org.geepawhill.contentment.player.Player;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -22,12 +24,14 @@ public class Main extends Application
 			preloadFontFile("/org/geepawhill/scripts/belligerent.ttf");
 			preloadFontFile("/org/geepawhill/scripts/WCManoNegraBoldBta.otf");
 
-			PlayerView mainView = new PlayerView(stage);
+			Player player = new Player();
+			MainView mainView = new MainView(stage,player);
 			Scene scene = new Scene(mainView.getNode());
 			stage.setScene(scene);
 			stage.setMaximized(true);
 			stage.setFullScreenExitHint("");
 			stage.show();
+			player.load(new UnderplayedScript().make());
 		}
 		catch (Exception e)
 		{
