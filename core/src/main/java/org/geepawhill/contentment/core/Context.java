@@ -3,7 +3,6 @@ package org.geepawhill.contentment.core;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Actors;
 import org.geepawhill.contentment.rhythm.Rhythm;
-import org.geepawhill.contentment.rhythm.SimpleRhythm;
 
 import javafx.scene.Group;
 

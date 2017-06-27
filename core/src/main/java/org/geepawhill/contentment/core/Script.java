@@ -23,11 +23,6 @@ public class Script
 		return steps.get(index);
 	}
 
-	public SyncStep last()
-	{
-		return steps.get(size() - 1);
-	}
-
 	public Script add(SyncStep step)
 	{
 		steps.add(step);

@@ -79,7 +79,9 @@ public class SimpleRhythm implements Rhythm
 	}
 
 	@Override
-	public void waitForEnd()
+	public boolean isAtEnd()
 	{
+		return true;
 	}
+
 }

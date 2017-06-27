@@ -21,5 +21,5 @@ public interface Rhythm
 
 	boolean isPlaying();
 
-	void waitForEnd();
+	boolean isAtEnd();
 }

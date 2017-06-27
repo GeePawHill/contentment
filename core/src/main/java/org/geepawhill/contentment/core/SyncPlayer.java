@@ -17,14 +17,14 @@ public class SyncPlayer
 	}
 
 	private Script script;
+	
 	private int position;
 	private Rhythm rhythm;
 	private Context context;
+	
 	private final SimpleObjectProperty<State> stateProperty;
 	private final SimpleBooleanProperty atStartProperty;
 	private final SimpleBooleanProperty atEndProperty;
-	private Animator animator;
-	private long waitBeat;
 
 	public SyncPlayer(Group canvas, Rhythm defaultRhythm)
 	{
@@ -34,6 +34,26 @@ public class SyncPlayer
 		this.atStartProperty = new SimpleBooleanProperty(true);
 		this.atEndProperty = new SimpleBooleanProperty(false);
 		this.position = 0;
+	}
+	
+	public BooleanProperty atStartProperty()
+	{
+		return atStartProperty;
+	}
+
+	public BooleanProperty atEndProperty()
+	{
+		return atEndProperty;
+	}
+
+	public boolean atStart()
+	{
+		return atStartProperty.get();
+	}
+
+	public boolean atEnd()
+	{
+		return atEndProperty.get();
 	}
 
 	public void load(Script script)
@@ -52,16 +72,6 @@ public class SyncPlayer
 	public long beat()
 	{
 		return getBeat();
-	}
-
-	public BooleanProperty atStartProperty()
-	{
-		return atStartProperty;
-	}
-
-	public BooleanProperty atEndProperty()
-	{
-		return atEndProperty;
 	}
 
 	public void forward()
@@ -114,22 +124,40 @@ public class SyncPlayer
 		{
 			stateProperty.set(State.Playing);
 			rhythm.play();
-			nextSync().slow(context, this::onPlayOneFinished);
+			new BeatWaiter(context, nextSync().phrase(), this::isPlayOneDone, this::newPlayOneFinished).play();
 		}
 	}
 
-	public void onPlayOneFinished()
+	public Boolean isPlayOneDone()
 	{
-		setPosition(position() + 1);
-		if (!atEnd())
+		if (position < script.size() - 1)
 		{
-			playOneWaitForBeat(nextSync().target());
+			if (rhythm.beat() >= getSync(position + 1).target()) return true;
+			else return false;
 		}
 		else
 		{
-			rhythm.waitForEnd();
+			return rhythm.isAtEnd();
+		}
+	}
+
+	public void newPlayOneFinished()
+	{
+		rhythm.pause();
+		stateProperty.set(State.Stepping);
+		setPosition(position() + 1);
+	}
+	
+	public void newPlayFinished()
+	{
+		setPosition(position()+1);
+		if(!atEnd())
+		{
+			new BeatWaiter(context, nextSync().phrase(), this::isPlayOneDone, this::newPlayFinished).play();
+		}
+		else
+		{
 			rhythm.pause();
-			rhythm.seekHard(Rhythm.MAX);
 			stateProperty.set(State.Stepping);
 		}
 	}
@@ -146,22 +174,7 @@ public class SyncPlayer
 		{
 			stateProperty.set(State.Playing);
 			rhythm.play();
-			nextSync().slow(context, this::onPlayFinished);
-		}
-	}
-
-	public void onPlayFinished()
-	{
-		setPosition(position() + 1);
-		if (!atEnd())
-		{
-			playWaitForBeat(nextSync().target());
-		}
-		else
-		{
-			rhythm.pause();
-			rhythm.seekHard(Rhythm.MAX);
-			stateProperty.set(State.Stepping);
+			new BeatWaiter(context, nextSync().phrase(), this::isPlayOneDone, this::newPlayFinished).play();
 		}
 	}
 
@@ -202,63 +215,9 @@ public class SyncPlayer
 		atEndProperty.set(position == script.size());
 	}
 
-	public boolean atStart()
-	{
-		return atStartProperty.get();
-	}
-
-	public boolean atEnd()
-	{
-		return atEndProperty.get();
-	}
 
 	public ObjectProperty<SyncPlayer.State> stateProperty()
 	{
 		return stateProperty;
 	}
-	
-	private void playWaitForBeat(long beat)
-	{
-		waitBeat = beat;
-		animator = new Animator();
-		animator.play(context, OnFinished.NONE, (double) beat * 2d, this::playUpdateBeat);
-	}
-	
-	private void playOneWaitForBeat(long beat)
-	{
-		waitBeat = beat;
-		animator = new Animator();
-		animator.play(context, OnFinished.NONE, (double) beat * 2d, this::updateBeat);
-	}
-	
-	private void playUpdateBeat(Context context, double fraction)
-	{
-		if (context.getRhythm().beat() >= waitBeat)
-		{
-			playFinishAndDie();
-		}
-	}
-	
-	private void playFinishAndDie()
-	{
-		animator.stop();
-		nextSync().slow(context, this::onPlayFinished);
-	}
-	
-	private void updateBeat(Context context, double fraction)
-	{
-		if (context.getRhythm().beat() >= waitBeat)
-		{
-			finishAndDie();
-		}
-	}
-
-	private void finishAndDie()
-	{
-		animator.stop();
-		rhythm.pause();
-		stateProperty.set(State.Stepping);
-	}
-
-
 }

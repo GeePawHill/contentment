@@ -11,8 +11,6 @@ import org.geepawhill.contentment.timing.Timing;
 
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.image.WritableImage;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 

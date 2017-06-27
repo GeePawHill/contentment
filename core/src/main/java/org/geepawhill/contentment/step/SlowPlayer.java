@@ -35,11 +35,9 @@ class SlowPlayer
 
 	private void next()
 	{
-//		dumpCurrent();
 		current += 1;
 		if (current == playables.size())
 		{
-//			System.out.println(name+": Finished.");
 			onFinished.run();
 		}
 		else
@@ -49,10 +47,4 @@ class SlowPlayer
 		}
 	}
 	
-	private void dumpCurrent()
-	{
-		Step step = playables.get(current);
-		System.out.print(name+": "+current+" "+step);
-		System.out.println();
-	}
 }

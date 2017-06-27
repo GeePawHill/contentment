@@ -7,7 +7,6 @@ import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.utility.JfxUtility;
 
 import javafx.application.Platform;
-import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.geometry.Orientation;
