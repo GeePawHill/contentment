@@ -1,6 +1,10 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.fast.ChangeColor;
+import org.geepawhill.contentment.fast.Clear;
+import org.geepawhill.contentment.fast.Entrance;
+import org.geepawhill.contentment.fast.Exit;
 
 import javafx.scene.paint.Paint;
 

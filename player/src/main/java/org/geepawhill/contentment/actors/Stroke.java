@@ -1,9 +1,9 @@
 package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.fast.AddNode;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.step.AddNode;
 import org.geepawhill.contentment.step.BezierStep;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.Timed;

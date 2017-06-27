@@ -2,7 +2,7 @@ package org.geepawhill.contentment.core;
 
 import java.util.ArrayList;
 
-import org.geepawhill.contentment.step.Fast;
+import org.geepawhill.contentment.fast.Fast;
 import org.geepawhill.contentment.step.FastStep;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.timing.Scheduler;

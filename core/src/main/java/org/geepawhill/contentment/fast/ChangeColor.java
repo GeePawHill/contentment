@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.step;
+package org.geepawhill.contentment.fast;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Context;

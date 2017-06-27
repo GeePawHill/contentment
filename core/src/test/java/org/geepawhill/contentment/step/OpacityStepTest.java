@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.within;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.fast.Entrance;
 import org.geepawhill.contentment.test.JavaFxTest;
 import org.geepawhill.contentment.test.TestActor;
 import org.junit.Before;

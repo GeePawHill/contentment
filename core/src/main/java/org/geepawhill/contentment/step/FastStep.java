@@ -2,6 +2,7 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
+import org.geepawhill.contentment.fast.Fast;
 import org.geepawhill.contentment.timing.Timing;
 
 public class FastStep implements Step

@@ -1,14 +1,14 @@
-package org.geepawhill.contentment.step;
+package org.geepawhill.contentment.fast;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Context;
 
-public class Exit implements Fast
+public class Entrance implements Fast
 {
 
 	private Actor actor;
 
-	public Exit(Actor actor)
+	public Entrance(Actor actor)
 	{
 		this.actor = actor;
 	}
@@ -16,18 +16,18 @@ public class Exit implements Fast
 	@Override
 	public void undo(Context context)
 	{
-		context.add(actor);
+		context.remove(actor);
 	}
 
 	@Override
 	public String toString()
 	{
-		return "Exit: " + actor.nickname();
+		return "Entrance: " + actor.nickname();
 	}
 
 	@Override
 	public void fast(Context context)
 	{
-		context.remove(actor);
+		context.add(actor);
 	}
 }

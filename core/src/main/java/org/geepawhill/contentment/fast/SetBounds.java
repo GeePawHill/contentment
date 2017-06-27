@@ -1,8 +1,9 @@
-package org.geepawhill.contentment.step;
+package org.geepawhill.contentment.fast;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.geometry.PointPairConsumer;
+import org.geepawhill.contentment.step.ShapeStep;
 
 import javafx.scene.Node;
 
