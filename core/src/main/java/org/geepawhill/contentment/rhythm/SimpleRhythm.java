@@ -3,6 +3,7 @@ package org.geepawhill.contentment.rhythm;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import javafx.animation.AnimationTimer;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 
@@ -13,12 +14,22 @@ public class SimpleRhythm implements Rhythm
 	private LocalDateTime startedPlayingAt;
 	private long startedPauseAt;
 	
+	private AnimationTimer timer;
+	
 	
 	public SimpleRhythm()
 	{
 		beatProperty = new SimpleLongProperty(0L);
 		isPlaying=false;
 		startedPauseAt=0L;
+		timer = new AnimationTimer() {
+
+			@Override
+			public void handle(long now)
+			{
+				update();
+				
+			} };
 	}
 
 	@Override
@@ -61,13 +72,14 @@ public class SimpleRhythm implements Rhythm
 		if(isPlaying) throw new RuntimeException("Can't play when already playing.");
 		startedPlayingAt = LocalDateTime.now();
 		isPlaying=true;
-		update();
+		timer.start();
 	}
 
 	@Override
 	public void pause()
 	{
 		if(!isPlaying) throw new RuntimeException("Can't pause when not playing.");
+		timer.stop();
 		startedPauseAt = beat();
 		isPlaying=false;
 	}

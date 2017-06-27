@@ -24,25 +24,6 @@ public class CommonSteps
 		sequence.add(new CueStep());
 	}
 	
-	public void delay(double d)
-	{
-		sequence.add(new DelayStep(d));
-	}
-
-	public void keyframe(double seconds)
-	{
-		keyframe(0d, seconds);
-	}
-
-	public void keyframe(double minutes, double seconds)
-	{
-		double adjusted = (minutes * 60d + seconds) * 1000d;
-		double here = sequence.runTime();
-		double delay = adjusted - here;
-		if (delay < 0) delay = 1d;
-		sequence.add(new DelayStep(delay));
-	}
-
 	public void reColor(Actor actor, Paint paint)
 	{
 		sequence.add(new ChangeColor(actor, paint));

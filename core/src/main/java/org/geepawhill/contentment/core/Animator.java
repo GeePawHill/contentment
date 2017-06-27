@@ -21,7 +21,6 @@ public class Animator extends Transition
 	@Override
 	protected void interpolate(double fraction)
 	{
-		context.getRhythm().update();
 		interpolator.interpolate(context, fraction);
 	}
 }

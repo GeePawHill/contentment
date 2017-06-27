@@ -17,11 +17,6 @@ public class Universals
 		return new CueStep();
 	}
 	
-	static public Step delay(double d)
-	{
-		return new DelayStep(d);
-	}
-
 	static public Step reColor(Actor actor, Paint paint)
 	{
 		return new FastStep(new ChangeColor(actor, paint));

@@ -30,7 +30,7 @@ public class SyncPlayer
 	{
 		this.rhythm = defaultRhythm;
 		this.stateProperty = new SimpleObjectProperty<>(State.Stepping);
-		this.context = new Context(canvas, defaultRhythm);
+		this.context = new Context(canvas);
 		this.atStartProperty = new SimpleBooleanProperty(true);
 		this.atEndProperty = new SimpleBooleanProperty(false);
 		this.position = 0;

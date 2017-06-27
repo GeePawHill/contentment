@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +14,7 @@ public class ChordTest
 	private Chord empty;
 	private Chord onlyOne;
 	private Chord both;
-	private Context context = new Context(new Group(), new SimpleRhythm());
+	private Context context = new Context(new Group());
 	private TestNote one;
 	private TestNote two;
 	private boolean gotFinish;

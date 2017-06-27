@@ -7,7 +7,6 @@ import java.util.function.Consumer;
 import org.geepawhill.contentment.core.Animator;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.ContextInterpolator;
-import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.step.Step;
 
 import javafx.application.Platform;
@@ -27,7 +26,7 @@ public class JavaFxRunner
 		region.setMaxSize(1600d, 900d);
 		region.setMinSize(1600d, 900d);
 		group = new Group();
-		context = new Context(group, new SimpleRhythm());
+		context = new Context(group);
 		region.getChildren().add(group);
 		stage.setScene(new Scene(region));
 		stage.show();

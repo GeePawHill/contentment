@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.model.PlayState;
+import org.geepawhill.contentment.rhythm.Rhythm;
 import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.step.CueMarker;
 import org.geepawhill.contentment.step.Step;
@@ -16,11 +17,13 @@ public class Player
 	private int current;
 	private final SimpleObjectProperty<PlayState> stateProperty;
 	private boolean isChaining;
+	private Rhythm rhythm;
 
 	public Player(Group canvas)
 	{
 		this.stateProperty = new SimpleObjectProperty<>(PlayState.Before);
-		context = new Context(canvas, new SimpleRhythm());
+		rhythm = new SimpleRhythm();
+		context = new Context(canvas);
 		sequence = new Sequence();
 		current = 0;
 	}
@@ -187,17 +190,16 @@ public class Player
 	private void playCurrent()
 	{
 		setState(PlayState.Playing);
-		if(!context.getRhythm().isPlaying()) context.getRhythm().play();
+		if(!rhythm.isPlaying()) rhythm.play();
 		currentStep().slow(context, this::onFinished);
 	}
 
 	private void onFinished()
 	{
-		context.getRhythm().update();
 		if (currentIsLast())
 		{
 			setState(PlayState.After);
-			context.getRhythm().pause();
+			rhythm.pause();
 		}
 		else
 		{
@@ -238,7 +240,7 @@ public class Player
 
 	public boolean isPlaying()
 	{
-		return context.getRhythm().isPlaying();
+		return rhythm.isPlaying();
 	}
 
 	public PlayState getState()
