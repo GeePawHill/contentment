@@ -2,18 +2,22 @@ package org.geepawhill.contentment.core;
 
 import static org.geepawhill.contentment.step.Universals.*;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.player.Script;
+import org.geepawhill.contentment.rhythm.MediaRhythm;
 import org.geepawhill.contentment.player.Keyframe;
 import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 
 import javafx.geometry.HPos;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -49,7 +53,7 @@ public class UnderplayedScript
 
 	public Script make()
 	{
-		Script script = new Script();
+		Script script = new Script(new MediaRhythm());
 		script.add(new Keyframe(0, opening()));
 		script.add(new Keyframe(3000,programmingIsTdd()));
 		script.add(new Keyframe(5000,style()));

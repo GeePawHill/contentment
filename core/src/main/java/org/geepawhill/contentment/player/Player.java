@@ -133,6 +133,8 @@ public class Player
 		getRhythm().pause();
 		stateProperty.set(PlayerState.Stepping);
 		setPosition(position() + 1);
+		if (atEnd()) getRhythm().seekHard(Rhythm.MAX);
+		else getRhythm().seekHard(nextSync().target);
 	}
 	
 	public void newPlayFinished()

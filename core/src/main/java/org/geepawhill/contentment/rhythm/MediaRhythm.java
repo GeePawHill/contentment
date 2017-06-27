@@ -1,36 +1,48 @@
 package org.geepawhill.contentment.rhythm;
 
+import java.io.File;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-public class SimpleRhythm implements Rhythm
+public class MediaRhythm implements Rhythm
 {
 	private SimpleLongProperty beatProperty;
 	private boolean isPlaying;
 	private LocalDateTime startedPlayingAt;
 	private long startedPauseAt;
-	
+
 	private AnimationTimer timer;
-	
-	
-	public SimpleRhythm()
+	private MediaPlayer mediaPlayer;
+
+	public MediaRhythm()
 	{
+		Media m = new Media(new File("/01faceoverCut.mp4").toURI().toString());
+		mediaPlayer = new MediaPlayer(m);
+		mediaPlayer.pause();
 		beatProperty = new SimpleLongProperty(0L);
-		isPlaying=false;
-		startedPauseAt=0L;
-		timer = new AnimationTimer() {
+		isPlaying = false;
+		startedPauseAt = 0L;
+		timer = new AnimationTimer()
+		{
 
 			@Override
 			public void handle(long now)
 			{
 				update();
-				
-			} };
+
+			}
+		};
+	}
+
+	public MediaPlayer getMediaPlayer()
+	{
+		return mediaPlayer;
 	}
 
 	@Override
@@ -38,7 +50,7 @@ public class SimpleRhythm implements Rhythm
 	{
 		return beatProperty;
 	}
-	
+
 	@Override
 	public long beat()
 	{
@@ -49,11 +61,21 @@ public class SimpleRhythm implements Rhythm
 	@Override
 	public void seekHard(long ms)
 	{
-		if(isPlaying) pause();
+		if (isPlaying) pause();
+		if (ms == Rhythm.MAX)
+		{
+			mediaPlayer.seek(javafx.util.Duration.seconds(mediaPlayer.getTotalDuration().toSeconds()-1d));
+			mediaPlayer.seek(javafx.util.Duration.INDEFINITE);
+			System.out.println("Seek to end.");
+		}
+		else
+		{
+			mediaPlayer.seek(javafx.util.Duration.millis((double) ms));
+		}
 		beatProperty.set(ms);
 		startedPauseAt = ms;
 	}
-	
+
 	@Override
 	public void update()
 	{
@@ -63,26 +85,28 @@ public class SimpleRhythm implements Rhythm
 
 	private long getPlayerTime()
 	{
-		if(isPlaying) return startedPauseAt+Duration.between( startedPlayingAt, LocalDateTime.now()).toMillis();
+		if (isPlaying) return startedPauseAt + Duration.between(startedPlayingAt, LocalDateTime.now()).toMillis();
 		return startedPauseAt;
 	}
 
 	@Override
 	public void play()
 	{
-		if(isPlaying) throw new RuntimeException("Can't play when already playing.");
+		if (isPlaying) throw new RuntimeException("Can't play when already playing.");
+		mediaPlayer.play();
 		startedPlayingAt = LocalDateTime.now();
-		isPlaying=true;
+		isPlaying = true;
 		timer.start();
 	}
 
 	@Override
 	public void pause()
 	{
-		if(!isPlaying) throw new RuntimeException("Can't pause when not playing.");
+		if (!isPlaying) throw new RuntimeException("Can't pause when not playing.");
+		mediaPlayer.pause();
 		timer.stop();
 		startedPauseAt = beat();
-		isPlaying=false;
+		isPlaying = false;
 	}
 
 	@Override
@@ -94,13 +118,7 @@ public class SimpleRhythm implements Rhythm
 	@Override
 	public boolean isAtEnd()
 	{
-		return true;
-	}
-	
-	@Override
-	public MediaPlayer getMediaPlayer()
-	{
-		return null;
+		return mediaPlayer.getCurrentTime().equals(mediaPlayer.getCycleDuration());
 	}
 
 }

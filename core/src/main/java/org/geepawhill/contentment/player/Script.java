@@ -48,10 +48,6 @@ public class Script
 
 	public MediaPlayer getMediaPlayer()
 	{
-		Media m = new Media(new File("/01faceoverCut.mp4").toURI().toString());
-		MediaPlayer p = new MediaPlayer(m);
-		p.setCycleCount(Integer.MAX_VALUE);
-		p.play();
-		return p;
+		return rhythm.getMediaPlayer();
 	}
 }

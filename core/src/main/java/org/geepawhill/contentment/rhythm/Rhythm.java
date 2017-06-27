@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.rhythm;
 
 import javafx.beans.property.LongProperty;
+import javafx.scene.media.MediaPlayer;
 
 public interface Rhythm
 {
@@ -22,4 +23,6 @@ public interface Rhythm
 	boolean isPlaying();
 
 	boolean isAtEnd();
+
+	MediaPlayer getMediaPlayer();
 }
