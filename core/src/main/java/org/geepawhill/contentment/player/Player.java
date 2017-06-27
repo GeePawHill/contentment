@@ -9,30 +9,29 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Group;
 
-public class SyncPlayer
+public class Player
 {
 	public enum State
 	{
 		Stepping, Playing
 	}
 
-	private Script script;
-	
 	private int position;
-	private Rhythm rhythm;
 	private Context context;
 	
+	
+	private final SimpleObjectProperty<Script> scriptProperty;
 	private final SimpleObjectProperty<State> stateProperty;
 	private final SimpleBooleanProperty atStartProperty;
 	private final SimpleBooleanProperty atEndProperty;
 
-	public SyncPlayer(Group canvas, Rhythm defaultRhythm)
+	public Player(Group canvas)
 	{
-		this.rhythm = defaultRhythm;
-		this.stateProperty = new SimpleObjectProperty<>(State.Stepping);
-		this.context = new Context(canvas);
 		this.atStartProperty = new SimpleBooleanProperty(true);
 		this.atEndProperty = new SimpleBooleanProperty(false);
+		this.stateProperty = new SimpleObjectProperty<>(State.Stepping);
+		this.scriptProperty = new SimpleObjectProperty<>(new Script());
+		this.context = new Context(canvas);
 		this.position = 0;
 	}
 	
@@ -58,9 +57,9 @@ public class SyncPlayer
 
 	public void load(Script script)
 	{
-		this.script = script;
+		this.scriptProperty.set(script);
 		this.setPosition(0);
-		rhythm.seekHard((long) 0);
+		getRhythm().seekHard((long) 0);
 		stateProperty.set(State.Stepping);
 	}
 
@@ -81,8 +80,8 @@ public class SyncPlayer
 		{
 			nextSync().phrase.fast(context);
 			setPosition(position() + 1);
-			if (atEnd()) rhythm.seekHard(Rhythm.MAX);
-			else rhythm.seekHard(nextSync().target);
+			if (atEnd()) getRhythm().seekHard(Rhythm.MAX);
+			else getRhythm().seekHard(nextSync().target);
 		}
 	}
 
@@ -93,7 +92,7 @@ public class SyncPlayer
 
 	private Keyframe getSync(int sync)
 	{
-		return script.get(sync);
+		return getScript().get(sync);
 	}
 
 	public void backward()
@@ -103,13 +102,13 @@ public class SyncPlayer
 		{
 			setPosition(position() - 1);
 			nextSync().phrase.undo(context);
-			rhythm.seekHard(nextSync().target);
+			getRhythm().seekHard(nextSync().target);
 		}
 	}
 
 	public long getBeat()
 	{
-		return rhythm.beat();
+		return getRhythm().beat();
 	}
 
 	public State getState()
@@ -123,27 +122,27 @@ public class SyncPlayer
 		if (!atEnd())
 		{
 			stateProperty.set(State.Playing);
-			rhythm.play();
+			getRhythm().play();
 			new BeatWaiter(context, nextSync().phrase, this::isPlayOneDone, this::newPlayOneFinished).play();
 		}
 	}
 
 	public Boolean isPlayOneDone()
 	{
-		if (position < script.size() - 1)
+		if (position < getScript().size() - 1)
 		{
-			if (rhythm.beat() >= getSync(position + 1).target) return true;
+			if (getRhythm().beat() >= getSync(position + 1).target) return true;
 			else return false;
 		}
 		else
 		{
-			return rhythm.isAtEnd();
+			return getRhythm().isAtEnd();
 		}
 	}
 
 	public void newPlayOneFinished()
 	{
-		rhythm.pause();
+		getRhythm().pause();
 		stateProperty.set(State.Stepping);
 		setPosition(position() + 1);
 	}
@@ -157,7 +156,7 @@ public class SyncPlayer
 		}
 		else
 		{
-			rhythm.pause();
+			getRhythm().pause();
 			stateProperty.set(State.Stepping);
 		}
 	}
@@ -173,7 +172,7 @@ public class SyncPlayer
 		if (!atEnd())
 		{
 			stateProperty.set(State.Playing);
-			rhythm.play();
+			getRhythm().play();
 			new BeatWaiter(context, nextSync().phrase, this::isPlayOneDone, this::newPlayFinished).play();
 		}
 	}
@@ -181,7 +180,7 @@ public class SyncPlayer
 	public void end()
 	{
 		mustBeStepping();
-		while (position() < script.size())
+		while (position() < getScript().size())
 		{
 			forward();
 		}
@@ -205,19 +204,29 @@ public class SyncPlayer
 
 	public Rhythm getRhythm()
 	{
-		return rhythm;
+		return getScript().rhythm();
 	}
 
 	public void setPosition(int position)
 	{
 		this.position = position;
 		atStartProperty.set(position == 0);
-		atEndProperty.set(position == script.size());
+		atEndProperty.set(position == getScript().size());
 	}
 
 
-	public ObjectProperty<SyncPlayer.State> stateProperty()
+	public ObjectProperty<Player.State> stateProperty()
 	{
 		return stateProperty;
+	}
+	
+	public ObjectProperty<Script> scriptProperty()
+	{
+		return scriptProperty;
+	}
+
+	public Script getScript()
+	{
+		return scriptProperty.get();
 	}
 }

@@ -2,9 +2,8 @@ package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.ScaleListener;
-import org.geepawhill.contentment.player.SyncPlayer;
+import org.geepawhill.contentment.player.Player;
 import org.geepawhill.contentment.rhythm.Rhythm;
-import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.utility.JfxUtility;
 
 import javafx.application.Platform;
@@ -28,7 +27,7 @@ import javafx.stage.Stage;
 
 public class PlayerView
 {
-	private SyncPlayer player;
+	private Player player;
 	private BorderPane root;
 	private Stage stage;
 	private Group canvas;
@@ -39,7 +38,7 @@ public class PlayerView
 	{
 		this.stage = stage;
 		canvas = new Group();
-		player = new SyncPlayer(canvas, new SimpleRhythm());
+		player = new Player(canvas);
 		tools = makeTools();
 		stage.fullScreenProperty().addListener((source, o, n) -> undoFullScreen(n));
 	}
@@ -58,6 +57,8 @@ public class PlayerView
 	{
 		Pane owner = new Pane();
 		owner.setPrefSize(1600d, 900d);
+		
+		player.scriptProperty().addListener((p,o,n)->scriptChanged());
 
 		// media background
 
@@ -72,6 +73,12 @@ public class PlayerView
 
 		owner.getChildren().add(canvas);
 		return owner;
+	}
+
+	private void scriptChanged()
+	{
+		player.getRhythm().beatProperty().addListener((p, o, n) -> beatChanged(n));
+		beatChanged(0);
 	}
 
 	private void mouseClicked(MouseEvent event)
@@ -99,9 +106,7 @@ public class PlayerView
 		timing.setFont(new Font("Consolas", 30d));
 		timing.setStroke(Color.BLUE);
 		timing.setFill(Color.BLUE);
-		player.getRhythm().beatProperty().addListener((p, o, n) -> beatChanged(n));
 		tools.getItems().add(timing);
-		beatChanged(0);
 
 		Button full = new Button("Full");
 		full.setOnAction(event -> stage.setFullScreen(true));
@@ -122,7 +127,7 @@ public class PlayerView
 		Button play = new Button(">");
 		play.setOnAction(event -> player.play());
 		
-		BooleanBinding trueIfPlaying = Bindings.createBooleanBinding(() -> player.getState()==SyncPlayer.State.Playing,player.stateProperty());
+		BooleanBinding trueIfPlaying = Bindings.createBooleanBinding(() -> player.getState()==Player.State.Playing,player.stateProperty());
 		play.disableProperty().bind(trueIfPlaying);
 		tools.getItems().add(play);
 
