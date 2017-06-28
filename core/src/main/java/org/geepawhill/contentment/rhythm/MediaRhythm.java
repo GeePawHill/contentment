@@ -64,9 +64,7 @@ public class MediaRhythm implements Rhythm
 		if (isPlaying) pause();
 		if (ms == Rhythm.MAX)
 		{
-			mediaPlayer.seek(javafx.util.Duration.seconds(mediaPlayer.getTotalDuration().toSeconds()-1d));
-			mediaPlayer.seek(javafx.util.Duration.INDEFINITE);
-			System.out.println("Seek to end.");
+			mediaPlayer.seek(javafx.util.Duration.millis(mediaPlayer.getTotalDuration().toMillis()-50d));
 		}
 		else
 		{
