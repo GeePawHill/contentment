@@ -2,6 +2,7 @@ package org.geepawhill.contentment.core;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Actors;
+import org.geepawhill.contentment.rhythm.Rhythm;
 
 import javafx.scene.Group;
 
@@ -11,6 +12,7 @@ public class Context
 	public final Group canvas;
 
 	private ContextInterpolator extra;
+	private Rhythm rhythm;
 
 	public Context()
 	{
@@ -45,5 +47,15 @@ public class Context
 	{
 		if (extra == null) return source;
 		return new ParallelInterpolator(source, extra);
+	}
+
+	public void setRhythm(Rhythm rhythm)
+	{
+		this.rhythm = rhythm;
+	}
+	
+	public long beat()
+	{
+		return rhythm.beat();
 	}
 }

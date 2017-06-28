@@ -59,6 +59,7 @@ public class Player
 		this.setPosition(0);
 		getRhythm().seekHard((long) 0);
 		stateProperty.set(PlayerState.Stepping);
+		context.setRhythm(script.rhythm());
 	}
 
 	public int position()

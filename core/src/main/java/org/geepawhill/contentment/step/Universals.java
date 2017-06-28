@@ -5,25 +5,35 @@ import org.geepawhill.contentment.fast.ChangeColor;
 import org.geepawhill.contentment.fast.Clear;
 import org.geepawhill.contentment.fast.Entrance;
 import org.geepawhill.contentment.fast.Exit;
+import org.geepawhill.contentment.fast.Fast;
 
 import javafx.scene.paint.Paint;
 
 public class Universals
 {
+	
+	static Phrase working=null;
 
 	static public Step clear()
 	{
-		return new FastStep(new Clear());
+		FastStep step = new FastStep(new Clear());
+		addToWorking(step);
+		return step;
 	}
+
 
 	static public Step cue()
 	{
-		return new CueStep();
+		CueStep step = new CueStep();
+		addToWorking(step);
+		return step;
 	}
 	
 	static public Step reColor(Actor actor, Paint paint)
 	{
-		return new FastStep(new ChangeColor(actor, paint));
+		FastStep step = new FastStep(new ChangeColor(actor, paint));
+		addToWorking(step);
+		return step;
 	}
 
 	static public Step sketch(double ms, Actor drawable)
@@ -31,6 +41,7 @@ public class Universals
 		Phrase phrase = new Phrase();
 		phrase.add(new Entrance(drawable));
 		phrase.add(drawable.draw(ms));
+		addToWorking(phrase);
 		return phrase;
 	}
 
@@ -39,12 +50,15 @@ public class Universals
 		Phrase result = new Phrase();
 		result.add(new Entrance(drawable));
 		result.add(drawable.draw(1d));
+		addToWorking(result);
 		return result;
 	}
 
 	static public Step disappear(Actor drawable)
 	{
-		return new FastStep(new Exit(drawable));
+		FastStep step = new FastStep(new Exit(drawable));
+		addToWorking(step);
+		return step;
 	}
 
 	static public Step fadeIn(double ms, Actor drawable)
@@ -54,7 +68,43 @@ public class Universals
 		result.add(new OpacityStep(0d, drawable, 0d));
 		result.add(drawable.draw(1d));
 		result.add(new OpacityStep(ms, drawable, 1d));
+		addToWorking(result);
 		return result;
 	}
-
+	
+	static public Step mark(long ms)
+	{
+		MarkStep step = new MarkStep(ms);
+		addToWorking(step);
+		return step;
+	}
+	
+	public static void addToWorking(Step step)
+	{
+		if(working!=null) working.add(step);
+	}
+	
+	public static void addToWorking(Fast step)
+	{
+		addToWorking(new FastStep(step));
+	}
+	
+	static public void setWorking(Phrase phrase)
+	{
+		working = phrase;
+	}
+	
+	static public Phrase newWorking()
+	{
+		working = new Phrase();
+		return working;
+	}
+	
+	static public Phrase endWorking()
+	{
+		Phrase temp = working;
+		working=null;
+		return temp;
+	}
+	
 }

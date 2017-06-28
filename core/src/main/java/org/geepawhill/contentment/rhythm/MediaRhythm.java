@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.rhythm;
 
 import java.io.File;
+import java.net.URI;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -19,10 +20,20 @@ public class MediaRhythm implements Rhythm
 
 	private AnimationTimer timer;
 	private MediaPlayer mediaPlayer;
-
-	public MediaRhythm()
+	
+	public MediaRhythm(URI uri)
 	{
-		Media m = new Media(new File("/01faceoverCut.mp4").toURI().toString());
+		this(uri.toString());
+	}
+	
+	public MediaRhythm(File file)
+	{
+		this(file.toURI().toString());
+	}
+	
+	public MediaRhythm(String mediaString)
+	{
+		Media m = new Media(mediaString);
 		mediaPlayer = new MediaPlayer(m);
 		mediaPlayer.pause();
 		beatProperty = new SimpleLongProperty(0L);
@@ -35,9 +46,14 @@ public class MediaRhythm implements Rhythm
 			public void handle(long now)
 			{
 				update();
-
 			}
 		};
+		
+	}
+
+	public MediaRhythm()
+	{
+		this(new File("/01faceoverCut.mp4"));
 	}
 
 	public MediaPlayer getMediaPlayer()
