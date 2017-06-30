@@ -313,14 +313,14 @@ public class ExceptionsScript extends ScriptBuilder
 		mark(194000);
 		Arrow compiletimeOne = knowLine(680d,false);
 		
-		mark(198000);
+		mark(202000);
 		Cross crossThree = new Cross(compiletimeOne,70d);
 		sketch(500d,crossThree);
 		
-		mark(202000);
+		mark(207000);
 		Arrow compiletimeTwo = knowLine(780d,true);
 		
-		mark(206000);
+		mark(212000);
 		Cross crossFour = new Cross(compiletimeTwo,70d);
 		sketch(500d,crossFour);
 		return endBuild();
