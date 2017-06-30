@@ -1,12 +1,10 @@
 package org.geepawhill.contentment.player;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.rhythm.Rhythm;
 import org.geepawhill.contentment.rhythm.SimpleRhythm;
 
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class Script

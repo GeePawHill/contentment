@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.actor.Actors;
 import org.geepawhill.contentment.fast.ChangeColor;
 import org.geepawhill.contentment.fast.Clear;
 import org.geepawhill.contentment.fast.Entrance;
@@ -129,4 +130,38 @@ public class ScriptBuilder
 		return temp;
 	}
 	
+	public void fadeIn(double ms, Actors... arrays)
+	{
+		Addable temp = endBuild();
+
+		buildChord();
+		for (Actors actors : arrays)
+		{
+			for (Actor actor : actors)
+			{
+				fadeIn(ms, actor);
+			}
+		}
+		Addable chord = endBuild();
+		buildMore(temp);
+		addToWorking(chord);
+	}
+
+	public void fadeOut(double ms, Actors... arrays)
+	{
+		Addable temp = endBuild();
+
+		buildChord();
+		for (Actors actors : arrays)
+		{
+			for (Actor actor : actors)
+			{
+				fadeOut(ms, actor);
+			}
+		}
+		Addable chord = endBuild();
+		buildMore(temp);
+		addToWorking(chord);
+	}
+
 }

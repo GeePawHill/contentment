@@ -53,4 +53,10 @@ public class Actors implements Iterable<Actor>
 	{
 		return items.contains(actor);
 	}
+
+	public void add(Actor... actors)
+	{
+		for(Actor actor : actors) items.add(actor);
+		
+	}
 }

@@ -1,7 +1,5 @@
 package org.geepawhill.contentment.core;
 
-import java.io.File;
-
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.jfx.ScaleListener;
 import org.geepawhill.contentment.player.Player;
@@ -14,7 +12,6 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.geometry.Orientation;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -23,8 +20,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;

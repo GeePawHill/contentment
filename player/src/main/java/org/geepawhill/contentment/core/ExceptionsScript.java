@@ -3,7 +3,6 @@ package org.geepawhill.contentment.core;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Actors;
 import org.geepawhill.contentment.actors.Arrow;
 import org.geepawhill.contentment.actors.Cross;
@@ -18,7 +17,6 @@ import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.player.Keyframe;
 import org.geepawhill.contentment.player.Script;
 import org.geepawhill.contentment.rhythm.MediaRhythm;
-import org.geepawhill.contentment.step.Addable;
 import org.geepawhill.contentment.step.ScriptBuilder;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.style.Dash;
@@ -56,6 +54,7 @@ public class ExceptionsScript extends ScriptBuilder
 	private Letters catcher;
 	private double top;
 	private double right;
+	private Format knowsFormat;
 
 	public ExceptionsScript()
 	{
@@ -271,6 +270,7 @@ public class ExceptionsScript extends ScriptBuilder
 	
 	private Step dependencies()
 	{
+		Actors allButOvals = new Actors();
 		buildPhrase();
 		clear();
 		head("Dependencies");
@@ -281,54 +281,77 @@ public class ExceptionsScript extends ScriptBuilder
 		sketch(1000d,catcher);
 		Spot throwerSpot = new Spot(1000d,800d);
 		Spot catcherSpot = new Spot(1500d,800d);
+		allButOvals.add(throwerSpot,catcherSpot);
 		sketch(1d,throwerSpot);
 		sketch(1d,catcherSpot);
 		Arrow throwerArrow = new Arrow(thrower,false,throwerSpot,false,commentFormat);
 		sketch(500d,throwerArrow);
 		Arrow catcherArrow = new Arrow(catcher,false,catcherSpot,false,commentFormat);
 		sketch(500d,catcherArrow);
+		allButOvals.add(throwerArrow,catcherArrow);
 		
 		mark(153000);
 		Letters runtime = new Letters("Runtime",new Point(1250d,220d),commentFormat);
 		sketch(500d,runtime);
+		allButOvals.add(runtime);
 		
 		mark(160000);
-		Arrow runtimeOne = knowLine(350d,false);
+		Arrow runtimeOne = knowLine(allButOvals,350d,false);
 		
 		mark(166000);
 		Cross crossOne = new Cross(runtimeOne,70d);
 		sketch(500d,crossOne);
+		allButOvals.add(crossOne);
 		
 		mark(172000);
-		Arrow runtimeTwo = knowLine(475d,true);
+		Arrow runtimeTwo = knowLine(allButOvals,475d,true);
 		
 		mark(176000);
 		Cross crossTwo = new Cross(runtimeTwo,70d);
 		sketch(500d,crossTwo);
+		allButOvals.add(crossTwo);
 		
 		mark(190000);
 		Letters compiletime = new Letters("Compile Time",new Point(1250d,550d),commentFormat);
 		sketch(500d,compiletime);
-		
+		allButOvals.add(compiletime);
+
 		mark(194000);
-		Arrow compiletimeOne = knowLine(680d,false);
+		Arrow compiletimeOne = knowLine(allButOvals,680d,false);
 		
 		mark(202000);
 		Cross crossThree = new Cross(compiletimeOne,70d);
 		sketch(500d,crossThree);
+		allButOvals.add(crossThree);
+
 		
 		mark(207000);
-		Arrow compiletimeTwo = knowLine(780d,true);
+		Arrow compiletimeTwo = knowLine(allButOvals,780d,true);
 		
 		mark(212000);
 		Cross crossFour = new Cross(compiletimeTwo,70d);
 		sketch(500d,crossFour);
+		allButOvals.add(crossFour);
+		
+		mark(233000);
+		fadeOut(500d,allButOvals);
+		
+		mark(240000);
+		OvalText lnf = new OvalText("LidNotFound",new Point(1250d,500d),commentFormat);
+		
+		sketch(500d,lnf);
+		
+		Arrow throwerLnf = new Arrow(thrower,false,lnf,true,knowsFormat);
+		Arrow catcherLnf = new Arrow(catcher,false,lnf,true,knowsFormat);
+		
+		sketch(500d,throwerLnf);
+		sketch(500d,catcherLnf);
 		return endBuild();
 	}
 	
-	private Arrow knowLine(double y, boolean leftHead)
+	private Arrow knowLine(Actors actors,double y, boolean leftHead)
 	{
-		Format knowsFormat = new Format(TypeFace.mediumHand(),TypeFace.color(Color.BLUE, 1d),Frames.frame(Color.BLUE, 2d, 1d,Dash.dash(4d)));
+		knowsFormat = new Format(TypeFace.mediumHand(),TypeFace.color(Color.BLUE, 1d),Frames.frame(Color.BLUE, 2d, 1d,Dash.dash(4d)));
 		Spot leftSpot = new Spot(1000d,y);
 		sketch(1d,leftSpot);
 		Spot rightSpot = new Spot(1500d,y);
@@ -337,6 +360,7 @@ public class ExceptionsScript extends ScriptBuilder
 		Letters letters = new Letters("knows?",new Point(1250,y-50),knowsFormat);
 		sketch(500d,line);
 		sketch(500d,letters);
+		actors.add(leftSpot,rightSpot,line,letters);
 		return line;
 	}
 
@@ -408,40 +432,4 @@ public class ExceptionsScript extends ScriptBuilder
 		appear(joke);
 		return joke;
 	}
-
-	private void fadeIn(double ms, Actors... arrays)
-	{
-		Addable temp = endBuild();
-
-		buildChord();
-		for (Actors actors : arrays)
-		{
-			for (Actor actor : actors)
-			{
-				fadeIn(ms, actor);
-			}
-		}
-		Addable chord = endBuild();
-		buildMore(temp);
-		addToWorking(chord);
-	}
-
-	private void fadeOut(double ms, Actors... arrays)
-	{
-		Addable temp = endBuild();
-
-		buildChord();
-		for (Actors actors : arrays)
-		{
-			for (Actor actor : actors)
-			{
-				fadeOut(ms, actor);
-			}
-		}
-		Addable chord = endBuild();
-		buildMore(temp);
-		addToWorking(chord);
-	}
-	
-
 }
