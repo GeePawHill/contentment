@@ -1,27 +1,23 @@
 package org.geepawhill.contentment.core;
 
-import static org.geepawhill.contentment.step.Universals.*;
-
-import java.io.File;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
+import org.geepawhill.contentment.player.Keyframe;
 import org.geepawhill.contentment.player.Script;
 import org.geepawhill.contentment.rhythm.MediaRhythm;
-import org.geepawhill.contentment.player.Keyframe;
 import org.geepawhill.contentment.step.Phrase;
+import org.geepawhill.contentment.step.ScriptBuilder;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 
 import javafx.geometry.HPos;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class UnderplayedScript
+public class UnderplayedScript extends ScriptBuilder
 {
 	private Format columnFormat;
 	private Format subFormat;
@@ -249,7 +245,7 @@ public class UnderplayedScript
 	{
 		Phrase phrase = new Phrase();
 		Letters line = new Letters(text, new Point(1550d, lastLineY), format, HPos.RIGHT);
-		phrase.add(sketch(500d,line));
+		sketch(500d,line);
 		lastLineY += 80d;
 		lines.add(line);
 		return phrase;
@@ -276,7 +272,7 @@ public class UnderplayedScript
 		lastLineY = 100d;
 		for (Letters line : lines)
 		{
-			phrase.add(disappear(line));
+			disappear(line);
 		}
 		lines.clear();
 		return phrase;
