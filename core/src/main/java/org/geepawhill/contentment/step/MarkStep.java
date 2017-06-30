@@ -14,7 +14,7 @@ public class MarkStep implements Step
 
 	public MarkStep(long mark)
 	{
-		this.mark = mark;
+		this.mark = mark*1000;
 		this.animator = new Animator();
 	}
 

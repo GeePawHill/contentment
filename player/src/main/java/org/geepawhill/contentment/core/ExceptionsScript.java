@@ -78,22 +78,22 @@ public class ExceptionsScript extends ScriptBuilder
 	{
 		script = new Script(new MediaRhythm(new File("/exceptionsTrialBase.mp4")));
 		script.add(new Keyframe(0, opening()));
-		script.add(new Keyframe(16000, stack()));
-		script.add(new Keyframe(50000, special()));
-		script.add(new Keyframe(96000, indirectCall()));
-		script.add(new Keyframe(140000, dependencies()));
-		script.add(new Keyframe(270000, easierToTest()));
-		dummy(290000, "What Should We Test?");
-		dummy(308000, "Testing The Thrower");
-		dummy(312000, "The Throw Condition");
-		dummy(337000, "The Thrown Exception");
-		dummy(412000, "Testing The Catcher");
-		dummy(420000, "Catches The Right Exception");
-		dummy(440000, "Does The Right Thing");
-		dummy(460000, "Extract The Catch Clause");
-		dummy(480000, "Finally, The Finally Clause");
-		dummy(540000, "Extract The Finally, Too");
-		dummy(550000, "Conclusion");
+		script.add(new Keyframe(16, stack()));
+		script.add(new Keyframe(50, special()));
+		script.add(new Keyframe(96, indirectCall()));
+		script.add(new Keyframe(140, dependencies()));
+		script.add(new Keyframe(252, easierToTest()));
+		dummy(290, "What Should We Test?");
+		dummy(308, "Testing The Thrower");
+		dummy(312, "The Throw Condition");
+		dummy(337, "The Thrown Exception");
+		dummy(412, "Testing The Catcher");
+		dummy(420, "Catches The Right Exception");
+		dummy(440, "Does The Right Thing");
+		dummy(460, "Extract The Catch Clause");
+		dummy(480, "Finally, The Finally Clause");
+		dummy(540, "Extract The Finally, Too");
+		dummy(550, "Conclusion");
 		return script;
 	}
 
@@ -116,7 +116,7 @@ public class ExceptionsScript extends ScriptBuilder
 	{
 		buildPhrase();
 		head("Microtesting Exceptions");
-		mark(3000);
+		mark(3);
 		sub("A GeePaw Quickie");
 		return endBuild();
 	}
@@ -148,42 +148,42 @@ public class ExceptionsScript extends ScriptBuilder
 			stack.add(topStroke);
 		}
 
-		mark(22000);
+		mark(22);
 		head("The Household Program");
 
-		mark(26000);
+		mark(26);
 		main = new Letters("main()", stackTextPoint(0), normalFormat, HPos.LEFT);
 		disappearingStackText.add(main);
 		sketch(500d, main);
 
-		mark(30000);
+		mark(30);
 		doChores = new Letters("doChores()", stackTextPoint(1), normalFormat, HPos.LEFT);
 		catchAndThrowColorText.add(doChores);
 		sketch(500d, doChores);
 
-		mark(33000);
+		mark(33);
 		takeOutTrash = new Letters("takeOutTrash()", stackTextPoint(2), normalFormat, HPos.LEFT);
 		disappearingStackText.add(takeOutTrash);
 		sketch(500d, takeOutTrash);
-		mark(34000);
+		mark(34);
 
-		mark(37500);
+		mark(37);
 		putBagsInCan = new Letters("putBagsInCans()", stackTextPoint(3), normalFormat, HPos.LEFT);
 		disappearingStackText.add(putBagsInCan);
 		sketch(500d, putBagsInCan);
 
-		mark(40500);
+		mark(40);
 		putOneBagInCan = new Letters("putOneBagInCan()", stackTextPoint(4), normalFormat, HPos.LEFT);
 		disappearingStackText.add(putOneBagInCan);
 		sketch(500d, putOneBagInCan);
 
-		mark(44000);
+		mark(44);
 		openCan = new Letters("openCan()", stackTextPoint(5), normalFormat, HPos.LEFT);
 		sketch(500d, openCan);
 		catchAndThrowColorText.add(openCan);
 
 		Letters joke = joke("whoops, he forgot openCan()");
-		mark(49000);
+		mark(49);
 		disappear(joke);
 
 		return endBuild();
@@ -200,34 +200,34 @@ public class ExceptionsScript extends ScriptBuilder
 		addToWorking(new ChangeColor(openCan, Color.VIOLET));
 		addToWorking(new ChangeColor(doChores, Color.VIOLET));
 
-		mark(55000);
+		mark(55);
 		thrower = new Letters("Thrower", new Point(left - 40d, bottom - 550d), commentFormat, HPos.RIGHT);
 		sketch(500d, thrower);
-		mark(57500);
+		mark(57);
 		catcher = new Letters("Catcher", new Point(left - 40d, bottom - 150d), commentFormat, HPos.RIGHT);
 		sketch(500d, catcher);
 
-		mark(60000);
+		mark(60);
 		fadeOut(500d, stack, disappearingStackText);
 
-		mark(64000);
+		mark(64);
 		Letters throwsLidNotFound = new Letters("throws LidNotFound", new Point(left + 20, bottom - 490), lightComment,
 				HPos.LEFT);
 		catchAndThrowColorText.add(throwsLidNotFound);
 		fadeIn(500d, throwsLidNotFound);
 
-		mark(72000);
+		mark(72);
 		Letters catchesAll = new Letters("catches all exceptions", new Point(left + 20, bottom - 90), lightComment, HPos.LEFT);
 		catchAndThrowColorText.add(catchesAll);
 		fadeIn(500d, catchesAll);
 
-		mark(82000);
+		mark(82);
 		Letters catchesLidNotFound = new Letters("catches LidNotFound", new Point(left + 20, bottom - 40), lightComment,
 				HPos.LEFT);
 		catchAndThrowColorText.add(catchesLidNotFound);
 		fadeIn(500d, catchesLidNotFound);
 
-		mark(86000);
+		mark(86);
 		Letters logsIt = new Letters("logs and moves on", new Point(left + 20, bottom + 10), lightComment, HPos.LEFT);
 		catchAndThrowColorText.add(logsIt);
 		fadeIn(500d, logsIt);
@@ -242,27 +242,27 @@ public class ExceptionsScript extends ScriptBuilder
 		head("How Throw & Catch Work");
 		fadeOut(500d, catchAndThrowColorText);
 
-		mark(105000);
+		mark(105);
 		Arrow call = new Arrow(thrower,false,catcher,true,commentFormat);
 		Letters letters = new Letters("call",new Point(left - 40d, bottom - 350d),commentFormat,HPos.RIGHT);
 		sketch(500d,call);
 		sketch(500d,letters);
 		
-		mark(111000);
+		mark(111);
 		Cross cross = new Cross(call,150d);
 		sketch(500d,cross);
 		
 		fadeIn(500d, stack);
 		
-		mark(115000);
+		mark(115);
 		throwsText(5);
-		mark(120000);
+		mark(120);
 		noCatchText(4);
-		mark(124000);
+		mark(124);
 		noCatchText(3);
-		mark(128000);
+		mark(128);
 		noCatchText(2);
-		mark(132000);
+		mark(132);
 		catchText(1);
 		
 		return endBuild();
@@ -274,7 +274,7 @@ public class ExceptionsScript extends ScriptBuilder
 		buildPhrase();
 		clear();
 		head("Dependencies");
-		mark(146000);
+		mark(146);
 		OvalText thrower = new OvalText("Thrower",new Point(1000d,200d),commentFormat);
 		sketch(1000d,thrower);
 		OvalText catcher = new OvalText("Catcher",new Point(1500d,200d),commentFormat);
@@ -290,53 +290,56 @@ public class ExceptionsScript extends ScriptBuilder
 		sketch(500d,catcherArrow);
 		allButOvals.add(throwerArrow,catcherArrow);
 		
-		mark(153000);
+		mark(153);
 		Letters runtime = new Letters("Runtime",new Point(1250d,220d),commentFormat);
 		sketch(500d,runtime);
 		allButOvals.add(runtime);
 		
-		mark(160000);
+		mark(160);
 		Arrow runtimeOne = knowLine(allButOvals,350d,false);
 		
-		mark(166000);
+		mark(166);
 		Cross crossOne = new Cross(runtimeOne,70d);
 		sketch(500d,crossOne);
 		allButOvals.add(crossOne);
 		
-		mark(172000);
+		mark(172);
 		Arrow runtimeTwo = knowLine(allButOvals,475d,true);
 		
-		mark(176000);
+		mark(176);
 		Cross crossTwo = new Cross(runtimeTwo,70d);
 		sketch(500d,crossTwo);
 		allButOvals.add(crossTwo);
 		
-		mark(190000);
+		mark(190);
 		Letters compiletime = new Letters("Compile Time",new Point(1250d,550d),commentFormat);
 		sketch(500d,compiletime);
 		allButOvals.add(compiletime);
 
-		mark(194000);
+		mark(194);
 		Arrow compiletimeOne = knowLine(allButOvals,680d,false);
 		
-		mark(202000);
+		mark(202);
 		Cross crossThree = new Cross(compiletimeOne,70d);
 		sketch(500d,crossThree);
 		allButOvals.add(crossThree);
 
 		
-		mark(207000);
+		mark(207);
 		Arrow compiletimeTwo = knowLine(allButOvals,780d,true);
 		
-		mark(212000);
+		mark(212);
 		Cross crossFour = new Cross(compiletimeTwo,70d);
 		sketch(500d,crossFour);
 		allButOvals.add(crossFour);
 		
-		mark(233000);
+		mark(218);
+		head("No Dependencies Is Different");
+		
+		mark(233);
 		fadeOut(500d,allButOvals);
 		
-		mark(240000);
+		mark(240);
 		OvalText lnf = new OvalText("LidNotFound",new Point(1250d,500d),commentFormat);
 		
 		sketch(500d,lnf);
@@ -346,6 +349,9 @@ public class ExceptionsScript extends ScriptBuilder
 		
 		sketch(500d,throwerLnf);
 		sketch(500d,catcherLnf);
+		
+		mark(246);
+		head("Shared Depenendency Doesn't Change This");
 		return endBuild();
 	}
 	

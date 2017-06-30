@@ -14,7 +14,7 @@ public class Keyframe
 
 	public Keyframe(long target, Step phrase)
 	{
-		this.target = target;
+		this.target = target*1000;
 		this.phrase = phrase;
 	}
 }
