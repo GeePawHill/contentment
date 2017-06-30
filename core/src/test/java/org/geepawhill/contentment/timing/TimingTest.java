@@ -82,20 +82,6 @@ public class TimingTest
 	}
 
 	@Test
-	public void throwsIfFixedTooBig()
-	{
-		try
-		{
-			scheduler.schedule(80d, fixed20, fixed80);
-			fail("Did not throw on absolute child overage.");
-		}
-		catch (RuntimeException e)
-		{
-			assertEquals(Scheduler.ABSOLUTE_OVERRUN, e.getMessage());
-		}
-	}
-
-	@Test
 	public void throwsIfRelativesButZeroTotal()
 	{
 		try

@@ -65,7 +65,7 @@ public class ScriptBuilder
 	{
 		Phrase result = new Phrase();
 		result.add(new Entrance(drawable));
-		result.add(new OpacityStep(0d, drawable, 0d));
+		result.add(new OpacityStep(1d, drawable, 0d));
 		result.add(drawable.draw(1d));
 		result.add(new OpacityStep(ms, drawable, 1d));
 		addToWorking(result);

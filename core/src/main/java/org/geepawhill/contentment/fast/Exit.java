@@ -28,6 +28,7 @@ public class Exit implements Fast
 	@Override
 	public void fast(Context context)
 	{
+		actor.group().getChildren().clear();
 		context.remove(actor);
 	}
 }

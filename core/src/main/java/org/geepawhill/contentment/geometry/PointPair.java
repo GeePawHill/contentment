@@ -196,4 +196,9 @@ public class PointPair
 		return new PointPair(from, to);
 	}
 
+	public PointPair centerLine()
+	{
+		return new PointPair(north(),south());
+	}
+
 }

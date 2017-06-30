@@ -59,7 +59,7 @@ public class Scheduler
 	private double amountLeftToDistribute(double total)
 	{
 		double distribute = total - accumulatedAbsolute;
-		if (distribute < 0d) throw new RuntimeException(ABSOLUTE_OVERRUN);
+//		if (distribute < 0d) throw new RuntimeException(ABSOLUTE_OVERRUN+" Total: "+total+" Allocated: "+accumulatedAbsolute);
 		return distribute;
 	}
 
