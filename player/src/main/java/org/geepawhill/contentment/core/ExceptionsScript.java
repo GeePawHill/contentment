@@ -30,9 +30,9 @@ import javafx.scene.text.FontPosture;
 
 public class ExceptionsScript extends ScriptBuilder
 {
-	private Format columnFormat;
+	private Format leadFormat;
 	private Format subFormat;
-	private Format moralFormat;
+	private Format minorFormat;
 
 	private ArrayList<Letters> lines;
 	private double lastLineY;
@@ -65,13 +65,13 @@ public class ExceptionsScript extends ScriptBuilder
 
 		Font largeFont = new Font("GoodDog", 100d);
 		Font mediumFont = new Font("GoodDog", 80d);
-		Font moralFont = new Font("GoodDog", 120d);
-		columnFormat = new Format(TypeFace.font(largeFont, 3d, 1d), TypeFace.color(Color.RED, 1d),
+		Font minorFont = new Font("GoodDog", 60d);
+		leadFormat = new Format(TypeFace.font(largeFont, 3d, 1d), TypeFace.color(Color.RED, 1d),
 				Frames.frame(Color.RED, 5d, 1d));
-		subFormat = new Format(columnFormat, TypeFace.font(mediumFont, 2d, 1d), TypeFace.color(Color.GREENYELLOW, 1d),
+		subFormat = new Format(leadFormat, TypeFace.font(mediumFont, 2d, 1d), TypeFace.color(Color.GREENYELLOW, 1d),
 				Frames.frame(Color.GREEN, 5d, 1d));
-		moralFormat = new Format(TypeFace.font(moralFont, 5d, 1d), TypeFace.color(Color.LIGHTBLUE, Color.BLUE, 1d),
-				Frames.frame(Color.BLUE, 5d, 1d));
+		minorFormat = new Format(TypeFace.font(minorFont, 2d, 1d), TypeFace.color(Color.BLUEVIOLET, 1d),
+				Frames.frame(Color.GREEN, 5d, 1d));
 	}
 
 	public Script make()
@@ -82,19 +82,115 @@ public class ExceptionsScript extends ScriptBuilder
 		script.add(new Keyframe(50, special()));
 		script.add(new Keyframe(96, indirectCall()));
 		script.add(new Keyframe(140, dependencies()));
-		script.add(new Keyframe(252, easierToTest()));
-		dummy(290, "What Should We Test?");
-		dummy(308, "Testing The Thrower");
-		dummy(312, "The Throw Condition");
-		dummy(337, "The Thrown Exception");
-		dummy(412, "Testing The Catcher");
-		dummy(420, "Catches The Right Exception");
-		dummy(440, "Does The Right Thing");
-		dummy(460, "Extract The Catch Clause");
-		dummy(480, "Finally, The Finally Clause");
-		dummy(540, "Extract The Finally, Too");
-		dummy(550, "Conclusion");
+		script.add(new Keyframe(218, noDependencies()));
+		script.add(new Keyframe(280,whatToTest()));
+		script.add(new Keyframe(300,testingTheThrower()));
+		script.add(new Keyframe(359,actualThrowerTest()));
+		script.add(new Keyframe(402,testingTheCatcher()));		
+		script.add(new Keyframe(457,complexCatchClause()));
 		return script;
+	}
+	
+	public Step complexCatchClause()
+	{
+		buildPhrase();
+		clear();
+		head("Testing A Complex Catch");
+		return endBuild();
+	}
+
+	
+	public Step testingTheCatcher()
+	{
+		buildPhrase();
+		clear();
+		head("Testing The Catcher");
+		OvalText catcher = new OvalText("Catcher",new Point(1250d,210d),commentFormat);
+		sketch(1d,catcher);
+		mark(411);
+		lead(" ");
+		sub("does it really catch?");
+		mark(413);
+		minor("set up throw");
+		minor("call doChores()");
+		mark(419);
+		minor("test completes? doChores() caught it");
+		mark(424);
+		sub("does it do something about it?");
+		mark(435);
+		minor("supposed to dial home");
+		mark(445);
+		minor("tell us the missing lid");
+		
+		return endBuild();
+	}
+
+	
+	public Step actualThrowerTest()
+	{
+		buildPhrase();
+		clear();
+		head("Two Questions, One Test");
+		mark(362);
+		sub("set up the throw condition");
+		mark(364);
+		minor("remove lids programmatically");
+		mark(370);
+		sub("call the thrower");
+		minor("call openCan()");
+		mark(374);
+		sub("catch the exception");
+		minor("test catches LidNotFound");
+		minor("maybe inspect it");
+		mark(382);
+		sub("non-throwing?");
+		mark(385);
+		minor("write those first");
+		return endBuild();
+	}
+
+	public Step testingTheThrower()
+	{
+		buildPhrase();
+		clear();
+		head("Testing The Thrower");
+		OvalText thrower = new OvalText("Thrower",new Point(1250d,210d),commentFormat);
+		sketch(1d,thrower);
+		mark(302);
+		lead(" ");
+		sub("throws under right condition?");
+		mark(304);
+		minor("don't throw if the lid's right there");
+		mark(309);
+		minor("don't throw if something else is wrong");
+		mark(315);
+		minor("always & only throw when lid's not found");
+		mark(324);
+		sub("throws the right thing?");
+		mark(328);
+		minor("must throw right exception");
+		mark(340);
+		minor("must build it correctly");
+		mark(346);
+		minor("use an exception constructor for that");
+		
+		return endBuild();
+	}
+
+	
+	public Step whatToTest()
+	{
+		buildPhrase();
+		clear();
+		head("What Do We Test?");
+		mark(284);
+		sub("five cases");
+		mark(288);
+		minor("each case asks a question");
+		minor("what happens when we ... ?");
+		mark(295);
+		minor("(how to think of all microtests)");
+		return endBuild();
 	}
 
 	private void dummy(long beat, String text)
@@ -103,13 +199,6 @@ public class ExceptionsScript extends ScriptBuilder
 		head(text);
 		script.add(new Keyframe(beat, endBuild()));
 
-	}
-
-	private Step easierToTest()
-	{
-		buildPhrase();
-		head("Easier To Test");
-		return endBuild();
 	}
 
 	private Step opening()
@@ -333,25 +422,56 @@ public class ExceptionsScript extends ScriptBuilder
 		sketch(500d,crossFour);
 		allButOvals.add(crossFour);
 		
-		mark(218);
-		head("No Dependencies Is Different");
+		return endBuild();
+	}
+	
+	private Step noDependencies()
+	{
+		buildPhrase();
+		clear();
+		head("No Dependencies");
+		sub("very different situation");
 		
+		mark(227);
+		minor("no direct call");
+		minor("so neither side knows the other");
 		mark(233);
-		fadeOut(500d,allButOvals);
+		
+		OvalText thrower = new OvalText("Thrower",new Point(1000d,490d),commentFormat);
+		sketch(1000d,thrower);
+		OvalText catcher = new OvalText("Catcher",new Point(1500d,490d),commentFormat);
+	
+		sketch(1000d,catcher);
 		
 		mark(240);
-		OvalText lnf = new OvalText("LidNotFound",new Point(1250d,500d),commentFormat);
-		
+		OvalText lnf = new OvalText("LidNotFound",new Point(1250d,650d),commentFormat);
 		sketch(500d,lnf);
 		
 		Arrow throwerLnf = new Arrow(thrower,false,lnf,true,knowsFormat);
 		Arrow catcherLnf = new Arrow(catcher,false,lnf,true,knowsFormat);
 		
+		
 		sketch(500d,throwerLnf);
 		sketch(500d,catcherLnf);
+		minor(" ");
+		minor(" ");
+		minor(" ");
+		minor(" ");
+		mark(247);
+		minor("shared dependency irrelevant");
 		
-		mark(246);
-		head("Shared Depenendency Doesn't Change This");
+		mark(252);
+		clear();
+		head("Easier To Test");
+		
+		mark(263);
+		sub("four nopes = one yep?");
+		mark(268);
+		minor("test the thrower by itself");
+		minor("test the catcher by itself");
+		
+		mark(274);
+		lead("this is far easier");
 		return endBuild();
 	}
 	
@@ -416,14 +536,20 @@ public class ExceptionsScript extends ScriptBuilder
 	{
 		lastLineY = 100d;
 		if (!lines.isEmpty()) clearLines();
-		line(text, columnFormat);
+		line(text, leadFormat);
 	}
 
 	private void lead(String text)
 	{
 		lastLineY += 30d;
-		line(text, columnFormat);
+		line(text, leadFormat);
 	}
+	
+	private void minor(String text)
+	{
+		line(text,minorFormat);
+	}
+
 
 	private void sub(String text)
 	{

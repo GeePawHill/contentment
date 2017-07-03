@@ -146,10 +146,18 @@ public class MainView
 		Button end = new Button("-->||");
 		end.setOnAction(event -> player.end());
 		tools.getItems().add(end);
+		
+		Button timinusTwo = new Button("T-2");
+		timinusTwo.setOnAction(event -> player.penultimate());
+		tools.getItems().add(timinusTwo);
 
-		Button allButEnd = new Button("-->.");
-		allButEnd.setOnAction(event -> player.last());
-		tools.getItems().add(allButEnd);
+		Button tminusOne = new Button("T-1");
+		tminusOne.setOnAction(event -> player.ultimate());
+		tools.getItems().add(tminusOne);
+		
+		Button markHere = new Button("Mark");
+		markHere.setOnAction(event -> markHere(tools));
+		tools.getItems().add(markHere);
 
 		return tools;
 	}
@@ -180,11 +188,20 @@ public class MainView
 
 	private void beatChanged(Number beat)
 	{
-		String text = String.format("%8d", beat.longValue());
+		String text = String.format("%8d", beat.longValue()/1000);
 		if (beat.longValue() == 0) text = "   Start";
 		if (beat.longValue() == Rhythm.MAX) text = "     End";
 		final String newText = text;
 		Platform.runLater(() -> timing.setText(newText));
+	}
+	
+	private void markHere(ToolBar bar)
+	{
+		Text text = new Text(String.format("%8d", player.getRhythm().beat()/1000));
+		text.setFont(new Font("Consolas", 30d));
+		text.setStroke(Color.BLUE);
+		text.setFill(Color.BLUE);
+		bar.getItems().add(text);
 	}
 
 	private void undoFullScreen(Boolean newValue)

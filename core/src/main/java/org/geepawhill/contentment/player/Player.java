@@ -186,10 +186,18 @@ public class Player
 		}
 	}
 
-	public void last()
+	public void ultimate()
 	{
 		mustBeStepping();
 		end();
+		backward();
+	}
+	
+	public void penultimate()
+	{
+		mustBeStepping();
+		end();
+		backward();
 		backward();
 	}
 
