@@ -3,41 +3,79 @@ package org.geepawhill.contentment.format;
 import org.geepawhill.contentment.geometry.Point;
 
 import javafx.geometry.HPos;
+import javafx.geometry.VPos;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 
 public class Aligner
 {
-	
-	private HPos align;
 
-	private Aligner(HPos align)
+	private HPos hAlign;
+	private VPos vAlign;
+
+	public Aligner(HPos hAlign)
 	{
-		this.align = align;
+		this(hAlign, VPos.TOP);
+	}
+
+	public Aligner(HPos hAlign, VPos vAlign)
+	{
+		this.hAlign = hAlign;
+		this.vAlign = vAlign;
 	}
 
 	public static Aligner align(HPos align)
 	{
 		return new Aligner(align);
 	}
-	
-	public void align(Point point,Text text)
+
+	public void align(Point point, Shape... shapes)
 	{
-		switch(align)
+		for (Shape shape : shapes)
 		{
-			default:
-			case CENTER:
-				text.setX(point.x - text.getBoundsInLocal().getWidth() / 2d);
-				text.setY(point.y);
-				break;
-			case LEFT:
-				text.setX(point.x);
-				text.setY(point.y);
-				break;
-			case RIGHT:
-				text.setX(point.x - text.getBoundsInLocal().getWidth());
-				text.setY(point.y);
-				break;
+			halign(point, shape);
+			valign(point, shape);
 		}
+
+	}
+
+	public void halign(Point point, Shape shape)
+	{
+		switch (hAlign)
+		{
+		default:
+		case CENTER:
+			shape.setTranslateX(point.x - shape.getBoundsInLocal().getWidth() / 2d);
+			break;
+		case LEFT:
+			shape.setTranslateX(point.x);
+			break;
+		case RIGHT:
+			shape.setTranslateX(point.x - shape.getBoundsInLocal().getWidth());
+			break;
+		}
+	}
+
+	public void valign(Point point, Shape shape)
+	{
+		switch (vAlign)
+		{
+		case CENTER:
+			shape.setTranslateY(point.y - shape.getBoundsInLocal().getHeight() / 2d);
+			break;
+		case TOP:
+			shape.setTranslateY(point.y);
+			break;
+		case BASELINE:
+		case BOTTOM:
+			shape.setTranslateY(point.y - shape.getBoundsInLocal().getHeight());
+			break;
+		}
+	}
+
+	public static Aligner rightCenter()
+	{
+		return new Aligner(HPos.RIGHT,VPos.CENTER);
 	}
 
 }

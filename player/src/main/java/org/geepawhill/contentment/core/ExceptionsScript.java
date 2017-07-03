@@ -5,12 +5,14 @@ import java.util.ArrayList;
 
 import org.geepawhill.contentment.actor.Actors;
 import org.geepawhill.contentment.actors.Arrow;
+import org.geepawhill.contentment.actors.CodeBlock;
 import org.geepawhill.contentment.actors.Cross;
 import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.actors.OvalText;
 import org.geepawhill.contentment.actors.Spot;
 import org.geepawhill.contentment.actors.Stroke;
 import org.geepawhill.contentment.fast.ChangeColor;
+import org.geepawhill.contentment.format.Aligner;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
@@ -55,6 +57,7 @@ public class ExceptionsScript extends ScriptBuilder
 	private double top;
 	private double right;
 	private Format knowsFormat;
+	private Format codeFormat;
 
 	public ExceptionsScript()
 	{
@@ -66,12 +69,15 @@ public class ExceptionsScript extends ScriptBuilder
 		Font largeFont = new Font("GoodDog", 100d);
 		Font mediumFont = new Font("GoodDog", 80d);
 		Font minorFont = new Font("GoodDog", 60d);
+		Font codeFont = new Font("Consolas",25d);
 		leadFormat = new Format(TypeFace.font(largeFont, 3d, 1d), TypeFace.color(Color.RED, 1d),
 				Frames.frame(Color.RED, 5d, 1d));
 		subFormat = new Format(leadFormat, TypeFace.font(mediumFont, 2d, 1d), TypeFace.color(Color.GREENYELLOW, 1d),
 				Frames.frame(Color.GREEN, 5d, 1d));
 		minorFormat = new Format(TypeFace.font(minorFont, 2d, 1d), TypeFace.color(Color.BLUEVIOLET, 1d),
 				Frames.frame(Color.GREEN, 5d, 1d));
+		
+		codeFormat = new Format(TypeFace.font(codeFont, 2d, 1d), TypeFace.color(Color.BLUE, 1d),Frames.frame(Color.BLUE, 2d, 1d));
 	}
 
 	public Script make()
@@ -96,6 +102,37 @@ public class ExceptionsScript extends ScriptBuilder
 		buildPhrase();
 		clear();
 		head("Testing A Complex Catch");
+		
+		double centerX = 1250d;
+		
+		String beforeText = "try { ... }\n"+
+		"catch(LidNotFound lidNotFound) {\n"+
+		"    // complex catch\n"+
+		"    }";
+		CodeBlock letters = new CodeBlock(beforeText,new Point(centerX,340d),codeFormat, Aligner.rightCenter());
+		appear(letters);
+
+		mark(460);
+		Letters replace = new Letters("Before: ",new Point(centerX,200d),commentFormat);
+		appear(replace);
+		
+		Letters with = new Letters("After: ",new Point(centerX,480d),commentFormat);
+		appear(with);
+
+		String afterText1 = "try { ... }\n"+
+		"catch(LidNotFound lidNotFound) {\n"+
+		"    handle(lidNotFound);\n"+
+		"    }";
+		CodeBlock afterCode = new CodeBlock(afterText1,new Point(centerX,600d),codeFormat, new Aligner(HPos.RIGHT));
+		appear(afterCode);
+		
+		String afterText2 = "try { ... }\n"+
+		"public void handle(LidNotFound lidNotFound) {\n"+
+		"    // complex catch\n"+
+		"    }";
+		CodeBlock afterCode2 = new CodeBlock(afterText2,new Point(centerX,750d),codeFormat, new Aligner(HPos.RIGHT));
+		appear(afterCode2);
+		
 		return endBuild();
 	}
 
