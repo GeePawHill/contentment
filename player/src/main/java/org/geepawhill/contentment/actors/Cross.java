@@ -23,17 +23,27 @@ public class Cross implements Actor
 	private Group group;
 	private BezierStep leftToRight;
 	private BezierStep rightToLeft;
-	private double size;
+	private double xsize;
+	private double ysize;
+	private Point offset;
 
 	public Cross(Actor target, double size)
 	{
+		this(target,size,size,new Point(0,0));
+	}
+	
+	public Cross(Actor target, double xsize, double ysize, Point offset)
+	{
 		this.target = target;
-		this.size = size;
+		this.xsize = xsize;
+		this.ysize = ysize;
+		this.offset = offset;
 		this.group = new Group();
 		Format crossFormat = new Format(Frames.frame(Color.RED, 7d, 8d));
 		leftToRight = new BezierStep(Timing.weighted(.5d),crossFormat);
 		rightToLeft = new BezierStep(Timing.weighted(.5d),crossFormat);
 	}
+
 	@Override
 	public Group group()
 	{
@@ -60,10 +70,11 @@ public class Cross implements Actor
 	
 	private void onSetBounds(PointPair bounds)
 	{
-		double additive = size/2;
-		Point center = bounds.center();
-		leftToRight.changeBezier(new Bezier(new Point(center.x-additive, center.y-additive),new Point(center.x+additive,center.y+additive)));
-		rightToLeft.changeBezier(new Bezier(new Point(center.x+additive, center.y-additive), new Point(center.x-additive, center.y+additive)));
+		double xadditive = xsize/2d;
+		double yadditive = ysize/2d;
+		Point center = bounds.center().add(offset);
+		leftToRight.changeBezier(new Bezier(new Point(center.x-xadditive, center.y-yadditive),new Point(center.x+xadditive,center.y+yadditive)));
+		rightToLeft.changeBezier(new Bezier(new Point(center.x+xadditive, center.y-yadditive), new Point(center.x-xadditive, center.y+yadditive)));
 	}
 
 }

@@ -26,17 +26,17 @@ public class LettersStep implements ShapeStep
 
 	public LettersStep(Timing timing, String source, Point center, Format format)
 	{
-		this(timing,source,center,format,HPos.CENTER);
+		this(timing,source,center,format,new Aligner(HPos.CENTER,VPos.TOP));
 	}
 
-	public LettersStep(Timing timing, String source, Point center, Format format, HPos align)
+	public LettersStep(Timing timing, String source, Point center, Format format, Aligner aligner)
 	{
 		this.timing = timing;
 		this.center = center;
 		this.text = new Text(" ");
 		this.source = source;
 		this.format = format;
-		this.aligner = Aligner.align(align);
+		this.aligner = aligner;
 	}
 
 	@Override
