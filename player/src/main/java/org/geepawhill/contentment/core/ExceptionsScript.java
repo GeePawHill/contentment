@@ -65,17 +65,17 @@ public class ExceptionsScript extends ScriptBuilder
 	public ExceptionsScript()
 	{
 		Paint majorColor = color(13,165,15);
-		Font majorHand = new Font("GoodDog", 100d);
-		majorFormat = new Format(TypeFace.font(majorHand, 1d, 1d), TypeFace.color(majorColor, 1d),
+		Font majorHand = Font.font("Chewed Pen BB",FontPosture.ITALIC,90d);
+		majorFormat = new Format(TypeFace.font(majorHand, 3d, 1d), TypeFace.color(majorColor, 1d),
 				Frames.frame(majorColor, 5d, 1d));
 		
-		Paint subColor = color(183,252,78);
-		Font subHand = new Font("GoodDog", 80d);
-		subFormat = new Format(majorFormat, TypeFace.font(subHand, 1d, 1d), TypeFace.color(subColor, 1d),
+		Paint subColor = color(163,232,78);
+		Font subHand = Font.font("Chewed Pen BB",FontPosture.ITALIC,68d);
+		subFormat = new Format(majorFormat, TypeFace.font(subHand, 3d, 1d), TypeFace.color(subColor, 1d),
 				Frames.frame(subColor, 5d, 1d));
 
 		Paint minorColor = color(240,255,30);
-		Font minorFont = new Font("GoodDog", 60d);
+		Font minorFont = Font.font("Chewed Pen BB",FontPosture.ITALIC,50d);
 		minorFormat = new Format(TypeFace.font(minorFont, 1d, 1d), TypeFace.color(minorColor, 1d),
 				Frames.frame(minorColor, 5d, 1d));
 
@@ -83,9 +83,10 @@ public class ExceptionsScript extends ScriptBuilder
 				TypeFace.color(Color.BLUEVIOLET, Color.BLUEVIOLET, 1d));
 		
 		Paint commentColor = color(48, 201, 137);
-		commentFormat = new Format(TypeFace.font(minorFont, 1d, 1d), TypeFace.color(commentColor, 1d), Frames.frame(commentColor, 3d, 1d));
+		Font commentFont = Font.font("Chewed Pen BB",FontPosture.ITALIC,50d);
+		commentFormat = new Format(TypeFace.font(commentFont, 1d, 1d), TypeFace.color(commentColor, 1d), Frames.frame(commentColor, 3d, 1d));
 		
-		knowsFormat = new Format(TypeFace.mediumHand(), TypeFace.color(Color.BLUEVIOLET, 1d),
+		knowsFormat = new Format(TypeFace.font(commentFont, 1d, 1d), TypeFace.color(Color.BLUEVIOLET, 1d),
 				Frames.frame(Color.BLUEVIOLET, 2d, 1d, Dash.dash(4d)));
 		
 		Paint codeColor = Color.WHITE;
@@ -101,7 +102,7 @@ public class ExceptionsScript extends ScriptBuilder
 		codeFormat = new Format(TypeFace.font(codeFont, 2d, 1d), TypeFace.color(codeColor, 1d),Frames.frame(codeColor, 2d, 1d));
 
 		stackFormat = new Format(Frames.frame(Color.YELLOW, 2d, 1d));
-		lightComment = new Format(TypeFace.font(new Font("GoodDog", 60d), 1d, 1d), TypeFace.color(commentColor, 1d),
+		lightComment = new Format(TypeFace.font(commentFont, 1d, 1d), TypeFace.color(commentColor, 1d),
 				Frames.frame(commentColor, 2d, 1d));
 	}
 
@@ -604,7 +605,7 @@ public class ExceptionsScript extends ScriptBuilder
 		minor("test the catcher by itself");
 
 		mark(274);
-		lead("this is far easier");
+		lead("This Is Far Easier");
 		return endBuild();
 	}
 
