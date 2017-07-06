@@ -1,5 +1,7 @@
 package org.geepawhill.contentment.actors;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.format.Aligner;
 import org.geepawhill.contentment.format.Format;
@@ -57,6 +59,11 @@ public class Letters implements Actor
 	public Step draw(double ms)
 	{
 		return new Timed(ms).add(step);
+	}
+	
+	public void setY(double y)
+	{
+		step.setY(y);
 	}
 	
 	@Override

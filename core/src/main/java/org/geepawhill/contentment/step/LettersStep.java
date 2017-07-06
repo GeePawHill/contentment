@@ -1,5 +1,6 @@
 package org.geepawhill.contentment.step;
 
+import org.controlsfx.tools.Platform;
 import org.geepawhill.contentment.core.Animator;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
@@ -9,15 +10,20 @@ import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.timing.Timing;
 
+import javafx.geometry.Bounds;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
+import javafx.scene.Group;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 
 public class LettersStep implements ShapeStep
 {
 	private final Timing timing;
-	private final Point center;
+	public Point center;
 	private final String source;
 	public final Text text;
 	private Format format;
@@ -72,11 +78,16 @@ public class LettersStep implements ShapeStep
 		String partialSource = source.substring(0, (int) (fraction * source.length()));
 		if(partialSource.equals(oldPartialSource)) return;
 		oldPartialSource=partialSource;
-		text.setTextOrigin(VPos.CENTER);
+//		text.setTextOrigin(VPos.CENTER);
 		format.apply(TypeFace.FACE, text);
 		format.apply(TypeFace.COLOR, text);
 		text.setText(partialSource);
 		aligner.align(center, text);
+//		Bounds boundsInParent = text.getBoundsInParent();
+//		Rectangle rectangle = new Rectangle(boundsInParent.getMinX(),boundsInParent.getMinY(),boundsInParent.getWidth(),boundsInParent.getHeight());
+//		rectangle.setStroke(Color.RED);
+//		rectangle.setFill(Color.TRANSPARENT);
+//		context.canvas.getChildren().add(rectangle);
 	}
 
 	public String toString()
@@ -88,5 +99,10 @@ public class LettersStep implements ShapeStep
 	public Shape shape()
 	{
 		return text;
+	}
+
+	public void setY(double y)
+	{
+		center = new Point(center.x,y);
 	}
 }

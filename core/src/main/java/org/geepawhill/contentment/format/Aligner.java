@@ -58,6 +58,10 @@ public class Aligner
 
 	public void valign(Point point, Shape shape)
 	{
+		if(shape instanceof Text)
+		{
+			((Text)shape).setTextOrigin(VPos.TOP);
+		}
 		switch (vAlign)
 		{
 		case CENTER:

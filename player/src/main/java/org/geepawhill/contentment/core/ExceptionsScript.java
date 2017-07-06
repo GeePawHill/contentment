@@ -3,6 +3,7 @@ package org.geepawhill.contentment.core;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Actors;
 import org.geepawhill.contentment.actors.Arrow;
 import org.geepawhill.contentment.actors.CodeBlock;
@@ -11,6 +12,7 @@ import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.actors.OvalText;
 import org.geepawhill.contentment.actors.Spot;
 import org.geepawhill.contentment.actors.Stroke;
+import org.geepawhill.contentment.fast.Compute;
 import org.geepawhill.contentment.format.Aligner;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
@@ -18,6 +20,7 @@ import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.player.Keyframe;
 import org.geepawhill.contentment.player.Script;
 import org.geepawhill.contentment.rhythm.MediaRhythm;
+import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.step.ScriptBuilder;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.style.Dash;
@@ -25,6 +28,8 @@ import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 
 import javafx.geometry.HPos;
+import javafx.geometry.VPos;
+import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -36,8 +41,7 @@ public class ExceptionsScript extends ScriptBuilder
 	private Format subFormat;
 	private Format minorFormat;
 
-	private ArrayList<Letters> lines;
-	private double lastLineY;
+	private ArrayList<BelowLetters> lines;
 	private Format commentFormat;
 	private double left;
 	private double bottom;
@@ -64,42 +68,44 @@ public class ExceptionsScript extends ScriptBuilder
 
 	public ExceptionsScript()
 	{
-		Paint majorColor = color(13,165,15);
-		Font majorHand = Font.font("Chewed Pen BB",FontPosture.ITALIC,90d);
+		Paint majorColor = color(13, 165, 15);
+		Font majorHand = Font.font("Chewed Pen BB", FontPosture.ITALIC, 90d);
 		majorFormat = new Format(TypeFace.font(majorHand, 3d, 1d), TypeFace.color(majorColor, 1d),
 				Frames.frame(majorColor, 5d, 1d));
-		
-		Paint subColor = color(163,232,78);
-		Font subHand = Font.font("Chewed Pen BB",FontPosture.ITALIC,68d);
+
+		Paint subColor = color(163, 232, 78);
+		Font subHand = Font.font("Chewed Pen BB", FontPosture.ITALIC, 68d);
 		subFormat = new Format(majorFormat, TypeFace.font(subHand, 3d, 1d), TypeFace.color(subColor, 1d),
 				Frames.frame(subColor, 5d, 1d));
 
-		Paint minorColor = color(240,255,30);
-		Font minorFont = Font.font("Chewed Pen BB",FontPosture.ITALIC,50d);
+		Paint minorColor = color(240, 255, 30);
+		Font minorFont = Font.font("Chewed Pen BB", FontPosture.ITALIC, 50d);
 		minorFormat = new Format(TypeFace.font(minorFont, 1d, 1d), TypeFace.color(minorColor, 1d),
 				Frames.frame(minorColor, 5d, 1d));
 
 		jokeFormat = new Format(TypeFace.font(Font.font("Calibri", FontPosture.ITALIC, 50d), 3d, 1d),
 				TypeFace.color(Color.BLUEVIOLET, Color.BLUEVIOLET, 1d));
-		
+
 		Paint commentColor = color(48, 201, 137);
-		Font commentFont = Font.font("Chewed Pen BB",FontPosture.ITALIC,50d);
-		commentFormat = new Format(TypeFace.font(commentFont, 1d, 1d), TypeFace.color(commentColor, 1d), Frames.frame(commentColor, 3d, 1d));
-		
+		Font commentFont = Font.font("Chewed Pen BB", FontPosture.ITALIC, 50d);
+		commentFormat = new Format(TypeFace.font(commentFont, 1d, 1d), TypeFace.color(commentColor, 1d),
+				Frames.frame(commentColor, 3d, 1d));
+
 		knowsFormat = new Format(TypeFace.font(commentFont, 1d, 1d), TypeFace.color(Color.BLUEVIOLET, 1d),
 				Frames.frame(Color.BLUEVIOLET, 2d, 1d, Dash.dash(4d)));
-		
+
 		Paint codeColor = Color.WHITE;
 		largeCodeFormat = new Format(TypeFace.font(new Font("Consolas", 60d), 2d, 1d), TypeFace.color(codeColor, 1d));
-		
+
 		this.lines = new ArrayList<>();
 		this.stack = new Actors();
 		this.disappearingStackText = new Actors();
 		this.catchAndThrowColorText = new Actors();
 
-		Font codeFont = new Font("Consolas",25d);
-		
-		codeFormat = new Format(TypeFace.font(codeFont, 2d, 1d), TypeFace.color(codeColor, 1d),Frames.frame(codeColor, 2d, 1d));
+		Font codeFont = new Font("Consolas", 25d);
+
+		codeFormat = new Format(TypeFace.font(codeFont, 2d, 1d), TypeFace.color(codeColor, 1d),
+				Frames.frame(codeColor, 2d, 1d));
 
 		stackFormat = new Format(Frames.frame(Color.YELLOW, 2d, 1d));
 		lightComment = new Format(TypeFace.font(commentFont, 1d, 1d), TypeFace.color(commentColor, 1d),
@@ -416,7 +422,7 @@ public class ExceptionsScript extends ScriptBuilder
 
 	private Point stackTextPoint(int line)
 	{
-		return new Point(left + 20d, bottom - ((line * 100d) + 50d));
+		return new Point(left + 20d, bottom - ((line + 1) * 100d) + 18d);
 	}
 
 	private Step special()
@@ -426,23 +432,24 @@ public class ExceptionsScript extends ScriptBuilder
 		reColor(doChores, Color.RED);
 
 		mark(55);
-		thrower = new Letters("Thrower", new Point(left - 40d, bottom - 550d), commentFormat, HPos.RIGHT);
+		thrower = new Letters("Thrower", new Point(left - 40d, stackTextPoint(5).y), commentFormat, HPos.RIGHT);
 		sketch(500d, thrower);
 		mark(57);
-		catcher = new Letters("Catcher", new Point(left - 40d, bottom - 150d), commentFormat, HPos.RIGHT);
+		catcher = new Letters("Catcher", new Point(left - 40d, stackTextPoint(1).y), commentFormat, HPos.RIGHT);
 		sketch(500d, catcher);
 
 		mark(60);
 		fadeOut(500d, stack, disappearingStackText);
 
 		mark(64);
-		Letters throwsLidNotFound = new Letters("throws LidNotFound", new Point(left + 20, bottom - 490), lightComment,
-				HPos.LEFT);
+		Letters throwsLidNotFound = new Letters("throws LidNotFound", new Point(left + 20, stackTextPoint(4).y - 30d),
+				lightComment, HPos.LEFT);
 		catchAndThrowColorText.add(throwsLidNotFound);
 		fadeIn(500d, throwsLidNotFound);
 
 		mark(72);
-		Letters catchesAll = new Letters("catches all exceptions", new Point(left + 20, bottom - 90), lightComment, HPos.LEFT);
+		Letters catchesAll = new Letters("catches all exceptions", new Point(left + 20, stackTextPoint(5).y - 30d),
+				lightComment, HPos.LEFT);
 		catchAndThrowColorText.add(catchesAll);
 		fadeIn(500d, catchesAll);
 
@@ -572,14 +579,14 @@ public class ExceptionsScript extends ScriptBuilder
 		minor("so neither side knows the other");
 		mark(233);
 
-		OvalText thrower = new OvalText("Thrower", new Point(1000d, 490d), commentFormat);
+		OvalText thrower = new OvalText("Thrower", new Point(1000d, 380d), commentFormat);
 		sketch(1000d, thrower);
-		OvalText catcher = new OvalText("Catcher", new Point(1500d, 490d), commentFormat);
+		OvalText catcher = new OvalText("Catcher", new Point(1500d, 380d), commentFormat);
 
 		sketch(1000d, catcher);
 
 		mark(240);
-		OvalText lnf = new OvalText("LidNotFound", new Point(1250d, 650d), commentFormat);
+		OvalText lnf = new OvalText("LidNotFound", new Point(1250d, 550d), commentFormat);
 		sketch(500d, lnf);
 
 		Arrow throwerLnf = new Arrow(thrower, false, lnf, true, knowsFormat);
@@ -587,6 +594,7 @@ public class ExceptionsScript extends ScriptBuilder
 
 		sketch(500d, throwerLnf);
 		sketch(500d, catcherLnf);
+		minor(" ");
 		minor(" ");
 		minor(" ");
 		minor(" ");
@@ -615,12 +623,18 @@ public class ExceptionsScript extends ScriptBuilder
 		sketch(1d, leftSpot);
 		Spot rightSpot = new Spot(1500d, y);
 		sketch(1d, rightSpot);
-		Arrow line = new Arrow(leftSpot, leftHead == true, rightSpot, leftHead == false, knowsFormat);
-		Letters letters = new Letters("knows?", new Point(1250, y - 50), knowsFormat);
+		Arrow line = chooseArrow(leftHead, leftSpot, rightSpot);
+		Letters letters = new Letters("knows?", new Point(1250, y - 60), knowsFormat);
 		sketch(500d, line);
 		sketch(500d, letters);
 		actors.add(leftSpot, rightSpot, line, letters);
 		return line;
+	}
+
+	private Arrow chooseArrow(boolean rightToLeft, Spot left, Spot right)
+	{
+		if (rightToLeft) return new Arrow(right, false, left, true, knowsFormat);
+		else return new Arrow(left, false, right, true, knowsFormat);
 	}
 
 	private void throwsText(int line)
@@ -647,18 +661,60 @@ public class ExceptionsScript extends ScriptBuilder
 		sketch(1d, no);
 	}
 
+	static class BelowLetters implements Actor
+	{
+		private Letters letters;
+		private BelowLetters below;
+		private double lastLineY;
+
+		public BelowLetters(String source, Point center, Format format, BelowLetters below)
+		{
+			this.below = below;
+			letters = new Letters(source, center, format, new Aligner(HPos.RIGHT, VPos.TOP));
+		}
+
+		@Override
+		public Group group()
+		{
+			return letters.group();
+		}
+
+		@Override
+		public String nickname()
+		{
+			return "BelowLetters";
+		}
+
+		@Override
+		public Step draw(double ms)
+		{
+			Phrase phrase = new Phrase();
+			phrase.add(new Compute(this::setBoundsFromLast));
+			phrase.add(letters.draw(ms));
+			return phrase;
+		}
+
+		private void setBoundsFromLast(Context context, double fraction)
+		{
+			if (below == null) lastLineY = 50d;
+			else lastLineY = below.group().getBoundsInLocal().getMaxY();
+			letters.setY(lastLineY);
+		}
+
+	}
+
 	private void line(String text, Format format)
 	{
-		Letters line = new Letters(text, new Point(1550d, lastLineY), format, HPos.RIGHT);
+		BelowLetters below = null;
+		if (lines.size() > 0) below = lines.get(lines.size() - 1);
+		BelowLetters line = new BelowLetters(text, new Point(1550d, 0d), format, below);
 		sketch(500d, line);
-		lastLineY += 80d;
 		lines.add(line);
 	}
 
 	private void clearLines()
 	{
-		lastLineY = 100d;
-		for (Letters line : lines)
+		for (BelowLetters line : lines)
 		{
 			disappear(line);
 		}
@@ -667,14 +723,12 @@ public class ExceptionsScript extends ScriptBuilder
 
 	private void head(String text)
 	{
-		lastLineY = 100d;
-		if (!lines.isEmpty()) clearLines();
+		clearLines();
 		line(text, majorFormat);
 	}
 
 	private void lead(String text)
 	{
-		lastLineY += 30d;
 		line(text, majorFormat);
 	}
 
