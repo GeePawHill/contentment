@@ -159,13 +159,13 @@ public class ExceptionsScript extends ScriptBuilder
 		double x = 1550d;
 
 		String beforeText = "finally {\n" + "    // complex finally\n" + "    }";
-		CodeBlock letters = new CodeBlock(beforeText, new Point(x, 340d), codeFormat, Aligner.rightCenter());
+		CodeBlock letters = new CodeBlock(beforeText, new Point(x, 300d), codeFormat, Aligner.rightTop());
 		appear(letters);
 
 		mark(460);
 		Letters extract = new Letters("extract this", new Point(1000d, 340d), commentFormat, Aligner.rightCenter());
 		sketch(500d, extract);
-		Spot spot = new Spot(1280d, 320d);
+		Spot spot = new Spot(1280d, 335d);
 		appear(spot);
 		Arrow arrow = new Arrow(extract, false, spot, true, commentFormat);
 		sketch(500d, arrow);
@@ -175,15 +175,15 @@ public class ExceptionsScript extends ScriptBuilder
 		sketch(500d, toThis);
 
 		String afterText1 = "finally {\n" + "    handleFinally(...);\n" + "    }";
-		CodeBlock afterCode = new CodeBlock(afterText1, new Point(x, 500d), codeFormat, Aligner.rightCenter());
+		CodeBlock afterCode = new CodeBlock(afterText1, new Point(x, 460d), codeFormat, Aligner.rightTop());
 		appear(afterCode);
 
 		String afterText2 = "public void handleFinally(...) {\n" + "    // complex finally\n" + "    }";
-		CodeBlock afterCode2 = new CodeBlock(afterText2, new Point(x, 650d), codeFormat, Aligner.rightCenter());
+		CodeBlock afterCode2 = new CodeBlock(afterText2, new Point(x, 610d), codeFormat, Aligner.rightTop());
 		appear(afterCode2);
 
 		mark(468);
-		Letters andTestThis = new Letters("and test the handler here!", new Point(1550d, 825d), commentFormat,
+		Letters andTestThis = new Letters("and test the handler here!", new Point(1550d, 725d), commentFormat,
 				Aligner.rightCenter());
 		sketch(500d, andTestThis);
 
@@ -218,7 +218,7 @@ public class ExceptionsScript extends ScriptBuilder
 		double x = 1550d;
 
 		String beforeText = "try { ... }\n" + "catch(LidNotFound lidNotFound) {\n" + "    // complex catch\n" + "    }";
-		CodeBlock letters = new CodeBlock(beforeText, new Point(x, 340d), codeFormat, Aligner.rightCenter());
+		CodeBlock letters = new CodeBlock(beforeText, new Point(x, 260d), codeFormat, Aligner.rightTop());
 		appear(letters);
 
 		mark(460);
@@ -234,15 +234,15 @@ public class ExceptionsScript extends ScriptBuilder
 		sketch(500d, toThis);
 
 		String afterText1 = "try { ... }\n" + "catch(LidNotFound lidNotFound) {\n" + "    handle(lidNotFound);\n" + "    }";
-		CodeBlock afterCode = new CodeBlock(afterText1, new Point(x, 500d), codeFormat, Aligner.rightCenter());
+		CodeBlock afterCode = new CodeBlock(afterText1, new Point(x, 460d), codeFormat,  Aligner.rightTop());
 		appear(afterCode);
 
 		String afterText2 = "public void handle(LidNotFound lidNotFound) {\n" + "    // complex catch\n" + "    }";
-		CodeBlock afterCode2 = new CodeBlock(afterText2, new Point(x, 650d), codeFormat, Aligner.rightCenter());
+		CodeBlock afterCode2 = new CodeBlock(afterText2, new Point(x, 610d), codeFormat, Aligner.rightTop());
 		appear(afterCode2);
 
 		mark(468);
-		Letters andTestThis = new Letters("and test the handler here!", new Point(1550d, 825d), commentFormat,
+		Letters andTestThis = new Letters("and test the handler here!", new Point(1550d, 725d), commentFormat,
 				Aligner.rightCenter());
 		sketch(500d, andTestThis);
 
@@ -258,6 +258,7 @@ public class ExceptionsScript extends ScriptBuilder
 		sketch(1d, catcher);
 		mark(410);
 		lead(" ");
+		minor(" ");
 		sub("does it really catch?");
 		mark(413);
 		minor("set up throw");
@@ -306,6 +307,7 @@ public class ExceptionsScript extends ScriptBuilder
 		sketch(1d, thrower);
 		mark(302);
 		lead(" ");
+		minor(" ");
 		sub("throws under right condition?");
 		mark(304);
 		minor("don't throw if the lid's right there");
@@ -432,35 +434,35 @@ public class ExceptionsScript extends ScriptBuilder
 		reColor(doChores, Color.RED);
 
 		mark(55);
-		thrower = new Letters("Thrower", new Point(left - 40d, stackTextPoint(5).y), commentFormat, HPos.RIGHT);
+		thrower = new Letters("Thrower", new Point(left - 40d, stackTextPoint(5).y-10d), commentFormat, HPos.RIGHT);
 		sketch(500d, thrower);
 		mark(57);
-		catcher = new Letters("Catcher", new Point(left - 40d, stackTextPoint(1).y), commentFormat, HPos.RIGHT);
+		catcher = new Letters("Catcher", new Point(left - 40d, stackTextPoint(1).y-10d), commentFormat, HPos.RIGHT);
 		sketch(500d, catcher);
 
 		mark(60);
 		fadeOut(500d, stack, disappearingStackText);
 
 		mark(64);
-		Letters throwsLidNotFound = new Letters("throws LidNotFound", new Point(left + 20, stackTextPoint(4).y - 30d),
+		Letters throwsLidNotFound = new Letters("throws LidNotFound", new Point(left + 20, stackTextPoint(5).y +50d ),
 				lightComment, HPos.LEFT);
 		catchAndThrowColorText.add(throwsLidNotFound);
 		fadeIn(500d, throwsLidNotFound);
 
 		mark(72);
-		Letters catchesAll = new Letters("catches all exceptions", new Point(left + 20, stackTextPoint(5).y - 30d),
+		Letters catchesAll = new Letters("catches all exceptions", new Point(left + 20, stackTextPoint(0).y - 50d),
 				lightComment, HPos.LEFT);
 		catchAndThrowColorText.add(catchesAll);
 		fadeIn(500d, catchesAll);
 
 		mark(82);
-		Letters catchesLidNotFound = new Letters("catches LidNotFound", new Point(left + 20, bottom - 40), lightComment,
+		Letters catchesLidNotFound = new Letters("catches LidNotFound", new Point(left + 20, stackTextPoint(0).y ), lightComment,
 				HPos.LEFT);
 		catchAndThrowColorText.add(catchesLidNotFound);
 		fadeIn(500d, catchesLidNotFound);
 
 		mark(86);
-		Letters logsIt = new Letters("logs and moves on", new Point(left + 20, bottom + 10), lightComment, HPos.LEFT);
+		Letters logsIt = new Letters("logs and moves on", new Point(left + 20, stackTextPoint(0).y + 50d), lightComment, HPos.LEFT);
 		catchAndThrowColorText.add(logsIt);
 		fadeIn(500d, logsIt);
 
@@ -744,7 +746,7 @@ public class ExceptionsScript extends ScriptBuilder
 
 	private Letters joke(String text)
 	{
-		Letters joke = new Letters(text, new Point(400d, 300d), jokeFormat, HPos.CENTER);
+		Letters joke = new Letters(text, new Point(380d, 300d), jokeFormat, HPos.CENTER);
 		appear(joke);
 		return joke;
 	}

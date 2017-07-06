@@ -12,6 +12,7 @@ public class Aligner
 
 	private HPos hAlign;
 	private VPos vAlign;
+	private double finalWidth;
 
 	public Aligner(HPos hAlign)
 	{
@@ -22,6 +23,7 @@ public class Aligner
 	{
 		this.hAlign = hAlign;
 		this.vAlign = vAlign;
+		this.finalWidth = -1;
 	}
 
 	public static Aligner align(HPos align)
@@ -51,7 +53,8 @@ public class Aligner
 			shape.setTranslateX(point.x);
 			break;
 		case RIGHT:
-			shape.setTranslateX(point.x - shape.getBoundsInLocal().getWidth());
+			if(finalWidth==-1) shape.setTranslateX(point.x - shape.getBoundsInLocal().getWidth());
+			else shape.setTranslateX(point.x - finalWidth);
 			break;
 		}
 	}
@@ -80,6 +83,17 @@ public class Aligner
 	public static Aligner rightCenter()
 	{
 		return new Aligner(HPos.RIGHT,VPos.CENTER);
+	}
+
+	public void setFinalWidth(double width)
+	{
+		finalWidth = width;
+		
+	}
+
+	public static Aligner rightTop()
+	{
+		return new Aligner(HPos.RIGHT,VPos.TOP);
 	}
 
 }

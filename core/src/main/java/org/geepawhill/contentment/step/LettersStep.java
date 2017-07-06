@@ -7,6 +7,7 @@ import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.format.Aligner;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
+import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.timing.Timing;
 
@@ -39,10 +40,15 @@ public class LettersStep implements ShapeStep
 	{
 		this.timing = timing;
 		this.center = center;
-		this.text = new Text(" ");
 		this.source = source;
 		this.format = format;
 		this.aligner = aligner;
+		this.text = new Text(source);
+		format.apply(TypeFace.FACE, text);
+		format.apply(TypeFace.COLOR, text);
+		double finalWidth = new PointPair(text.getBoundsInLocal()).width();
+		aligner.setFinalWidth(finalWidth);
+		this.text.setText(" ");
 	}
 
 	@Override
@@ -79,8 +85,6 @@ public class LettersStep implements ShapeStep
 		if(partialSource.equals(oldPartialSource)) return;
 		oldPartialSource=partialSource;
 //		text.setTextOrigin(VPos.CENTER);
-		format.apply(TypeFace.FACE, text);
-		format.apply(TypeFace.COLOR, text);
 		text.setText(partialSource);
 		aligner.align(center, text);
 //		Bounds boundsInParent = text.getBoundsInParent();

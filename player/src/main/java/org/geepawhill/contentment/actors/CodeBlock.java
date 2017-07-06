@@ -75,6 +75,6 @@ public class CodeBlock implements Actor
 		PointPair bounds2 = new PointPair(text.getBoundsInLocal());
 		rectangle.setWidth(bounds2.width()+2*XMARGIN);
 		rectangle.setHeight(bounds2.height()+2*YMARGIN);
-		aligner.align(new Point(center.x, center.y-YMARGIN*2),rectangle);		
+		aligner.align(new Point(center.x, center.y-YMARGIN),rectangle);		
 	}
 }
