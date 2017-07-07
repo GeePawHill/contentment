@@ -23,19 +23,19 @@ public class GridTest
 	@Test
 	public void normalValues()
 	{
-		assertEquals(16,normal.xCells());
-		assertEquals(9,normal.yCells());
-		assertDoubles(100d,normal.xWidth());
-		assertDoubles(100d,normal.yHeight());
+		assertEquals(16,normal.columns());
+		assertEquals(9,normal.rows());
+		assertDoubles(100d,normal.cellWidth());
+		assertDoubles(100d,normal.cellHeight());
 	}
 	
 	@Test
 	public void insetValues()
 	{
-		assertEquals(15,inset.xCells());
-		assertEquals(8,inset.yCells());
-		assertDoubles(100d,inset.xWidth());
-		assertDoubles(100d,inset.yHeight());
+		assertEquals(15,inset.columns());
+		assertEquals(8,inset.rows());
+		assertDoubles(100d,inset.cellWidth());
+		assertDoubles(100d,inset.cellHeight());
 	}
 	
 	@Test

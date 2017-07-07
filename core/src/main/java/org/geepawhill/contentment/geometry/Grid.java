@@ -3,46 +3,49 @@ package org.geepawhill.contentment.geometry;
 public class Grid
 {
 
-	private double xCells;
-	private double yCells;
-	private double xInset;
-	private double yInset;
-	private double xWidth;
-	private double yHeight;
-
-	public Grid(int xCells, int yCells)
+	private int columns;
+	private int rows;
+	private double cellWidth;
+	private double rowHeight;
+	private PointPair area;
+	
+	public Grid(int columns,int rows,PointPair area)
 	{
-		this(xCells, yCells, 0, 0);
+		this.columns=columns;
+		this.rows=rows;
+		this.cellWidth = area.width()/columns;
+		this.rowHeight = area.height()/rows;
+		this.area = area;
 	}
 
-	public Grid(int xCells, int yCells, double xInset, double yInset)
+	public Grid(int columns, int rows)
 	{
-		this.xCells = xCells;
-		this.yCells = yCells;
-		this.xInset = xInset;
-		this.yInset = yInset;
-		this.xWidth = (ViewPort.WIDTH - 2 * xInset) / xCells;
-		this.yHeight = (ViewPort.HEIGHT - 2 * yInset) / yCells;
+		this(columns,rows,new PointPair(0,0,ViewPort.WIDTH,ViewPort.HEIGHT));
 	}
 
-	public int xCells()
+	public Grid(int columns, int rows, double xInset, double yInset)
 	{
-		return (int) xCells;
+		this(columns,rows,new PointPair(xInset,yInset,ViewPort.WIDTH-xInset,ViewPort.HEIGHT-yInset));
 	}
 
-	public int yCells()
+	public int columns()
 	{
-		return (int) yCells;
+		return columns;
 	}
 
-	public double xWidth()
+	public int rows()
 	{
-		return xWidth;
+		return rows;
 	}
 
-	public double yHeight()
+	public double cellWidth()
 	{
-		return yHeight;
+		return cellWidth;
+	}
+
+	public double cellHeight()
+	{
+		return rowHeight;
 	}
 
 	public Point center(int x, int y)
@@ -52,8 +55,8 @@ public class Grid
 
 	public PointPair area(int x, int y, int width, int height)
 	{
-		Point from = new Point(xInset + xWidth * x, yInset + yHeight * y);
-		Point to = new Point(xInset + xWidth * x + xWidth * width, yInset + yHeight * y + yHeight * height);
+		Point from = new Point(area.from.x + cellWidth * x, area.from.y + rowHeight * y);
+		Point to = new Point(area.from.x + cellWidth * x + cellWidth * width, area.from.y + rowHeight * y + rowHeight * height);
 		return new PointPair(from, to);
 	}
 
