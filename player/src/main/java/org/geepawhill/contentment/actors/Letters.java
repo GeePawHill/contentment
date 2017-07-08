@@ -1,8 +1,7 @@
 package org.geepawhill.contentment.actors;
 
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-
 import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.fast.AddNode;
 import org.geepawhill.contentment.format.Aligner;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
@@ -39,7 +38,7 @@ public class Letters implements Actor
 		this.nickname = Names.make(getClass());
 		this.step = new LettersStep(Timing.weighted(1d), source, center, format, aligner);
 		this.source = source;
-		this.group = new Group(step.text);
+		this.group = new Group();
 		this.aligner = aligner;
 	}
 
@@ -58,7 +57,7 @@ public class Letters implements Actor
 	@Override
 	public Step draw(double ms)
 	{
-		return new Timed(ms).add(step);
+		return new Timed(ms).add(new AddNode(this,step)).add(step);
 	}
 	
 	public void setY(double y)

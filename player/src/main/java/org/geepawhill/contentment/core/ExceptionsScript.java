@@ -28,9 +28,11 @@ import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 
+import javafx.collections.ListChangeListener;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -350,6 +352,21 @@ public class ExceptionsScript extends ScriptBuilder
 	{
 		buildPhrase();
 		head("Microtesting Exceptions");
+//		lines.get(0).group().getChildren().addListener(new ListChangeListener<Node>()
+//		{
+//
+//			@Override
+//			public void onChanged(javafx.collections.ListChangeListener.Change<? extends Node> change)
+//			{
+//				System.out.print("Change ");
+//				while (change.next())
+//				{
+//					if (change.wasAdded()) System.out.println("Added: " + change.getAddedSubList().get(0));
+//					if (change.wasRemoved()) System.out.println("Removed: " + change.getRemoved().get(0));
+//				}
+//
+//			}
+//		});
 		mark(3);
 		sub("A GeePaw Quickie");
 		return endBuild();
@@ -364,45 +381,51 @@ public class ExceptionsScript extends ScriptBuilder
 		right = 1580d;
 
 		head("A Program's Stack");
-		drawStack();
-
-		mark(22);
-		head("The Household Program");
-
-		mark(26);
-		main = new Letters("main()", stackTextPoint(0), largeCodeFormat, HPos.LEFT);
-		disappearingStackText.add(main);
-		sketch(500d, main);
-
-		mark(30);
-		doChores = new Letters("doChores()", stackTextPoint(1), largeCodeFormat, HPos.LEFT);
-		catchAndThrowColorText.add(doChores);
-		sketch(500d, doChores);
-
-		mark(33);
-		takeOutTrash = new Letters("takeOutTrash()", stackTextPoint(2), largeCodeFormat, HPos.LEFT);
-		disappearingStackText.add(takeOutTrash);
-		sketch(500d, takeOutTrash);
-		mark(34);
-
-		mark(37);
-		putBagsInCan = new Letters("putBagsInCans()", stackTextPoint(3), largeCodeFormat, HPos.LEFT);
-		disappearingStackText.add(putBagsInCan);
-		sketch(500d, putBagsInCan);
-
-		mark(40);
-		putOneBagInCan = new Letters("putOneBagInCan()", stackTextPoint(4), largeCodeFormat, HPos.LEFT);
-		disappearingStackText.add(putOneBagInCan);
-		sketch(500d, putOneBagInCan);
-
-		mark(44);
-		openCan = new Letters("openCan()", stackTextPoint(5), largeCodeFormat, HPos.LEFT);
-		sketch(500d, openCan);
-		catchAndThrowColorText.add(openCan);
-
-		Letters joke = joke("whoops, he forgot openCan()");
-		mark(49);
-		disappear(joke);
+		 drawStack();
+		
+		 mark(22);
+		 head("The Household Program");
+		
+		 mark(26);
+		 main = new Letters("main()", stackTextPoint(0), largeCodeFormat,
+		 HPos.LEFT);
+		 disappearingStackText.add(main);
+		 sketch(500d, main);
+		
+		 mark(30);
+		 doChores = new Letters("doChores()", stackTextPoint(1),
+		 largeCodeFormat, HPos.LEFT);
+		 catchAndThrowColorText.add(doChores);
+		 sketch(500d, doChores);
+		
+		 mark(33);
+		 takeOutTrash = new Letters("takeOutTrash()", stackTextPoint(2),
+		 largeCodeFormat, HPos.LEFT);
+		 disappearingStackText.add(takeOutTrash);
+		 sketch(500d, takeOutTrash);
+		 mark(34);
+		
+		 mark(37);
+		 putBagsInCan = new Letters("putBagsInCans()", stackTextPoint(3),
+		 largeCodeFormat, HPos.LEFT);
+		 disappearingStackText.add(putBagsInCan);
+		 sketch(500d, putBagsInCan);
+		
+		 mark(40);
+		 putOneBagInCan = new Letters("putOneBagInCan()", stackTextPoint(4),
+		 largeCodeFormat, HPos.LEFT);
+		 disappearingStackText.add(putOneBagInCan);
+		 sketch(500d, putOneBagInCan);
+		
+		 mark(44);
+		 openCan = new Letters("openCan()", stackTextPoint(5),
+		 largeCodeFormat, HPos.LEFT);
+		 sketch(500d, openCan);
+		 catchAndThrowColorText.add(openCan);
+		
+		 Letters joke = joke("whoops, he forgot openCan()");
+		 mark(49);
+		 disappear(joke);
 
 		return endBuild();
 	}
@@ -419,14 +442,14 @@ public class ExceptionsScript extends ScriptBuilder
 			sketch(500d, topStroke);
 			stack.add(topStroke);
 		}
-		Stroke stackBottom = new Stroke(stackGrid.southLine(0,STACK_ROWS-1), stackFormat);
+		Stroke stackBottom = new Stroke(stackGrid.southLine(0, STACK_ROWS - 1), stackFormat);
 		sketch(500d, stackBottom);
 		stack.add(stackBottom);
 	}
 
 	private Point stackTextPoint(int line)
 	{
-		return stackGrid.northLine(0,STACK_ROWS-1-line).from.add(20,20);
+		return stackGrid.northLine(0, STACK_ROWS - 1 - line).from.add(20, 20);
 	}
 
 	private Step special()
@@ -446,14 +469,12 @@ public class ExceptionsScript extends ScriptBuilder
 		fadeOut(500d, stack, disappearingStackText);
 
 		mark(64);
-		Letters throwsLidNotFound = new Letters("throws LidNotFound", stackTextPoint(5).add(0,50),
-				lightComment, HPos.LEFT);
+		Letters throwsLidNotFound = new Letters("throws LidNotFound", stackTextPoint(5).add(0, 50), lightComment, HPos.LEFT);
 		catchAndThrowColorText.add(throwsLidNotFound);
 		fadeIn(500d, throwsLidNotFound);
 
 		mark(72);
-		Letters catchesAll = new Letters("catches all exceptions", stackTextPoint(1).add(0,50),
-				lightComment, HPos.LEFT);
+		Letters catchesAll = new Letters("catches all exceptions", stackTextPoint(1).add(0, 50), lightComment, HPos.LEFT);
 		catchAndThrowColorText.add(catchesAll);
 		fadeIn(500d, catchesAll);
 
@@ -475,7 +496,7 @@ public class ExceptionsScript extends ScriptBuilder
 
 	private Point leftCommentTextPoint(int line)
 	{
-		return stackTextPoint(line).add(-40,-10);
+		return stackTextPoint(line).add(-40, -10);
 	}
 
 	private Step indirectCall()

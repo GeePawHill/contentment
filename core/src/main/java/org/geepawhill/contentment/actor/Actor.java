@@ -1,5 +1,6 @@
 package org.geepawhill.contentment.actor;
 
+import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.step.Step;
 
 import javafx.scene.Group;
