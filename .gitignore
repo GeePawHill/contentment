@@ -36,3 +36,5 @@ proguard/
 gradle/
 build/
 bin/
+**/scenicView.properties
+
