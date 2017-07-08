@@ -15,6 +15,7 @@ import org.geepawhill.contentment.actors.Stroke;
 import org.geepawhill.contentment.fast.Compute;
 import org.geepawhill.contentment.format.Aligner;
 import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.geometry.Grid;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.player.Keyframe;
@@ -37,6 +38,7 @@ import javafx.scene.text.FontPosture;
 
 public class ExceptionsScript extends ScriptBuilder
 {
+	private static final int STACK_ROWS = 6;
 	private Format majorFormat;
 	private Format subFormat;
 	private Format minorFormat;
@@ -65,6 +67,7 @@ public class ExceptionsScript extends ScriptBuilder
 	private Format stackFormat;
 	private Format largeCodeFormat;
 	private Format jokeFormat;
+	private Grid stackGrid;
 
 	public ExceptionsScript()
 	{
@@ -99,6 +102,7 @@ public class ExceptionsScript extends ScriptBuilder
 
 		this.lines = new ArrayList<>();
 		this.stack = new Actors();
+		this.stackGrid = new Grid(1, STACK_ROWS, new PointPair(900d, 250d, 1480d, 850d));
 		this.disappearingStackText = new Actors();
 		this.catchAndThrowColorText = new Actors();
 
@@ -234,7 +238,7 @@ public class ExceptionsScript extends ScriptBuilder
 		sketch(500d, toThis);
 
 		String afterText1 = "try { ... }\n" + "catch(LidNotFound lidNotFound) {\n" + "    handle(lidNotFound);\n" + "    }";
-		CodeBlock afterCode = new CodeBlock(afterText1, new Point(x, 460d), codeFormat,  Aligner.rightTop());
+		CodeBlock afterCode = new CodeBlock(afterText1, new Point(x, 460d), codeFormat, Aligner.rightTop());
 		appear(afterCode);
 
 		String afterText2 = "public void handle(LidNotFound lidNotFound) {\n" + "    // complex catch\n" + "    }";
@@ -342,14 +346,6 @@ public class ExceptionsScript extends ScriptBuilder
 		return endBuild();
 	}
 
-	private void dummy(long beat, String text)
-	{
-		buildPhrase();
-		head(text);
-		script.add(new Keyframe(beat, endBuild()));
-
-	}
-
 	private Step opening()
 	{
 		buildPhrase();
@@ -368,18 +364,7 @@ public class ExceptionsScript extends ScriptBuilder
 		right = 1580d;
 
 		head("A Program's Stack");
-
-		Stroke guideStroke = new Stroke(new PointPair(left, top, left, bottom), stackFormat);
-		sketch(500d, guideStroke);
-		stack.add(guideStroke);
-
-		for (int i = 0; i < 7; i++)
-		{
-			double localBottom = bottom - (i * 100);
-			Stroke topStroke = new Stroke(new PointPair(left, localBottom, right, localBottom), stackFormat);
-			sketch(500d, topStroke);
-			stack.add(topStroke);
-		}
+		drawStack();
 
 		mark(22);
 		head("The Household Program");
@@ -422,9 +407,26 @@ public class ExceptionsScript extends ScriptBuilder
 		return endBuild();
 	}
 
+	private void drawStack()
+	{
+		Stroke guideStroke = new Stroke(stackGrid.westLine(), stackFormat);
+		sketch(500d, guideStroke);
+		stack.add(guideStroke);
+
+		for (int i = 0; i < stackGrid.rows(); i++)
+		{
+			Stroke topStroke = new Stroke(stackGrid.area(0, i).northLine(), stackFormat);
+			sketch(500d, topStroke);
+			stack.add(topStroke);
+		}
+		Stroke stackBottom = new Stroke(stackGrid.southLine(0,STACK_ROWS-1), stackFormat);
+		sketch(500d, stackBottom);
+		stack.add(stackBottom);
+	}
+
 	private Point stackTextPoint(int line)
 	{
-		return new Point(left + 20d, bottom - ((line + 1) * 100d) + 18d);
+		return stackGrid.northLine(0,STACK_ROWS-1-line).from.add(20,20);
 	}
 
 	private Step special()
@@ -434,40 +436,46 @@ public class ExceptionsScript extends ScriptBuilder
 		reColor(doChores, Color.RED);
 
 		mark(55);
-		thrower = new Letters("Thrower", new Point(left - 40d, stackTextPoint(5).y-10d), commentFormat, HPos.RIGHT);
+		thrower = new Letters("Thrower", leftCommentTextPoint(5), commentFormat, HPos.RIGHT);
 		sketch(500d, thrower);
 		mark(57);
-		catcher = new Letters("Catcher", new Point(left - 40d, stackTextPoint(1).y-10d), commentFormat, HPos.RIGHT);
+		catcher = new Letters("Catcher", leftCommentTextPoint(1), commentFormat, HPos.RIGHT);
 		sketch(500d, catcher);
 
 		mark(60);
 		fadeOut(500d, stack, disappearingStackText);
 
 		mark(64);
-		Letters throwsLidNotFound = new Letters("throws LidNotFound", new Point(left + 20, stackTextPoint(5).y +50d ),
+		Letters throwsLidNotFound = new Letters("throws LidNotFound", stackTextPoint(5).add(0,50),
 				lightComment, HPos.LEFT);
 		catchAndThrowColorText.add(throwsLidNotFound);
 		fadeIn(500d, throwsLidNotFound);
 
 		mark(72);
-		Letters catchesAll = new Letters("catches all exceptions", new Point(left + 20, stackTextPoint(0).y - 50d),
+		Letters catchesAll = new Letters("catches all exceptions", stackTextPoint(1).add(0,50),
 				lightComment, HPos.LEFT);
 		catchAndThrowColorText.add(catchesAll);
 		fadeIn(500d, catchesAll);
 
 		mark(82);
-		Letters catchesLidNotFound = new Letters("catches LidNotFound", new Point(left + 20, stackTextPoint(0).y ), lightComment,
+		Letters catchesLidNotFound = new Letters("catches LidNotFound", new Point(left + 20, stackTextPoint(0).y), lightComment,
 				HPos.LEFT);
 		catchAndThrowColorText.add(catchesLidNotFound);
 		fadeIn(500d, catchesLidNotFound);
 
 		mark(86);
-		Letters logsIt = new Letters("logs and moves on", new Point(left + 20, stackTextPoint(0).y + 50d), lightComment, HPos.LEFT);
+		Letters logsIt = new Letters("logs and moves on", new Point(left + 20, stackTextPoint(0).y + 50d), lightComment,
+				HPos.LEFT);
 		catchAndThrowColorText.add(logsIt);
 		fadeIn(500d, logsIt);
 
 		return endBuild();
 
+	}
+
+	private Point leftCommentTextPoint(int line)
+	{
+		return stackTextPoint(line).add(-40,-10);
 	}
 
 	private Step indirectCall()

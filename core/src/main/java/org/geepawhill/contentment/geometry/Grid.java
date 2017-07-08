@@ -64,5 +64,26 @@ public class Grid
 	{
 		return area(x, y, 1, 1);
 	}
+	
+	public PointPair westLine()
+	{
+		return area.westLine();
+	}
+	
+	public PointPair southLine()
+	{
+		return area.southLine();
+	}
+	
+	public PointPair northLine(int column,int row)
+	{
+		return area(column,row).northLine();
+	}
+
+	public PointPair southLine(int column, int row)
+	{
+		return area(column,row).southLine();
+	}
+
 
 }
