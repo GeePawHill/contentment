@@ -159,7 +159,54 @@ public class ScriptBuilder
 				fadeOut(ms, actor);
 			}
 		}
-		Addable chord = endBuild();
+		Addable chord 	= endBuild();
+		buildMore(temp);
+		addToWorking(chord);
+	}
+
+
+	public ScriptBuilder fadeDown(double ms, Actor actor)
+	{
+		addToWorking(new OpacityStep(ms, actor,0d));
+		return this;
+	}
+	
+	public ScriptBuilder fadeUp(double ms, Actor actor)
+	{
+		addToWorking(new OpacityStep(ms, actor,1d));
+		return this;
+	}
+	
+	public void fadeDown(double ms, Actors... arrays)
+	{
+		Addable temp = endBuild();
+
+		buildChord();
+		for (Actors actors : arrays)
+		{
+			for (Actor actor : actors)
+			{
+				fadeDown(ms, actor);
+			}
+		}
+		Addable chord 	= endBuild();
+		buildMore(temp);
+		addToWorking(chord);
+	}
+
+	public void fadeUp(double ms, Actors... arrays)
+	{
+		Addable temp = endBuild();
+
+		buildChord();
+		for (Actors actors : arrays)
+		{
+			for (Actor actor : actors)
+			{
+				fadeUp(ms, actor);
+			}
+		}
+		Addable chord 	= endBuild();
 		buildMore(temp);
 		addToWorking(chord);
 	}

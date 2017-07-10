@@ -466,7 +466,7 @@ public class ExceptionsScript extends ScriptBuilder
 		sketch(500d, catcher);
 
 		mark(60);
-		fadeOut(500d, stack, disappearingStackText);
+		fadeDown(500d, stack, disappearingStackText);
 
 		mark(64);
 		Letters throwsLidNotFound = new Letters("throws LidNotFound", stackTextPoint(5).add(0, 50), lightComment, HPos.LEFT);
@@ -515,7 +515,7 @@ public class ExceptionsScript extends ScriptBuilder
 		Cross cross = new Cross(call, 150d);
 		sketch(500d, cross);
 
-		fadeIn(500d, stack);
+		fadeUp(500d, stack);
 
 		mark(115);
 		throwsText(5);
