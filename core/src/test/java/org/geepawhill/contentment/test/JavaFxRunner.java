@@ -5,10 +5,13 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 import org.geepawhill.contentment.core.Animator;
+import org.geepawhill.contentment.core.Atom;
+import org.geepawhill.contentment.core.AtomRunner;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.ContextInterpolator;
 import org.geepawhill.contentment.step.Step;
 
+import javafx.animation.Transition;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -27,6 +30,21 @@ public class JavaFxRunner
 		region.getChildren().add(context.canvas);
 		stage.setScene(new Scene(region));
 		stage.show();
+	}
+	
+	public void play(Transition transition)
+	{
+		Consumer<CountDownLatch> action = new Consumer<CountDownLatch>()
+		{
+			@Override
+			public void accept(CountDownLatch latch)
+			{
+				transition.setOnFinished((event) -> latch.countDown());
+				transition.play();
+			}
+		};
+		actLater(action);
+		
 	}
 
 	public void play(Animator animator, double ms, ContextInterpolator interpolator)
@@ -101,5 +119,18 @@ public class JavaFxRunner
 		{
 			throw new RuntimeException(e);
 		}
+	}
+
+	public void play(long ms, Atom atom)
+	{
+		Consumer<CountDownLatch> action = new Consumer<CountDownLatch>()
+		{
+			@Override
+			public void accept(CountDownLatch latch)
+			{
+				new AtomRunner(ms,atom,context,()->latch.countDown()).play();
+			}
+		};
+		actLater(action);
 	}
 }

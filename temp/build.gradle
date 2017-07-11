@@ -12,4 +12,5 @@ dependencies {
     compile 'junit:junit:4.12'
 	compile project(':player')
 	compile project(':core')
+	testCompile project(':core').sourceSets.test.output
 }
