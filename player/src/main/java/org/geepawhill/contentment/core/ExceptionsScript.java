@@ -28,11 +28,9 @@ import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 
-import javafx.collections.ListChangeListener;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -703,6 +701,8 @@ public class ExceptionsScript extends ScriptBuilder
 			this.below = below;
 			letters = new Letters(source, center, format, new Aligner(HPos.RIGHT, VPos.TOP));
 		}
+		
+		
 
 		@Override
 		public Group group()
