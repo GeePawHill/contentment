@@ -10,13 +10,13 @@ import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
 
-public class NewLetters implements Actor
+public class Letters implements Actor
 {
 	private final String nickname;
 	private final Group group;
 	private LettersAtom atom;
 
-	public NewLetters(String source, Position position, Format format)
+	public Letters(String source, Position position, Format format)
 	{
 		this.nickname = Names.make(getClass());
 		this.atom = new LettersAtom(this, source, format, position);
