@@ -44,35 +44,34 @@ import javafx.scene.text.FontPosture;
 public class ExceptionsScript extends ScriptBuilder
 {
 	private static final int STACK_ROWS = 6;
+
 	private Format majorFormat;
 	private Format subFormat;
 	private Format minorFormat;
-
-	private ArrayList<Actor> lines;
 	private Format commentFormat;
-	private double left;
-	private double bottom;
-	private Letters main;
-	private Letters doChores;
-	private Letters openCan;
-	private Letters takeOutTrash;
-	private Letters putBagsInCan;
-	private Letters putOneBagInCan;
-	private Actors stack;
-	private Actors disappearingStackText;
-	private Actors catchAndThrowColorText;
-	private Format lightComment;
-	private Script script;
-	private Letters thrower;
-	private Letters catcher;
-	private double top;
-	private double right;
 	private Format knowsFormat;
 	private Format codeFormat;
 	private Format stackFormat;
 	private Format largeCodeFormat;
 	private Format jokeFormat;
+	private Format lightComment;
+
+	private ArrayList<Actor> lines;
+
+	private Actors stack;
+	private Actors disappearingStackText;
+	private Actors catchAndThrowColorText;
+	
+	private Script script;
+	
+	private Letters thrower;
+	private Letters catcher;
+	
 	private Grid stackGrid;
+
+	private Letters openCan;
+
+	private Letters doChores;
 
 	public ExceptionsScript()
 	{
@@ -361,10 +360,6 @@ public class ExceptionsScript extends ScriptBuilder
 	private Step stack()
 	{
 		buildPhrase();
-		left = 1000d;
-		top = 250d;
-		bottom = 850d;
-		right = 1580d;
 
 		head("A Program's Stack");
 		drawStack();
@@ -373,7 +368,7 @@ public class ExceptionsScript extends ScriptBuilder
 		head("The Household Program");
 
 		mark(26);
-		main = new Letters("main()", stackTextPosition(0), largeCodeFormat);
+		Letters main = new Letters("main()", stackTextPosition(0), largeCodeFormat);
 		disappearingStackText.add(main);
 		sketch(500d, main);
 
@@ -383,18 +378,18 @@ public class ExceptionsScript extends ScriptBuilder
 		sketch(500d, doChores);
 
 		mark(33);
-		takeOutTrash = new Letters("takeOutTrash()", stackTextPosition(2), largeCodeFormat);
+		Letters takeOutTrash = new Letters("takeOutTrash()", stackTextPosition(2), largeCodeFormat);
 		disappearingStackText.add(takeOutTrash);
 		sketch(500d, takeOutTrash);
 		mark(34);
 
 		mark(37);
-		putBagsInCan = new Letters("putBagsInCans()", stackTextPosition(3), largeCodeFormat);
+		Letters putBagsInCan = new Letters("putBagsInCans()", stackTextPosition(3), largeCodeFormat);
 		disappearingStackText.add(putBagsInCan);
 		sketch(500d, putBagsInCan);
 
 		mark(40);
-		putOneBagInCan = new Letters("putOneBagInCan()", stackTextPosition(4), largeCodeFormat);
+		Letters putOneBagInCan = new Letters("putOneBagInCan()", stackTextPosition(4), largeCodeFormat);
 		disappearingStackText.add(putOneBagInCan);
 		sketch(500d, putOneBagInCan);
 

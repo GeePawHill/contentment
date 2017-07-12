@@ -30,13 +30,7 @@ public class LettersAtom implements Atom
 	}
 
 	@Override
-	public void interpolate(Context context, double fraction)
-	{
-		if(fraction==0d) zero(context);
-		else nonZero(context,fraction);
-	}
-
-	private void nonZero(Context context, double fraction)
+	public void partial(Context context, double fraction)
 	{
 		String partialSource = source.substring(0, (int) (fraction * source.length()));
 		if(partialSource.equals(lastPartial)) return;
@@ -44,7 +38,8 @@ public class LettersAtom implements Atom
 		text.setText(partialSource);
 	}
 
-	private void zero(Context context)
+	@Override
+	public void setup(Context context)
 	{
 		if(source==null || source.isEmpty()) source = " ";
 		text.setText(source);

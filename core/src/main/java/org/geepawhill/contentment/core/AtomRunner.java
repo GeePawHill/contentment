@@ -7,14 +7,14 @@ public class AtomRunner extends Transition
 {
 
 	private long ms;
-	private ContextInterpolator atom;
+	private Atom atom;
 	private Context context;
 	private OnFinished onFinished;
 
-	public AtomRunner(long ms, ContextInterpolator atom, Context context, OnFinished onFinished)
+	public AtomRunner(long ms, Atom atom, Context context, OnFinished onFinished)
 	{
 		this.ms = ms;
-		this.atom = context.wrap(atom);
+		this.atom = atom;
 		this.context = context;
 		this.onFinished = onFinished;
 	}
@@ -24,14 +24,14 @@ public class AtomRunner extends Transition
 		if (ms == 0) ms = 1;
 		setCycleDuration(Duration.millis(ms));
 		setOnFinished(onFinished != null ? (event) -> onFinished.run() : null);
-		interpolate(0d);
+		atom.setup(context);
 		super.play();
 	}
 
 	@Override
 	protected void interpolate(double fraction)
 	{
-		atom.interpolate(context, fraction);
+		atom.partial(context, fraction);
 	}
 
 }

@@ -27,8 +27,8 @@ public class AtomStep implements Step
 	@Override
 	public void fast(Context context)
 	{
-		atom.interpolate(context, 0d);
-		atom.interpolate(context, 1d);
+		atom.setup(context);
+		atom.partial(context, 1d);
 	}
 
 	@Override

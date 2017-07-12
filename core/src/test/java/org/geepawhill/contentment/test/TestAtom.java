@@ -11,9 +11,15 @@ public class TestAtom implements Atom {
 	{
 		fractions = new ArrayList<>();
 	}
+
+	@Override
+	public void setup(Context context)
+	{
+		fractions.add(0d);
+	}
 	
 	@Override
-	public void interpolate(Context context, double fraction)
+	public void partial(Context context, double fraction)
 	{
 		fractions.add(fraction);
 	}
