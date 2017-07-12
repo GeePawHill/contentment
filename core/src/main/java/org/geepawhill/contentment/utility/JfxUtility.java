@@ -6,11 +6,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import javafx.embed.swing.SwingFXUtils;
+import javafx.geometry.VPos;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 public class JfxUtility
 {
@@ -59,6 +62,19 @@ public class JfxUtility
 		catch (IOException e)
 		{
 			// TODO: handle exception here
+		}
+	}
+
+	public static void addIfNeeded(Group group, Node node)
+	{
+		if(!group.getChildren().contains(node)) group.getChildren().add(node);
+	}
+
+	static public void setTopAlignment(Node node)
+	{
+		if(node instanceof Text)
+		{
+			((Text)node).setTextOrigin(VPos.TOP);
 		}
 	}
 
