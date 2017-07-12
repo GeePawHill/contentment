@@ -57,4 +57,13 @@ public class LettersAtom implements Atom
 		lastPartial = "";
 	}
 
+	public void at(Position position)
+	{
+		this.position = position;
+	}
+	
+	public void format(Format format)
+	{
+		this.format = format;
+	}
 }

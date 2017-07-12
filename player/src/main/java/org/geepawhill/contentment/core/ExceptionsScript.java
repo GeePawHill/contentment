@@ -373,33 +373,33 @@ public class ExceptionsScript extends ScriptBuilder
 		head("The Household Program");
 
 		mark(26);
-		main = new Letters("main()", new TopLeft(stackTextPoint(0)), largeCodeFormat);
+		main = new Letters("main()", stackTextPosition(0), largeCodeFormat);
 		disappearingStackText.add(main);
 		sketch(500d, main);
 
 		mark(30);
-		doChores = new Letters("doChores()", new TopLeft(stackTextPoint(1)), largeCodeFormat);
+		doChores = new Letters("doChores()", stackTextPosition(1), largeCodeFormat);
 		catchAndThrowColorText.add(doChores);
 		sketch(500d, doChores);
 
 		mark(33);
-		takeOutTrash = new Letters("takeOutTrash()", new TopLeft(stackTextPoint(2)), largeCodeFormat);
+		takeOutTrash = new Letters("takeOutTrash()", stackTextPosition(2), largeCodeFormat);
 		disappearingStackText.add(takeOutTrash);
 		sketch(500d, takeOutTrash);
 		mark(34);
 
 		mark(37);
-		putBagsInCan = new Letters("putBagsInCans()", new TopLeft(stackTextPoint(3)), largeCodeFormat);
+		putBagsInCan = new Letters("putBagsInCans()", stackTextPosition(3), largeCodeFormat);
 		disappearingStackText.add(putBagsInCan);
 		sketch(500d, putBagsInCan);
 
 		mark(40);
-		putOneBagInCan = new Letters("putOneBagInCan()", new TopLeft(stackTextPoint(4)), largeCodeFormat);
+		putOneBagInCan = new Letters("putOneBagInCan()", stackTextPosition(4), largeCodeFormat);
 		disappearingStackText.add(putOneBagInCan);
 		sketch(500d, putOneBagInCan);
 
 		mark(44);
-		openCan = new Letters("openCan()", new TopLeft(stackTextPoint(5)), largeCodeFormat);
+		openCan = new Letters("openCan()", stackTextPosition(5), largeCodeFormat);
 		sketch(500d, openCan);
 		catchAndThrowColorText.add(openCan);
 
@@ -427,10 +427,16 @@ public class ExceptionsScript extends ScriptBuilder
 		stack.add(stackBottom);
 	}
 
+	private Position stackTextPosition(int line)
+	{
+		return new TopLeft(stackTextPoint(line));
+	}
+	
 	private Point stackTextPoint(int line)
 	{
 		return stackGrid.northLine(0, STACK_ROWS - 1 - line).from.add(20, 20);
 	}
+
 
 	private Step special()
 	{
@@ -449,12 +455,12 @@ public class ExceptionsScript extends ScriptBuilder
 		fadeDown(500d, stack, disappearingStackText);
 
 		mark(64);
-		Letters throwsLidNotFound = new Letters("throws LidNotFound", new TopLeft(stackTextPoint(5).add(0, 50)), lightComment);
+		Letters throwsLidNotFound = new Letters("throws LidNotFound", new TopLeft(stackTextPoint(5).add(new Point(0,50))), lightComment);
 		catchAndThrowColorText.add(throwsLidNotFound);
 		fadeIn(500d, throwsLidNotFound);
 
 		mark(72);
-		Letters catchesAll = new Letters("catches all exceptions", new TopLeft(stackTextPoint(1).add(0, 50)), lightComment);
+		Letters catchesAll = new Letters("catches all exceptions", new TopLeft(stackTextPoint(1).add(new Point(0,50))), lightComment);
 		catchAndThrowColorText.add(catchesAll);
 		fadeIn(500d, catchesAll);
 
@@ -648,13 +654,13 @@ public class ExceptionsScript extends ScriptBuilder
 
 	private void throwsText(int line)
 	{
-		Letters letters = new Letters("throws X", new TopLeft(stackTextPoint(line)), commentFormat);
+		Letters letters = new Letters("throws X", stackTextPosition(line), commentFormat);
 		sketch(500d, letters);
 	}
 
 	private void noCatchText(int line)
 	{
-		Letters letters = new Letters("catches X?", new TopLeft(stackTextPoint(line)), commentFormat);
+		Letters letters = new Letters("catches X?", stackTextPosition(line), commentFormat);
 		sketch(500d, letters);
 		Letters no = new Letters("no, keep looking...", new RightOf(letters,20d),
 				new Format(commentFormat, TypeFace.color(Color.RED, 1d)));
@@ -663,7 +669,7 @@ public class ExceptionsScript extends ScriptBuilder
 
 	private void catchText(int line)
 	{
-		Letters letters = new Letters("catches X?", new TopLeft(stackTextPoint(line)), commentFormat);
+		Letters letters = new Letters("catches X?", stackTextPosition(line), commentFormat);
 		sketch(500d, letters);
 		Letters no = new Letters("YES! call this one!", new RightOf(letters,20d),
 				new Format(commentFormat, TypeFace.color(Color.GREEN, 1d)));

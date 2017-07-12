@@ -15,12 +15,29 @@ public class Letters implements Actor
 	private final String nickname;
 	private final Group group;
 	private LettersAtom atom;
+	
+	public Letters(String source)
+	{
+		this(source,Position.DEFAULT,Format.DEFAULT);
+	}
 
 	public Letters(String source, Position position, Format format)
 	{
 		this.nickname = Names.make(getClass());
 		this.atom = new LettersAtom(this, source, format, position);
 		this.group = new Group();
+	}
+	
+	public Letters at(Position position)
+	{
+		atom.at(position);
+		return this;
+	}
+	
+	public Letters format(Format format)
+	{
+		atom.format(format);
+		return this;
 	}
 
 	@Override

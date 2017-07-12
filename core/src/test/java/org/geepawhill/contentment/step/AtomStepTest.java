@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.step;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
 
 import org.geepawhill.contentment.test.JavaFxTest;
 import org.geepawhill.contentment.test.TestAtom;

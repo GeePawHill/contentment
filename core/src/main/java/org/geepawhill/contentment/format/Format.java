@@ -2,12 +2,23 @@ package org.geepawhill.contentment.format;
 
 import java.util.HashMap;
 
+import org.geepawhill.contentment.style.Frames;
+import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.utility.Names;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Font;
 
 public class Format
 {
+	public static final Format DEFAULT = new Format(
+			"DEFAULT",
+			TypeFace.color(Color.WHITE, 1d),
+			TypeFace.font(new Font("Arial",30d), 1d, 1d),
+			Frames.frame(Color.WHITE, 1d, 1d)
+			);
+	
 	private final HashMap<String, Style> overrides;
 	public final String nickname;
 	public final Format base;

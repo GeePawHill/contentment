@@ -1,12 +1,9 @@
 package org.geepawhill.contentment.perform;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
 
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
-import org.geepawhill.contentment.test.JavaFxRunner;
 import org.geepawhill.contentment.test.JavaFxTest;
 import org.junit.Test;
 
