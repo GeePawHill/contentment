@@ -49,7 +49,6 @@ public class MainView
 		root.setTop(makeTools());
 		root.setCenter(makeViewport());
 
-		makeScripts();
 		return root;
 	}
 
@@ -92,11 +91,6 @@ public class MainView
 		}
 		if (event.getButton() == MouseButton.SECONDARY) player.backward();
 		else player.playOne();
-	}
-
-	private void makeScripts()
-	{
-		player.load(new UnderplayedScript().make());
 	}
 
 	private ToolBar makeTools()
