@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.geepawhill.contentment.actor.Actor;
+
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
@@ -69,6 +71,12 @@ public class JfxUtility
 	{
 		if(!group.getChildren().contains(node)) group.getChildren().add(node);
 	}
+	
+	public static void addIfNeeded(Actor actor, Node node)
+	{
+		addIfNeeded(actor.group(),node);
+	}
+
 
 	static public void setTopAlignment(Node node)
 	{

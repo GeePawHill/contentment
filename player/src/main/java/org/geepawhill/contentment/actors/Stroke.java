@@ -22,7 +22,7 @@ public class Stroke implements Actor
 	{
 		this.nickname = Names.make(getClass());
 		this.group = new Group();
-		this.atom = new BezierAtom(group,format,points);
+		this.atom = new BezierAtom(this,format,points);
 	}
 
 	@Override
