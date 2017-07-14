@@ -1,21 +1,22 @@
 package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.fast.AddNode;
-import org.geepawhill.contentment.step.FastStep;
+import org.geepawhill.contentment.atom.SpotAtom;
+import org.geepawhill.contentment.geometry.Point;
+import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.step.Step;
+import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
-import javafx.scene.shape.Circle;
 
 public class Spot implements Actor
 {
 
 	final String nickname;
 	final Group group;
-	final Circle circle;
+	
+	final SpotAtom atom;
 	
 	public Spot(double x,double y)
 	{
@@ -26,7 +27,7 @@ public class Spot implements Actor
 	{
 		this.nickname = name;
 		this.group = new Group();
-		this.circle = new Circle(x,y,0d);
+		this.atom = new SpotAtom(this,new Point(x,y));
 	}
 	
 	public String nickname()
@@ -40,15 +41,10 @@ public class Spot implements Actor
 		return group;
 	}
 	
-	public void animateDrawText(double fraction,Context context)
-	{
-		circle.setVisible(true);
-	}
-
 	@Override
 	public Step draw(double ms)
 	{
-		return new FastStep(new AddNode(group,circle));
+		return new AtomStep(Timing.ms(ms),atom);
 	}
 
 }

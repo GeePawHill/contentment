@@ -6,6 +6,7 @@ import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.step.Step;
+import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
@@ -55,7 +56,7 @@ public class Letters implements Actor
 	@Override
 	public Step draw(double ms)
 	{
-		return new AtomStep((long)ms,atom);
+		return new AtomStep(Timing.ms(ms),atom);
 	}
 	
 	@Override

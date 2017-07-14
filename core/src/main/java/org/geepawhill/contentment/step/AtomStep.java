@@ -9,19 +9,19 @@ import org.geepawhill.contentment.timing.Timing;
 public class AtomStep implements Step
 {
 	
-	private long ms;
 	private Atom atom;
+	private Timing timing;
 
-	public AtomStep(long ms,Atom atom)
+	public AtomStep(Timing timing,Atom atom)
 	{
-		this.ms = ms;
+		this.timing = timing;
 		this.atom = atom;
 	}
 
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		new AtomRunner(ms, atom, context, onFinished).play();
+		new AtomRunner((long)timing.ms(), atom, context, onFinished).play();
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class AtomStep implements Step
 	@Override
 	public Timing timing()
 	{
-		return Timing.ms(ms);
+		return timing;
 	}
 
 }
