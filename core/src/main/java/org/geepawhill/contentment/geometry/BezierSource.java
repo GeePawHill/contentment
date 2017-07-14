@@ -1,8 +1,6 @@
-package org.geepawhill.contentment.atom;
+package org.geepawhill.contentment.geometry;
 
 import java.util.function.Supplier;
-
-import org.geepawhill.contentment.geometry.Bezier;
 
 public interface BezierSource extends Supplier<Bezier>
 {

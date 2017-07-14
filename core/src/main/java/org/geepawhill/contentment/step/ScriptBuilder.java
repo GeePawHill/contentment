@@ -2,11 +2,12 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Actors;
-import org.geepawhill.contentment.fast.ChangeColor;
-import org.geepawhill.contentment.fast.Clear;
-import org.geepawhill.contentment.fast.Entrance;
-import org.geepawhill.contentment.fast.Exit;
-import org.geepawhill.contentment.fast.Fast;
+import org.geepawhill.contentment.atom.ChangeColorAtom;
+import org.geepawhill.contentment.atom.ClearAtom;
+import org.geepawhill.contentment.atom.EntranceAtom;
+import org.geepawhill.contentment.atom.ExitAtom;
+import org.geepawhill.contentment.atom.OpacityAtom;
+import org.geepawhill.contentment.timing.Timing;
 
 import javafx.scene.paint.Paint;
 
@@ -17,7 +18,7 @@ public class ScriptBuilder
 
 	public Step clear()
 	{
-		FastStep step = new FastStep(new Clear());
+		AtomStep step = new AtomStep(Timing.instant(),new ClearAtom());
 		addToWorking(step);
 		return step;
 	}
@@ -25,7 +26,7 @@ public class ScriptBuilder
 
 	public Step reColor(Actor actor, Paint paint)
 	{
-		FastStep step = new FastStep(new ChangeColor(actor, paint));
+		AtomStep step = new AtomStep(Timing.instant(),new ChangeColorAtom(actor,paint));
 		addToWorking(step);
 		return step;
 	}
@@ -33,7 +34,7 @@ public class ScriptBuilder
 	public Step sketch(double ms, Actor drawable)
 	{
 		Phrase phrase = new Phrase();
-		phrase.add(new Entrance(drawable));
+		phrase.add(new AtomStep(Timing.instant(),new EntranceAtom(drawable)));
 		phrase.add(drawable.draw(ms));
 		addToWorking(phrase);
 		return phrase;
@@ -42,7 +43,7 @@ public class ScriptBuilder
 	public Step appear(Actor drawable)
 	{
 		Phrase result = new Phrase();
-		result.add(new Entrance(drawable));
+		result.add(new AtomStep(Timing.instant(),new EntranceAtom(drawable)));
 		result.add(drawable.draw(1d));
 		addToWorking(result);
 		return result;
@@ -50,7 +51,7 @@ public class ScriptBuilder
 
 	public Step disappear(Actor drawable)
 	{
-		FastStep step = new FastStep(new Exit(drawable));
+		AtomStep step = new AtomStep(Timing.instant(),new ExitAtom(drawable));
 		addToWorking(step);
 		return step;
 	}
@@ -58,10 +59,10 @@ public class ScriptBuilder
 	public Step fadeIn(double ms, Actor drawable)
 	{
 		Phrase result = new Phrase();
-		result.add(new Entrance(drawable));
-		result.add(new OpacityStep(1d, drawable, 0d));
+		result.add(new AtomStep(Timing.instant(),new EntranceAtom(drawable)));
+		result.add(new AtomStep(Timing.ms(1), new OpacityAtom(drawable,1,0)));
 		result.add(drawable.draw(1d));
-		result.add(new OpacityStep(ms, drawable, 1d));
+		result.add(new AtomStep(Timing.ms(ms), new OpacityAtom(drawable,0,1)));
 		addToWorking(result);
 		return result;
 	}
@@ -69,8 +70,8 @@ public class ScriptBuilder
 	public Step fadeOut(double ms, Actor drawable)
 	{
 		Phrase result = new Phrase();
-		result.add(new OpacityStep(ms, drawable, 0d));
-		result.add(new Exit(drawable));
+		result.add(new AtomStep(Timing.ms(ms), new OpacityAtom(drawable,1,0)));
+		result.add(new AtomStep(Timing.instant(),new ExitAtom(drawable)));
 		addToWorking(result);
 		return result;
 	}
@@ -86,11 +87,6 @@ public class ScriptBuilder
 	public void addToWorking(Step step)
 	{
 		if(working!=null) working.add(step);
-	}
-	
-	public void addToWorking(Fast step)
-	{
-		addToWorking(new FastStep(step));
 	}
 	
 	public void setWorking(Phrase phrase)
@@ -160,13 +156,13 @@ public class ScriptBuilder
 
 	public ScriptBuilder fadeDown(double ms, Actor actor)
 	{
-		addToWorking(new OpacityStep(ms, actor,0d));
+		addToWorking(new AtomStep(Timing.ms(ms), new OpacityAtom(actor,1,0)));
 		return this;
 	}
 	
 	public ScriptBuilder fadeUp(double ms, Actor actor)
 	{
-		addToWorking(new OpacityStep(ms, actor,1d));
+		addToWorking(new AtomStep(Timing.ms(ms), new OpacityAtom(actor,0,1)));
 		return this;
 	}
 	

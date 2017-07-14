@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.fast.Fast;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
@@ -34,16 +33,6 @@ public class Phrase implements Addable
 	{
 		playables.add(Step);
 		ms+=Step.timing().ms();
-		return this;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.geepawhill.contentment.step.Addable#add(org.geepawhill.contentment.fast.Fast)
-	 */
-	@Override
-	public Phrase add(Fast fast)
-	{
-		playables.add(new FastStep(fast));
 		return this;
 	}
 	

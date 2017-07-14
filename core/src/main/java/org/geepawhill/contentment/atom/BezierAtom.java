@@ -5,6 +5,7 @@ import org.geepawhill.contentment.core.Atom;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Bezier;
+import org.geepawhill.contentment.geometry.BezierSource;
 import org.geepawhill.contentment.geometry.BezierSplit;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.style.Frames;
