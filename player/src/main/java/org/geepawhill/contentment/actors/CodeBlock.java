@@ -16,9 +16,6 @@ public class CodeBlock implements Actor
 	private Group group;
 	private BlockAtom atom;
 
-	final static private double XMARGIN = 6;
-	final static private double YMARGIN = 10;
-	
 	public CodeBlock(String source,Format format, Position position)
 	{
 		this.group = new Group();

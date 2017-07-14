@@ -31,8 +31,6 @@ public class Arrow implements Actor
 	private BezierAtom toTopStep;
 	private BezierAtom toBottomStep;
 
-	private boolean pointAtFrom;
-	private boolean pointAtTo;
 
 	private ArrowComputer computer;
 	private ArrowPoints points;
@@ -45,8 +43,6 @@ public class Arrow implements Actor
 	{
 		this.random = new Random();
 		this.nickname = Names.make(getClass());
-		this.pointAtFrom = pointAtFrom;
-		this.pointAtTo = pointAtTo;
 		this.computer = new NodeArrowComputer(from.group(), to.group());
 		this.group = new Group();
 		steps = new ArrayList<>();

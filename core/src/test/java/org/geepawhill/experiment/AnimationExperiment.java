@@ -12,7 +12,6 @@ public class AnimationExperiment extends JavaFxTest
 {
 
 	private AnimationTimer timer;
-	private long lastNow;
 	private int lastNowCount;
 
 	@Before
@@ -42,7 +41,6 @@ public class AnimationExperiment extends JavaFxTest
 
 	protected void timerCallback(long now)
 	{
-		lastNow = now;
 		lastNowCount+=1;
 	}
 

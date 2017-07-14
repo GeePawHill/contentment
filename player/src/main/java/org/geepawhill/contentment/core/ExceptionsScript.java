@@ -163,7 +163,6 @@ public class ExceptionsScript extends ScriptBuilder
 		buildPhrase();
 		clear();
 		head("Testing A Complex Finally");
-		double x = 1550d;
 
 		String beforeText = "finally {\n" + "    // complex finally\n" + "    }";
 		CodeBlock beforeCode = new CodeBlock(beforeText, codeFormat, new TopRight(1550,260d));
@@ -220,8 +219,6 @@ public class ExceptionsScript extends ScriptBuilder
 		buildPhrase();
 		clear();
 		head("Testing A Complex Catch");
-
-		double x = 1550d;
 
 		String beforeText = "try { ... }\n" + "catch(LidNotFound lidNotFound) {\n" + "    // complex catch\n" + "    }";
 		CodeBlock beforeCode = new CodeBlock(beforeText, codeFormat, new TopRight(1550,260d));
