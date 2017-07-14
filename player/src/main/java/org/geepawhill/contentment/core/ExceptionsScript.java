@@ -12,7 +12,6 @@ import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.actors.OvalText;
 import org.geepawhill.contentment.actors.Spot;
 import org.geepawhill.contentment.actors.Stroke;
-import org.geepawhill.contentment.format.Aligner;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Grid;
 import org.geepawhill.contentment.geometry.Point;
@@ -167,7 +166,7 @@ public class ExceptionsScript extends ScriptBuilder
 		double x = 1550d;
 
 		String beforeText = "finally {\n" + "    // complex finally\n" + "    }";
-		CodeBlock beforeCode = new CodeBlock(beforeText, new Point(x, 300d), codeFormat, Aligner.rightTop());
+		CodeBlock beforeCode = new CodeBlock(beforeText, codeFormat, new TopRight(1550,260d));
 		appear(beforeCode);
 
 		mark(460);
@@ -183,11 +182,11 @@ public class ExceptionsScript extends ScriptBuilder
 		sketch(500d, toThis);
 
 		String afterText1 = "finally {\n" + "    handleFinally(...);\n" + "    }";
-		CodeBlock afterCode = new CodeBlock(afterText1, new Point(x, 460d), codeFormat, Aligner.rightTop());
+		CodeBlock afterCode = new CodeBlock(afterText1, codeFormat, new TopRight(1550d,460d));
 		appear(afterCode);
 
 		String afterText2 = "public void handleFinally(...) {\n" + "    // complex finally\n" + "    }";
-		CodeBlock afterCode2 = new CodeBlock(afterText2, new Point(x, 610d), codeFormat, Aligner.rightTop());
+		CodeBlock afterCode2 = new CodeBlock(afterText2,codeFormat, new TopRight(1550d,640d));
 		appear(afterCode2);
 
 		mark(468);
@@ -225,7 +224,7 @@ public class ExceptionsScript extends ScriptBuilder
 		double x = 1550d;
 
 		String beforeText = "try { ... }\n" + "catch(LidNotFound lidNotFound) {\n" + "    // complex catch\n" + "    }";
-		CodeBlock beforeCode = new CodeBlock(beforeText, new Point(x, 260d), codeFormat, Aligner.rightTop());
+		CodeBlock beforeCode = new CodeBlock(beforeText, codeFormat, new TopRight(1550,260d));
 		appear(beforeCode);
 
 		mark(460);
@@ -241,11 +240,11 @@ public class ExceptionsScript extends ScriptBuilder
 		sketch(500d, toThis);
 
 		String afterText1 = "try { ... }\n" + "catch(LidNotFound lidNotFound) {\n" + "    handle(lidNotFound);\n" + "    }";
-		CodeBlock afterCode = new CodeBlock(afterText1, new Point(x, 460d), codeFormat, Aligner.rightTop());
+		CodeBlock afterCode = new CodeBlock(afterText1, codeFormat, new TopRight(1550d,460d));
 		appear(afterCode);
 
 		String afterText2 = "public void handle(LidNotFound lidNotFound) {\n" + "    // complex catch\n" + "    }";
-		CodeBlock afterCode2 = new CodeBlock(afterText2, new Point(x, 610d), codeFormat, Aligner.rightTop());
+		CodeBlock afterCode2 = new CodeBlock(afterText2,codeFormat, new TopRight(1550d,640d));
 		appear(afterCode2);
 
 		mark(468);
