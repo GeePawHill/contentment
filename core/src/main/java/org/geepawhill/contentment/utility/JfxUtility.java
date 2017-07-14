@@ -63,7 +63,6 @@ public class JfxUtility
 		}
 		catch (IOException e)
 		{
-			// TODO: handle exception here
 		}
 	}
 
