@@ -23,13 +23,6 @@ public class ScriptBuilder
 	}
 
 
-	public Step cue()
-	{
-		CueStep step = new CueStep();
-		addToWorking(step);
-		return step;
-	}
-	
 	public Step reColor(Actor actor, Paint paint)
 	{
 		FastStep step = new FastStep(new ChangeColor(actor, paint));
