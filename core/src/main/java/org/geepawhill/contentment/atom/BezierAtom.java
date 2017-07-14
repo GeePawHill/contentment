@@ -5,7 +5,6 @@ import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.BezierSplit;
-import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.utility.JfxUtility;

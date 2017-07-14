@@ -61,4 +61,9 @@ public class LettersAtom implements Atom
 	{
 		this.format = format;
 	}
+	
+	public Text text()
+	{
+		return text;
+	}
 }
