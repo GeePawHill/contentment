@@ -91,13 +91,13 @@ public class Player
 
 	public void backward()
 	{
-		mustBeStepping();
-		if (!atStart())
-		{
-			setPosition(position() - 1);
-			nextSync().phrase.undo(context);
-			getRhythm().seekHard(nextSync().target);
-		}
+//		mustBeStepping();
+//		if (!atStart())
+//		{
+//			setPosition(position() - 1);
+//			nextSync().phrase.undo(context);
+//			getRhythm().seekHard(nextSync().target);
+//		}
 	}
 
 	public PlayerState getState()

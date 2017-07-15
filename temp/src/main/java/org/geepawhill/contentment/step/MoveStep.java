@@ -66,12 +66,6 @@ public class MoveStep implements Step
 	}
 
 	@Override
-	public void undo(Context context)
-	{
-		interpolate(context, 0d);
-	}
-
-	@Override
 	public Timing timing()
 	{
 		return timing;

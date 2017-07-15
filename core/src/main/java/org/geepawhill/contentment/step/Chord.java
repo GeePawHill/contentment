@@ -42,15 +42,6 @@ public class Chord implements Addable
 	}
 
 	@Override
-	public void undo(Context context)
-	{
-		for(int i= playables.size()-1; i>=0;i--)
-		{
-			playables.get(i).undo(context);
-		}
-	}
-	
-	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
 		this.onFinished = onFinished;

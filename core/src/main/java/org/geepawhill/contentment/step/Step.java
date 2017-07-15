@@ -10,7 +10,5 @@ public interface Step
 
 	public void fast(Context context);
 
-	public void undo(Context context);
-
 	public Timing timing();
 }

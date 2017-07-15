@@ -61,23 +61,6 @@ public class PhraseTest extends JavaFxTest
 	}
 
 	@Test
-	public void undoOne()
-	{
-		onlyOne.fast(getContext());
-		onlyOne.undo(getContext());
-		assertUndone(one);
-	}
-
-	@Test
-	public void undoBoth()
-	{
-		both.fast(getContext());
-		both.undo(getContext());
-		assertUndone(one);
-		assertUndone(two);
-	}
-
-	@Test
 	public void slowOne()
 	{
 		onlyOne.slow(getContext(), recordFinish);

@@ -41,11 +41,6 @@ public class MarkStep implements Step
 	}
 
 	@Override
-	public void undo(Context context)
-	{
-	}
-
-	@Override
 	public Timing timing()
 	{
 		return Timing.ms(5000d);

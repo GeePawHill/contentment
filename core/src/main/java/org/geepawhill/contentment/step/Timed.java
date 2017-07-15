@@ -46,15 +46,6 @@ public class Timed implements Step
 	}
 
 	@Override
-	public void undo(Context context)
-	{
-		for(int i= playables.size()-1; i>=0;i--)
-		{
-			playables.get(i).undo(context);
-		}
-	}
-	
-	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
 		new SlowPlayer(context,onFinished,playables);

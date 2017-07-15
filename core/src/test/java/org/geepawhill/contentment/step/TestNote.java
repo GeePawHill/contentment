@@ -42,19 +42,6 @@ public class TestNote implements Step
 	}
 
 	@Override
-	public void undo(Context context)
-	{
-		switch (state)
-		{
-		case Played:
-			state = State.Undone;
-			break;
-		default:
-			badChange("Undo");
-		}
-	}
-
-	@Override
 	public void fast(Context context)
 	{
 		switch (state)

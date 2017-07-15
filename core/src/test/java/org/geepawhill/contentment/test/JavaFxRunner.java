@@ -87,20 +87,6 @@ public class JavaFxRunner
 		actLater(action);
 	}
 
-	public void undo(Step step)
-	{
-		Consumer<CountDownLatch> action = new Consumer<CountDownLatch>()
-		{
-			@Override
-			public void accept(CountDownLatch latch)
-			{
-				step.undo(context);
-				latch.countDown();
-			}
-		};
-		actLater(action);
-	}
-
 	public void actLater(Consumer<CountDownLatch> action)
 	{
 		final CountDownLatch latch = new CountDownLatch(1);

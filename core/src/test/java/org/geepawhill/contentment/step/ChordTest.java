@@ -64,23 +64,6 @@ public class ChordTest
 	}
 
 	@Test
-	public void undoOne()
-	{
-		onlyOne.fast(context);
-		onlyOne.undo(context);
-		assertUndone(one);
-	}
-
-	@Test
-	public void undoBoth()
-	{
-		both.fast(context);
-		both.undo(context);
-		assertUndone(one);
-		assertUndone(two);
-	}
-
-	@Test
 	public void slowOne()
 	{
 		onlyOne.slow(context, recordFinish);
@@ -107,11 +90,6 @@ public class ChordTest
 	private void assertPlayed(TestNote Step)
 	{
 		assertThat(Step.state).isEqualTo(TestNote.State.Played);
-	}
-
-	private void assertUndone(TestNote Step)
-	{
-		assertThat(Step.state).isEqualTo(TestNote.State.Undone);
 	}
 
 	private void assertPlaying(TestNote Step)

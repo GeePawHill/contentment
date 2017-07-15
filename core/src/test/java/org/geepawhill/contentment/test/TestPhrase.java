@@ -29,13 +29,6 @@ public class TestPhrase extends Phrase
 	}
 
 	@Override
-	public void undo(Context context)
-	{
-		isBefore=true;
-		isPlaying=false;
-	}
-	
-	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
 		this.onFinished = onFinished;
