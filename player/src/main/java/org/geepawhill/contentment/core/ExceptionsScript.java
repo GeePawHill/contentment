@@ -273,11 +273,15 @@ public class ExceptionsScript extends ScriptBuilder
 		buildPhrase();
 		clear();
 		head("Dependencies");
+		
 		mark(146);
-		OvalText thrower = new OvalText("Thrower", new Point(1000d, 200d), commentFormat);
+		Letters thrower = new Letters("Thrower",new Centered(1000d,200d), commentFormat).withOval();
 		sketch(1000d, thrower);
-		OvalText catcher = new OvalText("Catcher", new Point(1500d, 200d), commentFormat);
+		
+		Letters catcher = new Letters("Catcher", new Centered(1500d, 200d), commentFormat).withOval();
 		sketch(1000d, catcher);
+		
+		
 		Spot throwerSpot = new Spot(1000d, 850d);
 		Spot catcherSpot = new Spot(1500d, 850d);
 		allButOvals.add(throwerSpot, catcherSpot);
@@ -346,14 +350,14 @@ public class ExceptionsScript extends ScriptBuilder
 		minor("so neither side knows the other");
 		mark(233);
 
-		OvalText thrower = new OvalText("Thrower", new Point(1000d, 420d), commentFormat);
+		Letters thrower = new Letters("Thrower",new Centered(1000d,420d), commentFormat).withOval();
 		sketch(1000d, thrower);
-		OvalText catcher = new OvalText("Catcher", new Point(1500d, 420d), commentFormat);
 
+		Letters catcher = new Letters("Catcher", new Centered(1500d, 420d), commentFormat).withOval();
 		sketch(1000d, catcher);
 
 		mark(240);
-		OvalText lnf = new OvalText("LidNotFound", new Point(1250d, 590d), commentFormat);
+		Letters lnf = new Letters("LidNotFound", new Centered(1250d, 590d), commentFormat).withOval();
 		sketch(500d, lnf);
 
 		Arrow throwerLnf = new Arrow(thrower, false, lnf, true, knowsFormat);
@@ -501,7 +505,7 @@ public class ExceptionsScript extends ScriptBuilder
 		buildPhrase();
 		clear();
 		head("Testing The Catcher");
-		OvalText catcher = new OvalText("Catcher", new Point(1250d, 210d), commentFormat);
+		Letters catcher = new Letters("Catcher", new Centered(1250d, 210d), commentFormat).withOval();
 		sketch(1d, catcher);
 		mark(410);
 		lead(" ");
@@ -550,7 +554,7 @@ public class ExceptionsScript extends ScriptBuilder
 		buildPhrase();
 		clear();
 		head("Testing The Thrower");
-		OvalText thrower = new OvalText("Thrower", new Point(1250d, 210d), commentFormat);
+		Letters thrower = new Letters("Thrower", new Centered(1250d, 210d), commentFormat).withOval();
 		sketch(1d, thrower);
 		mark(302);
 		lead(" ");
