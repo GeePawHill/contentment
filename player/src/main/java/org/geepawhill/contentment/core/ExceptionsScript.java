@@ -9,7 +9,6 @@ import org.geepawhill.contentment.actors.Arrow;
 import org.geepawhill.contentment.actors.CodeBlock;
 import org.geepawhill.contentment.actors.Cross;
 import org.geepawhill.contentment.actors.Letters;
-import org.geepawhill.contentment.actors.OvalText;
 import org.geepawhill.contentment.actors.Spot;
 import org.geepawhill.contentment.actors.Stroke;
 import org.geepawhill.contentment.format.Format;
@@ -71,7 +70,7 @@ public class ExceptionsScript extends ScriptBuilder
 	private Letters openCan;
 
 	private Letters doChores;
-
+	
 	public ExceptionsScript()
 	{
 		Paint majorColor = color(13, 165, 15);
@@ -621,13 +620,10 @@ public class ExceptionsScript extends ScriptBuilder
 		return stackGrid.northLine(0, STACK_ROWS - 1 - line).from.add(20, 20);
 	}
 
-
-
 	private Point leftCommentTextPoint(int line)
 	{
 		return stackTextPoint(line).add(-40, -10);
 	}
-
 
 	private Arrow knowLine(Actors actors, double y, boolean leftHead)
 	{

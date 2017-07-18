@@ -8,10 +8,8 @@ import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Jiggler;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.position.Position;
-import org.geepawhill.contentment.step.AtomStep;
-import org.geepawhill.contentment.step.NewTimed;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.Timed;
+import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
@@ -81,7 +79,7 @@ public class Letters implements Actor
 	@Override
 	public Step draw(double ms)
 	{
-		NewTimed timed = new NewTimed(ms);
+		Timed timed = new Timed(ms);
 		timed.add(Timing.weighted(7), letters);
 		if (hasOval)
 		{
