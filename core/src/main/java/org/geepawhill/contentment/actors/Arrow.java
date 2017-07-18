@@ -31,13 +31,18 @@ public class Arrow implements Actor
 	private BezierAtom toTopStep;
 	private BezierAtom toBottomStep;
 
-
 	private ArrowComputer computer;
 	private ArrowPoints points;
 
 	private ArrayList<BezierAtom> steps;
 
 	private Random random;
+
+	private Bezier chosenMain;
+	private Bezier chosenFromTop;
+	private Bezier chosenFromBottom;
+	private Bezier chosenToTop;
+	private Bezier chosenToBottom;
 
 	public Arrow(Actor from, boolean pointAtFrom, Actor to, boolean pointAtTo, Format format)
 	{
@@ -46,19 +51,20 @@ public class Arrow implements Actor
 		this.computer = new NodeArrowComputer(from.group(), to.group());
 		this.group = new Group();
 		steps = new ArrayList<>();
-		mainStep = new BezierAtom(this,this::getMainBezier, format);
+		chosenMain = null;
+		mainStep = new BezierAtom(this, this::getMainBezier, format);
 		if (pointAtFrom)
 		{
-			fromTopStep = new BezierAtom(this,this::getFromTop, format);
+			fromTopStep = new BezierAtom(this, this::getFromTop, format);
 			steps.add(fromTopStep);
-			fromBottomStep = new BezierAtom(this,this::getFromBottom, format);
+			fromBottomStep = new BezierAtom(this, this::getFromBottom, format);
 			steps.add(fromBottomStep);
 		}
 		if (pointAtTo)
 		{
-			toTopStep = new BezierAtom(this,this::getToTop, format);
+			toTopStep = new BezierAtom(this, this::getToTop, format);
 			steps.add(toTopStep);
-			toBottomStep = new BezierAtom(this,this::getToBottom, format);
+			toBottomStep = new BezierAtom(this, this::getToBottom, format);
 			steps.add(toBottomStep);
 		}
 	}
@@ -70,37 +76,43 @@ public class Arrow implements Actor
 
 	private Bezier getMainBezier()
 	{
-		points = computer.compute();
-		return chooseBezier(points.main);
-	}
-	
-	private Bezier getFromTop()
-	{
-		return chooseBezier(points.fromTop);
-	}
-	
-	private Bezier getFromBottom()
-	{
-		return chooseBezier(points.fromBottom);
-	}
-	
-	private Bezier getToTop()
-	{
-		return chooseBezier(points.toTop);
-	}
-	
-	private Bezier getToBottom()
-	{
-		return chooseBezier(points.toBottom);
+		if (chosenMain == null)
+		{
+			points = computer.compute();
+			chosenMain = chooseBezier(points.main);
+			chosenFromTop = chooseBezier(points.fromTop);
+			chosenToTop = chooseBezier(points.toTop);
+			chosenFromBottom = chooseBezier(points.fromBottom);
+			chosenToBottom = chooseBezier(points.toBottom);
+		}
+		return chosenMain;
 	}
 
-	
+	private Bezier getFromTop()
+	{
+		return chosenFromTop;
+	}
+
+	private Bezier getFromBottom()
+	{
+		return chosenFromBottom;
+	}
+
+	private Bezier getToTop()
+	{
+		return chosenToTop;
+	}
+
+	private Bezier getToBottom()
+	{
+		return chosenToBottom;
+	}
+
 	public Bezier chooseBezier(PointPair points)
 	{
-		return new Bezier(
-				points.from, points.along(random.nextDouble()).jiggle(random, 1d, 10),
-				points.along(random.nextDouble()).jiggle(random, 1d, 10), points.to
-		);
+		Bezier chosen = new Bezier(points.from, points.along(random.nextDouble()).jiggle(random, 1d, 10),
+				points.along(random.nextDouble()).jiggle(random, 1d, 10), points.to);
+		return chosen;
 	}
 
 	@Override
@@ -113,10 +125,10 @@ public class Arrow implements Actor
 	public Step draw(double ms)
 	{
 		Timed sequence = new Timed(ms);
-		sequence.add(new AtomStep(Timing.weighted(.9d),mainStep));
+		sequence.add(new AtomStep(Timing.weighted(.9d), mainStep));
 		for (BezierAtom step : steps)
 		{
-			sequence.add(new AtomStep(Timing.weighted(.1d),step));
+			sequence.add(new AtomStep(Timing.weighted(.1d), step));
 		}
 		return sequence;
 	}

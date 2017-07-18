@@ -138,6 +138,251 @@ public class ExceptionsScript extends ScriptBuilder
 		script.add(new Keyframe(540, exceptionsAreEasy()));
 		return script;
 	}
+	
+	private Step opening()
+	{
+		buildPhrase();
+		head("Microtesting Exceptions");
+		mark(3);
+		sub("A GeePaw Quickie");
+		return endBuild();
+	}
+	
+	private Step stack()
+	{
+		buildPhrase();
+		
+		head("A Program's Stack");
+		drawStack();
+		
+		mark(22);
+		head("The Household Program");
+		
+		mark(26);
+		Letters main = new Letters("main()", stackTextPosition(0), largeCodeFormat);
+		disappearingStackText.add(main);
+		sketch(500d, main);
+		
+		mark(30);
+		doChores = new Letters("doChores()", stackTextPosition(1), largeCodeFormat);
+		catchAndThrowColorText.add(doChores);
+		sketch(500d, doChores);
+		
+		mark(33);
+		Letters takeOutTrash = new Letters("takeOutTrash()", stackTextPosition(2), largeCodeFormat);
+		disappearingStackText.add(takeOutTrash);
+		sketch(500d, takeOutTrash);
+		mark(34);
+		
+		mark(37);
+		Letters putBagsInCan = new Letters("putBagsInCans()", stackTextPosition(3), largeCodeFormat);
+		disappearingStackText.add(putBagsInCan);
+		sketch(500d, putBagsInCan);
+		
+		mark(40);
+		Letters putOneBagInCan = new Letters("putOneBagInCan()", stackTextPosition(4), largeCodeFormat);
+		disappearingStackText.add(putOneBagInCan);
+		sketch(500d, putOneBagInCan);
+		
+		mark(44);
+		openCan = new Letters("openCan()", stackTextPosition(5), largeCodeFormat);
+		sketch(500d, openCan);
+		catchAndThrowColorText.add(openCan);
+		
+		Letters joke = joke("whoops, he forgot openCan()");
+		mark(49);
+		disappear(joke);
+		
+		return endBuild();
+	}
+
+	private Step special()
+	{
+		buildPhrase();
+		reColor(openCan, Color.RED);
+		reColor(doChores, Color.RED);
+
+		mark(55);
+		thrower = new Letters("Thrower", new TopRight(leftCommentTextPoint(5)), commentFormat);
+		sketch(500d, thrower);
+		mark(57);
+		catcher = new Letters("Catcher", new TopRight(leftCommentTextPoint(1)), commentFormat);
+		sketch(500d, catcher);
+
+		mark(60);
+		fadeDown(500d, stack, disappearingStackText);
+
+		mark(64);
+		Letters throwsLidNotFound = new Letters("throws LidNotFound", new TopLeft(stackTextPoint(5).add(new Point(0,50))), lightComment);
+		catchAndThrowColorText.add(throwsLidNotFound);
+		fadeIn(500d, throwsLidNotFound);
+
+		mark(72);
+		Letters catchesAll = new Letters("catches all exceptions", new TopLeft(stackTextPoint(1).add(new Point(0,50))), lightComment);
+		catchAndThrowColorText.add(catchesAll);
+		fadeIn(500d, catchesAll);
+
+		mark(82);
+		Letters catchesLidNotFound = new Letters("catches LidNotFound", new BelowLeft(catchesAll),lightComment);
+		catchAndThrowColorText.add(catchesLidNotFound);
+		fadeIn(500d, catchesLidNotFound);
+
+		mark(86);
+		Letters logsIt = new Letters("logs and moves on", new BelowLeft(catchesLidNotFound), lightComment);
+		catchAndThrowColorText.add(logsIt);
+		fadeIn(500d, logsIt);
+
+		return endBuild();
+
+	}
+	private Step indirectCall()
+	{
+		buildPhrase();
+		head("How Throw & Catch Work");
+		fadeOut(500d, catchAndThrowColorText);
+
+		mark(105);
+		Arrow call = new Arrow(thrower, false, catcher, true, commentFormat);
+		Letters letters = new Letters("call", new Centered(call), commentFormat);
+		sketch(500d, call);
+		sketch(500d, letters);
+
+		mark(111);
+		Cross cross = new Cross(call, 150d);
+		sketch(500d, cross);
+
+		fadeUp(500d, stack);
+
+		mark(115);
+		throwsText(5);
+		mark(120);
+		noCatchText(4);
+		mark(124);
+		noCatchText(3);
+		mark(128);
+		noCatchText(2);
+		mark(132);
+		catchText(1);
+
+		return endBuild();
+	}
+
+	private Step dependencies()
+	{
+		Actors allButOvals = new Actors();
+		buildPhrase();
+		clear();
+		head("Dependencies");
+		mark(146);
+		OvalText thrower = new OvalText("Thrower", new Point(1000d, 200d), commentFormat);
+		sketch(1000d, thrower);
+		OvalText catcher = new OvalText("Catcher", new Point(1500d, 200d), commentFormat);
+		sketch(1000d, catcher);
+		Spot throwerSpot = new Spot(1000d, 850d);
+		Spot catcherSpot = new Spot(1500d, 850d);
+		allButOvals.add(throwerSpot, catcherSpot);
+		sketch(1d, throwerSpot);
+		sketch(1d, catcherSpot);
+		Arrow throwerArrow = new Arrow(thrower, false, throwerSpot, false, commentFormat);
+		sketch(500d, throwerArrow);
+		Arrow catcherArrow = new Arrow(catcher, false, catcherSpot, false, commentFormat);
+		sketch(500d, catcherArrow);
+		allButOvals.add(throwerArrow, catcherArrow);
+
+		mark(153);
+		Letters runtime = new Letters("Runtime", new Centered(new Point(1250d, 220d)), commentFormat);
+		sketch(500d, runtime);
+		allButOvals.add(runtime);
+
+		mark(160);
+		Arrow runtimeOne = knowLine(allButOvals, 350d, false);
+
+		mark(166);
+		Cross crossOne = new Cross(runtimeOne, 125d, 100d, new Point(0d, -10d));
+		sketch(500d, crossOne);
+		allButOvals.add(crossOne);
+
+		mark(172);
+		Arrow runtimeTwo = knowLine(allButOvals, 475d, true);
+
+		mark(176);
+		Cross crossTwo = new Cross(runtimeTwo, 125d, 100d, new Point(0d, -10d));
+		sketch(500d, crossTwo);
+		allButOvals.add(crossTwo);
+
+		mark(190);
+		Letters compiletime = new Letters("Compile Time", new Centered(new Point(1250d, 550d)), commentFormat);
+		sketch(500d, compiletime);
+		allButOvals.add(compiletime);
+
+		mark(194);
+		Arrow compiletimeOne = knowLine(allButOvals, 680d, false);
+
+		mark(202);
+		Cross crossThree = new Cross(compiletimeOne, 125d, 100d, new Point(0d, -10d));
+		sketch(500d, crossThree);
+		allButOvals.add(crossThree);
+
+		mark(207);
+		Arrow compiletimeTwo = knowLine(allButOvals, 800d, true);
+
+		mark(212);
+		Cross crossFour = new Cross(compiletimeTwo, 125d, 100d, new Point(0d, -10d));
+		sketch(500d, crossFour);
+		allButOvals.add(crossFour);
+
+		return endBuild();
+	}
+
+	private Step noDependencies()
+	{
+		buildPhrase();
+		clear();
+		head("No Dependencies");
+		sub("very different situation");
+
+		mark(227);
+		minor("no direct call");
+		minor("so neither side knows the other");
+		mark(233);
+
+		OvalText thrower = new OvalText("Thrower", new Point(1000d, 420d), commentFormat);
+		sketch(1000d, thrower);
+		OvalText catcher = new OvalText("Catcher", new Point(1500d, 420d), commentFormat);
+
+		sketch(1000d, catcher);
+
+		mark(240);
+		OvalText lnf = new OvalText("LidNotFound", new Point(1250d, 590d), commentFormat);
+		sketch(500d, lnf);
+
+		Arrow throwerLnf = new Arrow(thrower, false, lnf, true, knowsFormat);
+		Arrow catcherLnf = new Arrow(catcher, false, lnf, true, knowsFormat);
+
+		sketch(500d, throwerLnf);
+		sketch(500d, catcherLnf);
+		minor(" ");
+		minor(" ");
+		minor(" ");
+		minor(" ");
+		minor(" ");
+		mark(247);
+		minor("shared dependency irrelevant");
+
+		mark(252);
+		clear();
+		head("Easier To Test");
+
+		mark(263);
+		sub("four nopes = one yep?");
+		mark(268);
+		minor("test the thrower by itself");
+		minor("test the catcher by itself");
+
+		mark(274);
+		lead("This Is Far Easier");
+		return endBuild();
+	}
 
 	public Step exceptionsAreEasy()
 	{
@@ -344,62 +589,6 @@ public class ExceptionsScript extends ScriptBuilder
 		return endBuild();
 	}
 
-	private Step opening()
-	{
-		buildPhrase();
-		head("Microtesting Exceptions");
-		mark(3);
-		sub("A GeePaw Quickie");
-		return endBuild();
-	}
-
-	private Step stack()
-	{
-		buildPhrase();
-
-		head("A Program's Stack");
-		drawStack();
-
-		mark(22);
-		head("The Household Program");
-
-		mark(26);
-		Letters main = new Letters("main()", stackTextPosition(0), largeCodeFormat);
-		disappearingStackText.add(main);
-		sketch(500d, main);
-
-		mark(30);
-		doChores = new Letters("doChores()", stackTextPosition(1), largeCodeFormat);
-		catchAndThrowColorText.add(doChores);
-		sketch(500d, doChores);
-
-		mark(33);
-		Letters takeOutTrash = new Letters("takeOutTrash()", stackTextPosition(2), largeCodeFormat);
-		disappearingStackText.add(takeOutTrash);
-		sketch(500d, takeOutTrash);
-		mark(34);
-
-		mark(37);
-		Letters putBagsInCan = new Letters("putBagsInCans()", stackTextPosition(3), largeCodeFormat);
-		disappearingStackText.add(putBagsInCan);
-		sketch(500d, putBagsInCan);
-
-		mark(40);
-		Letters putOneBagInCan = new Letters("putOneBagInCan()", stackTextPosition(4), largeCodeFormat);
-		disappearingStackText.add(putOneBagInCan);
-		sketch(500d, putOneBagInCan);
-
-		mark(44);
-		openCan = new Letters("openCan()", stackTextPosition(5), largeCodeFormat);
-		sketch(500d, openCan);
-		catchAndThrowColorText.add(openCan);
-
-		Letters joke = joke("whoops, he forgot openCan()");
-		mark(49);
-		disappear(joke);
-
-		return endBuild();
-	}
 
 	private void drawStack()
 	{
@@ -429,199 +618,12 @@ public class ExceptionsScript extends ScriptBuilder
 	}
 
 
-	private Step special()
-	{
-		buildPhrase();
-		reColor(openCan, Color.RED);
-		reColor(doChores, Color.RED);
-
-		mark(55);
-		thrower = new Letters("Thrower", new TopRight(leftCommentTextPoint(5)), commentFormat);
-		sketch(500d, thrower);
-		mark(57);
-		catcher = new Letters("Catcher", new TopRight(leftCommentTextPoint(1)), commentFormat);
-		sketch(500d, catcher);
-
-		mark(60);
-		fadeDown(500d, stack, disappearingStackText);
-
-		mark(64);
-		Letters throwsLidNotFound = new Letters("throws LidNotFound", new TopLeft(stackTextPoint(5).add(new Point(0,50))), lightComment);
-		catchAndThrowColorText.add(throwsLidNotFound);
-		fadeIn(500d, throwsLidNotFound);
-
-		mark(72);
-		Letters catchesAll = new Letters("catches all exceptions", new TopLeft(stackTextPoint(1).add(new Point(0,50))), lightComment);
-		catchAndThrowColorText.add(catchesAll);
-		fadeIn(500d, catchesAll);
-
-		mark(82);
-		Letters catchesLidNotFound = new Letters("catches LidNotFound", new BelowLeft(catchesAll),lightComment);
-		catchAndThrowColorText.add(catchesLidNotFound);
-		fadeIn(500d, catchesLidNotFound);
-
-		mark(86);
-		Letters logsIt = new Letters("logs and moves on", new BelowLeft(catchesLidNotFound), lightComment);
-		catchAndThrowColorText.add(logsIt);
-		fadeIn(500d, logsIt);
-
-		return endBuild();
-
-	}
 
 	private Point leftCommentTextPoint(int line)
 	{
 		return stackTextPoint(line).add(-40, -10);
 	}
 
-	private Step indirectCall()
-	{
-		buildPhrase();
-		head("How Throw & Catch Work");
-		fadeOut(500d, catchAndThrowColorText);
-
-		mark(105);
-		Arrow call = new Arrow(thrower, false, catcher, true, commentFormat);
-		Letters letters = new Letters("call", new Centered(call), commentFormat);
-		sketch(500d, call);
-		sketch(500d, letters);
-
-		mark(111);
-		Cross cross = new Cross(call, 150d);
-		sketch(500d, cross);
-
-		fadeUp(500d, stack);
-
-		mark(115);
-		throwsText(5);
-		mark(120);
-		noCatchText(4);
-		mark(124);
-		noCatchText(3);
-		mark(128);
-		noCatchText(2);
-		mark(132);
-		catchText(1);
-
-		return endBuild();
-	}
-
-	private Step dependencies()
-	{
-		Actors allButOvals = new Actors();
-		buildPhrase();
-		clear();
-		head("Dependencies");
-		mark(146);
-		OvalText thrower = new OvalText("Thrower", new Point(1000d, 200d), commentFormat);
-		sketch(1000d, thrower);
-		OvalText catcher = new OvalText("Catcher", new Point(1500d, 200d), commentFormat);
-		sketch(1000d, catcher);
-		Spot throwerSpot = new Spot(1000d, 850d);
-		Spot catcherSpot = new Spot(1500d, 850d);
-		allButOvals.add(throwerSpot, catcherSpot);
-		sketch(1d, throwerSpot);
-		sketch(1d, catcherSpot);
-		Arrow throwerArrow = new Arrow(thrower, false, throwerSpot, false, commentFormat);
-		sketch(500d, throwerArrow);
-		Arrow catcherArrow = new Arrow(catcher, false, catcherSpot, false, commentFormat);
-		sketch(500d, catcherArrow);
-		allButOvals.add(throwerArrow, catcherArrow);
-
-		mark(153);
-		Letters runtime = new Letters("Runtime", new Centered(new Point(1250d, 220d)), commentFormat);
-		sketch(500d, runtime);
-		allButOvals.add(runtime);
-
-		mark(160);
-		Arrow runtimeOne = knowLine(allButOvals, 350d, false);
-
-		mark(166);
-		Cross crossOne = new Cross(runtimeOne, 125d, 100d, new Point(0d, -10d));
-		sketch(500d, crossOne);
-		allButOvals.add(crossOne);
-
-		mark(172);
-		Arrow runtimeTwo = knowLine(allButOvals, 475d, true);
-
-		mark(176);
-		Cross crossTwo = new Cross(runtimeTwo, 125d, 100d, new Point(0d, -10d));
-		sketch(500d, crossTwo);
-		allButOvals.add(crossTwo);
-
-		mark(190);
-		Letters compiletime = new Letters("Compile Time", new Centered(new Point(1250d, 550d)), commentFormat);
-		sketch(500d, compiletime);
-		allButOvals.add(compiletime);
-
-		mark(194);
-		Arrow compiletimeOne = knowLine(allButOvals, 680d, false);
-
-		mark(202);
-		Cross crossThree = new Cross(compiletimeOne, 125d, 100d, new Point(0d, -10d));
-		sketch(500d, crossThree);
-		allButOvals.add(crossThree);
-
-		mark(207);
-		Arrow compiletimeTwo = knowLine(allButOvals, 800d, true);
-
-		mark(212);
-		Cross crossFour = new Cross(compiletimeTwo, 125d, 100d, new Point(0d, -10d));
-		sketch(500d, crossFour);
-		allButOvals.add(crossFour);
-
-		return endBuild();
-	}
-
-	private Step noDependencies()
-	{
-		buildPhrase();
-		clear();
-		head("No Dependencies");
-		sub("very different situation");
-
-		mark(227);
-		minor("no direct call");
-		minor("so neither side knows the other");
-		mark(233);
-
-		OvalText thrower = new OvalText("Thrower", new Point(1000d, 380d), commentFormat);
-		sketch(1000d, thrower);
-		OvalText catcher = new OvalText("Catcher", new Point(1500d, 380d), commentFormat);
-
-		sketch(1000d, catcher);
-
-		mark(240);
-		OvalText lnf = new OvalText("LidNotFound", new Point(1250d, 550d), commentFormat);
-		sketch(500d, lnf);
-
-		Arrow throwerLnf = new Arrow(thrower, false, lnf, true, knowsFormat);
-		Arrow catcherLnf = new Arrow(catcher, false, lnf, true, knowsFormat);
-
-		sketch(500d, throwerLnf);
-		sketch(500d, catcherLnf);
-		minor(" ");
-		minor(" ");
-		minor(" ");
-		minor(" ");
-		minor(" ");
-		mark(247);
-		minor("shared dependency irrelevant");
-
-		mark(252);
-		clear();
-		head("Easier To Test");
-
-		mark(263);
-		sub("four nopes = one yep?");
-		mark(268);
-		minor("test the thrower by itself");
-		minor("test the catcher by itself");
-
-		mark(274);
-		lead("This Is Far Easier");
-		return endBuild();
-	}
 
 	private Arrow knowLine(Actors actors, double y, boolean leftHead)
 	{

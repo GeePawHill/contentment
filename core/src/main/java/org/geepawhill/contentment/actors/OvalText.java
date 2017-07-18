@@ -29,6 +29,8 @@ public class OvalText implements Actor
 	private LettersAtom letters;
 	private BezierAtom east;
 	private BezierAtom west;
+	private Bezier eastHalfBezier;
+	private Bezier westHalfBezier;
 
 	public OvalText(String source, Point center, Format format)
 	{
@@ -37,9 +39,9 @@ public class OvalText implements Actor
 		this.northJiggler = new Jiggler(.5d, 6d);
 		this.controlJiggler = new Jiggler(.4d, 30d);
 
-		letters = new LettersAtom(this,source, format, new Centered(center));
-		east = new BezierAtom(this,this::eastHalfPoints,format);
-		west = new BezierAtom(this,this::westHalfPoints,format);
+		letters = new LettersAtom(this, source, format, new Centered(center));
+		east = new BezierAtom(this, this::eastHalfPoints, format);
+		west = new BezierAtom(this, this::westHalfPoints, format);
 		this.group = new Group();
 	}
 
@@ -64,18 +66,28 @@ public class OvalText implements Actor
 		return timed;
 	}
 
+	private void setPointsIfNeeded()
+	{
+		if(eastHalfBezier==null)
+		{
+		PointPair points = new PointPair(letters.text()).grow(45,8);
+		eastHalfBezier= new Bezier(points.north(), controlJiggler.jiggle(points.northeast()), controlJiggler.jiggle(points.southeast()),
+				points.south());
+		westHalfBezier = new Bezier(points.south(), controlJiggler.jiggle(points.southwest()), controlJiggler.jiggle(points.northwest()),
+				northJiggler.jiggle(points.north()));
+		}
+	}
+
 	private Bezier eastHalfPoints()
 	{
-		PointPair points = new PointPair(letters.text()).grow(45,8);
-		return new Bezier(points.north(), controlJiggler.jiggle(points.northeast()), controlJiggler.jiggle(points.southeast()),
-				points.south());
+		setPointsIfNeeded();
+		return eastHalfBezier;
 	}
 
 	public Bezier westHalfPoints()
 	{
-		PointPair points = new PointPair(letters.text()).grow(45,8);
-		return new Bezier(points.south(), controlJiggler.jiggle(points.southwest()), controlJiggler.jiggle(points.northwest()),
-				northJiggler.jiggle(points.north()));
+		setPointsIfNeeded();
+		return westHalfBezier;
 	}
 
 }

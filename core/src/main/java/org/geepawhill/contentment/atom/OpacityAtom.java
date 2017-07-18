@@ -6,7 +6,6 @@ import org.geepawhill.contentment.core.Context;
 
 public class OpacityAtom implements Atom
 {
-
 	private Actor actor;
 	private double from;
 	private double to;
@@ -21,6 +20,7 @@ public class OpacityAtom implements Atom
 	@Override
 	public void setup(Context context)
 	{
+		actor.group().setOpacity(from);
 	}
 
 	@Override

@@ -26,7 +26,6 @@ public class LettersAtom implements Atom
 		this.source = source;
 		this.format = format;
 		this.position = position;
-		this.text = new Text();
 	}
 
 	@Override
@@ -41,6 +40,7 @@ public class LettersAtom implements Atom
 	@Override
 	public void setup(Context context)
 	{
+		this.text = new Text();
 		if(source==null || source.isEmpty()) source = " ";
 		text.setText(source);
 		format.apply(TypeFace.FACE, text);

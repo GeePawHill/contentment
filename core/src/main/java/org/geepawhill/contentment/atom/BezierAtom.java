@@ -39,6 +39,7 @@ public class BezierAtom implements Atom
 	{
 		format.apply(Frames.KEY, path);
 		JfxUtility.addIfNeeded(owner, path);
+		partial(context,0d);
 	}
 
 	@Override

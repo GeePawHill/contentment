@@ -58,4 +58,14 @@ public class Context
 	{
 		return rhythm.beat();
 	}
+
+	public void wipe()
+	{
+		Actors local = new Actors();
+		local.addAll(actors);
+		for(Actor actor : local)
+		{
+			remove(actor);
+		}
+	}
 }

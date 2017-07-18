@@ -91,6 +91,19 @@ public class Player
 
 	public void backward()
 	{
+		mustBeStepping();
+		if(!atStart())
+		{
+			context.wipe();
+			int newPosition = position-1;
+			setPosition(0);
+			while(position!=newPosition)
+			{
+				forward();
+			}
+			if (atEnd()) getRhythm().seekHard(Rhythm.MAX);
+			else getRhythm().seekHard(nextSync().target);
+		}
 //		mustBeStepping();
 //		if (!atStart())
 //		{

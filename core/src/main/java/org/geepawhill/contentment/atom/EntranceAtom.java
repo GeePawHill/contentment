@@ -17,6 +17,8 @@ public class EntranceAtom implements Atom
 	@Override
 	public void setup(Context context)
 	{
+		actor.group().getChildren().clear();
+		actor.group().setOpacity(1);
 	}
 
 	@Override
