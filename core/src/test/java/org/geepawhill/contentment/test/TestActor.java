@@ -2,6 +2,7 @@ package org.geepawhill.contentment.test;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.GenericAgentBuilder;
+import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.step.Step;
 
@@ -36,9 +37,9 @@ public class TestActor implements Actor<GenericAgentBuilder<TestActor>>
 	}
 
 	@Override
-	public GenericAgentBuilder<TestActor> builder()
+	public GenericAgentBuilder<TestActor> builder(ScriptWorld world)
 	{
-		return new GenericAgentBuilder<>(this);
+		return new GenericAgentBuilder<>(world,this);
 	}
 
 }

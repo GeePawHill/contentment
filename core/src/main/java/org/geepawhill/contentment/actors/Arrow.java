@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.GenericAgentBuilder;
+import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.BezierAtom;
 import org.geepawhill.contentment.connector.arrow.ArrowComputer;
 import org.geepawhill.contentment.connector.arrow.ArrowPoints;
@@ -134,9 +135,9 @@ public class Arrow implements Actor<GenericAgentBuilder<Arrow>>
 	}
 
 	@Override
-	public GenericAgentBuilder<Arrow> builder()
+	public GenericAgentBuilder<Arrow> builder(ScriptWorld world)
 	{
-		return new GenericAgentBuilder<>(this);
+		return new GenericAgentBuilder<>(world,this);
 	}
 
 }

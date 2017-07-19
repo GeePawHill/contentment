@@ -2,6 +2,8 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Actors;
+import org.geepawhill.contentment.actor.CueBuilder;
+import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.ChangeColorAtom;
 import org.geepawhill.contentment.atom.ClearAtom;
 import org.geepawhill.contentment.atom.EntranceAtom;
@@ -14,16 +16,26 @@ import javafx.scene.paint.Paint;
 public class ScriptBuilder
 {
 	
-	Addable working=null;
+	protected ScriptWorld world;
 
+	public ScriptBuilder()
+	{
+		world = new ScriptWorld();
+	}
+	
+	public CueBuilder cue(long beat)
+	{
+		addToWorking(new MarkStep(beat));
+		return new CueBuilder(world,beat);
+	}
+	
 	public Step clear()
 	{
 		AtomStep step = new AtomStep(Timing.instant(),new ClearAtom());
 		addToWorking(step);
 		return step;
 	}
-
-
+	
 	public Step reColor(Actor<?> actor, Paint paint)
 	{
 		AtomStep step = new AtomStep(Timing.instant(),new ChangeColorAtom(actor,paint));
@@ -86,37 +98,27 @@ public class ScriptBuilder
 	
 	public void addToWorking(Step step)
 	{
-		if(working!=null) working.add(step);
-	}
-	
-	public void setWorking(Phrase phrase)
-	{
-		working = phrase;
+		world.add(step);
 	}
 	
 	public Addable buildPhrase()
 	{
-		working = new Phrase();
-		return working;
+		return world.buildPhrase();
 	}
 	
 	public Addable buildChord()
 	{
-		working = new Chord();
-		return working;
+		return world.buildChord();
 	}
 	
 	public Addable buildMore(Addable addable)
 	{
-		working = addable;
-		return working;
+		return world.buildMore(addable);
 	}
 	
 	public Addable endBuild()
 	{
-		Addable temp = working;
-		working=null;
-		return temp;
+		return world.endBuild();
 	}
 	
 	public void fadeIn(double ms, Actors... arrays)

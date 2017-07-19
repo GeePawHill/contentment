@@ -2,6 +2,7 @@ package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.GenericAgentBuilder;
+import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.SpotAtom;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.step.AtomStep;
@@ -49,9 +50,9 @@ public class Spot implements Actor<GenericAgentBuilder<Spot>>
 	}
 
 	@Override
-	public GenericAgentBuilder<Spot> builder()
+	public GenericAgentBuilder<Spot> builder(ScriptWorld world)
 	{
-		return new GenericAgentBuilder<>(this);
+		return new GenericAgentBuilder<>(world,this);
 	}
 	
 	

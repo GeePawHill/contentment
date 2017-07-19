@@ -12,5 +12,5 @@ public interface Actor<BUILDER>
 
 	public Step draw(double ms);
 
-	BUILDER builder();
+	BUILDER builder(ScriptWorld world);
 }

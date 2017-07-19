@@ -2,6 +2,7 @@ package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.GenericAgentBuilder;
+import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.BezierAtom;
 import org.geepawhill.contentment.core.Atom;
 import org.geepawhill.contentment.format.Format;
@@ -45,9 +46,9 @@ public class Stroke implements Actor<GenericAgentBuilder<Stroke>>
 	}
 
 	@Override
-	public GenericAgentBuilder<Stroke> builder()
+	public GenericAgentBuilder<Stroke> builder(ScriptWorld world)
 	{
-		return new GenericAgentBuilder<>(this);
+		return new GenericAgentBuilder<>(world,this);
 	}
 
 }

@@ -2,6 +2,7 @@ package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.ActorBuilderBase;
+import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.BezierAtom;
 import org.geepawhill.contentment.atom.LettersAtom;
 import org.geepawhill.contentment.format.Format;
@@ -121,16 +122,19 @@ public class Letters implements Actor<Letters.Builder>
 	}
 	
 	@Override
-	public Builder builder()
+	public Builder builder(ScriptWorld world)
 	{
-		return new Builder();
+		return new Builder(world);
 	}
 	
 	public class Builder extends ActorBuilderBase<Letters,Builder>
 	{
-		public Builder()
+		private ScriptWorld world;
+
+		public Builder(ScriptWorld world)
 		{
-			super(Letters.this);
+			super(world, Letters.this);
+			this.world = world;
 		}
 		
 		// this action can only be done to actors of type MyAgent

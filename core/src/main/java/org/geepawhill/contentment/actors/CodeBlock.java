@@ -2,6 +2,7 @@ package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.GenericAgentBuilder;
+import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.BlockAtom;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.position.Position;
@@ -44,8 +45,8 @@ public class CodeBlock implements Actor<GenericAgentBuilder<CodeBlock>>
 	}
 
 	@Override
-	public GenericAgentBuilder<CodeBlock> builder()
+	public GenericAgentBuilder<CodeBlock> builder(ScriptWorld world)
 	{
-		return new GenericAgentBuilder<>(this);
+		return new GenericAgentBuilder<>(world,this);
 	}
 }

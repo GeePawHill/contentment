@@ -4,9 +4,12 @@ public class GenericAgentBuilder<ACTOR extends Actor<GenericAgentBuilder<ACTOR>>
 		extends ActorBuilderBase<ACTOR, GenericAgentBuilder<ACTOR>>
 {
 
-	public GenericAgentBuilder(ACTOR agent)
+	protected ScriptWorld world;
+
+	public GenericAgentBuilder(ScriptWorld world,ACTOR agent)
 	{
-		super(agent);
+		super(world, agent);
+		this.world = world;
 	}
 
 	@Override

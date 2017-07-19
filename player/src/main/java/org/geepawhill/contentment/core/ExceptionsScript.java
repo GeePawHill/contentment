@@ -28,6 +28,7 @@ import org.geepawhill.contentment.position.RightOf;
 import org.geepawhill.contentment.position.TopLeft;
 import org.geepawhill.contentment.position.TopRight;
 import org.geepawhill.contentment.rhythm.MediaRhythm;
+import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.step.ScriptBuilder;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.style.Dash;
@@ -140,29 +141,12 @@ public class ExceptionsScript extends ScriptBuilder
 	
 	private Step opening()
 	{
-		buildPhrase();
+		cue(0).actor(new Letters("Hi mom!")).sketch();
 		head("Microtesting Exceptions");
 		mark(3);
 		sub("A GeePaw Quickie");
 		return endBuild();
 	}
-	
-//	private Step stack2()
-//	{
-//		assume().format("largeCodeFormat");
-//		mark(0).head("A Program's Stack");
-//		then().drawStack();
-//		mark(22).head("The Household Progam");
-//		mark(26).sketch().letters("main()").group("stack").at(stackTextPosition(0));
-//		mark(30).sketch().letters("doChores()").group("catchAndThrow").at(stackTextPosition(1));
-//		mark(33).sketch().letters("takeOutTrash()").group("stack").at(stackTextPosition(2));
-//		mark(37).sketch().letters("putBagsInCans()").group("stack").at(stackTextPosition(3));
-//		mark(40).sketch().letters("putOneBagInCan()").group("stack").at(stackTextPosition(4));
-//		mark(44).sketch().letters("openCan()").group("catchAndThrow").at(stackTextPosition(5));
-//		then().sketch().letters("whoops, he forgot openCan()").named("joke").placed(jokePosition());
-//		mark(49).fadeOut().the("joke");
-//	}
-
 	
 	private Step stack()
 	{
