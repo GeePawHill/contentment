@@ -55,7 +55,7 @@ public class ActorsTest
 	{
 		actors.add(box1);
 		actors.add(box2);
-		Iterator<Actor> iterator = actors.iterator();
+		Iterator<Actor<?>> iterator = actors.iterator();
 		assertTrue(iterator.hasNext());
 		assertEquals(box1,iterator.next());
 		assertEquals(box2,iterator.next());

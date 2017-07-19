@@ -71,7 +71,7 @@ public class JfxUtility
 		if(!group.getChildren().contains(node)) group.getChildren().add(node);
 	}
 	
-	public static void addIfNeeded(Actor actor, Node node)
+	public static void addIfNeeded(Actor<?> actor, Node node)
 	{
 		addIfNeeded(actor.group(),node);
 	}

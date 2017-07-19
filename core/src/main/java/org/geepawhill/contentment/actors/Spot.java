@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.actor.GenericAgentBuilder;
 import org.geepawhill.contentment.atom.SpotAtom;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.step.AtomStep;
@@ -10,7 +11,7 @@ import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
 
-public class Spot implements Actor
+public class Spot implements Actor<GenericAgentBuilder<Spot>>
 {
 
 	final String nickname;
@@ -46,5 +47,13 @@ public class Spot implements Actor
 	{
 		return new AtomStep(Timing.ms(ms),atom);
 	}
+
+	@Override
+	public GenericAgentBuilder<Spot> builder()
+	{
+		return new GenericAgentBuilder<>(this);
+	}
+	
+	
 
 }

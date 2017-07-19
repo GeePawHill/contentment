@@ -18,9 +18,9 @@ public class BezierAtom implements Atom
 	public final Path path;
 	private BezierSource source;
 	private Format format;
-	private Actor owner;
+	private Actor<?> owner;
 	
-	public BezierAtom(Actor owner, BezierSource source, Format format)
+	public BezierAtom(Actor<?> owner, BezierSource source, Format format)
 	{
 		this.owner = owner;
 		this.source = source;
@@ -29,7 +29,7 @@ public class BezierAtom implements Atom
 	}
 
 
-	public BezierAtom(Actor owner, Format format, PointPair points)
+	public BezierAtom(Actor<?> owner, Format format, PointPair points)
 	{
 		this(owner, () -> new Bezier(points), format);
 	}

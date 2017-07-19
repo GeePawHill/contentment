@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.actor.GenericAgentBuilder;
 import org.geepawhill.contentment.atom.BezierAtom;
 import org.geepawhill.contentment.core.Atom;
 import org.geepawhill.contentment.format.Format;
@@ -12,7 +13,7 @@ import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
 
-public class Stroke implements Actor
+public class Stroke implements Actor<GenericAgentBuilder<Stroke>>
 {
 	private final String nickname;
 	private final Group group;
@@ -41,6 +42,12 @@ public class Stroke implements Actor
 	public Step draw(double ms)
 	{
 		return new AtomStep(Timing.ms(ms),atom);
+	}
+
+	@Override
+	public GenericAgentBuilder<Stroke> builder()
+	{
+		return new GenericAgentBuilder<>(this);
 	}
 
 }

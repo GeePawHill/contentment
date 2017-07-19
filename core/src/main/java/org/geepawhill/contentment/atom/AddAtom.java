@@ -9,10 +9,10 @@ import javafx.scene.Node;
 
 public class AddAtom implements Atom
 {
-	private Actor actor;
+	private Actor<?> actor;
 	private Node node;
 
-	public AddAtom(Actor actor, Node node)
+	public AddAtom(Actor<?> actor, Node node)
 	{
 		this.actor = actor;
 		this.node = node;

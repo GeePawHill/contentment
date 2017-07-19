@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.actor.GenericAgentBuilder;
 import org.geepawhill.contentment.atom.BezierAtom;
 import org.geepawhill.contentment.connector.arrow.ArrowComputer;
 import org.geepawhill.contentment.connector.arrow.ArrowPoints;
@@ -11,14 +12,14 @@ import org.geepawhill.contentment.connector.arrow.NodeArrowComputer;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.step.Step;
+import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
 
-public class Arrow implements Actor
+public class Arrow implements Actor<GenericAgentBuilder<Arrow>>
 {
 	final String nickname;
 
@@ -43,7 +44,7 @@ public class Arrow implements Actor
 	private Bezier chosenToTop;
 	private Bezier chosenToBottom;
 
-	public Arrow(Actor from, boolean pointAtFrom, Actor to, boolean pointAtTo, Format format)
+	public Arrow(Actor<?> from, boolean pointAtFrom, Actor<?> to, boolean pointAtTo, Format format)
 	{
 		this.random = new Random();
 		this.nickname = Names.make(getClass());
@@ -130,6 +131,12 @@ public class Arrow implements Actor
 			sequence.add(Timing.weighted(.1d), step);
 		}
 		return sequence;
+	}
+
+	@Override
+	public GenericAgentBuilder<Arrow> builder()
+	{
+		return new GenericAgentBuilder<>(this);
 	}
 
 }

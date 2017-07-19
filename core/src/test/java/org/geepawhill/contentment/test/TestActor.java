@@ -1,12 +1,13 @@
 package org.geepawhill.contentment.test;
 
 import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.actor.GenericAgentBuilder;
 import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.step.Step;
 
 import javafx.scene.Group;
 
-public class TestActor implements Actor
+public class TestActor implements Actor<GenericAgentBuilder<TestActor>>
 {
 
 	public final Group group;
@@ -32,6 +33,12 @@ public class TestActor implements Actor
 	public Step draw(double ms)
 	{
 		return new Phrase();
+	}
+
+	@Override
+	public GenericAgentBuilder<TestActor> builder()
+	{
+		return new GenericAgentBuilder<>(this);
 	}
 
 }

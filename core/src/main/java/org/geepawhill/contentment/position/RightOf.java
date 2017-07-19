@@ -9,16 +9,16 @@ import javafx.scene.Node;
 public class RightOf implements Position
 {
 	
-	private Actor anchor;
+	private Actor<?> anchor;
 	private double offset;
 
-	public RightOf(Actor anchor,double offset)
+	public RightOf(Actor<?> anchor,double offset)
 	{
 		this.anchor = anchor;
 		this.offset = offset;
 	}
 	
-	public RightOf(Actor anchor)
+	public RightOf(Actor<?> anchor)
 	{
 		this(anchor,0d);
 	}

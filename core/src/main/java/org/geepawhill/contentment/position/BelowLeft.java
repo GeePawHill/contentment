@@ -9,9 +9,9 @@ import javafx.scene.Node;
 public class BelowLeft implements Position
 {
 	
-	private Actor anchor;
+	private Actor<?> anchor;
 
-	public BelowLeft(Actor anchor)
+	public BelowLeft(Actor<?> anchor)
 	{
 		this.anchor = anchor;
 	}

@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.actor.ActorBuilderBase;
 import org.geepawhill.contentment.atom.BezierAtom;
 import org.geepawhill.contentment.atom.LettersAtom;
 import org.geepawhill.contentment.format.Format;
@@ -8,14 +9,14 @@ import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Jiggler;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.position.Position;
-import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.step.Step;
+import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
 
-public class Letters implements Actor
+public class Letters implements Actor<Letters.Builder>
 {
 	private final String nickname;
 	private final Group group;
@@ -118,5 +119,33 @@ public class Letters implements Actor
 		setPointsIfNeeded();
 		return westHalfBezier;
 	}
+	
+	@Override
+	public Builder builder()
+	{
+		return new Builder();
+	}
+	
+	public class Builder extends ActorBuilderBase<Letters,Builder>
+	{
+		public Builder()
+		{
+			super(Letters.this);
+		}
+		
+		// this action can only be done to actors of type MyAgent
+		public Builder lettersOnly()
+		{
+			// do something only this kind of agent can do
+			return this;
+		}
+		
+		@Override
+		public Builder downcast()
+		{
+			return this;
+		}
+	}
+
 
 }

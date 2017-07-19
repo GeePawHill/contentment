@@ -9,16 +9,16 @@ import javafx.scene.Node;
 public class BelowCenter implements Position
 {
 	
-	private Actor anchor;
+	private Actor<?> anchor;
 	private double offset;
 
-	public BelowCenter(Actor anchor,double offset)
+	public BelowCenter(Actor<?> anchor,double offset)
 	{
 		this.anchor = anchor;
 		this.offset = offset;
 	}
 	
-	public BelowCenter(Actor anchor)
+	public BelowCenter(Actor<?> anchor)
 	{
 		this(anchor,0d);
 	}

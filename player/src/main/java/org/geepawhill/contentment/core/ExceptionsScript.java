@@ -54,7 +54,7 @@ public class ExceptionsScript extends ScriptBuilder
 	private Format jokeFormat;
 	private Format lightComment;
 
-	private ArrayList<Actor> lines;
+	private ArrayList<Actor<?>> lines;
 
 	private Actors stack;
 	private Actors disappearingStackText;
@@ -146,6 +146,23 @@ public class ExceptionsScript extends ScriptBuilder
 		sub("A GeePaw Quickie");
 		return endBuild();
 	}
+	
+//	private Step stack2()
+//	{
+//		assume().format("largeCodeFormat");
+//		mark(0).head("A Program's Stack");
+//		then().drawStack();
+//		mark(22).head("The Household Progam");
+//		mark(26).sketch().letters("main()").group("stack").at(stackTextPosition(0));
+//		mark(30).sketch().letters("doChores()").group("catchAndThrow").at(stackTextPosition(1));
+//		mark(33).sketch().letters("takeOutTrash()").group("stack").at(stackTextPosition(2));
+//		mark(37).sketch().letters("putBagsInCans()").group("stack").at(stackTextPosition(3));
+//		mark(40).sketch().letters("putOneBagInCan()").group("stack").at(stackTextPosition(4));
+//		mark(44).sketch().letters("openCan()").group("catchAndThrow").at(stackTextPosition(5));
+//		then().sketch().letters("whoops, he forgot openCan()").named("joke").placed(jokePosition());
+//		mark(49).fadeOut().the("joke");
+//	}
+
 	
 	private Step stack()
 	{
@@ -681,7 +698,7 @@ public class ExceptionsScript extends ScriptBuilder
 
 	private void clearLines()
 	{
-		for (Actor line : lines)
+		for (Actor<?> line : lines)
 		{
 			disappear(line);
 		}

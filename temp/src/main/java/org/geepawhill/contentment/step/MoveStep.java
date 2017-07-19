@@ -14,13 +14,13 @@ import javafx.scene.transform.Translate;
 public class MoveStep implements Step
 {
 
-	private Actor actor;
+	private Actor<?> actor;
 	private Point destination;
 	private Timing timing;
 	private PointPair translation;
 	private Translate translate;
 
-	public MoveStep(double ms, Actor actor, Point destination)
+	public MoveStep(double ms, Actor<?> actor, Point destination)
 	{
 		this.actor = actor;
 		this.destination = destination;
@@ -41,7 +41,7 @@ public class MoveStep implements Step
 		translation = new PointPair(translate.getX(), translate.getY(), destination.x - start.x, destination.y - start.y);
 	}
 
-	public Translate getOrAddTranslate(Actor actor)
+	public Translate getOrAddTranslate(Actor<?> actor)
 	{
 		for (Transform transform : actor.group().getTransforms())
 		{

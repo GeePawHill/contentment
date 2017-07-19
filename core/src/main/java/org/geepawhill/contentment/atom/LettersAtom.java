@@ -14,13 +14,13 @@ import javafx.scene.text.Text;
 public class LettersAtom implements Atom
 {
 	private Text text;
-	private Actor actor;
+	private Actor<?> actor;
 	private String source;
 	private Format format;
 	private Position position;
 	private String lastPartial;
 
-	public LettersAtom(Actor actor, String source, Format format, Position position)
+	public LettersAtom(Actor<?> actor, String source, Format format, Position position)
 	{
 		this.actor = actor;
 		this.source = source;
