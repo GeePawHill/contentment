@@ -15,6 +15,8 @@ import javafx.scene.Parent;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
 public class JfxUtility
@@ -85,4 +87,14 @@ public class JfxUtility
 		}
 	}
 
+	static public Paint color(int r, int g, int b)
+	{
+		return new Color((double) r / 255d, (double) g / 255d, (double) b / 255d, 1d);
+	}
+
+	public static void removeIfNeeded(Group group, Node node)
+	{
+		if(group.getChildren().contains(node)) group.getChildren().remove(node);
+		
+	}
 }

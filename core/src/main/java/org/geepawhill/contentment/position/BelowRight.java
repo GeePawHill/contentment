@@ -9,17 +9,23 @@ import javafx.scene.Node;
 public class BelowRight implements Position
 {
 	
-	private Actor<?> anchor;
+	private Node anchor;
 
 	public BelowRight(Actor<?> anchor)
 	{
+		this(anchor.group());
+	}
+	
+	public BelowRight(Node anchor)
+	{
 		this.anchor = anchor;
 	}
+
 	
 	@Override
 	public void position(Node node, PointPair dimensions)
 	{
-		Point anchorPoint = new PointPair(anchor.group().getBoundsInParent()).southeast();
+		Point anchorPoint = new PointPair(anchor.getBoundsInParent()).southeast();
 		JfxUtility.setTopAlignment(node);
 		node.setTranslateX(anchorPoint.x-dimensions.width());
 		node.setTranslateY(anchorPoint.y);

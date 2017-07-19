@@ -1,5 +1,7 @@
 package org.geepawhill.contentment.core;
 
+import static org.geepawhill.contentment.utility.JfxUtility.color;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -28,7 +30,6 @@ import org.geepawhill.contentment.position.RightOf;
 import org.geepawhill.contentment.position.TopLeft;
 import org.geepawhill.contentment.position.TopRight;
 import org.geepawhill.contentment.rhythm.MediaRhythm;
-import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.step.ScriptBuilder;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.style.Dash;
@@ -141,7 +142,6 @@ public class ExceptionsScript extends ScriptBuilder
 	
 	private Step opening()
 	{
-		cue(0).actor(new Letters("Hi mom!")).sketch();
 		head("Microtesting Exceptions");
 		mark(3);
 		sub("A GeePaw Quickie");
@@ -717,8 +717,4 @@ public class ExceptionsScript extends ScriptBuilder
 		return joke;
 	}
 
-	private Paint color(int r, int g, int b)
-	{
-		return new Color((double) r / 255d, (double) g / 255d, (double) b / 255d, 1d);
-	}
 }

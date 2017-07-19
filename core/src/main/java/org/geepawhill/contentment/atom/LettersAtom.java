@@ -9,12 +9,13 @@ import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.utility.JfxUtility;
 
+import javafx.scene.Group;
 import javafx.scene.text.Text;
 
 public class LettersAtom implements Atom
 {
 	private Text text;
-	private Actor<?> actor;
+	private Group group;
 	private String source;
 	private Format format;
 	private Position position;
@@ -22,7 +23,12 @@ public class LettersAtom implements Atom
 
 	public LettersAtom(Actor<?> actor, String source, Format format, Position position)
 	{
-		this.actor = actor;
+		this(actor.group(),source,format,position);
+	}
+	
+	public LettersAtom(Group group, String source, Format format, Position position)
+	{
+		this.group = group;
 		this.source = source;
 		this.format = format;
 		this.position = position;
@@ -48,7 +54,7 @@ public class LettersAtom implements Atom
 		PointPair dimensions = new PointPair(text.getBoundsInLocal());
 		position.position(text,dimensions);
 		text.setText("");
-		JfxUtility.addIfNeeded(actor.group(),text);
+		JfxUtility.addIfNeeded(group,text);
 		lastPartial = "";
 	}
 
