@@ -142,21 +142,17 @@ public class ExceptionsScript extends ScriptBuilder
 	
 	private Step opening()
 	{
-		head("Microtesting Exceptions");
-		mark(3);
-		sub("A GeePaw Quickie");
+		cue(0).slide().enter().head("Microtesting Exceptions");
+		cue(3).slide().sub("A GeePaw Quickie");
 		return endBuild();
 	}
 	
 	private Step stack()
 	{
-		buildPhrase();
-		
-		head("A Program's Stack");
+		cue(16).slide().head("A Program's Stack");
 		drawStack();
 		
-		mark(22);
-		head("The Household Program");
+		cue(22).slide().head("The Household Program");
 		
 		mark(26);
 		Letters main = new Letters("main()", stackTextPosition(0), largeCodeFormat);

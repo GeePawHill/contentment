@@ -1,5 +1,6 @@
 package org.geepawhill.contentment.actor;
 
+import org.geepawhill.contentment.actors.Slide;
 import org.geepawhill.contentment.step.Addable;
 import org.geepawhill.contentment.step.Chord;
 import org.geepawhill.contentment.step.Phrase;
@@ -8,10 +9,12 @@ import org.geepawhill.contentment.step.Step;
 public class ScriptWorld
 {
 	private Addable working;
+	private Slide slide;
 	
 	public ScriptWorld()
 	{
 		working = new Phrase();
+		slide = new Slide();
 	}
 
 	public void add(Step step)
@@ -39,7 +42,12 @@ public class ScriptWorld
 	public Addable endBuild()
 	{
 		Addable temp = working;
-		working=null;
+		working=new Phrase();
 		return temp;
+	}
+
+	public Actor slide()
+	{
+		return slide;
 	}
 }

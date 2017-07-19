@@ -1,5 +1,7 @@
 package org.geepawhill.contentment.actor;
 
+import org.geepawhill.contentment.actors.Letters;
+import org.geepawhill.contentment.actors.Slide;
 import org.geepawhill.contentment.step.MarkStep;
 
 public class CueBuilder
@@ -18,6 +20,11 @@ public class CueBuilder
 	public <ACTOR extends Actor<BUILDER>, BUILDER> BUILDER actor(ACTOR actor)
 	{
 		return actor.builder(world);
+	}
+	
+	public Slide.Builder slide()
+	{
+		return actor(world.slide());
 	}
 
 }
