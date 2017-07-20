@@ -1,5 +1,7 @@
 package org.geepawhill.contentment.actor;
 
+import java.util.HashMap;
+
 import org.geepawhill.contentment.actors.Slide;
 import org.geepawhill.contentment.step.Addable;
 import org.geepawhill.contentment.step.Chord;
@@ -10,11 +12,13 @@ public class ScriptWorld
 {
 	private Addable working;
 	private Slide slide;
+	private HashMap<String,Actor<?>> namedActors;
 	
 	public ScriptWorld()
 	{
 		working = new Phrase();
 		slide = new Slide();
+		namedActors = new HashMap<>();
 	}
 
 	public void add(Step step)
@@ -46,8 +50,19 @@ public class ScriptWorld
 		return temp;
 	}
 
-	public Actor slide()
+	public Actor<?> slide()
 	{
 		return slide;
+	}
+
+	public Actor<?> actor(String actor)
+	{
+		if(!namedActors.containsKey(actor)) throw new RuntimeException("Can't find actor: ["+actor+"]");
+		return namedActors.get(actor);
+	}
+
+	public void callActor(String name, Actor<?> actor)
+	{
+		namedActors.put(name, actor);
 	}
 }

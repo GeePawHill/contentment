@@ -30,11 +30,4 @@ public class AtomStep implements Step
 		atom.setup(context);
 		atom.partial(context, 1d);
 	}
-
-	@Override
-	public Timing timing()
-	{
-		return timing;
-	}
-
 }

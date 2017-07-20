@@ -6,6 +6,7 @@ package org.geepawhill.contentment.actor;
 public interface ActorBuilder<SUBCLASS>
 {
 	public SUBCLASS sketch();
+	public SUBCLASS called(String name);
 
 	// subclass will provide its properly-cast this
 	public SUBCLASS downcast();

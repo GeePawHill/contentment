@@ -1,9 +1,5 @@
 package org.geepawhill.contentment.timing;
 
-import java.util.ArrayList;
-
-import org.geepawhill.contentment.step.Step;
-
 public class Scheduler
 {
 
@@ -11,22 +7,6 @@ public class Scheduler
 	public static final String ABSOLUTE_OVERRUN = "Absolutes are bigger than allocated.";
 	private double accumulatedAbsolute;
 	private double accumulatedRelative;
-
-	public double schedule(double ms, ArrayList<Step> steps)
-	{
-		return schedule(ms, steps.toArray(new Step[0]));
-	}
-
-	public double schedule(double total, Step... steps)
-	{
-		Timing[] timings = new Timing[steps.length];
-		int dest = 0;
-		for (Step step : steps)
-		{
-			timings[dest++] = step.timing();
-		}
-		return schedule(total, timings);
-	}
 
 	public double schedule(double total, Timing... timings)
 	{

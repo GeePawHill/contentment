@@ -8,8 +8,8 @@ import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.step.Step;
+import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.timing.Timing;
 

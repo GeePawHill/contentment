@@ -43,10 +43,4 @@ public class TestPhrase extends Phrase
 		onFinished.run();
 	}
 
-	@Override
-	public Timing timing()
-	{
-		return timing;
-	}
-
 }

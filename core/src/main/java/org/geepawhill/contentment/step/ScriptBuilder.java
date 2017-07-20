@@ -17,6 +17,7 @@ public class ScriptBuilder
 {
 	
 	protected ScriptWorld world;
+	private CueBuilder cueBuilder;
 
 	public ScriptBuilder()
 	{
@@ -26,7 +27,13 @@ public class ScriptBuilder
 	public CueBuilder cue(long beat)
 	{
 		addToWorking(new MarkStep(beat));
-		return new CueBuilder(world,beat);
+		cueBuilder = new CueBuilder(world,beat);
+		return and();
+	}
+	
+	public CueBuilder and()
+	{
+		return cueBuilder;
 	}
 	
 	public Step clear()

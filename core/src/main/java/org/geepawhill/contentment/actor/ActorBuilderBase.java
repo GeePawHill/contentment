@@ -22,4 +22,11 @@ public abstract class ActorBuilderBase<ACTOR extends Actor<BUILDER>, BUILDER> im
 		world.add(actor.draw(500d));
 		return downcast();
 	}
+
+	@Override
+	public BUILDER called(String name)
+	{
+		world.callActor(name,actor);
+		return downcast();
+	}
 }

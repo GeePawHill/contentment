@@ -38,14 +38,6 @@ public class PhraseTest extends JavaFxTest
 	}
 
 	@Test
-	public void sumsMs()
-	{
-		assertThat(empty.timing().ms()).isEqualTo(0L);
-		assertThat(onlyOne.timing().ms()).isEqualTo(1L);
-		assertThat(both.timing().ms()).isEqualTo(10L);
-	}
-
-	@Test
 	public void fastOne()
 	{
 		onlyOne.fast(getContext());

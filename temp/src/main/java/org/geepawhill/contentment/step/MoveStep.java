@@ -65,10 +65,4 @@ public class MoveStep implements Step
 		interpolate(context, 1d);
 	}
 
-	@Override
-	public Timing timing()
-	{
-		return timing;
-	}
-
 }

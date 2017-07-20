@@ -2,7 +2,6 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.timing.Timing;
 
 public interface Step
 {
@@ -10,5 +9,4 @@ public interface Step
 
 	public void fast(Context context);
 
-	public Timing timing();
 }

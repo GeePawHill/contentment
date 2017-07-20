@@ -4,34 +4,24 @@ import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.timing.Timing;
 
 public class Chord implements Addable
 {
 	private final ArrayList<Step> playables;
-	private long ms;
 	private OnFinished onFinished;
 	private int finished;
 	
 	public Chord()
 	{
 		this.playables = new ArrayList<>();
-		this.ms=0L;
 	}
 
 	public Chord add(Step Step)
 	{
 		playables.add(Step);
-		if(Step.timing().ms()>ms) ms = (long)Step.timing().ms();
 		return this;
 	}
 	
-	@Override
-	public Timing timing()
-	{
-		return Timing.ms(ms);
-	}
-
 	@Override
 	public void fast(Context context)
 	{

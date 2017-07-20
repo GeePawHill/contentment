@@ -150,6 +150,7 @@ public class ExceptionsScript extends ScriptBuilder
 	private Step stack()
 	{
 		cue(16).slide().head("A Program's Stack");
+		and().actor(new Stack()).called("stack").sketch();
 		drawStack();
 		
 		cue(22).slide().head("The Household Program");

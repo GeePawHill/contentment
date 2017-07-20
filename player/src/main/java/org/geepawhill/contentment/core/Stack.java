@@ -3,10 +3,6 @@ package org.geepawhill.contentment.core;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.ActorBuilderBase;
 import org.geepawhill.contentment.actor.ScriptWorld;
-import org.geepawhill.contentment.actors.Letters;
-import org.geepawhill.contentment.actors.Letters.Builder;
-import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.step.Step;
 
 import javafx.scene.Group;
@@ -14,11 +10,17 @@ import javafx.scene.Group;
 public class Stack implements Actor<Stack.Builder>
 {
 	
+	private Group group;
+
+	public Stack()
+	{
+		group = new Group();
+	}
+	
 	@Override
 	public Group group()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return group;
 	}
 
 	@Override

@@ -49,14 +49,6 @@ public class Timed implements Step
 		return this;
 	}
 
-
-	@Override
-	public Timing timing()
-	{
-		scheduler.schedule(ms, timings.toArray(new Timing[] {}));
-		return Timing.ms(ms);
-	}
-
 	@Override
 	public void fast(Context context)
 	{

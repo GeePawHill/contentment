@@ -9,7 +9,6 @@ import org.junit.Test;
 
 public class ChordTest
 {
-	private Chord empty;
 	private Chord onlyOne;
 	private Chord both;
 	private Context context;
@@ -26,8 +25,6 @@ public class ChordTest
 		one = new TestNote(1L);
 		two = new TestNote(9L);
 
-		empty = new Chord();
-
 		onlyOne = new Chord();
 		onlyOne.add(one);
 
@@ -38,14 +35,6 @@ public class ChordTest
 		gotFinish = false;
 
 		recordFinish = () -> gotFinish = true;
-	}
-
-	@Test
-	public void maxesMs()
-	{
-		assertThat(empty.timing().ms()).isEqualTo(0L);
-		assertThat(onlyOne.timing().ms()).isEqualTo(1L);
-		assertThat(both.timing().ms()).isEqualTo(9L);
 	}
 
 	@Test

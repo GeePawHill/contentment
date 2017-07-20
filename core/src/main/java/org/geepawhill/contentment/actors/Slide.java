@@ -1,5 +1,9 @@
 package org.geepawhill.contentment.actors;
 
+import static org.geepawhill.contentment.utility.JfxUtility.color;
+
+import java.util.ArrayList;
+
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.ActorBuilderBase;
 import org.geepawhill.contentment.actor.ScriptWorld;
@@ -15,10 +19,6 @@ import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.timing.Timing;
-
-import static org.geepawhill.contentment.utility.JfxUtility.*;
-
-import java.util.ArrayList;
 
 import javafx.scene.Group;
 import javafx.scene.paint.Paint;

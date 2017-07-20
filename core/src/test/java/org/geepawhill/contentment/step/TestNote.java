@@ -2,7 +2,6 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.timing.Timing;
 
 public class TestNote implements Step
 {
@@ -35,12 +34,6 @@ public class TestNote implements Step
 		this.autoFinish = autoFinish;
 	}
 	
-	@Override
-	public Timing timing()
-	{
-		return Timing.ms(ms);
-	}
-
 	@Override
 	public void fast(Context context)
 	{

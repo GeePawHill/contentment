@@ -3,7 +3,6 @@ package org.geepawhill.contentment.step;
 import org.geepawhill.contentment.core.Animator;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.timing.Timing;
 
 public class MarkStep implements Step
 {
@@ -38,12 +37,6 @@ public class MarkStep implements Step
 	@Override
 	public void fast(Context context)
 	{
-	}
-
-	@Override
-	public Timing timing()
-	{
-		return Timing.ms(5000d);
 	}
 
 }

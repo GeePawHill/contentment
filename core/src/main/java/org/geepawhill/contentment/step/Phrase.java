@@ -4,13 +4,11 @@ import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
 public class Phrase implements Addable
 {
 	private final ArrayList<Step> playables;
-	private long ms;
 	private String name;
 	
 	public Phrase()
@@ -22,7 +20,6 @@ public class Phrase implements Addable
 	{
 		this.name = name;
 		this.playables = new ArrayList<>();
-		this.ms=0L;
 	}
 
 	/* (non-Javadoc)
@@ -32,16 +29,9 @@ public class Phrase implements Addable
 	public Phrase add(Step Step)
 	{
 		playables.add(Step);
-		ms+=Step.timing().ms();
 		return this;
 	}
 	
-	@Override
-	public Timing timing()
-	{
-		return Timing.ms(ms);
-	}
-
 	@Override
 	public void fast(Context context)
 	{
