@@ -1,6 +1,7 @@
 package org.geepawhill.contentment.step;
 
-import org.geepawhill.contentment.core.Animator;
+import org.geepawhill.contentment.atom.MarkAtom;
+import org.geepawhill.contentment.core.AtomRunner;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 
@@ -8,32 +9,29 @@ public class MarkStep implements Step
 {
 	
 	private long mark;
-	private Animator animator;
 	private OnFinished onFinished;
+	private AtomRunner atomRunner;
 
 	public MarkStep(long mark)
 	{
 		this.mark = mark*1000;
-		this.animator = new Animator();
 	}
 
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
 		this.onFinished = onFinished;
-		animator.play(context,onFinished,(double)(mark-context.beat())+5000d,this::interpolate);
-
+		long overPlay = mark - context.beat() + 5000;
+		atomRunner = new AtomRunner(overPlay,new MarkAtom(mark,this::hitMark),context,this::hitMark);
+		atomRunner.play();
 	}
 	
-	public void interpolate(Context context, double fraction)
+	private void hitMark()
 	{
-		if(context.beat()>=mark)
-		{
-			animator.stop();
-			onFinished.run();
-		}
+		atomRunner.stop();
+		onFinished.run();
 	}
-
+	
 	@Override
 	public void fast(Context context)
 	{

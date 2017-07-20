@@ -2,7 +2,6 @@ package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.actors.Slide;
 import org.geepawhill.contentment.actors.Slide.Builder;
-import org.geepawhill.contentment.step.MarkStep;
 
 public class CueBuilder
 {
@@ -12,7 +11,6 @@ public class CueBuilder
 	public CueBuilder(ScriptWorld world,long beat)
 	{
 		this.world = world;
-		this.world.add(new MarkStep(beat));
 	}
 	
 	// generically pass through to avoid fluency break for new

@@ -3,6 +3,7 @@ package org.geepawhill.contentment.core;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.ActorBuilderBase;
 import org.geepawhill.contentment.actor.ScriptWorld;
+import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.step.Step;
 
 import javafx.scene.Group;
@@ -33,8 +34,7 @@ public class Stack implements Actor<Stack.Builder>
 	@Override
 	public Step draw(double ms)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return new Phrase();
 	}
 	@Override
 	public Stack.Builder builder(ScriptWorld world)

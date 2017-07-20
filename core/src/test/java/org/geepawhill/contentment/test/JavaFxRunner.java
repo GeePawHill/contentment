@@ -4,11 +4,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-import org.geepawhill.contentment.core.Animator;
 import org.geepawhill.contentment.core.Atom;
 import org.geepawhill.contentment.core.AtomRunner;
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.ContextInterpolator;
 import org.geepawhill.contentment.step.Step;
 
 import javafx.animation.Transition;
@@ -45,19 +43,6 @@ public class JavaFxRunner
 		};
 		actLater(action);
 		
-	}
-
-	public void play(Animator animator, double ms, ContextInterpolator interpolator)
-	{
-		Consumer<CountDownLatch> action = new Consumer<CountDownLatch>()
-		{
-			@Override
-			public void accept(CountDownLatch latch)
-			{
-				animator.play(context, () -> latch.countDown(), ms, interpolator);
-			}
-		};
-		actLater(action);
 	}
 
 	public void slow(Step step)

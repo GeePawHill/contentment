@@ -11,7 +11,6 @@ public class Context
 	public final Actors actors;
 	public final Group canvas;
 
-	private ContextInterpolator extra;
 	private Rhythm rhythm;
 
 	public Context()
@@ -36,17 +35,6 @@ public class Context
 			canvas.getChildren().remove(actor.group());
 		}
 		actors.remove(actor);
-	}
-
-	public void setExtra(ContextInterpolator extra)
-	{
-		this.extra = extra;
-	}
-
-	public ContextInterpolator wrap(ContextInterpolator source)
-	{
-		if (extra == null) return source;
-		return new ParallelInterpolator(source, extra);
 	}
 
 	public void setRhythm(Rhythm rhythm)
