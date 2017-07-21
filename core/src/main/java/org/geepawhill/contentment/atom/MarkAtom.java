@@ -2,18 +2,15 @@ package org.geepawhill.contentment.atom;
 
 import org.geepawhill.contentment.core.Atom;
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.OnFinished;
 
 public class MarkAtom implements Atom
 {
 
-	private long ms;
-	private OnFinished onPastMark;
+	private long mark;
 
-	public MarkAtom(long ms, OnFinished onPastMark)
+	public MarkAtom(long mark)
 	{
-		this.ms = ms;
-		this.onPastMark = onPastMark;
+		this.mark = mark;
 	}
 
 	@Override
@@ -24,7 +21,7 @@ public class MarkAtom implements Atom
 	@Override
 	public boolean partial(Context context, double fraction)
 	{
-		if (context.beat() > ms)
+		if (context.beat() > mark)
 		{
 			return false;
 		}

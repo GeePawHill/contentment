@@ -8,6 +8,7 @@ import org.geepawhill.contentment.atom.ChangeColorAtom;
 import org.geepawhill.contentment.atom.ClearAtom;
 import org.geepawhill.contentment.atom.EntranceAtom;
 import org.geepawhill.contentment.atom.ExitAtom;
+import org.geepawhill.contentment.atom.MarkAtom;
 import org.geepawhill.contentment.atom.OpacityAtom;
 import org.geepawhill.contentment.timing.Timing;
 
@@ -26,7 +27,8 @@ public class ScriptBuilder
 	
 	public CueBuilder cue(long beat)
 	{
-		addToWorking(new MarkStep(beat));
+		addToWorking(new AtomStep(Timing.ms(5000),new MarkAtom(beat*1000)));
+//		addToWorking(new MarkStep(beat));
 		cueBuilder = new CueBuilder(world,beat);
 		return and();
 	}
@@ -96,11 +98,9 @@ public class ScriptBuilder
 	}
 
 	
-	public Step mark(long ms)
+	public void mark(long ms)
 	{
-		MarkStep step = new MarkStep(ms);
-		addToWorking(step);
-		return step;
+		addToWorking(new AtomStep(Timing.ms(5000),new MarkAtom(ms*1000)));
 	}
 	
 	public void addToWorking(Step step)
