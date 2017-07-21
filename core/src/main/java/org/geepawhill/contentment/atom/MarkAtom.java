@@ -22,12 +22,13 @@ public class MarkAtom implements Atom
 	}
 
 	@Override
-	public void partial(Context context, double fraction)
+	public boolean partial(Context context, double fraction)
 	{
 		if (context.beat() > ms)
 		{
-			onPastMark.run();
+			return false;
 		}
+		return true;
 	}
 
 }

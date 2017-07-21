@@ -20,9 +20,10 @@ public class ExitAtom implements Atom
 	}
 
 	@Override
-	public void partial(Context context, double fraction)
+	public boolean partial(Context context, double fraction)
 	{
 		context.remove(actor);
+		return false;
 	}
 
 }

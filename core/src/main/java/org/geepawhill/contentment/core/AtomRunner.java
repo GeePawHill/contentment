@@ -23,7 +23,7 @@ public class AtomRunner extends Transition
 	{
 		if (ms == 0) ms = 1;
 		setCycleDuration(Duration.millis(ms));
-		setOnFinished(onFinished != null ? (event) -> onFinished.run() : null);
+		setOnFinished((event) -> onFinished.run());
 		atom.setup(context);
 		super.play();
 	}
@@ -31,7 +31,11 @@ public class AtomRunner extends Transition
 	@Override
 	protected void interpolate(double fraction)
 	{
-		atom.partial(context, fraction);
+		if(!atom.partial(context, fraction))
+		{
+			stop();
+			onFinished.run();
+		}
 	}
 
 }

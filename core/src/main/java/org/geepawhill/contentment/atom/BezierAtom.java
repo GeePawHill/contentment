@@ -43,8 +43,9 @@ public class BezierAtom implements Atom
 	}
 
 	@Override
-	public void partial(Context context, double fraction)
+	public boolean partial(Context context, double fraction)
 	{
 		new BezierSplit(fraction, source.get()).setPathToBefore(path);
+		return true;
 	}
 }

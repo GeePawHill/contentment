@@ -55,8 +55,9 @@ public class BlockAtom implements Atom
 	}
 
 	@Override
-	public void partial(Context context, double fraction)
+	public boolean partial(Context context, double fraction)
 	{
+		return false;
 	}
 
 }

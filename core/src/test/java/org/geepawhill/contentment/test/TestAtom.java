@@ -19,8 +19,9 @@ public class TestAtom implements Atom {
 	}
 	
 	@Override
-	public void partial(Context context, double fraction)
+	public boolean partial(Context context, double fraction)
 	{
 		fractions.add(fraction);
+		return true;
 	}
 }

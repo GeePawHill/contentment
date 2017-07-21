@@ -23,9 +23,9 @@ public class LettersAtom implements Atom
 
 	public LettersAtom(Actor<?> actor, String source, Format format, Position position)
 	{
-		this(actor.group(),source,format,position);
+		this(actor.group(), source, format, position);
 	}
-	
+
 	public LettersAtom(Group group, String source, Format format, Position position)
 	{
 		this.group = group;
@@ -35,26 +35,29 @@ public class LettersAtom implements Atom
 	}
 
 	@Override
-	public void partial(Context context, double fraction)
+	public boolean partial(Context context, double fraction)
 	{
 		String partialSource = source.substring(0, (int) (fraction * source.length()));
-		if(partialSource.equals(lastPartial)) return;
-		lastPartial=partialSource;
-		text.setText(partialSource);
+		if (!partialSource.equals(lastPartial))
+		{
+			lastPartial = partialSource;
+			text.setText(partialSource);
+		}
+		return true;
 	}
 
 	@Override
 	public void setup(Context context)
 	{
 		this.text = new Text();
-		if(source==null || source.isEmpty()) source = " ";
+		if (source == null || source.isEmpty()) source = " ";
 		text.setText(source);
 		format.apply(TypeFace.FACE, text);
 		format.apply(TypeFace.COLOR, text);
 		PointPair dimensions = new PointPair(text.getBoundsInLocal());
-		position.position(text,dimensions);
+		position.position(text, dimensions);
 		text.setText("");
-		JfxUtility.addIfNeeded(group,text);
+		JfxUtility.addIfNeeded(group, text);
 		lastPartial = "";
 	}
 
@@ -62,12 +65,12 @@ public class LettersAtom implements Atom
 	{
 		this.position = position;
 	}
-	
+
 	public void format(Format format)
 	{
 		this.format = format;
 	}
-	
+
 	public Text text()
 	{
 		return text;

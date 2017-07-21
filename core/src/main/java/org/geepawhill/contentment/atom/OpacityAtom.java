@@ -24,9 +24,10 @@ public class OpacityAtom implements Atom
 	}
 
 	@Override
-	public void partial(Context context, double fraction)
+	public boolean partial(Context context, double fraction)
 	{
 		actor.group().setOpacity(from + fraction * (to - from));
+		return true;
 	}
 
 }

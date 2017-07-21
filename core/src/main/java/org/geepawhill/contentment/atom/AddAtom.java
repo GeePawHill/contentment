@@ -24,8 +24,9 @@ public class AddAtom implements Atom
 	}
 
 	@Override
-	public void partial(Context context, double fraction)
+	public boolean partial(Context context, double fraction)
 	{
 		JfxUtility.addIfNeeded(actor, node);
+		return false;
 	}
 }

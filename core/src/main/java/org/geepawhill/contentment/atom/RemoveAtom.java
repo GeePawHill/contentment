@@ -37,8 +37,9 @@ public class RemoveAtom implements Atom
 	}
 
 	@Override
-	public void partial(Context context, double fraction)
+	public boolean partial(Context context, double fraction)
 	{
 		JfxUtility.removeIfNeeded(group, nodeSource.get());
+		return false;
 	}
 }

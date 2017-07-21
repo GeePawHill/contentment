@@ -23,12 +23,13 @@ public class SpotAtom implements Atom
 	@Override
 	public void setup(Context context)
 	{
-		JfxUtility.addIfNeeded(actor.group(), circle);
 	}
 
 	@Override
-	public void partial(Context context, double fraction)
+	public boolean partial(Context context, double fraction)
 	{
+		JfxUtility.addIfNeeded(actor.group(), circle);
+		return false;
 	}
 
 }

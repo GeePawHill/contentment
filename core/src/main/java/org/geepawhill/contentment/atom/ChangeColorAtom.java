@@ -27,10 +27,11 @@ public class ChangeColorAtom implements Atom
 	}
 
 	@Override
-	public void partial(Context context, double fraction)
+	public boolean partial(Context context, double fraction)
 	{
 		ColorChanger colorChanger = new ColorChanger(paint);
 		JfxUtility.forEachDescendant(actor.group(), colorChanger);
+		return false;
 	}
 
 }

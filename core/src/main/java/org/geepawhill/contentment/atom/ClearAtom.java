@@ -19,7 +19,7 @@ public class ClearAtom implements Atom
 	}
 
 	@Override
-	public void partial(Context context, double fraction)
+	public boolean partial(Context context, double fraction)
 	{
 		Actors actors = new Actors();
 		actors.addAll(context.actors);
@@ -27,6 +27,7 @@ public class ClearAtom implements Atom
 		{
 			context.remove(actor);
 		}
+		return false;
 	}
 
 }
