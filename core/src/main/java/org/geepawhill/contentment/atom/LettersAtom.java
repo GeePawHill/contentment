@@ -21,7 +21,7 @@ public class LettersAtom implements Atom
 	private Position position;
 	private String lastPartial;
 
-	public LettersAtom(Actor<?> actor, String source, Format format, Position position)
+	public LettersAtom(Actor actor, String source, Format format, Position position)
 	{
 		this(actor.group(), source, format, position);
 	}

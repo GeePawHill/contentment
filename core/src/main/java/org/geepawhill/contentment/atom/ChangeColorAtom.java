@@ -11,10 +11,10 @@ import javafx.scene.paint.Paint;
 public class ChangeColorAtom implements Atom
 {
 	
-	private Actor<?> actor;
+	private Actor actor;
 	private Paint paint;
 
-	public ChangeColorAtom(Actor<?> actor, Paint paint)
+	public ChangeColorAtom(Actor actor, Paint paint)
 	{
 		this.actor = actor;
 		this.paint = paint;

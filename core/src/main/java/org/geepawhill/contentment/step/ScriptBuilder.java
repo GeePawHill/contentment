@@ -45,14 +45,14 @@ public class ScriptBuilder
 		return step;
 	}
 	
-	public Step reColor(Actor<?> actor, Paint paint)
+	public Step reColor(Actor actor, Paint paint)
 	{
 		AtomStep step = new AtomStep(Timing.instant(),new ChangeColorAtom(actor,paint));
 		addToWorking(step);
 		return step;
 	}
 
-	public Step sketch(double ms, Actor<?> drawable)
+	public Step sketch(double ms, Actor drawable)
 	{
 		Phrase phrase = new Phrase();
 		phrase.add(new AtomStep(Timing.instant(),new EntranceAtom(drawable)));
@@ -61,7 +61,7 @@ public class ScriptBuilder
 		return phrase;
 	}
 
-	public Step appear(Actor<?> drawable)
+	public Step appear(Actor drawable)
 	{
 		Phrase result = new Phrase();
 		result.add(new AtomStep(Timing.instant(),new EntranceAtom(drawable)));
@@ -70,14 +70,14 @@ public class ScriptBuilder
 		return result;
 	}
 
-	public Step disappear(Actor<?> drawable)
+	public Step disappear(Actor drawable)
 	{
 		AtomStep step = new AtomStep(Timing.instant(),new ExitAtom(drawable));
 		addToWorking(step);
 		return step;
 	}
 
-	public Step fadeIn(double ms, Actor<?> drawable)
+	public Step fadeIn(double ms, Actor drawable)
 	{
 		Phrase result = new Phrase();
 		result.add(new AtomStep(Timing.instant(),new EntranceAtom(drawable)));
@@ -88,7 +88,7 @@ public class ScriptBuilder
 		return result;
 	}
 	
-	public Step fadeOut(double ms, Actor<?> drawable)
+	public Step fadeOut(double ms, Actor drawable)
 	{
 		Phrase result = new Phrase();
 		result.add(new AtomStep(Timing.ms(ms), new OpacityAtom(drawable,1,0)));
@@ -135,7 +135,7 @@ public class ScriptBuilder
 		buildChord();
 		for (Actors actors : arrays)
 		{
-			for (Actor<?> actor : actors)
+			for (Actor actor : actors)
 			{
 				fadeIn(ms, actor);
 			}
@@ -152,7 +152,7 @@ public class ScriptBuilder
 		buildChord();
 		for (Actors actors : arrays)
 		{
-			for (Actor<?> actor : actors)
+			for (Actor actor : actors)
 			{
 				fadeOut(ms, actor);
 			}
@@ -163,13 +163,13 @@ public class ScriptBuilder
 	}
 
 
-	public ScriptBuilder fadeDown(double ms, Actor<?> actor)
+	public ScriptBuilder fadeDown(double ms, Actor actor)
 	{
 		addToWorking(new AtomStep(Timing.ms(ms), new OpacityAtom(actor,1,0)));
 		return this;
 	}
 	
-	public ScriptBuilder fadeUp(double ms, Actor<?> actor)
+	public ScriptBuilder fadeUp(double ms, Actor actor)
 	{
 		addToWorking(new AtomStep(Timing.ms(ms), new OpacityAtom(actor,0,1)));
 		return this;
@@ -182,7 +182,7 @@ public class ScriptBuilder
 		buildChord();
 		for (Actors actors : arrays)
 		{
-			for (Actor<?> actor : actors)
+			for (Actor actor : actors)
 			{
 				fadeDown(ms, actor);
 			}
@@ -199,7 +199,7 @@ public class ScriptBuilder
 		buildChord();
 		for (Actors actors : arrays)
 		{
-			for (Actor<?> actor : actors)
+			for (Actor actor : actors)
 			{
 				fadeUp(ms, actor);
 			}

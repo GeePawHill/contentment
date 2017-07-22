@@ -6,9 +6,9 @@ import org.geepawhill.contentment.core.Context;
 
 public class ExitAtom implements Atom
 {
-	private Actor<?> actor;
+	private Actor actor;
 
-	public ExitAtom(Actor<?> actor)
+	public ExitAtom(Actor actor)
 	{
 		this.actor = actor;
 		

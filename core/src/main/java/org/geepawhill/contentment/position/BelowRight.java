@@ -11,7 +11,7 @@ public class BelowRight implements Position
 	
 	private Node anchor;
 
-	public BelowRight(Actor<?> anchor)
+	public BelowRight(Actor anchor)
 	{
 		this(anchor.group());
 	}

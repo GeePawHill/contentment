@@ -56,7 +56,7 @@ public class ExceptionsScript extends ScriptBuilder
 	private Format jokeFormat;
 	private Format lightComment;
 
-	private ArrayList<Actor<?>> lines;
+	private ArrayList<Actor> lines;
 
 	private Actors stack;
 	private Actors disappearingStackText;
@@ -150,39 +150,38 @@ public class ExceptionsScript extends ScriptBuilder
 	private Step stack()
 	{
 		cue(16).slide().head("A Program's Stack");
-		and().actor(new Stack()).called("stack").sketch();
 		drawStack();
 		
 		cue(22).slide().head("The Household Program");
 		
 		mark(26);
-		Letters main = new Letters("main()", stackTextPosition(0), largeCodeFormat);
+		Letters main = new Letters(world, "main()", stackTextPosition(0), largeCodeFormat);
 		disappearingStackText.add(main);
 		sketch(500d, main);
 		
 		mark(30);
-		doChores = new Letters("doChores()", stackTextPosition(1), largeCodeFormat);
+		doChores = new Letters(world, "doChores()", stackTextPosition(1), largeCodeFormat);
 		catchAndThrowColorText.add(doChores);
 		sketch(500d, doChores);
 		
 		mark(33);
-		Letters takeOutTrash = new Letters("takeOutTrash()", stackTextPosition(2), largeCodeFormat);
+		Letters takeOutTrash = new Letters(world, "takeOutTrash()", stackTextPosition(2), largeCodeFormat);
 		disappearingStackText.add(takeOutTrash);
 		sketch(500d, takeOutTrash);
 		mark(34);
 		
 		mark(37);
-		Letters putBagsInCan = new Letters("putBagsInCans()", stackTextPosition(3), largeCodeFormat);
+		Letters putBagsInCan = new Letters(world, "putBagsInCans()", stackTextPosition(3), largeCodeFormat);
 		disappearingStackText.add(putBagsInCan);
 		sketch(500d, putBagsInCan);
 		
 		mark(40);
-		Letters putOneBagInCan = new Letters("putOneBagInCan()", stackTextPosition(4), largeCodeFormat);
+		Letters putOneBagInCan = new Letters(world, "putOneBagInCan()", stackTextPosition(4), largeCodeFormat);
 		disappearingStackText.add(putOneBagInCan);
 		sketch(500d, putOneBagInCan);
 		
 		mark(44);
-		openCan = new Letters("openCan()", stackTextPosition(5), largeCodeFormat);
+		openCan = new Letters(world, "openCan()", stackTextPosition(5), largeCodeFormat);
 		sketch(500d, openCan);
 		catchAndThrowColorText.add(openCan);
 		
@@ -200,32 +199,32 @@ public class ExceptionsScript extends ScriptBuilder
 		reColor(doChores, Color.RED);
 
 		mark(55);
-		thrower = new Letters("Thrower", new TopRight(leftCommentTextPoint(5)), commentFormat);
+		thrower = new Letters(world, "Thrower", new TopRight(leftCommentTextPoint(5)), commentFormat);
 		sketch(500d, thrower);
 		mark(57);
-		catcher = new Letters("Catcher", new TopRight(leftCommentTextPoint(1)), commentFormat);
+		catcher = new Letters(world, "Catcher", new TopRight(leftCommentTextPoint(1)), commentFormat);
 		sketch(500d, catcher);
 
 		mark(60);
 		fadeDown(500d, stack, disappearingStackText);
 
 		mark(64);
-		Letters throwsLidNotFound = new Letters("throws LidNotFound", new TopLeft(stackTextPoint(5).add(new Point(0,50))), lightComment);
+		Letters throwsLidNotFound = new Letters(world, "throws LidNotFound", new TopLeft(stackTextPoint(5).add(new Point(0,50))), lightComment);
 		catchAndThrowColorText.add(throwsLidNotFound);
 		fadeIn(500d, throwsLidNotFound);
 
 		mark(72);
-		Letters catchesAll = new Letters("catches all exceptions", new TopLeft(stackTextPoint(1).add(new Point(0,50))), lightComment);
+		Letters catchesAll = new Letters(world, "catches all exceptions", new TopLeft(stackTextPoint(1).add(new Point(0,50))), lightComment);
 		catchAndThrowColorText.add(catchesAll);
 		fadeIn(500d, catchesAll);
 
 		mark(82);
-		Letters catchesLidNotFound = new Letters("catches LidNotFound", new BelowLeft(catchesAll),lightComment);
+		Letters catchesLidNotFound = new Letters(world, "catches LidNotFound",new BelowLeft(catchesAll), lightComment);
 		catchAndThrowColorText.add(catchesLidNotFound);
 		fadeIn(500d, catchesLidNotFound);
 
 		mark(86);
-		Letters logsIt = new Letters("logs and moves on", new BelowLeft(catchesLidNotFound), lightComment);
+		Letters logsIt = new Letters(world, "logs and moves on", new BelowLeft(catchesLidNotFound), lightComment);
 		catchAndThrowColorText.add(logsIt);
 		fadeIn(500d, logsIt);
 
@@ -239,13 +238,13 @@ public class ExceptionsScript extends ScriptBuilder
 		fadeOut(500d, catchAndThrowColorText);
 
 		mark(105);
-		Arrow call = new Arrow(thrower, false, catcher, true, commentFormat);
-		Letters letters = new Letters("call", new Centered(call), commentFormat);
+		Arrow call = new Arrow(world, thrower, false, catcher, true, commentFormat);
+		Letters letters = new Letters(world, "call", new Centered(call), commentFormat);
 		sketch(500d, call);
 		sketch(500d, letters);
 
 		mark(111);
-		Cross cross = new Cross(call, 150d);
+		Cross cross = new Cross(world, call, 150d);
 		sketch(500d, cross);
 
 		fadeUp(500d, stack);
@@ -272,26 +271,26 @@ public class ExceptionsScript extends ScriptBuilder
 		head("Dependencies");
 		
 		mark(146);
-		Letters thrower = new Letters("Thrower",new Centered(1000d,200d), commentFormat).withOval();
+		Letters thrower = new Letters(world,"Thrower", new Centered(1000d,200d), commentFormat).withOval();
 		sketch(1000d, thrower);
 		
-		Letters catcher = new Letters("Catcher", new Centered(1500d, 200d), commentFormat).withOval();
+		Letters catcher = new Letters(world, "Catcher", new Centered(1500d, 200d), commentFormat).withOval();
 		sketch(1000d, catcher);
 		
 		
-		Spot throwerSpot = new Spot(1000d, 850d);
-		Spot catcherSpot = new Spot(1500d, 850d);
+		Spot throwerSpot = new Spot(world, 1000d, 850d);
+		Spot catcherSpot = new Spot(world, 1500d, 850d);
 		allButOvals.add(throwerSpot, catcherSpot);
 		sketch(1d, throwerSpot);
 		sketch(1d, catcherSpot);
-		Arrow throwerArrow = new Arrow(thrower, false, throwerSpot, false, commentFormat);
+		Arrow throwerArrow = new Arrow(world, thrower, false, throwerSpot, false, commentFormat);
 		sketch(500d, throwerArrow);
-		Arrow catcherArrow = new Arrow(catcher, false, catcherSpot, false, commentFormat);
+		Arrow catcherArrow = new Arrow(world, catcher, false, catcherSpot, false, commentFormat);
 		sketch(500d, catcherArrow);
 		allButOvals.add(throwerArrow, catcherArrow);
 
 		mark(153);
-		Letters runtime = new Letters("Runtime", new Centered(new Point(1250d, 220d)), commentFormat);
+		Letters runtime = new Letters(world, "Runtime", new Centered(new Point(1250d, 220d)), commentFormat);
 		sketch(500d, runtime);
 		allButOvals.add(runtime);
 
@@ -299,7 +298,7 @@ public class ExceptionsScript extends ScriptBuilder
 		Arrow runtimeOne = knowLine(allButOvals, 350d, false);
 
 		mark(166);
-		Cross crossOne = new Cross(runtimeOne, 125d, 100d, new Point(0d, -10d));
+		Cross crossOne = new Cross(world, runtimeOne, 125d, 100d, new Point(0d, -10d));
 		sketch(500d, crossOne);
 		allButOvals.add(crossOne);
 
@@ -307,12 +306,12 @@ public class ExceptionsScript extends ScriptBuilder
 		Arrow runtimeTwo = knowLine(allButOvals, 475d, true);
 
 		mark(176);
-		Cross crossTwo = new Cross(runtimeTwo, 125d, 100d, new Point(0d, -10d));
+		Cross crossTwo = new Cross(world, runtimeTwo, 125d, 100d, new Point(0d, -10d));
 		sketch(500d, crossTwo);
 		allButOvals.add(crossTwo);
 
 		mark(190);
-		Letters compiletime = new Letters("Compile Time", new Centered(new Point(1250d, 550d)), commentFormat);
+		Letters compiletime = new Letters(world, "Compile Time", new Centered(new Point(1250d, 550d)), commentFormat);
 		sketch(500d, compiletime);
 		allButOvals.add(compiletime);
 
@@ -320,7 +319,7 @@ public class ExceptionsScript extends ScriptBuilder
 		Arrow compiletimeOne = knowLine(allButOvals, 680d, false);
 
 		mark(202);
-		Cross crossThree = new Cross(compiletimeOne, 125d, 100d, new Point(0d, -10d));
+		Cross crossThree = new Cross(world, compiletimeOne, 125d, 100d, new Point(0d, -10d));
 		sketch(500d, crossThree);
 		allButOvals.add(crossThree);
 
@@ -328,7 +327,7 @@ public class ExceptionsScript extends ScriptBuilder
 		Arrow compiletimeTwo = knowLine(allButOvals, 800d, true);
 
 		mark(212);
-		Cross crossFour = new Cross(compiletimeTwo, 125d, 100d, new Point(0d, -10d));
+		Cross crossFour = new Cross(world, compiletimeTwo, 125d, 100d, new Point(0d, -10d));
 		sketch(500d, crossFour);
 		allButOvals.add(crossFour);
 
@@ -347,18 +346,18 @@ public class ExceptionsScript extends ScriptBuilder
 		minor("so neither side knows the other");
 		mark(233);
 
-		Letters thrower = new Letters("Thrower",new Centered(1000d,420d), commentFormat).withOval();
+		Letters thrower = new Letters(world,"Thrower", new Centered(1000d,420d), commentFormat).withOval();
 		sketch(1000d, thrower);
 
-		Letters catcher = new Letters("Catcher", new Centered(1500d, 420d), commentFormat).withOval();
+		Letters catcher = new Letters(world, "Catcher", new Centered(1500d, 420d), commentFormat).withOval();
 		sketch(1000d, catcher);
 
 		mark(240);
-		Letters lnf = new Letters("LidNotFound", new Centered(1250d, 590d), commentFormat).withOval();
+		Letters lnf = new Letters(world, "LidNotFound", new Centered(1250d, 590d), commentFormat).withOval();
 		sketch(500d, lnf);
 
-		Arrow throwerLnf = new Arrow(thrower, false, lnf, true, knowsFormat);
-		Arrow catcherLnf = new Arrow(catcher, false, lnf, true, knowsFormat);
+		Arrow throwerLnf = new Arrow(world, thrower, false, lnf, true, knowsFormat);
+		Arrow catcherLnf = new Arrow(world, catcher, false, lnf, true, knowsFormat);
 
 		sketch(500d, throwerLnf);
 		sketch(500d, catcherLnf);
@@ -411,31 +410,31 @@ public class ExceptionsScript extends ScriptBuilder
 		head("Testing A Complex Finally");
 
 		String beforeText = "finally {\n" + "    // complex finally\n" + "    }";
-		CodeBlock beforeCode = new CodeBlock(beforeText, codeFormat, new TopRight(1550,260d));
+		CodeBlock beforeCode = new CodeBlock(world, beforeText, codeFormat, new TopRight(1550,260d));
 		appear(beforeCode);
 
 		mark(460);
-		Letters extract = new Letters("extract this", new CenterRight(1000d, 340d), commentFormat);
+		Letters extract = new Letters(world, "extract this", new CenterRight(1000d, 340d), commentFormat);
 		sketch(500d, extract);
-		Spot spot = new Spot(1280d, 335d);
+		Spot spot = new Spot(world, 1280d, 335d);
 		appear(spot);
-		Arrow arrow = new Arrow(extract, false, spot, true, commentFormat);
+		Arrow arrow = new Arrow(world, extract, false, spot, true, commentFormat);
 		sketch(500d, arrow);
 
 		mark(464);
-		Letters toThis = new Letters("to this", new CenterRight(1000d, 550d), commentFormat);
+		Letters toThis = new Letters(world, "to this", new CenterRight(1000d, 550d), commentFormat);
 		sketch(500d, toThis);
 
 		String afterText1 = "finally {\n" + "    handleFinally(...);\n" + "    }";
-		CodeBlock afterCode = new CodeBlock(afterText1, codeFormat, new TopRight(1550d,460d));
+		CodeBlock afterCode = new CodeBlock(world, afterText1, codeFormat, new TopRight(1550d,460d));
 		appear(afterCode);
 
 		String afterText2 = "public void handleFinally(...) {\n" + "    // complex finally\n" + "    }";
-		CodeBlock afterCode2 = new CodeBlock(afterText2,codeFormat, new TopRight(1550d,640d));
+		CodeBlock afterCode2 = new CodeBlock(world,afterText2, codeFormat, new TopRight(1550d,640d));
 		appear(afterCode2);
 
 		mark(468);
-		Letters andTestThis = new Letters("and test the handler here!", new BelowCenter(afterCode2), commentFormat);
+		Letters andTestThis = new Letters(world, "and test the handler here!", new BelowCenter(afterCode2), commentFormat);
 		sketch(500d, andTestThis);
 
 		return endBuild();
@@ -467,31 +466,31 @@ public class ExceptionsScript extends ScriptBuilder
 		head("Testing A Complex Catch");
 
 		String beforeText = "try { ... }\n" + "catch(LidNotFound lidNotFound) {\n" + "    // complex catch\n" + "    }";
-		CodeBlock beforeCode = new CodeBlock(beforeText, codeFormat, new TopRight(1550,260d));
+		CodeBlock beforeCode = new CodeBlock(world, beforeText, codeFormat, new TopRight(1550,260d));
 		appear(beforeCode);
 
 		mark(460);
-		Letters extract = new Letters("extract this", new CenterRight(1000d, 340d), commentFormat);
+		Letters extract = new Letters(world, "extract this", new CenterRight(1000d, 340d), commentFormat);
 		sketch(500d, extract);
-		Spot spot = new Spot(1150d, 335d);
+		Spot spot = new Spot(world, 1150d, 335d);
 		appear(spot);
-		Arrow arrow = new Arrow(extract, false, spot, true, commentFormat);
+		Arrow arrow = new Arrow(world, extract, false, spot, true, commentFormat);
 		sketch(500d, arrow);
 
 		mark(464);
-		Letters toThis = new Letters("to this", new CenterRight(1000d, 550d), commentFormat);
+		Letters toThis = new Letters(world, "to this", new CenterRight(1000d, 550d), commentFormat);
 		sketch(500d, toThis);
 
 		String afterText1 = "try { ... }\n" + "catch(LidNotFound lidNotFound) {\n" + "    handle(lidNotFound);\n" + "    }";
-		CodeBlock afterCode = new CodeBlock(afterText1, codeFormat, new TopRight(1550d,460d));
+		CodeBlock afterCode = new CodeBlock(world, afterText1, codeFormat, new TopRight(1550d,460d));
 		appear(afterCode);
 
 		String afterText2 = "public void handle(LidNotFound lidNotFound) {\n" + "    // complex catch\n" + "    }";
-		CodeBlock afterCode2 = new CodeBlock(afterText2,codeFormat, new TopRight(1550d,640d));
+		CodeBlock afterCode2 = new CodeBlock(world,afterText2, codeFormat, new TopRight(1550d,640d));
 		appear(afterCode2);
 
 		mark(468);
-		Letters andTestThis = new Letters("and test the handler here!", new BelowCenter(afterCode2), commentFormat);
+		Letters andTestThis = new Letters(world, "and test the handler here!", new BelowCenter(afterCode2), commentFormat);
 		sketch(500d, andTestThis);
 
 		return endBuild();
@@ -502,7 +501,7 @@ public class ExceptionsScript extends ScriptBuilder
 		buildPhrase();
 		clear();
 		head("Testing The Catcher");
-		Letters catcher = new Letters("Catcher", new Centered(1250d, 210d), commentFormat).withOval();
+		Letters catcher = new Letters(world, "Catcher", new Centered(1250d, 210d), commentFormat).withOval();
 		sketch(1d, catcher);
 		mark(410);
 		lead(" ");
@@ -551,7 +550,7 @@ public class ExceptionsScript extends ScriptBuilder
 		buildPhrase();
 		clear();
 		head("Testing The Thrower");
-		Letters thrower = new Letters("Thrower", new Centered(1250d, 210d), commentFormat).withOval();
+		Letters thrower = new Letters(world, "Thrower", new Centered(1250d, 210d), commentFormat).withOval();
 		sketch(1d, thrower);
 		mark(302);
 		lead(" ");
@@ -593,17 +592,17 @@ public class ExceptionsScript extends ScriptBuilder
 
 	private void drawStack()
 	{
-		Stroke guideStroke = new Stroke(stackGrid.westLine(), stackFormat);
+		Stroke guideStroke = new Stroke(world, stackGrid.westLine(), stackFormat);
 		sketch(500d, guideStroke);
 		stack.add(guideStroke);
 
 		for (int i = 0; i < stackGrid.rows(); i++)
 		{
-			Stroke topStroke = new Stroke(stackGrid.area(0, i).northLine(), stackFormat);
+			Stroke topStroke = new Stroke(world, stackGrid.area(0, i).northLine(), stackFormat);
 			sketch(500d, topStroke);
 			stack.add(topStroke);
 		}
-		Stroke stackBottom = new Stroke(stackGrid.southLine(0, STACK_ROWS - 1), stackFormat);
+		Stroke stackBottom = new Stroke(world, stackGrid.southLine(0, STACK_ROWS - 1), stackFormat);
 		sketch(500d, stackBottom);
 		stack.add(stackBottom);
 	}
@@ -625,12 +624,12 @@ public class ExceptionsScript extends ScriptBuilder
 
 	private Arrow knowLine(Actors actors, double y, boolean leftHead)
 	{
-		Spot leftSpot = new Spot(1000d, y);
+		Spot leftSpot = new Spot(world, 1000d, y);
 		sketch(1d, leftSpot);
-		Spot rightSpot = new Spot(1500d, y);
+		Spot rightSpot = new Spot(world, 1500d, y);
 		sketch(1d, rightSpot);
 		Arrow line = chooseArrow(leftHead, leftSpot, rightSpot);
-		Letters know = new Letters("knows?", new AboveCenter(line), knowsFormat);
+		Letters know = new Letters(world, "knows?", new AboveCenter(line), knowsFormat);
 		sketch(500d, line);
 		sketch(500d, know);
 		actors.add(leftSpot, rightSpot, line, know);
@@ -639,31 +638,31 @@ public class ExceptionsScript extends ScriptBuilder
 
 	private Arrow chooseArrow(boolean rightToLeft, Spot left, Spot right)
 	{
-		if (rightToLeft) return new Arrow(right, false, left, true, knowsFormat);
-		else return new Arrow(left, false, right, true, knowsFormat);
+		if (rightToLeft) return new Arrow(world, right, false, left, true, knowsFormat);
+		else return new Arrow(world, left, false, right, true, knowsFormat);
 	}
 
 	private void throwsText(int line)
 	{
-		Letters letters = new Letters("throws X", stackTextPosition(line), commentFormat);
+		Letters letters = new Letters(world, "throws X", stackTextPosition(line), commentFormat);
 		sketch(500d, letters);
 	}
 
 	private void noCatchText(int line)
 	{
-		Letters letters = new Letters("catches X?", stackTextPosition(line), commentFormat);
+		Letters letters = new Letters(world, "catches X?", stackTextPosition(line), commentFormat);
 		sketch(500d, letters);
-		Letters no = new Letters("no, keep looking...", new RightOf(letters,20d),
-				new Format(commentFormat, TypeFace.color(Color.RED, 1d)));
+		Letters no = new Letters(world, "no, keep looking...",
+				new RightOf(letters,20d), new Format(commentFormat, TypeFace.color(Color.RED, 1d)));
 		sketch(1d, no);
 	}
 
 	private void catchText(int line)
 	{
-		Letters letters = new Letters("catches X?", stackTextPosition(line), commentFormat);
+		Letters letters = new Letters(world, "catches X?", stackTextPosition(line), commentFormat);
 		sketch(500d, letters);
-		Letters no = new Letters("YES! call this one!", new RightOf(letters,20d),
-				new Format(commentFormat, TypeFace.color(Color.GREEN, 1d)));
+		Letters no = new Letters(world, "YES! call this one!",
+				new RightOf(letters,20d), new Format(commentFormat, TypeFace.color(Color.GREEN, 1d)));
 		sketch(1d, no);
 	}
 
@@ -672,14 +671,14 @@ public class ExceptionsScript extends ScriptBuilder
 		Position position = null;
 		if(!lines.isEmpty()) position=new BelowRight(lines.get(lines.size()-1));
 		else position = new TopRight(1550d,50d);
-		Letters line = new Letters(text,position,format);
+		Letters line = new Letters(world,text,position, format);
 		sketch(500d, line);
 		lines.add(line);
 	}
 
 	private void clearLines()
 	{
-		for (Actor<?> line : lines)
+		for (Actor line : lines)
 		{
 			disappear(line);
 		}
@@ -709,7 +708,7 @@ public class ExceptionsScript extends ScriptBuilder
 
 	private Letters joke(String text)
 	{
-		Letters joke = new Letters(text, new Centered(new Point(380d, 300d)), jokeFormat);
+		Letters joke = new Letters(world, text, new Centered(new Point(380d, 300d)), jokeFormat);
 		appear(joke);
 		return joke;
 	}

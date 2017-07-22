@@ -23,7 +23,7 @@ public class ClearAtom implements Atom
 	{
 		Actors actors = new Actors();
 		actors.addAll(context.actors);
-		for (Actor<?> actor : actors)
+		for (Actor actor : actors)
 		{
 			context.remove(actor);
 		}

@@ -19,7 +19,7 @@ public class Context
 		this.actors = new Actors();
 	}
 	
-	public void add(Actor<?> actor)
+	public void add(Actor actor)
 	{
 		actors.add(actor);
 		if (!canvas.getChildren().contains(actor.group()))
@@ -28,7 +28,7 @@ public class Context
 		}
 	}
 
-	public void remove(Actor<?> actor)
+	public void remove(Actor actor)
 	{
 		if (canvas.getChildren().contains(actor.group()))
 		{
@@ -51,7 +51,7 @@ public class Context
 	{
 		Actors local = new Actors();
 		local.addAll(actors);
-		for(Actor<?> actor : local)
+		for(Actor actor : local)
 		{
 			remove(actor);
 		}

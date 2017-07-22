@@ -12,12 +12,12 @@ public class ScriptWorld
 {
 	private Addable working;
 	private Slide slide;
-	private HashMap<String,Actor<?>> namedActors;
+	private HashMap<String,Actor> namedActors;
 	
 	public ScriptWorld()
 	{
 		working = new Phrase();
-		slide = new Slide();
+		slide = new Slide(this);
 		namedActors = new HashMap<>();
 	}
 
@@ -50,18 +50,18 @@ public class ScriptWorld
 		return temp;
 	}
 
-	public Actor<?> slide()
+	public Slide slide()
 	{
 		return slide;
 	}
 
-	public Actor<?> actor(String actor)
+	public Actor actor(String actor)
 	{
 		if(!namedActors.containsKey(actor)) throw new RuntimeException("Can't find actor: ["+actor+"]");
 		return namedActors.get(actor);
 	}
 
-	public void callActor(String name, Actor<?> actor)
+	public void callActor(String name, Actor actor)
 	{
 		namedActors.put(name, actor);
 	}

@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.actors.Slide;
-import org.geepawhill.contentment.actors.Slide.Builder;
 
 public class CueBuilder
 {
@@ -15,20 +14,20 @@ public class CueBuilder
 	
 	// generically pass through to avoid fluency break for new
 	// without this, we'd have to change MarkContext when we added a new kind of Agent
-	public <ACTOR extends Actor<BUILDER>, BUILDER> BUILDER actor(ACTOR actor)
+	public <ACTOR> ACTOR actor(ACTOR actor)
 	{
-		return actor.builder(world);
+		return actor;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <ACTOR extends Actor<BUILDER>, BUILDER> BUILDER actor(String actor)
+	public <ACTOR extends Actor> ACTOR actor(String actor)
 	{
-		return (BUILDER) world.actor(actor).builder(world);
+		return (ACTOR) actor(world.actor(actor));
 	}
 	
-	public Slide.Builder slide()
+	public Slide slide()
 	{
-		return (Builder) actor(world.slide());
+		return world.slide();
 	}
 
 }

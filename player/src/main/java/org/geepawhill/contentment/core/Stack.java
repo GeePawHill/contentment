@@ -1,21 +1,21 @@
 package org.geepawhill.contentment.core;
 
-import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.actor.ActorBuilderBase;
+import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.step.Step;
 
 import javafx.scene.Group;
 
-public class Stack implements Actor<Stack.Builder>
+public class Stack extends GenericActor
 {
 	
 	private Group group;
 
-	public Stack()
+	public Stack(ScriptWorld world)
 	{
-		group = new Group();
+		super(world);
+		this.group = new Group();
 	}
 	
 	@Override
@@ -36,33 +36,4 @@ public class Stack implements Actor<Stack.Builder>
 	{
 		return new Phrase();
 	}
-	@Override
-	public Stack.Builder builder(ScriptWorld world)
-	{
-		return new Builder(world);
-	}
-	
-	public class Builder extends ActorBuilderBase<Stack,Builder>
-	{
-		private ScriptWorld world;
-
-		public Builder(ScriptWorld world)
-		{
-			super(world, Stack.this);
-			this.world = world;
-		}
-		
-		public Builder at(int line)
-		{
-			return this;
-		}
-		
-		@Override
-		public Builder downcast()
-		{
-			return this;
-		}
-	}
-
-
 }

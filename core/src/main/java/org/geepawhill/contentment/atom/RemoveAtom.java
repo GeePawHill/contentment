@@ -15,7 +15,7 @@ public class RemoveAtom implements Atom
 	private Group group;
 	private Supplier<Node> nodeSource;
 
-	public RemoveAtom(Actor<?> actor, Node node)
+	public RemoveAtom(Actor actor, Node node)
 	{
 		this(actor.group(), node);
 	}

@@ -6,10 +6,10 @@ import javafx.scene.shape.Shape;
 
 public class NodeOutliner 
 {
-	private final Actor<?> actor;
+	private final Actor actor;
 	private final ValueTree outline;
 	
-	public NodeOutliner(Actor<?> actor,ValueTree outline)
+	public NodeOutliner(Actor actor,ValueTree outline)
 	{
 		this.actor = actor;
 		this.outline = outline;

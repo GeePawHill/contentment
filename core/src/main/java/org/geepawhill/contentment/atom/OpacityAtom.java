@@ -6,11 +6,11 @@ import org.geepawhill.contentment.core.Context;
 
 public class OpacityAtom implements Atom
 {
-	private Actor<?> actor;
+	private Actor actor;
 	private double from;
 	private double to;
 
-	public OpacityAtom(Actor<?> actor, double from, double to)
+	public OpacityAtom(Actor actor, double from, double to)
 	{
 		this.actor = actor;
 		this.from = from;

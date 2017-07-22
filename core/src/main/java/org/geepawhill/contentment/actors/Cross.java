@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.actor.GenericAgentBuilder;
+import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.BezierAtom;
 import org.geepawhill.contentment.format.Format;
@@ -16,10 +16,10 @@ import org.geepawhill.contentment.timing.Timing;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 
-public class Cross implements Actor<GenericAgentBuilder<Cross>>
+public class Cross extends GenericActor
 {
 
-	private Actor<?> target;
+	private Actor target;
 	private Group group;
 	private BezierAtom leftToRight;
 	private BezierAtom rightToLeft;
@@ -27,13 +27,14 @@ public class Cross implements Actor<GenericAgentBuilder<Cross>>
 	private double ysize;
 	private Point offset;
 
-	public Cross(Actor<?> target, double size)
+	public Cross(ScriptWorld world, Actor target, double size)
 	{
-		this(target,size,size,new Point(0,0));
+		this(world,target,size,size, new Point(0,0));
 	}
 	
-	public Cross(Actor<?> target, double xsize, double ysize, Point offset)
+	public Cross(ScriptWorld world, Actor target, double xsize, double ysize, Point offset)
 	{
+		super(world);
 		this.target = target;
 		this.xsize = xsize;
 		this.ysize = ysize;
@@ -81,11 +82,4 @@ public class Cross implements Actor<GenericAgentBuilder<Cross>>
 		Point center = new PointPair(target.group()).center().add(offset);
 		return new Bezier(new Point(center.x+xadditive, center.y-yadditive), new Point(center.x-xadditive, center.y+yadditive));
 	}
-
-	@Override
-	public GenericAgentBuilder<Cross> builder(ScriptWorld world)
-	{
-		return new GenericAgentBuilder<>(world,this);
-	}
-
 }

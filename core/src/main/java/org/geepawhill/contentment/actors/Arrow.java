@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.actor.GenericAgentBuilder;
+import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.BezierAtom;
 import org.geepawhill.contentment.connector.arrow.ArrowComputer;
@@ -20,7 +20,7 @@ import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
 
-public class Arrow implements Actor<GenericAgentBuilder<Arrow>>
+public class Arrow extends GenericActor
 {
 	final String nickname;
 
@@ -45,8 +45,9 @@ public class Arrow implements Actor<GenericAgentBuilder<Arrow>>
 	private Bezier chosenToTop;
 	private Bezier chosenToBottom;
 
-	public Arrow(Actor<?> from, boolean pointAtFrom, Actor<?> to, boolean pointAtTo, Format format)
+	public Arrow(ScriptWorld world, Actor from, boolean pointAtFrom, Actor to, boolean pointAtTo, Format format)
 	{
+		super(world);
 		this.random = new Random();
 		this.nickname = Names.make(getClass());
 		this.computer = new NodeArrowComputer(from.group(), to.group());
@@ -132,12 +133,6 @@ public class Arrow implements Actor<GenericAgentBuilder<Arrow>>
 			sequence.add(Timing.weighted(.1d), step);
 		}
 		return sequence;
-	}
-
-	@Override
-	public GenericAgentBuilder<Arrow> builder(ScriptWorld world)
-	{
-		return new GenericAgentBuilder<>(world,this);
 	}
 
 }

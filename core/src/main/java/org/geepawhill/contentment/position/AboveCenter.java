@@ -9,16 +9,16 @@ import javafx.scene.Node;
 public class AboveCenter implements Position
 {
 	
-	private Actor<?> anchor;
+	private Actor anchor;
 	private double offset;
 
-	public AboveCenter(Actor<?> anchor,double offset)
+	public AboveCenter(Actor anchor,double offset)
 	{
 		this.anchor = anchor;
 		this.offset = offset;
 	}
 	
-	public AboveCenter(Actor<?> anchor)
+	public AboveCenter(Actor anchor)
 	{
 		this(anchor,0d);
 	}

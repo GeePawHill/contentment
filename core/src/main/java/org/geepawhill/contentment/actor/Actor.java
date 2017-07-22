@@ -4,7 +4,7 @@ import org.geepawhill.contentment.step.Step;
 
 import javafx.scene.Group;
 
-public interface Actor<BUILDER>
+public interface Actor
 {
 	public Group group();
 
@@ -12,5 +12,6 @@ public interface Actor<BUILDER>
 
 	public Step draw(double ms);
 
-	BUILDER builder(ScriptWorld world);
+	public Actor sketch();
+	public Actor called(String name);
 }

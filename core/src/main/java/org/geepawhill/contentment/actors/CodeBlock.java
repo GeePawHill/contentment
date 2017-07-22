@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.actors;
 
-import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.actor.GenericAgentBuilder;
+import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.BlockAtom;
 import org.geepawhill.contentment.format.Format;
@@ -13,13 +12,14 @@ import org.geepawhill.contentment.timing.Timing;
 
 import javafx.scene.Group;
 
-public class CodeBlock implements Actor<GenericAgentBuilder<CodeBlock>>
+public class CodeBlock extends GenericActor
 {
 	private Group group;
 	private BlockAtom atom;
 
-	public CodeBlock(String source,Format format, Position position)
+	public CodeBlock(ScriptWorld world,String source, Format format, Position position)
 	{
+		super(world);
 		this.group = new Group();
 		this.atom = new BlockAtom(this,source,format,position);
 	}
@@ -44,9 +44,4 @@ public class CodeBlock implements Actor<GenericAgentBuilder<CodeBlock>>
 		return phrase;
 	}
 
-	@Override
-	public GenericAgentBuilder<CodeBlock> builder(ScriptWorld world)
-	{
-		return new GenericAgentBuilder<>(world,this);
-	}
 }

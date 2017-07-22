@@ -9,10 +9,10 @@ import javafx.scene.Node;
 public class Centered implements Position
 {
 	
-	private Actor<?> actor;
+	private Actor actor;
 	private Point anchor;
 
-	public Centered(Actor<?> actor)
+	public Centered(Actor actor)
 	{
 		this(actor,null);
 	}
@@ -22,7 +22,7 @@ public class Centered implements Position
 		this(null,anchor);
 	}
 	
-	public Centered(Actor<?> actor,Point anchor)
+	public Centered(Actor actor,Point anchor)
 	{
 		this.actor = actor;
 		this.anchor = anchor;

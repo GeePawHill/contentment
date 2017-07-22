@@ -5,7 +5,7 @@ import static org.geepawhill.contentment.utility.JfxUtility.color;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.actor.ActorBuilderBase;
+import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.EntranceAtom;
 import org.geepawhill.contentment.atom.LettersAtom;
@@ -25,20 +25,21 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 
-public class Slide implements Actor<Slide.Builder>
+public class Slide extends GenericActor
 {
-	
+
 	private final Format majorFormat;
 	private final Format subFormat;
 	private final Format minorFormat;
 	private final Group group;
 	private final ArrayList<LettersAtom> lines;
 
-	public Slide()
+	public Slide(ScriptWorld world)
 	{
+		super(world);
 		this.group = new Group();
 		this.lines = new ArrayList<>();
-		
+
 		Paint majorColor = color(13, 165, 15);
 		Font majorHand = Font.font("Chewed Pen BB", FontPosture.ITALIC, 90d);
 		majorFormat = new Format(TypeFace.font(majorHand, 3d, 1d), TypeFace.color(majorColor, 1d),
@@ -55,7 +56,7 @@ public class Slide implements Actor<Slide.Builder>
 				Frames.frame(minorColor, 5d, 1d));
 
 	}
-	
+
 	@Override
 	public Group group()
 	{
@@ -74,81 +75,55 @@ public class Slide implements Actor<Slide.Builder>
 		throw new RuntimeException("Attempt to draw Slide actor.");
 	}
 
-	@Override
-	public Builder builder(ScriptWorld world)
+	public Slide head(String source)
 	{
-		return new Builder(world);
+		wipe();
+		line(source, majorFormat);
+		return this;
 	}
 
-	public class Builder extends ActorBuilderBase<Slide,Builder>
+	public Slide sub(String source)
 	{
-		private ScriptWorld world;
-
-		public Builder(ScriptWorld world)
-		{
-			super(world, Slide.this);
-			this.world = world;
-		}
-		
-		public Builder head(String source)
-		{
-			wipe();
-			line(source,majorFormat);
-			return this;
-		}
-		
-		public Builder sub(String source)
-		{
-			line(source,subFormat);
-			return this;
-		}
-		
-		public Builder lead(String source)
-		{
-			line(source,majorFormat);
-			return this;
-		}
-		
-		public Builder minor(String source)
-		{
-			line(source,minorFormat);
-			return this;
-		}
-		
-		void line(String text, Format format)
-		{
-			Position position = null;
-			if(!lines.isEmpty()) position=new BelowRight(group);
-			else position = new TopRight(1550d,50d);
-			LettersAtom line = new LettersAtom(group,text,format,position);
-			world.add(new AtomStep(Timing.ms(500),line));
-			lines.add(line);
-		}
-		
-		public Builder wipe()
-		{
-			for(LettersAtom line : lines)
-			{
-				world.add(new AtomStep(Timing.instant(),new RemoveAtom(group, () -> line.text())));
-			}
-			lines.clear();
-			return this;
-		}
-
-		
-		@Override
-		public Builder downcast()
-		{
-			return this;
-		}
-
-		public Builder enter()
-		{
-			world.add(new AtomStep(Timing.instant(),new EntranceAtom(Slide.this)));
-			return this;
-		}
+		line(source, subFormat);
+		return this;
 	}
 
+	public Slide lead(String source)
+	{
+		line(source, majorFormat);
+		return this;
+	}
 
+	public Slide minor(String source)
+	{
+		line(source, minorFormat);
+		return this;
+	}
+
+	void line(String text, Format format)
+	{
+		Position position = null;
+		if (!lines.isEmpty()) position = new BelowRight(group);
+		else position = new TopRight(1550d, 50d);
+		LettersAtom line = new LettersAtom(group, text, format, position);
+		world.add(new AtomStep(Timing.ms(500), line));
+		lines.add(line);
+	}
+
+	public Slide wipe()
+	{
+		for (LettersAtom line : lines)
+		{
+			world.add(new AtomStep(Timing.instant(), new RemoveAtom(group, () -> line.text())));
+		}
+		lines.clear();
+		return this;
+	}
+
+	public Slide enter()
+	{
+		world.add(new AtomStep(Timing.instant(), new EntranceAtom(Slide.this)));
+		return this;
+	}
 
 }

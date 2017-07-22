@@ -3,10 +3,10 @@ package org.geepawhill.contentment.actor;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Actors implements Iterable<Actor<?>>
+public class Actors implements Iterable<Actor>
 {
 
-	private ArrayList<Actor<?>> items;
+	private ArrayList<Actor> items;
 
 	public Actors()
 	{
@@ -18,23 +18,23 @@ public class Actors implements Iterable<Actor<?>>
 		return items.size();
 	}
 
-	public void add(Actor<?> actor)
+	public void add(Actor actor)
 	{
 		items.add(actor);
 	}
 
-	public void remove(Actor<?> actor)
+	public void remove(Actor actor)
 	{
 		items.remove(actor);
 	}
 
-	public Actor<?> get(int i)
+	public Actor get(int i)
 	{
 		return items.get(i);
 	}
 
 	@Override
-	public Iterator<Actor<?>> iterator()
+	public Iterator<Actor> iterator()
 	{
 		return items.iterator();
 	}
@@ -49,14 +49,14 @@ public class Actors implements Iterable<Actor<?>>
 		items.clear();
 	}
 
-	public boolean contains(Actor<?> actor)
+	public boolean contains(Actor actor)
 	{
 		return items.contains(actor);
 	}
 
-	public void add(Actor<?>... actors)
+	public void add(Actor... actors)
 	{
-		for(Actor<?> actor : actors) items.add(actor);
+		for(Actor actor : actors) items.add(actor);
 		
 	}
 }

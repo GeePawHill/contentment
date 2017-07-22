@@ -8,6 +8,7 @@ import java.util.Iterator;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Actors;
+import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.actors.Spot;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,9 +22,10 @@ public class ActorsTest
 	@Before
 	public void before()
 	{
+		ScriptWorld world = new ScriptWorld();
 		actors = new Actors();
-		box1 = new Spot(0d, 0d);
-		box2 = new Spot(100d, 100d);
+		box1 = new Spot(world, 0d, 0d);
+		box2 = new Spot(world, 100d, 100d);
 	}
 
 	@Test
@@ -55,7 +57,7 @@ public class ActorsTest
 	{
 		actors.add(box1);
 		actors.add(box2);
-		Iterator<Actor<?>> iterator = actors.iterator();
+		Iterator<Actor> iterator = actors.iterator();
 		assertTrue(iterator.hasNext());
 		assertEquals(box1,iterator.next());
 		assertEquals(box2,iterator.next());

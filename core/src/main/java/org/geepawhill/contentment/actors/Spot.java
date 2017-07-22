@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.actors;
 
-import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.actor.GenericAgentBuilder;
+import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.SpotAtom;
 import org.geepawhill.contentment.geometry.Point;
@@ -12,7 +11,7 @@ import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
 
-public class Spot implements Actor<GenericAgentBuilder<Spot>>
+public class Spot extends GenericActor
 {
 
 	final String nickname;
@@ -20,13 +19,14 @@ public class Spot implements Actor<GenericAgentBuilder<Spot>>
 	
 	final SpotAtom atom;
 	
-	public Spot(double x,double y)
+	public Spot(ScriptWorld world,double x, double y)
 	{
-		this(Names.make(Spot.class.getSimpleName()),x,y);
+		this(world,Names.make(Spot.class.getSimpleName()),x, y);
 	}
 	
-	public Spot(String name,double x, double y)
+	public Spot(ScriptWorld world,String name, double x, double y)
 	{
+		super(world);
 		this.nickname = name;
 		this.group = new Group();
 		this.atom = new SpotAtom(this,new Point(x,y));
@@ -48,13 +48,4 @@ public class Spot implements Actor<GenericAgentBuilder<Spot>>
 	{
 		return new AtomStep(Timing.ms(ms),atom);
 	}
-
-	@Override
-	public GenericAgentBuilder<Spot> builder(ScriptWorld world)
-	{
-		return new GenericAgentBuilder<>(world,this);
-	}
-	
-	
-
 }

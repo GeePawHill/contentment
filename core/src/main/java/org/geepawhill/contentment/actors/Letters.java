@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.actor.ActorBuilderBase;
+import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.BezierAtom;
 import org.geepawhill.contentment.atom.LettersAtom;
@@ -17,7 +17,7 @@ import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.Group;
 
-public class Letters implements Actor<Letters.Builder>
+public class Letters extends GenericActor implements Actor
 {
 	private final String nickname;
 	private final Group group;
@@ -31,13 +31,14 @@ public class Letters implements Actor<Letters.Builder>
 	private Bezier eastHalfBezier;
 	private Bezier westHalfBezier;
 
-	public Letters(String source)
+	public Letters(ScriptWorld world, String source)
 	{
-		this(source, Position.DEFAULT, Format.DEFAULT);
+		this(world, source, Position.DEFAULT, Format.DEFAULT);
 	}
 
-	public Letters(String source, Position position, Format format)
+	public Letters(ScriptWorld world, String source, Position position, Format format)
 	{
+		super(world);
 		this.nickname = Names.make(getClass());
 		this.group = new Group();
 		this.northJiggler = new Jiggler(.5d, 6d);
@@ -120,36 +121,12 @@ public class Letters implements Actor<Letters.Builder>
 		setPointsIfNeeded();
 		return westHalfBezier;
 	}
-	
-	@Override
-	public Builder builder(ScriptWorld world)
-	{
-		return new Builder(world);
-	}
-	
-	public class Builder extends ActorBuilderBase<Letters,Builder>
-	{
-		private ScriptWorld world;
 
-		public Builder(ScriptWorld world)
-		{
-			super(world, Letters.this);
-			this.world = world;
-		}
-		
-		// this action can only be done to actors of type MyAgent
-		public Builder lettersOnly()
-		{
-			// do something only this kind of agent can do
-			return this;
-		}
-		
-		@Override
-		public Builder downcast()
-		{
-			return this;
-		}
+	// this action can only be done to actors of type MyAgent
+	public Letters lettersOnly()
+	{
+		// do something only this kind of agent can do
+		return this;
 	}
-
 
 }

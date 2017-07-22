@@ -7,9 +7,9 @@ import org.geepawhill.contentment.core.Context;
 public class EntranceAtom implements Atom
 {
 	
-	private Actor<?> actor;
+	private Actor actor;
 
-	public EntranceAtom(Actor<?> actor)
+	public EntranceAtom(Actor actor)
 	{
 		this.actor = actor;
 	}

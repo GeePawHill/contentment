@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
 public class BlockAtom implements Atom
 {
 
-	private Actor<?> actor;
+	private Actor actor;
 	private String source;
 	private Format format;
 	private Position position;
@@ -26,7 +26,7 @@ public class BlockAtom implements Atom
 	final static private double XMARGIN = 6;
 	final static private double YMARGIN = 10;
 
-	public BlockAtom(Actor<?> actor, String source, Format format, Position position)
+	public BlockAtom(Actor actor, String source, Format format, Position position)
 	{
 		this.actor = actor;
 		this.source = source;
