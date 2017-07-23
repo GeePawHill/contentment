@@ -154,36 +154,12 @@ public class ExceptionsScript extends ScriptBuilder
 		
 		cue(22).slide().head("The Household Program");
 		
-		mark(26);
-		Letters main = new Letters(world, "main()", stackTextPosition(0), largeCodeFormat);
-		disappearingStackText.add(main);
-		sketch(500d, main);
-		
-		mark(30);
-		doChores = new Letters(world, "doChores()", stackTextPosition(1), largeCodeFormat);
-		catchAndThrowColorText.add(doChores);
-		sketch(500d, doChores);
-		
-		mark(33);
-		Letters takeOutTrash = new Letters(world, "takeOutTrash()", stackTextPosition(2), largeCodeFormat);
-		disappearingStackText.add(takeOutTrash);
-		sketch(500d, takeOutTrash);
-		mark(34);
-		
-		mark(37);
-		Letters putBagsInCan = new Letters(world, "putBagsInCans()", stackTextPosition(3), largeCodeFormat);
-		disappearingStackText.add(putBagsInCan);
-		sketch(500d, putBagsInCan);
-		
-		mark(40);
-		Letters putOneBagInCan = new Letters(world, "putOneBagInCan()", stackTextPosition(4), largeCodeFormat);
-		disappearingStackText.add(putOneBagInCan);
-		sketch(500d, putOneBagInCan);
-		
-		mark(44);
-		openCan = new Letters(world, "openCan()", stackTextPosition(5), largeCodeFormat);
-		sketch(500d, openCan);
-		catchAndThrowColorText.add(openCan);
+		cue(26).letters("main()").at(stackTextPosition(0)).format(largeCodeFormat).party("stackText").sketch();
+		cue(30).letters("doChores()").at(stackTextPosition(1)).format(largeCodeFormat).party("remainder").sketch();
+		cue(33).letters("takeOutTrash()").at(stackTextPosition(2)).format(largeCodeFormat).party("stackText").sketch();
+		cue(37).letters("putBagsInCans()").at(stackTextPosition(3)).format(largeCodeFormat).party("stackText").sketch();
+		cue(40).letters("putOneBagInCan()").at(stackTextPosition(4)).format(largeCodeFormat).party("stackText").sketch();
+		cue(44).letters("openCan()").at(stackTextPosition(5)).format(largeCodeFormat).party("remainder").sketch();
 		
 		Letters joke = joke("whoops, he forgot openCan()");
 		mark(49);
@@ -195,8 +171,7 @@ public class ExceptionsScript extends ScriptBuilder
 	private Step special()
 	{
 		buildPhrase();
-		reColor(openCan, Color.RED);
-		reColor(doChores, Color.RED);
+//		cue(50).party("remainder").reColor(Color.RED);
 
 		mark(55);
 		thrower = new Letters(world, "Thrower", new TopRight(leftCommentTextPoint(5)), commentFormat);

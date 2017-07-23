@@ -27,4 +27,11 @@ public abstract class GenericActor implements Actor
 		world.callActor(name,this);
 		return this;
 	}
+	
+	@Override
+	public Actor party(String name)
+	{
+		world.addToParty(name,this);
+		return this;
+	}
 }

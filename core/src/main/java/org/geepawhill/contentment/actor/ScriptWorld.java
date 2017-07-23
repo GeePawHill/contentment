@@ -12,13 +12,15 @@ public class ScriptWorld
 {
 	private Addable working;
 	private Slide slide;
-	private HashMap<String,Actor> namedActors;
+	private final HashMap<String,Actor> namedActors;
+	private final HashMap<String,Actors> namedParties;
 	
 	public ScriptWorld()
 	{
 		working = new Phrase();
 		slide = new Slide(this);
 		namedActors = new HashMap<>();
+		namedParties = new HashMap<>();
 	}
 
 	public void add(Step step)
@@ -64,5 +66,18 @@ public class ScriptWorld
 	public void callActor(String name, Actor actor)
 	{
 		namedActors.put(name, actor);
+	}
+
+	public void addToParty(String name, Actor actor)
+	{
+		Actors actors = namedParties.getOrDefault(name, new Actors());
+		actors.add(actor);
+		namedParties.put(name, actors);
+	}
+
+	public Actors party(String name)
+	{
+		if(!namedParties.containsKey(name)) throw new RuntimeException("Can't find party: ["+name+"]");
+		return namedParties.get(name);
 	}
 }

@@ -1,6 +1,9 @@
 package org.geepawhill.contentment.actor;
 
+import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.actors.Slide;
+import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.position.Position;
 
 public class CueBuilder
 {
@@ -28,6 +31,16 @@ public class CueBuilder
 	public Slide slide()
 	{
 		return world.slide();
+	}
+
+	public Letters letters(String source)
+	{
+		return new Letters(world,source);
+	}
+	
+	public Actors party(String name)
+	{
+		return world.party(name);
 	}
 
 }

@@ -4,7 +4,6 @@ import static org.geepawhill.contentment.utility.JfxUtility.color;
 
 import java.util.ArrayList;
 
-import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.EntranceAtom;

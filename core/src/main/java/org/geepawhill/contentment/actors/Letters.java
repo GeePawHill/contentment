@@ -55,17 +55,6 @@ public class Letters extends GenericActor implements Actor
 		return this;
 	}
 
-	public Letters at(Position position)
-	{
-		letters.at(position);
-		return this;
-	}
-
-	public Letters format(Format format)
-	{
-		letters.format(format);
-		return this;
-	}
 
 	@Override
 	public String nickname()
@@ -122,10 +111,15 @@ public class Letters extends GenericActor implements Actor
 		return westHalfBezier;
 	}
 
-	// this action can only be done to actors of type MyAgent
-	public Letters lettersOnly()
+	public Letters at(Position position)
 	{
-		// do something only this kind of agent can do
+		letters.at(position);
+		return this;
+	}
+
+	public Actor format(Format format)
+	{
+		letters.format(format);
 		return this;
 	}
 
