@@ -28,12 +28,6 @@ public class Stroke extends GenericActor
 	}
 
 	@Override
-	public String nickname()
-	{
-		return nickname;
-	}
-
-	@Override
 	public Group group()
 	{
 		return group;

@@ -154,12 +154,12 @@ public class ExceptionsScript extends ScriptBuilder
 		
 		cue(22).slide().head("The Household Program");
 		
-		cue(26).letters("main()").at(stackTextPosition(0)).format(largeCodeFormat).party("stackText").sketch();
-		cue(30).letters("doChores()").at(stackTextPosition(1)).format(largeCodeFormat).party("remainder").sketch();
-		cue(33).letters("takeOutTrash()").at(stackTextPosition(2)).format(largeCodeFormat).party("stackText").sketch();
-		cue(37).letters("putBagsInCans()").at(stackTextPosition(3)).format(largeCodeFormat).party("stackText").sketch();
-		cue(40).letters("putOneBagInCan()").at(stackTextPosition(4)).format(largeCodeFormat).party("stackText").sketch();
-		cue(44).letters("openCan()").at(stackTextPosition(5)).format(largeCodeFormat).party("remainder").sketch();
+		cue(26).letters("main()").at(stackTextPosition(0)).format(largeCodeFormat).in("stackText").sketch();
+		cue(30).letters("doChores()").at(stackTextPosition(1)).format(largeCodeFormat).in("remainder").sketch();
+		cue(33).letters("takeOutTrash()").at(stackTextPosition(2)).format(largeCodeFormat).in("stackText").sketch();
+		cue(37).letters("putBagsInCans()").at(stackTextPosition(3)).format(largeCodeFormat).in("stackText").sketch();
+		cue(40).letters("putOneBagInCan()").at(stackTextPosition(4)).format(largeCodeFormat).in("stackText").sketch();
+		cue(44).letters("openCan()").at(stackTextPosition(5)).format(largeCodeFormat).in("remainder").sketch();
 		
 		Letters joke = joke("whoops, he forgot openCan()");
 		mark(49);

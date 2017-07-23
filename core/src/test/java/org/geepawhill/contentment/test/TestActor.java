@@ -25,12 +25,6 @@ public class TestActor extends GenericActor
 	}
 
 	@Override
-	public String nickname()
-	{
-		return "TestActor";
-	}
-
-	@Override
 	public Step draw(double ms)
 	{
 		return new Phrase();

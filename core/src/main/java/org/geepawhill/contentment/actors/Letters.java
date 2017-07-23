@@ -55,13 +55,6 @@ public class Letters extends GenericActor implements Actor
 		return this;
 	}
 
-
-	@Override
-	public String nickname()
-	{
-		return nickname;
-	}
-
 	@Override
 	public Group group()
 	{
@@ -84,7 +77,7 @@ public class Letters extends GenericActor implements Actor
 	@Override
 	public String toString()
 	{
-		return nickname() + " [" + letters.toString() + "]";
+		return "Letters [" + letters.toString() + "]";
 	}
 
 	private void setPointsIfNeeded()

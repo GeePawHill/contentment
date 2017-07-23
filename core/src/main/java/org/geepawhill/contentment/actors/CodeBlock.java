@@ -31,12 +31,6 @@ public class CodeBlock extends GenericActor
 	}
 
 	@Override
-	public String nickname()
-	{
-		return "CodeBlock";
-	}
-
-	@Override
 	public Step draw(double ms)
 	{
 		Phrase phrase = new Phrase();

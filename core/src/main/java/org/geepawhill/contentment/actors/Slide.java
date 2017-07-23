@@ -63,12 +63,6 @@ public class Slide extends GenericActor
 	}
 
 	@Override
-	public String nickname()
-	{
-		return "Slide";
-	}
-
-	@Override
 	public Step draw(double ms)
 	{
 		throw new RuntimeException("Attempt to draw Slide actor.");

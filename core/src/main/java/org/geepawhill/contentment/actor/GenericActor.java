@@ -29,7 +29,7 @@ public abstract class GenericActor implements Actor
 	}
 	
 	@Override
-	public Actor party(String name)
+	public Actor in(String name)
 	{
 		world.addToParty(name,this);
 		return this;

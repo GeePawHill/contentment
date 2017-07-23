@@ -25,13 +25,6 @@ public class Stack extends GenericActor
 	}
 
 	@Override
-	public String nickname()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Step draw(double ms)
 	{
 		return new Phrase();

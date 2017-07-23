@@ -52,12 +52,6 @@ public class Cross extends GenericActor
 	}
 
 	@Override
-	public String nickname()
-	{
-		return "Cross";
-	}
-
-	@Override
 	public Step draw(double ms)
 	{
 		Timed timed = new Timed(ms);
