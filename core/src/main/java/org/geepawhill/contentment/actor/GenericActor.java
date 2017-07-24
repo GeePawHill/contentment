@@ -1,8 +1,12 @@
 package org.geepawhill.contentment.actor;
 
+import org.geepawhill.contentment.atom.ChangeColorAtom;
 import org.geepawhill.contentment.atom.EntranceAtom;
+import org.geepawhill.contentment.atom.OpacityAtom;
 import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.timing.Timing;
+
+import javafx.scene.paint.Paint;
 
 public abstract class GenericActor implements Actor
 {
@@ -32,6 +36,20 @@ public abstract class GenericActor implements Actor
 	public Actor in(String name)
 	{
 		world.addToParty(name,this);
+		return this;
+	}
+	
+	@Override
+	public Actor reColor(Paint paint)
+	{
+		world.add(new AtomStep(Timing.instant(),new ChangeColorAtom(this, paint)));
+		return this;
+	}
+	
+	@Override
+	public Actor fadeDown()
+	{
+		world.add(new AtomStep(Timing.ms(500),new OpacityAtom(this, 1, 0)));
 		return this;
 	}
 }

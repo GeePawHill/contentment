@@ -59,20 +59,12 @@ public class ExceptionsScript extends ScriptBuilder
 	private ArrayList<Actor> lines;
 
 	private Actors stack;
-	private Actors disappearingStackText;
 	private Actors catchAndThrowColorText;
 	
 	private Script script;
 	
-	private Letters thrower;
-	private Letters catcher;
-	
 	private Grid stackGrid;
 
-	private Letters openCan;
-
-	private Letters doChores;
-	
 	public ExceptionsScript()
 	{
 		Paint majorColor = color(13, 165, 15);
@@ -107,7 +99,6 @@ public class ExceptionsScript extends ScriptBuilder
 		this.lines = new ArrayList<>();
 		this.stack = new Actors();
 		this.stackGrid = new Grid(1, STACK_ROWS, new PointPair(900d, 250d, 1480d, 850d));
-		this.disappearingStackText = new Actors();
 		this.catchAndThrowColorText = new Actors();
 
 		Font codeFont = new Font("Consolas", 25d);
@@ -171,17 +162,12 @@ public class ExceptionsScript extends ScriptBuilder
 	private Step special()
 	{
 		buildPhrase();
-//		cue(50).party("remainder").reColor(Color.RED);
+		cue(50).party("remainder").reColor(Color.RED);
 
-		mark(55);
-		thrower = new Letters(world, "Thrower", new TopRight(leftCommentTextPoint(5)), commentFormat);
-		sketch(500d, thrower);
-		mark(57);
-		catcher = new Letters(world, "Catcher", new TopRight(leftCommentTextPoint(1)), commentFormat);
-		sketch(500d, catcher);
+		cue(55).letters("Thrower").at(new TopRight(leftCommentTextPoint(5))).format(commentFormat).called("thrower").sketch();
+		cue(57).letters("Catcher").at(new TopRight(leftCommentTextPoint(1))).format(commentFormat).called("catcher").sketch();
 
-		mark(60);
-		fadeDown(500d, stack, disappearingStackText);
+		cue(60).party("stackText").fadeDown();
 
 		mark(64);
 		Letters throwsLidNotFound = new Letters(world, "throws LidNotFound", new TopLeft(stackTextPoint(5).add(new Point(0,50))), lightComment);
@@ -213,7 +199,7 @@ public class ExceptionsScript extends ScriptBuilder
 		fadeOut(500d, catchAndThrowColorText);
 
 		mark(105);
-		Arrow call = new Arrow(world, thrower, false, catcher, true, commentFormat);
+		Arrow call = new Arrow(world, and().actor("thrower"), false, and().actor("catcher"), true, commentFormat);
 		Letters letters = new Letters(world, "call", new Centered(call), commentFormat);
 		sketch(500d, call);
 		sketch(500d, letters);

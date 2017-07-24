@@ -3,9 +3,12 @@ package org.geepawhill.contentment.actor;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Actors implements Iterable<Actor>
-{
+import org.geepawhill.contentment.step.Step;
 
+import javafx.scene.paint.Paint;
+
+public class Actors implements Iterable<Actor>, Commandable
+{
 	private ArrayList<Actor> items;
 
 	public Actors()
@@ -57,6 +60,57 @@ public class Actors implements Iterable<Actor>
 	public void add(Actor... actors)
 	{
 		for(Actor actor : actors) items.add(actor);
+		
+	}
+
+	@Override
+	public Step draw(double ms)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Commandable sketch()
+	{
+		for(Actor actor : this)
+		{
+			actor.sketch();
+		}
+		return this;
+	}
+
+	@Override
+	public Commandable called(String name)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Commandable in(String name)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Commandable reColor(Paint paint)
+	{
+		for(Actor actor : this)
+		{
+			actor.reColor(paint);
+		}
+		return this;
+		
+	}
+	
+	public Commandable fadeDown()
+	{
+		for(Actor actor : this)
+		{
+			actor.fadeDown();
+		}
+		return this;
 		
 	}
 }

@@ -7,10 +7,13 @@ public interface Commandable
 
 	Step draw(double ms);
 
-	Actor sketch();
+	Commandable sketch();
 
-	Actor called(String name);
+	Commandable called(String name);
 
-	Actor in(String name);
+	Commandable in(String name);
+	
+	Commandable fadeDown();
+
 
 }
