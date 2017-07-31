@@ -1,14 +1,17 @@
 package org.geepawhill.contentment.core;
 
+import java.util.ArrayList;
+
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Actors;
+import org.geepawhill.contentment.atom.GroupSource;
 import org.geepawhill.contentment.rhythm.Rhythm;
 
 import javafx.scene.Group;
+import javafx.scene.Node;
 
 public class Context
 {
-	public final Actors actors;
 	public final Group canvas;
 
 	private Rhythm rhythm;
@@ -16,25 +19,22 @@ public class Context
 	public Context()
 	{
 		this.canvas = new Group();
-		this.actors = new Actors();
 	}
 	
-	public void add(Actor actor)
+	public void add(GroupSource actor)
 	{
-		actors.add(actor);
-		if (!canvas.getChildren().contains(actor.group()))
+		if (!canvas.getChildren().contains(actor.get()))
 		{
-			canvas.getChildren().add(actor.group());
+			canvas.getChildren().add(actor.get());
 		}
 	}
 
-	public void remove(Actor actor)
+	public void remove(GroupSource actor)
 	{
-		if (canvas.getChildren().contains(actor.group()))
+		if (canvas.getChildren().contains(actor.get()))
 		{
-			canvas.getChildren().remove(actor.group());
+			canvas.getChildren().remove(actor.get());
 		}
-		actors.remove(actor);
 	}
 
 	public void setRhythm(Rhythm rhythm)
@@ -49,11 +49,6 @@ public class Context
 
 	public void wipe()
 	{
-		Actors local = new Actors();
-		local.addAll(actors);
-		for(Actor actor : local)
-		{
-			remove(actor);
-		}
+		canvas.getChildren().clear();
 	}
 }

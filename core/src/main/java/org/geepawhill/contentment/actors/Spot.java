@@ -29,7 +29,7 @@ public class Spot extends GenericActor
 		super(world);
 		this.nickname = name;
 		this.group = new Group();
-		this.atom = new SpotAtom(this,new Point(x,y));
+		this.atom = new SpotAtom(groupSource(),new Point(x,y));
 	}
 	
 	public String nickname()

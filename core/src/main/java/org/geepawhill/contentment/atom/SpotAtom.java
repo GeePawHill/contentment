@@ -11,9 +11,9 @@ import javafx.scene.shape.Circle;
 public class SpotAtom implements Atom
 {
 	private Circle circle;
-	private Actor actor;
+	private GroupSource actor;
 
-	public SpotAtom(Actor actor,Point center)
+	public SpotAtom(GroupSource actor,Point center)
 	{
 		this.actor = actor;
 		this.circle = new Circle(center.x,center.y,0d);
@@ -28,7 +28,7 @@ public class SpotAtom implements Atom
 	@Override
 	public boolean partial(Context context, double fraction)
 	{
-		JfxUtility.addIfNeeded(actor.group(), circle);
+		JfxUtility.addIfNeeded(actor, circle);
 		return false;
 	}
 

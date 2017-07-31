@@ -7,9 +7,9 @@ import org.geepawhill.contentment.core.Context;
 public class EntranceAtom implements Atom
 {
 	
-	private Actor actor;
+	private GroupSource actor;
 
-	public EntranceAtom(Actor actor)
+	public EntranceAtom(GroupSource actor)
 	{
 		this.actor = actor;
 	}
@@ -17,8 +17,8 @@ public class EntranceAtom implements Atom
 	@Override
 	public void setup(Context context)
 	{
-		actor.group().getChildren().clear();
-		actor.group().setOpacity(1);
+		actor.get().getChildren().clear();
+		actor.get().setOpacity(1);
 	}
 
 	@Override

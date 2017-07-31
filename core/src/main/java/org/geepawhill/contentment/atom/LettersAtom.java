@@ -15,7 +15,7 @@ import javafx.scene.text.Text;
 public class LettersAtom implements Atom
 {
 	private Text text;
-	private Group group;
+	private GroupSource group;
 	private String source;
 	private Format format;
 	private Position position;
@@ -23,10 +23,10 @@ public class LettersAtom implements Atom
 
 	public LettersAtom(Actor actor, String source, Format format, Position position)
 	{
-		this(actor.group(), source, format, position);
+		this(actor.groupSource(), source, format, position);
 	}
 
-	public LettersAtom(Group group, String source, Format format, Position position)
+	public LettersAtom(GroupSource group, String source, Format format, Position position)
 	{
 		this.group = group;
 		this.source = source;

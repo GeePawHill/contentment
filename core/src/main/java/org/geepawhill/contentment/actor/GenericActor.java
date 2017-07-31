@@ -33,7 +33,7 @@ public abstract class GenericActor implements Actor
 	@Override
 	public GenericActor sketch()
 	{
-		world.add(new AtomStep(Timing.instant(),new EntranceAtom(this)));
+		world.add(new AtomStep(Timing.instant(),new EntranceAtom(groupSource())));
 		world.add(draw(500d));
 		return this;
 	}
@@ -55,14 +55,14 @@ public abstract class GenericActor implements Actor
 	@Override
 	public Actor reColor(Paint paint)
 	{
-		world.add(new AtomStep(Timing.instant(),new ChangeColorAtom(this, paint)));
+		world.add(new AtomStep(Timing.instant(),new ChangeColorAtom(groupSource(), paint)));
 		return this;
 	}
 	
 	@Override
 	public Actor fadeDown()
 	{
-		world.add(new AtomStep(Timing.ms(500),new OpacityAtom(this, 1, 0)));
+		world.add(new AtomStep(Timing.ms(500),new OpacityAtom(groupSource(), 1, 0)));
 		return this;
 	}
 }

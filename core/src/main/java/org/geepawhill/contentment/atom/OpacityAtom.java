@@ -6,11 +6,11 @@ import org.geepawhill.contentment.core.Context;
 
 public class OpacityAtom implements Atom
 {
-	private Actor actor;
+	private GroupSource actor;
 	private double from;
 	private double to;
 
-	public OpacityAtom(Actor actor, double from, double to)
+	public OpacityAtom(GroupSource actor, double from, double to)
 	{
 		this.actor = actor;
 		this.from = from;
@@ -20,13 +20,13 @@ public class OpacityAtom implements Atom
 	@Override
 	public void setup(Context context)
 	{
-		actor.group().setOpacity(from);
+		actor.get().setOpacity(from);
 	}
 
 	@Override
 	public boolean partial(Context context, double fraction)
 	{
-		actor.group().setOpacity(from + fraction * (to - from));
+		actor.get().setOpacity(from + fraction * (to - from));
 		return true;
 	}
 

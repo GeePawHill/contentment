@@ -11,10 +11,10 @@ import javafx.scene.paint.Paint;
 public class ChangeColorAtom implements Atom
 {
 	
-	private Actor actor;
+	private GroupSource actor;
 	private Paint paint;
 
-	public ChangeColorAtom(Actor actor, Paint paint)
+	public ChangeColorAtom(GroupSource actor, Paint paint)
 	{
 		this.actor = actor;
 		this.paint = paint;
@@ -30,7 +30,7 @@ public class ChangeColorAtom implements Atom
 	public boolean partial(Context context, double fraction)
 	{
 		ColorChanger colorChanger = new ColorChanger(paint);
-		JfxUtility.forEachDescendant(actor.group(), colorChanger);
+		JfxUtility.forEachDescendant(actor.get(), colorChanger);
 		return false;
 	}
 

@@ -47,7 +47,7 @@ public class ScriptBuilder
 	
 	public Step reColor(Actor actor, Paint paint)
 	{
-		AtomStep step = new AtomStep(Timing.instant(),new ChangeColorAtom(actor,paint));
+		AtomStep step = new AtomStep(Timing.instant(),new ChangeColorAtom(actor.groupSource(),paint));
 		addToWorking(step);
 		return step;
 	}
@@ -55,7 +55,7 @@ public class ScriptBuilder
 	public Step sketch(double ms, Actor drawable)
 	{
 		Phrase phrase = new Phrase();
-		phrase.add(new AtomStep(Timing.instant(),new EntranceAtom(drawable)));
+		phrase.add(new AtomStep(Timing.instant(),new EntranceAtom(drawable.groupSource())));
 		phrase.add(drawable.draw(ms));
 		addToWorking(phrase);
 		return phrase;
@@ -64,7 +64,7 @@ public class ScriptBuilder
 	public Step appear(Actor drawable)
 	{
 		Phrase result = new Phrase();
-		result.add(new AtomStep(Timing.instant(),new EntranceAtom(drawable)));
+		result.add(new AtomStep(Timing.instant(),new EntranceAtom(drawable.groupSource())));
 		result.add(drawable.draw(1d));
 		addToWorking(result);
 		return result;
@@ -72,7 +72,7 @@ public class ScriptBuilder
 
 	public Step disappear(Actor drawable)
 	{
-		AtomStep step = new AtomStep(Timing.instant(),new ExitAtom(drawable));
+		AtomStep step = new AtomStep(Timing.instant(),new ExitAtom(drawable.groupSource()));
 		addToWorking(step);
 		return step;
 	}
@@ -80,10 +80,10 @@ public class ScriptBuilder
 	public Step fadeIn(double ms, Actor drawable)
 	{
 		Phrase result = new Phrase();
-		result.add(new AtomStep(Timing.instant(),new EntranceAtom(drawable)));
-		result.add(new AtomStep(Timing.ms(1), new OpacityAtom(drawable,1,0)));
+		result.add(new AtomStep(Timing.instant(),new EntranceAtom(drawable.groupSource())));
+		result.add(new AtomStep(Timing.ms(1), new OpacityAtom(drawable.groupSource(),1,0)));
 		result.add(drawable.draw(1d));
-		result.add(new AtomStep(Timing.ms(ms), new OpacityAtom(drawable,0,1)));
+		result.add(new AtomStep(Timing.ms(ms), new OpacityAtom(drawable.groupSource(),0,1)));
 		addToWorking(result);
 		return result;
 	}
@@ -91,8 +91,8 @@ public class ScriptBuilder
 	public Step fadeOut(double ms, Actor drawable)
 	{
 		Phrase result = new Phrase();
-		result.add(new AtomStep(Timing.ms(ms), new OpacityAtom(drawable,1,0)));
-		result.add(new AtomStep(Timing.instant(),new ExitAtom(drawable)));
+		result.add(new AtomStep(Timing.ms(ms), new OpacityAtom(drawable.groupSource(),1,0)));
+		result.add(new AtomStep(Timing.instant(),new ExitAtom(drawable.groupSource())));
 		addToWorking(result);
 		return result;
 	}
@@ -165,13 +165,13 @@ public class ScriptBuilder
 
 	public ScriptBuilder fadeDown(double ms, Actor actor)
 	{
-		addToWorking(new AtomStep(Timing.ms(ms), new OpacityAtom(actor,1,0)));
+		addToWorking(new AtomStep(Timing.ms(ms), new OpacityAtom(actor.groupSource(),1,0)));
 		return this;
 	}
 	
 	public ScriptBuilder fadeUp(double ms, Actor actor)
 	{
-		addToWorking(new AtomStep(Timing.ms(ms), new OpacityAtom(actor,0,1)));
+		addToWorking(new AtomStep(Timing.ms(ms), new OpacityAtom(actor.groupSource(),0,1)));
 		return this;
 	}
 	

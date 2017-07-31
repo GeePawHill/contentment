@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.atom.GroupSource;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.VPos;
@@ -68,14 +69,14 @@ public class JfxUtility
 		}
 	}
 
-	public static void addIfNeeded(Group group, Node node)
+	public static void addIfNeeded(GroupSource group, Node node)
 	{
-		if(!group.getChildren().contains(node)) group.getChildren().add(node);
+		if(!group.get().getChildren().contains(node)) group.get().getChildren().add(node);
 	}
 	
 	public static void addIfNeeded(Actor actor, Node node)
 	{
-		addIfNeeded(actor.group(),node);
+		addIfNeeded(actor.groupSource(),node);
 	}
 
 

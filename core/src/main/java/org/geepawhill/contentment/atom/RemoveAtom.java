@@ -12,20 +12,20 @@ import javafx.scene.Node;
 
 public class RemoveAtom implements Atom
 {
-	private Group group;
+	private GroupSource group;
 	private Supplier<Node> nodeSource;
 
 	public RemoveAtom(Actor actor, Node node)
 	{
-		this(actor.group(), node);
+		this(actor.groupSource(), node);
 	}
 
-	public RemoveAtom(Group group, Node node)
+	public RemoveAtom(GroupSource group, Node node)
 	{
 		this(group,() -> node);
 	}
 	
-	public RemoveAtom(Group group, Supplier<Node> nodeSource)
+	public RemoveAtom(GroupSource group, Supplier<Node> nodeSource)
 	{
 		this.group = group;
 		this.nodeSource = nodeSource;
@@ -39,7 +39,7 @@ public class RemoveAtom implements Atom
 	@Override
 	public boolean partial(Context context, double fraction)
 	{
-		JfxUtility.removeIfNeeded(group, nodeSource.get());
+		JfxUtility.removeIfNeeded(group.get(), nodeSource.get());
 		return false;
 	}
 }

@@ -98,7 +98,7 @@ public class Slide extends GenericActor
 		Position position = null;
 		if (!lines.isEmpty()) position = new BelowRight(groupSource());
 		else position = new TopRight(1550d, 50d);
-		LettersAtom line = new LettersAtom(group, text, format, position);
+		LettersAtom line = new LettersAtom(groupSource(), text, format, position);
 		world.add(new AtomStep(Timing.ms(500), line));
 		lines.add(line);
 	}
@@ -107,7 +107,7 @@ public class Slide extends GenericActor
 	{
 		for (LettersAtom line : lines)
 		{
-			world.add(new AtomStep(Timing.instant(), new RemoveAtom(group, () -> line.text())));
+			world.add(new AtomStep(Timing.instant(), new RemoveAtom(groupSource(), () -> line.text())));
 		}
 		lines.clear();
 		return this;
@@ -115,7 +115,7 @@ public class Slide extends GenericActor
 
 	public Slide enter()
 	{
-		world.add(new AtomStep(Timing.instant(), new EntranceAtom(Slide.this)));
+		world.add(new AtomStep(Timing.instant(), new EntranceAtom(groupSource())));
 		return this;
 	}
 

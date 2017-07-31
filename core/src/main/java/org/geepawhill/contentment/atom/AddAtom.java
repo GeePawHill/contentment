@@ -9,10 +9,10 @@ import javafx.scene.Node;
 
 public class AddAtom implements Atom
 {
-	private Actor actor;
+	private GroupSource actor;
 	private Node node;
 
-	public AddAtom(Actor actor, Node node)
+	public AddAtom(GroupSource actor, Node node)
 	{
 		this.actor = actor;
 		this.node = node;
@@ -21,12 +21,12 @@ public class AddAtom implements Atom
 	@Override
 	public void setup(Context context)
 	{
+		JfxUtility.addIfNeeded(actor, node);
 	}
 
 	@Override
 	public boolean partial(Context context, double fraction)
 	{
-		JfxUtility.addIfNeeded(actor, node);
 		return false;
 	}
 }
