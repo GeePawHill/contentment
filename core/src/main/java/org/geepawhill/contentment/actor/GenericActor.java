@@ -2,10 +2,12 @@ package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.atom.ChangeColorAtom;
 import org.geepawhill.contentment.atom.EntranceAtom;
+import org.geepawhill.contentment.atom.GroupSource;
 import org.geepawhill.contentment.atom.OpacityAtom;
 import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.timing.Timing;
 
+import javafx.scene.Group;
 import javafx.scene.paint.Paint;
 
 public abstract class GenericActor implements Actor
@@ -15,6 +17,17 @@ public abstract class GenericActor implements Actor
 	public GenericActor(ScriptWorld world)
 	{
 		this.world = world;
+	}
+	
+	public GroupSource groupSource()
+	{
+		return new GroupSource() {
+
+			@Override
+			public Group get()
+			{
+				return group();
+			} };
 	}
 
 	@Override
