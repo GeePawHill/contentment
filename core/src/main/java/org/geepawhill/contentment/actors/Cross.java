@@ -4,6 +4,7 @@ import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.BezierAtom;
+import org.geepawhill.contentment.atom.GroupSource;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Point;
@@ -19,7 +20,7 @@ import javafx.scene.paint.Color;
 public class Cross extends GenericActor
 {
 
-	private Actor target;
+	private GroupSource target;
 	private Group group;
 	private BezierAtom leftToRight;
 	private BezierAtom rightToLeft;
@@ -29,10 +30,10 @@ public class Cross extends GenericActor
 
 	public Cross(ScriptWorld world, Actor target, double size)
 	{
-		this(world,target,size,size, new Point(0,0));
+		this(world,target.groupSource(),size,size, new Point(0,0));
 	}
 	
-	public Cross(ScriptWorld world, Actor target, double xsize, double ysize, Point offset)
+	public Cross(ScriptWorld world, GroupSource target, double xsize, double ysize, Point offset)
 	{
 		super(world);
 		this.target = target;
@@ -64,7 +65,7 @@ public class Cross extends GenericActor
 	{
 		double xadditive = xsize/2d;
 		double yadditive = ysize/2d;
-		Point center = new PointPair(target.group()).center().add(offset);
+		Point center = new PointPair(target.get()).center().add(offset);
 		return new Bezier(new Point(center.x-xadditive, center.y-yadditive),new Point(center.x+xadditive,center.y+yadditive));
 	}
 
@@ -73,7 +74,7 @@ public class Cross extends GenericActor
 	{
 		double xadditive = xsize/2d;
 		double yadditive = ysize/2d;
-		Point center = new PointPair(target.group()).center().add(offset);
+		Point center = new PointPair(target.get()).center().add(offset);
 		return new Bezier(new Point(center.x+xadditive, center.y-yadditive), new Point(center.x-xadditive, center.y+yadditive));
 	}
 }

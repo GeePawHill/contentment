@@ -50,7 +50,7 @@ public class Arrow extends GenericActor
 		super(world);
 		this.random = new Random();
 		this.nickname = Names.make(getClass());
-		this.computer = new NodeArrowComputer(from.group(), to.group());
+		this.computer = new NodeArrowComputer(from.groupSource(), to.groupSource());
 		this.group = new Group();
 		steps = new ArrayList<>();
 		chosenMain = null;

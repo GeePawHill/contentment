@@ -259,7 +259,7 @@ public class ExceptionsScript extends ScriptBuilder
 		Arrow runtimeOne = knowLine(allButOvals, 350d, false);
 
 		mark(166);
-		Cross crossOne = new Cross(world, runtimeOne, 125d, 100d, new Point(0d, -10d));
+		Cross crossOne = new Cross(world, runtimeOne.groupSource(), 125d, 100d, new Point(0d, -10d));
 		sketch(500d, crossOne);
 		allButOvals.add(crossOne);
 
@@ -267,7 +267,7 @@ public class ExceptionsScript extends ScriptBuilder
 		Arrow runtimeTwo = knowLine(allButOvals, 475d, true);
 
 		mark(176);
-		Cross crossTwo = new Cross(world, runtimeTwo, 125d, 100d, new Point(0d, -10d));
+		Cross crossTwo = new Cross(world, runtimeTwo.groupSource(), 125d, 100d, new Point(0d, -10d));
 		sketch(500d, crossTwo);
 		allButOvals.add(crossTwo);
 
@@ -280,7 +280,7 @@ public class ExceptionsScript extends ScriptBuilder
 		Arrow compiletimeOne = knowLine(allButOvals, 680d, false);
 
 		mark(202);
-		Cross crossThree = new Cross(world, compiletimeOne, 125d, 100d, new Point(0d, -10d));
+		Cross crossThree = new Cross(world, compiletimeOne.groupSource(), 125d, 100d, new Point(0d, -10d));
 		sketch(500d, crossThree);
 		allButOvals.add(crossThree);
 
@@ -288,7 +288,7 @@ public class ExceptionsScript extends ScriptBuilder
 		Arrow compiletimeTwo = knowLine(allButOvals, 800d, true);
 
 		mark(212);
-		Cross crossFour = new Cross(world, compiletimeTwo, 125d, 100d, new Point(0d, -10d));
+		Cross crossFour = new Cross(world, compiletimeTwo.groupSource(), 125d, 100d, new Point(0d, -10d));
 		sketch(500d, crossFour);
 		allButOvals.add(crossFour);
 

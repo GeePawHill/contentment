@@ -1,17 +1,16 @@
 package org.geepawhill.contentment.connector.arrow;
 
+import org.geepawhill.contentment.atom.GroupSource;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
-
-import javafx.scene.Node;
 
 public class NodeArrowComputer implements ArrowComputer
 {
 	
-	private Node fromNode;
-	private Node toNode;
+	private GroupSource fromNode;
+	private GroupSource toNode;
 
-	public NodeArrowComputer(Node fromNode,Node toNode)
+	public NodeArrowComputer(GroupSource fromNode,GroupSource toNode)
 	{
 		this.fromNode = fromNode;
 		this.toNode = toNode;
@@ -23,11 +22,11 @@ public class NodeArrowComputer implements ArrowComputer
 	{
 		double d = 14;
 		double h = 10;
-		Point fromCenter = new PointPair(fromNode).center();
-		Point toCenter = new PointPair(toNode).center();
+		Point fromCenter = new PointPair(fromNode.get()).center();
+		Point toCenter = new PointPair(toNode.get()).center();
 		PointPair startLine = new PointPair(fromCenter,toCenter);
-		PointPair fromGrown = new PointPair(fromNode).grow(6d);
-		PointPair toGrown = new PointPair(toNode).grow(6d);
+		PointPair fromGrown = new PointPair(fromNode.get()).grow(6d);
+		PointPair toGrown = new PointPair(toNode.get()).grow(6d);
 		Point from = fromGrown.quadIntersects(startLine);
 		Point to = toGrown.quadIntersects(startLine);
 	
