@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.atom.GroupSource;
 
 import javafx.embed.swing.SwingFXUtils;
@@ -74,12 +73,6 @@ public class JfxUtility
 		if(!group.get().getChildren().contains(node)) group.get().getChildren().add(node);
 	}
 	
-	public static void addIfNeeded(Actor actor, Node node)
-	{
-		addIfNeeded(actor.groupSource(),node);
-	}
-
-
 	static public void setTopAlignment(Node node)
 	{
 		if(node instanceof Text)

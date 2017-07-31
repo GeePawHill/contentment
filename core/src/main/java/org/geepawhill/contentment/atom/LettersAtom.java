@@ -1,6 +1,5 @@
 package org.geepawhill.contentment.atom;
 
-import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Atom;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.format.Format;
@@ -9,7 +8,6 @@ import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.utility.JfxUtility;
 
-import javafx.scene.Group;
 import javafx.scene.text.Text;
 
 public class LettersAtom implements Atom
@@ -20,11 +18,6 @@ public class LettersAtom implements Atom
 	private Format format;
 	private Position position;
 	private String lastPartial;
-
-	public LettersAtom(Actor actor, String source, Format format, Position position)
-	{
-		this(actor.groupSource(), source, format, position);
-	}
 
 	public LettersAtom(GroupSource group, String source, Format format, Position position)
 	{

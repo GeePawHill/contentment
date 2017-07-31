@@ -24,7 +24,7 @@ public class Stroke extends GenericActor
 		super(world);
 		this.nickname = Names.make(getClass());
 		this.group = new Group();
-		this.atom = new BezierAtom(this,format,points);
+		this.atom = new BezierAtom(groupSource(),format,points);
 	}
 
 	@Override

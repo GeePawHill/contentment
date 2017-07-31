@@ -54,19 +54,19 @@ public class Arrow extends GenericActor
 		this.group = new Group();
 		steps = new ArrayList<>();
 		chosenMain = null;
-		mainStep = new BezierAtom(this, this::getMainBezier, format);
+		mainStep = new BezierAtom(groupSource(), this::getMainBezier, format);
 		if (pointAtFrom)
 		{
-			fromTopStep = new BezierAtom(this, this::getFromTop, format);
+			fromTopStep = new BezierAtom(groupSource(), this::getFromTop, format);
 			steps.add(fromTopStep);
-			fromBottomStep = new BezierAtom(this, this::getFromBottom, format);
+			fromBottomStep = new BezierAtom(groupSource(), this::getFromBottom, format);
 			steps.add(fromBottomStep);
 		}
 		if (pointAtTo)
 		{
-			toTopStep = new BezierAtom(this, this::getToTop, format);
+			toTopStep = new BezierAtom(groupSource(), this::getToTop, format);
 			steps.add(toTopStep);
-			toBottomStep = new BezierAtom(this, this::getToBottom, format);
+			toBottomStep = new BezierAtom(groupSource(), this::getToBottom, format);
 			steps.add(toBottomStep);
 		}
 	}

@@ -1,6 +1,5 @@
 package org.geepawhill.contentment.atom;
 
-import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Atom;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.format.Format;
@@ -18,9 +17,9 @@ public class BezierAtom implements Atom
 	public final Path path;
 	private BezierSource source;
 	private Format format;
-	private Actor owner;
+	private GroupSource owner;
 	
-	public BezierAtom(Actor owner, BezierSource source, Format format)
+	public BezierAtom(GroupSource owner, BezierSource source, Format format)
 	{
 		this.owner = owner;
 		this.source = source;
@@ -29,7 +28,7 @@ public class BezierAtom implements Atom
 	}
 
 
-	public BezierAtom(Actor owner, Format format, PointPair points)
+	public BezierAtom(GroupSource owner, Format format, PointPair points)
 	{
 		this(owner, () -> new Bezier(points), format);
 	}
@@ -38,7 +37,7 @@ public class BezierAtom implements Atom
 	public void setup(Context context)
 	{
 		format.apply(Frames.KEY, path);
-		JfxUtility.addIfNeeded(owner, path);
+		JfxUtility.addIfNeeded(owner,path);
 		partial(context,0d);
 	}
 

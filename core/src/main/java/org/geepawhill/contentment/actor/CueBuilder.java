@@ -2,8 +2,6 @@ package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.actors.Slide;
-import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.position.Position;
 
 public class CueBuilder
 {

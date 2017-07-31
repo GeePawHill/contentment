@@ -44,9 +44,9 @@ public class Letters extends GenericActor implements Actor
 		this.northJiggler = new Jiggler(.5d, 6d);
 		this.controlJiggler = new Jiggler(.4d, 30d);
 
-		this.letters = new LettersAtom(this, source, format, position);
-		this.east = new BezierAtom(this, this::eastHalfPoints, format);
-		this.west = new BezierAtom(this, this::westHalfPoints, format);
+		this.letters = new LettersAtom(groupSource(), source, format, position);
+		this.east = new BezierAtom(groupSource(), this::eastHalfPoints, format);
+		this.west = new BezierAtom(groupSource(), this::westHalfPoints, format);
 	}
 
 	public Letters withOval()

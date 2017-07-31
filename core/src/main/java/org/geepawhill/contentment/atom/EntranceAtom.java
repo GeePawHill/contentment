@@ -1,6 +1,5 @@
 package org.geepawhill.contentment.atom;
 
-import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.core.Atom;
 import org.geepawhill.contentment.core.Context;
 

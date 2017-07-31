@@ -21,7 +21,7 @@ public class CodeBlock extends GenericActor
 	{
 		super(world);
 		this.group = new Group();
-		this.atom = new BlockAtom(this,source,format,position);
+		this.atom = new BlockAtom(groupSource(),source,format,position);
 	}
 
 	@Override

@@ -42,8 +42,8 @@ public class Cross extends GenericActor
 		this.offset = offset;
 		this.group = new Group();
 		Format crossFormat = new Format(Frames.frame(Color.RED, 7d, 8d));
-		leftToRight = new BezierAtom(this,this::leftToRightBezier, crossFormat);
-		rightToLeft = new BezierAtom(this,this::rightToLeftBezier, crossFormat);
+		leftToRight = new BezierAtom(groupSource(),this::leftToRightBezier, crossFormat);
+		rightToLeft = new BezierAtom(groupSource(),this::rightToLeftBezier, crossFormat);
 	}
 
 	@Override
