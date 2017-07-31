@@ -180,12 +180,12 @@ public class ExceptionsScript extends ScriptBuilder
 		fadeIn(500d, catchesAll);
 
 		mark(82);
-		Letters catchesLidNotFound = new Letters(world, "catches LidNotFound",new BelowLeft(catchesAll), lightComment);
+		Letters catchesLidNotFound = new Letters(world, "catches LidNotFound",new BelowLeft(catchesAll.groupSource()), lightComment);
 		catchAndThrowColorText.add(catchesLidNotFound);
 		fadeIn(500d, catchesLidNotFound);
 
 		mark(86);
-		Letters logsIt = new Letters(world, "logs and moves on", new BelowLeft(catchesLidNotFound), lightComment);
+		Letters logsIt = new Letters(world, "logs and moves on", new BelowLeft(catchesLidNotFound.groupSource()), lightComment);
 		catchAndThrowColorText.add(logsIt);
 		fadeIn(500d, logsIt);
 
@@ -200,7 +200,7 @@ public class ExceptionsScript extends ScriptBuilder
 
 		mark(105);
 		Arrow call = new Arrow(world, and().actor("thrower"), false, and().actor("catcher"), true, commentFormat);
-		Letters letters = new Letters(world, "call", new Centered(call), commentFormat);
+		Letters letters = new Letters(world, "call", new Centered(call.groupSource()), commentFormat);
 		sketch(500d, call);
 		sketch(500d, letters);
 
@@ -395,7 +395,7 @@ public class ExceptionsScript extends ScriptBuilder
 		appear(afterCode2);
 
 		mark(468);
-		Letters andTestThis = new Letters(world, "and test the handler here!", new BelowCenter(afterCode2), commentFormat);
+		Letters andTestThis = new Letters(world, "and test the handler here!", new BelowCenter(afterCode2.groupSource()), commentFormat);
 		sketch(500d, andTestThis);
 
 		return endBuild();
@@ -451,7 +451,7 @@ public class ExceptionsScript extends ScriptBuilder
 		appear(afterCode2);
 
 		mark(468);
-		Letters andTestThis = new Letters(world, "and test the handler here!", new BelowCenter(afterCode2), commentFormat);
+		Letters andTestThis = new Letters(world, "and test the handler here!", new BelowCenter(afterCode2.groupSource()), commentFormat);
 		sketch(500d, andTestThis);
 
 		return endBuild();
@@ -590,7 +590,7 @@ public class ExceptionsScript extends ScriptBuilder
 		Spot rightSpot = new Spot(world, 1500d, y);
 		sketch(1d, rightSpot);
 		Arrow line = chooseArrow(leftHead, leftSpot, rightSpot);
-		Letters know = new Letters(world, "knows?", new AboveCenter(line), knowsFormat);
+		Letters know = new Letters(world, "knows?", new AboveCenter(line.groupSource()), knowsFormat);
 		sketch(500d, line);
 		sketch(500d, know);
 		actors.add(leftSpot, rightSpot, line, know);
@@ -614,7 +614,7 @@ public class ExceptionsScript extends ScriptBuilder
 		Letters letters = new Letters(world, "catches X?", stackTextPosition(line), commentFormat);
 		sketch(500d, letters);
 		Letters no = new Letters(world, "no, keep looking...",
-				new RightOf(letters,20d), new Format(commentFormat, TypeFace.color(Color.RED, 1d)));
+				new RightOf(letters.groupSource(),20d), new Format(commentFormat, TypeFace.color(Color.RED, 1d)));
 		sketch(1d, no);
 	}
 
@@ -623,14 +623,14 @@ public class ExceptionsScript extends ScriptBuilder
 		Letters letters = new Letters(world, "catches X?", stackTextPosition(line), commentFormat);
 		sketch(500d, letters);
 		Letters no = new Letters(world, "YES! call this one!",
-				new RightOf(letters,20d), new Format(commentFormat, TypeFace.color(Color.GREEN, 1d)));
+				new RightOf(letters.groupSource(),20d), new Format(commentFormat, TypeFace.color(Color.GREEN, 1d)));
 		sketch(1d, no);
 	}
 
 	private void line(String text, Format format)
 	{
 		Position position = null;
-		if(!lines.isEmpty()) position=new BelowRight(lines.get(lines.size()-1));
+		if(!lines.isEmpty()) position=new BelowRight(lines.get(lines.size()-1).groupSource());
 		else position = new TopRight(1550d,50d);
 		Letters line = new Letters(world,text,position, format);
 		sketch(500d, line);

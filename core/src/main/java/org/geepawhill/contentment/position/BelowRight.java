@@ -1,5 +1,6 @@
 package org.geepawhill.contentment.position;
 import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.atom.GroupSource;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.utility.JfxUtility;
@@ -9,14 +10,9 @@ import javafx.scene.Node;
 public class BelowRight implements Position
 {
 	
-	private Node anchor;
+	private GroupSource anchor;
 
-	public BelowRight(Actor anchor)
-	{
-		this(anchor.group());
-	}
-	
-	public BelowRight(Node anchor)
+	public BelowRight(GroupSource anchor)
 	{
 		this.anchor = anchor;
 	}
@@ -25,7 +21,7 @@ public class BelowRight implements Position
 	@Override
 	public void position(Node node, PointPair dimensions)
 	{
-		Point anchorPoint = new PointPair(anchor.getBoundsInParent()).southeast();
+		Point anchorPoint = new PointPair(anchor.get().getBoundsInParent()).southeast();
 		JfxUtility.setTopAlignment(node);
 		node.setTranslateX(anchorPoint.x-dimensions.width());
 		node.setTranslateY(anchorPoint.y);

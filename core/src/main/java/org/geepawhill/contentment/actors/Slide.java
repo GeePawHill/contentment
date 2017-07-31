@@ -96,7 +96,7 @@ public class Slide extends GenericActor
 	void line(String text, Format format)
 	{
 		Position position = null;
-		if (!lines.isEmpty()) position = new BelowRight(group);
+		if (!lines.isEmpty()) position = new BelowRight(groupSource());
 		else position = new TopRight(1550d, 50d);
 		LettersAtom line = new LettersAtom(group, text, format, position);
 		world.add(new AtomStep(Timing.ms(500), line));

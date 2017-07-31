@@ -1,5 +1,6 @@
 package org.geepawhill.contentment.position;
 import org.geepawhill.contentment.actor.Actor;
+import org.geepawhill.contentment.atom.GroupSource;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.utility.JfxUtility;
@@ -9,10 +10,10 @@ import javafx.scene.Node;
 public class Centered implements Position
 {
 	
-	private Actor actor;
+	private GroupSource actor;
 	private Point anchor;
 
-	public Centered(Actor actor)
+	public Centered(GroupSource actor)
 	{
 		this(actor,null);
 	}
@@ -22,7 +23,7 @@ public class Centered implements Position
 		this(null,anchor);
 	}
 	
-	public Centered(Actor actor,Point anchor)
+	public Centered(GroupSource actor,Point anchor)
 	{
 		this.actor = actor;
 		this.anchor = anchor;
@@ -37,7 +38,7 @@ public class Centered implements Position
 	public void position(Node node, PointPair dimensions)
 	{
 		JfxUtility.setTopAlignment(node);
-		if(actor!=null) anchor = new PointPair(actor.group().getBoundsInParent()).center();
+		if(actor!=null) anchor = new PointPair(actor.get().getBoundsInParent()).center();
 		node.setTranslateX(anchor.x-dimensions.width()/2d);
 		node.setTranslateY(anchor.y-dimensions.height()/2d);
 	}
