@@ -37,9 +37,6 @@ public class ExceptionsScript extends ScriptBuilder
 {
 	private static final int STACK_ROWS = 6;
 
-	private Format majorFormat;
-	private Format subFormat;
-	private Format minorFormat;
 	private Format commentFormat;
 	private Format knowsFormat;
 	private Format codeFormat;
@@ -54,21 +51,6 @@ public class ExceptionsScript extends ScriptBuilder
 
 	public ExceptionsScript()
 	{
-		Paint majorColor = color(13, 165, 15);
-		Font majorHand = Font.font("Chewed Pen BB", FontPosture.ITALIC, 90d);
-		majorFormat = new Format(TypeFace.font(majorHand, 3d, 1d), TypeFace.color(majorColor, 1d),
-				Frames.frame(majorColor, 5d, 1d));
-
-		Paint subColor = color(163, 232, 78);
-		Font subHand = Font.font("Chewed Pen BB", FontPosture.ITALIC, 68d);
-		subFormat = new Format(majorFormat, TypeFace.font(subHand, 3d, 1d), TypeFace.color(subColor, 1d),
-				Frames.frame(subColor, 5d, 1d));
-
-		Paint minorColor = color(240, 255, 30);
-		Font minorFont = Font.font("Chewed Pen BB", FontPosture.ITALIC, 50d);
-		minorFormat = new Format(TypeFace.font(minorFont, 1d, 1d), TypeFace.color(minorColor, 1d),
-				Frames.frame(minorColor, 5d, 1d));
-
 		jokeFormat = new Format(TypeFace.font(Font.font("Calibri", FontPosture.ITALIC, 50d), 3d, 1d),
 				TypeFace.color(Color.BLUEVIOLET, Color.BLUEVIOLET, 1d));
 
