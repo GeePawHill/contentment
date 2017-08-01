@@ -24,6 +24,9 @@ import javafx.scene.Group;
 public class Arrow extends GenericActor
 {
 	final String nickname;
+	
+	private GroupSource from;
+	private GroupSource to;
 
 	private BezierAtom mainStep;
 	private BezierAtom fromTopStep;
@@ -31,7 +34,6 @@ public class Arrow extends GenericActor
 	private BezierAtom toTopStep;
 	private BezierAtom toBottomStep;
 
-	private ArrowComputer computer;
 	private ArrowPoints points;
 
 	private ArrayList<BezierAtom> steps;
@@ -44,34 +46,53 @@ public class Arrow extends GenericActor
 	private Bezier chosenToTop;
 	private Bezier chosenToBottom;
 
+	private boolean pointAtFrom;
+
+	private boolean pointAtTo;
+
+	private Format format;
+	
+
 	public Arrow(ScriptWorld world, Actor from, boolean pointAtFrom, Actor to, boolean pointAtTo, Format format)
 	{
 		this(world,from.groupSource(),pointAtFrom,to.groupSource(),pointAtTo,format);
 	}
 	
+	public Arrow(ScriptWorld world)
+	{
+		this(world,GroupSource.NONE,false,GroupSource.NONE,false,Format.DEFAULT);
+	}
+	
 	public Arrow(ScriptWorld world, GroupSource from, boolean pointAtFrom, GroupSource to, boolean pointAtTo, Format format)
 	{
 		super(world);
+		this.from = from;
+		this.pointAtFrom = pointAtFrom;
+		this.to = to;
+		this.pointAtTo = pointAtTo;
+		this.format = format;
 		this.random = new Random();
 		this.nickname = Names.make(getClass());
-		this.computer = new NodeArrowComputer(from, to);
-		steps = new ArrayList<>();
-		chosenMain = null;
-		mainStep = new BezierAtom(groupSource(), this::getMainBezier, format);
-		if (pointAtFrom)
-		{
-			fromTopStep = new BezierAtom(groupSource(), this::getFromTop, format);
-			steps.add(fromTopStep);
-			fromBottomStep = new BezierAtom(groupSource(), this::getFromBottom, format);
-			steps.add(fromBottomStep);
-		}
-		if (pointAtTo)
-		{
-			toTopStep = new BezierAtom(groupSource(), this::getToTop, format);
-			steps.add(toTopStep);
-			toBottomStep = new BezierAtom(groupSource(), this::getToBottom, format);
-			steps.add(toBottomStep);
-		}
+	}
+	
+	public Arrow from(GroupSource from,boolean withHead)
+	{
+		this.from = from;
+		this.pointAtFrom=withHead;
+		return this;
+	}
+	
+	public Arrow to(GroupSource to, boolean withHead)
+	{
+		this.to = to;
+		this.pointAtTo = withHead;
+		return this;
+	}
+	
+	public Arrow format(Format format)
+	{
+		this.format = format;
+		return this;
 	}
 
 	public String nickname()
@@ -83,6 +104,7 @@ public class Arrow extends GenericActor
 	{
 		if (chosenMain == null)
 		{
+			ArrowComputer computer = new NodeArrowComputer(from, to);
 			points = computer.compute();
 			chosenMain = chooseBezier(points.main);
 			chosenFromTop = chooseBezier(points.fromTop);
@@ -129,6 +151,23 @@ public class Arrow extends GenericActor
 	@Override
 	public Step draw(double ms)
 	{
+		steps = new ArrayList<>();
+		chosenMain = null;
+		mainStep = new BezierAtom(groupSource(), this::getMainBezier, format);
+		if (pointAtFrom)
+		{
+			fromTopStep = new BezierAtom(groupSource(), this::getFromTop, format);
+			steps.add(fromTopStep);
+			fromBottomStep = new BezierAtom(groupSource(), this::getFromBottom, format);
+			steps.add(fromBottomStep);
+		}
+		if (pointAtTo)
+		{
+			toTopStep = new BezierAtom(groupSource(), this::getToTop, format);
+			steps.add(toTopStep);
+			toBottomStep = new BezierAtom(groupSource(), this::getToBottom, format);
+			steps.add(toBottomStep);
+		}
 		Timed sequence = new Timed(ms);
 		sequence.add(Timing.weighted(.9d), mainStep);
 		for (BezierAtom step : steps)

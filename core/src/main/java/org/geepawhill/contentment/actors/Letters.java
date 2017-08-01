@@ -111,6 +111,11 @@ public class Letters extends GenericActor implements Actor
 	public Actor format(Format format)
 	{
 		letters.format(format);
+		if(hasOval)
+		{
+			east.format(format);
+			west.format(format);
+		}
 		return this;
 	}
 

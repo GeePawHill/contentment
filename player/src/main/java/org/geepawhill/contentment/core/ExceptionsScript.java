@@ -3,15 +3,9 @@ package org.geepawhill.contentment.core;
 import static org.geepawhill.contentment.utility.JfxUtility.color;
 
 import java.io.File;
-import java.util.ArrayList;
 
-import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.actor.Actors;
-import org.geepawhill.contentment.actors.Arrow;
 import org.geepawhill.contentment.actors.CodeBlock;
 import org.geepawhill.contentment.actors.Cross;
-import org.geepawhill.contentment.actors.Letters;
-import org.geepawhill.contentment.actors.Spot;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Grid;
 import org.geepawhill.contentment.geometry.Point;
@@ -21,7 +15,6 @@ import org.geepawhill.contentment.player.Script;
 import org.geepawhill.contentment.position.AboveCenter;
 import org.geepawhill.contentment.position.BelowCenter;
 import org.geepawhill.contentment.position.BelowLeft;
-import org.geepawhill.contentment.position.BelowRight;
 import org.geepawhill.contentment.position.CenterRight;
 import org.geepawhill.contentment.position.Centered;
 import org.geepawhill.contentment.position.Position;
@@ -55,10 +48,6 @@ public class ExceptionsScript extends ScriptBuilder
 	private Format jokeFormat;
 	private Format lightComment;
 
-	private ArrayList<Actor> lines;
-
-	private Actors catchAndThrowColorText;
-	
 	private Script script;
 	
 	private Grid stackGrid;
@@ -94,9 +83,7 @@ public class ExceptionsScript extends ScriptBuilder
 		Paint codeColor = Color.WHITE;
 		largeCodeFormat = new Format(TypeFace.font(new Font("Consolas", 60d), 2d, 1d), TypeFace.color(codeColor, 1d));
 
-		this.lines = new ArrayList<>();
 		this.stackGrid = new Grid(1, STACK_ROWS, new PointPair(900d, 250d, 1480d, 850d));
-		this.catchAndThrowColorText = new Actors();
 
 		Font codeFont = new Font("Consolas", 25d);
 
@@ -181,99 +168,65 @@ public class ExceptionsScript extends ScriptBuilder
 		cue(96).slide().head("How Throw & Catch Work");
 		and().party("colorText").fadeOut();
 
-		mark(105);
-		Arrow call = new Arrow(world, and().actor("thrower"), false, and().actor("catcher"), true, commentFormat);
-		Letters letters = new Letters(world, "call", new Centered(call.groupSource()), commentFormat);
-		sketch(500d, call);
-		sketch(500d, letters);
+		cue(105).connector().from(and().actor("thrower").groupSource(),false).to(and().actor("catcher").groupSource(), true).format(commentFormat).sketch().called("calls");
+		and().letters("call").at(new Centered(and().actor("calls").groupSource())).format(commentFormat).sketch();
 
-		cue(111);
-		mark(111);
-		Cross cross = new Cross(world, call, 150d);
-		sketch(500d, cross);
+		cue(111).actor(new Cross(world,and().actor("calls"),150d)).sketch();
 		and().party("stackLines").fadeUp();
 		and().party("remainder").fadeOut();
-		mark(115);
-		throwsText(5);
-		mark(120);
-		noCatchText(4);
-		mark(124);
-		noCatchText(3);
-		mark(128);
-		noCatchText(2);
-		mark(132);
-		catchText(1);
-
+		
+		cue(115).letters("throws X").at(stackTextPosition(5)).format(commentFormat).sketch();
+		
+		cue(120).letters("catches X?").at(stackTextPosition(4)).format(commentFormat).sketch().called("line");
+		and().letters("no, keep looking...").at(new RightOf(and().actor("line").groupSource(),20d)).format(new Format(commentFormat, TypeFace.color(Color.RED, 1d))).sketch();
+		
+		cue(124).letters("catches X?").at(stackTextPosition(3)).format(commentFormat).sketch().called("line");
+		and().letters("no, keep looking...").at(new RightOf(and().actor("line").groupSource(),20d)).format(new Format(commentFormat, TypeFace.color(Color.RED, 1d))).sketch();
+		
+		cue(128).letters("catches X?").at(stackTextPosition(2)).format(commentFormat).sketch().called("line");
+		and().letters("no, keep looking...").at(new RightOf(and().actor("line").groupSource(),20d)).format(new Format(commentFormat, TypeFace.color(Color.RED, 1d))).sketch();
+		
+		cue(132).letters("catches X?").at(stackTextPosition(1)).format(commentFormat).sketch().called("line");
+		and().letters("YES! call this one!").at(new RightOf(and().actor("line").groupSource(),20d)).format(new Format(commentFormat, TypeFace.color(Color.GREEN, 1d))).sketch();
 		return endBuild();
 	}
 
 	private Step dependencies()
 	{
-		Actors allButOvals = new Actors();
 		buildPhrase();
-		clear();
-		head("Dependencies");
+		cue(140).wipe();
+		and().slide().enter();
+		and().slide().head("Dependencies");
+		cue(146).letters("Thrower").withOval().at(new Centered(1000d,200d)).format(commentFormat).sketch().called("thrower");
+		and().letters("Catcher").withOval().at(new Centered(1500d, 200d)).format(commentFormat).sketch().called("catcher");
+		and().spot(1000,850).appear().in("allButOvals").called("throwerSpot");
+		and().spot(1500,850).appear().in("allButOvals").called("catcherSpot");
+		and().connector().from(and().actor("thrower").groupSource(),false).to(and().actor("throwerSpot").groupSource(), false).format(commentFormat).sketch().in("allButOvals");
+		and().connector().from(and().actor("catcher").groupSource(),false).to(and().actor("catcherSpot").groupSource(),false).format(commentFormat).sketch().in("allButOvals");
 		
-		mark(146);
-		Letters thrower = new Letters(world,"Thrower", new Centered(1000d,200d), commentFormat).withOval();
-		sketch(1000d, thrower);
+		cue(153).letters("Runtime").at(new Centered(new Point(1250d, 220d))).format(commentFormat).sketch().in("allButOvals");
+
+		cue(160);
+		knowLine(350d, false);
+
+		cue(166).actor(new Cross(world, and().actor("arrow").groupSource(), 125d, 100d, new Point(0d, -10d))).sketch().in("allButOvals");
+
+		cue(172);
+		knowLine(475d, true);
+
+		cue(176).actor(new Cross(world, and().actor("arrow").groupSource(), 125d, 100d, new Point(0d, -10d))).sketch().in("allButOvals");
+
+		cue(190).letters("Compile Time").at(new Centered(new Point(1250d, 550d))).format(commentFormat).sketch().in("allButOvals");
+
+		cue(194);
+		knowLine(680d, false);
 		
-		Letters catcher = new Letters(world, "Catcher", new Centered(1500d, 200d), commentFormat).withOval();
-		sketch(1000d, catcher);
-		
-		
-		Spot throwerSpot = new Spot(world, 1000d, 850d);
-		Spot catcherSpot = new Spot(world, 1500d, 850d);
-		allButOvals.add(throwerSpot, catcherSpot);
-		sketch(1d, throwerSpot);
-		sketch(1d, catcherSpot);
-		Arrow throwerArrow = new Arrow(world, thrower, false, throwerSpot, false, commentFormat);
-		sketch(500d, throwerArrow);
-		Arrow catcherArrow = new Arrow(world, catcher, false, catcherSpot, false, commentFormat);
-		sketch(500d, catcherArrow);
-		allButOvals.add(throwerArrow, catcherArrow);
+		cue(202).actor(new Cross(world, and().actor("arrow").groupSource(), 125d, 100d, new Point(0d, -10d))).sketch().in("allButOvals");
 
-		mark(153);
-		Letters runtime = new Letters(world, "Runtime", new Centered(new Point(1250d, 220d)), commentFormat);
-		sketch(500d, runtime);
-		allButOvals.add(runtime);
+		cue(207);
+		knowLine(800d, true);
 
-		mark(160);
-		Arrow runtimeOne = knowLine(allButOvals, 350d, false);
-
-		mark(166);
-		Cross crossOne = new Cross(world, runtimeOne.groupSource(), 125d, 100d, new Point(0d, -10d));
-		sketch(500d, crossOne);
-		allButOvals.add(crossOne);
-
-		mark(172);
-		Arrow runtimeTwo = knowLine(allButOvals, 475d, true);
-
-		mark(176);
-		Cross crossTwo = new Cross(world, runtimeTwo.groupSource(), 125d, 100d, new Point(0d, -10d));
-		sketch(500d, crossTwo);
-		allButOvals.add(crossTwo);
-
-		mark(190);
-		Letters compiletime = new Letters(world, "Compile Time", new Centered(new Point(1250d, 550d)), commentFormat);
-		sketch(500d, compiletime);
-		allButOvals.add(compiletime);
-
-		mark(194);
-		Arrow compiletimeOne = knowLine(allButOvals, 680d, false);
-
-		mark(202);
-		Cross crossThree = new Cross(world, compiletimeOne.groupSource(), 125d, 100d, new Point(0d, -10d));
-		sketch(500d, crossThree);
-		allButOvals.add(crossThree);
-
-		mark(207);
-		Arrow compiletimeTwo = knowLine(allButOvals, 800d, true);
-
-		mark(212);
-		Cross crossFour = new Cross(world, compiletimeTwo.groupSource(), 125d, 100d, new Point(0d, -10d));
-		sketch(500d, crossFour);
-		allButOvals.add(crossFour);
+		cue(212).actor(new Cross(world, and().actor("arrow").groupSource(), 125d, 100d, new Point(0d, -10d))).sketch().in("allButOvals");
 
 		return endBuild();
 	}
@@ -281,124 +234,96 @@ public class ExceptionsScript extends ScriptBuilder
 	private Step noDependencies()
 	{
 		buildPhrase();
-		clear();
-		head("No Dependencies");
-		sub("very different situation");
+		cue(218).wipe().slide().enter();
+		and().slide().head("No Dependencies");
+		and().slide().sub("very different situation");
 
-		mark(227);
-		minor("no direct call");
-		minor("so neither side knows the other");
-		mark(233);
+		cue(227).slide().minor("no direct call");
+		and().slide().minor("so neither side knows the other");
 
-		Letters thrower = new Letters(world,"Thrower", new Centered(1000d,420d), commentFormat).withOval();
-		sketch(1000d, thrower);
+		cue(233).letters("Thrower").withOval().at(new Centered(1000d,420d)).format(commentFormat).sketch().called("thrower");
+		and().letters("Catcher").withOval().at(new Centered(1500d, 420d)).format(commentFormat).sketch().called("catcher");
 
-		Letters catcher = new Letters(world, "Catcher", new Centered(1500d, 420d), commentFormat).withOval();
-		sketch(1000d, catcher);
+		cue(240).letters("LidNotFound").withOval().at(new Centered(1250d, 590d)).format(commentFormat).sketch().called("lidNotFound");
 
-		mark(240);
-		Letters lnf = new Letters(world, "LidNotFound", new Centered(1250d, 590d), commentFormat).withOval();
-		sketch(500d, lnf);
+		and().connector().from(and().actor("thrower").groupSource(), false).to(and().actor("lidNotFound").groupSource(), true).format(commentFormat).sketch();
+		and().connector().from(and().actor("catcher").groupSource(), false).to(and().actor("lidNotFound").groupSource(), true).format(commentFormat).sketch();
 
-		Arrow throwerLnf = new Arrow(world, thrower, false, lnf, true, knowsFormat);
-		Arrow catcherLnf = new Arrow(world, catcher, false, lnf, true, knowsFormat);
+		and().slide().minor("").minor("").minor("").minor("").minor("");
+		
+		cue(247).slide().minor("shared dependency irrelevant");
 
-		sketch(500d, throwerLnf);
-		sketch(500d, catcherLnf);
-		minor(" ");
-		minor(" ");
-		minor(" ");
-		minor(" ");
-		minor(" ");
-		mark(247);
-		minor("shared dependency irrelevant");
+		cue(252).wipe().slide().enter();
+		cue(252).slide().head("Easier To Test");
+		cue(263).slide().sub("four nopes = one yep?");
+		cue(268).slide().minor("test the thrower by itself");
+		and().slide().minor("test the catcher by itself");
 
-		mark(252);
-		clear();
-		head("Easier To Test");
-
-		mark(263);
-		sub("four nopes = one yep?");
-		mark(268);
-		minor("test the thrower by itself");
-		minor("test the catcher by itself");
-
-		mark(274);
-		lead("This Is Far Easier");
+		cue(274).slide().lead("This Is Far Easier");
+		return endBuild();
+	}
+	
+	public Step whatToTest()
+	{
+		buildPhrase();
+		cue(280).wipe().slide().enter();
+		and().slide().head("What Do We Test?");
+		cue(284).slide().sub("five cases");
+		cue(288).slide().minor("each case asks a question");
+		and().slide().minor("what happens when we ... ?");
+		cue(295).slide().minor("(how to think of all microtests)");
 		return endBuild();
 	}
 
-	public Step exceptionsAreEasy()
+	public Step testingTheThrower()
 	{
 		buildPhrase();
-		clear();
-		head("Microtesting Exceptions Is Easy");
-		sub("thrower test questions");
-		minor("throws on the right condition?");
-		minor("throws the right thing?");
-		sub("catcher test questions");
-		minor("catches the right thing?");
-		minor("catch handler right?");
-		minor("finally handler right?");
-		mark(550);
-		sub("remember the judgment premise!");
-		mark(574);
-		joke("Bad Pun Alert!");
+		cue(300).wipe().slide().enter();
+		and().slide().head("Testing The Thrower");
+		and().letters("Thrower").withOval().at(new Centered(1250d, 210d)).format(commentFormat).sketch();
+		cue(302).slide().lead(" ").minor("");
+		and().slide().sub("throws under right condition?");
+		cue(304).slide().minor("don't throw if the lid's right there");
+		cue(309).slide().minor("don't throw if something else is wrong");
+		cue(315).slide().minor("always & only throw when lid's not found");
+		cue(324).slide().sub("throws the right thing?");
+		cue(328).slide().minor("must throw right exception");
+		cue(340).slide().minor("must build it correctly");
+		cue(346).slide().minor("use an exception constructor for that");
 		return endBuild();
 	}
-
-	public Step complexFinallyClause()
+	
+	public Step actualThrowerTest()
 	{
 		buildPhrase();
-		clear();
-		head("Testing A Complex Finally");
-
-		String beforeText = "finally {\n" + "    // complex finally\n" + "    }";
-		CodeBlock beforeCode = new CodeBlock(world, beforeText, codeFormat, new TopRight(1550,260d));
-		appear(beforeCode);
-
-		mark(460);
-		Letters extract = new Letters(world, "extract this", new CenterRight(1000d, 340d), commentFormat);
-		sketch(500d, extract);
-		Spot spot = new Spot(world, 1280d, 335d);
-		appear(spot);
-		Arrow arrow = new Arrow(world, extract, false, spot, true, commentFormat);
-		sketch(500d, arrow);
-
-		mark(464);
-		Letters toThis = new Letters(world, "to this", new CenterRight(1000d, 550d), commentFormat);
-		sketch(500d, toThis);
-
-		String afterText1 = "finally {\n" + "    handleFinally(...);\n" + "    }";
-		CodeBlock afterCode = new CodeBlock(world, afterText1, codeFormat, new TopRight(1550d,460d));
-		appear(afterCode);
-
-		String afterText2 = "public void handleFinally(...) {\n" + "    // complex finally\n" + "    }";
-		CodeBlock afterCode2 = new CodeBlock(world,afterText2, codeFormat, new TopRight(1550d,640d));
-		appear(afterCode2);
-
-		mark(468);
-		Letters andTestThis = new Letters(world, "and test the handler here!", new BelowCenter(afterCode2.groupSource()), commentFormat);
-		sketch(500d, andTestThis);
-
+		cue(359).wipe().slide().enter();
+		and().slide().head("Two Questions, One Test");
+		cue(362).slide().sub("set up the throw condition");
+		cue(364).slide().minor("remove lids programmatically");
+		cue(370).slide().sub("call the thrower");
+		and().slide().minor("call openCan()");
+		cue(374).slide().sub("catch the exception");
+		and().slide().minor("test catches LidNotFound");
+		and().slide().minor("maybe inspect it");
+		cue(382).slide().sub("non-throwing?");
+		cue(385).slide().minor("write those first");
 		return endBuild();
 	}
-
-	public Step finallyClause()
+	
+	public Step testingTheCatcher()
 	{
 		buildPhrase();
-		clear();
-		head("Does The Finally Work?");
-		mark(487);
-		sub("finally clauses clean things up");
-		minor("when it throws...");
-		minor("when it doesn't throw");
-		mark(492);
-		sub("the bag has been allocated");
-		mark(498);
-		minor("okay? de-allocate it");
-		mark(504);
-		minor("uh-oh? de-allocate it");
+		cue(402).wipe().slide().enter();
+		and().slide().head("Testing The Catcher");
+		and().letters("Catcher").withOval().at(new Centered(1250d, 210d)).format(commentFormat).sketch();
+		cue(410).slide().lead(" ").minor(" ");
+		and().slide().sub("does it really catch?");
+		cue(413).slide().minor("set up throw");
+		and().slide().minor("call doChores()");
+		cue(419).slide().minor("test completes? doChores() caught it");
+		cue(424).slide().sub("does it do something about it?");
+		cue(435).slide().minor("supposed to dial home");
+		cue(445).slide().minor("tell us the missing lid");
 
 		return endBuild();
 	}
@@ -406,132 +331,92 @@ public class ExceptionsScript extends ScriptBuilder
 	public Step complexCatchClause()
 	{
 		buildPhrase();
-		clear();
-		head("Testing A Complex Catch");
+		cue(457).wipe().slide().enter();
+		and().slide().head("Testing A Complex Catch");
 
 		String beforeText = "try { ... }\n" + "catch(LidNotFound lidNotFound) {\n" + "    // complex catch\n" + "    }";
 		CodeBlock beforeCode = new CodeBlock(world, beforeText, codeFormat, new TopRight(1550,260d));
-		appear(beforeCode);
+		and().actor(beforeCode).appear();
 
-		mark(460);
-		Letters extract = new Letters(world, "extract this", new CenterRight(1000d, 340d), commentFormat);
-		sketch(500d, extract);
-		Spot spot = new Spot(world, 1150d, 335d);
-		appear(spot);
-		Arrow arrow = new Arrow(world, extract, false, spot, true, commentFormat);
-		sketch(500d, arrow);
+		cue(460).letters("extract this").at(new CenterRight(1000d, 340d)).format(commentFormat).sketch().called("extract");
+		and().spot(1150, 335).appear().called("spot");
+		and().connector().from(and().actor("extract").groupSource(),false).to(and().actor("spot").groupSource(), true).format(commentFormat).sketch();
 
-		mark(464);
-		Letters toThis = new Letters(world, "to this", new CenterRight(1000d, 550d), commentFormat);
-		sketch(500d, toThis);
+		cue(464).letters("to this").at(new CenterRight(1000d, 550d)).format(commentFormat).sketch();
 
 		String afterText1 = "try { ... }\n" + "catch(LidNotFound lidNotFound) {\n" + "    handle(lidNotFound);\n" + "    }";
 		CodeBlock afterCode = new CodeBlock(world, afterText1, codeFormat, new TopRight(1550d,460d));
-		appear(afterCode);
+		and().actor(afterCode).appear();
 
 		String afterText2 = "public void handle(LidNotFound lidNotFound) {\n" + "    // complex catch\n" + "    }";
 		CodeBlock afterCode2 = new CodeBlock(world,afterText2, codeFormat, new TopRight(1550d,640d));
-		appear(afterCode2);
+		and().actor(afterCode2).appear();
 
-		mark(468);
-		Letters andTestThis = new Letters(world, "and test the handler here!", new BelowCenter(afterCode2.groupSource()), commentFormat);
-		sketch(500d, andTestThis);
-
+		cue(468).letters("and test the handler here!").at(new BelowCenter(afterCode2.groupSource())).format(commentFormat).sketch();
 		return endBuild();
 	}
 
-	public Step testingTheCatcher()
+	public Step finallyClause()
 	{
 		buildPhrase();
-		clear();
-		head("Testing The Catcher");
-		Letters catcher = new Letters(world, "Catcher", new Centered(1250d, 210d), commentFormat).withOval();
-		sketch(1d, catcher);
-		mark(410);
-		lead(" ");
-		minor(" ");
-		sub("does it really catch?");
-		mark(413);
-		minor("set up throw");
-		minor("call doChores()");
-		mark(419);
-		minor("test completes? doChores() caught it");
-		mark(424);
-		sub("does it do something about it?");
-		mark(435);
-		minor("supposed to dial home");
-		mark(445);
-		minor("tell us the missing lid");
-
+		cue(478).wipe().slide().enter();
+		and().slide().head("Does The Finally Work?");
+		cue(487).slide().sub("finally clauses clean things up");
+		and().slide().minor("when it throws...");
+		and().slide().minor("when it doesn't throw");
+		cue(492).slide().sub("the bag has been allocated");
+		cue(498).slide().minor("okay? de-allocate it");
+		cue(504).slide().minor("uh-oh? de-allocate it");
 		return endBuild();
 	}
-
-	public Step actualThrowerTest()
+	
+	public Step complexFinallyClause()
 	{
 		buildPhrase();
-		clear();
-		head("Two Questions, One Test");
-		mark(362);
-		sub("set up the throw condition");
-		mark(364);
-		minor("remove lids programmatically");
-		mark(370);
-		sub("call the thrower");
-		minor("call openCan()");
-		mark(374);
-		sub("catch the exception");
-		minor("test catches LidNotFound");
-		minor("maybe inspect it");
-		mark(382);
-		sub("non-throwing?");
-		mark(385);
-		minor("write those first");
+		cue(527).wipe().slide().enter();
+		and().slide().head("Testing A Complex Finally");
+
+		String beforeText = "finally {\n" + "    // complex finally\n" + "    }";
+		CodeBlock beforeCode = new CodeBlock(world, beforeText, codeFormat, new TopRight(1550,260d));
+		and().actor(beforeCode).appear();
+
+		cue(460).letters("extract this").at(new CenterRight(1000d, 340d)).format(commentFormat).sketch().called("extract");
+		and().spot(1280,335).appear().called("spot");
+		and().connector().from(and().actor("extract").groupSource(),false).to(and().actor("spot").groupSource(),true).format(commentFormat).sketch();
+
+		cue(464).letters("to this").at(new CenterRight(1000d, 550d)).format(commentFormat).sketch().called("toThis");
+
+		String afterText1 = "finally {\n" + "    handleFinally(...);\n" + "    }";
+		CodeBlock afterCode = new CodeBlock(world, afterText1, codeFormat, new TopRight(1550d,460d));
+		and().actor(afterCode).appear();
+
+		String afterText2 = "public void handleFinally(...) {\n" + "    // complex finally\n" + "    }";
+		CodeBlock afterCode2 = new CodeBlock(world,afterText2, codeFormat, new TopRight(1550d,640d));
+		and().actor(afterCode2).appear();
+
+		cue(468).letters("and test the handler here!").at(new BelowCenter(afterCode2.groupSource())).format(commentFormat).sketch();
+
 		return endBuild();
 	}
 
-	public Step testingTheThrower()
+	public Step exceptionsAreEasy()
 	{
 		buildPhrase();
-		clear();
-		head("Testing The Thrower");
-		Letters thrower = new Letters(world, "Thrower", new Centered(1250d, 210d), commentFormat).withOval();
-		sketch(1d, thrower);
-		mark(302);
-		lead(" ");
-		minor(" ");
-		sub("throws under right condition?");
-		mark(304);
-		minor("don't throw if the lid's right there");
-		mark(309);
-		minor("don't throw if something else is wrong");
-		mark(315);
-		minor("always & only throw when lid's not found");
-		mark(324);
-		sub("throws the right thing?");
-		mark(328);
-		minor("must throw right exception");
-		mark(340);
-		minor("must build it correctly");
-		mark(346);
-		minor("use an exception constructor for that");
-
+		cue(540).wipe().slide().enter();
+		and().slide().head("Microtesting Exceptions Is Easy");
+		and().slide().sub("thrower test questions");
+		and().slide().minor("throws on the right condition?");
+		and().slide().minor("throws the right thing?");
+		and().slide().sub("catcher test questions");
+		and().slide().minor("catches the right thing?");
+		and().slide().minor("catch handler right?");
+		and().slide().minor("finally handler right?");
+		cue(550).slide().sub("remember the judgment premise!");
+		cue(574).letters("Bad Pun Alert!").at(new Centered(new Point(380d, 300d))).format(jokeFormat).appear();
 		return endBuild();
 	}
 
-	public Step whatToTest()
-	{
-		buildPhrase();
-		clear();
-		head("What Do We Test?");
-		mark(284);
-		sub("five cases");
-		mark(288);
-		minor("each case asks a question");
-		minor("what happens when we ... ?");
-		mark(295);
-		minor("(how to think of all microtests)");
-		return endBuild();
-	}
+
 
 
 	private void drawStack()
@@ -559,95 +444,11 @@ public class ExceptionsScript extends ScriptBuilder
 		return stackTextPoint(line).add(-40, -10);
 	}
 
-	private Arrow knowLine(Actors actors, double y, boolean leftHead)
+	private void knowLine(double y, boolean leftHead)
 	{
-		Spot leftSpot = new Spot(world, 1000d, y);
-		sketch(1d, leftSpot);
-		Spot rightSpot = new Spot(world, 1500d, y);
-		sketch(1d, rightSpot);
-		Arrow line = chooseArrow(leftHead, leftSpot, rightSpot);
-		Letters know = new Letters(world, "knows?", new AboveCenter(line.groupSource()), knowsFormat);
-		sketch(500d, line);
-		sketch(500d, know);
-		actors.add(leftSpot, rightSpot, line, know);
-		return line;
+		and().spot(1000d, y).appear().called("leftSpot").in("allButOvals");
+		and().spot(1500d, y).appear().called("rightSpot").in("allButOvals");
+		and().connector().from(and().actor("leftSpot").groupSource(),leftHead).to(and().actor("rightSpot").groupSource(), !leftHead).format(knowsFormat).sketch().called("arrow").in("allButOvals");
+		and().letters("knows?").at(new AboveCenter(and().actor("arrow").groupSource())).format(knowsFormat).sketch().in("allButOvals");
 	}
-
-	private Arrow chooseArrow(boolean rightToLeft, Spot left, Spot right)
-	{
-		if (rightToLeft) return new Arrow(world, right, false, left, true, knowsFormat);
-		else return new Arrow(world, left, false, right, true, knowsFormat);
-	}
-
-	private void throwsText(int line)
-	{
-		Letters letters = new Letters(world, "throws X", stackTextPosition(line), commentFormat);
-		sketch(500d, letters);
-	}
-
-	private void noCatchText(int line)
-	{
-		Letters letters = new Letters(world, "catches X?", stackTextPosition(line), commentFormat);
-		sketch(500d, letters);
-		Letters no = new Letters(world, "no, keep looking...",
-				new RightOf(letters.groupSource(),20d), new Format(commentFormat, TypeFace.color(Color.RED, 1d)));
-		sketch(1d, no);
-	}
-
-	private void catchText(int line)
-	{
-		Letters letters = new Letters(world, "catches X?", stackTextPosition(line), commentFormat);
-		sketch(500d, letters);
-		Letters no = new Letters(world, "YES! call this one!",
-				new RightOf(letters.groupSource(),20d), new Format(commentFormat, TypeFace.color(Color.GREEN, 1d)));
-		sketch(1d, no);
-	}
-
-	private void line(String text, Format format)
-	{
-		Position position = null;
-		if(!lines.isEmpty()) position=new BelowRight(lines.get(lines.size()-1).groupSource());
-		else position = new TopRight(1550d,50d);
-		Letters line = new Letters(world,text,position, format);
-		sketch(500d, line);
-		lines.add(line);
-	}
-
-	private void clearLines()
-	{
-		for (Actor line : lines)
-		{
-			disappear(line);
-		}
-		lines.clear();
-	}
-
-	private void head(String text)
-	{
-		clearLines();
-		line(text, majorFormat);
-	}
-
-	private void lead(String text)
-	{
-		line(text, majorFormat);
-	}
-
-	private void minor(String text)
-	{
-		line(text, minorFormat);
-	}
-
-	private void sub(String text)
-	{
-		line(text, subFormat);
-	}
-
-	private Letters joke(String text)
-	{
-		Letters joke = new Letters(world, text, new Centered(new Point(380d, 300d)), jokeFormat);
-		appear(joke);
-		return joke;
-	}
-
 }
