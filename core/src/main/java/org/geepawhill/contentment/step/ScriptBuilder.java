@@ -28,7 +28,7 @@ public class ScriptBuilder
 		return cueBuilder;
 	}
 	
-	public void addToWorking(Step step)
+	private void addToWorking(Step step)
 	{
 		world.add(step);
 	}
@@ -36,16 +36,6 @@ public class ScriptBuilder
 	public Addable buildPhrase()
 	{
 		return world.buildPhrase();
-	}
-	
-	public Addable buildChord()
-	{
-		return world.buildChord();
-	}
-	
-	public Addable buildMore(Addable addable)
-	{
-		return world.buildMore(addable);
 	}
 	
 	public Addable endBuild()
