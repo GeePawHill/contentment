@@ -3,28 +3,38 @@ package org.geepawhill.contentment.atom;
 import org.geepawhill.contentment.core.Atom;
 import org.geepawhill.contentment.core.Context;
 
-public class EntranceAtom implements Atom
+import javafx.scene.Group;
+
+public class EntranceAtom implements Atom, GroupSource
 {
 	
-	private GroupSource actor;
+	private Group group;
+	private GroupSource groupSource;
 
-	public EntranceAtom(GroupSource actor)
+	public EntranceAtom()
 	{
-		this.actor = actor;
+		this.group = new Group();
+		this.groupSource = () -> group;
 	}
-
+	
 	@Override
 	public void setup(Context context)
 	{
-		actor.get().getChildren().clear();
-		actor.get().setOpacity(1);
+		groupSource.get().getChildren().clear();
+		groupSource.get().setOpacity(1);
 	}
 
 	@Override
 	public boolean partial(Context context, double fraction)
 	{
-		context.add(actor);
+		context.add(groupSource);
 		return false;
+	}
+
+	@Override
+	public Group get()
+	{
+		return groupSource.get();
 	}
 
 }

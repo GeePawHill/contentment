@@ -16,21 +16,19 @@ import javafx.scene.Group;
 public class Stroke extends GenericActor
 {
 	private final String nickname;
-	private final Group group;
 	private final Atom atom;
 
 	public Stroke(ScriptWorld world, PointPair points, Format format)
 	{
 		super(world);
 		this.nickname = Names.make(getClass());
-		this.group = new Group();
 		this.atom = new BezierAtom(groupSource(),format,points);
 	}
 
 	@Override
 	public Group group()
 	{
-		return group;
+		return entrance.get();
 	}
 
 	@Override

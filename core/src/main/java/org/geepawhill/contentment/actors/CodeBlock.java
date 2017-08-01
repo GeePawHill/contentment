@@ -14,20 +14,18 @@ import javafx.scene.Group;
 
 public class CodeBlock extends GenericActor
 {
-	private Group group;
 	private BlockAtom atom;
 
 	public CodeBlock(ScriptWorld world,String source, Format format, Position position)
 	{
 		super(world);
-		this.group = new Group();
 		this.atom = new BlockAtom(groupSource(),source,format,position);
 	}
 
 	@Override
 	public Group group()
 	{
-		return group;
+		return entrance.get();
 	}
 
 	@Override

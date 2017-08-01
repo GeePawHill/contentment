@@ -20,7 +20,6 @@ import javafx.scene.Group;
 public class Letters extends GenericActor implements Actor
 {
 	private final String nickname;
-	private final Group group;
 	private LettersAtom letters;
 	private boolean hasOval;
 
@@ -40,7 +39,6 @@ public class Letters extends GenericActor implements Actor
 	{
 		super(world);
 		this.nickname = Names.make(getClass());
-		this.group = new Group();
 		this.northJiggler = new Jiggler(.5d, 6d);
 		this.controlJiggler = new Jiggler(.4d, 30d);
 
@@ -58,7 +56,7 @@ public class Letters extends GenericActor implements Actor
 	@Override
 	public Group group()
 	{
-		return group;
+		return entrance.get();
 	}
 
 	@Override

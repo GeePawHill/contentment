@@ -12,28 +12,24 @@ import javafx.scene.paint.Paint;
 
 public abstract class GenericActor implements Actor
 {
-	protected ScriptWorld world;
+	protected final ScriptWorld world;
+	protected final EntranceAtom entrance;
 
 	public GenericActor(ScriptWorld world)
 	{
 		this.world = world;
+		this.entrance = new EntranceAtom();
 	}
 	
 	public GroupSource groupSource()
 	{
-		return new GroupSource() {
-
-			@Override
-			public Group get()
-			{
-				return group();
-			} };
+		return entrance;
 	}
 
 	@Override
 	public GenericActor sketch()
 	{
-		world.add(new AtomStep(Timing.instant(),new EntranceAtom(groupSource())));
+		world.add(new AtomStep(Timing.instant(),entrance));
 		world.add(draw(500d));
 		return this;
 	}
@@ -55,14 +51,14 @@ public abstract class GenericActor implements Actor
 	@Override
 	public Actor reColor(Paint paint)
 	{
-		world.add(new AtomStep(Timing.instant(),new ChangeColorAtom(groupSource(), paint)));
+		world.add(new AtomStep(Timing.instant(),new ChangeColorAtom(entrance, paint)));
 		return this;
 	}
 	
 	@Override
 	public Actor fadeDown()
 	{
-		world.add(new AtomStep(Timing.ms(500),new OpacityAtom(groupSource(), 1, 0)));
+		world.add(new AtomStep(Timing.ms(500),new OpacityAtom(entrance, 1, 0)));
 		return this;
 	}
 }

@@ -21,7 +21,6 @@ public class Cross extends GenericActor
 {
 
 	private GroupSource target;
-	private Group group;
 	private BezierAtom leftToRight;
 	private BezierAtom rightToLeft;
 	private double xsize;
@@ -40,7 +39,6 @@ public class Cross extends GenericActor
 		this.xsize = xsize;
 		this.ysize = ysize;
 		this.offset = offset;
-		this.group = new Group();
 		Format crossFormat = new Format(Frames.frame(Color.RED, 7d, 8d));
 		leftToRight = new BezierAtom(groupSource(),this::leftToRightBezier, crossFormat);
 		rightToLeft = new BezierAtom(groupSource(),this::rightToLeftBezier, crossFormat);
@@ -49,7 +47,7 @@ public class Cross extends GenericActor
 	@Override
 	public Group group()
 	{
-		return group;
+		return entrance.get();
 	}
 
 	@Override

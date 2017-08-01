@@ -30,13 +30,11 @@ public class Slide extends GenericActor
 	private final Format majorFormat;
 	private final Format subFormat;
 	private final Format minorFormat;
-	private final Group group;
 	private final ArrayList<LettersAtom> lines;
 
 	public Slide(ScriptWorld world)
 	{
 		super(world);
-		this.group = new Group();
 		this.lines = new ArrayList<>();
 
 		Paint majorColor = color(13, 165, 15);
@@ -59,7 +57,7 @@ public class Slide extends GenericActor
 	@Override
 	public Group group()
 	{
-		return group;
+		return entrance.get();
 	}
 
 	@Override
@@ -115,7 +113,7 @@ public class Slide extends GenericActor
 
 	public Slide enter()
 	{
-		world.add(new AtomStep(Timing.instant(), new EntranceAtom(groupSource())));
+		world.add(new AtomStep(Timing.instant(), entrance));
 		return this;
 	}
 

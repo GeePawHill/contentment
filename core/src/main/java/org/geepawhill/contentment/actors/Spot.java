@@ -15,7 +15,6 @@ public class Spot extends GenericActor
 {
 
 	final String nickname;
-	final Group group;
 	
 	final SpotAtom atom;
 	
@@ -28,7 +27,6 @@ public class Spot extends GenericActor
 	{
 		super(world);
 		this.nickname = name;
-		this.group = new Group();
 		this.atom = new SpotAtom(groupSource(),new Point(x,y));
 	}
 	
@@ -40,7 +38,7 @@ public class Spot extends GenericActor
 	@Override
 	public Group group()
 	{
-		return group;
+		return entrance.get();
 	}
 	
 	@Override

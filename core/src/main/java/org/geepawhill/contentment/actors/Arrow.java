@@ -24,8 +24,6 @@ public class Arrow extends GenericActor
 {
 	final String nickname;
 
-	private final Group group;
-
 	private BezierAtom mainStep;
 	private BezierAtom fromTopStep;
 	private BezierAtom fromBottomStep;
@@ -51,7 +49,6 @@ public class Arrow extends GenericActor
 		this.random = new Random();
 		this.nickname = Names.make(getClass());
 		this.computer = new NodeArrowComputer(from.groupSource(), to.groupSource());
-		this.group = new Group();
 		steps = new ArrayList<>();
 		chosenMain = null;
 		mainStep = new BezierAtom(groupSource(), this::getMainBezier, format);
@@ -120,7 +117,7 @@ public class Arrow extends GenericActor
 	@Override
 	public Group group()
 	{
-		return group;
+		return entrance.get();
 	}
 
 	@Override

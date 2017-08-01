@@ -52,19 +52,15 @@ public class ScriptBuilder
 		return step;
 	}
 
-	public Step sketch(double ms, Actor drawable)
+	public void sketch(double ms, Actor drawable)
 	{
-		Phrase phrase = new Phrase();
-		phrase.add(new AtomStep(Timing.instant(),new EntranceAtom(drawable.groupSource())));
-		phrase.add(drawable.draw(ms));
-		addToWorking(phrase);
-		return phrase;
+		drawable.sketch();
 	}
 
 	public Step appear(Actor drawable)
 	{
 		Phrase result = new Phrase();
-		result.add(new AtomStep(Timing.instant(),new EntranceAtom(drawable.groupSource())));
+		result.add(new AtomStep(Timing.instant(),new EntranceAtom()));
 		result.add(drawable.draw(1d));
 		addToWorking(result);
 		return result;
@@ -80,7 +76,7 @@ public class ScriptBuilder
 	public Step fadeIn(double ms, Actor drawable)
 	{
 		Phrase result = new Phrase();
-		result.add(new AtomStep(Timing.instant(),new EntranceAtom(drawable.groupSource())));
+		result.add(new AtomStep(Timing.instant(),new EntranceAtom()));
 		result.add(new AtomStep(Timing.ms(1), new OpacityAtom(drawable.groupSource(),1,0)));
 		result.add(drawable.draw(1d));
 		result.add(new AtomStep(Timing.ms(ms), new OpacityAtom(drawable.groupSource(),0,1)));
