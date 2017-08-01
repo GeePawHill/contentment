@@ -13,7 +13,14 @@ public interface Commandable
 
 	Commandable in(String name);
 	
+	Commandable fadeUp();
 	Commandable fadeDown();
+	Commandable fadeOut();
+	Commandable fadeIn();
+
+	Commandable appear();
+	Commandable disappear();
+
 
 
 }

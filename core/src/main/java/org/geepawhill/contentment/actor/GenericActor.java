@@ -2,6 +2,7 @@ package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.atom.ChangeColorAtom;
 import org.geepawhill.contentment.atom.EntranceAtom;
+import org.geepawhill.contentment.atom.ExitAtom;
 import org.geepawhill.contentment.atom.GroupSource;
 import org.geepawhill.contentment.atom.OpacityAtom;
 import org.geepawhill.contentment.step.AtomStep;
@@ -32,6 +33,22 @@ public abstract class GenericActor implements Actor
 		world.add(draw(500d));
 		return this;
 	}
+	
+	@Override
+	public GenericActor appear()
+	{
+		world.add(new AtomStep(Timing.instant(),entrance));
+		world.add(draw(1d));
+		return this;
+	}
+
+	@Override
+	public GenericActor disappear()
+	{
+		world.add(new AtomStep(Timing.instant(),new ExitAtom(groupSource())));
+		return this;
+	}
+
 
 	@Override
 	public GenericActor called(String name)
@@ -58,6 +75,31 @@ public abstract class GenericActor implements Actor
 	public Actor fadeDown()
 	{
 		world.add(new AtomStep(Timing.ms(500),new OpacityAtom(entrance, 1, 0)));
+		return this;
+	}
+	
+	@Override
+	public Actor fadeOut()
+	{
+		world.add(new AtomStep(Timing.ms(500),new OpacityAtom(entrance, 1, 0)));
+		world.add(new AtomStep(Timing.instant(),new ExitAtom(entrance)));
+		return this;
+	}
+	
+	@Override
+	public Actor fadeIn()
+	{
+		world.add(new AtomStep(Timing.instant(),entrance));
+		world.add(new AtomStep(Timing.instant(),new OpacityAtom(entrance, 1, 0)));
+		world.add(draw(1d));
+		world.add(new AtomStep(Timing.ms(500d),new OpacityAtom(entrance,0,1)));
+		return this;
+	}
+	
+	@Override
+	public Actor fadeUp()
+	{
+		world.add(new AtomStep(Timing.ms(500d),new OpacityAtom(entrance,0,1)));
 		return this;
 	}
 }

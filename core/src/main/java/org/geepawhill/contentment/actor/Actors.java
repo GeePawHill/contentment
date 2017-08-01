@@ -113,4 +113,55 @@ public class Actors implements Iterable<Actor>, Commandable
 		return this;
 		
 	}
+	
+	public Commandable fadeOut()
+	{
+		for(Actor actor : this)
+		{
+			actor.fadeOut();
+		}
+		return this;
+		
+	}
+
+
+	@Override
+	public Commandable appear()
+	{
+		for(Actor actor : this)
+		{
+			actor.appear();
+		}
+		return this;
+	}
+
+	@Override
+	public Commandable disappear()
+	{
+		for(Actor actor : this)
+		{
+			actor.disappear();
+		}
+		return this;
+	}
+
+	@Override
+	public Commandable fadeUp()
+	{
+		for(Actor actor : this)
+		{
+			actor.fadeUp();
+		}
+		return this;
+	}
+
+	@Override
+	public Commandable fadeIn()
+	{
+		for(Actor actor : this)
+		{
+			actor.fadeIn();
+		}
+		return this;
+	}
 }

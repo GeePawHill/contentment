@@ -57,7 +57,6 @@ public class ExceptionsScript extends ScriptBuilder
 
 	private ArrayList<Actor> lines;
 
-	private Actors stack;
 	private Actors catchAndThrowColorText;
 	
 	private Script script;
@@ -150,9 +149,8 @@ public class ExceptionsScript extends ScriptBuilder
 		cue(40).letters("putOneBagInCan()").at(stackTextPosition(4)).format(largeCodeFormat).in("stackText").sketch();
 		cue(44).letters("openCan()").at(stackTextPosition(5)).format(largeCodeFormat).in("remainder").sketch();
 		
-		Letters joke = joke("whoops, he forgot openCan()");
-		mark(49);
-		disappear(joke);
+		cue(44).letters("whoops, he forgot openCan()").at(new Centered(new Point(380d, 300d))).format(jokeFormat).called("joke").appear();
+		cue(49).actor("joke").disappear();
 		
 		return endBuild();
 	}
@@ -180,8 +178,8 @@ public class ExceptionsScript extends ScriptBuilder
 	private Step indirectCall()
 	{
 		buildPhrase();
-		head("How Throw & Catch Work");
-		fadeOut(500d, catchAndThrowColorText);
+		cue(96).slide().head("How Throw & Catch Work");
+		and().party("colorText").fadeOut();
 
 		mark(105);
 		Arrow call = new Arrow(world, and().actor("thrower"), false, and().actor("catcher"), true, commentFormat);
@@ -189,12 +187,12 @@ public class ExceptionsScript extends ScriptBuilder
 		sketch(500d, call);
 		sketch(500d, letters);
 
+		cue(111);
 		mark(111);
 		Cross cross = new Cross(world, call, 150d);
 		sketch(500d, cross);
-
-		fadeUp(500d, stack);
-
+		and().party("stackLines").fadeUp();
+		and().party("remainder").fadeOut();
 		mark(115);
 		throwsText(5);
 		mark(120);
