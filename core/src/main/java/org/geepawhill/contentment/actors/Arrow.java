@@ -7,6 +7,7 @@ import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.BezierAtom;
+import org.geepawhill.contentment.atom.GroupSource;
 import org.geepawhill.contentment.connector.arrow.ArrowComputer;
 import org.geepawhill.contentment.connector.arrow.ArrowPoints;
 import org.geepawhill.contentment.connector.arrow.NodeArrowComputer;
@@ -45,10 +46,15 @@ public class Arrow extends GenericActor
 
 	public Arrow(ScriptWorld world, Actor from, boolean pointAtFrom, Actor to, boolean pointAtTo, Format format)
 	{
+		this(world,from.groupSource(),pointAtFrom,to.groupSource(),pointAtTo,format);
+	}
+	
+	public Arrow(ScriptWorld world, GroupSource from, boolean pointAtFrom, GroupSource to, boolean pointAtTo, Format format)
+	{
 		super(world);
 		this.random = new Random();
 		this.nickname = Names.make(getClass());
-		this.computer = new NodeArrowComputer(from.groupSource(), to.groupSource());
+		this.computer = new NodeArrowComputer(from, to);
 		steps = new ArrayList<>();
 		chosenMain = null;
 		mainStep = new BezierAtom(groupSource(), this::getMainBezier, format);

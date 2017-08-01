@@ -2,6 +2,8 @@ package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.actors.Slide;
+import org.geepawhill.contentment.actors.Stroke;
+import org.geepawhill.contentment.geometry.PointPair;
 
 public class CueBuilder
 {
@@ -13,17 +15,14 @@ public class CueBuilder
 		this.world = world;
 	}
 	
-	// generically pass through to avoid fluency break for new
-	// without this, we'd have to change MarkContext when we added a new kind of Agent
-	public <ACTOR> ACTOR actor(ACTOR actor)
+	public Actor actor(Actor actor)
 	{
 		return actor;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public <ACTOR extends Actor> ACTOR actor(String actor)
+	public Actor actor(String actor)
 	{
-		return (ACTOR) actor(world.actor(actor));
+		return actor(world.actor(actor));
 	}
 	
 	public Slide slide()
@@ -39,6 +38,11 @@ public class CueBuilder
 	public Actors party(String name)
 	{
 		return world.party(name);
+	}
+
+	public Stroke stroke(PointPair westLine)
+	{
+		return new Stroke(world,westLine);
 	}
 
 }

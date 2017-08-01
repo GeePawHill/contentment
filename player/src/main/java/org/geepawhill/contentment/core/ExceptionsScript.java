@@ -12,7 +12,6 @@ import org.geepawhill.contentment.actors.CodeBlock;
 import org.geepawhill.contentment.actors.Cross;
 import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.actors.Spot;
-import org.geepawhill.contentment.actors.Stroke;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Grid;
 import org.geepawhill.contentment.geometry.Point;
@@ -97,7 +96,6 @@ public class ExceptionsScript extends ScriptBuilder
 		largeCodeFormat = new Format(TypeFace.font(new Font("Consolas", 60d), 2d, 1d), TypeFace.color(codeColor, 1d));
 
 		this.lines = new ArrayList<>();
-		this.stack = new Actors();
 		this.stackGrid = new Grid(1, STACK_ROWS, new PointPair(900d, 250d, 1480d, 850d));
 		this.catchAndThrowColorText = new Actors();
 
@@ -168,27 +166,14 @@ public class ExceptionsScript extends ScriptBuilder
 		cue(57).letters("Catcher").at(new TopRight(leftCommentTextPoint(1))).format(commentFormat).called("catcher").sketch();
 
 		cue(60).party("stackText").fadeDown();
+		and().party("stackLines").fadeDown();
 
-		mark(64);
-		Letters throwsLidNotFound = new Letters(world, "throws LidNotFound", new TopLeft(stackTextPoint(5).add(new Point(0,50))), lightComment);
-		catchAndThrowColorText.add(throwsLidNotFound);
-		fadeIn(500d, throwsLidNotFound);
+		cue(64).letters("throws LidNotFound").at(new TopLeft(stackTextPoint(5).add(new Point(0,50)))).format(lightComment).in("colorText").sketch();
+		cue(72).letters("catches all exceptions").at(new TopLeft(stackTextPoint(1).add(new Point(0,50)))).format(lightComment).in("colorText").called("catchesAll").sketch();
 
-		mark(72);
-		Letters catchesAll = new Letters(world, "catches all exceptions", new TopLeft(stackTextPoint(1).add(new Point(0,50))), lightComment);
-		catchAndThrowColorText.add(catchesAll);
-		fadeIn(500d, catchesAll);
+		cue(82).letters("catches LidNotFound").at(new BelowLeft(and().actor("catchesAll").groupSource())).format(lightComment).in("colorText").called("catchesLidNotFound").sketch();
 
-		mark(82);
-		Letters catchesLidNotFound = new Letters(world, "catches LidNotFound",new BelowLeft(catchesAll.groupSource()), lightComment);
-		catchAndThrowColorText.add(catchesLidNotFound);
-		fadeIn(500d, catchesLidNotFound);
-
-		mark(86);
-		Letters logsIt = new Letters(world, "logs and moves on", new BelowLeft(catchesLidNotFound.groupSource()), lightComment);
-		catchAndThrowColorText.add(logsIt);
-		fadeIn(500d, logsIt);
-
+		cue(86).letters("logs and moves on").at(new BelowLeft(and().actor("catchesLidNotFound").groupSource())).format(lightComment).in("colorText").sketch();
 		return endBuild();
 
 	}
@@ -553,19 +538,12 @@ public class ExceptionsScript extends ScriptBuilder
 
 	private void drawStack()
 	{
-		Stroke guideStroke = new Stroke(world, stackGrid.westLine(), stackFormat);
-		sketch(500d, guideStroke);
-		stack.add(guideStroke);
-
+		and().stroke(stackGrid.westLine()).format(stackFormat).in("stackLines").sketch();
 		for (int i = 0; i < stackGrid.rows(); i++)
 		{
-			Stroke topStroke = new Stroke(world, stackGrid.area(0, i).northLine(), stackFormat);
-			sketch(500d, topStroke);
-			stack.add(topStroke);
+			and().stroke(stackGrid.area(0, i).northLine()).format(stackFormat).in("stackLines").sketch();
 		}
-		Stroke stackBottom = new Stroke(world, stackGrid.southLine(0, STACK_ROWS - 1), stackFormat);
-		sketch(500d, stackBottom);
-		stack.add(stackBottom);
+		and().stroke(stackGrid.southLine(0, STACK_ROWS - 1)).format(stackFormat).in("stackLines").sketch();
 	}
 
 	private Position stackTextPosition(int line)

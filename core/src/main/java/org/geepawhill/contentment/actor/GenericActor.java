@@ -7,7 +7,6 @@ import org.geepawhill.contentment.atom.OpacityAtom;
 import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.timing.Timing;
 
-import javafx.scene.Group;
 import javafx.scene.paint.Paint;
 
 public abstract class GenericActor implements Actor

@@ -47,4 +47,9 @@ public class BezierAtom implements Atom
 		new BezierSplit(fraction, source.get()).setPathToBefore(path);
 		return true;
 	}
+	
+	public void format(Format format)
+	{
+		this.format = format;
+	}
 }

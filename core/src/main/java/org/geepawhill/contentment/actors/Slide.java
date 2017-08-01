@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
-import org.geepawhill.contentment.atom.EntranceAtom;
 import org.geepawhill.contentment.atom.LettersAtom;
 import org.geepawhill.contentment.atom.RemoveAtom;
 import org.geepawhill.contentment.format.Format;
