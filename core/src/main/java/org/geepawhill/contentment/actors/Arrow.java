@@ -19,8 +19,6 @@ import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
-import javafx.scene.Group;
-
 public class Arrow extends GenericActor
 {
 	final String nickname;

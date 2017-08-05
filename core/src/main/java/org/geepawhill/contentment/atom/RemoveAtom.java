@@ -1,12 +1,8 @@
 package org.geepawhill.contentment.atom;
 
-import java.util.function.Supplier;
-
 import org.geepawhill.contentment.core.Atom;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.utility.JfxUtility;
-
-import javafx.scene.Node;
 
 public class RemoveAtom implements Atom
 {

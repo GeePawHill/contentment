@@ -10,8 +10,6 @@ import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.timing.Timing;
 
-import javafx.scene.Group;
-
 public class CodeBlock extends GenericActor
 {
 	private BlockAtom atom;

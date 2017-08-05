@@ -5,8 +5,6 @@ import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.step.Step;
 
-import javafx.scene.Group;
-
 public class TestActor extends GenericActor
 {
 

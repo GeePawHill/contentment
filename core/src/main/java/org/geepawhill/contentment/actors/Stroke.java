@@ -10,8 +10,6 @@ import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
-import javafx.scene.Group;
-
 public class Stroke extends GenericActor
 {
 	private final String nickname;

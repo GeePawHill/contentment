@@ -14,7 +14,6 @@ import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.timing.Timing;
 
-import javafx.scene.Group;
 import javafx.scene.paint.Color;
 
 public class Cross extends GenericActor
