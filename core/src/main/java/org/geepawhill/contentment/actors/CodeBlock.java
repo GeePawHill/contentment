@@ -23,12 +23,6 @@ public class CodeBlock extends GenericActor
 	}
 
 	@Override
-	public Group group()
-	{
-		return entrance.get();
-	}
-
-	@Override
 	public Step draw(double ms)
 	{
 		Phrase phrase = new Phrase();

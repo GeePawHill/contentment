@@ -45,12 +45,6 @@ public class Cross extends GenericActor
 	}
 
 	@Override
-	public Group group()
-	{
-		return entrance.get();
-	}
-
-	@Override
 	public Step draw(double ms)
 	{
 		Timed timed = new Timed(ms);

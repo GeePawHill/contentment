@@ -2,6 +2,7 @@ package org.geepawhill.contentment.actor;
 
 import java.util.HashMap;
 
+import org.geepawhill.contentment.actors.Slide;
 import org.geepawhill.contentment.step.Addable;
 import org.geepawhill.contentment.step.Chord;
 import org.geepawhill.contentment.step.Phrase;
@@ -12,12 +13,14 @@ public class ScriptWorld
 	private Addable working;
 	private final HashMap<String,Actor> namedActors;
 	private final HashMap<String,Actors> namedParties;
-	
+	private final Slide slide;
+
 	public ScriptWorld()
 	{
 		working = new Phrase();
 		namedActors = new HashMap<>();
 		namedParties = new HashMap<>();
+		slide = new Slide(this);
 	}
 
 	public void add(Step step)
@@ -72,5 +75,15 @@ public class ScriptWorld
 	{
 		if(!namedParties.containsKey(name)) throw new RuntimeException("Can't find party: ["+name+"]");
 		return namedParties.get(name);
+	}
+
+	public void dump()
+	{
+		working.dump();
+	}
+	
+	public Slide slide()
+	{
+		return slide;
 	}
 }

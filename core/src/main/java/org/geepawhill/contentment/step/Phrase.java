@@ -35,11 +35,21 @@ public class Phrase implements Addable
 	@Override
 	public void fast(Context context)
 	{
-		for(Step Step : playables)
+		for(Step step : playables)
 		{
-			Step.fast(context);
+			step.fast(context);
 		}
 	}
+	
+	@Override
+	public void dump()
+	{
+		for(Step step : playables)
+		{
+			System.out.println(step);
+		}
+	}
+
 
 	@Override
 	public void slow(Context context, OnFinished onFinished)

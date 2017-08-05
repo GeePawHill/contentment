@@ -23,6 +23,16 @@ public class Chord implements Addable
 	}
 	
 	@Override
+	public void dump()
+	{
+		for(Step step : playables)
+		{
+			System.out.println(step);
+		}
+	}
+
+	
+	@Override
 	public void fast(Context context)
 	{
 		for(Step Step : playables)

@@ -11,14 +11,9 @@ import javafx.scene.Node;
 public class RemoveAtom implements Atom
 {
 	private GroupSource group;
-	private Supplier<Node> nodeSource;
+	private NodeSource nodeSource;
 
-	public RemoveAtom(GroupSource group, Node node)
-	{
-		this(group,() -> node);
-	}
-	
-	public RemoveAtom(GroupSource group, Supplier<Node> nodeSource)
+	public RemoveAtom(GroupSource group, NodeSource nodeSource)
 	{
 		this.group = group;
 		this.nodeSource = nodeSource;

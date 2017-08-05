@@ -19,12 +19,6 @@ public class Stack extends GenericActor
 	}
 	
 	@Override
-	public Group group()
-	{
-		return group;
-	}
-
-	@Override
 	public Step draw(double ms)
 	{
 		return new Phrase();

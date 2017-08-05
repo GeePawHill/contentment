@@ -18,7 +18,6 @@ import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.timing.Timing;
 
-import javafx.scene.Group;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -51,12 +50,6 @@ public class Slide extends GenericActor
 		minorFormat = new Format(TypeFace.font(minorFont, 1d, 1d), TypeFace.color(minorColor, 1d),
 				Frames.frame(minorColor, 5d, 1d));
 
-	}
-
-	@Override
-	public Group group()
-	{
-		return entrance.get();
 	}
 
 	@Override
@@ -93,9 +86,9 @@ public class Slide extends GenericActor
 	void line(String text, Format format)
 	{
 		Position position = null;
-		if (!lines.isEmpty()) position = new BelowRight(groupSource());
+		if (!lines.isEmpty()) position = new BelowRight(lines.get(lines.size()-1));
 		else position = new TopRight(1550d, 50d);
-		LettersAtom line = new LettersAtom(groupSource(), text, format, position);
+		LettersAtom line = new LettersAtom(entrance, text, format, position);
 		world.add(new AtomStep(Timing.ms(500), line));
 		lines.add(line);
 	}
@@ -104,7 +97,7 @@ public class Slide extends GenericActor
 	{
 		for (LettersAtom line : lines)
 		{
-			world.add(new AtomStep(Timing.instant(), new RemoveAtom(groupSource(), () -> line.text())));
+			world.add(new AtomStep(Timing.instant(), new RemoveAtom(entrance, line)));
 		}
 		lines.clear();
 		return this;

@@ -1,6 +1,5 @@
 package org.geepawhill.contentment.atom;
 
-import org.geepawhill.contentment.core.Atom;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
@@ -8,9 +7,10 @@ import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.utility.JfxUtility;
 
+import javafx.scene.Node;
 import javafx.scene.text.Text;
 
-public class LettersAtom implements Atom
+public class LettersAtom implements NodeAtom
 {
 	private Text text;
 	private GroupSource group;
@@ -67,5 +67,17 @@ public class LettersAtom implements Atom
 	public Text text()
 	{
 		return text;
+	}
+
+	@Override
+	public Node get()
+	{
+		return text;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "Letters: Source |"+source+"| Group |"+group.get()+"|";
 	}
 }

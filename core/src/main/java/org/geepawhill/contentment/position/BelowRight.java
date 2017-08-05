@@ -1,5 +1,6 @@
 package org.geepawhill.contentment.position;
 import org.geepawhill.contentment.atom.GroupSource;
+import org.geepawhill.contentment.atom.NodeSource;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.utility.JfxUtility;
@@ -9,9 +10,9 @@ import javafx.scene.Node;
 public class BelowRight implements Position
 {
 	
-	private GroupSource anchor;
+	private NodeSource anchor;
 
-	public BelowRight(GroupSource anchor)
+	public BelowRight(NodeSource anchor)
 	{
 		this.anchor = anchor;
 	}

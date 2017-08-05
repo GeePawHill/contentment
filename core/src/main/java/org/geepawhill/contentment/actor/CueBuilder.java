@@ -14,13 +14,10 @@ public class CueBuilder
 {
 	
 	private ScriptWorld world;
-	private Slide slide;
-
 
 	public CueBuilder(ScriptWorld world,long beat)
 	{
 		this.world = world;
-		this.slide = new Slide(world);
 	}
 	
 	public Actor actor(Actor actor)
@@ -35,7 +32,7 @@ public class CueBuilder
 	
 	public Slide slide()
 	{
-		return slide;
+		return world.slide();
 	}
 
 	public Letters letters(String source)

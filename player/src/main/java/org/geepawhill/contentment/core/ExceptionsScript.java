@@ -79,7 +79,7 @@ public class ExceptionsScript extends ScriptBuilder
 
 	public Script make()
 	{
-		script = new Script(new MediaRhythm(new File("/exceptionsTrialBase.mp4")));
+		script = new Script(new MediaRhythm(new File("/faceoverPositionTrial.mp4")));
 		script.add(new Keyframe(0, opening()));
 		script.add(new Keyframe(16, stack()));
 		script.add(new Keyframe(50, special()));

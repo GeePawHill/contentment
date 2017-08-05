@@ -36,12 +36,6 @@ public class Spot extends GenericActor
 	}
 	
 	@Override
-	public Group group()
-	{
-		return entrance.get();
-	}
-	
-	@Override
 	public Step draw(double ms)
 	{
 		return new AtomStep(Timing.ms(ms),atom);

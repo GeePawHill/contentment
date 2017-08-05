@@ -10,18 +10,9 @@ import javafx.scene.Group;
 public class TestActor extends GenericActor
 {
 
-	public final Group group;
-
 	public TestActor(ScriptWorld world)
 	{
 		super(world);
-		group = new Group();
-	}
-
-	@Override
-	public Group group()
-	{
-		return group;
 	}
 
 	@Override

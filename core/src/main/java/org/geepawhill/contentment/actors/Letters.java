@@ -54,12 +54,6 @@ public class Letters extends GenericActor implements Actor
 	}
 
 	@Override
-	public Group group()
-	{
-		return entrance.get();
-	}
-
-	@Override
 	public Step draw(double ms)
 	{
 		Timed timed = new Timed(ms);
