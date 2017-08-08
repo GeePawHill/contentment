@@ -13,7 +13,6 @@ import org.geepawhill.contentment.position.BelowRight;
 import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.position.TopRight;
 import org.geepawhill.contentment.step.AtomStep;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.timing.Timing;
@@ -53,7 +52,7 @@ public class Slide extends GenericActor
 	}
 
 	@Override
-	public Step draw(double ms)
+	public Slide draw(double ms)
 	{
 		throw new RuntimeException("Attempt to draw Slide actor.");
 	}

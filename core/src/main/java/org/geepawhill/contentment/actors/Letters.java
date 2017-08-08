@@ -10,7 +10,6 @@ import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Jiggler;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.position.Position;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
@@ -52,7 +51,7 @@ public class Letters extends GenericActor implements Actor
 	}
 
 	@Override
-	public Step draw(double ms)
+	public Letters draw(double ms)
 	{
 		Timed timed = new Timed(ms);
 		timed.add(Timing.weighted(7), letters);
@@ -61,7 +60,8 @@ public class Letters extends GenericActor implements Actor
 			timed.add(Timing.weighted(1.5), east);
 			timed.add(Timing.weighted(1.5), west);
 		}
-		return timed;
+		world.add(timed);
+		return this;
 	}
 
 	@Override

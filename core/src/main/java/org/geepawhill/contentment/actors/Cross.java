@@ -9,7 +9,6 @@ import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.timing.Timing;
@@ -44,12 +43,13 @@ public class Cross extends GenericActor
 	}
 
 	@Override
-	public Step draw(double ms)
+	public Cross draw(double ms)
 	{
 		Timed timed = new Timed(ms);
 		timed.add(Timing.weighted(.5),leftToRight);
 		timed.add(Timing.weighted(.5),rightToLeft);
-		return timed;
+		world.add(timed);
+		return this;
 	}
 	
 	private Bezier leftToRightBezier()

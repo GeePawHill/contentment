@@ -5,7 +5,6 @@ import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.SpotAtom;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.step.AtomStep;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
@@ -34,8 +33,9 @@ public class Spot extends GenericActor
 	}
 	
 	@Override
-	public Step draw(double ms)
+	public Spot draw(double ms)
 	{
-		return new AtomStep(Timing.ms(ms),atom);
+		world.add(new AtomStep(Timing.ms(ms),atom));
+		return this;
 	}
 }

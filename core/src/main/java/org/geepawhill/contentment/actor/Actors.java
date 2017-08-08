@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.geepawhill.contentment.atom.GroupSource;
-import org.geepawhill.contentment.step.Step;
 
 import javafx.scene.paint.Paint;
 
@@ -69,10 +68,9 @@ public class Actors implements Iterable<Actor>, Actor
 	}
 
 	@Override
-	public Step draw(double ms)
+	public Actors draw(double ms)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 
 	@Override

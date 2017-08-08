@@ -3,7 +3,6 @@ package org.geepawhill.contentment.test;
 import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.step.Phrase;
-import org.geepawhill.contentment.step.Step;
 
 public class TestActor extends GenericActor
 {
@@ -14,9 +13,10 @@ public class TestActor extends GenericActor
 	}
 
 	@Override
-	public Step draw(double ms)
+	public TestActor draw(double ms)
 	{
-		return new Phrase();
+		world.add(new Phrase());
+		return this;
 	}
 
 }

@@ -1,21 +1,15 @@
 package org.geepawhill.contentment.actor;
 
 import org.geepawhill.contentment.atom.GroupSource;
-import org.geepawhill.contentment.step.Step;
 
 import javafx.scene.paint.Paint;
 
 public interface Actor
 {
-
-	Step draw(double ms);
-
-	Actor sketch();
-
 	Actor called(String name);
-
 	Actor in(String name);
 	
+	Actor sketch();
 	Actor fadeUp();
 	Actor fadeDown();
 	Actor fadeOut();
@@ -25,7 +19,6 @@ public interface Actor
 	Actor appear();
 	Actor disappear();
 
+	Actor draw(double ms);
 	GroupSource groupSource();
-
-
 }

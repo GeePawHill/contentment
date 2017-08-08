@@ -14,7 +14,6 @@ import org.geepawhill.contentment.connector.arrow.NodeArrowComputer;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
@@ -141,7 +140,7 @@ public class Arrow extends GenericActor
 	}
 
 	@Override
-	public Step draw(double ms)
+	public Arrow draw(double ms)
 	{
 		steps = new ArrayList<>();
 		chosenMain = null;
@@ -166,7 +165,7 @@ public class Arrow extends GenericActor
 		{
 			sequence.add(Timing.weighted(.1d), step);
 		}
-		return sequence;
+		return this;
 	}
 
 }

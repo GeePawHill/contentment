@@ -6,7 +6,6 @@ import org.geepawhill.contentment.atom.BezierAtom;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AtomStep;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
@@ -34,8 +33,9 @@ public class Stroke extends GenericActor
 	}
 
 	@Override
-	public Step draw(double ms)
+	public Stroke draw(double ms)
 	{
-		return new AtomStep(Timing.ms(ms),atom);
+		world.add(new AtomStep(Timing.ms(ms),atom));
+		return this;
 	}
 }

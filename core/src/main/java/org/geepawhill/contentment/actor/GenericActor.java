@@ -30,7 +30,7 @@ public abstract class GenericActor implements Actor
 	public GenericActor sketch()
 	{
 		world.add(new AtomStep(Timing.instant(),entrance));
-		world.add(draw(500d));
+		draw(500d);
 		return this;
 	}
 	
@@ -38,7 +38,7 @@ public abstract class GenericActor implements Actor
 	public GenericActor appear()
 	{
 		world.add(new AtomStep(Timing.instant(),entrance));
-		world.add(draw(1d));
+		draw(1d);
 		return this;
 	}
 
@@ -91,7 +91,7 @@ public abstract class GenericActor implements Actor
 	{
 		world.add(new AtomStep(Timing.instant(),entrance));
 		world.add(new AtomStep(Timing.instant(),new OpacityAtom(entrance, 1, 0)));
-		world.add(draw(1d));
+		draw(1d);
 		world.add(new AtomStep(Timing.ms(500d),new OpacityAtom(entrance,0,1)));
 		return this;
 	}

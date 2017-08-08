@@ -6,8 +6,6 @@ import org.geepawhill.contentment.atom.BlockAtom;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.step.AtomStep;
-import org.geepawhill.contentment.step.Phrase;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.timing.Timing;
 
 public class CodeBlock extends GenericActor
@@ -21,11 +19,10 @@ public class CodeBlock extends GenericActor
 	}
 
 	@Override
-	public Step draw(double ms)
+	public CodeBlock draw(double ms)
 	{
-		Phrase phrase = new Phrase();
-		phrase.add(new AtomStep(Timing.ms(ms),atom));
-		return phrase;
+		world.add(new AtomStep(Timing.ms(ms),atom));
+		return this;
 	}
 
 }
