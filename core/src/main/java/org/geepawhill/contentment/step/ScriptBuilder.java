@@ -47,7 +47,7 @@ public class ScriptBuilder
 	
 	public Addable endBuild()
 	{
-		return world.endBuild();
+		return world.endPhrase();
 	}
 	
 	public Actor actor(Actor actor)

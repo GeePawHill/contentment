@@ -23,7 +23,6 @@ public class MarkAtom implements Atom
 	{
 		if (context.beat() > mark)
 		{
-			System.out.println("Beat: "+context.beat()+" Mark: "+mark);
 			return false;
 		}
 		return true;
