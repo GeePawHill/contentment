@@ -26,7 +26,7 @@ public class ScriptBuilder
 	
 	public ScriptBuilder cue(long beat)
 	{
-		addToWorking(new AtomStep(Timing.ms(5000),new MarkAtom(beat*1000)));
+		addToWorking(new AtomStep(Timing.ms(30000),new MarkAtom(beat*1000)));
 		return this;
 	}
 	

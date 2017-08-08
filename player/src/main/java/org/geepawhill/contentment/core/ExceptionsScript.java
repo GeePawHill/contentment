@@ -65,7 +65,7 @@ public class ExceptionsScript extends ScriptBuilder
 		Paint codeColor = Color.WHITE;
 		largeCodeFormat = new Format(TypeFace.font(new Font("Consolas", 60d), 2d, 1d), TypeFace.color(codeColor, 1d));
 
-		this.stackGrid = new Grid(1, STACK_ROWS, new PointPair(900d, 250d, 1480d, 850d));
+		this.stackGrid = new Grid(1, STACK_ROWS, new PointPair(800d, 250d, 1480d, 850d));
 
 		Font codeFont = new Font("Consolas", 25d);
 
@@ -81,7 +81,7 @@ public class ExceptionsScript extends ScriptBuilder
 	{
 		script = new Script(new MediaRhythm(new File("/faceoverPositionTrial.mp4")));
 		script.add(new Keyframe(0, opening()));
-		script.add(new Keyframe(16, stack()));
+		script.add(new Keyframe(5, stack()));
 		script.add(new Keyframe(50, special()));
 		script.add(new Keyframe(96, indirectCall()));
 		script.add(new Keyframe(140, dependencies()));
@@ -106,20 +106,21 @@ public class ExceptionsScript extends ScriptBuilder
 	
 	private Step stack()
 	{
-		cue(16).slide().head("A Program's Stack");
-		drawStack();
+		cue(5);
+		stroke(stackGrid.southLine(0, STACK_ROWS - 1)).format(stackFormat).in("stackLines").sketch();
+		stroke(stackGrid.westLine()).format(stackFormat).in("stackLines").sketch();
+		for (int i = stackGrid.rows()-1; i >=0; i--)
+		{
+			stroke(stackGrid.area(0, i).northLine()).format(stackFormat).in("stackLines").sketch();
+		}
 		
-		cue(22).slide().head("The Household Program");
-		
-		cue(26).letters("main()").at(stackTextPosition(0)).format(largeCodeFormat).in("stackText").sketch();
-		cue(30).letters("doChores()").at(stackTextPosition(1)).format(largeCodeFormat).in("remainder").sketch();
-		cue(33).letters("takeOutTrash()").at(stackTextPosition(2)).format(largeCodeFormat).in("stackText").sketch();
-		cue(37).letters("putBagsInCans()").at(stackTextPosition(3)).format(largeCodeFormat).in("stackText").sketch();
-		cue(40).letters("putOneBagInCan()").at(stackTextPosition(4)).format(largeCodeFormat).in("stackText").sketch();
-		cue(44).letters("openCan()").at(stackTextPosition(5)).format(largeCodeFormat).in("remainder").sketch();
-		
-		cue(44).letters("whoops, he forgot openCan()").at(new Centered(new Point(380d, 300d))).format(jokeFormat).called("joke").appear();
-		cue(49).actor("joke").disappear();
+		slide().head("The Household Program");
+		cue(14).letters("main()").at(stackTextPosition(0)).format(largeCodeFormat).in("stackText").sketch();
+		cue(24).letters("Household.doChores()").at(stackTextPosition(1)).format(largeCodeFormat).in("remainder").sketch();
+//		cue(32).letters("Kitchen.clean()").at(stackTextPosition(2)).format(largeCodeFormat).in("stackText").sketch();
+//		cue(36).letters("Kitchen.takeOutTrash()").at(stackTextPosition(3)).format(largeCodeFormat).in("stackText").sketch();
+//		cue(44).letters("Kitchen.replaceBag()").at(stackTextPosition(4)).format(largeCodeFormat).in("stackText").sketch();
+//		cue(46).letters("Supplies.getBag()").at(stackTextPosition(5)).format(largeCodeFormat).in("remainder").sketch();
 		
 		return endBuild();
 	}
@@ -396,16 +397,6 @@ public class ExceptionsScript extends ScriptBuilder
 		cue(550).slide().sub("remember the judgment premise!");
 		cue(574).letters("Bad Pun Alert!").at(new Centered(new Point(380d, 300d))).format(jokeFormat).appear();
 		return endBuild();
-	}
-
-	private void drawStack()
-	{
-		stroke(stackGrid.westLine()).format(stackFormat).in("stackLines").sketch();
-		for (int i = 0; i < stackGrid.rows(); i++)
-		{
-			stroke(stackGrid.area(0, i).northLine()).format(stackFormat).in("stackLines").sketch();
-		}
-		stroke(stackGrid.southLine(0, STACK_ROWS - 1)).format(stackFormat).in("stackLines").sketch();
 	}
 
 	private Position stackTextPosition(int line)
