@@ -1,17 +1,16 @@
 package org.geepawhill.contentment.actor;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.geepawhill.contentment.atom.GroupSource;
 
 import javafx.scene.paint.Paint;
 
-public class Actors implements Iterable<Actor>, Actor
+public class Party implements Actor
 {
 	private ArrayList<Actor> items;
 
-	public Actors()
+	public Party()
 	{
 		items = new ArrayList<>();
 	}
@@ -36,13 +35,7 @@ public class Actors implements Iterable<Actor>, Actor
 		return items.get(i);
 	}
 
-	@Override
-	public Iterator<Actor> iterator()
-	{
-		return items.iterator();
-	}
-
-	public void addAll(Actors source)
+	public void addAll(Party source)
 	{
 		items.addAll(source.items);
 	}
@@ -68,7 +61,7 @@ public class Actors implements Iterable<Actor>, Actor
 	}
 
 	@Override
-	public Actors draw(double ms)
+	public Party draw(double ms)
 	{
 		return this;
 	}
@@ -76,7 +69,7 @@ public class Actors implements Iterable<Actor>, Actor
 	@Override
 	public Actor sketch()
 	{
-		for(Actor actor : this)
+		for(Actor actor : items)
 		{
 			actor.sketch();
 		}
@@ -99,7 +92,7 @@ public class Actors implements Iterable<Actor>, Actor
 
 	public Actor reColor(Paint paint)
 	{
-		for(Actor actor : this)
+		for(Actor actor : items)
 		{
 			actor.reColor(paint);
 		}
@@ -109,7 +102,7 @@ public class Actors implements Iterable<Actor>, Actor
 	
 	public Actor fadeDown()
 	{
-		for(Actor actor : this)
+		for(Actor actor : items)
 		{
 			actor.fadeDown();
 		}
@@ -119,7 +112,7 @@ public class Actors implements Iterable<Actor>, Actor
 	
 	public Actor fadeOut()
 	{
-		for(Actor actor : this)
+		for(Actor actor : items)
 		{
 			actor.fadeOut();
 		}
@@ -131,7 +124,7 @@ public class Actors implements Iterable<Actor>, Actor
 	@Override
 	public Actor appear()
 	{
-		for(Actor actor : this)
+		for(Actor actor : items)
 		{
 			actor.appear();
 		}
@@ -141,7 +134,7 @@ public class Actors implements Iterable<Actor>, Actor
 	@Override
 	public Actor disappear()
 	{
-		for(Actor actor : this)
+		for(Actor actor : items)
 		{
 			actor.disappear();
 		}
@@ -151,7 +144,7 @@ public class Actors implements Iterable<Actor>, Actor
 	@Override
 	public Actor fadeUp()
 	{
-		for(Actor actor : this)
+		for(Actor actor : items)
 		{
 			actor.fadeUp();
 		}
@@ -161,7 +154,7 @@ public class Actors implements Iterable<Actor>, Actor
 	@Override
 	public Actor fadeIn()
 	{
-		for(Actor actor : this)
+		for(Actor actor : items)
 		{
 			actor.fadeIn();
 		}

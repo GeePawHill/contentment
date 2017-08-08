@@ -11,7 +11,7 @@ public class ScriptWorld
 {
 	private Addable working;
 	private final HashMap<String,Actor> namedActors;
-	private final HashMap<String,Actors> namedParties;
+	private final HashMap<String,Party> namedParties;
 
 	public ScriptWorld()
 	{
@@ -57,12 +57,12 @@ public class ScriptWorld
 
 	public void addToParty(String name, Actor actor)
 	{
-		Actors actors = namedParties.getOrDefault(name, new Actors());
+		Party actors = namedParties.getOrDefault(name, new Party());
 		actors.add(actor);
 		namedParties.put(name, actors);
 	}
 
-	public Actors party(String name)
+	public Party party(String name)
 	{
 		if(!namedParties.containsKey(name)) throw new RuntimeException("Can't find party: ["+name+"]");
 		return namedParties.get(name);

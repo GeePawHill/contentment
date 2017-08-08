@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.actor.Actors;
+import org.geepawhill.contentment.actor.Party;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.actors.Arrow;
 import org.geepawhill.contentment.actors.Letters;
@@ -60,7 +60,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 		return new Letters(world,source);
 	}
 	
-	public Actors party(String name)
+	public Party party(String name)
 	{
 		return world.party(name);
 	}
