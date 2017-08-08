@@ -6,7 +6,6 @@ import org.geepawhill.contentment.actor.Commandable;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.actors.Arrow;
 import org.geepawhill.contentment.actors.Letters;
-import org.geepawhill.contentment.actors.Slide;
 import org.geepawhill.contentment.actors.Spot;
 import org.geepawhill.contentment.actors.Stroke;
 import org.geepawhill.contentment.atom.ClearAtom;
@@ -14,7 +13,7 @@ import org.geepawhill.contentment.atom.MarkAtom;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.timing.Timing;
 
-public class ScriptBuilder
+public abstract class ScriptBuilder<SUBCLASS>
 {
 	
 	protected ScriptWorld world;
@@ -24,15 +23,12 @@ public class ScriptBuilder
 		world = new ScriptWorld();
 	}
 	
-	public ScriptBuilder cue(long beat)
+	public abstract SUBCLASS downcast();
+	
+	public SUBCLASS cue(long beat)
 	{
 		addToWorking(new AtomStep(Timing.ms(30000),new MarkAtom(beat*1000)));
-		return this;
-	}
-	
-	public ScriptBuilder and()
-	{
-		return this;
+		return downcast();
 	}
 	
 	private void addToWorking(Step step)
@@ -60,11 +56,6 @@ public class ScriptBuilder
 		return actor(world.actor(actor));
 	}
 	
-	public Slide slide()
-	{
-		return world.slide();
-	}
-
 	public Letters letters(String source)
 	{
 		return new Letters(world,source);
@@ -85,10 +76,10 @@ public class ScriptBuilder
 		return new Arrow(world);
 	}
 	
-	public ScriptBuilder wipe()
+	public SUBCLASS wipe()
 	{
 		world.add(new AtomStep(Timing.instant(),new ClearAtom()));
-		return this;
+		return downcast();
 	}
 
 	public Commandable spot(double x, double y)

@@ -13,14 +13,12 @@ public class ScriptWorld
 	private Addable working;
 	private final HashMap<String,Actor> namedActors;
 	private final HashMap<String,Actors> namedParties;
-	private final Slide slide;
 
 	public ScriptWorld()
 	{
 		working = new Phrase();
 		namedActors = new HashMap<>();
 		namedParties = new HashMap<>();
-		slide = new Slide(this);
 	}
 
 	public void add(Step step)
@@ -40,19 +38,13 @@ public class ScriptWorld
 		return working;
 	}
 	
-	public Addable buildMore(Addable addable)
-	{
-		working = addable;
-		return working;
-	}
-	
-	public Addable endBuild()
+	public Addable endPhrase()
 	{
 		Addable temp = working;
 		working=new Phrase();
 		return temp;
 	}
-
+	
 	public Actor actor(String actor)
 	{
 		if(!namedActors.containsKey(actor)) throw new RuntimeException("Can't find actor: ["+actor+"]");
@@ -80,10 +72,5 @@ public class ScriptWorld
 	public void dump()
 	{
 		working.dump();
-	}
-	
-	public Slide slide()
-	{
-		return slide;
 	}
 }

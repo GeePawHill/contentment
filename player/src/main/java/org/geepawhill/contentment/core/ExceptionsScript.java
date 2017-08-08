@@ -6,6 +6,7 @@ import java.io.File;
 
 import org.geepawhill.contentment.actors.CodeBlock;
 import org.geepawhill.contentment.actors.Cross;
+import org.geepawhill.contentment.actors.Slide;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Grid;
 import org.geepawhill.contentment.geometry.Point;
@@ -33,7 +34,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 
-public class ExceptionsScript extends ScriptBuilder
+public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 {
 	private static final int STACK_ROWS = 6;
 
@@ -49,8 +50,11 @@ public class ExceptionsScript extends ScriptBuilder
 	
 	private Grid stackGrid;
 
+	private Slide slide;
+
 	public ExceptionsScript()
 	{
+		slide = new Slide(world);
 		jokeFormat = new Format(TypeFace.font(Font.font("Calibri", FontPosture.ITALIC, 50d), 3d, 1d),
 				TypeFace.color(Color.BLUEVIOLET, Color.BLUEVIOLET, 1d));
 
@@ -420,5 +424,15 @@ public class ExceptionsScript extends ScriptBuilder
 		spot(1500d, y).appear().called("rightSpot").in("allButOvals");
 		connector().from(actor("leftSpot").groupSource(),leftHead).to(actor("rightSpot").groupSource(), !leftHead).format(knowsFormat).sketch().called("arrow").in("allButOvals");
 		letters("knows?").at(new AboveCenter(actor("arrow").groupSource())).format(knowsFormat).sketch().in("allButOvals");
+	}
+	
+	public ExceptionsScript downcast()
+	{
+		return this;
+	}
+	
+	private Slide slide()
+	{
+		return slide;
 	}
 }
