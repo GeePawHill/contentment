@@ -65,7 +65,7 @@ public class ExceptionsScript extends ScriptBuilder
 		Paint codeColor = Color.WHITE;
 		largeCodeFormat = new Format(TypeFace.font(new Font("Consolas", 60d), 2d, 1d), TypeFace.color(codeColor, 1d));
 
-		this.stackGrid = new Grid(1, STACK_ROWS, new PointPair(800d, 250d, 1480d, 850d));
+		this.stackGrid = new Grid(1, STACK_ROWS, new PointPair(900d, 250d, 1480d, 850d));
 
 		Font codeFont = new Font("Consolas", 25d);
 
@@ -116,11 +116,11 @@ public class ExceptionsScript extends ScriptBuilder
 		
 		slide().head("The Household Program");
 		cue(14).letters("main()").at(stackTextPosition(0)).format(largeCodeFormat).in("stackText").sketch();
-		cue(24).letters("Household.doChores()").at(stackTextPosition(1)).format(largeCodeFormat).in("remainder").sketch();
-//		cue(32).letters("Kitchen.clean()").at(stackTextPosition(2)).format(largeCodeFormat).in("stackText").sketch();
-//		cue(36).letters("Kitchen.takeOutTrash()").at(stackTextPosition(3)).format(largeCodeFormat).in("stackText").sketch();
-//		cue(44).letters("Kitchen.replaceBag()").at(stackTextPosition(4)).format(largeCodeFormat).in("stackText").sketch();
-//		cue(46).letters("Supplies.getBag()").at(stackTextPosition(5)).format(largeCodeFormat).in("remainder").sketch();
+		cue(24).letters("doChores()").at(stackTextPosition(1)).format(largeCodeFormat).in("remainder").sketch();
+		cue(29).letters("clean()").at(stackTextPosition(2)).format(largeCodeFormat).in("stackText").sketch();
+		cue(33).letters("takeOutTrash()").at(stackTextPosition(3)).format(largeCodeFormat).in("stackText").sketch();
+		cue(44).letters("replaceTrashBag()").at(stackTextPosition(4)).format(largeCodeFormat).in("stackText").sketch();
+		cue(50).letters("getBag()").at(stackTextPosition(5)).format(largeCodeFormat).in("remainder").sketch();
 		
 		return endBuild();
 	}

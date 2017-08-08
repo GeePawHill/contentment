@@ -36,17 +36,17 @@ public class Slide extends GenericActor
 		this.lines = new ArrayList<>();
 
 		Paint majorColor = color(13, 165, 15);
-		Font majorHand = Font.font("Chewed Pen BB", FontPosture.ITALIC, 90d);
-		majorFormat = new Format(TypeFace.font(majorHand, 3d, 1d), TypeFace.color(majorColor, 1d),
+		Font majorHand = Font.font("Times New Roman", FontPosture.ITALIC, 90d);
+		majorFormat = new Format(TypeFace.font(majorHand, 2d, 1d), TypeFace.color(majorColor, 1d),
 				Frames.frame(majorColor, 5d, 1d));
 
 		Paint subColor = color(163, 232, 78);
-		Font subHand = Font.font("Chewed Pen BB", FontPosture.ITALIC, 68d);
-		subFormat = new Format(majorFormat, TypeFace.font(subHand, 3d, 1d), TypeFace.color(subColor, 1d),
+		Font subHand = Font.font("Times New Roman", FontPosture.ITALIC, 68d);
+		subFormat = new Format(majorFormat, TypeFace.font(subHand, 2d, 1d), TypeFace.color(subColor, 1d),
 				Frames.frame(subColor, 5d, 1d));
 
 		Paint minorColor = color(240, 255, 30);
-		Font minorFont = Font.font("Chewed Pen BB", FontPosture.ITALIC, 50d);
+		Font minorFont = Font.font("Times New Roman", FontPosture.ITALIC, 50d);
 		minorFormat = new Format(TypeFace.font(minorFont, 1d, 1d), TypeFace.color(minorColor, 1d),
 				Frames.frame(minorColor, 5d, 1d));
 
