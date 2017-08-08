@@ -2,7 +2,6 @@ package org.geepawhill.contentment.actor;
 
 import java.util.HashMap;
 
-import org.geepawhill.contentment.actors.Slide;
 import org.geepawhill.contentment.step.Addable;
 import org.geepawhill.contentment.step.Chord;
 import org.geepawhill.contentment.step.Phrase;

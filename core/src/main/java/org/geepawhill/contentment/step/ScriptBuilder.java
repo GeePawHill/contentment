@@ -2,7 +2,6 @@ package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Actors;
-import org.geepawhill.contentment.actor.Commandable;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.actors.Arrow;
 import org.geepawhill.contentment.actors.Letters;
@@ -82,7 +81,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 		return downcast();
 	}
 
-	public Commandable spot(double x, double y)
+	public Actor spot(double x, double y)
 	{
 		return new Spot(world,x,y);
 	}

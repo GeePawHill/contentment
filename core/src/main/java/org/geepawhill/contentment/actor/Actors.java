@@ -3,11 +3,12 @@ package org.geepawhill.contentment.actor;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.geepawhill.contentment.atom.GroupSource;
 import org.geepawhill.contentment.step.Step;
 
 import javafx.scene.paint.Paint;
 
-public class Actors implements Iterable<Actor>, Commandable
+public class Actors implements Iterable<Actor>, Actor
 {
 	private ArrayList<Actor> items;
 
@@ -60,7 +61,11 @@ public class Actors implements Iterable<Actor>, Commandable
 	public void add(Actor... actors)
 	{
 		for(Actor actor : actors) items.add(actor);
-		
+	}
+	
+	public GroupSource groupSource()
+	{
+		throw new RuntimeException("Parties have no groupSource().");
 	}
 
 	@Override
@@ -71,7 +76,7 @@ public class Actors implements Iterable<Actor>, Commandable
 	}
 
 	@Override
-	public Commandable sketch()
+	public Actor sketch()
 	{
 		for(Actor actor : this)
 		{
@@ -81,20 +86,20 @@ public class Actors implements Iterable<Actor>, Commandable
 	}
 
 	@Override
-	public Commandable called(String name)
+	public Actor called(String name)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Commandable in(String name)
+	public Actor in(String name)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Commandable reColor(Paint paint)
+	public Actor reColor(Paint paint)
 	{
 		for(Actor actor : this)
 		{
@@ -104,7 +109,7 @@ public class Actors implements Iterable<Actor>, Commandable
 		
 	}
 	
-	public Commandable fadeDown()
+	public Actor fadeDown()
 	{
 		for(Actor actor : this)
 		{
@@ -114,7 +119,7 @@ public class Actors implements Iterable<Actor>, Commandable
 		
 	}
 	
-	public Commandable fadeOut()
+	public Actor fadeOut()
 	{
 		for(Actor actor : this)
 		{
@@ -126,7 +131,7 @@ public class Actors implements Iterable<Actor>, Commandable
 
 
 	@Override
-	public Commandable appear()
+	public Actor appear()
 	{
 		for(Actor actor : this)
 		{
@@ -136,7 +141,7 @@ public class Actors implements Iterable<Actor>, Commandable
 	}
 
 	@Override
-	public Commandable disappear()
+	public Actor disappear()
 	{
 		for(Actor actor : this)
 		{
@@ -146,7 +151,7 @@ public class Actors implements Iterable<Actor>, Commandable
 	}
 
 	@Override
-	public Commandable fadeUp()
+	public Actor fadeUp()
 	{
 		for(Actor actor : this)
 		{
@@ -156,7 +161,7 @@ public class Actors implements Iterable<Actor>, Commandable
 	}
 
 	@Override
-	public Commandable fadeIn()
+	public Actor fadeIn()
 	{
 		for(Actor actor : this)
 		{
