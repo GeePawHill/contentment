@@ -85,8 +85,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 	{
 		script = new Script(new MediaRhythm(new File("/faceoverPositionTrial.mp4")));
 		script.add(new Keyframe(0, opening()));
-		script.add(new Keyframe(5, stack()));
-		script.add(new Keyframe(50, special()));
+		script.add(new Keyframe(58, special()));
 		script.add(new Keyframe(96, indirectCall()));
 		script.add(new Keyframe(140, dependencies()));
 		script.add(new Keyframe(218, noDependencies()));
@@ -104,12 +103,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 	private Step opening()
 	{
 		cue(0).slide().enter().head("Microtesting Exceptions");
-		cue(3).slide().sub("A GeePaw Quickie");
-		return endBuild();
-	}
-	
-	private Step stack()
-	{
+		slide().sub("A GeePaw Quickie");
 		cue(5);
 		stroke(stackGrid.southLine(0, STACK_ROWS - 1)).format(stackFormat).in("stackLines").sketch();
 		stroke(stackGrid.westLine()).format(stackFormat).in("stackLines").sketch();
@@ -120,7 +114,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		
 		slide().head("The Household Program");
 		cue(14).letters("main()").at(stackTextPosition(0)).format(largeCodeFormat).in("stackText").sketch();
-		cue(24).letters("doChores()").at(stackTextPosition(1)).format(largeCodeFormat).in("remainder").sketch();
+		cue(22).letters("doChores()").at(stackTextPosition(1)).format(largeCodeFormat).in("remainder").sketch();
 		cue(29).letters("clean()").at(stackTextPosition(2)).format(largeCodeFormat).in("stackText").sketch();
 		cue(33).letters("takeOutTrash()").at(stackTextPosition(3)).format(largeCodeFormat).in("stackText").sketch();
 		cue(44).letters("replaceTrashBag()").at(stackTextPosition(4)).format(largeCodeFormat).in("stackText").sketch();
@@ -132,7 +126,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 	private Step special()
 	{
 		buildPhrase();
-		cue(50).party("remainder").reColor(Color.RED);
+		cue(60).party("remainder").reColor(Color.RED);
 
 		cue(55).letters("Thrower").at(new TopRight(leftCommentTextPoint(5))).format(commentFormat).called("thrower").sketch();
 		cue(57).letters("Catcher").at(new TopRight(leftCommentTextPoint(1))).format(commentFormat).called("catcher").sketch();
