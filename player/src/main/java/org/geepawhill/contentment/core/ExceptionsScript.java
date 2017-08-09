@@ -88,15 +88,16 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		script.add(new Keyframe(58, special()));
 		script.add(new Keyframe(111, indirectCall()));
 		script.add(new Keyframe(160, dependencies()));
-		script.add(new Keyframe(218, noDependencies()));
-		script.add(new Keyframe(280, whatToTest()));
-		script.add(new Keyframe(300, testingTheThrower()));
-		script.add(new Keyframe(359, actualThrowerTest()));
-		script.add(new Keyframe(402, testingTheCatcher()));
-		script.add(new Keyframe(457, complexCatchClause()));
-		script.add(new Keyframe(478, finallyClause()));
-		script.add(new Keyframe(527, complexFinallyClause()));
-		script.add(new Keyframe(540, exceptionsAreEasy()));
+		script.add(new Keyframe(184, whatToTest()));
+		script.add(new Keyframe(214, simplestCase()));
+		script.add(new Keyframe(257, testingTheCatcher()));
+		script.add(new Keyframe(282, stackDistance()));
+		script.add(new Keyframe(320, playingFair()));
+		script.add(new Keyframe(353, cheating()));
+		script.add(new Keyframe(389, extractAndOverride()));
+		script.add(new Keyframe(416, theTestableCatcher()));
+		script.add(new Keyframe(475, notReallyCheating()));
+		script.add(new Keyframe(490, outro()));
 		return script;
 	}
 	
@@ -179,187 +180,119 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 	private Step dependencies()
 	{
 		buildPhrase();
-		cue(140).wipe();
+		wipe();
 		slide().enter();
-		slide().head("Dependencies");
-		cue(146).letters("Thrower").withOval().at(new Centered(1000d,200d)).format(commentFormat).sketch().called("thrower");
-		letters("Catcher").withOval().at(new Centered(1500d, 200d)).format(commentFormat).sketch().called("catcher");
-		spot(1000,850).appear().in("allButOvals").called("throwerSpot");
-		spot(1500,850).appear().in("allButOvals").called("catcherSpot");
-		connector().from(actor("thrower").groupSource(),false).to(actor("throwerSpot").groupSource(), false).format(commentFormat).sketch().in("allButOvals");
-		connector().from(actor("catcher").groupSource(),false).to(actor("catcherSpot").groupSource(),false).format(commentFormat).sketch().in("allButOvals");
-		
-		cue(153).letters("Runtime").at(new Centered(new Point(1250d, 220d))).format(commentFormat).sketch().in("allButOvals");
+		slide().head("Indirect Connection");
+		cue(161).letters("Thrower").withOval().at(new Centered(1000d,300d)).format(commentFormat).sketch().called("thrower");
+		letters("Catcher").withOval().at(new Centered(1500d, 300d)).format(commentFormat).sketch().called("catcher");
+		connector().from(actor("catcher").groupSource(),true).to(actor("thrower").groupSource(), true).format(commentFormat).sketch().in("allButOvals").called("knows");
+		letters("knows?").at(new AboveCenter(actor("knows").groupSource())).format(knowsFormat).sketch().in("allButOvals");
+		cue(169).actor(new Cross(world, actor("knows").groupSource(), 125d, 100d, new Point(0d, -10d))).sketch().in("allButOvals");
 
-		cue(160);
-		knowLine(350d, false);
 
-		cue(166).actor(new Cross(world, actor("arrow").groupSource(), 125d, 100d, new Point(0d, -10d))).sketch().in("allButOvals");
+		cue(171).letters("BagNotFound").withOval().at(new Centered(1250d, 590d)).format(commentFormat).sketch().called("lidNotFound");
 
-		cue(172);
-		knowLine(475d, true);
+		connector().from(actor("thrower").groupSource(), false).to(actor("lidNotFound").groupSource(), true).format(commentFormat).sketch().called("first");
+		connector().from(actor("catcher").groupSource(), false).to(actor("lidNotFound").groupSource(), true).format(commentFormat).sketch().called("second");
 
-		cue(176).actor(new Cross(world, actor("arrow").groupSource(), 125d, 100d, new Point(0d, -10d))).sketch().in("allButOvals");
-
-		cue(190).letters("Compile Time").at(new Centered(new Point(1250d, 550d))).format(commentFormat).sketch().in("allButOvals");
-
-		cue(194);
-		knowLine(680d, false);
-		
-		cue(202).actor(new Cross(world, actor("arrow").groupSource(), 125d, 100d, new Point(0d, -10d))).sketch().in("allButOvals");
-
-		cue(207);
-		knowLine(800d, true);
-
-		cue(212).actor(new Cross(world, actor("arrow").groupSource(), 125d, 100d, new Point(0d, -10d))).sketch().in("allButOvals");
-
-		return endBuild();
-	}
-
-	private Step noDependencies()
-	{
-		buildPhrase();
-		cue(218).wipe().slide().enter();
-		slide().head("No Dependencies");
-		slide().sub("very different situation");
-
-		cue(227).slide().minor("no direct call");
-		slide().minor("so neither side knows the other");
-
-		cue(233).letters("Thrower").withOval().at(new Centered(1000d,420d)).format(commentFormat).sketch().called("thrower");
-		letters("Catcher").withOval().at(new Centered(1500d, 420d)).format(commentFormat).sketch().called("catcher");
-
-		cue(240).letters("LidNotFound").withOval().at(new Centered(1250d, 590d)).format(commentFormat).sketch().called("lidNotFound");
-
-		connector().from(actor("thrower").groupSource(), false).to(actor("lidNotFound").groupSource(), true).format(commentFormat).sketch();
-		connector().from(actor("catcher").groupSource(), false).to(actor("lidNotFound").groupSource(), true).format(commentFormat).sketch();
-
-		slide().minor("").minor("").minor("").minor("").minor("");
-		
-		cue(247).slide().minor("shared dependency irrelevant");
-
-		cue(252).wipe().slide().enter();
-		cue(252).slide().head("Easier To Test");
-		cue(263).slide().sub("four nopes = one yep?");
-		cue(268).slide().minor("test the thrower by itself");
-		slide().minor("test the catcher by itself");
-
-		cue(274).slide().lead("This Is Far Easier");
 		return endBuild();
 	}
 	
 	public Step whatToTest()
 	{
 		buildPhrase();
-		cue(280).wipe().slide().enter();
-		slide().head("What Do We Test?");
-		cue(284).slide().sub("five cases");
-		cue(288).slide().minor("each case asks a question");
-		slide().minor("what happens when we ... ?");
-		cue(295).slide().minor("(how to think of all microtests)");
+		wipe().slide().enter().head("What Could Go Wrong?");
+		letters("Thrower").withOval().at(new Centered(1000d,300d)).format(commentFormat).sketch().called("thrower");
+		letters("1. Notice the fail condition").at(new Centered(1000,400)).sketch();
+		letters("2. Construct the exception").at(new Centered(1000,500)).sketch();
+		letters("3. throw the exception").at(new Centered(1000,600)).sketch();
 		return endBuild();
 	}
 
-	public Step testingTheThrower()
+	public Step simplestCase()
 	{
 		buildPhrase();
-		cue(300).wipe().slide().enter();
-		slide().head("Testing The Thrower");
-		letters("Thrower").withOval().at(new Centered(1250d, 210d)).format(commentFormat).sketch();
-		cue(302).slide().lead(" ").minor("");
-		slide().sub("throws under right condition?");
-		cue(304).slide().minor("don't throw if the lid's right there");
-		cue(309).slide().minor("don't throw if something else is wrong");
-		cue(315).slide().minor("always & only throw when lid's not found");
-		cue(324).slide().sub("throws the right thing?");
-		cue(328).slide().minor("must throw right exception");
-		cue(340).slide().minor("must build it correctly");
-		cue(346).slide().minor("use an exception constructor for that");
-		return endBuild();
-	}
-	
-	public Step actualThrowerTest()
-	{
-		buildPhrase();
-		cue(359).wipe().slide().enter();
-		slide().head("Two Questions, One Test");
-		cue(362).slide().sub("set up the throw condition");
-		cue(364).slide().minor("remove lids programmatically");
-		cue(370).slide().sub("call the thrower");
-		slide().minor("call openCan()");
-		cue(374).slide().sub("catch the exception");
-		slide().minor("test catches LidNotFound");
-		slide().minor("maybe inspect it");
-		cue(382).slide().sub("non-throwing?");
-		cue(385).slide().minor("write those first");
+		wipe().slide().enter();
+		slide().head("Forcing The Throw");
+//		letters("Thrower").withOval().at(new Centered(1250d, 210d)).format(commentFormat).sketch();
+//		cue(302).slide().lead(" ").minor("");
+//		slide().sub("throws under right condition?");
+//		cue(304).slide().minor("don't throw if the lid's right there");
+//		cue(309).slide().minor("don't throw if something else is wrong");
+//		cue(315).slide().minor("always & only throw when lid's not found");
+//		cue(324).slide().sub("throws the right thing?");
+//		cue(328).slide().minor("must throw right exception");
+//		cue(340).slide().minor("must build it correctly");
+//		cue(346).slide().minor("use an exception constructor for that");
 		return endBuild();
 	}
 	
 	public Step testingTheCatcher()
 	{
 		buildPhrase();
-		cue(402).wipe().slide().enter();
+		wipe().slide().enter();
 		slide().head("Testing The Catcher");
-		letters("Catcher").withOval().at(new Centered(1250d, 210d)).format(commentFormat).sketch();
-		cue(410).slide().lead(" ").minor(" ");
-		slide().sub("does it really catch?");
-		cue(413).slide().minor("set up throw");
-		slide().minor("call doChores()");
-		cue(419).slide().minor("test completes? doChores() caught it");
-		cue(424).slide().sub("does it do something about it?");
-		cue(435).slide().minor("supposed to dial home");
-		cue(445).slide().minor("tell us the missing lid");
+//		letters("Catcher").withOval().at(new Centered(1250d, 210d)).format(commentFormat).sketch();
+//		cue(410).slide().lead(" ").minor(" ");
+//		slide().sub("does it really catch?");
+//		cue(413).slide().minor("set up throw");
+//		slide().minor("call doChores()");
+//		cue(419).slide().minor("test completes? doChores() caught it");
+//		cue(424).slide().sub("does it do something about it?");
+//		cue(435).slide().minor("supposed to dial home");
+//		cue(445).slide().minor("tell us the missing lid");
 
-		return endBuild();
-	}
-
-	public Step complexCatchClause()
-	{
-		buildPhrase();
-		cue(457).wipe().slide().enter();
-		slide().head("Testing A Complex Catch");
-
-		String beforeText = "try { ... }\n" + "catch(LidNotFound lidNotFound) {\n" + "    // complex catch\n" + "    }";
-		CodeBlock beforeCode = new CodeBlock(world, beforeText, codeFormat, new TopRight(1550,260d));
-		actor(beforeCode).appear();
-
-		cue(460).letters("extract this").at(new CenterRight(1000d, 340d)).format(commentFormat).sketch().called("extract");
-		spot(1150, 335).appear().called("spot");
-		connector().from(actor("extract").groupSource(),false).to(actor("spot").groupSource(), true).format(commentFormat).sketch();
-
-		cue(464).letters("to this").at(new CenterRight(1000d, 550d)).format(commentFormat).sketch();
-
-		String afterText1 = "try { ... }\n" + "catch(LidNotFound lidNotFound) {\n" + "    handle(lidNotFound);\n" + "    }";
-		CodeBlock afterCode = new CodeBlock(world, afterText1, codeFormat, new TopRight(1550d,460d));
-		actor(afterCode).appear();
-
-		String afterText2 = "public void handle(LidNotFound lidNotFound) {\n" + "    // complex catch\n" + "    }";
-		CodeBlock afterCode2 = new CodeBlock(world,afterText2, codeFormat, new TopRight(1550d,640d));
-		actor(afterCode2).appear();
-
-		cue(468).letters("and test the handler here!").at(new BelowCenter(afterCode2.groupSource())).format(commentFormat).sketch();
-		return endBuild();
-	}
-
-	public Step finallyClause()
-	{
-		buildPhrase();
-		cue(478).wipe().slide().enter();
-		slide().head("Does The Finally Work?");
-		cue(487).slide().sub("finally clauses clean things up");
-		slide().minor("when it throws...");
-		slide().minor("when it doesn't throw");
-		cue(492).slide().sub("the bag has been allocated");
-		cue(498).slide().minor("okay? de-allocate it");
-		cue(504).slide().minor("uh-oh? de-allocate it");
 		return endBuild();
 	}
 	
-	public Step complexFinallyClause()
+	public Step stackDistance()
 	{
 		buildPhrase();
-		cue(527).wipe().slide().enter();
-		slide().head("Testing A Complex Finally");
+		wipe().slide().enter().head("A Difficult Case");
+		return endBuild();
+	}
+
+	public Step playingFair()
+	{
+		buildPhrase();
+		wipe().slide().enter();
+		slide().head("Playing Fair");
+
+//		String beforeText = "try { ... }\n" + "catch(LidNotFound lidNotFound) {\n" + "    // complex catch\n" + "    }";
+//		CodeBlock beforeCode = new CodeBlock(world, beforeText, codeFormat, new TopRight(1550,260d));
+//		actor(beforeCode).appear();
+//
+//		cue(460).letters("extract this").at(new CenterRight(1000d, 340d)).format(commentFormat).sketch().called("extract");
+//		spot(1150, 335).appear().called("spot");
+//		connector().from(actor("extract").groupSource(),false).to(actor("spot").groupSource(), true).format(commentFormat).sketch();
+//
+//		cue(464).letters("to this").at(new CenterRight(1000d, 550d)).format(commentFormat).sketch();
+//
+//		String afterText1 = "try { ... }\n" + "catch(LidNotFound lidNotFound) {\n" + "    handle(lidNotFound);\n" + "    }";
+//		CodeBlock afterCode = new CodeBlock(world, afterText1, codeFormat, new TopRight(1550d,460d));
+//		actor(afterCode).appear();
+//
+//		String afterText2 = "public void handle(LidNotFound lidNotFound) {\n" + "    // complex catch\n" + "    }";
+//		CodeBlock afterCode2 = new CodeBlock(world,afterText2, codeFormat, new TopRight(1550d,640d));
+//		actor(afterCode2).appear();
+//
+//		cue(468).letters("and test the handler here!").at(new BelowCenter(afterCode2.groupSource())).format(commentFormat).sketch();
+		return endBuild();
+	}
+
+	public Step cheating()
+	{
+		buildPhrase();
+		wipe().slide().enter();
+		slide().head("How Does Cheating Work?");
+		return endBuild();
+	}
+	
+	public Step extractAndOverride()
+	{
+		buildPhrase();
+		wipe().slide().enter();
+		slide().head("Extract & Override");
 
 		String beforeText = "finally {\n" + "    // complex finally\n" + "    }";
 		CodeBlock beforeCode = new CodeBlock(world, beforeText, codeFormat, new TopRight(1550,260d));
@@ -384,20 +317,27 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		return endBuild();
 	}
 
-	public Step exceptionsAreEasy()
+	public Step theTestableCatcher()
 	{
 		buildPhrase();
-		cue(540).wipe().slide().enter();
-		slide().head("Microtesting Exceptions Is Easy");
-		slide().sub("thrower test questions");
-		slide().minor("throws on the right condition?");
-		slide().minor("throws the right thing?");
-		slide().sub("catcher test questions");
-		slide().minor("catches the right thing?");
-		slide().minor("catch handler right?");
-		slide().minor("finally handler right?");
-		cue(550).slide().sub("remember the judgment premise!");
-		cue(574).letters("Bad Pun Alert!").at(new Centered(new Point(380d, 300d))).format(jokeFormat).appear();
+		wipe().slide().enter();
+		slide().head("The Testable Catcher");
+		return endBuild();
+	}
+	
+	public Step notReallyCheating()
+	{
+		buildPhrase();
+		wipe().slide().enter();
+		slide().head("Not Really Cheating");
+		return endBuild();
+	}
+	
+	public Step outro()
+	{
+		buildPhrase();
+		wipe().slide().enter();
+		slide().head("Outtro");
 		return endBuild();
 	}
 
