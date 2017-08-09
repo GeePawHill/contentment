@@ -1,47 +1,43 @@
 package org.geepawhill.contentment.actor;
 
 import java.util.HashMap;
+import java.util.Stack;
 
 import org.geepawhill.contentment.step.Addable;
-import org.geepawhill.contentment.step.Chord;
-import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.step.Step;
 
 public class ScriptWorld
 {
-	private Addable working;
+	private Stack<Addable> working;
 	private final HashMap<String,Actor> namedActors;
 	private final HashMap<String,Party> namedParties;
 
 	public ScriptWorld()
 	{
-		working = new Phrase();
+		working = new Stack<>();
 		namedActors = new HashMap<>();
 		namedParties = new HashMap<>();
 	}
-
+	
 	public void add(Step step)
 	{
-		working.add(step);
+		getWorking().add(step);
 	}
 	
-	public Addable buildPhrase()
+	public void push(Addable addable)
 	{
-		working = new Phrase();
-		return working;
-	}
-
-	public Addable buildChord()
-	{
-		working = new Chord();
-		return working;
+		working.push(addable);
 	}
 	
-	public Addable endPhrase()
+	public Addable pop()
 	{
-		Addable temp = working;
-		working=new Phrase();
-		return temp;
+		return working.pop();
+	}
+	
+	public void popAndAppend()
+	{
+		Addable popped = pop();
+		add(popped);
 	}
 	
 	public Actor actor(String actor)
@@ -57,7 +53,7 @@ public class ScriptWorld
 
 	public void addToParty(String name, Actor actor)
 	{
-		Party actors = namedParties.getOrDefault(name, new Party());
+		Party actors = namedParties.getOrDefault(name, new Party(this));
 		actors.add(actor);
 		namedParties.put(name, actors);
 	}
@@ -70,6 +66,11 @@ public class ScriptWorld
 
 	public void dump()
 	{
-		working.dump();
+		getWorking().dump();
+	}
+
+	private Addable getWorking()
+	{
+		return working.peek();
 	}
 }

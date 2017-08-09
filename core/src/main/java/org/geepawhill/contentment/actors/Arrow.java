@@ -165,6 +165,7 @@ public class Arrow extends GenericActor
 		{
 			sequence.add(Timing.weighted(.1d), step);
 		}
+		world.add(sequence);
 		return this;
 	}
 

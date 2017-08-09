@@ -3,15 +3,18 @@ package org.geepawhill.contentment.actor;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.atom.GroupSource;
+import org.geepawhill.contentment.step.Chord;
 
 import javafx.scene.paint.Paint;
 
 public class Party implements Actor
 {
 	private ArrayList<Actor> items;
+	private ScriptWorld world;
 
-	public Party()
+	public Party(ScriptWorld world)
 	{
+		this.world = world;
 		items = new ArrayList<>();
 	}
 
@@ -79,15 +82,15 @@ public class Party implements Actor
 	@Override
 	public Actor called(String name)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		world.callActor(name, this);
+		return this;
 	}
 
 	@Override
 	public Actor in(String name)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		world.addToParty(name, this);
+		return this;
 	}
 
 	public Actor reColor(Paint paint)
@@ -102,24 +105,26 @@ public class Party implements Actor
 	
 	public Actor fadeDown()
 	{
+		world.push(new Chord());
 		for(Actor actor : items)
 		{
 			actor.fadeDown();
 		}
+		world.popAndAppend();
 		return this;
 		
 	}
 	
 	public Actor fadeOut()
 	{
+		world.push(new Chord());
 		for(Actor actor : items)
 		{
 			actor.fadeOut();
 		}
+		world.popAndAppend();
 		return this;
-		
 	}
-
 
 	@Override
 	public Actor appear()
@@ -144,20 +149,24 @@ public class Party implements Actor
 	@Override
 	public Actor fadeUp()
 	{
+		world.push(new Chord());
 		for(Actor actor : items)
 		{
 			actor.fadeUp();
 		}
+		world.popAndAppend();
 		return this;
 	}
 
 	@Override
 	public Actor fadeIn()
 	{
+		world.push(new Chord());
 		for(Actor actor : items)
 		{
 			actor.fadeIn();
 		}
+		world.popAndAppend();
 		return this;
 	}
 }

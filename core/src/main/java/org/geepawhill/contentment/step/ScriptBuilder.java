@@ -35,14 +35,14 @@ public abstract class ScriptBuilder<SUBCLASS>
 		world.add(step);
 	}
 	
-	public Addable buildPhrase()
+	public void buildPhrase()
 	{
-		return world.buildPhrase();
+		world.push(new Phrase());
 	}
 	
 	public Addable endBuild()
 	{
-		return world.endPhrase();
+		return world.pop();
 	}
 	
 	public Actor actor(Actor actor)

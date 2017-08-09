@@ -69,7 +69,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		Paint codeColor = Color.WHITE;
 		largeCodeFormat = new Format(TypeFace.font(new Font("Consolas", 60d), 2d, 1d), TypeFace.color(codeColor, 1d));
 
-		this.stackGrid = new Grid(1, STACK_ROWS, new PointPair(900d, 250d, 1480d, 850d));
+		this.stackGrid = new Grid(1, STACK_ROWS, new PointPair(900d, 230d, 1480d, 820d));
 
 		Font codeFont = new Font("Consolas", 25d);
 
@@ -86,8 +86,8 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		script = new Script(new MediaRhythm(new File("/faceoverPositionTrial.mp4")));
 		script.add(new Keyframe(0, opening()));
 		script.add(new Keyframe(58, special()));
-		script.add(new Keyframe(96, indirectCall()));
-		script.add(new Keyframe(140, dependencies()));
+		script.add(new Keyframe(111, indirectCall()));
+		script.add(new Keyframe(160, dependencies()));
 		script.add(new Keyframe(218, noDependencies()));
 		script.add(new Keyframe(280, whatToTest()));
 		script.add(new Keyframe(300, testingTheThrower()));
@@ -102,23 +102,28 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 	
 	private Step opening()
 	{
+		buildPhrase();
 		cue(0).slide().enter().head("Microtesting Exceptions");
 		slide().sub("A GeePaw Quickie");
 		cue(5);
-		stroke(stackGrid.southLine(0, STACK_ROWS - 1)).format(stackFormat).in("stackLines").sketch();
-		stroke(stackGrid.westLine()).format(stackFormat).in("stackLines").sketch();
+		slide().head("The Household Program");
+		cue(7);
+		stroke(stackGrid.southLine(0, STACK_ROWS - 1)).format(stackFormat).in("stackLines");
+		stroke(stackGrid.westLine()).format(stackFormat).in("stackLines");
 		for (int i = stackGrid.rows()-1; i >=0; i--)
 		{
-			stroke(stackGrid.area(0, i).northLine()).format(stackFormat).in("stackLines").sketch();
+			stroke(stackGrid.area(0, i).northLine()).format(stackFormat).in("stackLines");
 		}
+		party("stackLines").fadeIn();
+		party("stackLines").in("stackTextAndLines");
 		
-		slide().head("The Household Program");
 		cue(14).letters("main()").at(stackTextPosition(0)).format(largeCodeFormat).in("stackText").sketch();
 		cue(22).letters("doChores()").at(stackTextPosition(1)).format(largeCodeFormat).in("remainder").sketch();
 		cue(29).letters("clean()").at(stackTextPosition(2)).format(largeCodeFormat).in("stackText").sketch();
 		cue(33).letters("takeOutTrash()").at(stackTextPosition(3)).format(largeCodeFormat).in("stackText").sketch();
 		cue(44).letters("replaceTrashBag()").at(stackTextPosition(4)).format(largeCodeFormat).in("stackText").sketch();
 		cue(50).letters("getBag()").at(stackTextPosition(5)).format(largeCodeFormat).in("remainder").sketch();
+		party("stackText").in("stackTextAndLines");
 		
 		return endBuild();
 	}
@@ -128,46 +133,45 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		buildPhrase();
 		cue(60).party("remainder").reColor(Color.RED);
 
-		cue(55).letters("Thrower").at(new TopRight(leftCommentTextPoint(5))).format(commentFormat).called("thrower").sketch();
-		cue(57).letters("Catcher").at(new TopRight(leftCommentTextPoint(1))).format(commentFormat).called("catcher").sketch();
+		cue(64).letters("Thrower").at(new TopRight(leftCommentTextPoint(5))).format(commentFormat).called("thrower").sketch();
 
-		cue(60).party("stackText").fadeDown();
-		party("stackLines").fadeDown();
+		party("stackTextAndLines").fadeDown();
 
-		cue(64).letters("throws LidNotFound").at(new TopLeft(stackTextPoint(5).add(new Point(0,50)))).format(lightComment).in("colorText").sketch();
-		cue(72).letters("catches all exceptions").at(new TopLeft(stackTextPoint(1).add(new Point(0,50)))).format(lightComment).in("colorText").called("catchesAll").sketch();
+		cue(75).letters("throws BagNotFound").at(new TopLeft(stackTextPoint(5).add(new Point(0,50)))).format(lightComment).in("colorText").sketch();
+		cue(85).letters("Catcher").at(new TopRight(leftCommentTextPoint(1))).format(commentFormat).called("catcher").sketch();
+		cue(87).letters("catches all exceptions").at(new TopLeft(stackTextPoint(1).add(new Point(0,50)))).format(lightComment).in("colorText").called("catchesAll").sketch();
 
-		cue(82).letters("catches LidNotFound").at(new BelowLeft(actor("catchesAll").groupSource())).format(lightComment).in("colorText").called("catchesLidNotFound").sketch();
+		cue(90).letters("catches BagNotFound").at(new BelowLeft(actor("catchesAll").groupSource())).format(lightComment).in("colorText").called("catchesLidNotFound").sketch();
 
-		cue(86).letters("logs and moves on").at(new BelowLeft(actor("catchesLidNotFound").groupSource())).format(lightComment).in("colorText").sketch();
+		cue(96).letters("logs and moves on").at(new BelowLeft(actor("catchesLidNotFound").groupSource())).format(lightComment).in("colorText").sketch();
 		return endBuild();
-
 	}
+	
 	private Step indirectCall()
 	{
 		buildPhrase();
-		cue(96).slide().head("How Throw & Catch Work");
+		cue(111).slide().head("How Throw & Catch Work");
 		party("colorText").fadeOut();
 
-		cue(105).connector().from(actor("thrower").groupSource(),false).to(actor("catcher").groupSource(), true).format(commentFormat).sketch().called("calls");
-		letters("call").at(new Centered(actor("calls").groupSource())).format(commentFormat).sketch();
+		cue(119).connector().from(actor("thrower").groupSource(),false).to(actor("catcher").groupSource(), true).format(commentFormat).sketch().called("calls");
+		letters("direct\n  call?").at(new Centered(actor("calls").groupSource())).format(commentFormat).sketch();
 
-		cue(111).actor(new Cross(world,actor("calls"),150d)).sketch();
+		cue(121).actor(new Cross(world,actor("calls"),150d)).sketch();
+		party("remainder").disappear();
 		party("stackLines").fadeUp();
-		party("remainder").fadeOut();
 		
-		cue(115).letters("throws X").at(stackTextPosition(5)).format(commentFormat).sketch();
+		cue(126).letters("throws X").at(stackTextPosition(5)).format(commentFormat).sketch();
 		
-		cue(120).letters("catches X?").at(stackTextPosition(4)).format(commentFormat).sketch().called("line");
+		cue(132).letters("catches X?").at(stackTextPosition(4)).format(commentFormat).sketch().called("line");
 		letters("no, keep looking...").at(new RightOf(actor("line").groupSource(),20d)).format(new Format(commentFormat, TypeFace.color(Color.RED, 1d))).sketch();
 		
-		cue(124).letters("catches X?").at(stackTextPosition(3)).format(commentFormat).sketch().called("line");
+		cue(137).letters("catches X?").at(stackTextPosition(3)).format(commentFormat).sketch().called("line");
 		letters("no, keep looking...").at(new RightOf(actor("line").groupSource(),20d)).format(new Format(commentFormat, TypeFace.color(Color.RED, 1d))).sketch();
 		
-		cue(128).letters("catches X?").at(stackTextPosition(2)).format(commentFormat).sketch().called("line");
+		cue(141).letters("catches X?").at(stackTextPosition(2)).format(commentFormat).sketch().called("line");
 		letters("no, keep looking...").at(new RightOf(actor("line").groupSource(),20d)).format(new Format(commentFormat, TypeFace.color(Color.RED, 1d))).sketch();
 		
-		cue(132).letters("catches X?").at(stackTextPosition(1)).format(commentFormat).sketch().called("line");
+		cue(150).letters("catches X?").at(stackTextPosition(1)).format(commentFormat).sketch().called("line");
 		letters("YES! call this one!").at(new RightOf(actor("line").groupSource(),20d)).format(new Format(commentFormat, TypeFace.color(Color.GREEN, 1d))).sketch();
 		return endBuild();
 	}
