@@ -5,12 +5,15 @@ import static org.geepawhill.contentment.utility.JfxUtility.color;
 import java.io.File;
 
 import org.geepawhill.contentment.actors.CodeBlock;
+import org.geepawhill.contentment.actors.Column;
 import org.geepawhill.contentment.actors.Cross;
 import org.geepawhill.contentment.actors.Slide;
+import org.geepawhill.contentment.atom.LettersAtom;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Grid;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.geometry.ViewPort;
 import org.geepawhill.contentment.player.Keyframe;
 import org.geepawhill.contentment.player.Script;
 import org.geepawhill.contentment.position.AboveCenter;
@@ -29,6 +32,8 @@ import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -88,7 +93,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		script.add(new Keyframe(58, special()));
 		script.add(new Keyframe(111, indirectCall()));
 		script.add(new Keyframe(160, dependencies()));
-		script.add(new Keyframe(184, whatToTest()));
+		script.add(new Keyframe(190, whatToTest()));
 		script.add(new Keyframe(214, simplestCase()));
 		script.add(new Keyframe(257, testingTheCatcher()));
 		script.add(new Keyframe(282, stackDistance()));
@@ -204,12 +209,14 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		wipe().slide().enter().head("What Could Go Wrong?");
 		cue(193);
 		letters("Thrower").withOval().at(new Centered(1200d,300d)).format(commentFormat).sketch().called("thrower");
+		Column column = new Column(world,new PointPair(1000,400,ViewPort.WIDTH,ViewPort.HEIGHT),HPos.LEFT,VPos.TOP);
 		cue(196);
-		letters("1. Notice the fail condition").at(new TopLeft(1000,400)).format(commentFormat).sketch();
+		column.enter();
+		column.head(new LettersAtom(column.groupSource(),"1. Notice the fail condition",commentFormat,Position.DEFAULT));
 		cue(199);
-		letters("2. Construct the exception").at(new TopLeft(1000,500)).format(commentFormat).sketch();
+		column.line(new LettersAtom(column.groupSource(),"2. Construct the exception",commentFormat,Position.DEFAULT));
 		cue(202);
-		letters("3. throw the exception").at(new TopLeft(1000,600)).format(commentFormat).sketch();
+		column.line(new LettersAtom(column.groupSource(),"3. throw the exception",commentFormat,Position.DEFAULT));
 		return endBuild();
 	}
 
@@ -218,6 +225,9 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		buildPhrase();
 		wipe().slide().enter();
 		slide().head("Forcing The Throw");
+		
+		
+		
 //		letters("Thrower").withOval().at(new Centered(1250d, 210d)).format(commentFormat).sketch();
 //		cue(302).slide().lead(" ").minor("");
 //		slide().sub("throws under right condition?");
@@ -360,14 +370,6 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		return stackTextPoint(line).add(-40, -10);
 	}
 
-	private void knowLine(double y, boolean leftHead)
-	{
-		spot(1000d, y).appear().called("leftSpot").in("allButOvals");
-		spot(1500d, y).appear().called("rightSpot").in("allButOvals");
-		connector().from(actor("leftSpot").groupSource(),leftHead).to(actor("rightSpot").groupSource(), !leftHead).format(knowsFormat).sketch().called("arrow").in("allButOvals");
-		letters("knows?").at(new AboveCenter(actor("arrow").groupSource())).format(knowsFormat).sketch().in("allButOvals");
-	}
-	
 	public ExceptionsScript downcast()
 	{
 		return this;

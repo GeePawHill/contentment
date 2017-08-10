@@ -75,11 +75,17 @@ public class JfxUtility
 	
 	static public void setTopAlignment(Node node)
 	{
+		setVerticalAlignment(node,VPos.TOP);
+	}
+	
+	static public void setVerticalAlignment(Node node,VPos vpos)
+	{
 		if(node instanceof Text)
 		{
-			((Text)node).setTextOrigin(VPos.TOP);
+			((Text)node).setTextOrigin(vpos);
 		}
 	}
+
 
 	static public Paint color(int r, int g, int b)
 	{
