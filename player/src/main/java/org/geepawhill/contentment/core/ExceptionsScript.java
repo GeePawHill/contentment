@@ -202,10 +202,14 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 	{
 		buildPhrase();
 		wipe().slide().enter().head("What Could Go Wrong?");
-		letters("Thrower").withOval().at(new Centered(1000d,300d)).format(commentFormat).sketch().called("thrower");
-		letters("1. Notice the fail condition").at(new Centered(1000,400)).sketch();
-		letters("2. Construct the exception").at(new Centered(1000,500)).sketch();
-		letters("3. throw the exception").at(new Centered(1000,600)).sketch();
+		cue(193);
+		letters("Thrower").withOval().at(new Centered(1200d,300d)).format(commentFormat).sketch().called("thrower");
+		cue(196);
+		letters("1. Notice the fail condition").at(new TopLeft(1000,400)).format(commentFormat).sketch();
+		cue(199);
+		letters("2. Construct the exception").at(new TopLeft(1000,500)).format(commentFormat).sketch();
+		cue(202);
+		letters("3. throw the exception").at(new TopLeft(1000,600)).format(commentFormat).sketch();
 		return endBuild();
 	}
 
