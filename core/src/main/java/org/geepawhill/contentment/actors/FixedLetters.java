@@ -8,12 +8,14 @@ import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.timing.Timing;
 
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 public class FixedLetters extends GenericActor
 {
 	
 	FixedLettersAtom atom;
+	private Paint assumedColor;
 	
 	public FixedLetters(ScriptWorld world, int columns, int rows)
 	{
@@ -38,6 +40,16 @@ public class FixedLetters extends GenericActor
 	{
 		world.add(new AtomStep(Timing.instant(), atom.say(paint, row, column, text)));
 		return this;
+	}
+	
+	public FixedLetters say(int row,int column,String text)
+	{
+		return say(assumedColor,row,column,text);
+	}
+
+	public void assume(Paint paint)
+	{
+		this.assumedColor = paint;
 	}
 
 

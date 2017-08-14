@@ -226,13 +226,31 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		buildPhrase();
 		wipe().slide().enter();
 		slide().head("Forcing The Throw");
-		FixedLetters code = new FixedLetters(world, 40, 10);
+		FixedLetters code = new FixedLetters(world, 52, 14);
 		code.at(new TopRight(1550,300)).appear();
-		code.say(Color.WHITE, 0, 10, "Hi mom!");
-		code.say(Color.RED, 1, 0, "You, too, dad!");
-		code.say(Color.BLUE, 5, 5, "and Aunt Elsie.");
-		code.say(Color.BLUE, 9, 0, "and lily.");
+		code.assume(Color.WHITE);
+		cue(220);
+		code.say(4, 8, "Supplies supplies = new Supplies");
+		cue(230);
+		code.say(5, 8, "supplies.getBag()");
+		cue(238);
+		code.say(2, 4, "TRY");
+		code.say(3, 4, "{");
+		code.say(6, 8, "FAIL \"We should have thrown here.\"");
+		code.say(7, 4, "}");
+
+		cue(240);
+		code.say(0, 0, "TEST throwsOnEmpty()");
+		code.say(1, 0, "{");
+		code.say(12, 0, "}");
 		
+		cue(246);
+		code.say(8, 4, "CATCH( BagNotFound exception )");
+		code.say(9,4, "{");
+		code.say(10, 8, "ASSERT exception.msg EQUALS BagNotFound.MSG");
+		code.say(11, 4, "}");
+		
+	
 		
 //		letters("Thrower").withOval().at(new Centered(1250d, 210d)).format(commentFormat).sketch();
 //		cue(302).slide().lead(" ").minor("");
