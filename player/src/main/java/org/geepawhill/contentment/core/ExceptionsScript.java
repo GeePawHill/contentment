@@ -7,6 +7,7 @@ import java.io.File;
 import org.geepawhill.contentment.actors.CodeBlock;
 import org.geepawhill.contentment.actors.Column;
 import org.geepawhill.contentment.actors.Cross;
+import org.geepawhill.contentment.actors.FixedLetters;
 import org.geepawhill.contentment.actors.Slide;
 import org.geepawhill.contentment.atom.LettersAtom;
 import org.geepawhill.contentment.format.Format;
@@ -225,7 +226,12 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		buildPhrase();
 		wipe().slide().enter();
 		slide().head("Forcing The Throw");
-		
+		FixedLetters code = new FixedLetters(world, 40, 10);
+		code.at(new TopRight(1550,300)).appear();
+		code.say(Color.WHITE, 0, 10, "Hi mom!");
+		code.say(Color.RED, 1, 0, "You, too, dad!");
+		code.say(Color.BLUE, 5, 5, "and Aunt Elsie.");
+		code.say(Color.BLUE, 9, 0, "and lily.");
 		
 		
 //		letters("Thrower").withOval().at(new Centered(1250d, 210d)).format(commentFormat).sketch();
