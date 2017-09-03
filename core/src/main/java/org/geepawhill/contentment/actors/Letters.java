@@ -5,6 +5,7 @@ import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.BezierAtom;
 import org.geepawhill.contentment.atom.LettersAtom;
+import org.geepawhill.contentment.format.Assumptions;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Jiggler;
@@ -100,15 +101,17 @@ public class Letters extends GenericActor implements Actor
 		return this;
 	}
 
-	public Actor format(Format format)
+	public Letters format(Format format)
 	{
 		letters.format(format);
-		if(hasOval)
-		{
-			east.format(format);
-			west.format(format);
-		}
+		east.format(format);
+		west.format(format);
 		return this;
+	}
+
+	public Letters assume()
+	{
+		return format(world.assumptions().format());
 	}
 
 }

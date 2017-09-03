@@ -3,6 +3,7 @@ package org.geepawhill.contentment.actor;
 import java.util.HashMap;
 import java.util.Stack;
 
+import org.geepawhill.contentment.format.Assumptions;
 import org.geepawhill.contentment.step.Addable;
 import org.geepawhill.contentment.step.Step;
 
@@ -11,12 +12,14 @@ public class ScriptWorld
 	private Stack<Addable> working;
 	private final HashMap<String,Actor> namedActors;
 	private final HashMap<String,Party> namedParties;
+	private final Assumptions assumptions;
 
 	public ScriptWorld()
 	{
 		working = new Stack<>();
 		namedActors = new HashMap<>();
 		namedParties = new HashMap<>();
+		assumptions = new Assumptions();
 	}
 	
 	public void add(Step step)
@@ -72,5 +75,10 @@ public class ScriptWorld
 	private Addable getWorking()
 	{
 		return working.peek();
+	}
+
+	public Assumptions assumptions()
+	{
+		return assumptions;
 	}
 }

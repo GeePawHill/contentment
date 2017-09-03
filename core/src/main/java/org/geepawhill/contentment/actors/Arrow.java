@@ -180,4 +180,10 @@ public class Arrow extends GenericActor
 		return this;
 	}
 
+	public Arrow assume()
+	{
+		format(world.assumptions().format());
+		return this;
+	}
+
 }

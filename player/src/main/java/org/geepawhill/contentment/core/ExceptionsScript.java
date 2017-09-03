@@ -121,13 +121,13 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		party("stackLines").fadeIn();
 		party("stackLines").in("stackTextAndLines");
 		
-//		assume().format(largeCodeFormat);
-		cue(14).letters("main()").at(stackTextPosition(0)).format(largeCodeFormat).in("stackText").sketch();
-		cue(22).letters("doChores()").at(stackTextPosition(1)).format(largeCodeFormat).in("remainder").sketch();
-		cue(29).letters("clean()").at(stackTextPosition(2)).format(largeCodeFormat).in("stackText").sketch();
-		cue(33).letters("takeOutTrash()").at(stackTextPosition(3)).format(largeCodeFormat).in("stackText").sketch();
-		cue(44).letters("replaceTrashBag()").at(stackTextPosition(4)).format(largeCodeFormat).in("stackText").sketch();
-		cue(50).letters("getBag()").at(stackTextPosition(5)).format(largeCodeFormat).in("remainder").sketch();
+		assume(largeCodeFormat);
+		cue(14).letters("main()").at(stackTextPosition(0)).in("stackText").sketch();
+		cue(22).letters("doChores()").at(stackTextPosition(1)).in("remainder").sketch();
+		cue(29).letters("clean()").at(stackTextPosition(2)).in("stackText").sketch();
+		cue(33).letters("takeOutTrash()").at(stackTextPosition(3)).in("stackText").sketch();
+		cue(44).letters("replaceTrashBag()").at(stackTextPosition(4)).in("stackText").sketch();
+		cue(50).letters("getBag()").at(stackTextPosition(5)).in("remainder").sketch();
 		party("stackText").in("stackTextAndLines");
 		
 		return endBuild();
@@ -144,11 +144,12 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 
 		cue(75).letters("throws BagNotFound").at(new TopLeft(stackTextPoint(5).add(new Point(0,50)))).format(lightComment).in("colorText").sketch();
 		cue(85).letters("Catcher").at(new TopRight(leftCommentTextPoint(1))).format(commentFormat).called("catcher").sketch();
-		cue(87).letters("catches all exceptions").at(new TopLeft(stackTextPoint(1).add(new Point(0,50)))).format(lightComment).in("colorText").called("catchesAll").sketch();
+		assume(lightComment);
+		cue(87).letters("catches all exceptions").at(new TopLeft(stackTextPoint(1).add(new Point(0,50)))).in("colorText").called("catchesAll").sketch();
 
-		cue(90).letters("catches BagNotFound").at(new BelowLeft(actor("catchesAll").groupSource())).format(lightComment).in("colorText").called("catchesLidNotFound").sketch();
+		cue(90).letters("catches BagNotFound").at(new BelowLeft(actor("catchesAll").groupSource())).in("colorText").called("catchesLidNotFound").sketch();
 
-		cue(96).letters("logs and moves on").at(new BelowLeft(actor("catchesLidNotFound").groupSource())).format(lightComment).in("colorText").sketch();
+		cue(96).letters("logs and moves on").at(new BelowLeft(actor("catchesLidNotFound").groupSource())).in("colorText").sketch();
 		return endBuild();
 	}
 	
@@ -158,26 +159,27 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		cue(111).slide().head("How Throw & Catch Work");
 		party("colorText").fadeOut();
 
-		cue(119).connector().from("thrower",false).to("catcher", true).format(commentFormat).sketch().called("calls");
-		letters("direct\n  call?").at(new Centered(actor("calls").groupSource())).format(commentFormat).sketch();
+		assume(commentFormat);
+		cue(119).connector().from("thrower",false).to("catcher", true).sketch().called("calls");
+		letters("direct\n  call?").at(new Centered(actor("calls").groupSource())).sketch();
 
 		cue(121).actor(new Cross(world,actor("calls"),150d)).sketch();
 		party("remainder").disappear();
 		party("stackLines").fadeUp();
 		
-		cue(126).letters("throws X").at(stackTextPosition(5)).format(commentFormat).sketch();
+		cue(126).letters("throws X").at(stackTextPosition(5)).sketch();
 		
-		cue(132).letters("catches X?").at(stackTextPosition(4)).format(commentFormat).sketch().called("line");
+		cue(132).letters("catches X?").at(stackTextPosition(4)).sketch().called("line");
 		Format redComment = new Format(commentFormat, TypeFace.color(Color.RED, 1d));
 		letters("no, keep looking...").at(new RightOf(actor("line").groupSource(),20d)).format(redComment).sketch();
 		
-		cue(137).letters("catches X?").at(stackTextPosition(3)).format(commentFormat).sketch().called("line");
+		cue(137).letters("catches X?").at(stackTextPosition(3)).sketch().called("line");
 		letters("no, keep looking...").at(new RightOf(actor("line").groupSource(),20d)).format(redComment).sketch();
 		
-		cue(141).letters("catches X?").at(stackTextPosition(2)).format(commentFormat).sketch().called("line");
+		cue(141).letters("catches X?").at(stackTextPosition(2)).sketch().called("line");
 		letters("no, keep looking...").at(new RightOf(actor("line").groupSource(),20d)).format(redComment).sketch();
 		
-		cue(150).letters("catches X?").at(stackTextPosition(1)).format(commentFormat).sketch().called("line");
+		cue(150).letters("catches X?").at(stackTextPosition(1)).sketch().called("line");
 		Format greenComment = new Format(commentFormat, TypeFace.color(Color.GREEN, 1d));
 		letters("YES! call this one!").at(new RightOf(actor("line").groupSource(),20d)).format(greenComment).sketch();
 		return endBuild();
@@ -189,17 +191,18 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		wipe();
 		slide().enter();
 		slide().head("Indirect Connection");
-		cue(161).letters("Thrower").withOval().at(new Centered(1000d,300d)).format(commentFormat).sketch().called("thrower");
-		letters("Catcher").withOval().at(new Centered(1500d, 300d)).format(commentFormat).sketch().called("catcher");
-		connector().from("catcher",true).to("thrower", true).format(commentFormat).sketch().in("allButOvals").called("knows");
+		assume(commentFormat);
+		cue(161).letters("Thrower").withOval().at(new Centered(1000d,300d)).sketch().called("thrower");
+		letters("Catcher").withOval().at(new Centered(1500d, 300d)).sketch().called("catcher");
+		connector().from("catcher",true).to("thrower", true).sketch().in("allButOvals").called("knows");
 		letters("knows?").at(new AboveCenter(actor("knows").groupSource())).format(knowsFormat).sketch().in("allButOvals");
 		cue(169).actor(new Cross(world, actor("knows").groupSource(), 125d, 100d, new Point(0d, -10d))).sketch().in("allButOvals");
 
 
-		cue(171).letters("BagNotFound").withOval().at(new Centered(1250d, 590d)).format(commentFormat).sketch().called("lidNotFound");
+		cue(171).letters("BagNotFound").withOval().at(new Centered(1250d, 590d)).sketch().called("lidNotFound");
 
-		connector().from("thrower", false).to("lidNotFound", true).format(commentFormat).sketch().called("first");
-		connector().from("catcher", false).to("lidNotFound", true).format(commentFormat).sketch().called("second");
+		connector().from("thrower", false).to("lidNotFound", true).sketch().called("first");
+		connector().from("catcher", false).to("lidNotFound", true).sketch().called("second");
 
 		return endBuild();
 	}

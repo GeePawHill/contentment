@@ -8,7 +8,6 @@ import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.timing.Timing;
 
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 public class FixedLetters extends GenericActor

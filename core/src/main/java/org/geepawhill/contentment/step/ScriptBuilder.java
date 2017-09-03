@@ -9,6 +9,7 @@ import org.geepawhill.contentment.actors.Spot;
 import org.geepawhill.contentment.actors.Stroke;
 import org.geepawhill.contentment.atom.ClearAtom;
 import org.geepawhill.contentment.atom.MarkAtom;
+import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.timing.Timing;
 
@@ -57,7 +58,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 	
 	public Letters letters(String source)
 	{
-		return new Letters(world,source);
+		return new Letters(world,source).assume();
 	}
 	
 	public Party party(String name)
@@ -72,7 +73,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 
 	public Arrow connector()
 	{
-		return new Arrow(world);
+		return new Arrow(world).assume();
 	}
 	
 	public SUBCLASS wipe()
@@ -84,6 +85,12 @@ public abstract class ScriptBuilder<SUBCLASS>
 	public Actor spot(double x, double y)
 	{
 		return new Spot(world,x,y);
+	}
+	
+	public SUBCLASS assume(Format format)
+	{
+		world.assumptions().assume(format);
+		return downcast();
 	}
 	
 }
