@@ -72,12 +72,23 @@ public class Arrow extends GenericActor
 		this.nickname = Names.make(getClass());
 	}
 	
+	public Arrow from(String actorName,boolean withHead)
+	{
+		return from(world.actor(actorName).groupSource(),withHead);
+	}
+	
 	public Arrow from(GroupSource from,boolean withHead)
 	{
 		this.from = from;
 		this.pointAtFrom=withHead;
 		return this;
 	}
+	
+	public Arrow to(String actorName, boolean withHead)
+	{
+		return to(world.actor(actorName).groupSource(),withHead);
+	}
+
 	
 	public Arrow to(GroupSource to, boolean withHead)
 	{

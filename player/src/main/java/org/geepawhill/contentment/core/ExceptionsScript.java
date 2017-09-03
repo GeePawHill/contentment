@@ -91,7 +91,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 	{
 		script = new Script(new MediaRhythm(new File("/faceoverPositionTrial.mp4")));
 		script.add(new Keyframe(0, opening()));
-		script.add(new Keyframe(58, special()));
+		script.add(new Keyframe(59, special()));
 		script.add(new Keyframe(111, indirectCall()));
 		script.add(new Keyframe(160, dependencies()));
 		script.add(new Keyframe(190, whatToTest()));
@@ -160,7 +160,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		cue(111).slide().head("How Throw & Catch Work");
 		party("colorText").fadeOut();
 
-		cue(119).connector().from(actor("thrower").groupSource(),false).to(actor("catcher").groupSource(), true).format(commentFormat).sketch().called("calls");
+		cue(119).connector().from("thrower",false).to("catcher", true).format(commentFormat).sketch().called("calls");
 		letters("direct\n  call?").at(new Centered(actor("calls").groupSource())).format(commentFormat).sketch();
 
 		cue(121).actor(new Cross(world,actor("calls"),150d)).sketch();
@@ -170,16 +170,18 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		cue(126).letters("throws X").at(stackTextPosition(5)).format(commentFormat).sketch();
 		
 		cue(132).letters("catches X?").at(stackTextPosition(4)).format(commentFormat).sketch().called("line");
-		letters("no, keep looking...").at(new RightOf(actor("line").groupSource(),20d)).format(new Format(commentFormat, TypeFace.color(Color.RED, 1d))).sketch();
+		Format redComment = new Format(commentFormat, TypeFace.color(Color.RED, 1d));
+		letters("no, keep looking...").at(new RightOf(actor("line").groupSource(),20d)).format(redComment).sketch();
 		
 		cue(137).letters("catches X?").at(stackTextPosition(3)).format(commentFormat).sketch().called("line");
-		letters("no, keep looking...").at(new RightOf(actor("line").groupSource(),20d)).format(new Format(commentFormat, TypeFace.color(Color.RED, 1d))).sketch();
+		letters("no, keep looking...").at(new RightOf(actor("line").groupSource(),20d)).format(redComment).sketch();
 		
 		cue(141).letters("catches X?").at(stackTextPosition(2)).format(commentFormat).sketch().called("line");
-		letters("no, keep looking...").at(new RightOf(actor("line").groupSource(),20d)).format(new Format(commentFormat, TypeFace.color(Color.RED, 1d))).sketch();
+		letters("no, keep looking...").at(new RightOf(actor("line").groupSource(),20d)).format(redComment).sketch();
 		
 		cue(150).letters("catches X?").at(stackTextPosition(1)).format(commentFormat).sketch().called("line");
-		letters("YES! call this one!").at(new RightOf(actor("line").groupSource(),20d)).format(new Format(commentFormat, TypeFace.color(Color.GREEN, 1d))).sketch();
+		Format greenComment = new Format(commentFormat, TypeFace.color(Color.GREEN, 1d));
+		letters("YES! call this one!").at(new RightOf(actor("line").groupSource(),20d)).format(greenComment).sketch();
 		return endBuild();
 	}
 
@@ -191,15 +193,15 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		slide().head("Indirect Connection");
 		cue(161).letters("Thrower").withOval().at(new Centered(1000d,300d)).format(commentFormat).sketch().called("thrower");
 		letters("Catcher").withOval().at(new Centered(1500d, 300d)).format(commentFormat).sketch().called("catcher");
-		connector().from(actor("catcher").groupSource(),true).to(actor("thrower").groupSource(), true).format(commentFormat).sketch().in("allButOvals").called("knows");
+		connector().from("catcher",true).to("thrower", true).format(commentFormat).sketch().in("allButOvals").called("knows");
 		letters("knows?").at(new AboveCenter(actor("knows").groupSource())).format(knowsFormat).sketch().in("allButOvals");
 		cue(169).actor(new Cross(world, actor("knows").groupSource(), 125d, 100d, new Point(0d, -10d))).sketch().in("allButOvals");
 
 
 		cue(171).letters("BagNotFound").withOval().at(new Centered(1250d, 590d)).format(commentFormat).sketch().called("lidNotFound");
 
-		connector().from(actor("thrower").groupSource(), false).to(actor("lidNotFound").groupSource(), true).format(commentFormat).sketch().called("first");
-		connector().from(actor("catcher").groupSource(), false).to(actor("lidNotFound").groupSource(), true).format(commentFormat).sketch().called("second");
+		connector().from("thrower", false).to("lidNotFound", true).format(commentFormat).sketch().called("first");
+		connector().from("catcher", false).to("lidNotFound", true).format(commentFormat).sketch().called("second");
 
 		return endBuild();
 	}
@@ -249,19 +251,6 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		code.say(9,4, "{");
 		code.say(10, 8, "ASSERT exception.msg EQUALS BagNotFound.MSG");
 		code.say(11, 4, "}");
-		
-	
-		
-//		letters("Thrower").withOval().at(new Centered(1250d, 210d)).format(commentFormat).sketch();
-//		cue(302).slide().lead(" ").minor("");
-//		slide().sub("throws under right condition?");
-//		cue(304).slide().minor("don't throw if the lid's right there");
-//		cue(309).slide().minor("don't throw if something else is wrong");
-//		cue(315).slide().minor("always & only throw when lid's not found");
-//		cue(324).slide().sub("throws the right thing?");
-//		cue(328).slide().minor("must throw right exception");
-//		cue(340).slide().minor("must build it correctly");
-//		cue(346).slide().minor("use an exception constructor for that");
 		return endBuild();
 	}
 	
