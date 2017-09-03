@@ -85,5 +85,5 @@ public abstract class ScriptBuilder<SUBCLASS>
 	{
 		return new Spot(world,x,y);
 	}
-
+	
 }

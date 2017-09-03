@@ -49,7 +49,6 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 	private Format codeFormat;
 	private Format stackFormat;
 	private Format largeCodeFormat;
-	private Format jokeFormat;
 	private Format lightComment;
 
 	private Script script;
@@ -61,8 +60,6 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 	public ExceptionsScript()
 	{
 		slide = new Slide(world);
-		jokeFormat = new Format(TypeFace.font(Font.font("Calibri", FontPosture.ITALIC, 50d), 3d, 1d),
-				TypeFace.color(Color.BLUEVIOLET, Color.BLUEVIOLET, 1d));
 
 		Paint commentColor = color(48, 201, 137);
 		Font commentFont = Font.font("Chewed Pen BB", FontPosture.ITALIC, 50d);
@@ -124,6 +121,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		party("stackLines").fadeIn();
 		party("stackLines").in("stackTextAndLines");
 		
+//		assume().format(largeCodeFormat);
 		cue(14).letters("main()").at(stackTextPosition(0)).format(largeCodeFormat).in("stackText").sketch();
 		cue(22).letters("doChores()").at(stackTextPosition(1)).format(largeCodeFormat).in("remainder").sketch();
 		cue(29).letters("clean()").at(stackTextPosition(2)).format(largeCodeFormat).in("stackText").sketch();
