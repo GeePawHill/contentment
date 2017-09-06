@@ -5,7 +5,6 @@ import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.BezierAtom;
 import org.geepawhill.contentment.atom.LettersAtom;
-import org.geepawhill.contentment.format.Assumptions;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Jiggler;
@@ -13,11 +12,9 @@ import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
-import org.geepawhill.contentment.utility.Names;
 
 public class Letters extends GenericActor implements Actor
 {
-	private final String nickname;
 	private LettersAtom letters;
 	private boolean hasOval;
 
@@ -36,7 +33,6 @@ public class Letters extends GenericActor implements Actor
 	public Letters(ScriptWorld world, String source, Position position, Format format)
 	{
 		super(world);
-		this.nickname = Names.make(getClass());
 		this.northJiggler = new Jiggler(.5d, 6d);
 		this.controlJiggler = new Jiggler(.4d, 30d);
 
