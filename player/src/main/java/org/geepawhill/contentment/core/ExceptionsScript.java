@@ -260,15 +260,21 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		buildPhrase();
 		wipe().slide().enter();
 		slide().head("Testing The Catcher");
-//		letters("Catcher").withOval().at(new Centered(1250d, 210d)).format(commentFormat).sketch();
-//		cue(410).slide().lead(" ").minor(" ");
-//		slide().sub("does it really catch?");
-//		cue(413).slide().minor("set up throw");
-//		slide().minor("call doChores()");
-//		cue(419).slide().minor("test completes? doChores() caught it");
-//		cue(424).slide().sub("does it do something about it?");
-//		cue(435).slide().minor("supposed to dial home");
-//		cue(445).slide().minor("tell us the missing lid");
+		FixedLetters code = new FixedLetters(world, 62, 14);
+		code.at(new TopRight(1550,300)).appear();
+		code.assume(Color.WHITE);
+		cue(266);
+		code.say(2, 4, "Supplies supplies = new Supplies");
+		code.say(3, 4, "Reporter reporter = new TestingReporter");
+		code.say(4, 4, "Household household = new Household( supplies, reporter )");
+		cue(274);
+		code.say(6, 4, "household.doChores()");
+		cue(279);
+		code.say(8, 4, "ASSERT reporter.lastReport IS OutOfBags");
+		code.say(0, 0, "TEST handlesBagNotFound()");
+		code.say(1, 0, "{");
+		code.say(9, 0, "}");
+		
 
 		return endBuild();
 	}

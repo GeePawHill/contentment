@@ -28,7 +28,7 @@ public class FixedLettersAtom implements NodeAtom
 		this.owner = owner;
 		this.columns = columns;
 		this.rows = rows;
-		font = new Font("Consolas",30d);
+		font = new Font("Consolas",26d);
 		Text text = new Text("A");
 		text.setFont(font);
 		PointPair bounds = new PointPair(text);
