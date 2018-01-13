@@ -34,7 +34,7 @@ public class Main extends Application
 			stage.setMaximized(true);
 			stage.setFullScreenExitHint("");
 			stage.show();
-			player.load(new ExceptionsScript().make());
+			player.load(new PremisesScript().make());
 		}
 		catch (Exception e)
 		{
