@@ -13,7 +13,7 @@ thumbs.db
 # generated files
 bin/
 gen/
-.settings/
+**/.settings
 
 # Local configuration file (sdk path, etc)
 local.properties
