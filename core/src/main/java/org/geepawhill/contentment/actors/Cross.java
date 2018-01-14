@@ -30,6 +30,12 @@ public class Cross extends GenericActor
 		this(world,target.groupSource(),size,size, new Point(0,0));
 	}
 	
+	public Cross(ScriptWorld world, GroupSource target, double xsize, double ysize, double xoffset, double yoffset)
+	{
+		this(world,target,xsize,ysize,new Point(xoffset,yoffset));
+	}
+
+	
 	public Cross(ScriptWorld world, GroupSource target, double xsize, double ysize, Point offset)
 	{
 		super(world);
@@ -37,7 +43,7 @@ public class Cross extends GenericActor
 		this.xsize = xsize;
 		this.ysize = ysize;
 		this.offset = offset;
-		Format crossFormat = new Format(Frames.frame(Color.RED, 7d, 8d));
+		Format crossFormat = new Format(Frames.frame(Color.RED, 7d, .7d));
 		leftToRight = new BezierAtom(groupSource(),this::leftToRightBezier, crossFormat);
 		rightToLeft = new BezierAtom(groupSource(),this::rightToLeftBezier, crossFormat);
 	}
@@ -66,6 +72,7 @@ public class Cross extends GenericActor
 		double xadditive = xsize/2d;
 		double yadditive = ysize/2d;
 		Point center = new PointPair(target.get()).center().add(offset);
-		return new Bezier(new Point(center.x+xadditive, center.y-yadditive), new Point(center.x-xadditive, center.y+yadditive));
+		return new Bezier(
+				new Point(center.x+xadditive, center.y-yadditive), new Point(center.x-xadditive, center.y+yadditive));
 	}
 }

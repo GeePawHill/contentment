@@ -25,8 +25,8 @@ public class NodeArrowComputer implements ArrowComputer
 		Point fromCenter = new PointPair(fromNode.get()).center();
 		Point toCenter = new PointPair(toNode.get()).center();
 		PointPair startLine = new PointPair(fromCenter,toCenter);
-		PointPair fromGrown = new PointPair(fromNode.get()).grow(6d);
-		PointPair toGrown = new PointPair(toNode.get()).grow(6d);
+		PointPair fromGrown = new PointPair(fromNode.get()).grow(2d);
+		PointPair toGrown = new PointPair(toNode.get()).grow(2d);
 		Point from = fromGrown.quadIntersects(startLine);
 		Point to = toGrown.quadIntersects(startLine);
 	

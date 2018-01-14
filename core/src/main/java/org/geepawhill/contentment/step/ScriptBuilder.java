@@ -4,12 +4,14 @@ import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Party;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.actors.Arrow;
+import org.geepawhill.contentment.actors.Cross;
 import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.actors.Spot;
 import org.geepawhill.contentment.actors.Stroke;
 import org.geepawhill.contentment.atom.ClearAtom;
 import org.geepawhill.contentment.atom.MarkAtom;
 import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.timing.Timing;
 
@@ -17,6 +19,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 {
 	
 	protected ScriptWorld world;
+	private long lastCue;
 
 	public ScriptBuilder()
 	{
@@ -28,7 +31,13 @@ public abstract class ScriptBuilder<SUBCLASS>
 	public SUBCLASS cue(long beat)
 	{
 		addToWorking(new AtomStep(Timing.ms(30000),new MarkAtom(beat*1000)));
+		lastCue = beat;
 		return downcast();
+	}
+	
+	public SUBCLASS offset(long offset)
+	{
+		return cue(lastCue+offset);
 	}
 	
 	private void addToWorking(Step step)
@@ -64,6 +73,11 @@ public abstract class ScriptBuilder<SUBCLASS>
 	public Party party(String name)
 	{
 		return world.party(name);
+	}
+	
+	public Cross cross(String name, double xsize, double ysize, double xoffset, double yoffset)
+	{
+		return new Cross(world,actor(name).groupSource(),xsize,ysize,xoffset,yoffset);
 	}
 
 	public Stroke stroke(PointPair westLine)

@@ -31,7 +31,7 @@ public class Stroke extends GenericActor
 		atom.format(format);
 		return this;
 	}
-
+	
 	@Override
 	public Stroke draw(double ms)
 	{

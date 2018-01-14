@@ -2,7 +2,9 @@ package org.geepawhill.contentment.core;
 
 import static org.geepawhill.contentment.utility.JfxUtility.color;
 
+import java.awt.SecondaryLoop;
 import java.io.File;
+import java.util.Vector;
 
 import org.geepawhill.contentment.actors.CodeBlock;
 import org.geepawhill.contentment.actors.Column;
@@ -11,6 +13,7 @@ import org.geepawhill.contentment.actors.FixedLetters;
 import org.geepawhill.contentment.actors.Slide;
 import org.geepawhill.contentment.atom.LettersAtom;
 import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.format.Style;
 import org.geepawhill.contentment.geometry.Grid;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
@@ -40,363 +43,463 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 
-public class PremisesScript extends ScriptBuilder<PremisesScript>
-{
-	private static final int STACK_ROWS = 6;
-
-	private Format commentFormat;
-	private Format knowsFormat;
-	private Format codeFormat;
-	private Format stackFormat;
-	private Format largeCodeFormat;
-	private Format lightComment;
+public class PremisesScript extends ScriptBuilder<PremisesScript> {
+	private static final double XMARGIN = 20;
+	private static final double YMARGIN = 20;
 
 	private Script script;
-	
-	private Grid stackGrid;
 
-	private Slide slide;
+	private Format secondaryJumbo;
+	private Format primaryJumbo;
+	private Format emphasisFormat;
+	private Format secondaryNormal;
+	private Format primaryNormal;
+	private Format emphaticNormal;
+	private Format emphaticSmall;
+	private Format emphaticJumbo;
+	private Format codeFormat;
 
-	public PremisesScript()
-	{
-		slide = new Slide(world);
+	public PremisesScript() {
 
-		Paint commentColor = color(48, 201, 137);
-		Font commentFont = Font.font("Chewed Pen BB", FontPosture.ITALIC, 50d);
-		commentFormat = new Format(TypeFace.font(commentFont, 1d, 1d), TypeFace.color(commentColor, 1d),
-				Frames.frame(commentColor, 3d, 1d));
+		final double jumbo = 80d;
+		final double normal = 55d;
+		final double small = 45d;
 
-		knowsFormat = new Format(TypeFace.font(commentFont, 1d, 1d), TypeFace.color(Color.BLUEVIOLET, 1d),
-				Frames.frame(Color.BLUEVIOLET, 2d, 1d, Dash.dash(4d)));
+		Paint primary = color(119, 187, 65);
+		Paint secondary = color(177, 140, 254);
+		Paint emphatic = color(255, 255, 0);
 
-		Paint codeColor = Color.WHITE;
-		largeCodeFormat = new Format(TypeFace.font(new Font("Consolas", 60d), 2d, 1d), TypeFace.color(codeColor, 1d));
+		primaryJumbo = format(primary, jumbo);
+		primaryNormal = format(primary, normal);
 
-		this.stackGrid = new Grid(1, STACK_ROWS, new PointPair(900d, 230d, 1480d, 820d));
+		secondaryJumbo = format(secondary, jumbo);
+		secondaryNormal = format(secondary, normal);
+
+		emphaticJumbo = format(emphatic, jumbo);
+		emphaticNormal = format(emphatic, normal);
+		emphaticSmall = format(emphatic, small);
+
+		emphasisFormat = new Format(Frames.frame(emphatic, 4d, .7d));
 
 		Font codeFont = new Font("Consolas", 25d);
-
+		Paint codeColor = Color.WHITE;
 		codeFormat = new Format(TypeFace.font(codeFont, 2d, 1d), TypeFace.color(codeColor, 1d),
 				Frames.frame(codeColor, 2d, 1d));
 
-		stackFormat = new Format(Frames.frame(Color.YELLOW, 2d, 1d));
-		lightComment = new Format(TypeFace.font(commentFont, 1d, 1d), TypeFace.color(commentColor, 1d),
-				Frames.frame(commentColor, 2d, 1d));
 	}
 
-	public Script make()
-	{
-		script = new Script(new MediaRhythm(new File("d:\\GeePawHillDotOrg\\videos\\premises.home\\positioned_2_1.mp4")));
+	private Format format(Paint majorColor, double fontsize) {
+		Font font = Font.font("Chewed Pen BB", FontPosture.ITALIC, fontsize);
+		return new Format(TypeFace.font(font, 2d, 1d), TypeFace.color(majorColor, 1d),
+				Frames.frame(majorColor, 5d, 1d));
+	}
+
+	public Script make() {
+		script = new Script(
+				new MediaRhythm(new File("d:\\GeePawHillDotOrg\\videos\\premises.home\\positioned_2_1.mp4")));
 		script.add(new Keyframe(0, opening()));
-		script.add(new Keyframe(59, special()));
-		script.add(new Keyframe(111, indirectCall()));
-		script.add(new Keyframe(160, dependencies()));
-		script.add(new Keyframe(190, whatToTest()));
-		script.add(new Keyframe(214, simplestCase()));
-		script.add(new Keyframe(257, testingTheCatcher()));
-		script.add(new Keyframe(282, stackDistance()));
-		script.add(new Keyframe(320, playingFair()));
-		script.add(new Keyframe(353, cheating()));
-		script.add(new Keyframe(389, extractAndOverride()));
-		script.add(new Keyframe(416, theTestableCatcher()));
-		script.add(new Keyframe(475, notReallyCheating()));
-		script.add(new Keyframe(490, outro()));
+		script.add(new Keyframe(30, money()));
+		script.add(new Keyframe(76, money2()));
+		script.add(new Keyframe(132, money3()));
+		script.add(new Keyframe(151, judgment()));
+		script.add(new Keyframe(194, judgment2()));
+		script.add(new Keyframe(234, judgment3()));
+		script.add(new Keyframe(251, correlation()));
+		script.add(new Keyframe(270, correlation2()));
+		script.add(new Keyframe(318,correlation3()));
+		script.add(new Keyframe(380, chaining()));
+		script.add(new Keyframe(446, steering()));
+		script.add(new Keyframe(528, underplayed()));
+		script.add(new Keyframe(598, outro()));
 		return script;
 	}
-	
-	private Step opening()
-	{
-		buildPhrase();
-		cue(0).slide().enter().head("Microtesting Exceptions");
-		slide().sub("A GeePaw Quickie");
-		cue(5);
-		slide().head("The Household Program");
-		cue(7);
-		stroke(stackGrid.southLine(0, STACK_ROWS - 1)).format(stackFormat).in("stackLines");
-		stroke(stackGrid.westLine()).format(stackFormat).in("stackLines");
-		for (int i = stackGrid.rows()-1; i >=0; i--)
-		{
-			stroke(stackGrid.area(0, i).northLine()).format(stackFormat).in("stackLines");
-		}
-		party("stackLines").fadeIn();
-		party("stackLines").in("stackTextAndLines");
-		
-		assume(largeCodeFormat);
-		cue(14).letters("main()").at(stackTextPosition(0)).in("stackText").sketch();
-		cue(22).letters("doChores()").at(stackTextPosition(1)).in("remainder").sketch();
-		cue(29).letters("clean()").at(stackTextPosition(2)).in("stackText").sketch();
-		cue(33).letters("takeOutTrash()").at(stackTextPosition(3)).in("stackText").sketch();
-		cue(44).letters("replaceTrashBag()").at(stackTextPosition(4)).in("stackText").sketch();
-		cue(50).letters("getBag()").at(stackTextPosition(5)).in("remainder").sketch();
-		party("stackText").in("stackTextAndLines");
-		
-		return endBuild();
-	}
 
-	private Step special()
-	{
-		buildPhrase();
-		cue(60).party("remainder").reColor(Color.RED);
-
-		cue(64).letters("Thrower").at(new TopRight(leftCommentTextPoint(5))).format(commentFormat).called("thrower").sketch();
-
-		party("stackTextAndLines").fadeDown();
-
-		cue(75).letters("throws BagNotFound").at(new TopLeft(stackTextPoint(5).add(new Point(0,50)))).format(lightComment).in("colorText").sketch();
-		cue(85).letters("Catcher").at(new TopRight(leftCommentTextPoint(1))).format(commentFormat).called("catcher").sketch();
-		assume(lightComment);
-		cue(87).letters("catches all exceptions").at(new TopLeft(stackTextPoint(1).add(new Point(0,50)))).in("colorText").called("catchesAll").sketch();
-
-		cue(90).letters("catches BagNotFound").at(new BelowLeft(actor("catchesAll").groupSource())).in("colorText").called("catchesLidNotFound").sketch();
-
-		cue(96).letters("logs and moves on").at(new BelowLeft(actor("catchesLidNotFound").groupSource())).in("colorText").sketch();
-		return endBuild();
-	}
-	
-	private Step indirectCall()
-	{
-		buildPhrase();
-		cue(111).slide().head("How Throw & Catch Work");
-		party("colorText").fadeOut();
-
-		assume(commentFormat);
-		cue(119).connector().from("thrower",false).to("catcher", true).sketch().called("calls");
-		letters("direct\n  call?").at(new Centered(actor("calls").groupSource())).sketch();
-
-		cue(121).actor(new Cross(world,actor("calls"),150d)).sketch();
-		party("remainder").disappear();
-		party("stackLines").fadeUp();
-		
-		cue(126).letters("throws X").at(stackTextPosition(5)).sketch();
-		
-		cue(132).letters("catches X?").at(stackTextPosition(4)).sketch().called("line");
-		Format redComment = new Format(commentFormat, TypeFace.color(Color.RED, 1d));
-		letters("no, keep looking...").at(new RightOf(actor("line").groupSource(),20d)).format(redComment).sketch();
-		
-		cue(137).letters("catches X?").at(stackTextPosition(3)).sketch().called("line");
-		letters("no, keep looking...").at(new RightOf(actor("line").groupSource(),20d)).format(redComment).sketch();
-		
-		cue(141).letters("catches X?").at(stackTextPosition(2)).sketch().called("line");
-		letters("no, keep looking...").at(new RightOf(actor("line").groupSource(),20d)).format(redComment).sketch();
-		
-		cue(150).letters("catches X?").at(stackTextPosition(1)).sketch().called("line");
-		Format greenComment = new Format(commentFormat, TypeFace.color(Color.GREEN, 1d));
-		letters("YES! call this one!").at(new RightOf(actor("line").groupSource(),20d)).format(greenComment).sketch();
-		return endBuild();
-	}
-
-	private Step dependencies()
-	{
+	private Step opening() {
 		buildPhrase();
 		wipe();
-		slide().enter();
-		slide().head("Indirect Connection");
-		assume(commentFormat);
-		cue(161).letters("Thrower").withOval().at(new Centered(1000d,300d)).sketch().called("thrower");
-		letters("Catcher").withOval().at(new Centered(1500d, 300d)).sketch().called("catcher");
-		connector().from("catcher",true).to("thrower", true).sketch().in("allButOvals").called("knows");
-		letters("knows?").at(new AboveCenter(actor("knows").groupSource())).format(knowsFormat).sketch().in("allButOvals");
-		cue(169).actor(new Cross(world, actor("knows").groupSource(), 125d, 100d, new Point(0d, -10d))).sketch().in("allButOvals");
+		cue(0);
+		header("Five Underplayed TDD Premises");
+		Vector<Point> inner = polygon(5, 225, new Point(450, 450));
+		Vector<Point> outer = polygon(5, 275, new Point(450, 450));
+		offset(12);
+		assume(secondaryNormal);
+		letters("money").at(new Centered(outer.get(0))).sketch();
+		offset(1);
+		letters("judgment").at(new Centered(outer.get(1).add(45d, 0))).sketch();
+		offset(1);
+		letters("correlation").at(new Centered(outer.get(2))).sketch();
+		offset(1);
+		letters("chain").at(new Centered(outer.get(3))).sketch();
+		offset(1);
+		letters("steering").at(new Centered(outer.get(4).add(-42d, 0))).sketch();
 
+		assume(primaryNormal);
+		offset(3);
+		for (int i = 0; i < 5; i++) {
+			spot(inner.get(i).x, inner.get(i).y).called("P" + i).appear();
+		}
+		for (int i = 0; i < 5; i++) {
+			connector().from("P" + i, false).to("P" + (i + 1) % 5, false).sketch();
+		}
 
-		cue(171).letters("BagNotFound").withOval().at(new Centered(1250d, 590d)).sketch().called("lidNotFound");
-
-		connector().from("thrower", false).to("lidNotFound", true).sketch().called("first");
-		connector().from("catcher", false).to("lidNotFound", true).sketch().called("second");
+		letters("TDD\nLives\nHere").at(new Centered(450, 450)).format(secondaryNormal).sketch();
 
 		return endBuild();
 	}
-	
-	public Step whatToTest()
-	{
+
+	public Step money() {
 		buildPhrase();
-		wipe().slide().enter().head("What Could Go Wrong?");
-		cue(193);
-		letters("Thrower").withOval().at(new Centered(1200d,300d)).format(commentFormat).sketch().called("thrower");
-		Column column = new Column(world,new PointPair(1000,400,ViewPort.WIDTH,ViewPort.HEIGHT),HPos.LEFT,VPos.TOP);
-		cue(196);
-		column.enter();
-		column.head(new LettersAtom(column.groupSource(),"1. Notice the fail condition",commentFormat,Position.DEFAULT));
-		cue(199);
-		column.line(new LettersAtom(column.groupSource(),"2. Construct the exception",commentFormat,Position.DEFAULT));
-		cue(202);
-		column.line(new LettersAtom(column.groupSource(),"3. throw the exception",commentFormat,Position.DEFAULT));
+		cue(30);
+		wipe();
+		header("Money:  ");
+		offset(7);
+		headerEnd("We're In This For The Money");
+		offset(8);
+		assume(primaryJumbo);
+		letters("Money").centered(290, 400).in("part1").sketch();
+		letters("=").centered(450, 400).in("part1").sketch();
+		offset(2);
+		letters("Shipping\nMore\nValue\nFaster").centered(650, 400).in("part1").sketch();
+		offset(5);
+		emphasize(530, 245, 290, "part1");
+		offset(1);
+		emphasize(530, 140, 385, "part1");
+		offset(1);
+		emphasize(530, 155, 480, "part1");
+		offset(1);
+		emphasize(530, 200, 577, "part1");
+		offset(8);
+		assume(secondaryJumbo);
+		letters("TDD makes us money.").centered(450, 720).in("part1").sketch();
+		letters("and that's why we do it.").centered(450, 800).in("part1").sketch();
+
 		return endBuild();
 	}
 
-	public Step simplestCase()
-	{
+	public Step money2() {
 		buildPhrase();
-		wipe().slide().enter();
-		slide().head("Forcing The Throw");
-		FixedLetters code = new FixedLetters(world, 52, 14);
-		code.at(new TopRight(1550,300)).appear();
+		cue(75);
+		party("part1").fadeOut();
+		assume(primaryNormal);
+		letters("some things TDD is not about...").at(new TopLeft(30, 140)).in("part2").sketch();
+
+		offset(9);
+		assume(secondaryNormal);
+		letters("good citizenship?").at(new TopLeft(30, 220)).called("citizenship").in("part2").sketch();
+		assume(primaryNormal);
+		lettersBelow("   responsibility for the future", "citizenship", "responsibility", "part2");
+		lettersBelow("   morality or decency", "responsibility", "morality", "part2");
+		offset(6);
+		cross("citizenship", 320, 40, 0, 10).in("part2").sketch();
+		assume(emphaticNormal);
+		letters("nope, not even close!").at(new RightOf(actor("citizenship").groupSource(), 40d)).in("part2").sketch();
+
+		offset(11);
+		assume(secondaryNormal);
+		lettersBelow("quality?", "morality", "quality", "part2");
+		assume(primaryNormal);
+		lettersBelow("   proving customer delight", "quality", "delight", "part2");
+		lettersBelow("   killing all defects", "delight", "help", "part2");
+		offset(4);
+		cross("quality", 140, 40, 0, 10).in("part2").sketch();
+		assume(emphaticNormal);
+		letters("naww, tho it might help!").at(new RightOf(actor("quality").groupSource(), 40d)).in("part2").sketch();
+		offset(4);
+
+		offset(12);
+		assume(secondaryNormal);
+		lettersBelow("art or craft?", "help", "art", "part2");
+		assume(primaryNormal);
+		lettersBelow("   the glow of excellent workmanship", "art", "craft", "part2");
+		lettersBelow("   beauty, elegance, grace", "craft", "beauty", "part2");
+		offset(1);
+		cross("art", 250, 40, 0, 10).in("part2").sketch();
+		assume(emphaticNormal);
+		letters("no, but it makes good designs!").at(new RightOf(actor("art").groupSource(), 40d)).in("part2").sketch();
+		return endBuild();
+	}
+
+	public Step money3() {
+		buildPhrase();
+		cue(132);
+		party("part2").fadeOut();
+		assume(primaryJumbo);
+		letters("We TDD only to...").at(new Centered(new Point(450, 250))).called("we").sketch();
+		assume(secondaryJumbo);
+		letters("Ship").at(new BelowCenter(actor("we").groupSource())).called("shipping").sketch();
+		letters("More").at(new BelowCenter(actor("shipping").groupSource())).called("more").sketch();
+		letters("Value").at(new BelowCenter(actor("more").groupSource())).called("value").sketch();
+		letters("Faster").at(new BelowCenter(actor("value").groupSource())).sketch();
+		return endBuild();
+	}
+
+	public Step judgment() {
+		buildPhrase();
+		cue(151);
+		wipe();
+		header("Judgment:  ");
+		offset(5);
+		headerEnd("We Rely On Human Judgment");
+		offset(12);
+		assume(secondaryNormal);
+		letters("this seems like TDD...").at(new TopLeft(30, 150)).in("part1").sketch();
+		FixedLetters code = new FixedLetters(world, 26, 13);
+		code.at(new TopLeft(150, 230)).in("part1").called("code").appear();
 		code.assume(Color.WHITE);
-		cue(220);
-		code.say(4, 8, "Supplies supplies = new Supplies");
-		cue(230);
-		code.say(5, 8, "supplies.getBag()");
-		cue(238);
-		code.say(2, 4, "TRY");
-		code.say(3, 4, "{");
-		code.say(6, 8, "FAIL \"We should have thrown here.\"");
-		code.say(7, 4, "}");
-
-		cue(240);
-		code.say(0, 0, "TEST throwsOnEmpty()");
+		code.say(0, 0, "TestDrivenDevelopment()");
 		code.say(1, 0, "{");
+		code.say(2, 3, "while(!shipping())");
+		code.say(3, 3, "{");
+		code.say(4, 6, "while(!storyDone())");
+		code.say(5, 6, "{");
+		code.say(6, 9, "red();");
+		code.say(7, 9, "green();");
+		code.say(8, 9, "refactor()");
+		code.say(9, 9, "push()");
+		code.say(10, 6, "}");
+		code.say(11, 3, "}");
 		code.say(12, 0, "}");
+		offset(7);
+		letters("but it's not.").at(new TopLeft(30, 770)).in("part1").sketch();
+		cross("code", 400, 400, 0, 0).in("part1").sketch();
+		return endBuild();
+	}
+
+	public Step judgment2() {
+		buildPhrase();
+		cue(194);
+		party("part1").fadeOut();
+		assume(secondaryNormal);
+		letters("Programming is translating").at(new Centered(450, 200)).in("part2").sketch();
+		assume(primaryJumbo);
+		letters("Human Words").withOval().at(new Centered(450, 330)).called("human").in("part2").sketch();
+		letters("Computer Program").withOval().at(new Centered(450, 730)).called("computer").in("part2").sketch();
+		connector().from("human", false).to("computer", true).in("part2").sketch();
+		offset(6);
+		assume(emphaticSmall);
+		letters("just add\ngeeks!").at(new TopLeft(250, 480)).in("part2").sketch();
+		offset(3);
+		letters("(some\nconsciousness\nrequired)").at(new TopRight(new Point(750, 450))).in("part2").sketch();
+		return endBuild();
+	}
+
+	public Step judgment3() {
+		buildPhrase();
+		cue(234);
+		party("part2").fadeOut();
+		assume(secondaryJumbo);
+		letters("We are...").at(new Centered(450, 200)).called("we").sketch();
+		assume(primaryJumbo);
+		belowCentered("...absolutely...", "we", "absolutely", "part3");
+		offset(2);
+		belowCentered("...routinely...", "absolutely", "routinely", "part3");
+		offset(2);
+		belowCentered("...everyday...", "routinely", "everyday", "part3");
+		offset(1);
+		belowCentered("...all the time...", "everyday", "always", "part3");
+		assume(emphaticJumbo);
+		offset(1);
+		belowCentered("...happily...", "always", "happily", "part3");
+		assume(secondaryJumbo);
+		belowCentered("dependent on human judgment", "happily", "dependent", "part3");
+		return endBuild();
+	}
+
+	public Step correlation() {
+		buildPhrase();
+		cue(251);
+		wipe();
+		header("Correlation:  ");
+		offset(5);
+		headerEnd("Internal Quality & Productivity Correlate");
+		assume(primaryNormal);
+		offset(2);
+		letters("(Internal quality is IQ.)").at(new Centered(480,190)).in("part1").sketch();
+
+		offset(2);
+		assume(secondaryJumbo);
+		letters("When IQ goes up...").at(new Centered(300,290)).in("part1").sketch();
+		assume(primaryJumbo);
+		letters("...productivity goes up!").at(new Centered(600,370)).in("part1").sketch();
 		
-		cue(246);
-		code.say(8, 4, "CATCH( BagNotFound exception )");
-		code.say(9,4, "{");
-		code.say(10, 8, "ASSERT exception.msg EQUALS BagNotFound.MSG");
-		code.say(11, 4, "}");
+		offset(1);
+		assume(secondaryJumbo);
+		letters("When IQ goes down...").at(new Centered(300,490)).in("part1").sketch();
+		assume(primaryJumbo);
+		letters("...productivity goes down!").at(new Centered(600,570)).in("part1").sketch();
 		return endBuild();
 	}
-	
-	public Step testingTheCatcher()
-	{
+
+	public Step correlation2() {
 		buildPhrase();
-		wipe().slide().enter();
-		slide().head("Testing The Catcher");
-		FixedLetters code = new FixedLetters(world, 62, 14);
-		code.at(new TopRight(1550,300)).appear();
-		code.assume(Color.WHITE);
-		cue(266);
-		code.say(2, 4, "Supplies supplies = new Supplies");
-		code.say(3, 4, "Reporter reporter = new TestingReporter");
-		code.say(4, 4, "Household household = new Household( supplies, reporter )");
-		cue(274);
-		code.say(6, 4, "household.doChores()");
-		cue(279);
-		code.say(8, 4, "ASSERT reporter.lastReport IS OutOfBags");
-		code.say(0, 0, "TEST handlesBagNotFound()");
-		code.say(1, 0, "{");
-		code.say(9, 0, "}");
+		cue(272);
+		party("part1").fadeOut();
+		assume(secondaryNormal);
+		letters("External").at(new Centered(220, 200)).called("external").in("part2").sketch();
+		offset(3);
+		assume(primaryJumbo);
+		belowCentered("Users See It", "external", "users", "part2");
+		offset(4);
+		assume(secondaryNormal);
+		belowCentered("fast?", "users", "fast", "part2");
+		offset(2);
+		belowCentered("complete?", "fast", "complete", "part2");
+		offset(5);
+		belowCentered("stable?", "complete", "stable", "part2");
+		offset(3);
+		belowCentered("pretty?", "stable", "pretty", "part2");
+		offset(1);
+		belowCentered("fluid?", "pretty", "fluid", "part2");
+
+		offset(4);
+		assume(secondaryNormal);
+		letters("Internal").at(new Centered(750, 200)).called("internal").in("part2").sketch();
 		
-
+		offset(3);
+		assume(primaryJumbo);
+		belowCentered("Geeks See It", "internal", "geeks", "part2");
+		assume(secondaryNormal);
+		
+		offset(5);
+		belowCentered("scannable?", "geeks", "scannable", "part2");
+		belowCentered("readable?", "scannable", "readable", "part2");
+		offset(5);
+		belowCentered("well-factored?", "readable", "factored", "part2");
+		offset(2);
+		belowCentered("changeable?", "factored", "changeable", "part2");
+		offset(4);
+		belowCentered("tested?", "changeable", "tested", "part2");
 		return endBuild();
 	}
 	
-	public Step stackDistance()
-	{
+	public Step correlation3() {
 		buildPhrase();
-		wipe().slide().enter().head("A Difficult Case");
-		return endBuild();
-	}
-
-	public Step playingFair()
-	{
-		buildPhrase();
-		wipe().slide().enter();
-		slide().head("Playing Fair");
-
-//		String beforeText = "try { ... }\n" + "catch(LidNotFound lidNotFound) {\n" + "    // complex catch\n" + "    }";
-//		CodeBlock beforeCode = new CodeBlock(world, beforeText, codeFormat, new TopRight(1550,260d));
-//		actor(beforeCode).appear();
-//
-//		cue(460).letters("extract this").at(new CenterRight(1000d, 340d)).format(commentFormat).sketch().called("extract");
-//		spot(1150, 335).appear().called("spot");
-//		connector().from(actor("extract").groupSource(),false).to(actor("spot").groupSource(), true).format(commentFormat).sketch();
-//
-//		cue(464).letters("to this").at(new CenterRight(1000d, 550d)).format(commentFormat).sketch();
-//
-//		String afterText1 = "try { ... }\n" + "catch(LidNotFound lidNotFound) {\n" + "    handle(lidNotFound);\n" + "    }";
-//		CodeBlock afterCode = new CodeBlock(world, afterText1, codeFormat, new TopRight(1550d,460d));
-//		actor(afterCode).appear();
-//
-//		String afterText2 = "public void handle(LidNotFound lidNotFound) {\n" + "    // complex catch\n" + "    }";
-//		CodeBlock afterCode2 = new CodeBlock(world,afterText2, codeFormat, new TopRight(1550d,640d));
-//		actor(afterCode2).appear();
-//
-//		cue(468).letters("and test the handler here!").at(new BelowCenter(afterCode2.groupSource())).format(commentFormat).sketch();
-		return endBuild();
-	}
-
-	public Step cheating()
-	{
-		buildPhrase();
-		wipe().slide().enter();
-		slide().head("How Does Cheating Work?");
+		cue(319);
+		party("part2").fadeOut();
+		assume(secondaryJumbo);
+		letters("We *can* trade EQ for productivity").at(new TopLeft(30, 200)).called("eq").in("part3").sketch();
+		offset(4);
+		assume(primaryNormal);
+		lettersBelow("   less speed, completeness, or beauty","eq","lessEQ","part3");
+		offset(8);
+		lettersBelow("   means more time to work on other things","lessEQ","time","part3");
+		
+		offset(8);
+		assume(secondaryJumbo);
+		letters("We *can't* trade IQ for productivity").at(new TopLeft(30, 500)).called("iq").in("part3").sketch();
+		offset(2);
+		assume(primaryNormal);
+		lettersBelow("    less effort towards changeability","iq","changing","part3");
+		lettersBelow("    means more effort to change","changing","expense","part3");
+		lettersBelow("    means less time to work on other things","expense","other","part3");
 		return endBuild();
 	}
 	
-	public Step extractAndOverride()
-	{
+	public Step chaining() {
 		buildPhrase();
-		wipe().slide().enter();
-		slide().head("Extract & Override");
+		wipe();
+		header("The Chaining Premise");
+		return endBuild();
+	}
 
-		String beforeText = "finally {\n" + "    // complex finally\n" + "    }";
-		CodeBlock beforeCode = new CodeBlock(world, beforeText, codeFormat, new TopRight(1550,260d));
-		actor(beforeCode).appear();
+	public Step steering() {
+		buildPhrase();
+		wipe();
+		header("The Steering Premise");
+		return endBuild();
+	}
 
-		cue(460).letters("extract this").at(new CenterRight(1000d, 340d)).format(commentFormat).sketch().called("extract");
-		spot(1280,335).appear().called("spot");
-		connector().from(actor("extract").groupSource(),false).to(actor("spot").groupSource(),true).format(commentFormat).sketch();
+	public void header(String text) {
+		letters(text).format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").sketch();
+	}
 
-		cue(464).letters("to this").at(new CenterRight(1000d, 550d)).format(commentFormat).sketch().called("toThis");
+	private void headerEnd(String end) {
+		letters(end).format(secondaryJumbo).at(new RightOf(actor("header").groupSource())).sketch();
+	}
 
-		String afterText1 = "finally {\n" + "    handleFinally(...);\n" + "    }";
-		CodeBlock afterCode = new CodeBlock(world, afterText1, codeFormat, new TopRight(1550d,460d));
-		actor(afterCode).appear();
+	public Step underplayed() {
+		buildPhrase();
+		wipe();
+		Vector<Point> pentagon = polygon(5, 225, new Point(450, 450));
+		for (int i = 0; i < 5; i++) {
+			spot(pentagon.get(i).x, pentagon.get(i).y).called("P" + i).appear();
+		}
+		for (int i = 0; i < 5; i++) {
+			connector().from("P" + i, false).to("P" + (i + 1) % 5, false).format(secondaryJumbo).appear();
+		}
 
-		String afterText2 = "public void handleFinally(...) {\n" + "    // complex finally\n" + "    }";
-		CodeBlock afterCode2 = new CodeBlock(world,afterText2, codeFormat, new TopRight(1550d,640d));
-		actor(afterCode2).appear();
+		Vector<Point> pentagon2 = polygon(5, 275, new Point(450, 450));
+		assume(secondaryNormal);
+		letters("money").at(new Centered(pentagon2.get(0))).appear();
+		letters("judgment").at(new Centered(pentagon2.get(1).add(38d, 0))).appear();
+		letters("correlation").at(new Centered(pentagon2.get(2))).appear();
+		letters("chain").at(new Centered(pentagon2.get(3))).appear();
+		letters("steering").at(new Centered(pentagon2.get(4).add(-38d, 0))).appear();
+		return endBuild();
+	}
 
-		cue(468).letters("and test the handler here!").at(new BelowCenter(afterCode2.groupSource())).format(commentFormat).sketch();
+	public Step outro() {
+		buildPhrase();
+		wipe();
+		final double premiseToText = 50d;
+		final double testToPremise = 90d;
+
+		letters("Five Underplayed TDD Premises").at(new TopLeft(new Point(20, 15))).format(secondaryJumbo).appear();
+		double y = 120d;
+		letters("The Money Premise").at(new TopLeft(20, y)).format(secondaryNormal).appear();
+		y += premiseToText;
+		letters("We're in this for the money.").at(new TopLeft(60, y)).format(primaryJumbo).appear();
+		y += testToPremise;
+		letters("The Judgment Premise").at(new TopLeft(20, y)).format(secondaryNormal).appear();
+		y += premiseToText;
+		letters("We rely entirely on human judgment.").at(new TopLeft(60, y)).format(primaryJumbo).appear();
+
+		y += testToPremise;
+		letters("The Correlation Premise").at(new TopLeft(20, y)).format(secondaryNormal).appear();
+		y += premiseToText;
+		letters("Internal quality & productivity correlate directly.").at(new TopLeft(60, y)).format(primaryJumbo)
+				.appear();
+
+		y += testToPremise;
+		letters("The Chain Premise").at(new TopLeft(20, y)).format(secondaryNormal).appear();
+		y += premiseToText;
+		letters("Test a chain by testing its links.").at(new TopLeft(60, y)).format(primaryJumbo).appear();
+
+		y += testToPremise;
+		letters("The Steering Premise").at(new TopLeft(20, y)).format(secondaryNormal).appear();
+		y += premiseToText;
+		letters("Tests & testability steer design & development.").at(new TopLeft(60, y)).format(primaryJumbo).appear();
 
 		return endBuild();
 	}
 
-	public Step theTestableCatcher()
-	{
-		buildPhrase();
-		wipe().slide().enter();
-		slide().head("The Testable Catcher");
-		return endBuild();
-	}
-	
-	public Step notReallyCheating()
-	{
-		buildPhrase();
-		wipe().slide().enter();
-		slide().head("Not Really Cheating");
-		return endBuild();
-	}
-	
-	public Step outro()
-	{
-		buildPhrase();
-		wipe().slide().enter();
-		slide().head("Outtro");
-		return endBuild();
+	public void belowCentered(String text, String target, String name, String party) {
+		letters(text).at(new BelowCenter(actor(target).groupSource())).called(name).in(party).sketch();
 	}
 
-	private Position stackTextPosition(int line)
-	{
-		return new TopLeft(stackTextPoint(line));
-	}
-	
-	private Point stackTextPoint(int line)
-	{
-		return stackGrid.northLine(0, STACK_ROWS - 1 - line).from.add(20, 20);
-	}
-
-	private Point leftCommentTextPoint(int line)
-	{
-		return stackTextPoint(line).add(-40, -10);
+	Vector<Point> polygon(int sides, double radius, Point at) {
+		Vector<Point> result = new Vector<>();
+		for (int i = 0; i < sides; i += 1) {
+			double angle = ((double) i / (double) sides) * 2 * Math.PI;
+			double pointX = (Math.sin(angle) * radius) + at.x;
+			double pointY = (Math.cos(angle) * radius) + at.y;
+			result.add(new Point(pointX, pointY));
+		}
+		return result;
 	}
 
-	public PremisesScript downcast()
-	{
+	public PremisesScript downcast() {
 		return this;
 	}
-	
-	private Slide slide()
-	{
-		return slide;
+
+	private void lettersBelow(String text, String target, String name, String party) {
+		letters(text).at(new BelowLeft(actor(target).groupSource())).called(name).in(party).sketch();
 	}
+
+	private void emphasize(double fromX, double width, double atY, String in) {
+		spot(fromX, atY).called("us" + atY).in("part1").appear();
+		spot(fromX + width, atY).called("ue" + atY).in("part1").appear();
+		connector().from("us" + atY, false).to("ue" + atY, false).format(emphasisFormat).in("part1").sketch();
+	}
+
 }

@@ -9,6 +9,7 @@ import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Jiggler;
 import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.position.Centered;
 import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
@@ -71,7 +72,8 @@ public class Letters extends GenericActor implements Actor
 	{
 		if (eastHalfBezier == null)
 		{
-			PointPair points = new PointPair(letters.text()).grow(45, 8);
+			PointPair raw = new PointPair(letters.text());
+			PointPair points = raw.grow(raw.width()*0.25, raw.height()*0.25);
 			eastHalfBezier = new Bezier(points.north(), controlJiggler.jiggle(points.northeast()),
 					controlJiggler.jiggle(points.southeast()), points.south());
 			westHalfBezier = new Bezier(points.south(), controlJiggler.jiggle(points.southwest()),
@@ -108,6 +110,10 @@ public class Letters extends GenericActor implements Actor
 	public Letters assume()
 	{
 		return format(world.assumptions().format());
+	}
+
+	public Letters centered(double x, double y) {
+		return at(new Centered(x,y));
 	}
 
 }
