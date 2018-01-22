@@ -18,6 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.MediaView;
@@ -56,6 +58,8 @@ public class MainView
 	{
 		Pane owner = new Pane();
 		owner.setPrefSize(1600d, 900d);
+		Background background = new Background(new BackgroundFill(Color.BLACK, null, null));
+		owner.setBackground(background);
 		
 		player.scriptProperty().addListener((p,o,n)->scriptChanged());
 

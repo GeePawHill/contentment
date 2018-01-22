@@ -145,8 +145,9 @@ public class Arrow extends GenericActor
 
 	public Bezier chooseBezier(PointPair points)
 	{
-		Bezier chosen = new Bezier(points.from, points.along(random.nextDouble()).jiggle(random, 1d, 10),
-				points.along(random.nextDouble()).jiggle(random, 1d, 10), points.to);
+		double variance = points.distance()*.1;
+		Bezier chosen = new Bezier(points.from, points.along(random.nextDouble()).jiggle(random, 1d, variance),
+				points.along(random.nextDouble()).jiggle(random, 1d, variance), points.to);
 		return chosen;
 	}
 

@@ -30,6 +30,7 @@ import org.geepawhill.contentment.position.RightOf;
 import org.geepawhill.contentment.position.TopLeft;
 import org.geepawhill.contentment.position.TopRight;
 import org.geepawhill.contentment.rhythm.MediaRhythm;
+import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.step.ScriptBuilder;
 import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.style.Dash;
@@ -57,7 +58,8 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 	private Format emphaticNormal;
 	private Format emphaticSmall;
 	private Format emphaticJumbo;
-	private Format codeFormat;
+	private Format secondarySmall;
+	private Format primarySmall;
 
 	public PremisesScript() {
 
@@ -71,21 +73,18 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 
 		primaryJumbo = format(primary, jumbo);
 		primaryNormal = format(primary, normal);
+		primarySmall = format(primary,small);
 
 		secondaryJumbo = format(secondary, jumbo);
 		secondaryNormal = format(secondary, normal);
+		secondarySmall = new Format(format(secondary, small),Frames.frame(secondary, 3d, .7d));
+		
 
 		emphaticJumbo = format(emphatic, jumbo);
 		emphaticNormal = format(emphatic, normal);
-		emphaticSmall = format(emphatic, small);
+		emphaticSmall = new Format(format(emphatic, small),Frames.frame(emphatic, 3d, .7d));
 
 		emphasisFormat = new Format(Frames.frame(emphatic, 4d, .7d));
-
-		Font codeFont = new Font("Consolas", 25d);
-		Paint codeColor = Color.WHITE;
-		codeFormat = new Format(TypeFace.font(codeFont, 2d, 1d), TypeFace.color(codeColor, 1d),
-				Frames.frame(codeColor, 2d, 1d));
-
 	}
 
 	private Format format(Paint majorColor, double fontsize) {
@@ -96,8 +95,10 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 
 	public Script make() {
 		script = new Script(
-				new MediaRhythm(new File("d:\\GeePawHillDotOrg\\videos\\premises.home\\positioned_2_1.mp4")));
-		script.add(new Keyframe(0, opening()));
+//				new MediaRhythm(new File("d:\\GeePawHillDotOrg\\videos\\premises.home\\TddPremisesFaceoverFinal.mp4")));
+				new SimpleRhythm());
+		script.add(new Keyframe(0, leadIn()));
+		script.add(new Keyframe(3, opening()));
 		script.add(new Keyframe(30, money()));
 		script.add(new Keyframe(76, money2()));
 		script.add(new Keyframe(132, money3()));
@@ -107,11 +108,27 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		script.add(new Keyframe(251, correlation()));
 		script.add(new Keyframe(270, correlation2()));
 		script.add(new Keyframe(318,correlation3()));
-		script.add(new Keyframe(380, chaining()));
+		script.add(new Keyframe(379, chaining()));
+		script.add(new Keyframe(415, chaining2()));
 		script.add(new Keyframe(446, steering()));
+		script.add(new Keyframe(510, steering2()));
 		script.add(new Keyframe(528, underplayed()));
 		script.add(new Keyframe(598, outro()));
 		return script;
+	}
+	
+	private Step leadIn() {
+		buildPhrase();
+		wipe();
+		cue(0);
+		letters("GeePaw's Notebook:").format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").appear();
+		assume(secondaryJumbo);
+		letters("Five Underplayed Premises\nof Test-Driven Development").centered(450, 450).appear();
+		assume(emphaticSmall);
+		letters("Copyright (C) 2018, GeePawHill. All rights reserved.").at(new TopLeft(20,825)).appear();
+		offset(3);
+
+		return endBuild();
 	}
 
 	private Step opening() {
@@ -377,7 +394,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		cue(319);
 		party("part2").fadeOut();
 		assume(secondaryJumbo);
-		letters("We *can* trade EQ for productivity").at(new TopLeft(30, 200)).called("eq").in("part3").sketch();
+		letters("EQ *can* trade for productivity").at(new TopLeft(30, 200)).called("eq").in("part3").sketch();
 		offset(4);
 		assume(primaryNormal);
 		lettersBelow("   less speed, completeness, or beauty","eq","lessEQ","part3");
@@ -386,7 +403,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		
 		offset(8);
 		assume(secondaryJumbo);
-		letters("We *can't* trade IQ for productivity").at(new TopLeft(30, 500)).called("iq").in("part3").sketch();
+		letters("IQ *can't* trade for productivity").at(new TopLeft(30, 500)).called("iq").in("part3").sketch();
 		offset(2);
 		assume(primaryNormal);
 		lettersBelow("    less effort towards changeability","iq","changing","part3");
@@ -398,14 +415,124 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 	public Step chaining() {
 		buildPhrase();
 		wipe();
-		header("The Chaining Premise");
-		return endBuild();
+		cue(380);
+		header("Chaining: ");
+		offset(4);
+		headerEnd("Test A Chain By Testing Links");
+		
+		offset(10);
+		assume(primaryNormal);
+		letters(" A ").at(new Centered(250,250)).withOval().called("a").sketch();
+		letters(" B ").at(new Centered(375,375)).withOval().called("b").sketch();
+		letters(" C ").at(new Centered(500,500)).withOval().called("c").sketch();
+		letters(" D ").at(new Centered(625,625)).withOval().called("d").sketch();
+		letters(" E ").at(new Centered(750,750)).withOval().called("e").sketch();
+		assume(secondarySmall);
+		letters("layers, packages\nobjects, or functions").at(new Centered(800,420)).called("pieces").in("part1").sketch();
+		spot(640, 480).called("piecesMark").in("part1").appear();
+		connector().from("piecesMark", false).to("c", false).in("part1").sketch();
+		connector().from("piecesMark", false).to("d", false).in("part1").sketch();
+
+		offset(7);
+		assume(primaryNormal);
+		connector().from("a", false).to("b", true).sketch();
+		connector().from("b", false).to("c", true).sketch();
+		connector().from("c", false).to("d", true).sketch();
+		connector().from("d", false).to("e", true).sketch();
+		
+		assume(secondarySmall);
+		letters("dependencies").at(new Centered(470,770)).called("dependencies").in("part1").sketch();
+		spot(565, 570).called("dep1").in("part1").appear();
+		spot(675, 680).called("dep2").in("part1").appear();
+		connector().from("dependencies", false).to("dep1", false).in("part1").sketch();
+		connector().from("dependencies", false).to("dep2", false).in("part1").sketch();
+		return endBuild();                                             
+	}
+
+	public Step chaining2() {
+		buildPhrase();
+		cue(414);
+		party("part1").fadeOut();
+		assume(secondarySmall);
+		offset(8);
+		sketchRect(new PointPair(150,150,440,430), "1");
+		letters("test that A works...").at(new TopLeft(500,180)).sketch();
+		letters("...assuming that B works").at(new TopLeft(500,230)).sketch();
+		offset(8);
+		sketchRect(new PointPair(300,300,560,580),"2");
+		letters("and B works...").at(new TopLeft(650,320)).sketch();
+		letters("...if C works").at(new TopLeft(650,370)).sketch();
+		
+		offset(8);
+		assume(emphaticNormal);
+		letters("Chain Tests Are\nThe Cheapest Tests").at(new TopLeft(100,600)).sketch();
+		return endBuild();                                             
+	}
+
+	private void sketchRect(PointPair bounds, String name) {
+		spot(bounds.from.x,bounds.from.y).called("nw"+name).appear();
+		spot(bounds.from.x,bounds.to.y).called("sw"+name).appear();
+		spot(bounds.to.x,bounds.from.y).called("ne"+name).appear();
+		spot(bounds.to.x,bounds.to.y).called("se"+name).appear();
+		connector().from("nw"+name, false).to("sw"+name, false).sketch();
+		connector().from("sw"+name,false).to("se"+name, false).sketch();
+		connector().from("se"+name, false).to("ne"+name, false).sketch();
+		connector().from("ne"+name, false).to("nw"+name,false).sketch();
 	}
 
 	public Step steering() {
 		buildPhrase();
 		wipe();
-		header("The Steering Premise");
+		header("Steering:  ");
+		offset(17);
+		headerEnd("Testability Helps Steer Our Designs");
+		offset(10);
+		assume(secondaryNormal);
+		letters("factors in our design process...").at(new Centered(450,160)).in("part1").sketch();
+		assume(primaryNormal);
+		offset(6);
+		letters("market").withOval().centered(200,300).in("part1").sketch();
+		offset(6);
+		letters("platform").withOval().centered(700, 700).in("part1").sketch();
+		offset(6);
+		letters(" price ").withOval().centered(450, 700).in("part1").sketch();
+		offset(3);
+		letters("geek skills").withOval().centered(700, 300).in("part1").sketch();
+		offset(2);
+		letters("stability").withOval().centered(200, 500).in("part1").sketch();
+		letters("predictors").withOval().centered(700, 500).in("part1").sketch();
+		offset(2);
+		letters("priorities").withOval().centered(450, 300).in("part1").sketch();
+		letters("performance").withOval().centered(200,700).in("part1").sketch();
+		
+		offset(10);
+		assume(emphaticNormal);
+		letters(" tests &\ntestability").withOval().centered(450, 500).in("part1").sketch();
+		
+		return endBuild();
+	}
+	
+	public Step steering2() {
+		buildPhrase();
+		cue(510);
+		party("part1").fadeOut();
+		assume(primaryNormal);
+		letters("all through development we ask...").at(new Centered(450,180)).sketch();
+		assume(secondaryJumbo);
+		offset(2);
+		letters("is this testable?").at(new Centered(450,280)).called("testable").sketch();
+		offset(2);
+		belowCentered("is the test cheap?", "testable", "cheap", "part2");
+		offset(2);
+		belowCentered("can we make it cheaper?","cheap","cheaper", "part2");
+		
+		offset(4);
+		assume(primaryNormal);
+		letters("Tests and testability become").at(new Centered(450,600)).called("tandt").sketch();
+		assume(emphaticNormal);
+		belowCentered("first class factors","tandt","first","part2");
+		assume(primaryNormal);
+		belowCentered("in steering our design.","first","steer","part2");
 		return endBuild();
 	}
 
@@ -420,21 +547,40 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 	public Step underplayed() {
 		buildPhrase();
 		wipe();
-		Vector<Point> pentagon = polygon(5, 225, new Point(450, 450));
+		cue(528);
+		header("Underplayed?  ");
+		Vector<Point> pentagon = polygon(5, 200, new Point(450, 450));
+
+		Vector<Point> pentagon2 = polygon(5, 250, new Point(450, 450));
+		assume(secondaryNormal);
+		offset(3);
+		letters("money").at(new Centered(pentagon2.get(0))).sketch();
+		offset(1);
+		letters("judgment").at(new Centered(pentagon2.get(1).add(38d, 0))).called("judgment").sketch();
+		offset(1);
+		letters("correlation").at(new Centered(pentagon2.get(2))).called("correlation").sketch();
+		offset(1);
+		letters("chain").at(new Centered(pentagon2.get(3))).sketch();
+		offset(1);
+		letters("steering").at(new Centered(pentagon2.get(4).add(-38d, 0))).sketch();
+		offset(2);
+		assume(primaryNormal);
 		for (int i = 0; i < 5; i++) {
 			spot(pentagon.get(i).x, pentagon.get(i).y).called("P" + i).appear();
 		}
 		for (int i = 0; i < 5; i++) {
-			connector().from("P" + i, false).to("P" + (i + 1) % 5, false).format(secondaryJumbo).appear();
+			connector().from("P" + i, false).to("P" + (i + 1) % 5, false).sketch();
 		}
-
-		Vector<Point> pentagon2 = polygon(5, 275, new Point(450, 450));
-		assume(secondaryNormal);
-		letters("money").at(new Centered(pentagon2.get(0))).appear();
-		letters("judgment").at(new Centered(pentagon2.get(1).add(38d, 0))).appear();
-		letters("correlation").at(new Centered(pentagon2.get(2))).appear();
-		letters("chain").at(new Centered(pentagon2.get(3))).appear();
-		letters("steering").at(new Centered(pentagon2.get(4).add(-38d, 0))).appear();
+		offset(5);
+		headerEnd("Visible Outside, Invisible Inside");
+		
+		assume(emphaticSmall);
+		offset(4);
+		letters("outside,\nwe see them").centered(800,350).called("outside").sketch();
+		connector().from("outside", false).to("judgment", true).sketch();
+		connector().from("outside", false).to("correlation", true).sketch();
+		offset(9);
+		letters("inside\n  we  \n*live*\n them  ").centered(450, 430).sketch();
 		return endBuild();
 	}
 
@@ -444,31 +590,43 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		final double premiseToText = 50d;
 		final double testToPremise = 90d;
 
-		letters("Five Underplayed TDD Premises").at(new TopLeft(new Point(20, 15))).format(secondaryJumbo).appear();
+		header("Five Underplayed TDD Premises");
 		double y = 120d;
-		letters("The Money Premise").at(new TopLeft(20, y)).format(secondaryNormal).appear();
+		
+		assume(primarySmall);
+		letters("The Money Premise").at(new TopLeft(20, y)).sketch();
 		y += premiseToText;
-		letters("We're in this for the money.").at(new TopLeft(60, y)).format(primaryJumbo).appear();
+		assume(secondaryNormal);
+		letters("We're in this for the money.").at(new TopLeft(60, y)).appear();
+		
 		y += testToPremise;
-		letters("The Judgment Premise").at(new TopLeft(20, y)).format(secondaryNormal).appear();
+		assume(primarySmall);
+		letters("The Judgment Premise").at(new TopLeft(20, y)).appear();
 		y += premiseToText;
-		letters("We rely entirely on human judgment.").at(new TopLeft(60, y)).format(primaryJumbo).appear();
+		assume(secondaryNormal);
+		letters("We rely on human judgment.").at(new TopLeft(60, y)).appear();
+		
+		y += testToPremise;
+		assume(primarySmall);
+		letters("The Correlation Premise").at(new TopLeft(20, y)).appear();
+		assume(secondaryNormal);
+		y += premiseToText;
+		letters("Internal quality & productivity correlate.").at(new TopLeft(60, y)).appear();
+		
+		
+		y += testToPremise;
+		assume(primarySmall);
+		letters("The Chain Premise").at(new TopLeft(20, y)).appear();
+		y += premiseToText;
+		assume(secondaryNormal);
+		letters("Test a chain by testing its links.").at(new TopLeft(60, y)).appear();
 
 		y += testToPremise;
-		letters("The Correlation Premise").at(new TopLeft(20, y)).format(secondaryNormal).appear();
+		assume(primarySmall);
+		letters("The Steering Premise").at(new TopLeft(20, y)).appear();
 		y += premiseToText;
-		letters("Internal quality & productivity correlate directly.").at(new TopLeft(60, y)).format(primaryJumbo)
-				.appear();
-
-		y += testToPremise;
-		letters("The Chain Premise").at(new TopLeft(20, y)).format(secondaryNormal).appear();
-		y += premiseToText;
-		letters("Test a chain by testing its links.").at(new TopLeft(60, y)).format(primaryJumbo).appear();
-
-		y += testToPremise;
-		letters("The Steering Premise").at(new TopLeft(20, y)).format(secondaryNormal).appear();
-		y += premiseToText;
-		letters("Tests & testability steer design & development.").at(new TopLeft(60, y)).format(primaryJumbo).appear();
+		assume(secondaryNormal);
+		letters("Testability steers development.").at(new TopLeft(60, y)).appear();
 
 		return endBuild();
 	}

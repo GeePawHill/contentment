@@ -73,7 +73,7 @@ public class Letters extends GenericActor implements Actor
 		if (eastHalfBezier == null)
 		{
 			PointPair raw = new PointPair(letters.text());
-			PointPair points = raw.grow(raw.width()*0.25, raw.height()*0.25);
+			PointPair points = raw.grow(raw.width()*0.25, raw.height()*0.15);
 			eastHalfBezier = new Bezier(points.north(), controlJiggler.jiggle(points.northeast()),
 					controlJiggler.jiggle(points.southeast()), points.south());
 			westHalfBezier = new Bezier(points.south(), controlJiggler.jiggle(points.southwest()),
