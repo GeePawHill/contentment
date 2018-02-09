@@ -1,41 +1,48 @@
 package org.geepawhill.contentment.actors;
 
+import java.util.Random;
+
 import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.BezierAtom;
 import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.geometry.Bezier;
+import org.geepawhill.contentment.geometry.BezierSource;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
-public class Stroke extends GenericActor
-{
+public class Stroke extends GenericActor {
 	private final String nickname;
+	private final Bezier bezier;
 	private final BezierAtom atom;
-	
-	public Stroke(ScriptWorld world, PointPair points)
-	{
-		this(world,points,Format.DEFAULT);
-	}
+	private PointPair points;
+	private Random random;
 
-	public Stroke(ScriptWorld world, PointPair points, Format format)
-	{
+	public Stroke(ScriptWorld world, PointPair points) {
 		super(world);
 		this.nickname = Names.make(getClass());
-		this.atom = new BezierAtom(groupSource(),format,points);
+		random = new Random();
+		this.bezier = jiggle(random, points);
+		this.atom = new BezierAtom(groupSource(), () -> bezier, Format.DEFAULT);
 	}
-	
-	public Stroke format(Format format)
-	{
+
+	public Bezier jiggle(Random random, PointPair points) {
+		double variance = points.distance() * .1;
+		Bezier chosen = new Bezier(points.from, points.along(random.nextDouble()).jiggle(random, 1d, variance),
+				points.along(random.nextDouble()).jiggle(random, 1d, variance), points.to);
+		return chosen;
+	}
+
+	public Stroke format(Format format) {
 		atom.format(format);
 		return this;
 	}
-	
+
 	@Override
-	public Stroke draw(double ms)
-	{
-		world.add(new AtomStep(Timing.ms(ms),atom));
+	public Stroke draw(double ms) {
+		world.add(new AtomStep(Timing.ms(ms), atom));
 		return this;
 	}
 }

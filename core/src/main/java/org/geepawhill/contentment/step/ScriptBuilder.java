@@ -9,6 +9,7 @@ import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.actors.Spot;
 import org.geepawhill.contentment.actors.Stroke;
 import org.geepawhill.contentment.atom.ClearAtom;
+import org.geepawhill.contentment.atom.LettersAtom;
 import org.geepawhill.contentment.atom.MarkAtom;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
@@ -50,6 +51,16 @@ public abstract class ScriptBuilder<SUBCLASS>
 		world.push(new Phrase());
 	}
 	
+	public void buildChord()
+	{
+		world.push(new Chord());
+	}
+	
+	public void endChord()
+	{
+		world.popAndAppend();
+	}
+	
 	public Addable endBuild()
 	{
 		return world.pop();
@@ -69,6 +80,11 @@ public abstract class ScriptBuilder<SUBCLASS>
 	{
 		return new Letters(world,source).assume();
 	}
+	
+	public Stroke stroke(int fromX, int fromY, int toX, int toY) {
+		return new Stroke(world,new PointPair(fromX,fromY,toX,toY));
+	}
+
 	
 	public Party party(String name)
 	{

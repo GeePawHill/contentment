@@ -8,6 +8,7 @@ import org.geepawhill.contentment.atom.LettersAtom;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Jiggler;
+import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.position.Centered;
 import org.geepawhill.contentment.position.Position;
@@ -114,6 +115,10 @@ public class Letters extends GenericActor implements Actor
 
 	public Letters centered(double x, double y) {
 		return at(new Centered(x,y));
+	}
+	
+	public Letters centered(Point p) {
+		return centered(p.x,p.y);
 	}
 
 }

@@ -6,6 +6,7 @@ import org.geepawhill.contentment.atom.ExitAtom;
 import org.geepawhill.contentment.atom.GroupSource;
 import org.geepawhill.contentment.atom.OpacityAtom;
 import org.geepawhill.contentment.step.AtomStep;
+import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.timing.Timing;
 
 import javafx.scene.paint.Paint;
@@ -81,18 +82,22 @@ public abstract class GenericActor implements Actor
 	@Override
 	public Actor fadeOut()
 	{
-		world.add(new AtomStep(Timing.ms(500),new OpacityAtom(entrance, 1, 0)));
+		world.push(new Phrase());
+		world.add(new AtomStep(Timing.ms(500d),new OpacityAtom(entrance, 1, 0)));
 		world.add(new AtomStep(Timing.instant(),new ExitAtom(entrance)));
+		world.popAndAppend();
 		return this;
 	}
 	
 	@Override
 	public Actor fadeIn()
 	{
+		world.push(new Phrase());
 		world.add(new AtomStep(Timing.instant(),entrance));
 		world.add(new AtomStep(Timing.instant(),new OpacityAtom(entrance, 1, 0)));
 		draw(1d);
 		world.add(new AtomStep(Timing.ms(500d),new OpacityAtom(entrance,0,1)));
+		world.popAndAppend();
 		return this;
 	}
 	
