@@ -2,10 +2,10 @@ package org.geepawhill.contentment.test;
 
 import java.util.ArrayList;
 
-import org.geepawhill.contentment.core.Atom;
+import org.geepawhill.contentment.core.Fragment;
 import org.geepawhill.contentment.core.Context;
 
-public class TestAtom implements Atom {
+public class TestAtom implements Fragment {
 	public ArrayList<Double> fractions;
 	public TestAtom()
 	{
@@ -13,13 +13,13 @@ public class TestAtom implements Atom {
 	}
 
 	@Override
-	public void setup(Context context)
+	public void prepare(Context context)
 	{
 		fractions.add(0d);
 	}
 	
 	@Override
-	public boolean partial(Context context, double fraction)
+	public boolean interpolate(Context context, double fraction)
 	{
 		fractions.add(fraction);
 		return true;

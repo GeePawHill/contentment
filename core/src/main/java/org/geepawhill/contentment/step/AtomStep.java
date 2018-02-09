@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.step;
 
-import org.geepawhill.contentment.core.Atom;
-import org.geepawhill.contentment.core.AtomRunner;
+import org.geepawhill.contentment.core.Fragment;
+import org.geepawhill.contentment.core.FragmentTransition;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.timing.Timing;
@@ -9,10 +9,10 @@ import org.geepawhill.contentment.timing.Timing;
 public class AtomStep implements Step
 {
 	
-	private Atom atom;
+	private Fragment atom;
 	private Timing timing;
 
-	public AtomStep(Timing timing,Atom atom)
+	public AtomStep(Timing timing,Fragment atom)
 	{
 		this.timing = timing;
 		this.atom = atom;
@@ -21,14 +21,14 @@ public class AtomStep implements Step
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		new AtomRunner((long)timing.ms(), atom, context, onFinished).play();
+		new FragmentTransition((long)timing.ms(), atom, context, onFinished).play();
 	}
 
 	@Override
 	public void fast(Context context)
 	{
-		atom.setup(context);
-		atom.partial(context, 1d);
+		atom.prepare(context);
+		atom.interpolate(context, 1d);
 	}
 	
 	@Override

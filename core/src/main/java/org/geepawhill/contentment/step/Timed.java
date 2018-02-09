@@ -2,8 +2,8 @@ package org.geepawhill.contentment.step;
 
 import java.util.ArrayList;
 
-import org.geepawhill.contentment.core.Atom;
-import org.geepawhill.contentment.core.AtomRunner;
+import org.geepawhill.contentment.core.Fragment;
+import org.geepawhill.contentment.core.FragmentTransition;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.timing.Scheduler;
@@ -13,7 +13,7 @@ import org.geepawhill.contentment.utility.Names;
 public class Timed implements Step
 {
 	private final Scheduler scheduler;
-	private final ArrayList<Atom> atoms;
+	private final ArrayList<Fragment> atoms;
 	private final ArrayList<Timing> timings;
 
 	private double ms;
@@ -31,18 +31,18 @@ public class Timed implements Step
 		this.scheduler = new Scheduler();
 	}
 
-	public Timed add(Atom atom)
+	public Timed add(Fragment atom)
 	{
 		return add(Timing.instant(), atom);
 	}
 
-	public Timed add(long ms, Atom atom)
+	public Timed add(long ms, Fragment atom)
 	{
 		add(Timing.ms(ms),atom);
 		return this;
 	}
 	
-	public Timed add(Timing timing, Atom atom)
+	public Timed add(Timing timing, Fragment atom)
 	{
 		atoms.add(atom);
 		timings.add(timing);
@@ -52,10 +52,10 @@ public class Timed implements Step
 	@Override
 	public void fast(Context context)
 	{
-		for (Atom atom : atoms)
+		for (Fragment atom : atoms)
 		{
-			atom.setup(context);
-			atom.partial(context, 1d);
+			atom.prepare(context);
+			atom.interpolate(context, 1d);
 		}
 	}
 
@@ -75,9 +75,9 @@ public class Timed implements Step
 
 	private void runCurrent()
 	{
-		Atom atom = atoms.get(current);
+		Fragment atom = atoms.get(current);
 		Timing timing = timings.get(current);
-		new AtomRunner((long)timing.ms(),atom,context,()->next()).play();
+		new FragmentTransition((long)timing.ms(),atom,context,()->next()).play();
 	}
 	
 	private void next()

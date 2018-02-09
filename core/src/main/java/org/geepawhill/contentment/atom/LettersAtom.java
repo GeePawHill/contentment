@@ -28,7 +28,7 @@ public class LettersAtom implements NodeAtom
 	}
 
 	@Override
-	public boolean partial(Context context, double fraction)
+	public boolean interpolate(Context context, double fraction)
 	{
 		String partialSource = source.substring(0, (int) (fraction * source.length()));
 		if (!partialSource.equals(lastPartial))
@@ -40,7 +40,7 @@ public class LettersAtom implements NodeAtom
 	}
 
 	@Override
-	public void setup(Context context)
+	public void prepare(Context context)
 	{
 		this.text = new Text();
 		if (source == null || source.isEmpty()) source = " ";

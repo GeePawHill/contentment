@@ -1,9 +1,9 @@
 package org.geepawhill.contentment.atom;
 
-import org.geepawhill.contentment.core.Atom;
+import org.geepawhill.contentment.core.Fragment;
 import org.geepawhill.contentment.core.Context;
 
-public class OpacityAtom implements Atom
+public class OpacityAtom implements Fragment
 {
 	private GroupSource actor;
 	private double from;
@@ -17,13 +17,13 @@ public class OpacityAtom implements Atom
 	}
 
 	@Override
-	public void setup(Context context)
+	public void prepare(Context context)
 	{
 		actor.get().setOpacity(from);
 	}
 
 	@Override
-	public boolean partial(Context context, double fraction)
+	public boolean interpolate(Context context, double fraction)
 	{
 		actor.get().setOpacity(from + fraction * (to - from));
 		return true;

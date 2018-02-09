@@ -1,9 +1,9 @@
 package org.geepawhill.contentment.atom;
 
-import org.geepawhill.contentment.core.Atom;
+import org.geepawhill.contentment.core.Fragment;
 import org.geepawhill.contentment.core.Context;
 
-public class ClearAtom implements Atom
+public class ClearAtom implements Fragment
 {
 	
 	public ClearAtom()
@@ -11,13 +11,13 @@ public class ClearAtom implements Atom
 	}
 
 	@Override
-	public void setup(Context context)
+	public void prepare(Context context)
 	{
 		context.canvas.getChildren().clear();
 	}
 
 	@Override
-	public boolean partial(Context context, double fraction)
+	public boolean interpolate(Context context, double fraction)
 	{
 		return false;
 	}

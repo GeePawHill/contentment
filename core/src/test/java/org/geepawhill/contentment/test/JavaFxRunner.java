@@ -4,8 +4,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-import org.geepawhill.contentment.core.Atom;
-import org.geepawhill.contentment.core.AtomRunner;
+import org.geepawhill.contentment.core.Fragment;
+import org.geepawhill.contentment.core.FragmentTransition;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.step.Step;
 
@@ -92,14 +92,14 @@ public class JavaFxRunner
 		}
 	}
 
-	public void play(long ms, Atom atom)
+	public void play(long ms, Fragment atom)
 	{
 		Consumer<CountDownLatch> action = new Consumer<CountDownLatch>()
 		{
 			@Override
 			public void accept(CountDownLatch latch)
 			{
-				new AtomRunner(ms,atom,context,()->latch.countDown()).play();
+				new FragmentTransition(ms,atom,context,()->latch.countDown()).play();
 			}
 		};
 		actLater(action);

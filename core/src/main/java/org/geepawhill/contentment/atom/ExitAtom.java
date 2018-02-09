@@ -1,9 +1,9 @@
 package org.geepawhill.contentment.atom;
 
-import org.geepawhill.contentment.core.Atom;
+import org.geepawhill.contentment.core.Fragment;
 import org.geepawhill.contentment.core.Context;
 
-public class ExitAtom implements Atom
+public class ExitAtom implements Fragment
 {
 	private GroupSource actor;
 
@@ -14,12 +14,12 @@ public class ExitAtom implements Atom
 	}
 
 	@Override
-	public void setup(Context context)
+	public void prepare(Context context)
 	{
 	}
 
 	@Override
-	public boolean partial(Context context, double fraction)
+	public boolean interpolate(Context context, double fraction)
 	{
 		context.remove(actor);
 		return false;

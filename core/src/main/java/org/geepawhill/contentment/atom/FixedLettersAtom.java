@@ -37,7 +37,7 @@ public class FixedLettersAtom implements NodeAtom
 	}
 
 	@Override
-	public void setup(Context context)
+	public void prepare(Context context)
 	{
 		canvas = new Canvas(cellWidth*columns,cellHeight*rows);
 		at.position(canvas,new PointPair(0,0,cellWidth*columns,cellHeight*rows));
@@ -45,7 +45,7 @@ public class FixedLettersAtom implements NodeAtom
 	}
 
 	@Override
-	public boolean partial(Context context, double fraction)
+	public boolean interpolate(Context context, double fraction)
 	{
 		return false;
 	}

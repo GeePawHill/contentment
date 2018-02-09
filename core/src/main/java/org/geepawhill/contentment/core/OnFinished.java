@@ -1,8 +1,15 @@
 package org.geepawhill.contentment.core;
 
-public interface OnFinished extends Runnable
-{
-
+/**
+ * Typedef for Runnable with added standard constant NONE.
+ * 
+ * @author GeePaw
+ *
+ */
+public interface OnFinished extends Runnable {
+	/**
+	 * A no-op Runnable
+	 */
 	OnFinished NONE = () -> {
 	};
 }

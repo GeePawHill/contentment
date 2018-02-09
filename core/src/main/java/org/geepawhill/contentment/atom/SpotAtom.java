@@ -1,13 +1,13 @@
 package org.geepawhill.contentment.atom;
 
-import org.geepawhill.contentment.core.Atom;
+import org.geepawhill.contentment.core.Fragment;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.utility.JfxUtility;
 
 import javafx.scene.shape.Circle;
 
-public class SpotAtom implements Atom
+public class SpotAtom implements Fragment
 {
 	private Circle circle;
 	private GroupSource actor;
@@ -20,12 +20,12 @@ public class SpotAtom implements Atom
 	}
 
 	@Override
-	public void setup(Context context)
+	public void prepare(Context context)
 	{
 	}
 
 	@Override
-	public boolean partial(Context context, double fraction)
+	public boolean interpolate(Context context, double fraction)
 	{
 		JfxUtility.addIfNeeded(actor, circle);
 		return false;
