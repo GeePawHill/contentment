@@ -33,7 +33,6 @@ import org.geepawhill.contentment.rhythm.MediaRhythm;
 import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.step.Chord;
 import org.geepawhill.contentment.step.ScriptBuilder;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
@@ -114,7 +113,7 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 		return script;
 	}
 	
-	private Step leadIn() {
+	private Gesture leadIn() {
 		buildPhrase();
 		wipe();
 		cue(0);
@@ -128,7 +127,7 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 		return endBuild();
 	}
 
-	private Step opening() {
+	private Gesture opening() {
 		buildPhrase();
 		wipe();
 		cue(4);
@@ -183,7 +182,7 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 
 	
 
-	public Step explanation() {
+	public Gesture explanation() {
 		buildPhrase();
 		cue(90);
 		wipe();
@@ -259,7 +258,7 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 		return endBuild();
 	}
 	
-	public Step programming() {
+	public Gesture programming() {
 		buildPhrase();
 		cue(149);
 		wipe();
@@ -334,7 +333,7 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 		return endBuild();                                             
 	}
 
-	public Step scanning1() {
+	public Gesture scanning1() {
 		buildPhrase();
 		cue(202);
 		wipe();
@@ -378,7 +377,7 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 		return endBuild();
 	}
 	
-	public Step scanning2() {
+	public Gesture scanning2() {
 		buildPhrase();
 		cue(240);
 		wipe();
@@ -428,7 +427,7 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 		return endBuild();                                             
 	}
 
-	public Step scanning3() {
+	public Gesture scanning3() {
 		buildPhrase();
 		cue(303);
 		party("part1").fadeOut();
@@ -457,7 +456,7 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 	
 
 	
-	public Step optimizing1() {
+	public Gesture optimizing1() {
 		buildPhrase();
 		wipe();
 		cue(328);
@@ -493,7 +492,7 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 	}
 
 
-	public Step optimizing2() {
+	public Gesture optimizing2() {
 		buildPhrase();
 		party("part1").fadeOut();
 		cue(360);
@@ -548,7 +547,7 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 		return endBuild();
 	}
 	
-	public Step outro() {
+	public Gesture outro() {
 		buildPhrase();
 		cue(462);
 		wipe();

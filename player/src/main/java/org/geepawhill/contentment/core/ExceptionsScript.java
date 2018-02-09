@@ -28,7 +28,6 @@ import org.geepawhill.contentment.position.TopLeft;
 import org.geepawhill.contentment.position.TopRight;
 import org.geepawhill.contentment.rhythm.MediaRhythm;
 import org.geepawhill.contentment.step.ScriptBuilder;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
@@ -104,7 +103,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		return script;
 	}
 	
-	private Step opening()
+	private Gesture opening()
 	{
 		buildPhrase();
 		cue(0).slide().enter().head("Microtesting Exceptions");
@@ -133,7 +132,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		return endBuild();
 	}
 
-	private Step special()
+	private Gesture special()
 	{
 		buildPhrase();
 		cue(60).party("remainder").reColor(Color.RED);
@@ -153,7 +152,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		return endBuild();
 	}
 	
-	private Step indirectCall()
+	private Gesture indirectCall()
 	{
 		buildPhrase();
 		cue(111).slide().head("How Throw & Catch Work");
@@ -185,7 +184,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		return endBuild();
 	}
 
-	private Step dependencies()
+	private Gesture dependencies()
 	{
 		buildPhrase();
 		wipe();
@@ -207,7 +206,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		return endBuild();
 	}
 	
-	public Step whatToTest()
+	public Gesture whatToTest()
 	{
 		buildPhrase();
 		wipe().slide().enter().head("What Could Go Wrong?");
@@ -224,7 +223,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		return endBuild();
 	}
 
-	public Step simplestCase()
+	public Gesture simplestCase()
 	{
 		buildPhrase();
 		wipe().slide().enter();
@@ -255,7 +254,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		return endBuild();
 	}
 	
-	public Step testingTheCatcher()
+	public Gesture testingTheCatcher()
 	{
 		buildPhrase();
 		wipe().slide().enter();
@@ -279,14 +278,14 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		return endBuild();
 	}
 	
-	public Step stackDistance()
+	public Gesture stackDistance()
 	{
 		buildPhrase();
 		wipe().slide().enter().head("A Difficult Case");
 		return endBuild();
 	}
 
-	public Step playingFair()
+	public Gesture playingFair()
 	{
 		buildPhrase();
 		wipe().slide().enter();
@@ -314,7 +313,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		return endBuild();
 	}
 
-	public Step cheating()
+	public Gesture cheating()
 	{
 		buildPhrase();
 		wipe().slide().enter();
@@ -322,7 +321,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		return endBuild();
 	}
 	
-	public Step extractAndOverride()
+	public Gesture extractAndOverride()
 	{
 		buildPhrase();
 		wipe().slide().enter();
@@ -351,7 +350,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		return endBuild();
 	}
 
-	public Step theTestableCatcher()
+	public Gesture theTestableCatcher()
 	{
 		buildPhrase();
 		wipe().slide().enter();
@@ -359,7 +358,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		return endBuild();
 	}
 	
-	public Step notReallyCheating()
+	public Gesture notReallyCheating()
 	{
 		buildPhrase();
 		wipe().slide().enter();
@@ -367,7 +366,7 @@ public class ExceptionsScript extends ScriptBuilder<ExceptionsScript>
 		return endBuild();
 	}
 	
-	public Step outro()
+	public Gesture outro()
 	{
 		buildPhrase();
 		wipe().slide().enter();

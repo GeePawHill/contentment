@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.core;
 /**
  * A Fragment of some Gesture. Sometimes gestures need multiple tiny steps to
- * complete.
+ * complete. These are Fragments.
  * <P>
  * An example would be drawing some text with an oval around it. The underlying
  * engine isn't capable of doing this in one command, so we have to knit
@@ -27,7 +27,6 @@ public interface Fragment
 	 * <p>
 	 * The fraction is between 0.0 and 1.0. If, say, it comes in at .25, the
 	 * intention is that the fragment do 1/4 of the work to be done.
-	 * <P>
 	 * In normal operation, the engine guarantees that interpolate will be called at
 	 * fraction 1.0, <i>but provides no such guarantee at 0.0.</i>
 	 * <P>
@@ -41,7 +40,7 @@ public interface Fragment
 	 * 
 	 * @param fraction
 	 * 
-	 * @return
+	 * @return <b>true</b> to continue the interpolation, <b>false</b> to indicate early completion.
 	 */
 	public boolean interpolate(Context context, double fraction);
 }

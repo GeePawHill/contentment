@@ -1,18 +1,18 @@
 package org.geepawhill.contentment.player;
 
-import org.geepawhill.contentment.step.Step;
+import org.geepawhill.contentment.core.Gesture;
 
 public class Keyframe
 {
 	public final long target;
-	public final Step phrase;
+	public final Gesture phrase;
 	
-	public Keyframe(Step phrase)
+	public Keyframe(Gesture phrase)
 	{
 		this(0,phrase);
 	}
 
-	public Keyframe(long target, Step phrase)
+	public Keyframe(long target, Gesture phrase)
 	{
 		this.target = target*1000;
 		this.phrase = phrase;

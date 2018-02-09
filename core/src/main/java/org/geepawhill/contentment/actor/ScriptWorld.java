@@ -3,9 +3,9 @@ package org.geepawhill.contentment.actor;
 import java.util.HashMap;
 import java.util.Stack;
 
+import org.geepawhill.contentment.core.Gesture;
 import org.geepawhill.contentment.format.Assumptions;
 import org.geepawhill.contentment.step.Addable;
-import org.geepawhill.contentment.step.Step;
 
 public class ScriptWorld
 {
@@ -22,7 +22,7 @@ public class ScriptWorld
 		assumptions = new Assumptions();
 	}
 	
-	public void add(Step step)
+	public void add(Gesture step)
 	{
 		getWorking().add(step);
 	}

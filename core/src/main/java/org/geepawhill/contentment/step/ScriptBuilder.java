@@ -11,6 +11,7 @@ import org.geepawhill.contentment.actors.Stroke;
 import org.geepawhill.contentment.atom.ClearAtom;
 import org.geepawhill.contentment.atom.LettersAtom;
 import org.geepawhill.contentment.atom.MarkAtom;
+import org.geepawhill.contentment.core.Gesture;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
@@ -41,7 +42,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 		return cue(lastCue+offset);
 	}
 	
-	private void addToWorking(Step step)
+	private void addToWorking(Gesture step)
 	{
 		world.add(step);
 	}

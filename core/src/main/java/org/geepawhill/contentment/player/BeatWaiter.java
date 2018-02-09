@@ -3,8 +3,8 @@ package org.geepawhill.contentment.player;
 import java.util.function.Supplier;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Gesture;
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.step.Step;
 
 import javafx.animation.Transition;
 import javafx.util.Duration;
@@ -12,12 +12,12 @@ import javafx.util.Duration;
 public class BeatWaiter
 {
 	private Context context;
-	private Step step;
+	private Gesture step;
 	private OnFinished onFinished;
 	private Transition animator;
 	private Supplier<Boolean> isDone;
 
-	public BeatWaiter(Context context, Step step, Supplier<Boolean> isDone, OnFinished onFinished)
+	public BeatWaiter(Context context, Gesture step, Supplier<Boolean> isDone, OnFinished onFinished)
 	{
 		this.context = context;
 		this.step = step;

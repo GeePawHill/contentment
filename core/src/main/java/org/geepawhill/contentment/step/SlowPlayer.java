@@ -3,16 +3,17 @@ package org.geepawhill.contentment.step;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Gesture;
 import org.geepawhill.contentment.core.OnFinished;
 
 class SlowPlayer
 {
 	private int current;
 	private OnFinished onFinished;
-	private ArrayList<Step> playables;
+	private ArrayList<Gesture> playables;
 	private Context context;
 
-	public SlowPlayer(Context context, OnFinished onFinished, ArrayList<Step> playables)
+	public SlowPlayer(Context context, OnFinished onFinished, ArrayList<Gesture> playables)
 	{
 		this.context = context;
 		this.onFinished = onFinished;
@@ -24,7 +25,7 @@ class SlowPlayer
 		}
 		else
 		{
-			Step step = playables.get(current);
+			Gesture step = playables.get(current);
 			step.slow(context, () -> next());
 		}
 	}
@@ -38,7 +39,7 @@ class SlowPlayer
 		}
 		else
 		{
-			Step step = playables.get(current);
+			Gesture step = playables.get(current);
 			step.slow(context, () -> next());
 		}
 	}

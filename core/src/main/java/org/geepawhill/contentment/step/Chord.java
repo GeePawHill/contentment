@@ -3,11 +3,12 @@ package org.geepawhill.contentment.step;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Gesture;
 import org.geepawhill.contentment.core.OnFinished;
 
 public class Chord implements Addable
 {
-	private final ArrayList<Step> playables;
+	private final ArrayList<Gesture> playables;
 	private OnFinished onFinished;
 	private int finished;
 	
@@ -16,7 +17,7 @@ public class Chord implements Addable
 		this.playables = new ArrayList<>();
 	}
 
-	public Chord add(Step Step)
+	public Chord add(Gesture Step)
 	{
 		playables.add(Step);
 		return this;
@@ -25,7 +26,7 @@ public class Chord implements Addable
 	@Override
 	public void dump()
 	{
-		for(Step step : playables)
+		for(Gesture step : playables)
 		{
 			System.out.println(step);
 		}
@@ -35,7 +36,7 @@ public class Chord implements Addable
 	@Override
 	public void fast(Context context)
 	{
-		for(Step Step : playables)
+		for(Gesture Step : playables)
 		{
 			Step.fast(context);
 		}
@@ -46,7 +47,7 @@ public class Chord implements Addable
 	{
 		this.onFinished = onFinished;
 		this.finished = 0;
-		for(Step Step : playables)
+		for(Gesture Step : playables)
 		{
 			Step.slow(context, ()->next());
 		}

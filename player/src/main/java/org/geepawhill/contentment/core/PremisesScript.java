@@ -32,7 +32,6 @@ import org.geepawhill.contentment.position.TopRight;
 import org.geepawhill.contentment.rhythm.MediaRhythm;
 import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.step.ScriptBuilder;
-import org.geepawhill.contentment.step.Step;
 import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
@@ -117,7 +116,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		return script;
 	}
 	
-	private Step leadIn() {
+	private Gesture leadIn() {
 		buildPhrase();
 		wipe();
 		cue(0);
@@ -131,7 +130,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		return endBuild();
 	}
 
-	private Step opening() {
+	private Gesture opening() {
 		buildPhrase();
 		wipe();
 		cue(0);
@@ -164,7 +163,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		return endBuild();
 	}
 
-	public Step money() {
+	public Gesture money() {
 		buildPhrase();
 		cue(30);
 		wipe();
@@ -193,7 +192,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		return endBuild();
 	}
 
-	public Step money2() {
+	public Gesture money2() {
 		buildPhrase();
 		cue(75);
 		party("part1").fadeOut();
@@ -236,7 +235,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		return endBuild();
 	}
 
-	public Step money3() {
+	public Gesture money3() {
 		buildPhrase();
 		cue(132);
 		party("part2").fadeOut();
@@ -250,7 +249,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		return endBuild();
 	}
 
-	public Step judgment() {
+	public Gesture judgment() {
 		buildPhrase();
 		cue(151);
 		wipe();
@@ -282,7 +281,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		return endBuild();
 	}
 
-	public Step judgment2() {
+	public Gesture judgment2() {
 		buildPhrase();
 		cue(194);
 		party("part1").fadeOut();
@@ -300,7 +299,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		return endBuild();
 	}
 
-	public Step judgment3() {
+	public Gesture judgment3() {
 		buildPhrase();
 		cue(234);
 		party("part2").fadeOut();
@@ -322,7 +321,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		return endBuild();
 	}
 
-	public Step correlation() {
+	public Gesture correlation() {
 		buildPhrase();
 		cue(251);
 		wipe();
@@ -347,7 +346,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		return endBuild();
 	}
 
-	public Step correlation2() {
+	public Gesture correlation2() {
 		buildPhrase();
 		cue(272);
 		party("part1").fadeOut();
@@ -389,7 +388,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		return endBuild();
 	}
 	
-	public Step correlation3() {
+	public Gesture correlation3() {
 		buildPhrase();
 		cue(319);
 		party("part2").fadeOut();
@@ -412,7 +411,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		return endBuild();
 	}
 	
-	public Step chaining() {
+	public Gesture chaining() {
 		buildPhrase();
 		wipe();
 		cue(380);
@@ -449,7 +448,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		return endBuild();                                             
 	}
 
-	public Step chaining2() {
+	public Gesture chaining2() {
 		buildPhrase();
 		cue(414);
 		party("part1").fadeOut();
@@ -480,7 +479,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		connector().from("ne"+name, false).to("nw"+name,false).sketch();
 	}
 
-	public Step steering() {
+	public Gesture steering() {
 		buildPhrase();
 		wipe();
 		header("Steering:  ");
@@ -512,7 +511,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		return endBuild();
 	}
 	
-	public Step steering2() {
+	public Gesture steering2() {
 		buildPhrase();
 		cue(510);
 		party("part1").fadeOut();
@@ -544,7 +543,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		letters(end).format(secondaryJumbo).at(new RightOf(actor("header").groupSource())).sketch();
 	}
 
-	public Step underplayed() {
+	public Gesture underplayed() {
 		buildPhrase();
 		wipe();
 		cue(528);
@@ -584,7 +583,7 @@ public class PremisesScript extends ScriptBuilder<PremisesScript> {
 		return endBuild();
 	}
 
-	public Step outro() {
+	public Gesture outro() {
 		buildPhrase();
 		wipe();
 		final double premiseToText = 50d;

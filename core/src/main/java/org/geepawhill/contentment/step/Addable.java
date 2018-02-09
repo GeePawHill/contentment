@@ -1,9 +1,11 @@
 package org.geepawhill.contentment.step;
 
-public interface Addable extends Step
+import org.geepawhill.contentment.core.Gesture;
+
+public interface Addable extends Gesture
 {
 
-	Addable add(Step Step);
+	Addable add(Gesture Step);
 	void dump();
 
 }

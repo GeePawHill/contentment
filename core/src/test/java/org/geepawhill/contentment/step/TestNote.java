@@ -1,9 +1,10 @@
 package org.geepawhill.contentment.step;
 
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Gesture;
 import org.geepawhill.contentment.core.OnFinished;
 
-public class TestNote implements Step
+public class TestNote implements Gesture
 {
 	static public enum State
 	{

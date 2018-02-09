@@ -6,8 +6,8 @@ import java.util.function.Consumer;
 
 import org.geepawhill.contentment.core.Fragment;
 import org.geepawhill.contentment.core.FragmentTransition;
+import org.geepawhill.contentment.core.Gesture;
 import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.step.Step;
 
 import javafx.animation.Transition;
 import javafx.application.Platform;
@@ -45,7 +45,7 @@ public class JavaFxRunner
 		
 	}
 
-	public void slow(Step step)
+	public void slow(Gesture step)
 	{
 		Consumer<CountDownLatch> action = new Consumer<CountDownLatch>()
 		{
@@ -58,7 +58,7 @@ public class JavaFxRunner
 		actLater(action);
 	}
 
-	public void fast(Step step)
+	public void fast(Gesture step)
 	{
 		Consumer<CountDownLatch> action = new Consumer<CountDownLatch>()
 		{
