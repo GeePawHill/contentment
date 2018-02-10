@@ -12,9 +12,9 @@ import javafx.scene.text.Text;
 
 public class LettersAtom implements NodeAtom
 {
+	public final String source;
 	private Text text;
 	private GroupSource group;
-	private String source;
 	private Format format;
 	private Position position;
 	private String lastPartial;
@@ -22,6 +22,7 @@ public class LettersAtom implements NodeAtom
 	public LettersAtom(GroupSource group, String source, Format format, Position position)
 	{
 		this.group = group;
+		if (source == null || source.isEmpty()) source = " ";
 		this.source = source;
 		this.format = format;
 		this.position = position;
@@ -43,7 +44,6 @@ public class LettersAtom implements NodeAtom
 	public void prepare(Context context)
 	{
 		this.text = new Text();
-		if (source == null || source.isEmpty()) source = " ";
 		text.setText(source);
 		format.apply(TypeFace.FACE, text);
 		format.apply(TypeFace.COLOR, text);

@@ -98,8 +98,8 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 
 	public Script make() {
 		script = new Script(
-//				new MediaRhythm(new File("d:\\GeePawHillDotOrg\\videos\\optimizing.home\\finalFaceoverSequence.mp4")));
-				new SimpleRhythm());
+				new MediaRhythm(new File("d:\\GeePawHillDotOrg\\videos\\optimizing.home\\finalFaceoverSequence.mp4")));
+//				new SimpleRhythm());
 		script.add(new Keyframe(0, leadIn()));
 		script.add(new Keyframe(4, opening()));
 		script.add(new Keyframe(88, explanation()));

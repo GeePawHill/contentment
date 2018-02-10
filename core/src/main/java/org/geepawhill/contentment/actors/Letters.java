@@ -52,6 +52,7 @@ public class Letters extends GenericActor implements Actor
 	@Override
 	public Letters draw(double ms)
 	{
+		ms = letters.source.length()*25d;
 		Timed timed = new Timed(ms);
 		timed.add(Timing.weighted(7), letters);
 		if (hasOval)
