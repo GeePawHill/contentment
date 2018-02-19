@@ -4,16 +4,6 @@ import java.util.Vector;
 
 public class Flow
 {
-	public static enum Color
-	{
-		Primary, Secondary, Emphatic
-	};
-
-	public static enum Size
-	{
-		Jumbo, Normal, Small
-	};
-
 	public static class Line
 	{
 		public String text;

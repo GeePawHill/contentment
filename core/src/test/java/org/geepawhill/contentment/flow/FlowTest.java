@@ -24,13 +24,13 @@ public class FlowTest
 				+ "xnThis is primary normal.\n"
 				+ "esThis is emphatic small.\n");
 		assertThat(flow.lines().size()).isEqualTo(4);
-		assertLine(0,"This is primary jumbo.", Flow.Color.Primary, Flow.Size.Jumbo);
-		assertLine(1,"This is secondary normal.", Flow.Color.Secondary, Flow.Size.Normal);
-		assertLine(2,"This is primary normal.", Flow.Color.Primary, Flow.Size.Normal);
-		assertLine(3,"This is emphatic small.", Flow.Color.Emphatic, Flow.Size.Small);
+		assertLine(0,"This is primary jumbo.", Color.Primary, Size.Jumbo);
+		assertLine(1,"This is secondary normal.", Color.Secondary, Size.Normal);
+		assertLine(2,"This is primary normal.", Color.Primary, Size.Normal);
+		assertLine(3,"This is emphatic small.", Color.Emphatic, Size.Small);
 	}
 	
-	public void assertLine(int index,String text, Flow.Color color, Flow.Size size)
+	public void assertLine(int index,String text, Color color, Size size)
 	{
 		Flow.Line line = flow.lines().get(index);
 		assertThat(line.text).isEqualTo(text);
