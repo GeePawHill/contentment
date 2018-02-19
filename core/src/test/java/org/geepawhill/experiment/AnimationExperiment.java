@@ -4,10 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.geepawhill.contentment.test.JavaFxTest;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javafx.animation.AnimationTimer;
 
+@Ignore
 public class AnimationExperiment extends JavaFxTest
 {
 

@@ -5,8 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.geepawhill.contentment.test.JavaFxTest;
 import org.geepawhill.contentment.test.TestAtom;
 import org.geepawhill.contentment.timing.Timing;
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 public class AtomStepTest extends JavaFxTest
 {
 	

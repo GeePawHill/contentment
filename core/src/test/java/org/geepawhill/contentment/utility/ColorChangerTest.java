@@ -4,12 +4,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.geepawhill.contentment.test.JavaFxTest;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-
+@Ignore
 public class ColorChangerTest extends JavaFxTest
 {
 

@@ -5,8 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.test.JavaFxTest;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
-
+@Ignore
 public class PhraseTest extends JavaFxTest
 {
 	private Phrase empty;
