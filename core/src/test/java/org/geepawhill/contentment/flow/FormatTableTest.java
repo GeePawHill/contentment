@@ -1,39 +1,56 @@
 package org.geepawhill.contentment.flow;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
 
-import static org.geepawhill.contentment.utility.JfxUtility.color;
-import static org.junit.Assert.*;
-
-import org.geepawhill.contentment.format.Format;
+import org.junit.Before;
 import org.junit.Test;
-
-import javafx.scene.paint.Paint;
 
 public class FormatTableTest
 {
-
 	private FormatTable table;
 
-	@Test
-	public void test()
+	@Before
+	public void before()
 	{
-		final double jumbo = 80d;
-		final double normal = 55d;
-		final double small = 45d;
-
-		Paint primary = color(119, 187, 65);
-		Paint secondary = color(177, 140, 254);
-		Paint emphatic = color(255, 255, 0);
-
 		table = new FormatTable();
-		Format format = table.get(Size.Jumbo,Color.Primary);
-		for( Size size : Size.values())
+	}
+
+	@Test
+	public void findsAllNineValues()
+	{
+		for (Size size : Size.values())
 		{
-			for( Color color : Color.values())
+			if(size.equals(Size.None)) continue;
+			for (Color color : Color.values())
 			{
+				if(color.equals(Color.None)) continue;
 				assertThat(table.get(size, color)).isNotNull();
 			}
 		}
 	}
 
+	@Test
+	public void missingSize()
+	{
+		try
+		{
+			table.get(Size.None, Color.Emphatic);
+			fail("No throw on missing size.");
+		}
+		catch (FormatTable.EntryNotFoundException e)
+		{
+			assertThat(e.getMessage()).endsWith("Size not found.");
+		}
+		try
+		{
+			table.get(Size.Jumbo, Color.None);
+			fail("No throw on missing color.");
+		}
+		catch (FormatTable.EntryNotFoundException e)
+		{
+			assertThat(e.getMessage()).endsWith("Color not found.");
+		}
+
+	}
 }

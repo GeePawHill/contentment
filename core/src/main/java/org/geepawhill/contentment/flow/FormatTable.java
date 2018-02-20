@@ -15,7 +15,7 @@ import javafx.scene.text.FontPosture;
 
 public class FormatTable
 {
-	Map<Size,Map<Color,Format>> sizes;
+	Map<Size,Map<Color,Format>> sizeToColors;
 	
 	static class EntryNotFoundException extends RuntimeException
 	{
@@ -37,31 +37,31 @@ public class FormatTable
 		Paint secondary = color(177, 140, 254);
 		Paint emphatic = color(255, 255, 0);
 
-		sizes = new HashMap<>();
+		sizeToColors = new HashMap<>();
 		
 		Map<Color,Format> jumbos = new HashMap<>();
 		jumbos.put(Color.Primary, format(primary,jumbo));
 		jumbos.put(Color.Secondary, format(secondary,jumbo));
 		jumbos.put(Color.Emphatic, format(emphatic,jumbo));
-		sizes.put(Size.Jumbo, jumbos);
+		sizeToColors.put(Size.Jumbo, jumbos);
 		
 		Map<Color,Format> normals = new HashMap<>();
 		normals.put(Color.Primary, format(primary,normal));
 		normals.put(Color.Secondary, format(secondary,normal));
 		normals.put(Color.Emphatic, format(emphatic,normal));
-		sizes.put(Size.Normal, normals);
+		sizeToColors.put(Size.Normal, normals);
 		
 		Map<Color,Format> smalls = new HashMap<>();
 		smalls.put(Color.Primary, format(primary,small));
 		smalls.put(Color.Secondary, format(secondary,small));
 		smalls.put(Color.Emphatic, format(emphatic,small));
 		
-		sizes.put(Size.Small, smalls);
+		sizeToColors.put(Size.Small, smalls);
 	}
 
 	public Format get(Size size, Color color)
 	{
-		Map<Color,Format> colorToFormat = sizes.get(size);
+		Map<Color,Format> colorToFormat = sizeToColors.get(size);
 		if(colorToFormat==null) throw new EntryNotFoundException(size,color,"Size not found.");
 		Format result = colorToFormat.get(color);
 		if(result==null) throw new EntryNotFoundException(size,color,"Color not found.");

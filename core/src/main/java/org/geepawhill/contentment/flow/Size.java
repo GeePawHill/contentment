@@ -2,5 +2,5 @@ package org.geepawhill.contentment.flow;
 
 public enum Size
 {
-	Jumbo, Normal, Small
+	Jumbo, Normal, Small, None
 }
