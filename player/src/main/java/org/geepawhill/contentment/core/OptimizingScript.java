@@ -12,6 +12,7 @@ import org.geepawhill.contentment.actors.Cross;
 import org.geepawhill.contentment.actors.FixedLetters;
 import org.geepawhill.contentment.actors.Slide;
 import org.geepawhill.contentment.atom.LettersAtom;
+import org.geepawhill.contentment.flow.Flow;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.format.Style;
 import org.geepawhill.contentment.geometry.Grid;
@@ -117,12 +118,22 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 		buildPhrase();
 		wipe();
 		cue(0);
-		letters("GeePaw's Notebook:").format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").appear();
-		assume(secondaryJumbo);
-		letters("Optimizing a Program\nAnd Optimizing Programming").centered(450, 450).appear();
-		assume(emphaticSmall);
-		letters("Copyright (C) 2018, GeePawHill. All rights reserved.").at(new TopLeft(20,825)).appear();
-		offset(3);
+		Flow flow = new Flow(world);
+		flow.load("pjThis is primary jumbo.\n"
+				+ "snThis is secondary normal.\n"
+				+ "xnThis is primary normal.\n"
+				+ "esThis is emphatic small.\n");
+
+		for(int i=0;i<4;i++)
+		{
+			flow.letters(i).appear();
+		}
+//		letters("GeePaw's Notebook:").format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").appear();
+//		assume(secondaryJumbo);
+//		letters("Optimizing a Program\nAnd Optimizing Programming").centered(450, 450).appear();
+//		assume(emphaticSmall);
+//		letters("Copyright (C) 2018, GeePawHill. All rights reserved.").at(new TopLeft(20,825)).appear();
+		offset(20);
 
 		return endBuild();
 	}

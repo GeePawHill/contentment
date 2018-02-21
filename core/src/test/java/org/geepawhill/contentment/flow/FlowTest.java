@@ -2,18 +2,25 @@ package org.geepawhill.contentment.flow;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Vector;
+
+import org.geepawhill.contentment.actor.ScriptWorld;
+import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.test.JavaFxTest;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FlowTest
+public class FlowTest extends JavaFxTest
 {
 
 	private Flow flow;
+	private ScriptWorld world;
 	
 	@Before
 	public void before()
 	{
-		flow = new Flow();
+		world = new ScriptWorld();
+		flow = new Flow(world);
 	}
 
 	@Test
@@ -28,6 +35,7 @@ public class FlowTest
 		assertLine(1,"This is secondary normal.", Color.Secondary, Size.Normal);
 		assertLine(2,"This is primary normal.", Color.Primary, Size.Normal);
 		assertLine(3,"This is emphatic small.", Color.Emphatic, Size.Small);
+		assertCoordinates(flow.lines());
 	}
 	
 	public void assertLine(int index,String text, Color color, Size size)
@@ -36,6 +44,17 @@ public class FlowTest
 		assertThat(line.text).isEqualTo(text);
 		assertThat(line.color).isEqualTo(color);
 		assertThat(line.size).isEqualTo(size);
+	}
+	
+	public void assertCoordinates(Vector<Flow.Line> lines )
+	{
+		Double lastEndY = -1d;
+		for(Flow.Line line : lines)
+		{
+			assertThat(line.layout.from.x).isEqualTo(0);
+			assertThat(line.layout.from.y).isGreaterThan(lastEndY);
+			lastEndY = line.layout.to.y;
+		}
 	}
 
 }
