@@ -2,18 +2,21 @@ package org.geepawhill.contentment.core;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.geepawhill.contentment.test.JavaFxTest;
+import org.geepawhill.contentment.test.ContentmentTest;
+import org.geepawhill.contentment.test.JavaFxRunner;
 import org.geepawhill.contentment.test.TestAtom;
-import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore
-public class AtomRunnerTest extends JavaFxTest
+import javafx.application.Platform;
+
+public class AtomRunnerTest extends ContentmentTest
 {
+	JavaFxRunner runner = new JavaFxRunner();
 	
 	@Test
 	public void atZeroTime()
 	{
+		assertThat(Platform.isFxApplicationThread()).isFalse();
 		TestAtom atom = new TestAtom();
 		runner.play(0L,atom);
 		assertThat(atom.fractions).contains(0d,1d);
@@ -22,11 +25,10 @@ public class AtomRunnerTest extends JavaFxTest
 	@Test
 	public void atSmallTime()
 	{
+		assertThat(Platform.isFxApplicationThread()).isFalse();
 		TestAtom atom = new TestAtom();
 		runner.play(40L,atom);
 		assertThat(atom.fractions).contains(0d,1d);
 		assertThat(atom.fractions.size()).isGreaterThan(2);
 	}
-
-
 }

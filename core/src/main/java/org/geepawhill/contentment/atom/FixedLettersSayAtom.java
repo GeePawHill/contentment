@@ -2,8 +2,8 @@ package org.geepawhill.contentment.atom;
 
 import java.util.function.Supplier;
 
-import org.geepawhill.contentment.core.Fragment;
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Fragment;
 
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;

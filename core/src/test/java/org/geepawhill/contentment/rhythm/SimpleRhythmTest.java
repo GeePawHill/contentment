@@ -2,13 +2,11 @@ package org.geepawhill.contentment.rhythm;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.geepawhill.contentment.test.JavaFxTest;
+import org.geepawhill.contentment.test.ContentmentTest;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore
-public class SimpleRhythmTest extends JavaFxTest
+public class SimpleRhythmTest extends ContentmentTest
 {
 	final static long SHORT_TIME = 20;
 	

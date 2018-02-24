@@ -9,11 +9,9 @@ import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.actors.Spot;
 import org.geepawhill.contentment.actors.Stroke;
 import org.geepawhill.contentment.atom.ClearAtom;
-import org.geepawhill.contentment.atom.LettersAtom;
 import org.geepawhill.contentment.atom.MarkAtom;
 import org.geepawhill.contentment.core.Gesture;
 import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.timing.Timing;
 

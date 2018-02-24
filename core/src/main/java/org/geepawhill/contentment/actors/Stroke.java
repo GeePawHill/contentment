@@ -7,22 +7,17 @@ import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.atom.BezierAtom;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Bezier;
-import org.geepawhill.contentment.geometry.BezierSource;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.timing.Timing;
-import org.geepawhill.contentment.utility.Names;
 
 public class Stroke extends GenericActor {
-	private final String nickname;
 	private final Bezier bezier;
 	private final BezierAtom atom;
-	private PointPair points;
 	private Random random;
 
 	public Stroke(ScriptWorld world, PointPair points) {
 		super(world);
-		this.nickname = Names.make(getClass());
 		random = new Random();
 		this.bezier = jiggle(random, points);
 		this.atom = new BezierAtom(groupSource(), () -> bezier, Format.DEFAULT);

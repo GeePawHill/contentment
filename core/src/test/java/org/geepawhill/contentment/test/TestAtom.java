@@ -2,8 +2,8 @@ package org.geepawhill.contentment.test;
 
 import java.util.ArrayList;
 
-import org.geepawhill.contentment.core.Fragment;
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Fragment;
 
 public class TestAtom implements Fragment {
 	public ArrayList<Double> fractions;

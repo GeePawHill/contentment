@@ -2,44 +2,24 @@ package org.geepawhill.contentment.core;
 
 import static org.geepawhill.contentment.utility.JfxUtility.color;
 
-import java.awt.SecondaryLoop;
 import java.io.File;
 import java.util.Vector;
 
-import org.geepawhill.contentment.actors.CodeBlock;
-import org.geepawhill.contentment.actors.Column;
-import org.geepawhill.contentment.actors.Cross;
 import org.geepawhill.contentment.actors.FixedLetters;
-import org.geepawhill.contentment.actors.Slide;
-import org.geepawhill.contentment.atom.LettersAtom;
 import org.geepawhill.contentment.flow.Flow;
 import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.format.Style;
-import org.geepawhill.contentment.geometry.Grid;
 import org.geepawhill.contentment.geometry.Point;
-import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.geometry.ViewPort;
 import org.geepawhill.contentment.player.Keyframe;
 import org.geepawhill.contentment.player.Script;
-import org.geepawhill.contentment.position.AboveCenter;
 import org.geepawhill.contentment.position.BelowCenter;
-import org.geepawhill.contentment.position.BelowLeft;
-import org.geepawhill.contentment.position.CenterRight;
 import org.geepawhill.contentment.position.Centered;
-import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.position.RightOf;
 import org.geepawhill.contentment.position.TopLeft;
-import org.geepawhill.contentment.position.TopRight;
 import org.geepawhill.contentment.rhythm.MediaRhythm;
-import org.geepawhill.contentment.rhythm.SimpleRhythm;
-import org.geepawhill.contentment.step.Chord;
 import org.geepawhill.contentment.step.ScriptBuilder;
-import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -53,14 +33,11 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 
 	private Format secondaryJumbo;
 	private Format primaryJumbo;
-	private Format emphasisFormat;
 	private Format secondaryNormal;
 	private Format primaryNormal;
 	private Format emphaticNormal;
 	private Format emphaticSmall;
 	private Format emphaticJumbo;
-	private Format secondarySmall;
-	private Format primarySmall;
 	private Paint secondary;
 	private Paint primary;
 	private Paint emphatic;
@@ -77,18 +54,14 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 
 		primaryJumbo = format(primary, jumbo);
 		primaryNormal = format(primary, normal);
-		primarySmall = format(primary,small);
 
 		secondaryJumbo = format(secondary, jumbo);
 		secondaryNormal = format(secondary, normal);
-		secondarySmall = new Format(format(secondary, small),Frames.frame(secondary, 3d, .7d));
-		
 
 		emphaticJumbo = format(emphatic, jumbo);
 		emphaticNormal = format(emphatic, normal);
 		emphaticSmall = new Format(format(emphatic, small),Frames.frame(emphatic, 3d, .7d));
 
-		emphasisFormat = new Format(Frames.frame(emphatic, 4d, .7d));
 	}
 
 	private Format format(Paint majorColor, double fontsize) {
@@ -453,20 +426,6 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 		return endBuild();                                             
 	}
 
-	private void sketchRect(PointPair bounds, String name) {
-		spot(bounds.from.x,bounds.from.y).called("nw"+name).appear();
-		spot(bounds.from.x,bounds.to.y).called("sw"+name).appear();
-		spot(bounds.to.x,bounds.from.y).called("ne"+name).appear();
-		spot(bounds.to.x,bounds.to.y).called("se"+name).appear();
-		connector().from("nw"+name, false).to("sw"+name, false).sketch();
-		connector().from("sw"+name,false).to("se"+name, false).sketch();
-		connector().from("se"+name, false).to("ne"+name, false).sketch();
-		connector().from("ne"+name, false).to("nw"+name,false).sketch();
-	}
-
-	
-
-	
 	public Gesture optimizing1() {
 		buildPhrase();
 		wipe();
@@ -629,15 +588,4 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 	public OptimizingScript downcast() {
 		return this;
 	}
-
-	private void lettersBelow(String text, String target, String name, String party) {
-		letters(text).at(new BelowLeft(actor(target).groupSource())).called(name).in(party).sketch();
-	}
-
-	private void emphasize(double fromX, double width, double atY, String in) {
-		spot(fromX, atY).called("us" + atY).in("part1").appear();
-		spot(fromX + width, atY).called("ue" + atY).in("part1").appear();
-		connector().from("us" + atY, false).to("ue" + atY, false).format(emphasisFormat).in("part1").sketch();
-	}
-
 }

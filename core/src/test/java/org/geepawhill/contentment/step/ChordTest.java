@@ -22,8 +22,8 @@ public class ChordTest
 	{
 		
 		context = new Context();
-		one = new TestNote(1L);
-		two = new TestNote(9L);
+		one = new TestNote();
+		two = new TestNote();
 
 		onlyOne = new Chord();
 		onlyOne.add(one);

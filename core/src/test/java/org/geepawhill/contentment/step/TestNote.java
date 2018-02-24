@@ -13,26 +13,13 @@ public class TestNote implements Gesture
 
 	State state;
 	private OnFinished onFinished;
-	private long ms;
 	private boolean autoFinish;
 
 	public TestNote()
 	{
-		this(0, false);
-	}
-
-	public TestNote(long ms)
-	{
-		this(ms,false);
-	}
-	
-	public TestNote(long ms,boolean autoFinish)
-	{
-		this.ms = ms;
-		this.ms = ms;
 		this.state = State.Undone;
 		this.onFinished = null;
-		this.autoFinish = autoFinish;
+		this.autoFinish = false;
 	}
 	
 	@Override

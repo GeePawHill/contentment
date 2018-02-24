@@ -4,14 +4,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.concurrent.CountDownLatch;
 
-import org.geepawhill.contentment.test.JavaFxTest;
+import org.geepawhill.contentment.test.ContentmentTest;
 import org.junit.Test;
 
 import javafx.animation.Transition;
 import javafx.application.Platform;
 import javafx.util.Duration;
 
-public class AnimationsGuaranteeOneTest extends JavaFxTest
+public class AnimationsGuaranteeOneTest extends ContentmentTest
 {
 
 	private boolean oneReceived;

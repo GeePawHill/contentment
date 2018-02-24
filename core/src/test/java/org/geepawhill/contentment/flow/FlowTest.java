@@ -5,12 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Vector;
 
 import org.geepawhill.contentment.actor.ScriptWorld;
-import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.test.JavaFxTest;
+import org.geepawhill.contentment.test.ContentmentTest;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FlowTest extends JavaFxTest
+public class FlowTest extends ContentmentTest
 {
 
 	private Flow flow;

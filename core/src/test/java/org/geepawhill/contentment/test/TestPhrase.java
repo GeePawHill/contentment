@@ -3,7 +3,6 @@ package org.geepawhill.contentment.test;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.step.Phrase;
-import org.geepawhill.contentment.timing.Timing;
 
 public class TestPhrase extends Phrase
 {
@@ -11,12 +10,10 @@ public class TestPhrase extends Phrase
 	public boolean isBefore;
 	public boolean isPlaying;
 	private OnFinished onFinished;
-	private Timing timing;
 	
 	
-	public TestPhrase(Timing timing)
+	public TestPhrase()
 	{
-		this.timing = timing;
 		isBefore=true;
 		isPlaying=false;
 	}

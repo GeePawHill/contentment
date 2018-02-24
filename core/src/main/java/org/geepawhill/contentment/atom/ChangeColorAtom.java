@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.atom;
 
-import org.geepawhill.contentment.core.Fragment;
 import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.Fragment;
 import org.geepawhill.contentment.utility.ColorChanger;
 import org.geepawhill.contentment.utility.JfxUtility;
 

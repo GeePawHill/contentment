@@ -3,14 +3,11 @@ package org.geepawhill.contentment.step;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.test.JavaFxTest;
+import org.geepawhill.contentment.test.ContentmentTest;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-@Ignore
-public class PhraseTest extends JavaFxTest
+public class PhraseTest extends ContentmentTest
 {
-	private Phrase empty;
 	private Phrase onlyOne;
 	private Phrase both;
 	private TestNote one;
@@ -21,10 +18,8 @@ public class PhraseTest extends JavaFxTest
 	@Before
 	public void before()
 	{
-		one = new TestNote(1L);
-		two = new TestNote(9L);
-
-		empty = new Phrase();
+		one = new TestNote();
+		two = new TestNote();
 
 		onlyOne = new Phrase();
 		onlyOne.add(one);

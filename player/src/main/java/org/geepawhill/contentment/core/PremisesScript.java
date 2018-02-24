@@ -2,42 +2,25 @@ package org.geepawhill.contentment.core;
 
 import static org.geepawhill.contentment.utility.JfxUtility.color;
 
-import java.awt.SecondaryLoop;
-import java.io.File;
 import java.util.Vector;
 
-import org.geepawhill.contentment.actors.CodeBlock;
-import org.geepawhill.contentment.actors.Column;
-import org.geepawhill.contentment.actors.Cross;
 import org.geepawhill.contentment.actors.FixedLetters;
-import org.geepawhill.contentment.actors.Slide;
-import org.geepawhill.contentment.atom.LettersAtom;
 import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.format.Style;
-import org.geepawhill.contentment.geometry.Grid;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.geometry.ViewPort;
 import org.geepawhill.contentment.player.Keyframe;
 import org.geepawhill.contentment.player.Script;
-import org.geepawhill.contentment.position.AboveCenter;
 import org.geepawhill.contentment.position.BelowCenter;
 import org.geepawhill.contentment.position.BelowLeft;
-import org.geepawhill.contentment.position.CenterRight;
 import org.geepawhill.contentment.position.Centered;
-import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.position.RightOf;
 import org.geepawhill.contentment.position.TopLeft;
 import org.geepawhill.contentment.position.TopRight;
-import org.geepawhill.contentment.rhythm.MediaRhythm;
 import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.step.ScriptBuilder;
-import org.geepawhill.contentment.style.Dash;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.style.TypeFace;
 
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
