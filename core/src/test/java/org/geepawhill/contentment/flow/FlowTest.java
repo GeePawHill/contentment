@@ -1,16 +1,23 @@
 package org.geepawhill.contentment.flow;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.data.Percentage.*;
 
 import java.util.Vector;
 
 import org.geepawhill.contentment.actor.ScriptWorld;
+import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.test.ContentmentTest;
 import org.junit.Before;
 import org.junit.Test;
 
 public class FlowTest extends ContentmentTest
 {
+	
+	private final PointPair AREA = new PointPair(50,90,450,590);
+	private final double HEIGHT = 400;
+	private final double FROM_X = 50;
+	private final double FROM_Y = 90;
 
 	private Flow flow;
 	private ScriptWorld world;
@@ -19,7 +26,7 @@ public class FlowTest extends ContentmentTest
 	public void before()
 	{
 		world = new ScriptWorld();
-		flow = new Flow(world);
+		flow = new Flow(world, AREA);
 	}
 
 	@Test
@@ -47,10 +54,10 @@ public class FlowTest extends ContentmentTest
 	
 	public void assertCoordinates(Vector<Flow.Line> lines )
 	{
-		Double lastEndY = -1d;
+		Double lastEndY = AREA.from.y-1;
 		for(Flow.Line line : lines)
 		{
-			assertThat(line.layout.from.x).isEqualTo(0);
+			assertThat(line.layout.from.x).isCloseTo(AREA.from.x, withPercentage(.5));
 			assertThat(line.layout.from.y).isGreaterThan(lastEndY);
 			lastEndY = line.layout.to.y;
 		}

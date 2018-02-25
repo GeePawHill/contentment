@@ -91,7 +91,7 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 		buildPhrase();
 		wipe();
 		cue(0);
-		Flow flow = new Flow(world);
+		Flow flow = new Flow(world, AREA);
 		flow.load("pjThis is primary jumbo.\n"
 				+ "snThis is secondary normal.\n"
 				+ "xnThis is primary normal.\n"

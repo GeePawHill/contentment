@@ -25,10 +25,12 @@ public class Flow
 	private final Vector<Line> lines;
 	private final Text sizer;
 	private ScriptWorld world;
+	private final PointPair area;
 
-	public Flow(ScriptWorld world)
+	public Flow(ScriptWorld world, PointPair area)
 	{
 		this.world = world;
+		this.area = area;
 		lines = new Vector<>();
 		sizer = new Text();
 		table = new FormatTable();
@@ -63,7 +65,7 @@ public class Flow
 
 	private void layout()
 	{
-		double lastEndY = 0; 
+		double lastEndY = area.from.y;
 		for(Line line : lines)
 		{
 			Format format = table.get(line.size,line.color);
@@ -71,7 +73,7 @@ public class Flow
 			sizer.setText(line.text);
 			PointPair layout = new PointPair(sizer.getLayoutBounds());
 			double newLastEndY = lastEndY+1+layout.height();
-			line.layout = new PointPair(0,lastEndY+1,layout.width(),newLastEndY);
+			line.layout = new PointPair(area.from.x,lastEndY+1,layout.width(),newLastEndY);
 			lastEndY = newLastEndY;
 		}
 	}

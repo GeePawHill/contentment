@@ -7,6 +7,13 @@ import org.geepawhill.contentment.test.ContentmentTest;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * PhraseTest tests that phrases can play their gestures fast (synchronously) or
+ * slow (asynchronously).
+ * 
+ * @author GeePaw
+ *
+ */
 public class PhraseTest extends ContentmentTest
 {
 	private Phrase onlyOne;
@@ -28,7 +35,7 @@ public class PhraseTest extends ContentmentTest
 		both = new Phrase();
 		both.add(one);
 		both.add(two);
-		
+
 		gotFinish = false;
 
 		recordFinish = () -> gotFinish = true;

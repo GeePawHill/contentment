@@ -17,10 +17,11 @@ public class ColorChangerTest extends ContentmentTest
 		Line line = new Line(0d, 0d, 100d, 100d);
 		line.setStroke(Color.RED);
 		line.setFill(Color.RED);
-		new ColorChanger(Color.BLUE).accept(line);
+		ColorChanger changer = new ColorChanger(Color.BLUE);
+		changer.accept(line);
 		assertThat(line.getStroke()).isEqualTo(Color.BLUE);
 		assertThat(line.getFill()).isEqualTo(Color.RED);
-		assertThat(new ColorChanger(Color.BLUE).result).isEqualTo(Color.RED);
+		assertThat(changer.result).isEqualTo(Color.RED);
 	}
 
 	@Test
@@ -29,10 +30,11 @@ public class ColorChangerTest extends ContentmentTest
 		Text text = new Text();
 		text.setStroke(Color.RED);
 		text.setFill(Color.RED);
-		new ColorChanger(Color.BLUE).accept(text);
+		ColorChanger changer = new ColorChanger(Color.BLUE);
+		changer.accept(text);
 		assertThat(text.getStroke()).isEqualTo(Color.BLUE);
 		assertThat(text.getFill()).isEqualTo(Color.BLUE);
-		assertThat(new ColorChanger(Color.BLUE).result).isEqualTo(Color.RED);
+		assertThat(changer.result).isEqualTo(Color.RED);
 	}
 
 }
