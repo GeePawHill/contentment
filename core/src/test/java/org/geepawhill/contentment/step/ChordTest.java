@@ -12,8 +12,8 @@ public class ChordTest
 	private Chord onlyOne;
 	private Chord both;
 	private Context context;
-	private TestNote one;
-	private TestNote two;
+	private TestGesture one;
+	private TestGesture two;
 	private boolean gotFinish;
 	private OnFinished recordFinish;
 
@@ -22,8 +22,8 @@ public class ChordTest
 	{
 		
 		context = new Context();
-		one = new TestNote();
-		two = new TestNote();
+		one = new TestGesture();
+		two = new TestGesture();
 
 		onlyOne = new Chord();
 		onlyOne.add(one);
@@ -76,13 +76,13 @@ public class ChordTest
 		assertThat(gotFinish).isTrue();
 	}
 
-	private void assertPlayed(TestNote Step)
+	private void assertPlayed(TestGesture Step)
 	{
-		assertThat(Step.state).isEqualTo(TestNote.State.Played);
+		assertThat(Step.state).isEqualTo(TestGesture.State.Played);
 	}
 
-	private void assertPlaying(TestNote Step)
+	private void assertPlaying(TestGesture Step)
 	{
-		assertThat(Step.state).isEqualTo(TestNote.State.Playing);
+		assertThat(Step.state).isEqualTo(TestGesture.State.Playing);
 	}
 }

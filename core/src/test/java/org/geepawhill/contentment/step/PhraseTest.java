@@ -6,20 +6,21 @@ import org.geepawhill.contentment.core.OnFinished;
 import org.geepawhill.contentment.test.ContentmentTest;
 import org.junit.Before;
 import org.junit.Test;
+
 public class PhraseTest extends ContentmentTest
 {
 	private Phrase onlyOne;
 	private Phrase both;
-	private TestNote one;
-	private TestNote two;
+	private TestGesture one;
+	private TestGesture two;
 	private boolean gotFinish;
 	private OnFinished recordFinish;
 
 	@Before
 	public void before()
 	{
-		one = new TestNote();
-		two = new TestNote();
+		one = new TestGesture();
+		two = new TestGesture();
 
 		onlyOne = new Phrase();
 		onlyOne.add(one);
@@ -34,14 +35,14 @@ public class PhraseTest extends ContentmentTest
 	}
 
 	@Test
-	public void fastOne()
+	public void fastPlaysOne()
 	{
 		onlyOne.fast(getContext());
 		assertPlayed(one);
 	}
 
 	@Test
-	public void fastBoth()
+	public void fastPlaysTwo()
 	{
 		both.fast(getContext());
 		assertPlayed(one);
@@ -49,7 +50,7 @@ public class PhraseTest extends ContentmentTest
 	}
 
 	@Test
-	public void slowOne()
+	public void slowPlaysOne()
 	{
 		onlyOne.slow(getContext(), recordFinish);
 		assertPlaying(one);
@@ -59,7 +60,7 @@ public class PhraseTest extends ContentmentTest
 	}
 
 	@Test
-	public void slowBoth()
+	public void slowPlaysBoth()
 	{
 		both.slow(getContext(), recordFinish);
 		assertPlaying(one);
@@ -72,19 +73,18 @@ public class PhraseTest extends ContentmentTest
 		assertThat(gotFinish).isTrue();
 	}
 
-	private void assertPlayed(TestNote Step)
+	private void assertPlayed(TestGesture Step)
 	{
-		assertThat(Step.state).isEqualTo(TestNote.State.Played);
+		assertThat(Step.state).isEqualTo(TestGesture.State.Played);
 	}
 
-	private void assertUndone(TestNote Step)
+	private void assertUndone(TestGesture Step)
 	{
-		assertThat(Step.state).isEqualTo(TestNote.State.Undone);
+		assertThat(Step.state).isEqualTo(TestGesture.State.Undone);
 	}
 
-	private void assertPlaying(TestNote Step)
+	private void assertPlaying(TestGesture Step)
 	{
-		assertThat(Step.state).isEqualTo(TestNote.State.Playing);
+		assertThat(Step.state).isEqualTo(TestGesture.State.Playing);
 	}
-
 }

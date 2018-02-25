@@ -4,7 +4,21 @@ import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Gesture;
 import org.geepawhill.contentment.core.OnFinished;
 
-public class TestNote implements Gesture
+/**
+ * Handy gesture for testing plays.
+ * 
+ * TestGesture is a gesture that knows and exposes whether it is Undone,
+ * Playing, or has Played. Most gestures have asynchronous transition, that is,
+ * they go from {@linkplain org.geepawhill.contentment.step.TestGesture.State.Playing} to
+ * {@link TestGesture.State.Played} independently. Since it has no way to decide
+ * whether it has independently finished running, TestGesture adds the method
+ * <code>Finish</code> to enable a tester to mark that. See {@link PhraseTest}
+ * for a good sample usage.
+ * 
+ * @author GeePaw
+ *
+ */
+public class TestGesture implements Gesture
 {
 	static public enum State
 	{
@@ -15,13 +29,13 @@ public class TestNote implements Gesture
 	private OnFinished onFinished;
 	private boolean autoFinish;
 
-	public TestNote()
+	public TestGesture()
 	{
 		this.state = State.Undone;
 		this.onFinished = null;
 		this.autoFinish = false;
 	}
-	
+
 	@Override
 	public void fast(Context context)
 	{
@@ -44,7 +58,7 @@ public class TestNote implements Gesture
 		{
 		case Undone:
 			state = State.Playing;
-			if(autoFinish)
+			if (autoFinish)
 			{
 				finish(context);
 			}
