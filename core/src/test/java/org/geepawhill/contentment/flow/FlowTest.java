@@ -15,9 +15,6 @@ public class FlowTest extends ContentmentTest
 {
 	
 	private final PointPair AREA = new PointPair(50,90,450,590);
-	private final double HEIGHT = 400;
-	private final double FROM_X = 50;
-	private final double FROM_Y = 90;
 
 	private Flow flow;
 	private ScriptWorld world;

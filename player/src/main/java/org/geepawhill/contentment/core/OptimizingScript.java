@@ -9,6 +9,7 @@ import org.geepawhill.contentment.actors.FixedLetters;
 import org.geepawhill.contentment.flow.Flow;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.Point;
+import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.player.Keyframe;
 import org.geepawhill.contentment.player.Script;
 import org.geepawhill.contentment.position.BelowCenter;
@@ -91,7 +92,7 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 		buildPhrase();
 		wipe();
 		cue(0);
-		Flow flow = new Flow(world, AREA);
+		Flow flow = new Flow(world, new PointPair(120,50,400,400));
 		flow.load("pjThis is primary jumbo.\n"
 				+ "snThis is secondary normal.\n"
 				+ "xnThis is primary normal.\n"
