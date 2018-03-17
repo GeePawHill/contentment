@@ -50,14 +50,19 @@ public abstract class ScriptBuilder<SUBCLASS>
 		return cue(lastCue+offset);
 	}
 	
-	private void addToWorking(Gesture step)
+	protected void addToWorking(Gesture step)
 	{
 		world.add(step);
 	}
 	
+	public Phrase makePhrase()
+	{
+		return new Phrase();
+	}
+
 	public void buildPhrase()
 	{
-		world.push(new Phrase());
+		world.push(makePhrase());
 	}
 	
 	public void buildChord()

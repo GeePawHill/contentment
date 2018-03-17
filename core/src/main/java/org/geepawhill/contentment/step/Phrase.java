@@ -9,7 +9,7 @@ import org.geepawhill.contentment.utility.Names;
 
 public class Phrase implements Addable
 {
-	private final ArrayList<Gesture> playables;
+	protected final ArrayList<Gesture> playables;
 	private String name;
 	
 	public Phrase()
