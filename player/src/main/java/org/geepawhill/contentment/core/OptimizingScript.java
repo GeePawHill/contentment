@@ -72,17 +72,70 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 	}
 
 	public Script make() {
-		script.add(new Keyframe(0, leadIn()));
-		script.add(new Keyframe(4, opening()));
-		script.add(new Keyframe(88, explanation()));
-		script.add(new Keyframe(149, programming()));
-		script.add(new Keyframe(202, scanning1()));
-		script.add(new Keyframe(240, scanning2()));
-		script.add(new Keyframe(303, scanning3()));
-		script.add(new Keyframe(328, optimizing1()));
-		script.add(new Keyframe(360, optimizing2()));
-		script.add(new Keyframe(462, outro()));
+		zero();
+		five();
+		ten();
+		end();
+//		script.add(new Keyframe(0, leadIn()));
+//		script.add(new Keyframe(4, opening()));
+//		script.add(new Keyframe(88, explanation()));
+//		script.add(new Keyframe(149, programming()));
+//		script.add(new Keyframe(202, scanning1()));
+//		script.add(new Keyframe(240, scanning2()));
+//		script.add(new Keyframe(303, scanning3()));
+//		script.add(new Keyframe(328, optimizing1()));
+//		script.add(new Keyframe(360, optimizing2()));
+//		script.add(new Keyframe(462, outro()));
 		return script;
+	}
+	
+	public void zero()
+	{
+		scene(0);
+		Flow flow = new Flow(world,new PointPair(0,0,1000,1000));
+		flow.load("pj0\npj1\npj2\npj3\npj4\n");
+		flow.letters(0).appear();
+		stall(1);
+		flow.letters(1).appear();
+		stall(1);
+		flow.letters(2).appear();
+		stall(1);
+		flow.letters(3).appear();
+		stall(1);
+		flow.letters(4).appear();
+	}
+
+	public void five()
+	{
+		scene(5);
+		wipe();
+		Flow flow = new Flow(world,new PointPair(0,0,1000,1000));
+		flow.load("pj5\npj6\npj7\npj8\npj9\n");
+		flow.letters(0).appear();
+		stall(1);
+		flow.letters(1).appear();
+		stall(1);
+		flow.letters(2).appear();
+		stall(1);
+		flow.letters(3).appear();
+		stall(1);
+		flow.letters(4).appear();
+	}
+
+	public void ten()
+	{
+		scene(10);
+		Flow flow = new Flow(world,new PointPair(0,0,1000,1000));
+		flow.load("pj10\npj11\npj12\npj13\npj14\n");
+		flow.letters(0).appear();
+		stall(1);
+		flow.letters(1).appear();
+		stall(1);
+		flow.letters(2).appear();
+		stall(1);
+		flow.letters(3).appear();
+		stall(1);
+		flow.letters(4).appear();
 	}
 	
 	private Gesture leadIn() {

@@ -14,7 +14,6 @@ import org.geepawhill.contentment.timing.Timing;
 
 public class ScriptBuilderTest
 {
-	
 	static class ExposedPhrase extends Phrase
 	{
 		public ArrayList<Gesture> gestures()
@@ -25,41 +24,26 @@ public class ScriptBuilderTest
 	
 	static class TestScriptBuilder extends ScriptBuilder<TestScriptBuilder>
 	{
-		private long sceneStart;
-		
-		public TestScriptBuilder()
-		{
-			sceneStart = -1;
-		}
-
 		@Override
 		public TestScriptBuilder downcast()
 		{
 			return this;
 		}
 		
-
-		public void scene(long beat)
-		{
-			if(sceneStart!=-1)
-			{
-				script.add(new Keyframe(sceneStart,endBuild()));
-			}
-			sceneStart = beat;
-			buildPhrase();
-			addToWorking(new AtomStep(Timing.ms(30000),new MarkAtom(beat*1000)));
-		}
-
-		public void end()
-		{
-			if(sceneStart==-1) throw new RuntimeException("end() called with no scene.");
-			script.add(new Keyframe(sceneStart,endBuild()));
-		}
-		
 		@Override
 		public Phrase makePhrase()
 		{
 			return new ExposedPhrase();
+		}
+		
+		public long lastStall()
+		{
+			return lastStall;
+		}
+		
+		public long lastScene()
+		{
+			return lastScene;
 		}
 		
 	}
@@ -88,6 +72,20 @@ public class ScriptBuilderTest
 	public void sceneAddsScene()
 	{
 		builder.scene(0);
+		assertThat(builder.lastScene()).isEqualTo(0);
+		assertThat(builder.lastStall()).isEqualTo(0);
+		builder.end();
+		assertThat(builder.script.size()).isEqualTo(1);
+		ExposedPhrase phrase = (ExposedPhrase)builder.script.get(0).phrase;
+		assertThat(phrase.gestures().size()).isEqualTo(1);
+	}
+	
+	@Test
+	public void scenesStartAnywhere()
+	{
+		builder.scene(20);
+		assertThat(builder.lastScene()).isEqualTo(20);
+		assertThat(builder.lastStall()).isEqualTo(20);
 		builder.end();
 		assertThat(builder.script.size()).isEqualTo(1);
 		ExposedPhrase phrase = (ExposedPhrase)builder.script.get(0).phrase;
@@ -105,5 +103,25 @@ public class ScriptBuilderTest
 		assertThat(phrase.gestures().size()).isEqualTo(2);
 	}
 	
+	@Test
+	public void scenesChain()
+	{
+		builder.scene(0);
+		builder.scene(5);
+		assertThat(builder.lastScene()).isEqualTo(5);
+		builder.end();
+		assertThat(builder.script.size()).isEqualTo(2);
+	}
+
+	@Test
+	public void stallsChain()
+	{
+		builder.scene(0);
+		builder.stall(5);
+		builder.stall(5);
+		assertThat(builder.lastStall()).isEqualTo(10);
+		builder.end();
+		assertThat(builder.script.size()).isEqualTo(1);
+	}
 
 }

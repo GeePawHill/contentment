@@ -13,6 +13,7 @@ import org.geepawhill.contentment.atom.MarkAtom;
 import org.geepawhill.contentment.core.Gesture;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.player.Keyframe;
 import org.geepawhill.contentment.player.Script;
 import org.geepawhill.contentment.rhythm.Rhythm;
 import org.geepawhill.contentment.rhythm.SimpleRhythm;
@@ -24,6 +25,8 @@ public abstract class ScriptBuilder<SUBCLASS>
 	protected ScriptWorld world;
 	private long lastCue;
 	protected Script script;
+	protected long lastScene;
+	protected long lastStall;
 
 	public ScriptBuilder()
 	{
@@ -33,10 +36,37 @@ public abstract class ScriptBuilder<SUBCLASS>
 	public ScriptBuilder(Rhythm rhythm)
 	{
 		this.script = new Script(rhythm);
-		world = new ScriptWorld();
+		this.lastScene = -1L;
+		this.world = new ScriptWorld();
 	}
 	
 	public abstract SUBCLASS downcast();
+	
+	public void scene(long beat)
+	{
+		if(lastScene!=-1)
+		{
+			script.add(new Keyframe(lastScene,endBuild()));
+		}
+		lastScene = beat;
+		lastStall=beat;
+		buildPhrase();
+		addToWorking(new AtomStep(Timing.ms(30000),new MarkAtom(beat*1000)));
+	}
+
+	public void end()
+	{
+		if(lastScene==-1) throw new RuntimeException("end() called with no scene.");
+		script.add(new Keyframe(lastScene,endBuild()));
+		lastScene=-1;
+	}
+	
+	public void stall(long beat)
+	{
+		if(lastScene==-1) throw new RuntimeException("end() called with no scene.");
+		lastStall+=beat;
+		addToWorking(new AtomStep(Timing.ms(30000),new MarkAtom(lastStall*1000)));
+	}
 	
 	public SUBCLASS cue(long beat)
 	{
