@@ -13,6 +13,9 @@ import org.geepawhill.contentment.atom.MarkAtom;
 import org.geepawhill.contentment.core.Gesture;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.player.Script;
+import org.geepawhill.contentment.rhythm.Rhythm;
+import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.timing.Timing;
 
 public abstract class ScriptBuilder<SUBCLASS>
@@ -20,9 +23,16 @@ public abstract class ScriptBuilder<SUBCLASS>
 	
 	protected ScriptWorld world;
 	private long lastCue;
+	protected Script script;
 
 	public ScriptBuilder()
 	{
+		this(new SimpleRhythm());
+	}
+	
+	public ScriptBuilder(Rhythm rhythm)
+	{
+		this.script = new Script(rhythm);
 		world = new ScriptWorld();
 	}
 	

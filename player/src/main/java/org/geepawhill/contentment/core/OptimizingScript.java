@@ -30,8 +30,6 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 	private static final double XMARGIN = 20;
 	private static final double YMARGIN = 20;
 
-	private Script script;
-
 	private Format secondaryJumbo;
 	private Format primaryJumbo;
 	private Format secondaryNormal;
@@ -44,7 +42,9 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 	private Paint emphatic;
 
 	public OptimizingScript() {
-
+		super(new MediaRhythm(new File("d:\\GeePawHillDotOrg\\videos\\optimizing.home\\finalFaceoverSequence.mp4")));
+		//		new SimpleRhythm());
+		
 		final double jumbo = 80d;
 		final double normal = 55d;
 		final double small = 45d;
@@ -72,9 +72,6 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 	}
 
 	public Script make() {
-		script = new Script(
-				new MediaRhythm(new File("d:\\GeePawHillDotOrg\\videos\\optimizing.home\\finalFaceoverSequence.mp4")));
-//				new SimpleRhythm());
 		script.add(new Keyframe(0, leadIn()));
 		script.add(new Keyframe(4, opening()));
 		script.add(new Keyframe(88, explanation()));
@@ -92,23 +89,11 @@ public class OptimizingScript extends ScriptBuilder<OptimizingScript> {
 		buildPhrase();
 		wipe();
 		cue(0);
-		Flow flow = new Flow(world, new PointPair(120,50,400,400));
-		flow.load("pjThis is primary jumbo.\n"
-				+ "snThis is secondary normal.\n"
-				+ "xnThis is primary normal.\n"
-				+ "esThis is emphatic small.\n");
-
-		for(int i=0;i<4;i++)
-		{
-			flow.letters(i).appear();
-		}
-//		letters("GeePaw's Notebook:").format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").appear();
-//		assume(secondaryJumbo);
-//		letters("Optimizing a Program\nAnd Optimizing Programming").centered(450, 450).appear();
-//		assume(emphaticSmall);
-//		letters("Copyright (C) 2018, GeePawHill. All rights reserved.").at(new TopLeft(20,825)).appear();
-		offset(20);
-
+		letters("GeePaw's Notebook:").format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").appear();
+		assume(secondaryJumbo);
+		letters("Optimizing a Program\nAnd Optimizing Programming").centered(450, 450).appear();
+		assume(emphaticSmall);
+		letters("Copyright (C) 2018, GeePawHill. All rights reserved.").at(new TopLeft(20,825)).appear();
 		return endBuild();
 	}
 
