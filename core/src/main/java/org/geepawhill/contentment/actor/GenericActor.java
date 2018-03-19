@@ -1,10 +1,10 @@
 package org.geepawhill.contentment.actor;
 
-import org.geepawhill.contentment.atom.ChangeColorAtom;
-import org.geepawhill.contentment.atom.EntranceAtom;
-import org.geepawhill.contentment.atom.ExitAtom;
-import org.geepawhill.contentment.atom.GroupSource;
-import org.geepawhill.contentment.atom.OpacityAtom;
+import org.geepawhill.contentment.fragments.Recolor;
+import org.geepawhill.contentment.fragments.Entrance;
+import org.geepawhill.contentment.fragments.Exit;
+import org.geepawhill.contentment.fragments.GroupSource;
+import org.geepawhill.contentment.fragments.OpacityAtom;
 import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.timing.Timing;
@@ -14,12 +14,12 @@ import javafx.scene.paint.Paint;
 public abstract class GenericActor implements Actor
 {
 	protected final ScriptWorld world;
-	protected final EntranceAtom entrance;
+	protected final Entrance entrance;
 
 	public GenericActor(ScriptWorld world)
 	{
 		this.world = world;
-		this.entrance = new EntranceAtom();
+		this.entrance = new Entrance();
 	}
 	
 	public GroupSource groupSource()
@@ -46,7 +46,7 @@ public abstract class GenericActor implements Actor
 	@Override
 	public GenericActor disappear()
 	{
-		world.add(new AtomStep(Timing.instant(),new ExitAtom(groupSource())));
+		world.add(new AtomStep(Timing.instant(),new Exit(groupSource())));
 		return this;
 	}
 
@@ -68,7 +68,7 @@ public abstract class GenericActor implements Actor
 	@Override
 	public Actor reColor(Paint paint)
 	{
-		world.add(new AtomStep(Timing.instant(),new ChangeColorAtom(entrance, paint)));
+		world.add(new AtomStep(Timing.instant(),new Recolor(entrance, paint)));
 		return this;
 	}
 	
@@ -84,7 +84,7 @@ public abstract class GenericActor implements Actor
 	{
 		world.push(new Phrase());
 		world.add(new AtomStep(Timing.ms(500d),new OpacityAtom(entrance, 1, 0)));
-		world.add(new AtomStep(Timing.instant(),new ExitAtom(entrance)));
+		world.add(new AtomStep(Timing.instant(),new Exit(entrance)));
 		world.popAndAppend();
 		return this;
 	}

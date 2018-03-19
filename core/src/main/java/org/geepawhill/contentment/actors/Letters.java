@@ -3,9 +3,9 @@ package org.geepawhill.contentment.actors;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
-import org.geepawhill.contentment.atom.BezierAtom;
-import org.geepawhill.contentment.atom.LettersAtom;
 import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.fragments.Curve;
+import org.geepawhill.contentment.fragments.Type;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Jiggler;
 import org.geepawhill.contentment.geometry.Point;
@@ -17,13 +17,13 @@ import org.geepawhill.contentment.timing.Timing;
 
 public class Letters extends GenericActor implements Actor
 {
-	private LettersAtom letters;
+	private Type letters;
 	private boolean hasOval;
 
 	private Jiggler controlJiggler;
 	private Jiggler northJiggler;
-	private BezierAtom east;
-	private BezierAtom west;
+	private Curve east;
+	private Curve west;
 	private Bezier eastHalfBezier;
 	private Bezier westHalfBezier;
 
@@ -38,9 +38,9 @@ public class Letters extends GenericActor implements Actor
 		this.northJiggler = new Jiggler(.5d, 6d);
 		this.controlJiggler = new Jiggler(.4d, 30d);
 
-		this.letters = new LettersAtom(groupSource(), source, format, position);
-		this.east = new BezierAtom(groupSource(), this::eastHalfPoints, format);
-		this.west = new BezierAtom(groupSource(), this::westHalfPoints, format);
+		this.letters = new Type(groupSource(), source, format, position);
+		this.east = new Curve(groupSource(), this::eastHalfPoints, format);
+		this.west = new Curve(groupSource(), this::westHalfPoints, format);
 	}
 
 	public Letters withOval()

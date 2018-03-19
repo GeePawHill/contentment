@@ -7,8 +7,8 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.ArrayList;
 
 import org.assertj.core.api.Fail;
-import org.geepawhill.contentment.atom.MarkAtom;
 import org.geepawhill.contentment.core.Gesture;
+import org.geepawhill.contentment.fragments.MarkAtom;
 import org.geepawhill.contentment.player.Keyframe;
 import org.geepawhill.contentment.timing.Timing;
 

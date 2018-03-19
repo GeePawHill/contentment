@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.atom;
+package org.geepawhill.contentment.fragments;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Fragment;
@@ -7,12 +7,12 @@ import org.geepawhill.contentment.utility.JfxUtility;
 
 import javafx.scene.shape.Circle;
 
-public class SpotAtom implements Fragment
+public class Spot implements Fragment
 {
 	private Circle circle;
 	private GroupSource actor;
 
-	public SpotAtom(GroupSource actor,Point center)
+	public Spot(GroupSource actor,Point center)
 	{
 		this.actor = actor;
 		this.circle = new Circle(center.x,center.y,0d);

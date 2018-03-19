@@ -6,12 +6,12 @@ import java.util.Random;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
-import org.geepawhill.contentment.atom.BezierAtom;
-import org.geepawhill.contentment.atom.GroupSource;
 import org.geepawhill.contentment.connector.arrow.ArrowComputer;
 import org.geepawhill.contentment.connector.arrow.ArrowPoints;
 import org.geepawhill.contentment.connector.arrow.NodeArrowComputer;
 import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.fragments.Curve;
+import org.geepawhill.contentment.fragments.GroupSource;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.step.Timed;
@@ -25,15 +25,15 @@ public class Arrow extends GenericActor
 	private GroupSource from;
 	private GroupSource to;
 
-	private BezierAtom mainStep;
-	private BezierAtom fromTopStep;
-	private BezierAtom fromBottomStep;
-	private BezierAtom toTopStep;
-	private BezierAtom toBottomStep;
+	private Curve mainStep;
+	private Curve fromTopStep;
+	private Curve fromBottomStep;
+	private Curve toTopStep;
+	private Curve toBottomStep;
 
 	private ArrowPoints points;
 
-	private ArrayList<BezierAtom> steps;
+	private ArrayList<Curve> steps;
 
 	private Random random;
 
@@ -156,24 +156,24 @@ public class Arrow extends GenericActor
 	{
 		steps = new ArrayList<>();
 		chosenMain = null;
-		mainStep = new BezierAtom(groupSource(), this::getMainBezier, format);
+		mainStep = new Curve(groupSource(), this::getMainBezier, format);
 		if (pointAtFrom)
 		{
-			fromTopStep = new BezierAtom(groupSource(), this::getFromTop, format);
+			fromTopStep = new Curve(groupSource(), this::getFromTop, format);
 			steps.add(fromTopStep);
-			fromBottomStep = new BezierAtom(groupSource(), this::getFromBottom, format);
+			fromBottomStep = new Curve(groupSource(), this::getFromBottom, format);
 			steps.add(fromBottomStep);
 		}
 		if (pointAtTo)
 		{
-			toTopStep = new BezierAtom(groupSource(), this::getToTop, format);
+			toTopStep = new Curve(groupSource(), this::getToTop, format);
 			steps.add(toTopStep);
-			toBottomStep = new BezierAtom(groupSource(), this::getToBottom, format);
+			toBottomStep = new Curve(groupSource(), this::getToBottom, format);
 			steps.add(toBottomStep);
 		}
 		Timed sequence = new Timed(ms);
 		sequence.add(Timing.weighted(.9d), mainStep);
-		for (BezierAtom step : steps)
+		for (Curve step : steps)
 		{
 			sequence.add(Timing.weighted(.1d), step);
 		}

@@ -1,6 +1,6 @@
 package org.geepawhill.contentment.connector.arrow;
 
-import org.geepawhill.contentment.atom.GroupSource;
+import org.geepawhill.contentment.fragments.GroupSource;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 

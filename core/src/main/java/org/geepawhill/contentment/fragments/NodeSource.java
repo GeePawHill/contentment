@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.atom;
+package org.geepawhill.contentment.fragments;
 
 import java.util.function.Supplier;
 

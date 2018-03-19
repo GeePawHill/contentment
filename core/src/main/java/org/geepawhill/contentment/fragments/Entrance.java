@@ -1,16 +1,16 @@
-package org.geepawhill.contentment.atom;
+package org.geepawhill.contentment.fragments;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Fragment;
 
 import javafx.scene.Group;
 
-public class EntranceAtom implements Fragment, GroupSource
+public class Entrance implements Fragment, GroupSource
 {
 	
 	private Group group;
 
-	public EntranceAtom()
+	public Entrance()
 	{
 		this.group = new Group();
 	}

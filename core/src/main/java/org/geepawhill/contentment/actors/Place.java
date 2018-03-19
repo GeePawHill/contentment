@@ -2,29 +2,29 @@ package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
-import org.geepawhill.contentment.atom.SpotAtom;
+import org.geepawhill.contentment.fragments.Spot;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
-public class Spot extends GenericActor
+public class Place extends GenericActor
 {
 
 	final String nickname;
 	
-	final SpotAtom atom;
+	final Spot atom;
 	
-	public Spot(ScriptWorld world,double x, double y)
+	public Place(ScriptWorld world,double x, double y)
 	{
-		this(world,Names.make(Spot.class.getSimpleName()),x, y);
+		this(world,Names.make(Place.class.getSimpleName()),x, y);
 	}
 	
-	public Spot(ScriptWorld world,String name, double x, double y)
+	public Place(ScriptWorld world,String name, double x, double y)
 	{
 		super(world);
 		this.nickname = name;
-		this.atom = new SpotAtom(groupSource(),new Point(x,y));
+		this.atom = new Spot(groupSource(),new Point(x,y));
 	}
 	
 	public String nickname()
@@ -33,7 +33,7 @@ public class Spot extends GenericActor
 	}
 	
 	@Override
-	public Spot draw(double ms)
+	public Place draw(double ms)
 	{
 		world.add(new AtomStep(Timing.ms(ms),atom));
 		return this;

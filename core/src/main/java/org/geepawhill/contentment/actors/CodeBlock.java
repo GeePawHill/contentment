@@ -2,8 +2,8 @@ package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
-import org.geepawhill.contentment.atom.BlockAtom;
 import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.fragments.BlockAtom;
 import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.timing.Timing;

@@ -3,7 +3,7 @@ package org.geepawhill.contentment.actors;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
-import org.geepawhill.contentment.atom.FixedLettersAtom;
+import org.geepawhill.contentment.fragments.FixedLettersAtom;
 import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.timing.Timing;

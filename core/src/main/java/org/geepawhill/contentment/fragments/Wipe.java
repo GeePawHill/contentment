@@ -1,12 +1,12 @@
-package org.geepawhill.contentment.atom;
+package org.geepawhill.contentment.fragments;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Fragment;
 
-public class ClearAtom implements Fragment
+public class Wipe implements Fragment
 {
 	
-	public ClearAtom()
+	public Wipe()
 	{
 	}
 

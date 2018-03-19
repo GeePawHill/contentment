@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.atom;
+package org.geepawhill.contentment.fragments;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.format.Format;
@@ -10,7 +10,7 @@ import org.geepawhill.contentment.utility.JfxUtility;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 
-public class LettersAtom implements NodeAtom
+public class Type implements NodeAtom
 {
 	public final String source;
 	private Text text;
@@ -19,7 +19,7 @@ public class LettersAtom implements NodeAtom
 	private Position position;
 	private String lastPartial;
 
-	public LettersAtom(GroupSource group, String source, Format format, Position position)
+	public Type(GroupSource group, String source, Format format, Position position)
 	{
 		this.group = group;
 		if (source == null || source.isEmpty()) source = " ";

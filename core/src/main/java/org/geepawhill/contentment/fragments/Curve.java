@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.atom;
+package org.geepawhill.contentment.fragments;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Fragment;
@@ -12,14 +12,14 @@ import org.geepawhill.contentment.utility.JfxUtility;
 
 import javafx.scene.shape.Path;
 
-public class BezierAtom implements Fragment
+public class Curve implements Fragment
 {
 	public final Path path;
 	private BezierSource source;
 	private Format format;
 	private GroupSource owner;
 	
-	public BezierAtom(GroupSource owner, BezierSource source, Format format)
+	public Curve(GroupSource owner, BezierSource source, Format format)
 	{
 		this.owner = owner;
 		this.source = source;
@@ -28,7 +28,7 @@ public class BezierAtom implements Fragment
 	}
 
 
-	public BezierAtom(GroupSource owner, Format format, PointPair points)
+	public Curve(GroupSource owner, Format format, PointPair points)
 	{
 		this(owner, () -> new Bezier(points), format);
 	}

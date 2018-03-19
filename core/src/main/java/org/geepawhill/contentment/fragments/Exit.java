@@ -1,16 +1,16 @@
-package org.geepawhill.contentment.atom;
+package org.geepawhill.contentment.fragments;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Fragment;
 
-public class MarkAtom implements Fragment
+public class Exit implements Fragment
 {
+	private GroupSource actor;
 
-	private long mark;
-
-	public MarkAtom(long mark)
+	public Exit(GroupSource actor)
 	{
-		this.mark = mark;
+		this.actor = actor;
+		
 	}
 
 	@Override
@@ -21,11 +21,8 @@ public class MarkAtom implements Fragment
 	@Override
 	public boolean interpolate(Context context, double fraction)
 	{
-		if (context.beat() > mark)
-		{
-			return false;
-		}
-		return true;
+		context.remove(actor);
+		return false;
 	}
 
 }

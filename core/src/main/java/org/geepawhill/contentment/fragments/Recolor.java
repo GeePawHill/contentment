@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.atom;
+package org.geepawhill.contentment.fragments;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Fragment;
@@ -7,13 +7,13 @@ import org.geepawhill.contentment.utility.JfxUtility;
 
 import javafx.scene.paint.Paint;
 
-public class ChangeColorAtom implements Fragment
+public class Recolor implements Fragment
 {
 	
 	private GroupSource actor;
 	private Paint paint;
 
-	public ChangeColorAtom(GroupSource actor, Paint paint)
+	public Recolor(GroupSource actor, Paint paint)
 	{
 		this.actor = actor;
 		this.paint = paint;
