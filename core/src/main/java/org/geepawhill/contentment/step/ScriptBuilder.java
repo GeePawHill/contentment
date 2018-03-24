@@ -68,18 +68,6 @@ public abstract class ScriptBuilder<SUBCLASS>
 		addToWorking(new AtomStep(Timing.ms(30000),new Sync(lastStall*1000)));
 	}
 	
-	public SUBCLASS cue(long beat)
-	{
-		addToWorking(new AtomStep(Timing.ms(30000),new Sync(beat*1000)));
-		lastCue = beat;
-		return downcast();
-	}
-	
-	public SUBCLASS offset(long offset)
-	{
-		return cue(lastCue+offset);
-	}
-	
 	protected void addToWorking(Gesture step)
 	{
 		world.add(step);
@@ -128,7 +116,6 @@ public abstract class ScriptBuilder<SUBCLASS>
 	public Stroke stroke(int fromX, int fromY, int toX, int toY) {
 		return new Stroke(world,new PointPair(fromX,fromY,toX,toY));
 	}
-
 	
 	public Party party(String name)
 	{
