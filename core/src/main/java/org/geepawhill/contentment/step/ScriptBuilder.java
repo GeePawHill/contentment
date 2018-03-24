@@ -61,7 +61,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 		lastScene=-1;
 	}
 	
-	public void stall(long beat)
+	public void sync(long beat)
 	{
 		if(lastScene==-1) throw new RuntimeException("end() called with no scene.");
 		lastStall+=beat;

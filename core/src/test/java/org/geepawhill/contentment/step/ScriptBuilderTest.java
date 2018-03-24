@@ -117,8 +117,8 @@ public class ScriptBuilderTest
 	public void stallsChain()
 	{
 		builder.scene(0);
-		builder.stall(5);
-		builder.stall(5);
+		builder.sync(5);
+		builder.sync(5);
 		assertThat(builder.lastStall()).isEqualTo(10);
 		builder.end();
 		assertThat(builder.script.size()).isEqualTo(1);
