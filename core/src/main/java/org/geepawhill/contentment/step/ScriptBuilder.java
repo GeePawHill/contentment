@@ -11,7 +11,7 @@ import org.geepawhill.contentment.actors.Stroke;
 import org.geepawhill.contentment.core.Gesture;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.fragments.Wipe;
-import org.geepawhill.contentment.fragments.MarkAtom;
+import org.geepawhill.contentment.fragments.Sync;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.player.Keyframe;
 import org.geepawhill.contentment.player.Script;
@@ -51,7 +51,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 		lastScene = beat;
 		lastStall=beat;
 		buildPhrase();
-		addToWorking(new AtomStep(Timing.ms(30000),new MarkAtom(beat*1000)));
+		addToWorking(new AtomStep(Timing.ms(30000),new Sync(beat*1000)));
 	}
 
 	public void end()
@@ -65,12 +65,12 @@ public abstract class ScriptBuilder<SUBCLASS>
 	{
 		if(lastScene==-1) throw new RuntimeException("end() called with no scene.");
 		lastStall+=beat;
-		addToWorking(new AtomStep(Timing.ms(30000),new MarkAtom(lastStall*1000)));
+		addToWorking(new AtomStep(Timing.ms(30000),new Sync(lastStall*1000)));
 	}
 	
 	public SUBCLASS cue(long beat)
 	{
-		addToWorking(new AtomStep(Timing.ms(30000),new MarkAtom(beat*1000)));
+		addToWorking(new AtomStep(Timing.ms(30000),new Sync(beat*1000)));
 		lastCue = beat;
 		return downcast();
 	}

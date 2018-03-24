@@ -2,13 +2,18 @@ package org.geepawhill.contentment.fragments;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Fragment;
-
-public class MarkAtom implements Fragment
+/**
+ * Wait for the context's rhythm to hit a particular mark in seconds
+ * 
+ * @author GeePaw
+ *
+ */
+public class Sync implements Fragment
 {
 
 	private long mark;
 
-	public MarkAtom(long mark)
+	public Sync(long mark)
 	{
 		this.mark = mark;
 	}
@@ -21,11 +26,7 @@ public class MarkAtom implements Fragment
 	@Override
 	public boolean interpolate(Context context, double fraction)
 	{
-		if (context.beat() > mark)
-		{
-			return false;
-		}
-		return true;
+		return context.beat()<mark;
 	}
 
 }
