@@ -3,13 +3,13 @@ package org.geepawhill.contentment.fragments;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Fragment;
 
-public class OpacityAtom implements Fragment
+public class Fader implements Fragment
 {
 	private GroupSource actor;
 	private double from;
 	private double to;
 
-	public OpacityAtom(GroupSource actor, double from, double to)
+	public Fader(GroupSource actor, double from, double to)
 	{
 		this.actor = actor;
 		this.from = from;

@@ -4,7 +4,7 @@ import org.geepawhill.contentment.fragments.Recolor;
 import org.geepawhill.contentment.fragments.Entrance;
 import org.geepawhill.contentment.fragments.Exit;
 import org.geepawhill.contentment.fragments.GroupSource;
-import org.geepawhill.contentment.fragments.OpacityAtom;
+import org.geepawhill.contentment.fragments.Fader;
 import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.timing.Timing;
@@ -75,7 +75,7 @@ public abstract class GenericActor implements Actor
 	@Override
 	public Actor fadeDown()
 	{
-		world.add(new AtomStep(Timing.ms(500),new OpacityAtom(entrance, 1, 0)));
+		world.add(new AtomStep(Timing.ms(500),new Fader(entrance, 1, 0)));
 		return this;
 	}
 	
@@ -83,7 +83,7 @@ public abstract class GenericActor implements Actor
 	public Actor fadeOut()
 	{
 		world.push(new Phrase());
-		world.add(new AtomStep(Timing.ms(500d),new OpacityAtom(entrance, 1, 0)));
+		world.add(new AtomStep(Timing.ms(500d),new Fader(entrance, 1, 0)));
 		world.add(new AtomStep(Timing.instant(),new Exit(entrance)));
 		world.popAndAppend();
 		return this;
@@ -94,9 +94,9 @@ public abstract class GenericActor implements Actor
 	{
 		world.push(new Phrase());
 		world.add(new AtomStep(Timing.instant(),entrance));
-		world.add(new AtomStep(Timing.instant(),new OpacityAtom(entrance, 1, 0)));
+		world.add(new AtomStep(Timing.instant(),new Fader(entrance, 1, 0)));
 		draw(1d);
-		world.add(new AtomStep(Timing.ms(500d),new OpacityAtom(entrance,0,1)));
+		world.add(new AtomStep(Timing.ms(500d),new Fader(entrance,0,1)));
 		world.popAndAppend();
 		return this;
 	}
@@ -104,7 +104,7 @@ public abstract class GenericActor implements Actor
 	@Override
 	public Actor fadeUp()
 	{
-		world.add(new AtomStep(Timing.ms(500d),new OpacityAtom(entrance,0,1)));
+		world.add(new AtomStep(Timing.ms(500d),new Fader(entrance,0,1)));
 		return this;
 	}
 }
