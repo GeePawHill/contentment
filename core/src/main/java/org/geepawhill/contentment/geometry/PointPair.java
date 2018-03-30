@@ -196,9 +196,15 @@ public class PointPair
 		return new PointPair(from, to);
 	}
 
-	public PointPair centerLine()
+	public PointPair xCenterLine()
 	{
 		return new PointPair(north(),south());
 	}
+	
+	public PointPair yCenterLine()
+	{
+		return new PointPair(west(),east());
+	}
+
 
 }

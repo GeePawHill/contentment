@@ -1,6 +1,6 @@
 package org.geepawhill.contentment.grid;
 
-import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.geometry.*;
 
 public class Grid
 {
@@ -13,22 +13,36 @@ public class Grid
 	
 	public Horizontal top()
 	{
-		return new Horizontal(bounds,0);
+		return horizontal(0);
 	}
 	
 	public Horizontal bottom()
 	{
-		return new Horizontal(bounds, 100);
+		return horizontal(100);
 	}
 
 	public Vertical left()
 	{
-		return new Vertical(bounds,0);
+		return vertical(0);
 	}
 
 	public Vertical right()
 	{
-		return new Vertical(bounds,100);
+		return vertical(100);
 	}
 
+	public Vertical vertical(double percent)
+	{
+		return new Vertical(bounds,percent);
+	}
+
+	public Horizontal horizontal(double percent)
+	{
+		return new Horizontal(bounds,percent);
+	}
+
+	public Point point(Horizontal horizontal, Vertical vertical)
+	{
+		return new Point(vertical.points().from.x,horizontal.points.from.y);
+	}
 }

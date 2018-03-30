@@ -27,5 +27,18 @@ public class GridTest
 		assertThat( grid.bottom().points()).isEqualTo(bounds.southLine());
 		assertThat( grid.right().points()).isEqualTo(bounds.eastLine());
 	}
+	
+	@Test
+	public void verticalAndHorizontal()
+	{
+		assertThat( grid.vertical(50).points()).isEqualTo(bounds.xCenterLine());
+		assertThat( grid.horizontal(50).points()).isEqualTo(bounds.yCenterLine());
+	}
+	
+	@Test
+	public void point()
+	{
+		assertThat( grid.point(grid.horizontal(50),grid.vertical(50))).isEqualTo(bounds.center());
+	}
 
 }
