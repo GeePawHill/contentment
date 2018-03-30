@@ -10,7 +10,6 @@ public class Exit implements Fragment
 	public Exit(GroupSource actor)
 	{
 		this.actor = actor;
-		
 	}
 
 	@Override
