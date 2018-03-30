@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.fragments;
+package org.geepawhill.contentment.core;
 
 import java.util.function.Supplier;
 

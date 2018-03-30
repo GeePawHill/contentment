@@ -2,7 +2,7 @@ package org.geepawhill.contentment.actor;
 
 import java.util.ArrayList;
 
-import org.geepawhill.contentment.fragments.GroupSource;
+import org.geepawhill.contentment.core.GroupSource;
 import org.geepawhill.contentment.step.Chord;
 
 import javafx.scene.paint.Paint;

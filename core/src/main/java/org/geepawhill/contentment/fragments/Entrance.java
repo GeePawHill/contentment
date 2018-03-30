@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.fragments;
 
-import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.Fragment;
+import org.geepawhill.contentment.core.*;
 
 import javafx.scene.Group;
 

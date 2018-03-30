@@ -1,5 +1,5 @@
 package org.geepawhill.contentment.position;
-import org.geepawhill.contentment.fragments.GroupSource;
+import org.geepawhill.contentment.core.GroupSource;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.utility.JfxUtility;

@@ -1,6 +1,6 @@
 package org.geepawhill.contentment.actor;
 
-import org.geepawhill.contentment.fragments.GroupSource;
+import org.geepawhill.contentment.core.GroupSource;
 
 import javafx.scene.paint.Paint;
 

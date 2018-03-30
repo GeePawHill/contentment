@@ -1,10 +1,7 @@
 package org.geepawhill.contentment.actor;
 
-import org.geepawhill.contentment.fragments.Recolor;
-import org.geepawhill.contentment.fragments.Entrance;
-import org.geepawhill.contentment.fragments.Exit;
-import org.geepawhill.contentment.fragments.GroupSource;
-import org.geepawhill.contentment.fragments.Fader;
+import org.geepawhill.contentment.core.GroupSource;
+import org.geepawhill.contentment.fragments.*;
 import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.step.Phrase;
 import org.geepawhill.contentment.timing.Timing;

@@ -1,6 +1,5 @@
 package org.geepawhill.contentment.core;
 
-import org.geepawhill.contentment.fragments.GroupSource;
 import org.geepawhill.contentment.rhythm.Rhythm;
 
 import javafx.scene.Group;

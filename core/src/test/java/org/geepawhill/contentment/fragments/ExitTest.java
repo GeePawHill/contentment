@@ -6,7 +6,7 @@ import javafx.scene.Group;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.geepawhill.contentment.core.Context;
+import org.geepawhill.contentment.core.*;
 
 public class ExitTest
 {

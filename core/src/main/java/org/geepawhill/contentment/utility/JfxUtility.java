@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import org.geepawhill.contentment.fragments.GroupSource;
+import org.geepawhill.contentment.core.GroupSource;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.VPos;
