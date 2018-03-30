@@ -1,7 +1,7 @@
 package org.geepawhill.contentment.geometry;
 
 import static org.assertj.core.api.Assertions.within;
-import static org.geepawhill.contentment.test.PointAssert.assertThat;
+import static org.geepawhill.contentment.test.ContentmentAssertions.*;
 
 import org.junit.Before;
 import org.junit.Test;
