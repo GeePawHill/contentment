@@ -2,29 +2,43 @@ package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.*;
 import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.fragments.Curve;
 import org.geepawhill.contentment.geometry.*;
+import org.geepawhill.contentment.step.AtomStep;
+import org.geepawhill.contentment.timing.Timing;
 
 public class Marks extends GenericActor
 {
 
-	protected final Curves curves;
+	private final Curve[] curves;
 
 	public Marks(ScriptWorld world,Bezier...beziers)
 	{
 		super(world);
-		this.curves = new Curves(world, groupSource(), beziers);
+		this.curves = new Curve[beziers.length];
+		int next = 0;
+		for (Bezier bezier : beziers)
+		{
+			curves[next++] = new Curve(groupSource(), () -> bezier, Format.DEFAULT);
+		}
 	}
-
+	
 	public Marks format(Format format)
 	{
-		curves.format(format);
+		for (Curve curve : curves)
+		{
+			curve.format(format);
+		}
 		return this;
 	}
 
 	@Override
 	public Marks draw(double ms)
 	{
-		curves.draw(ms);
+		for (Curve curve : curves)
+		{
+			world.add(new AtomStep(Timing.ms(ms / curves.length), curve));
+		}
 		return this;
 	}
 
