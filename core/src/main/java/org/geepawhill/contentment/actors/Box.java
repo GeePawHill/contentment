@@ -1,23 +1,17 @@
 package org.geepawhill.contentment.actors;
 
-import java.util.Random;
-
-import org.geepawhill.contentment.actor.GenericActor;
-import org.geepawhill.contentment.actor.ScriptWorld;
+import org.geepawhill.contentment.actor.*;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.fragments.Curve;
-import org.geepawhill.contentment.geometry.Bezier;
-import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.geometry.*;
 
 public class Box extends GenericActor
 {
 	private final Curves curves;
-	private final Random random;
 
 	public Box(ScriptWorld world, PointPair points)
 	{
 		super(world);
-		this.random = new Random();
 		this.curves = new Curves(world, jiggle(points.northLine()), jiggle(points.eastLine()), jiggle(points.southLine()),
 				jiggle(points.westLine()));
 	}
@@ -26,9 +20,9 @@ public class Box extends GenericActor
 	{
 		double variance = points.distance() * .1;
 		Bezier chosen = new Bezier(
-				points.from, 
-				points.along(random.nextDouble()).jiggle(random, 1d, variance),
-				points.along(random.nextDouble()).jiggle(random, 1d, variance), 
+				points.from,
+				world.jiggle(points.along(world.nextDouble()), 1d, variance),
+				world.jiggle(points.along(world.nextDouble()), 1d, variance),
 				points.to);
 		return new Curve(groupSource(), () -> chosen, Format.DEFAULT);
 	}

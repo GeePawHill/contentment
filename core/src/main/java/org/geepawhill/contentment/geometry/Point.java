@@ -1,7 +1,5 @@
 package org.geepawhill.contentment.geometry;
 
-import java.util.Random;
-
 public class Point
 {
 	public final double x;
@@ -43,25 +41,6 @@ public class Point
 	public Point along(double fraction, Point to)
 	{
 		return new Point(x + fraction * xDistance(to), y + fraction * yDistance(to));
-	}
-
-	public Point jiggle(Random random, double probability, double variance)
-	{
-		double newX = x;
-		double newY = y;
-		if (random.nextDouble() < probability)
-		{
-			double sign = random.nextDouble() > .5 ? -1 : +1;
-			double change = random.nextDouble() * variance;
-			newX += sign * change;
-		}
-		if (random.nextDouble() < probability)
-		{
-			double sign = random.nextDouble() > .5 ? -1 : +1;
-			double change = random.nextDouble() * variance;
-			newY += sign * change;
-		}
-		return new Point(newX, newY);
 	}
 
 	@Override

@@ -1,7 +1,5 @@
 package org.geepawhill.contentment.actors;
 
-import java.util.Random;
-
 import org.geepawhill.contentment.actor.*;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.fragments.Curve;
@@ -10,12 +8,10 @@ import org.geepawhill.contentment.geometry.*;
 public class Stroke extends GenericActor
 {
 	private final Curves curves;
-	private Random random;
 
 	public Stroke(ScriptWorld world, PointPair points)
 	{
 		super(world);
-		random = new Random();
 		this.curves = new Curves(world,jiggle(points));
 	}
 
@@ -23,9 +19,9 @@ public class Stroke extends GenericActor
 	{
 		double variance = points.distance() * .1;
 		Bezier chosen = new Bezier(
-				points.from, 
-				points.along(random.nextDouble()).jiggle(random, 1d, variance),
-				points.along(random.nextDouble()).jiggle(random, 1d, variance), 
+				points.from,
+				world.jiggle(points.along(world.nextDouble()), 1d, variance),
+				world.jiggle(points.along(world.nextDouble()), 1d, variance),
 				points.to);
 		return new Curve(groupSource(), () -> chosen, Format.DEFAULT);
 	}

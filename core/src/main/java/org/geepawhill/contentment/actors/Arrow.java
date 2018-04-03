@@ -1,19 +1,13 @@
 package org.geepawhill.contentment.actors;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.actor.GenericActor;
-import org.geepawhill.contentment.actor.ScriptWorld;
-import org.geepawhill.contentment.connector.arrow.ArrowComputer;
-import org.geepawhill.contentment.connector.arrow.ArrowPoints;
-import org.geepawhill.contentment.connector.arrow.NodeArrowComputer;
+import org.geepawhill.contentment.actor.*;
+import org.geepawhill.contentment.connector.arrow.*;
 import org.geepawhill.contentment.core.GroupSource;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.fragments.Curve;
-import org.geepawhill.contentment.geometry.Bezier;
-import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.geometry.*;
 import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
@@ -34,8 +28,6 @@ public class Arrow extends GenericActor
 	private ArrowPoints points;
 
 	private ArrayList<Curve> steps;
-
-	private Random random;
 
 	private Bezier chosenMain;
 	private Bezier chosenFromTop;
@@ -68,7 +60,6 @@ public class Arrow extends GenericActor
 		this.to = to;
 		this.pointAtTo = pointAtTo;
 		this.format = format;
-		this.random = new Random();
 		this.nickname = Names.make(getClass());
 	}
 	
@@ -146,8 +137,11 @@ public class Arrow extends GenericActor
 	public Bezier chooseBezier(PointPair points)
 	{
 		double variance = points.distance()*.1;
-		Bezier chosen = new Bezier(points.from, points.along(random.nextDouble()).jiggle(random, 1d, variance),
-				points.along(random.nextDouble()).jiggle(random, 1d, variance), points.to);
+		Bezier chosen = new Bezier(
+				points.from,
+				world.jiggle(points.along(world.nextDouble()), 1d, variance),
+				world.jiggle(points.along(world.nextDouble()), 1d, variance),
+				points.to);
 		return chosen;
 	}
 
