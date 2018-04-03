@@ -8,49 +8,47 @@ import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.fragments.Curve;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.step.AtomStep;
-import org.geepawhill.contentment.timing.Timing;
 
 public class Box extends GenericActor
 {
-	private final Curve curves[];
-	private Random random;
+	private final Curves curves;
+	private final Random random;
 
 	public Box(ScriptWorld world, PointPair points)
 	{
 		super(world);
-		random = new Random();
-		this.curves = new Curve[4];
-		this.curves[0] = jiggle(points.northLine());
-		this.curves[1] = jiggle(points.eastLine());
-		this.curves[2] = jiggle(points.southLine());
-		this.curves[3] = jiggle(points.westLine());
+		this.random = new Random();
+		this.curves = new Curves(world, jiggle(points.northLine()), jiggle(points.eastLine()), jiggle(points.southLine()),
+				jiggle(points.westLine()));
 	}
 
 	public Curve jiggle(PointPair points)
 	{
 		double variance = points.distance() * .1;
-		Bezier chosen = new Bezier(points.from, points.along(random.nextDouble()).jiggle(random, 1d, variance),
-				points.along(random.nextDouble()).jiggle(random, 1d, variance), points.to);
+		Bezier chosen = new Bezier(
+				points.from, 
+				points.along(random.nextDouble()).jiggle(random, 1d, variance),
+				points.along(random.nextDouble()).jiggle(random, 1d, variance), 
+				points.to);
 		return new Curve(groupSource(), () -> chosen, Format.DEFAULT);
 	}
 
 	public Box format(Format format)
 	{
-		for (Curve curve : curves)
-		{
-			curve.format(format);
-		}
+		curves.format(format);
 		return this;
 	}
 
 	@Override
 	public Box draw(double ms)
 	{
-		for (Curve curve : curves)
-		{
-			world.add(new AtomStep(Timing.ms(ms), curve));
-		}
+		curves.draw(ms);
+		return this;
+	}
+
+	public Box assume()
+	{
+		format(world.assumptions().format());
 		return this;
 	}
 }

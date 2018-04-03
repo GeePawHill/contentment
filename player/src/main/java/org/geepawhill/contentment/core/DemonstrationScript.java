@@ -5,7 +5,7 @@ import static org.geepawhill.contentment.utility.JfxUtility.color;
 import java.io.File;
 import java.util.Vector;
 
-import org.geepawhill.contentment.actors.Box;
+import org.geepawhill.contentment.actors.*;
 import org.geepawhill.contentment.flow.Flow;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.*;
@@ -87,9 +87,12 @@ public class DemonstrationScript extends ScriptBuilder<DemonstrationScript> {
 		Horizontal middleThirdTop = grid.horizontal(33);
 		Horizontal middleThirdBottom = grid.horizontal(66);
 		
-		Box box = new Box(world,grid.area(middleThirdLeft, middleThirdTop, middleThirdRight, middleThirdBottom));
+		PointPair middleThird = grid.area(middleThirdLeft, middleThirdTop, middleThirdRight, middleThirdBottom);
 		assume(primaryJumbo);
-		box.appear();
+		box(middleThird).sketch();
+		sync(1);
+		stroke(middleThird).appear();
+		stroke(new PointPair(middleThird.to.x,middleThird.from.y,middleThird.from.x,middleThird.to.y)).appear();
 	}
 
 	public void header(String text) {

@@ -3,11 +3,7 @@ package org.geepawhill.contentment.step;
 import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.Party;
 import org.geepawhill.contentment.actor.ScriptWorld;
-import org.geepawhill.contentment.actors.Arrow;
-import org.geepawhill.contentment.actors.Cross;
-import org.geepawhill.contentment.actors.Letters;
-import org.geepawhill.contentment.actors.Place;
-import org.geepawhill.contentment.actors.Stroke;
+import org.geepawhill.contentment.actors.*;
 import org.geepawhill.contentment.core.Gesture;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.fragments.Wipe;
@@ -129,7 +125,12 @@ public abstract class ScriptBuilder<SUBCLASS>
 
 	public Stroke stroke(PointPair westLine)
 	{
-		return new Stroke(world,westLine);
+		return new Stroke(world,westLine).assume();
+	}
+	
+	public Box box(PointPair area)
+	{
+		return new Box(world,area).assume();
 	}
 
 	public Arrow connector()
