@@ -41,8 +41,17 @@ public class Grid
 		return new Horizontal(bounds,percent);
 	}
 
-	public Point point(Horizontal horizontal, Vertical vertical)
+	public Point point(Vertical vertical, Horizontal horizontal)
 	{
 		return new Point(vertical.points().from.x,horizontal.points.from.y);
+	}
+	
+	public PointPair area(Vertical fromX,Horizontal fromY,Vertical toX,Horizontal toY)
+	{
+		return new PointPair(
+				fromX.points().from.x,
+				fromY.points().from.y,
+				toX.points().to.x,
+				toY.points().to.y);
 	}
 }
