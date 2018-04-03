@@ -1,25 +1,19 @@
 package org.geepawhill.contentment.step;
 
-import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.actor.Party;
-import org.geepawhill.contentment.actor.ScriptWorld;
+import org.geepawhill.contentment.actor.*;
 import org.geepawhill.contentment.actors.*;
 import org.geepawhill.contentment.core.Gesture;
 import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.fragments.Wipe;
-import org.geepawhill.contentment.fragments.Sync;
+import org.geepawhill.contentment.fragments.*;
 import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.player.Keyframe;
-import org.geepawhill.contentment.player.Script;
-import org.geepawhill.contentment.rhythm.Rhythm;
-import org.geepawhill.contentment.rhythm.SimpleRhythm;
+import org.geepawhill.contentment.player.*;
+import org.geepawhill.contentment.rhythm.*;
 import org.geepawhill.contentment.timing.Timing;
 
 public abstract class ScriptBuilder<SUBCLASS>
 {
 	
 	protected ScriptWorld world;
-	private long lastCue;
 	protected Script script;
 	protected long lastScene;
 	protected long lastStall;
@@ -109,8 +103,8 @@ public abstract class ScriptBuilder<SUBCLASS>
 		return new Letters(world,source).assume();
 	}
 	
-	public Stroke stroke(int fromX, int fromY, int toX, int toY) {
-		return new Stroke(world,new PointPair(fromX,fromY,toX,toY));
+	public Marks stroke(int fromX, int fromY, int toX, int toY) {
+		return Marks.makeLine(world,new PointPair(fromX,fromY,toX,toY));
 	}
 	
 	public Party party(String name)
@@ -123,14 +117,14 @@ public abstract class ScriptBuilder<SUBCLASS>
 		return new Cross(world,actor(name).groupSource(),xsize,ysize,xoffset,yoffset);
 	}
 
-	public Stroke stroke(PointPair westLine)
+	public Marks stroke(PointPair points)
 	{
-		return new Stroke(world,westLine).assume();
+		return Marks.makeLine(world,points).assume();
 	}
 	
-	public Box box(PointPair area)
+	public Marks box(PointPair area)
 	{
-		return new Box(world,area).assume();
+		return Marks.makeBox(world,area).assume();
 	}
 
 	public Arrow connector()
