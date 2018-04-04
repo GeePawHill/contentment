@@ -11,7 +11,6 @@ import org.geepawhill.contentment.core.Fragment;
  */
 public class Wipe implements Fragment
 {
-	
 	public Wipe()
 	{
 	}
@@ -27,5 +26,4 @@ public class Wipe implements Fragment
 	{
 		return false;
 	}
-
 }
