@@ -5,7 +5,7 @@ import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.core.GroupSource;
 import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.fragments.Curve;
+import org.geepawhill.contentment.fragments.Mark;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
@@ -19,8 +19,8 @@ public class Cross extends GenericActor
 {
 
 	private GroupSource target;
-	private Curve leftToRight;
-	private Curve rightToLeft;
+	private Mark leftToRight;
+	private Mark rightToLeft;
 	private double xsize;
 	private double ysize;
 	private Point offset;
@@ -44,8 +44,8 @@ public class Cross extends GenericActor
 		this.ysize = ysize;
 		this.offset = offset;
 		Format crossFormat = new Format(Frames.frame(Color.RED, 7d, .7d));
-		leftToRight = new Curve(groupSource(),this::leftToRightBezier, crossFormat);
-		rightToLeft = new Curve(groupSource(),this::rightToLeftBezier, crossFormat);
+		leftToRight = new Mark(groupSource(),this::leftToRightBezier, crossFormat);
+		rightToLeft = new Mark(groupSource(),this::rightToLeftBezier, crossFormat);
 	}
 
 	@Override

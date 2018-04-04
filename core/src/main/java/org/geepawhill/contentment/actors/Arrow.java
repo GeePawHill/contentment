@@ -6,7 +6,7 @@ import org.geepawhill.contentment.actor.*;
 import org.geepawhill.contentment.connector.arrow.*;
 import org.geepawhill.contentment.core.GroupSource;
 import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.fragments.Curve;
+import org.geepawhill.contentment.fragments.Mark;
 import org.geepawhill.contentment.geometry.*;
 import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
@@ -19,15 +19,15 @@ public class Arrow extends GenericActor
 	private GroupSource from;
 	private GroupSource to;
 
-	private Curve mainStep;
-	private Curve fromTopStep;
-	private Curve fromBottomStep;
-	private Curve toTopStep;
-	private Curve toBottomStep;
+	private Mark mainStep;
+	private Mark fromTopStep;
+	private Mark fromBottomStep;
+	private Mark toTopStep;
+	private Mark toBottomStep;
 
 	private ArrowPoints points;
 
-	private ArrayList<Curve> steps;
+	private ArrayList<Mark> steps;
 
 	private Bezier chosenMain;
 	private Bezier chosenFromTop;
@@ -150,24 +150,24 @@ public class Arrow extends GenericActor
 	{
 		steps = new ArrayList<>();
 		chosenMain = null;
-		mainStep = new Curve(groupSource(), this::getMainBezier, format);
+		mainStep = new Mark(groupSource(), this::getMainBezier, format);
 		if (pointAtFrom)
 		{
-			fromTopStep = new Curve(groupSource(), this::getFromTop, format);
+			fromTopStep = new Mark(groupSource(), this::getFromTop, format);
 			steps.add(fromTopStep);
-			fromBottomStep = new Curve(groupSource(), this::getFromBottom, format);
+			fromBottomStep = new Mark(groupSource(), this::getFromBottom, format);
 			steps.add(fromBottomStep);
 		}
 		if (pointAtTo)
 		{
-			toTopStep = new Curve(groupSource(), this::getToTop, format);
+			toTopStep = new Mark(groupSource(), this::getToTop, format);
 			steps.add(toTopStep);
-			toBottomStep = new Curve(groupSource(), this::getToBottom, format);
+			toBottomStep = new Mark(groupSource(), this::getToBottom, format);
 			steps.add(toBottomStep);
 		}
 		Timed sequence = new Timed(ms);
 		sequence.add(Timing.weighted(.9d), mainStep);
-		for (Curve step : steps)
+		for (Mark step : steps)
 		{
 			sequence.add(Timing.weighted(.1d), step);
 		}

@@ -15,6 +15,7 @@ public class BezierSplit
 	{
 		this.fraction = t;
 		this.bezier = bezier;
+		
 		// this is de casteljau's algorithm, see: https://stackoverflow.com/questions/2613788/algorithm-for-inserting-points-in-a-piecewise-cubic-b%C3%A9zier-path
 		// P0_1 = (1-t)*P0 + t*P1
 		// P1_2 = (1-t)*P1 + t*P2

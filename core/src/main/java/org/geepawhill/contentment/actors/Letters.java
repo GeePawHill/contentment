@@ -4,7 +4,7 @@ import org.geepawhill.contentment.actor.Actor;
 import org.geepawhill.contentment.actor.GenericActor;
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.fragments.Curve;
+import org.geepawhill.contentment.fragments.Mark;
 import org.geepawhill.contentment.fragments.Type;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Jiggler;
@@ -22,8 +22,8 @@ public class Letters extends GenericActor implements Actor
 
 	private Jiggler controlJiggler;
 	private Jiggler northJiggler;
-	private Curve east;
-	private Curve west;
+	private Mark east;
+	private Mark west;
 	private Bezier eastHalfBezier;
 	private Bezier westHalfBezier;
 
@@ -39,8 +39,8 @@ public class Letters extends GenericActor implements Actor
 		this.controlJiggler = new Jiggler(.4d, 30d);
 
 		this.letters = new Type(groupSource(), source, format, position);
-		this.east = new Curve(groupSource(), this::eastHalfPoints, format);
-		this.west = new Curve(groupSource(), this::westHalfPoints, format);
+		this.east = new Mark(groupSource(), this::eastHalfPoints, format);
+		this.west = new Mark(groupSource(), this::westHalfPoints, format);
 	}
 
 	public Letters withOval()

@@ -11,23 +11,22 @@ import org.geepawhill.contentment.utility.JfxUtility;
 
 import javafx.scene.shape.Path;
 
-public class Curve implements Fragment
+public class Mark implements Fragment
 {
-	public final Path path;
-	private BezierSource source;
+	private final Path path;
+	private final BezierSource source;
+	private final GroupSource owner;
 	private Format format;
-	private GroupSource owner;
 	
-	public Curve(GroupSource owner, BezierSource source, Format format)
+	public Mark(GroupSource owner, BezierSource source, Format format)
 	{
 		this.owner = owner;
 		this.source = source;
-		this.format = format;
 		this.path = new Path();
+		this.format = format;
 	}
 
-
-	public Curve(GroupSource owner, Format format, PointPair points)
+	public Mark(GroupSource owner, Format format, PointPair points)
 	{
 		this(owner, () -> new Bezier(points), format);
 	}
