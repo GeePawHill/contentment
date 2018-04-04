@@ -24,6 +24,11 @@ public class Type implements Fragment
 	private Format format;
 	private Position position;
 	private String lastPartial;
+	
+	public Type(GroupSource owner, String source)
+	{
+		this(owner,source,Format.DEFAULT,Position.DEFAULT);
+	}
 
 	public Type(GroupSource group, String source, Format format, Position position)
 	{
