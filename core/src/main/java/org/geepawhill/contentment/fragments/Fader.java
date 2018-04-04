@@ -14,17 +14,16 @@ public class Fader implements Fragment
 	private double from;
 	private double to;
 
-	public Fader(GroupSource target, double from, double to)
+	public Fader(GroupSource target, double to)
 	{
 		this.target = target;
-		this.from = from;
 		this.to = to;
 	}
 
 	@Override
 	public void prepare(Context context)
 	{
-		target.get().setOpacity(from);
+		this.from = target.get().getOpacity();
 	}
 
 	@Override

@@ -72,7 +72,7 @@ public abstract class GenericActor implements Actor
 	@Override
 	public Actor fadeDown()
 	{
-		world.add(new AtomStep(Timing.ms(500),new Fader(entrance, 1, 0)));
+		world.add(new AtomStep(Timing.ms(500),new Fader(entrance, 0)));
 		return this;
 	}
 	
@@ -80,7 +80,7 @@ public abstract class GenericActor implements Actor
 	public Actor fadeOut()
 	{
 		world.push(new Phrase());
-		world.add(new AtomStep(Timing.ms(500d),new Fader(entrance, 1, 0)));
+		world.add(new AtomStep(Timing.ms(500d),new Fader(entrance, 0)));
 		world.add(new AtomStep(Timing.instant(),new Exit(entrance)));
 		world.popAndAppend();
 		return this;
@@ -91,9 +91,9 @@ public abstract class GenericActor implements Actor
 	{
 		world.push(new Phrase());
 		world.add(new AtomStep(Timing.instant(),entrance));
-		world.add(new AtomStep(Timing.instant(),new Fader(entrance, 1, 0)));
+		world.add(new AtomStep(Timing.instant(),new Fader(entrance, 0)));
 		draw(1d);
-		world.add(new AtomStep(Timing.ms(500d),new Fader(entrance,0,1)));
+		world.add(new AtomStep(Timing.ms(500d),new Fader(entrance,1)));
 		world.popAndAppend();
 		return this;
 	}
@@ -101,7 +101,7 @@ public abstract class GenericActor implements Actor
 	@Override
 	public Actor fadeUp()
 	{
-		world.add(new AtomStep(Timing.ms(500d),new Fader(entrance,0,1)));
+		world.add(new AtomStep(Timing.ms(500d),new Fader(entrance,1)));
 		return this;
 	}
 }

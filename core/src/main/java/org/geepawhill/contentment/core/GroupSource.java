@@ -28,4 +28,9 @@ public interface GroupSource extends Supplier<Group>
 			super("GroupSource has no group.");
 		}
 	}
+
+	public static GroupSource value(Group group)
+	{
+		return () -> group;
+	}
 }
