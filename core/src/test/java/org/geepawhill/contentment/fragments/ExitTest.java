@@ -10,11 +10,9 @@ import org.geepawhill.contentment.core.*;
 
 public class ExitTest
 {
-	
 	private Context context;
 	private Group group;
 	private GroupSource source;
-
 
 	@Before
 	public void before()
@@ -23,7 +21,6 @@ public class ExitTest
 		group = new Group();
 		source = GroupSource.VALUE(group);
 	}
-
 
 	@Test
 	public void removesGroup()
@@ -43,7 +40,7 @@ public class ExitTest
 	}
 	
 	@Test
-	public void missingGroup()
+	public void missingGroupIsNoOp()
 	{
 		Exit exit = new Exit( source );
 		exit.prepare(context);
@@ -51,7 +48,7 @@ public class ExitTest
 	}
 	
 	@Test(expected = GroupSource.NoGroupSource.class)
-	public void badGroup()
+	public void invalidGroupThrows()
 	{
 		Exit exit = new Exit( GroupSource.NONE );
 		exit.prepare(context);

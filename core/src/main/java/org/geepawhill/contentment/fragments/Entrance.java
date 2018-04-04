@@ -6,7 +6,6 @@ import javafx.scene.Group;
 
 public class Entrance implements Fragment, GroupSource
 {
-	
 	private Group group;
 
 	public Entrance()
@@ -19,7 +18,7 @@ public class Entrance implements Fragment, GroupSource
 	{
 		group.getChildren().clear();
 		group.setOpacity(1);
-		context.add(() -> group);
+		context.add(this);
 	}
 
 	@Override
@@ -33,11 +32,4 @@ public class Entrance implements Fragment, GroupSource
 	{
 		return group;
 	}
-	
-	@Override
-	public String toString()
-	{
-		return "Entrance: Group ("+group+")";
-	}
-
 }

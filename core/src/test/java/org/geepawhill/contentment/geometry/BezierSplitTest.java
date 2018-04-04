@@ -8,7 +8,6 @@ import org.junit.Test;
 
 public class BezierSplitTest
 {
-
 	private Point start;
 	private Point end;
 	private Bezier linear;
