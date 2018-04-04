@@ -3,6 +3,12 @@ package org.geepawhill.contentment.fragments;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.core.Fragment;
 
+/**
+ * Clears the entire canvas.
+ * 
+ * @author GeePaw
+ *
+ */
 public class Wipe implements Fragment
 {
 	

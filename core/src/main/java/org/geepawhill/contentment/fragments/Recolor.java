@@ -6,9 +6,15 @@ import org.geepawhill.contentment.utility.JfxUtility;
 
 import javafx.scene.paint.Paint;
 
+/**
+ * Changes the color of its target and all its target's children.
+ * 
+ * @author GeePaw
+ *
+ */
 public class Recolor implements Fragment
 {
-	
+
 	private GroupSource actor;
 	private Paint paint;
 
@@ -16,7 +22,6 @@ public class Recolor implements Fragment
 	{
 		this.actor = actor;
 		this.paint = paint;
-		
 	}
 
 	@Override
@@ -31,5 +36,4 @@ public class Recolor implements Fragment
 		JfxUtility.forEachDescendant(actor.get(), colorChanger);
 		return false;
 	}
-
 }

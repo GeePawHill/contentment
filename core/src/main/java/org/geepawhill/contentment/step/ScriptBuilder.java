@@ -137,11 +137,6 @@ public abstract class ScriptBuilder<SUBCLASS>
 		world.add(new AtomStep(Timing.instant(),new Wipe()));
 		return downcast();
 	}
-
-	public Actor spot(double x, double y)
-	{
-		return new Place(world,x,y);
-	}
 	
 	public SUBCLASS assume(Format format)
 	{

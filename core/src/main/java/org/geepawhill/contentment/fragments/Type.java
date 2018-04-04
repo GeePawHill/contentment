@@ -10,7 +10,13 @@ import org.geepawhill.contentment.utility.JfxUtility;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 
-public class Type implements NodeAtom
+/**
+ * Renders some type to the screen using a Text node.
+ * 
+ * @author GeePaw
+ *
+ */
+public class Type implements Fragment
 {
 	public final String source;
 	private Text text;
@@ -67,17 +73,5 @@ public class Type implements NodeAtom
 	public Text text()
 	{
 		return text;
-	}
-
-	@Override
-	public Node get()
-	{
-		return text;
-	}
-	
-	@Override
-	public String toString()
-	{
-		return "Letters: Source |"+source+"| Group |"+group.get()+"|";
 	}
 }

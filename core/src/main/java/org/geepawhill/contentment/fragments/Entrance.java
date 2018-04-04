@@ -4,6 +4,13 @@ import org.geepawhill.contentment.core.*;
 
 import javafx.scene.Group;
 
+/**
+ * Makes a group and adds it to the canvas at root, making it available via get for later
+ * manipulators.
+ * 
+ * @author GeePaw
+ *
+ */
 public class Entrance implements Fragment, GroupSource
 {
 	private Group group;
@@ -12,7 +19,7 @@ public class Entrance implements Fragment, GroupSource
 	{
 		this.group = new Group();
 	}
-	
+
 	@Override
 	public void prepare(Context context)
 	{

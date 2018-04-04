@@ -2,15 +2,21 @@ package org.geepawhill.contentment.fragments;
 
 import org.geepawhill.contentment.core.*;
 
+/**
+ * Changes the opacity of a given Group target.
+ * 
+ * @author GeePaw
+ *
+ */
 public class Fader implements Fragment
 {
-	private GroupSource actor;
+	private GroupSource target;
 	private double from;
 	private double to;
 
-	public Fader(GroupSource actor, double from, double to)
+	public Fader(GroupSource target, double from, double to)
 	{
-		this.actor = actor;
+		this.target = target;
 		this.from = from;
 		this.to = to;
 	}
@@ -18,14 +24,13 @@ public class Fader implements Fragment
 	@Override
 	public void prepare(Context context)
 	{
-		actor.get().setOpacity(from);
+		target.get().setOpacity(from);
 	}
 
 	@Override
 	public boolean interpolate(Context context, double fraction)
 	{
-		actor.get().setOpacity(from + fraction * (to - from));
+		target.get().setOpacity(from + fraction * (to - from));
 		return true;
 	}
-
 }

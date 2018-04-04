@@ -11,13 +11,20 @@ import org.geepawhill.contentment.utility.JfxUtility;
 
 import javafx.scene.shape.Path;
 
+/**
+ * Animates a single (bezier) line in a given format to the screen using a Path
+ * node.
+ * 
+ * @author GeePaw
+ *
+ */
 public class Mark implements Fragment
 {
 	private final Path path;
 	private final BezierSource source;
 	private final GroupSource owner;
 	private Format format;
-	
+
 	public Mark(GroupSource owner, BezierSource source, Format format)
 	{
 		this.owner = owner;
@@ -35,8 +42,8 @@ public class Mark implements Fragment
 	public void prepare(Context context)
 	{
 		format.apply(Frames.KEY, path);
-		JfxUtility.addIfNeeded(owner,path);
-		interpolate(context,0d);
+		JfxUtility.addIfNeeded(owner, path);
+		interpolate(context, 0d);
 	}
 
 	@Override
@@ -45,7 +52,7 @@ public class Mark implements Fragment
 		new BezierSplit(fraction, source.get()).setPathToBefore(path);
 		return true;
 	}
-	
+
 	public void format(Format format)
 	{
 		this.format = format;
