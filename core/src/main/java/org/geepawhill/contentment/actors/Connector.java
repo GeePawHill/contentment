@@ -12,7 +12,7 @@ import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
-public class Arrow extends GenericActor
+public class Connector extends GenericActor
 {
 	final String nickname;
 	
@@ -42,17 +42,17 @@ public class Arrow extends GenericActor
 	private Format format;
 	
 
-	public Arrow(ScriptWorld world, Actor from, boolean pointAtFrom, Actor to, boolean pointAtTo, Format format)
+	public Connector(ScriptWorld world, Actor from, boolean pointAtFrom, Actor to, boolean pointAtTo, Format format)
 	{
 		this(world,from.groupSource(),pointAtFrom,to.groupSource(),pointAtTo,format);
 	}
 	
-	public Arrow(ScriptWorld world)
+	public Connector(ScriptWorld world)
 	{
 		this(world,GroupSource.NONE,false,GroupSource.NONE,false,Format.DEFAULT);
 	}
 	
-	public Arrow(ScriptWorld world, GroupSource from, boolean pointAtFrom, GroupSource to, boolean pointAtTo, Format format)
+	public Connector(ScriptWorld world, GroupSource from, boolean pointAtFrom, GroupSource to, boolean pointAtTo, Format format)
 	{
 		super(world);
 		this.from = from;
@@ -63,32 +63,31 @@ public class Arrow extends GenericActor
 		this.nickname = Names.make(getClass());
 	}
 	
-	public Arrow from(String actorName,boolean withHead)
+	public Connector from(String actorName,boolean withHead)
 	{
 		return from(world.actor(actorName).groupSource(),withHead);
 	}
 	
-	public Arrow from(GroupSource from,boolean withHead)
+	public Connector from(GroupSource from,boolean withHead)
 	{
 		this.from = from;
 		this.pointAtFrom=withHead;
 		return this;
 	}
 	
-	public Arrow to(String actorName, boolean withHead)
+	public Connector to(String actorName, boolean withHead)
 	{
 		return to(world.actor(actorName).groupSource(),withHead);
 	}
-
 	
-	public Arrow to(GroupSource to, boolean withHead)
+	public Connector to(GroupSource to, boolean withHead)
 	{
 		this.to = to;
 		this.pointAtTo = withHead;
 		return this;
 	}
 	
-	public Arrow format(Format format)
+	public Connector format(Format format)
 	{
 		this.format = format;
 		return this;
@@ -103,8 +102,7 @@ public class Arrow extends GenericActor
 	{
 		if (chosenMain == null)
 		{
-			ArrowComputer computer = new NodeArrowComputer(from, to);
-			points = computer.compute();
+			points = compute(from,to);
 			chosenMain = chooseBezier(points.main);
 			chosenFromTop = chooseBezier(points.fromTop);
 			chosenToTop = chooseBezier(points.toTop);
@@ -146,7 +144,7 @@ public class Arrow extends GenericActor
 	}
 
 	@Override
-	public Arrow draw(double ms)
+	public Connector draw(double ms)
 	{
 		steps = new ArrayList<>();
 		chosenMain = null;
@@ -175,10 +173,66 @@ public class Arrow extends GenericActor
 		return this;
 	}
 
-	public Arrow assume()
+	public Connector assume()
 	{
 		format(world.assumptions().format());
 		return this;
 	}
 
+	public ArrowPoints compute(GroupSource fromNode,GroupSource toNode)
+	{
+		double d = 14;
+		double h = 10;
+		Point fromCenter = new PointPair(fromNode.get()).center();
+		Point toCenter = new PointPair(toNode.get()).center();
+		PointPair startLine = new PointPair(fromCenter,toCenter);
+		PointPair fromGrown = new PointPair(fromNode.get()).grow(2d);
+		PointPair toGrown = new PointPair(toNode.get()).grow(2d);
+		Point from = fromGrown.quadIntersects(startLine);
+		Point to = toGrown.quadIntersects(startLine);
+	
+		PointPair main = new PointPair(from, to);
+		double xDistance = from.xDistance(to);
+		double yDistance = from.yDistance(to);
+		double distance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
+		double xm = distance - d;
+		double ym = h;
+		double xn = xm;
+		double yn = -h;
+		double sin = yDistance / distance;
+		double cos = xDistance / distance;
+
+		double x = xm * cos - ym * sin + from.x;
+		ym = xm * sin + ym * cos + from.y;
+		xm = x;
+		PointPair toTop = new PointPair(to, new Point(xm, ym));
+
+		x = xn * cos - yn * sin + from.x;
+		yn = xn * sin + yn * cos + from.y;
+		xn = x;
+		PointPair toBottom = new PointPair(to, new Point(xn, yn));
+		
+		xDistance = to.xDistance(from);
+		yDistance = to.yDistance(from);
+		distance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
+		xm = distance - d;
+		ym = h;
+		xn = xm;
+		yn = -h;
+		sin = yDistance / distance;
+		cos = xDistance / distance;
+	
+		x = xm * cos - ym * sin + to.x;
+		ym = xm * sin + ym * cos + to.y;
+		xm = x;
+		PointPair fromTop = new PointPair(from, new Point(xm, ym));
+
+		x = xn * cos - yn * sin + to.x;
+		yn = xn * sin + yn * cos + to.y;
+		xn = x;
+		PointPair fromBottom = new PointPair(from, new Point(xn, yn));
+
+		return new ArrowPoints(main, toTop, toBottom, fromTop, fromBottom);
+
+	}
 }

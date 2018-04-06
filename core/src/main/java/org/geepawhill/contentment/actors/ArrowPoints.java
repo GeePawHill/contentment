@@ -1,4 +1,4 @@
-package org.geepawhill.contentment.connector.arrow;
+package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.geometry.PointPair;
 

@@ -127,9 +127,9 @@ public abstract class ScriptBuilder<SUBCLASS>
 		return Marks.makeBox(world,area).assume();
 	}
 
-	public Arrow connector()
+	public Connector connector()
 	{
-		return new Arrow(world).assume();
+		return new Connector(world).assume();
 	}
 	
 	public SUBCLASS wipe()
