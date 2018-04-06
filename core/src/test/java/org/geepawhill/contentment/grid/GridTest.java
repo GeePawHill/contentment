@@ -52,4 +52,16 @@ public class GridTest
 		PointPair centerThird = new PointPair(bounds.along(.33), bounds.along(.66));
 		assertThat( grid.area(grid.vertical(33), grid.horizontal(33), grid.vertical(66), grid.horizontal(66))).isEqualTo(centerThird);
 	}
+	
+	@Test
+	public void nested()
+	{
+		Grid square = new Grid(0,0,100,100);
+		Horizontal newTop = square.horizontal(25);
+		Horizontal newBottom = square.horizontal(50);
+		Vertical newLeft = square.vertical(33);
+		Vertical newRight = square.vertical(66);
+		Grid nested = square.nested(newLeft,newTop,newRight,newBottom);
+		assertThat(nested.all()).isEqualTo( new PointPair(33,25,66,50));
+	}
 }

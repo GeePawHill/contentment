@@ -7,7 +7,6 @@ import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.utility.JfxUtility;
 
-import javafx.scene.Node;
 import javafx.scene.text.Text;
 
 /**

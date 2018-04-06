@@ -5,10 +5,25 @@ import org.geepawhill.contentment.geometry.*;
 public class Grid
 {
 	private final PointPair bounds;
+	
+	public Grid(double x0,double y0, double x1, double y1)
+	{
+		this(new PointPair(x0,y0,x1,y1));
+	}
 
 	public Grid(PointPair bounds)
 	{
 		this.bounds = bounds;
+	}
+	
+	public Grid()
+	{
+		this(0,0,1600,900);
+	}
+
+	public PointPair all()
+	{
+		return bounds;
 	}
 	
 	public Horizontal top()
@@ -31,12 +46,12 @@ public class Grid
 		return vertical(100);
 	}
 
-	public Vertical vertical(double percent)
+	public Vertical vertical(int percent)
 	{
 		return new Vertical(bounds,percent);
 	}
 
-	public Horizontal horizontal(double percent)
+	public Horizontal horizontal(int percent)
 	{
 		return new Horizontal(bounds,percent);
 	}
@@ -53,5 +68,15 @@ public class Grid
 				fromY.points().from.y,
 				toX.points().to.x,
 				toY.points().to.y);
+	}
+
+	public Grid nested(Vertical newLeft, Horizontal newTop, Vertical newRight, Horizontal newBottom)
+	{
+		return new Grid(newLeft.points().from.x,newTop.points().from.y,newRight.points().from.x,newBottom.points().from.y);
+	}
+
+	public Grid nested(int fromXPercent, int fromYPercent, int toXPercent, int toYPercent)
+	{
+		return nested(vertical(fromXPercent),horizontal(fromYPercent),vertical(toXPercent),horizontal(toYPercent));
 	}
 }

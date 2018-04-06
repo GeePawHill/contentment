@@ -90,6 +90,8 @@ public class Flow
 			return Color.Secondary;
 		case 'e':
 			return Color.Emphatic;
+		case 't':
+			return Color.Tertiary;
 		}
 	}
 

@@ -35,6 +35,7 @@ public class FormatTable
 
 		Paint primary = color(119, 187, 65);
 		Paint secondary = color(177, 140, 254);
+		Paint tertiary = color(244, 194, 194);
 		Paint emphatic = color(255, 255, 0);
 
 		sizeToColors = new HashMap<>();
@@ -42,18 +43,21 @@ public class FormatTable
 		Map<Color,Format> jumbos = new HashMap<>();
 		jumbos.put(Color.Primary, format(primary,jumbo));
 		jumbos.put(Color.Secondary, format(secondary,jumbo));
+		jumbos.put(Color.Tertiary, format(tertiary,jumbo));
 		jumbos.put(Color.Emphatic, format(emphatic,jumbo));
 		sizeToColors.put(Size.Jumbo, jumbos);
 		
 		Map<Color,Format> normals = new HashMap<>();
 		normals.put(Color.Primary, format(primary,normal));
 		normals.put(Color.Secondary, format(secondary,normal));
+		normals.put(Color.Tertiary, format(tertiary,normal));
 		normals.put(Color.Emphatic, format(emphatic,normal));
 		sizeToColors.put(Size.Normal, normals);
 		
 		Map<Color,Format> smalls = new HashMap<>();
 		smalls.put(Color.Primary, format(primary,small));
 		smalls.put(Color.Secondary, format(secondary,small));
+		smalls.put(Color.Tertiary, format(tertiary,small));
 		smalls.put(Color.Emphatic, format(emphatic,small));
 		
 		sizeToColors.put(Size.Small, smalls);
@@ -70,7 +74,7 @@ public class FormatTable
 	
 	private Format format(Paint majorColor, double fontsize) {
 		Font font = Font.font("Chewed Pen BB", FontPosture.ITALIC, fontsize);
-		return new Format(TypeFace.font(font, 2d, 1d), TypeFace.color(majorColor, 1d),
+		return new Format(TypeFace.font(font, 1d, 1d), TypeFace.color(majorColor, 1d),
 				Frames.frame(majorColor, 5d, 1d));
 	}
 
