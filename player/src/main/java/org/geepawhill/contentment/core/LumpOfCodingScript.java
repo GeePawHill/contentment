@@ -151,7 +151,7 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript> {
 		assume(primaryNormal);
 		Marks gakAfter = box( after.area(after.left(),difference, after.right(), afterOne).grow(-10));
 		gakAfter.appear();
-		connector().from(gakBefore.groupSource(), false).to(gakAfter.groupSource(), true).format(emphaticSmall).sketch();
+		connector().from(gakBefore.groupSource(), true).to(new Point(1130,410), true).format(emphaticSmall).sketch();
 		
 		assume(secondaryNormal);
 		Marks afterStudy = box( after.area(after.left(),afterOne, after.right(), afterTwo).grow(-10));

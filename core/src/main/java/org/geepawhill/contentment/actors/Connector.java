@@ -11,12 +11,14 @@ import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
+import javafx.scene.transform.Rotate;
+
 public class Connector extends GenericActor
 {
 	final String nickname;
-	
-	private GroupSource from;
-	private GroupSource to;
+
+	private GroupSource fromGroup;
+	private GroupSource toGroup;
 
 	private Mark mainStep;
 	private Mark fromTopStep;
@@ -34,58 +36,69 @@ public class Connector extends GenericActor
 	private Bezier chosenToTop;
 	private Bezier chosenToBottom;
 
-	private boolean pointAtFrom;
+	private boolean arrowheadAtFrom;
 
-	private boolean pointAtTo;
+	private boolean arrowHeadAtTo;
 
 	private Format format;
-	
 
-	public Connector(ScriptWorld world, Actor from, boolean pointAtFrom, Actor to, boolean pointAtTo, Format format)
-	{
-		this(world,from.groupSource(),pointAtFrom,to.groupSource(),pointAtTo,format);
-	}
-	
+	private Point fromPoint;
+
+	private Point toPoint;
+
 	public Connector(ScriptWorld world)
 	{
-		this(world,GroupSource.NONE,false,GroupSource.NONE,false,Format.DEFAULT);
-	}
-	
-	public Connector(ScriptWorld world, GroupSource from, boolean pointAtFrom, GroupSource to, boolean pointAtTo, Format format)
-	{
 		super(world);
-		this.from = from;
-		this.pointAtFrom = pointAtFrom;
-		this.to = to;
-		this.pointAtTo = pointAtTo;
-		this.format = format;
+		this.fromGroup = GroupSource.NONE;
+		this.fromPoint = new Point(0, 0);
+		this.arrowheadAtFrom = false;
+		this.toGroup = GroupSource.NONE;
+		this.toPoint = new Point(0, 0);
+		this.arrowHeadAtTo = false;
+		this.format = Format.DEFAULT;
 		this.nickname = Names.make(getClass());
 	}
-	
-	public Connector from(String actorName,boolean withHead)
+
+	public Connector from(Point target, boolean withHead)
 	{
-		return from(world.actor(actorName).groupSource(),withHead);
-	}
-	
-	public Connector from(GroupSource from,boolean withHead)
-	{
-		this.from = from;
-		this.pointAtFrom=withHead;
+		fromGroup = GroupSource.NONE;
+		fromPoint = target;
+		arrowheadAtFrom = withHead;
 		return this;
 	}
-	
+
+	public Connector from(String actorName, boolean withHead)
+	{
+		return from(world.actor(actorName).groupSource(), withHead);
+	}
+
+	public Connector from(GroupSource from, boolean withHead)
+	{
+		this.fromGroup = from;
+		this.arrowheadAtFrom = withHead;
+		return this;
+	}
+
+	public Connector to(Point target, boolean withHead)
+	{
+		this.toGroup = GroupSource.NONE;
+		this.toPoint = target;
+		this.arrowHeadAtTo = withHead;
+		return this;
+	}
+
 	public Connector to(String actorName, boolean withHead)
 	{
-		return to(world.actor(actorName).groupSource(),withHead);
+		return to(world.actor(actorName).groupSource(), withHead);
 	}
-	
+
 	public Connector to(GroupSource to, boolean withHead)
 	{
-		this.to = to;
-		this.pointAtTo = withHead;
+		this.toGroup = to;
+		this.arrowHeadAtTo = withHead;
 		return this;
 	}
-	
+
 	public Connector format(Format format)
 	{
 		this.format = format;
@@ -101,7 +114,7 @@ public class Connector extends GenericActor
 	{
 		if (chosenMain == null)
 		{
-			points = compute(from,to);
+			points = compute();
 			chosenMain = chooseBezier(points.main);
 			chosenFromTop = chooseBezier(points.fromTop);
 			chosenToTop = chooseBezier(points.toTop);
@@ -133,12 +146,9 @@ public class Connector extends GenericActor
 
 	public Bezier chooseBezier(PointPair points)
 	{
-		double variance = points.distance()*.1;
-		Bezier chosen = new Bezier(
-				points.from,
-				world.jiggle(points.along(world.nextDouble()), 1d, variance),
-				world.jiggle(points.along(world.nextDouble()), 1d, variance),
-				points.to);
+		double variance = points.distance() * .1;
+		Bezier chosen = new Bezier(points.from, world.jiggle(points.along(world.nextDouble()), 1d, variance),
+				world.jiggle(points.along(world.nextDouble()), 1d, variance), points.to);
 		return chosen;
 	}
 
@@ -148,14 +158,14 @@ public class Connector extends GenericActor
 		steps = new ArrayList<>();
 		chosenMain = null;
 		mainStep = new Mark(groupSource(), this::getMainBezier, format);
-		if (pointAtFrom)
+		if (arrowheadAtFrom)
 		{
 			fromTopStep = new Mark(groupSource(), this::getFromTop, format);
 			steps.add(fromTopStep);
 			fromBottomStep = new Mark(groupSource(), this::getFromBottom, format);
 			steps.add(fromBottomStep);
 		}
-		if (pointAtTo)
+		if (arrowHeadAtTo)
 		{
 			toTopStep = new Mark(groupSource(), this::getToTop, format);
 			steps.add(toTopStep);
@@ -178,60 +188,62 @@ public class Connector extends GenericActor
 		return this;
 	}
 
-	public ArrowPoints compute(GroupSource fromNode,GroupSource toNode)
+	public ArrowPoints compute()
 	{
-		double d = 14;
-		double h = 10;
-		Point fromCenter = new PointPair(fromNode.get()).center();
-		Point toCenter = new PointPair(toNode.get()).center();
-		PointPair startLine = new PointPair(fromCenter,toCenter);
-		PointPair fromGrown = new PointPair(fromNode.get()).grow(2d);
-		PointPair toGrown = new PointPair(toNode.get()).grow(2d);
-		Point from = fromGrown.quadIntersects(startLine);
-		Point to = toGrown.quadIntersects(startLine);
-	
-		PointPair main = new PointPair(from, to);
-		double xDistance = from.xDistance(to);
-		double yDistance = from.yDistance(to);
-		double distance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
-		double xm = distance - d;
-		double ym = h;
-		double xn = xm;
-		double yn = -h;
-		double sin = yDistance / distance;
-		double cos = xDistance / distance;
+		PointPair main = computeMainLine();
+		return makeArrowPoints(main);
+	}
 
-		double x = xm * cos - ym * sin + from.x;
-		ym = xm * sin + ym * cos + from.y;
-		xm = x;
-		PointPair toTop = new PointPair(to, new Point(xm, ym));
+	private PointPair computeMainLine()
+	{
+		PointPair startLine = guessStartLine();
+		PointPair main = new PointPair(adjustFromIfGroup(startLine), adjustToIfGroup(startLine));
+		return main;
+	}
 
-		x = xn * cos - yn * sin + from.x;
-		yn = xn * sin + yn * cos + from.y;
-		xn = x;
-		PointPair toBottom = new PointPair(to, new Point(xn, yn));
-		
-		xDistance = to.xDistance(from);
-		yDistance = to.yDistance(from);
-		distance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
-		xm = distance - d;
-		ym = h;
-		xn = xm;
-		yn = -h;
-		sin = yDistance / distance;
-		cos = xDistance / distance;
-	
-		x = xm * cos - ym * sin + to.x;
-		ym = xm * sin + ym * cos + to.y;
-		xm = x;
-		PointPair fromTop = new PointPair(from, new Point(xm, ym));
+	private Point adjustToIfGroup(PointPair startLine)
+	{
+		if (toGroup == GroupSource.NONE) return startLine.to;
+		PointPair toGrown = new PointPair(toGroup.get());
+		return toGrown.quadIntersects(startLine);
+	}
 
-		x = xn * cos - yn * sin + to.x;
-		yn = xn * sin + yn * cos + to.y;
-		xn = x;
-		PointPair fromBottom = new PointPair(from, new Point(xn, yn));
+	private Point adjustFromIfGroup(PointPair startLine)
+	{
+		if (fromGroup == GroupSource.NONE) return startLine.from;
+		PointPair fromGrown = new PointPair(fromGroup.get());
+		return fromGrown.quadIntersects(startLine);
+	}
+
+	private PointPair guessStartLine()
+	{
+		Point fromCenter = fromGroup == GroupSource.NONE ? fromPoint : new PointPair(fromGroup.get()).center();
+		Point toCenter = toGroup == GroupSource.NONE ? toPoint : new PointPair(toGroup.get()).center();
+		PointPair startLine = new PointPair(fromCenter, toCenter);
+		return startLine;
+	}
+
+	private ArrowPoints makeArrowPoints(PointPair target)
+	{
+		final double pointStandOffFromTarget = 2d;
+		PointPair main = new PointPair(target.standoffFrom(pointStandOffFromTarget), target.standoffTo(pointStandOffFromTarget));
+
+		final double arrowStandoffFromEnd = 14d;
+		Point toOffset = main.standoffTo(arrowStandoffFromEnd);
+		PointPair toTop = rotateWing(-40d, main.to, toOffset);
+		PointPair toBottom = rotateWing(40d, main.to, toOffset);
+
+		Point fromOffset = main.standoffFrom(arrowStandoffFromEnd);
+		PointPair fromTop = rotateWing(-40d, main.from, fromOffset);
+		PointPair fromBottom = rotateWing(40d, main.from, fromOffset);
 
 		return new ArrowPoints(main, toTop, toBottom, fromTop, fromBottom);
+	}
 
+	private PointPair rotateWing(double angle, Point pivot, Point target)
+	{
+		Rotate rotate = new Rotate(angle, pivot.x, pivot.y);
+		Point top = new Point(rotate.transform(target.x, target.y));
+		return new PointPair(top, pivot);
 	}
 }

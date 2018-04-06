@@ -1,5 +1,7 @@
 package org.geepawhill.contentment.geometry;
 
+import javafx.geometry.Point2D;
+
 public class Point
 {
 	public final double x;
@@ -9,6 +11,11 @@ public class Point
 	{
 		this.x = x;
 		this.y = y;
+	}
+	
+	public Point(Point2D source)
+	{
+		this(source.getX(),source.getY());
 	}
 
 	public Point add(double xmove, double ymove)

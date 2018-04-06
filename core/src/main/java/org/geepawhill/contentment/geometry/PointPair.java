@@ -205,6 +205,15 @@ public class PointPair
 	{
 		return new PointPair(west(),east());
 	}
+	
+	public Point standoffTo(double amount)
+	{
+		return along(1d-(amount/distance()));
+	}
 
+	public Point standoffFrom(double amount)
+	{
+		return along(amount/distance());
+	}
 
 }
