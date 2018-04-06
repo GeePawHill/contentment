@@ -11,7 +11,7 @@ public class Marks extends GenericActor
 {
 	private final Mark[] marks;
 
-	public Marks(ScriptWorld world,Bezier...beziers)
+	public Marks(ScriptWorld world, Bezier... beziers)
 	{
 		super(world);
 		this.marks = new Mark[beziers.length];
@@ -21,7 +21,7 @@ public class Marks extends GenericActor
 			marks[next++] = new Mark(groupSource(), () -> bezier, Format.DEFAULT);
 		}
 	}
-	
+
 	public Marks format(Format format)
 	{
 		for (Mark curve : marks)
@@ -49,10 +49,10 @@ public class Marks extends GenericActor
 
 	public static Marks makeBox(ScriptWorld world, PointPair points)
 	{
-		return new Marks(world, jiggle(world, points.northLine()), jiggle(world, points.eastLine()), jiggle(world, points.southLine()),
-				jiggle(world, points.westLine()));
+		return new Marks(world, jiggle(world, points.northLine()), jiggle(world, points.eastLine()),
+				jiggle(world, points.southLine()), jiggle(world, points.westLine()));
 	}
-	
+
 	public static Marks makeLine(ScriptWorld world, PointPair points)
 	{
 		return new Marks(world, jiggle(world, points));
@@ -65,6 +65,5 @@ public class Marks extends GenericActor
 				world.jiggle(points.along(world.nextDouble()), 1d, variance), points.to);
 		return chosen;
 	}
-
 
 }

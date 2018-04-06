@@ -3,7 +3,6 @@ package org.geepawhill.contentment.actors;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.actor.*;
-import org.geepawhill.contentment.connector.arrow.*;
 import org.geepawhill.contentment.core.GroupSource;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.fragments.Mark;
