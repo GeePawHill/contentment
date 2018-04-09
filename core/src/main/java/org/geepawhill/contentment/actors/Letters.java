@@ -22,18 +22,13 @@ public class Letters extends GenericActor implements Actor
 
 	public Letters(ScriptWorld world, String source)
 	{
-		this(world, source, Position.DEFAULT, Format.DEFAULT);
-	}
-
-	public Letters(ScriptWorld world, String source, Position position, Format format)
-	{
 		super(world);
 		this.northJiggler = new Jiggler(.5d, 6d);
 		this.controlJiggler = new Jiggler(.4d, 30d);
 
-		this.letters = new Type(entrance(), source, format, position);
-		this.east = new Mark(entrance(), this::eastHalfPoints, format);
-		this.west = new Mark(entrance(), this::westHalfPoints, format);
+		this.letters = new Type(entrance(), source, Format.DEFAULT, Position.DEFAULT);
+		this.east = new Mark(entrance(), this::eastHalfPoints, Format.DEFAULT);
+		this.west = new Mark(entrance(), this::westHalfPoints, Format.DEFAULT);
 	}
 
 	public Letters withOval()
