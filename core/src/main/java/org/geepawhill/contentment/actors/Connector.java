@@ -7,6 +7,7 @@ import org.geepawhill.contentment.core.GroupSource;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.fragments.Mark;
 import org.geepawhill.contentment.geometry.*;
+import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
@@ -69,7 +70,7 @@ public class Connector extends GenericActor
 
 	public Connector from(String actorName, boolean withHead)
 	{
-		return from(world.actor(actorName).groupSource(), withHead);
+		return from(world.actor(actorName).entrance(), withHead);
 	}
 
 	public Connector from(GroupSource from, boolean withHead)
@@ -89,7 +90,7 @@ public class Connector extends GenericActor
 
 	public Connector to(String actorName, boolean withHead)
 	{
-		return to(world.actor(actorName).groupSource(), withHead);
+		return to(world.actor(actorName).entrance(), withHead);
 	}
 
 	public Connector to(GroupSource to, boolean withHead)
@@ -99,10 +100,9 @@ public class Connector extends GenericActor
 		return this;
 	}
 
-	public Connector format(Format format)
+	public void format(Format format)
 	{
 		this.format = format;
-		return this;
 	}
 
 	public String nickname()
@@ -157,19 +157,19 @@ public class Connector extends GenericActor
 	{
 		steps = new ArrayList<>();
 		chosenMain = null;
-		mainStep = new Mark(groupSource(), this::getMainBezier, format);
+		mainStep = new Mark(entrance(), this::getMainBezier, format);
 		if (arrowheadAtFrom)
 		{
-			fromTopStep = new Mark(groupSource(), this::getFromTop, format);
+			fromTopStep = new Mark(entrance(), this::getFromTop, format);
 			steps.add(fromTopStep);
-			fromBottomStep = new Mark(groupSource(), this::getFromBottom, format);
+			fromBottomStep = new Mark(entrance(), this::getFromBottom, format);
 			steps.add(fromBottomStep);
 		}
 		if (arrowHeadAtTo)
 		{
-			toTopStep = new Mark(groupSource(), this::getToTop, format);
+			toTopStep = new Mark(entrance(), this::getToTop, format);
 			steps.add(toTopStep);
-			toBottomStep = new Mark(groupSource(), this::getToBottom, format);
+			toBottomStep = new Mark(entrance(), this::getToBottom, format);
 			steps.add(toBottomStep);
 		}
 		Timed sequence = new Timed(ms);
@@ -179,12 +179,6 @@ public class Connector extends GenericActor
 			sequence.add(Timing.weighted(.1d), step);
 		}
 		world.add(sequence);
-		return this;
-	}
-
-	public Connector assume()
-	{
-		format(world.assumptions().format());
 		return this;
 	}
 
@@ -245,5 +239,10 @@ public class Connector extends GenericActor
 		Rotate rotate = new Rotate(angle, pivot.x, pivot.y);
 		Point top = new Point(rotate.transform(target.x, target.y));
 		return new PointPair(top, pivot);
+	}
+
+	@Override
+	public void at(Position position)
+	{
 	}
 }

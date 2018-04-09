@@ -2,7 +2,9 @@ package org.geepawhill.contentment.actor;
 
 import java.util.ArrayList;
 
-import org.geepawhill.contentment.core.GroupSource;
+import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.fragments.Entrance;
+import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.step.Chord;
 
 import javafx.scene.paint.Paint;
@@ -58,7 +60,7 @@ public class Party implements Actor
 		for(Actor actor : actors) items.add(actor);
 	}
 	
-	public GroupSource groupSource()
+	public Entrance entrance()
 	{
 		throw new RuntimeException("Parties have no groupSource().");
 	}
@@ -168,5 +170,15 @@ public class Party implements Actor
 		}
 		world.popAndAppend();
 		return this;
+	}
+
+	@Override
+	public void format(Format format)
+	{
+	}
+
+	@Override
+	public void at(Position position)
+	{
 	}
 }

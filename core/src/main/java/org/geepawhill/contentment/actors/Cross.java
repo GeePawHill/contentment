@@ -9,6 +9,7 @@ import org.geepawhill.contentment.fragments.Mark;
 import org.geepawhill.contentment.geometry.Bezier;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.timing.Timing;
@@ -27,7 +28,7 @@ public class Cross extends GenericActor
 
 	public Cross(ScriptWorld world, Actor target, double size)
 	{
-		this(world,target.groupSource(),size,size, new Point(0,0));
+		this(world,target.entrance(),size,size, new Point(0,0));
 	}
 	
 	public Cross(ScriptWorld world, GroupSource target, double xsize, double ysize, double xoffset, double yoffset)
@@ -44,8 +45,8 @@ public class Cross extends GenericActor
 		this.ysize = ysize;
 		this.offset = offset;
 		Format crossFormat = new Format(Frames.frame(Color.RED, 7d, .7d));
-		leftToRight = new Mark(groupSource(),this::leftToRightBezier, crossFormat);
-		rightToLeft = new Mark(groupSource(),this::rightToLeftBezier, crossFormat);
+		leftToRight = new Mark(entrance(),this::leftToRightBezier, crossFormat);
+		rightToLeft = new Mark(entrance(),this::rightToLeftBezier, crossFormat);
 	}
 
 	@Override
@@ -74,5 +75,15 @@ public class Cross extends GenericActor
 		Point center = new PointPair(target.get()).center().add(offset);
 		return new Bezier(
 				new Point(center.x+xadditive, center.y-yadditive), new Point(center.x-xadditive, center.y+yadditive));
+	}
+
+	@Override
+	public void format(Format format)
+	{
+	}
+
+	@Override
+	public void at(Position position)
+	{
 	}
 }

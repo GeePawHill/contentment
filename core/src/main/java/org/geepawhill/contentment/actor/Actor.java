@@ -1,6 +1,8 @@
 package org.geepawhill.contentment.actor;
 
-import org.geepawhill.contentment.core.GroupSource;
+import org.geepawhill.contentment.format.Format;
+import org.geepawhill.contentment.fragments.Entrance;
+import org.geepawhill.contentment.position.Position;
 
 import javafx.scene.paint.Paint;
 
@@ -20,6 +22,9 @@ public interface Actor
 	Actor disappear();
 
 	Actor draw(double ms);
-	GroupSource groupSource();
+	Entrance entrance();
+	
+	void format(Format format);
+	void at(Position position);
 	
 }

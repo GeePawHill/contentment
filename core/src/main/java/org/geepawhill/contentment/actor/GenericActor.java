@@ -1,6 +1,5 @@
 package org.geepawhill.contentment.actor;
 
-import org.geepawhill.contentment.core.GroupSource;
 import org.geepawhill.contentment.fragments.*;
 import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.step.Phrase;
@@ -19,7 +18,7 @@ public abstract class GenericActor implements Actor
 		this.entrance = new Entrance();
 	}
 	
-	public GroupSource groupSource()
+	public Entrance entrance()
 	{
 		return entrance;
 	}
@@ -43,7 +42,7 @@ public abstract class GenericActor implements Actor
 	@Override
 	public GenericActor disappear()
 	{
-		world.add(new AtomStep(Timing.instant(),new Exit(groupSource())));
+		world.add(new AtomStep(Timing.instant(),new Exit(entrance())));
 		return this;
 	}
 

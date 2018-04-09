@@ -4,8 +4,6 @@ import static org.geepawhill.contentment.utility.JfxUtility.color;
 
 import java.util.Vector;
 
-import org.geepawhill.contentment.actor.Cast;
-import org.geepawhill.contentment.actors.Marks;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.*;
 import org.geepawhill.contentment.grid.*;
@@ -67,7 +65,7 @@ public class DemonstrationScript extends ScriptBuilder<DemonstrationScript> {
 	private void leadIn() {
 		scene(0);
 		wipe();
-		letters("Demonstration Script").actor.format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").appear();
+		letters("Demonstration Script").format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").appear();
 		assume(secondaryJumbo);
 	}
 
@@ -92,15 +90,15 @@ public class DemonstrationScript extends ScriptBuilder<DemonstrationScript> {
 	}
 
 	public void header(String text) {
-		letters(text).actor.format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").sketch();
+		letters(text).format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").sketch();
 	}
 	
 	private void headerEnd(String end) {
-		letters(end).actor.format(secondaryJumbo).at(new RightOf(actor("header").groupSource())).sketch();
+		letters(end).format(secondaryJumbo).at(new RightOf(actor("header").entrance())).sketch();
 	}
 	
 	public void belowCentered(String text, String target, String name, String party) {
-		letters(text).actor.at(new BelowCenter(actor(target).groupSource())).called(name).in(party).sketch();
+		letters(text).at(new BelowCenter(actor(target).entrance())).called(name).in(party).sketch();
 	}
 
 	Vector<Point> polygon(int sides, double radius, Point at) {

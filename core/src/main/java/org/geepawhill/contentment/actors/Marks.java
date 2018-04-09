@@ -4,6 +4,7 @@ import org.geepawhill.contentment.actor.*;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.fragments.Mark;
 import org.geepawhill.contentment.geometry.*;
+import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.timing.Timing;
 
@@ -18,17 +19,17 @@ public class Marks extends GenericActor
 		int next = 0;
 		for (Bezier bezier : beziers)
 		{
-			marks[next++] = new Mark(groupSource(), () -> bezier, Format.DEFAULT);
+			marks[next++] = new Mark(entrance(), () -> bezier, Format.DEFAULT);
 		}
 	}
 
-	public Marks format(Format format)
+	@Override
+	public void format(Format format)
 	{
 		for (Mark curve : marks)
 		{
 			curve.format(format);
 		}
-		return this;
 	}
 
 	@Override
@@ -38,12 +39,6 @@ public class Marks extends GenericActor
 		{
 			world.add(new AtomStep(Timing.ms(ms / marks.length), curve));
 		}
-		return this;
-	}
-
-	public Marks assume()
-	{
-		format(world.assumptions().format());
 		return this;
 	}
 
@@ -64,6 +59,11 @@ public class Marks extends GenericActor
 		Bezier chosen = new Bezier(points.from, world.jiggle(points.along(world.nextDouble()), 1d, variance),
 				world.jiggle(points.along(world.nextDouble()), 1d, variance), points.to);
 		return chosen;
+	}
+
+	@Override
+	public void at(Position position)
+	{
 	}
 
 }

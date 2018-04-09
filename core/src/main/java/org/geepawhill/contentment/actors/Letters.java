@@ -38,9 +38,9 @@ public class Letters extends GenericActor implements Actor
 		this.northJiggler = new Jiggler(.5d, 6d);
 		this.controlJiggler = new Jiggler(.4d, 30d);
 
-		this.letters = new Type(groupSource(), source, format, position);
-		this.east = new Mark(groupSource(), this::eastHalfPoints, format);
-		this.west = new Mark(groupSource(), this::westHalfPoints, format);
+		this.letters = new Type(entrance(), source, format, position);
+		this.east = new Mark(entrance(), this::eastHalfPoints, format);
+		this.west = new Mark(entrance(), this::westHalfPoints, format);
 	}
 
 	public Letters withOval()
@@ -95,31 +95,24 @@ public class Letters extends GenericActor implements Actor
 		return westHalfBezier;
 	}
 
-	public Letters at(Position position)
+	public void at(Position position)
 	{
 		letters.at(position);
-		return this;
 	}
 
-	public Letters format(Format format)
+	public void format(Format format)
 	{
 		letters.format(format);
 		east.format(format);
 		west.format(format);
-		return this;
 	}
 
-	public Letters assume()
-	{
-		return format(world.assumptions().format());
-	}
-
-	public Letters centered(double x, double y) {
-		return at(new Centered(x,y));
+	public void centered(double x, double y) {
+		at(new Centered(x,y));
 	}
 	
-	public Letters centered(Point p) {
-		return centered(p.x,p.y);
+	public void centered(Point p) {
+		centered(p.x,p.y);
 	}
 
 }

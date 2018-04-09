@@ -5,7 +5,7 @@ import static org.geepawhill.contentment.utility.JfxUtility.color;
 import java.io.File;
 import java.util.Vector;
 
-import org.geepawhill.contentment.actor.Cast;
+import org.geepawhill.contentment.actor.Appearance;
 import org.geepawhill.contentment.actors.*;
 import org.geepawhill.contentment.flow.*;
 import org.geepawhill.contentment.format.Format;
@@ -69,11 +69,11 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript> {
 	private void leadIn() {
 		scene(0);
 		wipe();
-		letters("GeePaw's Notebook:").actor.format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").appear();
+		letters("GeePaw's Notebook:").format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").appear();
 		assume(secondaryJumbo);
-		letters("The Lump Of Coding Fallacy\n(A Letter For Noobs)").actor.centered(450, 450).appear();
+		letters("The Lump Of Coding Fallacy\n(A Letter For Noobs)").centered(450, 450).appear();
 		assume(emphaticSmall);
-		letters("Copyright (C) 2018, GeePawHill. All rights reserved.").actor.at(new TopLeft(20,825)).appear();
+		letters("Copyright (C) 2018, GeePawHill. All rights reserved.").at(new TopLeft(20,825)).appear();
 	}
 
 	private void noob() {
@@ -91,7 +91,7 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript> {
 		Point beforeHeader = before.all().north();
 		beforeHeader = new Point(beforeHeader.x,beforeHeader.y-50);
 		
-		letters("Before").actor.format(emphaticJumbo).centered(beforeHeader).appear();
+		letters("Before").format(emphaticJumbo).centered(beforeHeader).appear();
 		
 		assume(primaryNormal);
 		Marks gakBefore = box( before.area(before.left(),before.top(), before.right(), betweenOne).grow(-10)).actor;
@@ -128,25 +128,29 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript> {
 
 		Point afterHeader = after.all().north();
 		afterHeader = new Point(afterHeader.x,afterHeader.y-50);
-		letters("After").actor.format(emphaticJumbo).centered(afterHeader).appear();
+		letters("After").format(emphaticJumbo).centered(afterHeader).appear();
 
 		assume(primaryNormal);
 		Marks gakAfter = box( after.area(after.left(),difference, after.right(), afterOne).grow(-10)).actor;
 		gakAfter.appear();
-		connector().actor.from(gakBefore.groupSource(), false).to(new Point(1130,410), true).format(emphaticSmall).sketch();
+		Appearance<Connector> gakLine = connector();
+		gakLine.actor.from(gakBefore.entrance(), false).to(new Point(1130,410), true);
+		gakLine.format(emphaticSmall).sketch();
 		
 		assume(secondaryNormal);
 		Marks afterStudy = box( after.area(after.left(),afterOne, after.right(), afterTwo).grow(-10)).actor;
 		afterStudy.appear();
-		connector().actor.from(study.groupSource(), false).to(afterStudy.groupSource(), true).format(emphaticSmall).sketch();
+		Appearance<Connector> studyLine = connector();
+		studyLine.actor.from(study.entrance(), false).to(afterStudy.entrance(), true);
+		studyLine.format(emphaticSmall).sketch();
 		
 		assume(tertiaryNormal);
 		Marks afterProgramming = box( after.area(after.left(),afterTwo, after.right(),after.bottom()).grow(-10)).actor;
 		afterProgramming.appear();
 		assume(emphaticSmall);
-		connector().actor.from(programming.groupSource(), false).to(afterProgramming.groupSource(), true).sketch();
-		
-		
+		Appearance<Connector> programmingLine = connector();
+		programmingLine.actor.from(programming.entrance(), false).to(afterProgramming.entrance(), true);
+		programmingLine.sketch();
 	}
 	
 	/*
@@ -157,15 +161,15 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript> {
 	 */
 
 	public void header(String text) {
-		letters(text).actor.format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").sketch();
+		letters(text).format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").sketch();
 	}
 	
 	private void headerEnd(String end) {
-		letters(end).actor.format(secondaryJumbo).at(new RightOf(actor("header").groupSource())).sketch();
+		letters(end).format(secondaryJumbo).at(new RightOf(actor("header").entrance())).sketch();
 	}
 	
 	public void belowCentered(String text, String target, String name, String party) {
-		letters(text).actor.at(new BelowCenter(actor(target).groupSource())).called(name).in(party).sketch();
+		letters(text).at(new BelowCenter(actor(target).entrance())).called(name).in(party).sketch();
 	}
 
 	Vector<Point> polygon(int sides, double radius, Point at) {
