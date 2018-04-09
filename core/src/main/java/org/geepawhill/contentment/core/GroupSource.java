@@ -23,6 +23,8 @@ public interface GroupSource extends Supplier<Group>
 	
 	public static class NoGroupSource extends RuntimeException
 	{
+		private static final long serialVersionUID = 1L;
+
 		public NoGroupSource()
 		{
 			super("GroupSource has no group.");

@@ -8,7 +8,7 @@ public class DemoInterfaceTest
 	@Test
 	public void test()
 	{
-		DemoInterface i = null;
+//		DemoInterface i = null;
 	}
 
 }

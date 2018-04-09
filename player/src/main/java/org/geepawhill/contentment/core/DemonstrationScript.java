@@ -2,17 +2,16 @@ package org.geepawhill.contentment.core;
 
 import static org.geepawhill.contentment.utility.JfxUtility.color;
 
-import java.io.File;
 import java.util.Vector;
 
-import org.geepawhill.contentment.actors.*;
-import org.geepawhill.contentment.flow.Flow;
+import org.geepawhill.contentment.actor.Cast;
+import org.geepawhill.contentment.actors.Marks;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.*;
 import org.geepawhill.contentment.grid.*;
 import org.geepawhill.contentment.player.Script;
 import org.geepawhill.contentment.position.*;
-import org.geepawhill.contentment.rhythm.*;
+import org.geepawhill.contentment.rhythm.SimpleRhythm;
 import org.geepawhill.contentment.step.ScriptBuilder;
 import org.geepawhill.contentment.style.*;
 
@@ -25,11 +24,6 @@ public class DemonstrationScript extends ScriptBuilder<DemonstrationScript> {
 
 	private Format secondaryJumbo;
 	private Format primaryJumbo;
-	private Format secondaryNormal;
-	private Format primaryNormal;
-	private Format emphaticNormal;
-	private Format emphaticSmall;
-	private Format emphaticJumbo;
 	private Paint secondary;
 	private Paint primary;
 	private Paint emphatic;
@@ -46,14 +40,14 @@ public class DemonstrationScript extends ScriptBuilder<DemonstrationScript> {
 		emphatic = color(255, 255, 0);
 
 		primaryJumbo = format(primary, jumbo);
-		primaryNormal = format(primary, normal);
+		format(primary, normal);
 
 		secondaryJumbo = format(secondary, jumbo);
-		secondaryNormal = format(secondary, normal);
+		format(secondary, normal);
 
-		emphaticJumbo = format(emphatic, jumbo);
-		emphaticNormal = format(emphatic, normal);
-		emphaticSmall = new Format(format(emphatic, small),Frames.frame(emphatic, 3d, .7d));
+		format(emphatic, jumbo);
+		format(emphatic, normal);
+		new Format(format(emphatic, small),Frames.frame(emphatic, 3d, .7d));
 
 	}
 
@@ -73,7 +67,7 @@ public class DemonstrationScript extends ScriptBuilder<DemonstrationScript> {
 	private void leadIn() {
 		scene(0);
 		wipe();
-		letters("Demonstration Script").format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").appear();
+		letters("Demonstration Script").actor.format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").appear();
 		assume(secondaryJumbo);
 	}
 
@@ -89,22 +83,24 @@ public class DemonstrationScript extends ScriptBuilder<DemonstrationScript> {
 		
 		PointPair middleThird = grid.area(middleThirdLeft, middleThirdTop, middleThirdRight, middleThirdBottom);
 		assume(primaryJumbo);
-		box(middleThird).sketch();
+		box(middleThird).actor.appear();
 		sync(1);
-		stroke(middleThird).appear();
-		stroke(new PointPair(middleThird.to.x,middleThird.from.y,middleThird.from.x,middleThird.to.y)).appear();
+		stroke(middleThird).actor.appear().called("middle third");
+		stroke(new PointPair(middleThird.to.x,middleThird.from.y,middleThird.from.x,middleThird.to.y)).actor.appear();
+		
+		cross("middle third", 100, 100, 0,0).actor.appear();
 	}
 
 	public void header(String text) {
-		letters(text).format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").sketch();
+		letters(text).actor.format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").sketch();
 	}
 	
 	private void headerEnd(String end) {
-		letters(end).format(secondaryJumbo).at(new RightOf(actor("header").groupSource())).sketch();
+		letters(end).actor.format(secondaryJumbo).at(new RightOf(actor("header").groupSource())).sketch();
 	}
 	
 	public void belowCentered(String text, String target, String name, String party) {
-		letters(text).at(new BelowCenter(actor(target).groupSource())).called(name).in(party).sketch();
+		letters(text).actor.at(new BelowCenter(actor(target).groupSource())).called(name).in(party).sketch();
 	}
 
 	Vector<Point> polygon(int sides, double radius, Point at) {

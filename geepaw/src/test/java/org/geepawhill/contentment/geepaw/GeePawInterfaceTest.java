@@ -8,7 +8,7 @@ public class GeePawInterfaceTest
 	@Test
 	public void test()
 	{
-		GeePawInterface i = null;
+//		GeePawInterface i = null;
 	}
 
 }

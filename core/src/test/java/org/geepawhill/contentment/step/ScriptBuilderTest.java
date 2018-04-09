@@ -1,16 +1,12 @@
 package org.geepawhill.contentment.step;
 
-import org.junit.Before;
-import org.junit.Test;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 
 import org.assertj.core.api.Fail;
 import org.geepawhill.contentment.core.Gesture;
-import org.geepawhill.contentment.fragments.Sync;
-import org.geepawhill.contentment.player.Keyframe;
-import org.geepawhill.contentment.timing.Timing;
+import org.junit.*;
 
 public class ScriptBuilderTest
 {

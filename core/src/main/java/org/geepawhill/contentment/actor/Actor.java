@@ -21,4 +21,5 @@ public interface Actor
 
 	Actor draw(double ms);
 	GroupSource groupSource();
+	
 }

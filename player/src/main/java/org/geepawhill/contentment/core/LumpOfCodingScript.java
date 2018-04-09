@@ -5,23 +5,19 @@ import static org.geepawhill.contentment.utility.JfxUtility.color;
 import java.io.File;
 import java.util.Vector;
 
-import javax.swing.Box;
-
-import org.geepawhill.contentment.actors.Marks;
+import org.geepawhill.contentment.actor.Cast;
+import org.geepawhill.contentment.actors.*;
 import org.geepawhill.contentment.flow.*;
 import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.geometry.*;
+import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.grid.*;
 import org.geepawhill.contentment.player.Script;
 import org.geepawhill.contentment.position.*;
 import org.geepawhill.contentment.rhythm.MediaRhythm;
 import org.geepawhill.contentment.step.ScriptBuilder;
-import org.geepawhill.contentment.style.*;
-
-import com.sun.javafx.geom.BoxBounds;
+import org.geepawhill.contentment.style.Frames;
 
 import javafx.scene.paint.Paint;
-import javafx.scene.text.*;
 
 public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript> {
 	private static final double XMARGIN = 20;
@@ -33,13 +29,9 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript> {
 	private Format primaryJumbo;
 	private Format secondaryNormal;
 	private Format primaryNormal;
-	private Format emphaticNormal;
 	private Format emphaticSmall;
 	private Format emphaticJumbo;
-	private Paint secondary;
-	private Paint primary;
 	private Paint emphatic;
-	private Format tertiaryJumbo;
 	private Format tertiaryNormal;
 
 	public LumpOfCodingScript() {
@@ -48,12 +40,8 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript> {
 		
 		formats = new FormatTable();
 
-		final double jumbo = 80d;
-		final double normal = 55d;
-		final double small = 45d;
-
-		primary = color(119, 187, 65);
-		secondary = color(177, 140, 254);
+		color(119, 187, 65);
+		color(177, 140, 254);
 		emphatic = color(255, 255, 0);
 
 		primaryJumbo = formats.get(Size.Jumbo, Color.Primary);
@@ -62,19 +50,13 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript> {
 		secondaryJumbo = formats.get(Size.Jumbo, Color.Secondary);
 		secondaryNormal = formats.get(Size.Normal, Color.Secondary);
 		
-		tertiaryJumbo = formats.get(Size.Jumbo, Color.Tertiary);
+		formats.get(Size.Jumbo, Color.Tertiary);
 		tertiaryNormal = formats.get(Size.Normal, Color.Tertiary);
 
 		emphaticJumbo = formats.get(Size.Jumbo, Color.Emphatic);
-		emphaticNormal = formats.get(Size.Normal, Color.Emphatic);
+		formats.get(Size.Normal, Color.Emphatic);
 		emphaticSmall = new Format(formats.get(Size.Small,Color.Emphatic),Frames.frame(emphatic, 3d, .7d));
 
-	}
-
-	private Format format(Paint majorColor, double fontsize) {
-		Font font = Font.font("Chewed Pen BB", FontPosture.ITALIC, fontsize);
-		return new Format(TypeFace.font(font, 1d, 1d), TypeFace.color(majorColor, 1d),
-				Frames.frame(majorColor, 2d, 1d));
 	}
 
 	public Script make() {
@@ -87,11 +69,11 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript> {
 	private void leadIn() {
 		scene(0);
 		wipe();
-		letters("GeePaw's Notebook:").format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").appear();
+		letters("GeePaw's Notebook:").actor.format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").appear();
 		assume(secondaryJumbo);
-		letters("The Lump Of Coding Fallacy\n(A Letter For Noobs)").centered(450, 450).appear();
+		letters("The Lump Of Coding Fallacy\n(A Letter For Noobs)").actor.centered(450, 450).appear();
 		assume(emphaticSmall);
-		letters("Copyright (C) 2018, GeePawHill. All rights reserved.").at(new TopLeft(20,825)).appear();
+		letters("Copyright (C) 2018, GeePawHill. All rights reserved.").actor.at(new TopLeft(20,825)).appear();
 	}
 
 	private void noob() {
@@ -109,18 +91,18 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript> {
 		Point beforeHeader = before.all().north();
 		beforeHeader = new Point(beforeHeader.x,beforeHeader.y-50);
 		
-		letters("Before").format(emphaticJumbo).centered(beforeHeader).appear();
+		letters("Before").actor.format(emphaticJumbo).centered(beforeHeader).appear();
 		
 		assume(primaryNormal);
-		Marks gakBefore = box( before.area(before.left(),before.top(), before.right(), betweenOne).grow(-10));
+		Marks gakBefore = box( before.area(before.left(),before.top(), before.right(), betweenOne).grow(-10)).actor;
 		gakBefore.appear();
 		
 		assume(secondaryNormal);
-		Marks study = box( before.area(before.left(),betweenOne, before.right(), betweenTwo).grow(-10));
+		Marks study = box( before.area(before.left(),betweenOne, before.right(), betweenTwo).grow(-10)).actor;
 		study.appear();
 		
 		assume(tertiaryNormal);
-		Marks programming = box( before.area(before.left(),betweenTwo, before.right(),before.bottom()).grow(-10));
+		Marks programming = box( before.area(before.left(),betweenTwo, before.right(),before.bottom()).grow(-10)).actor;
 		programming.appear();
 		
 		Grid textGrid = columns.nested(0,0,33,100);
@@ -146,20 +128,25 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript> {
 
 		Point afterHeader = after.all().north();
 		afterHeader = new Point(afterHeader.x,afterHeader.y-50);
-		letters("After").format(emphaticJumbo).centered(afterHeader).appear();
+		letters("After").actor.format(emphaticJumbo).centered(afterHeader).appear();
 
 		assume(primaryNormal);
-		Marks gakAfter = box( after.area(after.left(),difference, after.right(), afterOne).grow(-10));
+		Marks gakAfter = box( after.area(after.left(),difference, after.right(), afterOne).grow(-10)).actor;
 		gakAfter.appear();
-		connector().from(gakBefore.groupSource(), true).to(new Point(1130,410), true).format(emphaticSmall).sketch();
+		connector().actor.from(gakBefore.groupSource(), false).to(new Point(1130,410), true).format(emphaticSmall).sketch();
 		
 		assume(secondaryNormal);
-		Marks afterStudy = box( after.area(after.left(),afterOne, after.right(), afterTwo).grow(-10));
+		Marks afterStudy = box( after.area(after.left(),afterOne, after.right(), afterTwo).grow(-10)).actor;
 		afterStudy.appear();
+		connector().actor.from(study.groupSource(), false).to(afterStudy.groupSource(), true).format(emphaticSmall).sketch();
 		
 		assume(tertiaryNormal);
-		Marks afterProgramming = box( after.area(after.left(),afterTwo, after.right(),after.bottom()).grow(-10));
+		Marks afterProgramming = box( after.area(after.left(),afterTwo, after.right(),after.bottom()).grow(-10)).actor;
 		afterProgramming.appear();
+		assume(emphaticSmall);
+		connector().actor.from(programming.groupSource(), false).to(afterProgramming.groupSource(), true).sketch();
+		
+		
 	}
 	
 	/*
@@ -170,15 +157,15 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript> {
 	 */
 
 	public void header(String text) {
-		letters(text).format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").sketch();
+		letters(text).actor.format(primaryJumbo).at(new TopLeft(XMARGIN, YMARGIN)).called("header").sketch();
 	}
 	
 	private void headerEnd(String end) {
-		letters(end).format(secondaryJumbo).at(new RightOf(actor("header").groupSource())).sketch();
+		letters(end).actor.format(secondaryJumbo).at(new RightOf(actor("header").groupSource())).sketch();
 	}
 	
 	public void belowCentered(String text, String target, String name, String party) {
-		letters(text).at(new BelowCenter(actor(target).groupSource())).called(name).in(party).sketch();
+		letters(text).actor.at(new BelowCenter(actor(target).groupSource())).called(name).in(party).sketch();
 	}
 
 	Vector<Point> polygon(int sides, double radius, Point at) {

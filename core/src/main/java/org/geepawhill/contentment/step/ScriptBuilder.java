@@ -98,13 +98,13 @@ public abstract class ScriptBuilder<SUBCLASS>
 		return actor(world.actor(actor));
 	}
 	
-	public Letters letters(String source)
+	public Cast<Letters> letters(String source)
 	{
-		return new Letters(world,source).assume();
+		return new Cast<>(world,new Letters(world,source).assume());
 	}
 	
-	public Marks stroke(int fromX, int fromY, int toX, int toY) {
-		return Marks.makeLine(world,new PointPair(fromX,fromY,toX,toY));
+	public Cast<Marks> stroke(int fromX, int fromY, int toX, int toY) {
+		return new Cast<>(world,Marks.makeLine(world,new PointPair(fromX,fromY,toX,toY)).assume());
 	}
 	
 	public Party party(String name)
@@ -112,24 +112,24 @@ public abstract class ScriptBuilder<SUBCLASS>
 		return world.party(name);
 	}
 	
-	public Cross cross(String name, double xsize, double ysize, double xoffset, double yoffset)
+	public Cast<Cross> cross(String name, double xsize, double ysize, double xoffset, double yoffset)
 	{
-		return new Cross(world,actor(name).groupSource(),xsize,ysize,xoffset,yoffset);
+		return new Cast<>(world,new Cross(world,actor(name).groupSource(),xsize,ysize,xoffset,yoffset));
 	}
 
-	public Marks stroke(PointPair points)
+	public Cast<Marks> stroke(PointPair points)
 	{
-		return Marks.makeLine(world,points).assume();
+		return new Cast<>(world,Marks.makeLine(world,points).assume());
 	}
 	
-	public Marks box(PointPair area)
+	public Cast<Marks> box(PointPair area)
 	{
-		return Marks.makeBox(world,area).assume();
+		return new Cast<>(world,Marks.makeBox(world,area).assume());
 	}
 
-	public Connector connector()
+	public Cast<Connector> connector()
 	{
-		return new Connector(world).assume();
+		return new Cast<>(world,new Connector(world).assume());
 	}
 	
 	public SUBCLASS wipe()
