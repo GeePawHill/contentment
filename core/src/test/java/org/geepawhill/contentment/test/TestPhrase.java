@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.test;
 
-import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.OnFinished;
+import org.geepawhill.contentment.core.*;
 import org.geepawhill.contentment.step.Phrase;
 
 public class TestPhrase extends Phrase

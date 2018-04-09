@@ -1,11 +1,6 @@
 package org.geepawhill.contentment.actor;
 
-import org.geepawhill.contentment.fragments.*;
-import org.geepawhill.contentment.step.AtomStep;
-import org.geepawhill.contentment.step.Phrase;
-import org.geepawhill.contentment.timing.Timing;
-
-import javafx.scene.paint.Paint;
+import org.geepawhill.contentment.fragments.Entrance;
 
 public abstract class GenericActor implements Actor
 {
@@ -23,84 +18,4 @@ public abstract class GenericActor implements Actor
 		return entrance;
 	}
 
-	@Override
-	public GenericActor sketch()
-	{
-		world.add(new AtomStep(Timing.instant(),entrance));
-		draw(500d);
-		return this;
-	}
-	
-	@Override
-	public GenericActor appear()
-	{
-		world.add(new AtomStep(Timing.instant(),entrance));
-		draw(1d);
-		return this;
-	}
-
-	@Override
-	public GenericActor disappear()
-	{
-		world.add(new AtomStep(Timing.instant(),new Exit(entrance())));
-		return this;
-	}
-
-
-	@Override
-	public GenericActor called(String name)
-	{
-		world.callActor(name,this);
-		return this;
-	}
-	
-	@Override
-	public Actor in(String name)
-	{
-		world.addToParty(name,this);
-		return this;
-	}
-	
-	@Override
-	public Actor reColor(Paint paint)
-	{
-		world.add(new AtomStep(Timing.instant(),new Recolor(entrance, paint)));
-		return this;
-	}
-	
-	@Override
-	public Actor fadeDown()
-	{
-		world.add(new AtomStep(Timing.ms(500),new Fader(entrance, 0)));
-		return this;
-	}
-	
-	@Override
-	public Actor fadeOut()
-	{
-		world.push(new Phrase());
-		world.add(new AtomStep(Timing.ms(500d),new Fader(entrance, 0)));
-		world.add(new AtomStep(Timing.instant(),new Exit(entrance)));
-		world.popAndAppend();
-		return this;
-	}
-	
-	@Override
-	public Actor fadeIn()
-	{
-		world.push(new Phrase());
-		world.add(new AtomStep(Timing.instant(),entrance));
-		world.add(new AtomStep(Timing.instant(),new Fader(entrance, 0)));
-		draw(1d);
-		world.add(new AtomStep(Timing.ms(500d),new Fader(entrance,1)));
-		world.popAndAppend();
-		return this;
-	}
-	
-	@Override
-	public Actor fadeUp()
-	{
-		world.add(new AtomStep(Timing.ms(500d),new Fader(entrance,1)));
-		return this;
-	}
 }

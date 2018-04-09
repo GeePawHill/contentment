@@ -2,9 +2,7 @@ package org.geepawhill.contentment.core;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.geepawhill.contentment.test.ContentmentTest;
-import org.geepawhill.contentment.test.JavaFxRunner;
-import org.geepawhill.contentment.test.TestAtom;
+import org.geepawhill.contentment.test.*;
 import org.junit.Test;
 
 import javafx.application.Platform;

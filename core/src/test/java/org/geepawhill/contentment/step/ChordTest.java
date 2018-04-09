@@ -2,10 +2,8 @@ package org.geepawhill.contentment.step;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.OnFinished;
-import org.junit.Before;
-import org.junit.Test;
+import org.geepawhill.contentment.core.*;
+import org.junit.*;
 
 public class ChordTest
 {

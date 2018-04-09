@@ -1,12 +1,10 @@
 package org.geepawhill.contentment.fragments;
-import org.junit.Before;
-import org.junit.Test;
-
-import javafx.scene.Group;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.geepawhill.contentment.core.*;
+import org.junit.*;
+
+import javafx.scene.Group;
 
 public class ExitTest
 {

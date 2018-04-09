@@ -1,12 +1,10 @@
 package org.geepawhill.contentment.fragments;
-import org.junit.Before;
-import org.junit.Test;
-
-import javafx.scene.text.Text;
-
-import static org.geepawhill.contentment.test.ContentmentAssertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.geepawhill.contentment.core.Context;
+import org.junit.*;
+
+import javafx.scene.text.Text;
 
 public class WipeTest
 {

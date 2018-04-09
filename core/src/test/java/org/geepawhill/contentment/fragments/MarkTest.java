@@ -1,16 +1,15 @@
 package org.geepawhill.contentment.fragments;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import javafx.scene.Group;
-import javafx.scene.shape.*;
-
-import static org.geepawhill.contentment.test.ContentmentAssertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.geepawhill.contentment.test.ContentmentAssertions.assertThat;
 
 import org.geepawhill.contentment.core.*;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.*;
+import org.junit.*;
+
+import javafx.scene.Group;
+import javafx.scene.shape.*;
 
 public class MarkTest
 {

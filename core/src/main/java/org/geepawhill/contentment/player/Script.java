@@ -2,8 +2,7 @@ package org.geepawhill.contentment.player;
 
 import java.util.ArrayList;
 
-import org.geepawhill.contentment.rhythm.Rhythm;
-import org.geepawhill.contentment.rhythm.SimpleRhythm;
+import org.geepawhill.contentment.rhythm.*;
 
 import javafx.scene.media.MediaPlayer;
 

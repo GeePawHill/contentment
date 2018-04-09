@@ -1,8 +1,6 @@
 package org.geepawhill.contentment.geometry;
 
-import javafx.scene.shape.CubicCurveTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
+import javafx.scene.shape.*;
 
 public class BezierSplit
 {

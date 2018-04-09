@@ -2,8 +2,7 @@ package org.geepawhill.contentment.format;
 
 import java.util.HashMap;
 
-import org.geepawhill.contentment.style.Frames;
-import org.geepawhill.contentment.style.TypeFace;
+import org.geepawhill.contentment.style.*;
 import org.geepawhill.contentment.utility.Names;
 
 import javafx.scene.paint.Color;

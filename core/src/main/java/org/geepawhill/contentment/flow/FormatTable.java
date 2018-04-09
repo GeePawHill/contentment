@@ -2,16 +2,13 @@ package org.geepawhill.contentment.flow;
 
 import static org.geepawhill.contentment.utility.JfxUtility.color;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.style.Frames;
-import org.geepawhill.contentment.style.TypeFace;
+import org.geepawhill.contentment.style.*;
 
 import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
+import javafx.scene.text.*;
 
 public class FormatTable
 {

@@ -1,13 +1,11 @@
 package org.geepawhill.contentment.fragments;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import javafx.scene.Group;
-
-import static org.geepawhill.contentment.test.ContentmentAssertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 import org.geepawhill.contentment.core.*;
+import org.junit.*;
+
+import javafx.scene.Group;
 
 public class FaderTest
 {

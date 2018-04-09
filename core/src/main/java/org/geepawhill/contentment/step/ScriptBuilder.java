@@ -107,11 +107,6 @@ public abstract class ScriptBuilder<SUBCLASS>
 		return new Appearance<>(world,Marks.makeLine(world,new PointPair(fromX,fromY,toX,toY)));
 		}
 	
-	public Party party(String name)
-	{
-		return world.party(name);
-	}
-	
 	public Appearance<Cross> cross(String name, double xsize, double ysize, double xoffset, double yoffset)
 	{
 		return new Appearance<>(world,new Cross(world,actor(name).entrance(),xsize,ysize,xoffset,yoffset));

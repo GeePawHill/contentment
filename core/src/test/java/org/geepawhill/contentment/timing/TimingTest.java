@@ -5,8 +5,7 @@ import static org.assertj.core.api.Assertions.within;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 public class TimingTest
 {

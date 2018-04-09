@@ -94,15 +94,15 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript> {
 		letters("Before").format(emphaticJumbo).centered(beforeHeader).appear();
 		
 		assume(primaryNormal);
-		Marks gakBefore = box( before.area(before.left(),before.top(), before.right(), betweenOne).grow(-10)).actor;
+		Appearance<Marks> gakBefore = box( before.area(before.left(),before.top(), before.right(), betweenOne).grow(-10));
 		gakBefore.appear();
 		
 		assume(secondaryNormal);
-		Marks study = box( before.area(before.left(),betweenOne, before.right(), betweenTwo).grow(-10)).actor;
+		Appearance<Marks> study = box( before.area(before.left(),betweenOne, before.right(), betweenTwo).grow(-10));
 		study.appear();
 		
 		assume(tertiaryNormal);
-		Marks programming = box( before.area(before.left(),betweenTwo, before.right(),before.bottom()).grow(-10)).actor;
+		Appearance<Marks> programming = box( before.area(before.left(),betweenTwo, before.right(),before.bottom()).grow(-10));
 		programming.appear();
 		
 		Grid textGrid = columns.nested(0,0,33,100);
@@ -131,25 +131,25 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript> {
 		letters("After").format(emphaticJumbo).centered(afterHeader).appear();
 
 		assume(primaryNormal);
-		Marks gakAfter = box( after.area(after.left(),difference, after.right(), afterOne).grow(-10)).actor;
+		Appearance<Marks> gakAfter = box( after.area(after.left(),difference, after.right(), afterOne).grow(-10));
 		gakAfter.appear();
 		Appearance<Connector> gakLine = connector();
-		gakLine.actor.from(gakBefore.entrance(), false).to(new Point(1130,410), true);
+		gakLine.actor.from(gakBefore.groupSource(), false).to(new Point(1130,410), true);
 		gakLine.format(emphaticSmall).sketch();
 		
 		assume(secondaryNormal);
-		Marks afterStudy = box( after.area(after.left(),afterOne, after.right(), afterTwo).grow(-10)).actor;
+		Appearance<Marks> afterStudy = box( after.area(after.left(),afterOne, after.right(), afterTwo).grow(-10));
 		afterStudy.appear();
 		Appearance<Connector> studyLine = connector();
-		studyLine.actor.from(study.entrance(), false).to(afterStudy.entrance(), true);
+		studyLine.actor.from(study.groupSource(), false).to(afterStudy.groupSource(), true);
 		studyLine.format(emphaticSmall).sketch();
 		
 		assume(tertiaryNormal);
-		Marks afterProgramming = box( after.area(after.left(),afterTwo, after.right(),after.bottom()).grow(-10)).actor;
+		Appearance<Marks> afterProgramming = box( after.area(after.left(),afterTwo, after.right(),after.bottom()).grow(-10));
 		afterProgramming.appear();
 		assume(emphaticSmall);
 		Appearance<Connector> programmingLine = connector();
-		programmingLine.actor.from(programming.entrance(), false).to(afterProgramming.entrance(), true);
+		programmingLine.actor.from(programming.groupSource(), false).to(afterProgramming.groupSource(), true);
 		programmingLine.sketch();
 	}
 	
@@ -168,10 +168,6 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript> {
 		letters(end).format(secondaryJumbo).at(new RightOf(actor("header").entrance())).sketch();
 	}
 	
-	public void belowCentered(String text, String target, String name, String party) {
-		letters(text).at(new BelowCenter(actor(target).entrance())).called(name).in(party).sketch();
-	}
-
 	Vector<Point> polygon(int sides, double radius, Point at) {
 		Vector<Point> result = new Vector<>();
 		for (int i = 0; i < sides; i += 1) {

@@ -2,8 +2,7 @@ package org.geepawhill.contentment.step;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.geepawhill.contentment.test.ContentmentTest;
-import org.geepawhill.contentment.test.TestAtom;
+import org.geepawhill.contentment.test.*;
 import org.geepawhill.contentment.timing.Timing;
 import org.junit.Test;
 

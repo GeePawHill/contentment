@@ -2,10 +2,7 @@ package org.geepawhill.contentment.fragments;
 
 import org.geepawhill.contentment.core.*;
 import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.geometry.Bezier;
-import org.geepawhill.contentment.geometry.BezierSource;
-import org.geepawhill.contentment.geometry.BezierSplit;
-import org.geepawhill.contentment.geometry.PointPair;
+import org.geepawhill.contentment.geometry.*;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.utility.JfxUtility;
 

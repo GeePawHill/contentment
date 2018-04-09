@@ -3,10 +3,7 @@ package org.geepawhill.contentment.player;
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.rhythm.Rhythm;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 
 public class Player
 {

@@ -1,9 +1,9 @@
 package org.geepawhill.contentment.test;
 
-import org.junit.Test;
-import static org.geepawhill.contentment.test.ContentmentAssertions.*;
+import static org.geepawhill.contentment.test.ContentmentAssertions.assertThat;
 
 import org.geepawhill.contentment.geometry.*;
+import org.junit.Test;
 
 
 public class ContentmentAssertionsTest

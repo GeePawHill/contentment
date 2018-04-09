@@ -2,8 +2,7 @@ package org.geepawhill.contentment.utility;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 public class NamesTest
 {

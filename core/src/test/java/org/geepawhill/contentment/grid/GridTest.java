@@ -1,12 +1,11 @@
 package org.geepawhill.contentment.grid;
 
-import org.junit.Before;
-
-import org.junit.Test;
-import static org.geepawhill.contentment.test.ContentmentAssertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.geepawhill.contentment.test.ContentmentAssertions.assertThat;
 
 import org.assertj.core.data.Offset;
-import org.geepawhill.contentment.geometry.*;
+import org.geepawhill.contentment.geometry.PointPair;
+import org.junit.*;
 
 public class GridTest
 {

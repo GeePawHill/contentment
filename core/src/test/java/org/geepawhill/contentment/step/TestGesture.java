@@ -1,8 +1,6 @@
 package org.geepawhill.contentment.step;
 
-import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.Gesture;
-import org.geepawhill.contentment.core.OnFinished;
+import org.geepawhill.contentment.core.*;
 
 /**
  * Handy gesture for testing plays.

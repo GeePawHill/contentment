@@ -3,8 +3,7 @@ package org.geepawhill.contentment.flow;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 public class FormatTableTest
 {

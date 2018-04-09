@@ -1,10 +1,9 @@
 package org.geepawhill.contentment.geometry;
 
 import static org.assertj.core.api.Assertions.within;
-import static org.geepawhill.contentment.test.ContentmentAssertions.*;
+import static org.geepawhill.contentment.test.ContentmentAssertions.assertThat;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 public class BezierTest
 {

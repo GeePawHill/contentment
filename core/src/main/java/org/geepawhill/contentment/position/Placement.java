@@ -4,8 +4,7 @@ import org.geepawhill.contentment.core.NodeSource;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.utility.JfxUtility;
 
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
+import javafx.geometry.*;
 import javafx.scene.Node;
 
 public class Placement implements Position

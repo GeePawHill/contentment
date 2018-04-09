@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.utility;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 import javax.imageio.ImageIO;
 
@@ -9,14 +8,10 @@ import org.geepawhill.contentment.core.GroupSource;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.VPos;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.SnapshotParameters;
+import javafx.scene.*;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import javafx.scene.paint.*;
 import javafx.scene.text.Text;
 
 public class JfxUtility

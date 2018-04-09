@@ -1,8 +1,7 @@
 package org.geepawhill.contentment.fragments;
 
 import org.geepawhill.contentment.core.*;
-import org.geepawhill.contentment.utility.ColorChanger;
-import org.geepawhill.contentment.utility.JfxUtility;
+import org.geepawhill.contentment.utility.*;
 
 import javafx.scene.paint.Paint;
 

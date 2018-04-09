@@ -1,11 +1,9 @@
 package org.geepawhill.contentment.format;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import org.geepawhill.contentment.style.Frames;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 public class FormatTest
 {

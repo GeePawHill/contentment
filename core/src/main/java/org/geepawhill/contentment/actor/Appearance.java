@@ -55,12 +55,6 @@ public class Appearance<ACTOR extends Actor>
 		return this;
 	}
 	
-	public Appearance<ACTOR> in(String name)
-	{
-		world.addToParty(name,actor);
-		return this;
-	}
-	
 	public Appearance<ACTOR> reColor(Paint paint)
 	{
 		world.add(new AtomStep(Timing.instant(),new Recolor(entrance, paint)));

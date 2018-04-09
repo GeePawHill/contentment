@@ -2,7 +2,7 @@ package org.geepawhill.contentment.core;
 
 import java.util.function.Supplier;
 
-import javafx.scene.*;
+import javafx.scene.Node;
 
 public interface NodeSource extends Supplier<Node>
 {

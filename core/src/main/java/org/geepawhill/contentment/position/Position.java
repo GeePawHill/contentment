@@ -1,7 +1,6 @@
 package org.geepawhill.contentment.position;
 
-import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.geometry.ViewPort;
+import org.geepawhill.contentment.geometry.*;
 
 import javafx.scene.Node;
 

@@ -1,17 +1,10 @@
 package org.geepawhill.contentment.actors;
 
-import org.geepawhill.contentment.actor.Actor;
-import org.geepawhill.contentment.actor.GenericActor;
-import org.geepawhill.contentment.actor.ScriptWorld;
+import org.geepawhill.contentment.actor.*;
 import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.fragments.Mark;
-import org.geepawhill.contentment.fragments.Type;
-import org.geepawhill.contentment.geometry.Bezier;
-import org.geepawhill.contentment.geometry.Jiggler;
-import org.geepawhill.contentment.geometry.Point;
-import org.geepawhill.contentment.geometry.PointPair;
-import org.geepawhill.contentment.position.Centered;
-import org.geepawhill.contentment.position.Position;
+import org.geepawhill.contentment.fragments.*;
+import org.geepawhill.contentment.geometry.*;
+import org.geepawhill.contentment.position.*;
 import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
 

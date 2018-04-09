@@ -4,11 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
-import javafx.scene.Group;
-import javafx.scene.Node;
+import javafx.scene.*;
 import javafx.scene.text.Text;
 
 public class JfxUtilityTest

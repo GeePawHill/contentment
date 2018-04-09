@@ -81,12 +81,12 @@ public class DemonstrationScript extends ScriptBuilder<DemonstrationScript> {
 		
 		PointPair middleThird = grid.area(middleThirdLeft, middleThirdTop, middleThirdRight, middleThirdBottom);
 		assume(primaryJumbo);
-		box(middleThird).actor.appear();
+		box(middleThird).appear();
 		sync(1);
-		stroke(middleThird).actor.appear().called("middle third");
-		stroke(new PointPair(middleThird.to.x,middleThird.from.y,middleThird.from.x,middleThird.to.y)).actor.appear();
+		stroke(middleThird).called("middle third").appear();
+		stroke(new PointPair(middleThird.to.x,middleThird.from.y,middleThird.from.x,middleThird.to.y)).appear();
 		
-		cross("middle third", 100, 100, 0,0).actor.appear();
+		cross("middle third", 100, 100, 0,0).appear();
 	}
 
 	public void header(String text) {
@@ -97,10 +97,6 @@ public class DemonstrationScript extends ScriptBuilder<DemonstrationScript> {
 		letters(end).format(secondaryJumbo).at(new RightOf(actor("header").entrance())).sketch();
 	}
 	
-	public void belowCentered(String text, String target, String name, String party) {
-		letters(text).at(new BelowCenter(actor(target).entrance())).called(name).in(party).sketch();
-	}
-
 	Vector<Point> polygon(int sides, double radius, Point at) {
 		Vector<Point> result = new Vector<>();
 		for (int i = 0; i < sides; i += 1) {

@@ -1,11 +1,10 @@
 package org.geepawhill.contentment.fragments;
 
-import org.junit.Before;
-import org.junit.Test;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.geepawhill.contentment.core.Context;
 import org.geepawhill.contentment.rhythm.SimpleRhythm;
+import org.junit.*;
 
 public class SyncTest
 {

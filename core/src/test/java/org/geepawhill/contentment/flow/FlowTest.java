@@ -1,15 +1,14 @@
 package org.geepawhill.contentment.flow;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.data.Percentage.*;
+import static org.assertj.core.data.Percentage.withPercentage;
 
 import java.util.Vector;
 
 import org.geepawhill.contentment.actor.ScriptWorld;
 import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.test.ContentmentTest;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 public class FlowTest extends ContentmentTest
 {

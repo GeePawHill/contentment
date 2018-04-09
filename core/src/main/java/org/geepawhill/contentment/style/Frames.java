@@ -1,10 +1,8 @@
 package org.geepawhill.contentment.style;
 
-import org.geepawhill.contentment.format.Style;
-import org.geepawhill.contentment.format.StyleApplier;
+import org.geepawhill.contentment.format.*;
 
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import javafx.scene.paint.*;
 import javafx.scene.shape.Shape;
 
 public class Frames

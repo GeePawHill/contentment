@@ -11,7 +11,6 @@ public class ScriptWorld
 {
 	private Stack<Addable> working;
 	private final HashMap<String,Actor> namedActors;
-	private final HashMap<String,Party> namedParties;
 	private final Assumptions assumptions;
 	private final Random random;
 
@@ -19,7 +18,6 @@ public class ScriptWorld
 	{
 		working = new Stack<>();
 		namedActors = new HashMap<>();
-		namedParties = new HashMap<>();
 		assumptions = new Assumptions();
 		random = new Random();
 	}
@@ -84,24 +82,6 @@ public class ScriptWorld
 	public void callActor(String name, Actor actor)
 	{
 		namedActors.put(name, actor);
-	}
-
-	public void addToParty(String name, Actor actor)
-	{
-		Party actors = namedParties.getOrDefault(name, new Party(this));
-		actors.add(actor);
-		namedParties.put(name, actors);
-	}
-
-	public Party party(String name)
-	{
-		if(!namedParties.containsKey(name)) throw new RuntimeException("Can't find party: ["+name+"]");
-		return namedParties.get(name);
-	}
-
-	public void dump()
-	{
-		getWorking().dump();
 	}
 
 	private Addable getWorking()

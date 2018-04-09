@@ -2,13 +2,8 @@ package org.geepawhill.contentment.step;
 
 import java.util.ArrayList;
 
-import org.geepawhill.contentment.core.Context;
-import org.geepawhill.contentment.core.Fragment;
-import org.geepawhill.contentment.core.FragmentTransition;
-import org.geepawhill.contentment.core.Gesture;
-import org.geepawhill.contentment.core.OnFinished;
-import org.geepawhill.contentment.timing.Scheduler;
-import org.geepawhill.contentment.timing.Timing;
+import org.geepawhill.contentment.core.*;
+import org.geepawhill.contentment.timing.*;
 import org.geepawhill.contentment.utility.Names;
 
 public class Timed implements Gesture

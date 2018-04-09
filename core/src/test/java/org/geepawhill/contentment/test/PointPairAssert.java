@@ -1,8 +1,9 @@
 package org.geepawhill.contentment.test;
 
+import static org.geepawhill.contentment.test.ContentmentAssertions.assertThat;
+
 import org.assertj.core.api.AbstractAssert;
-import static org.geepawhill.contentment.test.ContentmentAssertions.*;
-import org.geepawhill.contentment.geometry.*;
+import org.geepawhill.contentment.geometry.PointPair;
 
 public class PointPairAssert extends AbstractAssert<PointPairAssert, PointPair>
 {

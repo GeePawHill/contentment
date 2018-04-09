@@ -2,7 +2,7 @@ package org.geepawhill.contentment.flow;
 
 import java.util.Vector;
 
-import org.geepawhill.contentment.actor.ScriptWorld;
+import org.geepawhill.contentment.actor.*;
 import org.geepawhill.contentment.actors.Letters;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.PointPair;
@@ -55,12 +55,12 @@ public class Flow
 		layout();
 	}
 	
-	public Letters letters(int i)
+	public Appearance<Letters> letters(int i)
 	{
 		Line line = lines.get(i);
 		TopLeft position = new TopLeft(line.layout.from);
-		Letters result = new Letters(world,line.text,position,table.get(line.size, line.color));
-		return result;
+		Letters result = new Letters(world,line.text);
+		return new Appearance<Letters>(world, result).format(table.get(line.size, line.color)).at(position);
 	}
 
 	private void layout()

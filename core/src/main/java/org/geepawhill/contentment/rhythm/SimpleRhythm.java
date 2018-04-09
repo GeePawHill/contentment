@@ -1,11 +1,9 @@
 package org.geepawhill.contentment.rhythm;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.*;
 
 import javafx.animation.AnimationTimer;
-import javafx.beans.property.LongProperty;
-import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.*;
 import javafx.scene.media.MediaPlayer;
 
 public class SimpleRhythm implements Rhythm
