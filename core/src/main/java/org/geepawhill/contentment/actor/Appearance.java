@@ -31,20 +31,28 @@ public class Appearance<ACTOR extends Actor>
 
 	public Appearance<ACTOR> sketch()
 	{
+		return sketch(500d);
+	}
+	
+	public Appearance<ACTOR> sketch(double time)
+	{
 		world.add(new AtomStep(Timing.instant(),entrance));
-		actor.draw(500d);
+		world.addActor(entrance);
+		actor.draw(time);
 		return this;
 	}
 	
 	public Appearance<ACTOR> appear()
 	{
 		world.add(new AtomStep(Timing.instant(),entrance));
+		world.addActor(entrance);
 		actor.draw(1d);
 		return this;
 	}
 
 	public Appearance<ACTOR> disappear()
 	{
+		world.removeActor(actor.entrance());
 		world.add(new AtomStep(Timing.instant(),new Exit(groupSource())));
 		return this;
 	}
@@ -69,6 +77,7 @@ public class Appearance<ACTOR extends Actor>
 	
 	public Appearance<ACTOR> fadeOut()
 	{
+		world.removeActor(actor.entrance());
 		world.push(new Phrase());
 		world.add(new AtomStep(Timing.ms(500d),new Fader(entrance, 0)));
 		world.add(new AtomStep(Timing.instant(),new Exit(entrance)));
@@ -78,6 +87,7 @@ public class Appearance<ACTOR extends Actor>
 	
 	public Appearance<ACTOR> fadeIn()
 	{
+		world.addActor(entrance);
 		world.push(new Phrase());
 		world.add(new AtomStep(Timing.instant(),entrance));
 		world.add(new AtomStep(Timing.instant(),new Fader(entrance, 0)));

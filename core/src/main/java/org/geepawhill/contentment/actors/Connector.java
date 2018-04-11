@@ -219,7 +219,7 @@ public class Connector extends GenericActor
 
 	private ArrowPoints makeArrowPoints(PointPair target)
 	{
-		final double pointStandOffFromTarget = 2d;
+		final double pointStandOffFromTarget = 4d;
 		PointPair main = new PointPair(target.standoffFrom(pointStandOffFromTarget), target.standoffTo(pointStandOffFromTarget));
 
 		final double arrowStandoffFromEnd = 14d;

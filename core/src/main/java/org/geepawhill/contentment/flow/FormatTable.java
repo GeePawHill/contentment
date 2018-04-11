@@ -72,7 +72,7 @@ public class FormatTable
 	private Format format(Paint majorColor, double fontsize) {
 		Font font = Font.font("Chewed Pen BB", FontPosture.ITALIC, fontsize);
 		return new Format(TypeFace.font(font, 1d, 1d), TypeFace.color(majorColor, 1d),
-				Frames.frame(majorColor, 5d, 1d));
+				Frames.frame(majorColor, 2d, 1d));
 	}
 
 

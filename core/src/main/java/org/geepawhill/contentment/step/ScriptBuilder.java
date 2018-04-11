@@ -12,7 +12,7 @@ import org.geepawhill.contentment.timing.Timing;
 
 public abstract class ScriptBuilder<SUBCLASS>
 {
-	
+
 	protected ScriptWorld world;
 	protected Script script;
 	protected long lastScene;
@@ -22,47 +22,47 @@ public abstract class ScriptBuilder<SUBCLASS>
 	{
 		this(new SimpleRhythm());
 	}
-	
+
 	public ScriptBuilder(Rhythm rhythm)
 	{
 		this.script = new Script(rhythm);
 		this.lastScene = -1L;
 		this.world = new ScriptWorld();
 	}
-	
+
 	public abstract SUBCLASS downcast();
-	
+
 	public void scene(long beat)
 	{
-		if(lastScene!=-1)
+		if (lastScene != -1)
 		{
-			script.add(new Keyframe(lastScene,endBuild()));
+			script.add(new Keyframe(lastScene, endBuild()));
 		}
 		lastScene = beat;
-		lastStall=beat;
+		lastStall = beat;
 		buildPhrase();
-		addToWorking(new AtomStep(Timing.ms(30000),new Sync(beat*1000)));
+		addToWorking(new AtomStep(Timing.ms(30000), new Sync(beat * 1000)));
 	}
 
 	public void end()
 	{
-		if(lastScene==-1) throw new RuntimeException("end() called with no scene.");
-		script.add(new Keyframe(lastScene,endBuild()));
-		lastScene=-1;
+		if (lastScene == -1) throw new RuntimeException("end() called with no scene.");
+		script.add(new Keyframe(lastScene, endBuild()));
+		lastScene = -1;
 	}
-	
+
 	public void sync(long beat)
 	{
-		if(lastScene==-1) throw new RuntimeException("end() called with no scene.");
-		lastStall+=beat;
-		addToWorking(new AtomStep(Timing.ms(30000),new Sync(lastStall*1000)));
+		if (lastScene == -1) throw new RuntimeException("end() called with no scene.");
+		lastStall += beat;
+		addToWorking(new AtomStep(Timing.ms(30000), new Sync(lastStall * 1000)));
 	}
-	
+
 	protected void addToWorking(Gesture step)
 	{
 		world.add(step);
 	}
-	
+
 	public Phrase makePhrase()
 	{
 		return new Phrase();
@@ -72,71 +72,87 @@ public abstract class ScriptBuilder<SUBCLASS>
 	{
 		world.push(makePhrase());
 	}
-	
+
 	public void buildChord()
 	{
 		world.push(new Chord());
 	}
-	
+
 	public void endChord()
 	{
 		world.popAndAppend();
 	}
-	
+
 	public Addable endBuild()
 	{
 		return world.pop();
 	}
-	
+
 	public Actor actor(Actor actor)
 	{
 		return actor;
 	}
-	
+
 	public Actor actor(String actor)
 	{
 		return actor(world.actor(actor));
 	}
-	
+
 	public Appearance<Letters> letters(String source)
 	{
-		return new Appearance<>(world,new Letters(world,source));
+		return new Appearance<>(world, new Letters(world, source));
 	}
-	
-	public Appearance<Marks> stroke(int fromX, int fromY, int toX, int toY) {
-		return new Appearance<>(world,Marks.makeLine(world,new PointPair(fromX,fromY,toX,toY)));
-		}
-	
+
+	public Appearance<Marks> stroke(int fromX, int fromY, int toX, int toY)
+	{
+		return new Appearance<>(world, Marks.makeLine(world, new PointPair(fromX, fromY, toX, toY)));
+	}
+
 	public Appearance<Cross> cross(String name, double xsize, double ysize, double xoffset, double yoffset)
 	{
-		return new Appearance<>(world,new Cross(world,actor(name).entrance(),xsize,ysize,xoffset,yoffset));
+		return new Appearance<>(world, new Cross(world, actor(name).entrance(), xsize, ysize, xoffset, yoffset));
 	}
 
 	public Appearance<Marks> stroke(PointPair points)
 	{
-		return new Appearance<>(world,Marks.makeLine(world,points));
+		return new Appearance<>(world, Marks.makeLine(world, points));
 	}
-	
+
 	public Appearance<Marks> box(PointPair area)
 	{
-		return new Appearance<>(world,Marks.makeBox(world,area));
+		return new Appearance<>(world, Marks.makeBox(world, area));
 	}
 
 	public Appearance<Connector> connector()
 	{
-		return new Appearance<>(world,new Connector(world));
+		return new Appearance<>(world, new Connector(world));
 	}
-	
+
 	public SUBCLASS wipe()
 	{
-		world.add(new AtomStep(Timing.instant(),new Wipe()));
+		world.add(new AtomStep(Timing.instant(), new Wipe()));
 		return downcast();
 	}
 	
+	public SUBCLASS fadeOut()
+	{
+		buildChord();
+		for(Entrance entrance : world.entrances())
+		{
+			world.push(new Phrase());
+			world.add(new AtomStep(Timing.ms(500d),new Fader(entrance, 0)));
+			world.add(new AtomStep(Timing.instant(),new Exit(entrance)));
+			world.popAndAppend();
+		}
+		world.entrances().clear();
+		world.popAndAppend();
+		return downcast();
+	}
+
 	public SUBCLASS assume(Format format)
 	{
 		world.assumptions().assume(format);
 		return downcast();
 	}
-	
+
 }
