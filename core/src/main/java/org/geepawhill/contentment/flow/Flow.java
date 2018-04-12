@@ -43,6 +43,7 @@ public class Flow
 
 	public void load(String source)
 	{
+		lines.clear();
 		String[] markups = source.split("\n");
 		for (String markup : markups)
 		{
@@ -77,7 +78,7 @@ public class Flow
 			lastEndY = newLastEndY;
 		}
 	}
-
+	
 	private Color chooseColor(String substring)
 	{
 		char colorChar = substring.toLowerCase().charAt(0);
@@ -109,4 +110,10 @@ public class Flow
 			return Size.Small;
 		}
 	}
+	
+	public int size()
+	{
+		return lines.size();
+	}
+
 }

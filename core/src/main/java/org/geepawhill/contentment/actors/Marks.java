@@ -55,7 +55,7 @@ public class Marks extends GenericActor
 
 	private static Bezier jiggle(ScriptWorld world, PointPair points)
 	{
-		double variance = points.distance() * .1;
+		double variance = points.distance() * .05;
 		Bezier chosen = new Bezier(points.from, world.jiggle(points.along(world.nextDouble()), 1d, variance),
 				world.jiggle(points.along(world.nextDouble()), 1d, variance), points.to);
 		return chosen;
