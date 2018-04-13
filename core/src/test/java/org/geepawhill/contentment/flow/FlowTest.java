@@ -40,6 +40,15 @@ public class FlowTest extends ContentmentTest
 		assertCoordinates(flow.lines());
 	}
 	
+	@Test
+	public void loadClearsOld()
+	{
+		flow.load("pjABCDE\n");
+		assertThat(flow.lines().size()).isEqualTo(1);
+		flow.load("pjABCDE\npjXYZZY");
+		assertThat(flow.lines().size()).isEqualTo(2);
+	}
+	
 	public void assertLine(int index,String text, Color color, Size size)
 	{
 		Flow.Line line = flow.lines().get(index);
