@@ -257,9 +257,6 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript>
 		Format studyingFormat = primaryNormal;
 		Format gakkingFormat = secondaryNormal;
 
-		Horizontal betweenOne = before.horizontal(50);
-		Horizontal betweenTwo = before.horizontal(80);
-
 		Flow gakText = new Flow(world, viewport.area(0, 0, 100, 100));
 		gakText.load("snGAK Activity\n" + "sn     Inspection\n" + "ss     Testing\n" + "ss     Debugging\n"
 		// + "ss\n"
@@ -293,19 +290,15 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript>
 
 		sync(10);
 		assume(gakkingFormat);
-		Appearance<Marks> gakBefore = box(before.area(before.left(), before.top(), before.right(), betweenOne).grow(-10));
+		Appearance<Marks> gakBefore = box(before.area(0, 0, 100, 50).grow(-10));
 		gakBefore.sketch(2000);
 
 		sync(12);
 		assume(studyingFormat);
-		Appearance<Marks> studyBefore = box(before.area(before.left(), betweenOne, before.right(), betweenTwo).grow(-10));
+		Appearance<Marks> studyBefore = box(before.area(0, 50, 100, 80).grow(-10));
 		studyBefore.sketch(1500);
 
 		scene(356);
-
-		Horizontal difference = after.horizontal(38);
-		Horizontal afterOne = after.horizontal(45);
-		Horizontal afterTwo = after.horizontal(60);
 
 		Point beforeHeader = before.all().north();
 		beforeHeader = new Point(beforeHeader.x, beforeHeader.y - 50);
@@ -313,7 +306,7 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript>
 
 		sync(8);
 		assume(programmingFormat);
-		PointPair programmingAfterBounds = after.area(after.left(), afterTwo, after.right(), after.bottom()).grow(-10);
+		PointPair programmingAfterBounds = after.area(0, 60, 100, 100).grow(-10);
 		Appearance<Marks> programmingAfter = box(programmingAfterBounds);
 		programmingAfter.sketch(2000);
 		assume(emphaticSmall);
@@ -330,7 +323,7 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript>
 
 		sync(16);
 		assume(studyingFormat);
-		PointPair studyingAfterBounds = after.area(after.left(), afterOne, after.right(), afterTwo).grow(-10);
+		PointPair studyingAfterBounds = after.area(0, 45, 100, 60).grow(-10);
 		Appearance<Marks> afterStudy = box(studyingAfterBounds);
 		afterStudy.sketch(2000);
 
@@ -343,7 +336,7 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript>
 
 		sync(15);
 		assume(gakkingFormat);
-		PointPair gakAfterBounds = after.area(after.left(), difference, after.right(), afterOne).grow(-10);
+		PointPair gakAfterBounds = after.area(0, 38, 100, 45).grow(-10);
 		Appearance<Marks> gakAfter = box(gakAfterBounds);
 		gakAfter.sketch(2000);
 		assume(emphaticSmall);
