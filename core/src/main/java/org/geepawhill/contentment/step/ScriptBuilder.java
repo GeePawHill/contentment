@@ -88,12 +88,12 @@ public abstract class ScriptBuilder<SUBCLASS>
 		return world.pop();
 	}
 
-	public Actor actor(Actor actor)
+	public Appearance<? extends Actor> actor(Appearance<? extends Actor> actor)
 	{
 		return actor;
 	}
 
-	public Actor actor(String actor)
+	public Appearance<? extends Actor> actor(String actor)
 	{
 		return actor(world.actor(actor));
 	}

@@ -30,6 +30,11 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 		return sketch(500d);
 	}
 	
+	public Entrance entrance()
+	{
+		return entrance;
+	}
+	
 	public Appearance<ACTOR> sketch(double time)
 	{
 		world.add(new AtomStep(Timing.instant(),entrance));
@@ -55,7 +60,7 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 
 	public Appearance<ACTOR> called(String name)
 	{
-		world.callActor(name,actor);
+		world.callActor(name,this);
 		return this;
 	}
 	

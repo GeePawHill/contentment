@@ -21,18 +21,17 @@ public class Cross extends GenericActor
 	private double xsize;
 	private double ysize;
 	private Point offset;
-
-	public Cross(ScriptWorld world, Actor target, double size)
+	
+	public Cross(ScriptWorld world, Appearance<? extends Actor> target, double size)
 	{
 		this(world,target.entrance(),size,size, new Point(0,0));
 	}
-	
+
 	public Cross(ScriptWorld world, GroupSource target, double xsize, double ysize, double xoffset, double yoffset)
 	{
 		this(world,target,xsize,ysize,new Point(xoffset,yoffset));
 	}
 
-	
 	public Cross(ScriptWorld world, GroupSource target, double xsize, double ysize, Point offset)
 	{
 		super(world);

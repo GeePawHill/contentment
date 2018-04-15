@@ -11,7 +11,7 @@ import org.geepawhill.contentment.step.Addable;
 public class ScriptWorld
 {
 	private Stack<Addable> working;
-	private final HashMap<String,Actor> namedActors;
+	private final HashMap<String,Appearance<? extends Actor>> namedActors;
 	private final Assumptions assumptions;
 	private final Random random;
 	private final Vector<Entrance> appearances;
@@ -76,13 +76,13 @@ public class ScriptWorld
 		add(popped);
 	}
 	
-	public Actor actor(String actor)
+	public Appearance<? extends Actor> actor(String actor)
 	{
 		if(!namedActors.containsKey(actor)) throw new RuntimeException("Can't find actor: ["+actor+"]");
 		return namedActors.get(actor);
 	}
 
-	public void callActor(String name, Actor actor)
+	public void callActor(String name, Appearance<? extends Actor> actor)
 	{
 		namedActors.put(name, actor);
 	}
