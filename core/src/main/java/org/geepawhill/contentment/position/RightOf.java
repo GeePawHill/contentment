@@ -25,7 +25,7 @@ public class RightOf implements Position
 	@Override
 	public void position(Node node, PointPair dimensions)
 	{
-		Point anchorPoint = new PointPair(anchor.get().getBoundsInParent()).east();
+		Point anchorPoint = new PointPair(anchor.group().getBoundsInParent()).east();
 		JfxUtility.setTopAlignment(node);
 		node.setTranslateX(anchorPoint.x+offset);
 		node.setTranslateY(anchorPoint.y - dimensions.height()/2d);

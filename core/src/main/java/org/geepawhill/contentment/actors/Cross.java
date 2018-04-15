@@ -59,7 +59,7 @@ public class Cross extends GenericActor
 	{
 		double xadditive = xsize/2d;
 		double yadditive = ysize/2d;
-		Point center = new PointPair(target.get()).center().add(offset);
+		Point center = new PointPair(target.group()).center().add(offset);
 		return new Bezier(new Point(center.x-xadditive, center.y-yadditive),new Point(center.x+xadditive,center.y+yadditive));
 	}
 
@@ -68,7 +68,7 @@ public class Cross extends GenericActor
 	{
 		double xadditive = xsize/2d;
 		double yadditive = ysize/2d;
-		Point center = new PointPair(target.get()).center().add(offset);
+		Point center = new PointPair(target.group()).center().add(offset);
 		return new Bezier(
 				new Point(center.x+xadditive, center.y-yadditive), new Point(center.x-xadditive, center.y+yadditive));
 	}

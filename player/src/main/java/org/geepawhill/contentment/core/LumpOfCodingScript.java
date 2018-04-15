@@ -10,15 +10,13 @@ import org.geepawhill.contentment.actors.*;
 import org.geepawhill.contentment.flow.*;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.*;
-import org.geepawhill.contentment.grid.*;
+import org.geepawhill.contentment.grid.Grid;
 import org.geepawhill.contentment.player.Script;
 import org.geepawhill.contentment.position.*;
-import org.geepawhill.contentment.rhythm.*;
+import org.geepawhill.contentment.rhythm.MediaRhythm;
 import org.geepawhill.contentment.step.ScriptBuilder;
 import org.geepawhill.contentment.style.*;
 import org.geepawhill.contentment.utility.JfxUtility;
-
-import com.sun.media.jfxmediaimpl.MarkerStateListener;
 
 import javafx.scene.paint.Paint;
 import javafx.scene.text.*;

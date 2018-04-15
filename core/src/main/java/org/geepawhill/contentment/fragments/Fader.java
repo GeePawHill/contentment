@@ -23,13 +23,13 @@ public class Fader implements Fragment
 	@Override
 	public void prepare(Context context)
 	{
-		this.from = target.get().getOpacity();
+		this.from = target.group().getOpacity();
 	}
 
 	@Override
 	public boolean interpolate(Context context, double fraction)
 	{
-		target.get().setOpacity(from + fraction * (to - from));
+		target.group().setOpacity(from + fraction * (to - from));
 		return true;
 	}
 }

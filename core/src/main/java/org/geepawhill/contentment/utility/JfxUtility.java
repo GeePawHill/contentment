@@ -65,7 +65,7 @@ public class JfxUtility
 
 	public static void addIfNeeded(GroupSource group, Node node)
 	{
-		if(!group.get().getChildren().contains(node)) group.get().getChildren().add(node);
+		if(!group.group().getChildren().contains(node)) group.group().getChildren().add(node);
 	}
 	
 	static public void setTopAlignment(Node node)

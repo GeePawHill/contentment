@@ -32,7 +32,7 @@ public class Recolor implements Fragment
 	public boolean interpolate(Context context, double fraction)
 	{
 		ColorChanger colorChanger = new ColorChanger(paint);
-		JfxUtility.forEachDescendant(actor.get(), colorChanger);
+		JfxUtility.forEachDescendant(actor.group(), colorChanger);
 		return false;
 	}
 }

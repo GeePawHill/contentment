@@ -20,7 +20,7 @@ public class EntranceTest
 		Entrance entrance = new Entrance( );
 		entrance.prepare(context);
 		entrance.interpolate(context, 1);
-		assertThat(context.canvas.getChildren().contains(entrance.get())).isTrue();
+		assertThat(context.canvas.getChildren().contains(entrance.group())).isTrue();
 	}
 	
 	@Test

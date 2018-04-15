@@ -17,17 +17,17 @@ public class Context
 	
 	public void add(GroupSource actor)
 	{
-		if (!canvas.getChildren().contains(actor.get()))
+		if (!canvas.getChildren().contains(actor.group()))
 		{
-			canvas.getChildren().add(actor.get());
+			canvas.getChildren().add(actor.group());
 		}
 	}
 
 	public void remove(GroupSource actor)
 	{
-		if (canvas.getChildren().contains(actor.get()))
+		if (canvas.getChildren().contains(actor.group()))
 		{
-			canvas.getChildren().remove(actor.get());
+			canvas.getChildren().remove(actor.group());
 		}
 	}
 

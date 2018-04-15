@@ -35,7 +35,7 @@ public class Entrance implements Fragment, GroupSource
 	}
 
 	@Override
-	public Group get()
+	public Group group()
 	{
 		return group;
 	}

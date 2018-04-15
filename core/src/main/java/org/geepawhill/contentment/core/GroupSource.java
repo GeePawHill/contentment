@@ -1,21 +1,27 @@
 package org.geepawhill.contentment.core;
 
-import java.util.function.Supplier;
-
 import javafx.scene.Group;
 
-public interface GroupSource extends Supplier<Group>
+public interface GroupSource 
 {
+	public Group group();
+
+	public static GroupSource value(Group group)
+	{
+		return () -> group;
+	}
+	
 	public static GroupSource VALUE(Group group)
 	{
 		return ()->group;
 	}
 	
+	
 	public final static GroupSource NONE = new GroupSource()
 	{
 
 		@Override
-		public Group get()
+		public Group group()
 		{
 			throw new NoGroupSource();
 		}
@@ -31,8 +37,4 @@ public interface GroupSource extends Supplier<Group>
 		}
 	}
 
-	public static GroupSource value(Group group)
-	{
-		return () -> group;
-	}
 }

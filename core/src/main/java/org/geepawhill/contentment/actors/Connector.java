@@ -198,21 +198,21 @@ public class Connector extends GenericActor
 	private Point adjustToIfGroup(PointPair startLine)
 	{
 		if (toGroup == GroupSource.NONE) return startLine.to;
-		PointPair toGrown = new PointPair(toGroup.get());
+		PointPair toGrown = new PointPair(toGroup.group());
 		return toGrown.quadIntersects(startLine);
 	}
 
 	private Point adjustFromIfGroup(PointPair startLine)
 	{
 		if (fromGroup == GroupSource.NONE) return startLine.from;
-		PointPair fromGrown = new PointPair(fromGroup.get());
+		PointPair fromGrown = new PointPair(fromGroup.group());
 		return fromGrown.quadIntersects(startLine);
 	}
 
 	private PointPair guessStartLine()
 	{
-		Point fromCenter = fromGroup == GroupSource.NONE ? fromPoint : new PointPair(fromGroup.get()).center();
-		Point toCenter = toGroup == GroupSource.NONE ? toPoint : new PointPair(toGroup.get()).center();
+		Point fromCenter = fromGroup == GroupSource.NONE ? fromPoint : new PointPair(fromGroup.group()).center();
+		Point toCenter = toGroup == GroupSource.NONE ? toPoint : new PointPair(toGroup.group()).center();
 		PointPair startLine = new PointPair(fromCenter, toCenter);
 		return startLine;
 	}
