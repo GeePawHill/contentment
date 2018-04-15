@@ -8,9 +8,10 @@ import org.geepawhill.contentment.position.*;
 import org.geepawhill.contentment.step.*;
 import org.geepawhill.contentment.timing.Timing;
 
+import javafx.scene.Group;
 import javafx.scene.paint.Paint;
 
-public class Appearance<ACTOR extends Actor>
+public class Appearance<ACTOR extends Actor> implements GroupSource
 {
 	public final ACTOR actor;
 	protected final ScriptWorld world;
@@ -24,11 +25,6 @@ public class Appearance<ACTOR extends Actor>
 		actor.format(world.assumptions().format());
 	}
 	
-	public GroupSource groupSource()
-	{
-		return entrance;
-	}
-
 	public Appearance<ACTOR> sketch()
 	{
 		return sketch(500d);
@@ -53,7 +49,7 @@ public class Appearance<ACTOR extends Actor>
 	public Appearance<ACTOR> disappear()
 	{
 		world.removeActor(actor.entrance());
-		world.add(new AtomStep(Timing.instant(),new Exit(groupSource())));
+		world.add(new AtomStep(Timing.instant(),new Exit(entrance)));
 		return this;
 	}
 
@@ -125,6 +121,12 @@ public class Appearance<ACTOR extends Actor>
 	{
 		at(new Centered(x,y));
 		return this;
+	}
+
+	@Override
+	public Group group()
+	{
+		return entrance.group();
 	}
 	
 }

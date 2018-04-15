@@ -300,7 +300,7 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript>
 
 		Point beforeHeader = before.all().north();
 		beforeHeader = new Point(beforeHeader.x, beforeHeader.y - 50);
-		letters("Before").format(emphaticJumbo).at(new BelowCenter(programmingBefore.groupSource(), 0)).appear();
+		letters("Before").format(emphaticJumbo).at(new BelowCenter(programmingBefore, 0)).appear();
 
 		sync(8);
 		assume(programmingFormat);
@@ -311,13 +311,13 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript>
 
 		Point afterHeader = after.all().north();
 		afterHeader = new Point(afterHeader.x, afterHeader.y - 50);
-		letters("After").format(emphaticJumbo).at(new BelowCenter(programmingAfter.groupSource(), 0)).appear();
+		letters("After").format(emphaticJumbo).at(new BelowCenter(programmingAfter, 0)).appear();
 
 		sync(12);
 		Appearance<Connector> programmingLine = connector();
-		programmingLine.actor.from(programmingBefore.groupSource(), false).to(programmingAfterBounds.west(), true);
+		programmingLine.actor.from(programmingBefore, false).to(programmingAfterBounds.west(), true);
 		programmingLine.sketch();
-		letters("Doubled").at(new AboveCenter(programmingLine.groupSource(), 20d)).appear();
+		letters("Doubled").at(new AboveCenter(programmingLine, 20d)).appear();
 
 		sync(16);
 		assume(studyingFormat);
@@ -328,9 +328,9 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript>
 		sync(19);
 		assume(emphaticSmall);
 		Appearance<Connector> studyLine = connector();
-		studyLine.actor.from(studyBefore.groupSource(), false).to(studyingAfterBounds.west(), true);
+		studyLine.actor.from(studyBefore, false).to(studyingAfterBounds.west(), true);
 		studyLine.format(emphaticSmall).sketch();
-		letters("Halved").at(new AboveCenter(studyLine.groupSource(), 0d)).appear();
+		letters("Halved").at(new AboveCenter(studyLine, 0d)).appear();
 
 		sync(15);
 		assume(gakkingFormat);
@@ -340,9 +340,9 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript>
 		assume(emphaticSmall);
 		sync(8);
 		Appearance<Connector> gakLine = connector();
-		gakLine.actor.from(gakBefore.groupSource(), false).to(gakAfterBounds.west(), true);
+		gakLine.actor.from(gakBefore, false).to(gakAfterBounds.west(), true);
 		gakLine.format(emphaticSmall).sketch();
-		letters("Slashed!").at(new AboveCenter(gakLine.groupSource(), 0d)).appear();
+		letters("Slashed!").at(new AboveCenter(gakLine, 0d)).appear();
 	}
 
 	public void header(String text)
