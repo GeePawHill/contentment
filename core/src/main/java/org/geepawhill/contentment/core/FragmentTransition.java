@@ -56,7 +56,7 @@ public class FragmentTransition extends Transition
 
 	private void finishEarly()
 	{
-		// Note: OnFinished is called automatically when there's no call to #stop.
+		// Note: OnFinished is called automatically by super when there's no call to #stop.
 		stop();
 		onFinished.run();
 	}

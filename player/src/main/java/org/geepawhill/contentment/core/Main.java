@@ -14,7 +14,6 @@ public class Main extends Application
 	@Override
 	public void start(Stage stage)
 	{
-		System.out.println(System.getProperty("java.version"));
 		try
 		{
 			preloadFontFile("/org/geepawhill/scripts/SAMUELS.TTF");
