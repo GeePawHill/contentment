@@ -38,7 +38,7 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 	public Appearance<ACTOR> sketch(double time)
 	{
 		world.add(new AtomStep(Timing.instant(),entrance));
-		world.addActor(entrance);
+		world.addActor(this);
 		actor.draw(time);
 		return this;
 	}
@@ -46,14 +46,14 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 	public Appearance<ACTOR> appear()
 	{
 		world.add(new AtomStep(Timing.instant(),entrance));
-		world.addActor(entrance);
+		world.addActor(this);
 		actor.draw(1d);
 		return this;
 	}
 
 	public Appearance<ACTOR> disappear()
 	{
-		world.removeActor(actor.entrance());
+		world.removeActor(this);
 		world.add(new AtomStep(Timing.instant(),new Exit(entrance)));
 		return this;
 	}
@@ -78,7 +78,7 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 	
 	public Appearance<ACTOR> fadeOut()
 	{
-		world.removeActor(actor.entrance());
+		world.removeActor(this);
 		world.push(new Phrase());
 		world.add(new AtomStep(Timing.ms(500d),new Fader(entrance, 0)));
 		world.add(new AtomStep(Timing.instant(),new Exit(entrance)));
@@ -88,7 +88,7 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 	
 	public Appearance<ACTOR> fadeIn()
 	{
-		world.addActor(entrance);
+		world.addActor(this);
 		world.push(new Phrase());
 		world.add(new AtomStep(Timing.instant(),entrance));
 		world.add(new AtomStep(Timing.instant(),new Fader(entrance, 0)));

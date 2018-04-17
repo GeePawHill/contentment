@@ -4,7 +4,6 @@ import java.util.*;
 
 import org.geepawhill.contentment.core.Gesture;
 import org.geepawhill.contentment.format.Assumptions;
-import org.geepawhill.contentment.fragments.Entrance;
 import org.geepawhill.contentment.geometry.Point;
 import org.geepawhill.contentment.step.Addable;
 
@@ -12,9 +11,9 @@ public class ScriptWorld
 {
 	private Stack<Addable> working;
 	private final HashMap<String,Appearance<? extends Actor>> namedActors;
+	private final Vector<Appearance<? extends Actor>> actors;
 	private final Assumptions assumptions;
 	private final Random random;
-	private final Vector<Entrance> appearances;
 
 	public ScriptWorld()
 	{
@@ -22,7 +21,7 @@ public class ScriptWorld
 		namedActors = new HashMap<>();
 		assumptions = new Assumptions();
 		random = new Random();
-		appearances = new Vector<>();
+		actors = new Vector<>();
 	}
 	
 	public void add(Gesture step)
@@ -97,18 +96,18 @@ public class ScriptWorld
 		return assumptions;
 	}
 
-	public void addActor(Entrance entrance)
+	public void addActor(Appearance<? extends Actor> appearance)
 	{
-		appearances.add(entrance);
+		actors.add(appearance);
 	}
 	
-	public void removeActor(Entrance entrance)
+	public void removeActor(Appearance<? extends Actor> appearance)
 	{
-		appearances.remove(entrance);
+		actors.remove(appearance);
 	}
 
-	public Vector<Entrance> entrances()
+	public Vector<Appearance<? extends Actor>> entrances()
 	{
-		return appearances;
+		return actors;
 	}
 }

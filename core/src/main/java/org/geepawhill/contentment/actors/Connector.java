@@ -12,7 +12,6 @@ import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
-import javafx.scene.Group;
 import javafx.scene.transform.Rotate;
 
 public class Connector extends GenericActor

@@ -137,11 +137,11 @@ public abstract class ScriptBuilder<SUBCLASS>
 	public SUBCLASS fadeOut()
 	{
 		buildChord();
-		for(Entrance entrance : world.entrances())
+		for(Appearance<? extends Actor> appearance : world.entrances())
 		{
 			world.push(new Phrase());
-			world.add(new AtomStep(Timing.ms(500d),new Fader(entrance, 0)));
-			world.add(new AtomStep(Timing.instant(),new Exit(entrance)));
+			world.add(new AtomStep(Timing.ms(500d),new Fader(appearance, 0)));
+			world.add(new AtomStep(Timing.instant(),new Exit(appearance)));
 			world.popAndAppend();
 		}
 		world.entrances().clear();
