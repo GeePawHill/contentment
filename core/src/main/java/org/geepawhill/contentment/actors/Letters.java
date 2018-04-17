@@ -22,7 +22,7 @@ public class Letters extends GenericActor implements Actor
 	private Bezier eastHalfBezier;
 	private Bezier westHalfBezier;
 
-	public Letters(ScriptWorld world, String source, Group destination)
+	public Letters(ScriptWorld world, Group destination, String source)
 	{
 		super(world);
 		this.northJiggler = new Jiggler(.5d, 6d);

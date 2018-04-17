@@ -10,6 +10,7 @@ import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.timing.Timing;
 
+import javafx.scene.Group;
 import javafx.scene.paint.Color;
 
 public class Cross extends GenericActor
@@ -21,25 +22,26 @@ public class Cross extends GenericActor
 	private double xsize;
 	private double ysize;
 	private Point offset;
+	private Format crossFormat;
 	
-	public Cross(ScriptWorld world, Appearance<? extends Actor> target, double size)
+	public Cross(ScriptWorld world, Group destination, Appearance<? extends Actor> target, double size)
 	{
-		this(world,target.entrance(),size,size, new Point(0,0));
+		this(world,destination,target.entrance(),size, size, new Point(0,0));
 	}
 
-	public Cross(ScriptWorld world, GroupSource target, double xsize, double ysize, double xoffset, double yoffset)
+	public Cross(ScriptWorld world, Group destination, GroupSource target, double xsize, double ysize, double xoffset, double yoffset)
 	{
-		this(world,target,xsize,ysize,new Point(xoffset,yoffset));
+		this(world,destination,target,xsize,ysize, new Point(xoffset,yoffset));
 	}
 
-	public Cross(ScriptWorld world, GroupSource target, double xsize, double ysize, Point offset)
+	public Cross(ScriptWorld world, Group destination, GroupSource target, double xsize, double ysize, Point offset)
 	{
 		super(world);
 		this.target = target;
 		this.xsize = xsize;
 		this.ysize = ysize;
 		this.offset = offset;
-		Format crossFormat = new Format(Frames.frame(Color.RED, 7d, .7d));
+		crossFormat = new Format(Frames.frame(Color.RED, 7d, .7d));
 		leftToRight = new Mark(entrance(),this::leftToRightBezier);
 		rightToLeft = new Mark(entrance(),this::rightToLeftBezier);
 	}
@@ -47,6 +49,8 @@ public class Cross extends GenericActor
 	@Override
 	public Cross draw(double ms)
 	{
+		leftToRight.format(crossFormat);
+		rightToLeft.format(crossFormat);
 		Timed timed = new Timed(ms);
 		timed.add(Timing.weighted(.5),leftToRight);
 		timed.add(Timing.weighted(.5),rightToLeft);

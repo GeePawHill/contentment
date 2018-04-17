@@ -102,7 +102,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 
 	public Appearance<Letters> letters(String source)
 	{
-		return new Appearance<>(world, new Letters(world, source, new Group()));
+		return new Appearance<>(world, new Letters(world, new Group(), source));
 	}
 
 	public Appearance<Marks> stroke(int fromX, int fromY, int toX, int toY)
@@ -112,7 +112,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 
 	public Appearance<Cross> cross(String name, double xsize, double ysize, double xoffset, double yoffset)
 	{
-		return new Appearance<>(world, new Cross(world, actor(name).entrance(), xsize, ysize, xoffset, yoffset));
+		return new Appearance<>(world, new Cross(world, new Group(), actor(name).entrance(), xsize, ysize, xoffset, yoffset));
 	}
 
 	public Appearance<Marks> stroke(PointPair points)
@@ -127,7 +127,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 
 	public Appearance<Connector> connector()
 	{
-		return new Appearance<>(world, new Connector(world));
+		return new Appearance<>(world, new Connector(world, new Group()));
 	}
 
 	public SUBCLASS wipe()

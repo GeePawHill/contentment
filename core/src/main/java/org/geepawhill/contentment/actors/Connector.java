@@ -12,6 +12,7 @@ import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
+import javafx.scene.Group;
 import javafx.scene.transform.Rotate;
 
 public class Connector extends GenericActor
@@ -47,7 +48,7 @@ public class Connector extends GenericActor
 
 	private Point toPoint;
 
-	public Connector(ScriptWorld world)
+	public Connector(ScriptWorld world, Group destination)
 	{
 		super(world);
 		this.fromGroup = GroupSource.NONE;
