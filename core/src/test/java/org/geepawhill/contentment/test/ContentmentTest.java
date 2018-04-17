@@ -54,9 +54,7 @@ public class ContentmentTest
 			}
 		});
 
-		System.out.println("javafx initialising...");
 		latch.await();
-		System.out.println("javafx is initialised in " + (System.currentTimeMillis() - timeMillis) + "ms");
 		javaFxRunning = true;
 	}
 

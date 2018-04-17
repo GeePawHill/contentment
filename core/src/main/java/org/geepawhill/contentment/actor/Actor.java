@@ -1,10 +1,11 @@
 package org.geepawhill.contentment.actor;
 
+import org.geepawhill.contentment.core.GroupSource;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.fragments.Entrance;
 import org.geepawhill.contentment.position.Position;
 
-public interface Actor
+public interface Actor extends GroupSource
 {
 	Entrance entrance();
 	void format(Format format);

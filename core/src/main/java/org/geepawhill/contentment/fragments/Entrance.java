@@ -15,9 +15,9 @@ public class Entrance implements Fragment, GroupSource
 {
 	private Group group;
 
-	public Entrance()
+	public Entrance(Group group)
 	{
-		this.group = new Group();
+		this.group = group;
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
 import org.geepawhill.contentment.utility.Names;
 
+import javafx.scene.Group;
 import javafx.scene.transform.Rotate;
 
 public class Connector extends GenericActor
@@ -67,7 +68,7 @@ public class Connector extends GenericActor
 		arrowheadAtFrom = withHead;
 		return this;
 	}
-
+	
 	public Connector from(String actorName, boolean withHead)
 	{
 		return from(world.actor(actorName).entrance(), withHead);
@@ -103,11 +104,6 @@ public class Connector extends GenericActor
 	public void format(Format format)
 	{
 		this.format = format;
-	}
-
-	public String nickname()
-	{
-		return nickname;
 	}
 
 	private Bezier getMainBezier()

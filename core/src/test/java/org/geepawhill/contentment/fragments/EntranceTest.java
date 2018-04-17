@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.geepawhill.contentment.core.Context;
 import org.junit.*;
 
+import javafx.scene.Group;
+
 public class EntranceTest
 {
 	private Context context;
@@ -17,7 +19,7 @@ public class EntranceTest
 	@Test
 	public void addsNewGroup()
 	{
-		Entrance entrance = new Entrance( );
+		Entrance entrance = new Entrance(new Group() );
 		entrance.prepare(context);
 		entrance.interpolate(context, 1);
 		assertThat(context.canvas.getChildren().contains(entrance.group())).isTrue();
@@ -26,7 +28,7 @@ public class EntranceTest
 	@Test
 	public void isInstant()
 	{
-		Entrance entrance = new Entrance();
+		Entrance entrance = new Entrance(new Group());
 		entrance.prepare(context);
 		assertThat(entrance.interpolate(context, .1)).isFalse();
 	}

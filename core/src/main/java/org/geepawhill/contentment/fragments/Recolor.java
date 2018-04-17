@@ -14,12 +14,12 @@ import javafx.scene.paint.Paint;
 public class Recolor implements Fragment
 {
 
-	private GroupSource actor;
+	private GroupSource target;
 	private Paint paint;
 
-	public Recolor(GroupSource actor, Paint paint)
+	public Recolor(GroupSource target, Paint paint)
 	{
-		this.actor = actor;
+		this.target = target;
 		this.paint = paint;
 	}
 
@@ -32,7 +32,7 @@ public class Recolor implements Fragment
 	public boolean interpolate(Context context, double fraction)
 	{
 		ColorChanger colorChanger = new ColorChanger(paint);
-		JfxUtility.forEachDescendant(actor.group(), colorChanger);
+		JfxUtility.forEachDescendant(target.group(), colorChanger);
 		return false;
 	}
 }

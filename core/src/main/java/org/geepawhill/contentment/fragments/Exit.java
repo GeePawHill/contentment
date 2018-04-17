@@ -11,11 +11,11 @@ import org.geepawhill.contentment.core.*;
  */
 public class Exit implements Fragment
 {
-	private GroupSource actor;
+	private GroupSource target;
 
-	public Exit(GroupSource actor)
+	public Exit(GroupSource target)
 	{
-		this.actor = actor;
+		this.target = target;
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class Exit implements Fragment
 	@Override
 	public boolean interpolate(Context context, double fraction)
 	{
-		context.remove(actor);
+		context.remove(target);
 		return false;
 	}
 
