@@ -57,6 +57,11 @@ public class Connector extends GenericActor
 		this.toPoint = new Point(0, 0);
 		this.arrowHeadAtTo = false;
 		this.format = Format.DEFAULT;
+		this.mainStep = new Mark(entrance(), this::getMainBezier);
+		this.fromTopStep = new Mark(entrance(), this::getFromTop);
+		this.fromBottomStep = new Mark(entrance(), this::getFromBottom);
+		this.toTopStep = new Mark(entrance(), this::getToTop);
+		this.toBottomStep = new Mark(entrance(), this::getToBottom);
 		this.nickname = Names.make(getClass());
 	}
 
@@ -152,19 +157,14 @@ public class Connector extends GenericActor
 	{
 		steps = new ArrayList<>();
 		chosenMain = null;
-		mainStep = new Mark(entrance(), this::getMainBezier);
 		if (arrowheadAtFrom)
 		{
-			fromTopStep = new Mark(entrance(), this::getFromTop);
 			steps.add(fromTopStep);
-			fromBottomStep = new Mark(entrance(), this::getFromBottom);
 			steps.add(fromBottomStep);
 		}
 		if (arrowHeadAtTo)
 		{
-			toTopStep = new Mark(entrance(), this::getToTop);
 			steps.add(toTopStep);
-			toBottomStep = new Mark(entrance(), this::getToBottom);
 			steps.add(toBottomStep);
 		}
 		Timed sequence = new Timed(ms);

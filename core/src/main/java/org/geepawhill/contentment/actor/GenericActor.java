@@ -24,6 +24,6 @@ public abstract class GenericActor implements Actor
 	
 	public Group group()
 	{
-		return this.group;
+		return group;
 	}
 }

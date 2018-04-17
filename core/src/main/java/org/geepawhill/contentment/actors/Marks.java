@@ -21,7 +21,7 @@ public class Marks extends GenericActor
 		int next = 0;
 		for (Bezier bezier : beziers)
 		{
-			marks[next++] = new Mark(() -> destination, () -> bezier);
+			marks[next++] = new Mark(entrance(), () -> bezier);
 		}
 	}
 
