@@ -9,6 +9,7 @@ import org.geepawhill.contentment.geometry.PointPair;
 import org.geepawhill.contentment.position.TopLeft;
 import org.geepawhill.contentment.style.TypeFace;
 
+import javafx.scene.Group;
 import javafx.scene.text.Text;
 
 public class Flow
@@ -60,7 +61,7 @@ public class Flow
 	{
 		Line line = lines.get(i);
 		TopLeft position = new TopLeft(line.layout.from);
-		Letters result = new Letters(world,line.text);
+		Letters result = new Letters(world,line.text, new Group());
 		return new Appearance<Letters>(world, result).format(table.get(line.size, line.color)).at(position);
 	}
 

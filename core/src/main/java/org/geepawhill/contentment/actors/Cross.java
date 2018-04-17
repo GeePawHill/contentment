@@ -40,8 +40,8 @@ public class Cross extends GenericActor
 		this.ysize = ysize;
 		this.offset = offset;
 		Format crossFormat = new Format(Frames.frame(Color.RED, 7d, .7d));
-		leftToRight = new Mark(entrance(),this::leftToRightBezier, crossFormat);
-		rightToLeft = new Mark(entrance(),this::rightToLeftBezier, crossFormat);
+		leftToRight = new Mark(entrance(),this::leftToRightBezier);
+		rightToLeft = new Mark(entrance(),this::rightToLeftBezier);
 	}
 
 	@Override

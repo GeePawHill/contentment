@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.geepawhill.contentment.test.ContentmentAssertions.assertThat;
 
 import org.geepawhill.contentment.core.*;
-import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.geometry.*;
 import org.junit.*;
 
@@ -27,7 +26,7 @@ public class MarkTest
 	@Test
 	public void addsPath()
 	{
-		Mark mark = new Mark(GroupSource.value(group), BezierSource.value(bezier), Format.DEFAULT);
+		Mark mark = new Mark(GroupSource.value(group), BezierSource.value(bezier));
 		mark.prepare(context);
 		assertThat(group.getChildren().size()).isEqualTo(1);
 	}
@@ -35,7 +34,7 @@ public class MarkTest
 	@Test
 	public void addsTwoStepPath()
 	{
-		Mark mark = new Mark(GroupSource.value(group), BezierSource.value(bezier), Format.DEFAULT);
+		Mark mark = new Mark(GroupSource.value(group), BezierSource.value(bezier));
 		mark.prepare(context);
 		assertThat(group.getChildren().size()).isEqualTo(1);
 		Path path = (Path) group.getChildren().get(0);
@@ -47,7 +46,7 @@ public class MarkTest
 	@Test
 	public void completedPathValues()
 	{
-		Mark mark = new Mark(GroupSource.value(group), BezierSource.value(bezier), Format.DEFAULT);
+		Mark mark = new Mark(GroupSource.value(group), BezierSource.value(bezier));
 		mark.prepare(context);
 		mark.interpolate(context, 1d);
 		Path path = (Path) group.getChildren().get(0);
@@ -60,7 +59,7 @@ public class MarkTest
 	@Test
 	public void partialPathValues()
 	{
-		Mark mark = new Mark(GroupSource.value(group), BezierSource.value(bezier), Format.DEFAULT);
+		Mark mark = new Mark(GroupSource.value(group), BezierSource.value(bezier));
 		mark.prepare(context);
 		mark.interpolate(context, .5d);
 		Path path = (Path) group.getChildren().get(0);

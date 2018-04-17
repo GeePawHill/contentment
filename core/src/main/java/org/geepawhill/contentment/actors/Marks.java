@@ -8,18 +8,20 @@ import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.step.AtomStep;
 import org.geepawhill.contentment.timing.Timing;
 
+import javafx.scene.Group;
+
 public class Marks extends GenericActor
 {
 	private final Mark[] marks;
 
-	public Marks(ScriptWorld world, Bezier... beziers)
+	public Marks(ScriptWorld world, Group destination, Bezier... beziers)
 	{
 		super(world);
 		this.marks = new Mark[beziers.length];
 		int next = 0;
 		for (Bezier bezier : beziers)
 		{
-			marks[next++] = new Mark(entrance(), () -> bezier, Format.DEFAULT);
+			marks[next++] = new Mark(() -> destination, () -> bezier);
 		}
 	}
 
@@ -44,13 +46,13 @@ public class Marks extends GenericActor
 
 	public static Marks makeBox(ScriptWorld world, PointPair points)
 	{
-		return new Marks(world, jiggle(world, points.northLine()), jiggle(world, points.eastLine()),
-				jiggle(world, points.southLine()), jiggle(world, points.westLine()));
+		return new Marks(world, new Group(), jiggle(world, points.northLine()),
+				jiggle(world, points.eastLine()), jiggle(world, points.southLine()), jiggle(world, points.westLine()));
 	}
 
 	public static Marks makeLine(ScriptWorld world, PointPair points)
 	{
-		return new Marks(world, jiggle(world, points));
+		return new Marks(world, new Group(), jiggle(world, points));
 	}
 
 	private static Bezier jiggle(ScriptWorld world, PointPair points)

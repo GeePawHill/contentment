@@ -10,6 +10,8 @@ import org.geepawhill.contentment.player.*;
 import org.geepawhill.contentment.rhythm.*;
 import org.geepawhill.contentment.timing.Timing;
 
+import javafx.scene.Group;
+
 public abstract class ScriptBuilder<SUBCLASS>
 {
 
@@ -100,7 +102,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 
 	public Appearance<Letters> letters(String source)
 	{
-		return new Appearance<>(world, new Letters(world, source));
+		return new Appearance<>(world, new Letters(world, source, new Group()));
 	}
 
 	public Appearance<Marks> stroke(int fromX, int fromY, int toX, int toY)

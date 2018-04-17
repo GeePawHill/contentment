@@ -8,6 +8,8 @@ import org.geepawhill.contentment.position.*;
 import org.geepawhill.contentment.step.Timed;
 import org.geepawhill.contentment.timing.Timing;
 
+import javafx.scene.Group;
+
 public class Letters extends GenericActor implements Actor
 {
 	private Type letters;
@@ -20,15 +22,15 @@ public class Letters extends GenericActor implements Actor
 	private Bezier eastHalfBezier;
 	private Bezier westHalfBezier;
 
-	public Letters(ScriptWorld world, String source)
+	public Letters(ScriptWorld world, String source, Group destination)
 	{
 		super(world);
 		this.northJiggler = new Jiggler(.5d, 6d);
 		this.controlJiggler = new Jiggler(.4d, 30d);
 
 		this.letters = new Type(entrance(), source, Format.DEFAULT, Position.DEFAULT);
-		this.east = new Mark(entrance(), this::eastHalfPoints, Format.DEFAULT);
-		this.west = new Mark(entrance(), this::westHalfPoints, Format.DEFAULT);
+		this.east = new Mark(entrance(), this::eastHalfPoints);
+		this.west = new Mark(entrance(), this::westHalfPoints);
 	}
 
 	public Letters withOval()

@@ -8,11 +8,13 @@ public abstract class GenericActor implements Actor
 {
 	protected final ScriptWorld world;
 	protected final Entrance entrance;
+	protected final Group group;
 
 	public GenericActor(ScriptWorld world)
 	{
 		this.world = world;
-		this.entrance = new Entrance(new Group());
+		this.group = new Group();
+		this.entrance = new Entrance(this.group);
 	}
 	
 	public Entrance entrance()
@@ -22,6 +24,6 @@ public abstract class GenericActor implements Actor
 	
 	public Group group()
 	{
-		return entrance().group();
+		return this.group;
 	}
 }

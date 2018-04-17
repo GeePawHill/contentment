@@ -22,17 +22,12 @@ public class Mark implements Fragment
 	private final GroupSource owner;
 	private Format format;
 
-	public Mark(GroupSource owner, BezierSource source, Format format)
+	public Mark(GroupSource owner, BezierSource source)
 	{
 		this.owner = owner;
 		this.source = source;
 		this.path = new Path();
-		this.format = format;
-	}
-
-	public Mark(GroupSource owner, Format format, PointPair points)
-	{
-		this(owner, () -> new Bezier(points), format);
+		this.format = Format.DEFAULT;
 	}
 
 	@Override
