@@ -53,17 +53,16 @@ public class Connector implements Actor
 	protected final Entrance entrance;
 
 	protected final Group group;
+	
+	private final ConnectorPoints connectorPoints;
 
 	public Connector(ScriptWorld world, Group destination)
 	{
 		this.world = world;
 		this.group = new Group();
 		this.entrance = new Entrance(group);
-		this.fromGroup = GroupSource.NONE;
-		this.fromPoint = new Point(0, 0);
+		this.connectorPoints = new ConnectorPoints(world);
 		this.arrowheadAtFrom = false;
-		this.toGroup = GroupSource.NONE;
-		this.toPoint = new Point(0, 0);
 		this.arrowHeadAtTo = false;
 		this.format = Format.DEFAULT;
 		this.mainStep = new Mark(entrance(), this::getMainBezier);
@@ -76,8 +75,7 @@ public class Connector implements Actor
 
 	public Connector from(Point target, boolean withHead)
 	{
-		fromGroup = GroupSource.NONE;
-		fromPoint = target;
+		connectorPoints.from(target, withHead);
 		arrowheadAtFrom = withHead;
 		return this;
 	}
@@ -89,15 +87,14 @@ public class Connector implements Actor
 
 	public Connector from(GroupSource from, boolean withHead)
 	{
-		this.fromGroup = from;
+		connectorPoints.from(from, withHead);
 		this.arrowheadAtFrom = withHead;
 		return this;
 	}
 
 	public Connector to(Point target, boolean withHead)
 	{
-		this.toGroup = GroupSource.NONE;
-		this.toPoint = target;
+		connectorPoints.to(target,withHead);
 		this.arrowHeadAtTo = withHead;
 		return this;
 	}
@@ -109,7 +106,7 @@ public class Connector implements Actor
 
 	public Connector to(GroupSource to, boolean withHead)
 	{
-		this.toGroup = to;
+		connectorPoints.to(to,withHead);
 		this.arrowHeadAtTo = withHead;
 		return this;
 	}
@@ -117,6 +114,12 @@ public class Connector implements Actor
 	public void format(Format format)
 	{
 		this.format = format;
+		this.mainStep.format(format);
+		this.fromTopStep.format(format);
+		this.fromBottomStep.format(format);
+		this.toTopStep.format(format);
+		this.toBottomStep.format(format);
+		
 	}
 
 	private Bezier getMainBezier()
@@ -188,37 +191,84 @@ public class Connector implements Actor
 
 	public ArrowPoints compute()
 	{
-		PointPair main = computeMainLine();
+		PointPair main = connectorPoints.computeMainLine();
 		return makeArrowPoints(main);
 	}
-
-	private PointPair computeMainLine()
+	
+	public static class ConnectorPoints
 	{
-		PointPair startLine = guessStartLine();
-		PointPair main = new PointPair(adjustFromIfGroup(startLine), adjustToIfGroup(startLine));
-		return main;
-	}
+		
+		private GroupSource fromGroup;
+		private Point fromPoint;
+		private GroupSource toGroup;
+		private Point toPoint;
+		private ScriptWorld world;
+		
+		public ConnectorPoints(ScriptWorld world)
+		{
+			this.world = world;
+			this.fromGroup = GroupSource.NONE;
+			this.fromPoint = new Point(0, 0);
+			this.toGroup = GroupSource.NONE;
+			this.toPoint = new Point(0, 0);
+		}
+		
+		public PointPair computeMainLine()
+		{
+			PointPair startLine = guessStartLine();
+			PointPair main = new PointPair(adjustFromIfGroup(startLine), adjustToIfGroup(startLine));
+			return main;
+		}
 
-	private Point adjustToIfGroup(PointPair startLine)
-	{
-		if (toGroup == GroupSource.NONE) return startLine.to;
-		PointPair toGrown = new PointPair(toGroup.group());
-		return toGrown.quadIntersects(startLine);
-	}
+		public void from(Point target, boolean withHead)
+		{
+			fromGroup = GroupSource.NONE;
+			fromPoint = target;
+		}
+		
+		public void from(String actorName, boolean withHead)
+		{
+			from(world.actor(actorName).entrance(), withHead);
+		}
 
-	private Point adjustFromIfGroup(PointPair startLine)
-	{
-		if (fromGroup == GroupSource.NONE) return startLine.from;
-		PointPair fromGrown = new PointPair(fromGroup.group());
-		return fromGrown.quadIntersects(startLine);
-	}
+		public void from(GroupSource from, boolean withHead)
+		{
+			this.fromGroup = from;
+		}
 
-	private PointPair guessStartLine()
-	{
-		Point fromCenter = fromGroup == GroupSource.NONE ? fromPoint : new PointPair(fromGroup.group()).center();
-		Point toCenter = toGroup == GroupSource.NONE ? toPoint : new PointPair(toGroup.group()).center();
-		PointPair startLine = new PointPair(fromCenter, toCenter);
-		return startLine;
+		public void to(Point target, boolean withHead)
+		{
+			this.toGroup = GroupSource.NONE;
+			this.toPoint = target;
+		}
+		
+		public void to(GroupSource to, boolean withHead)
+		{
+			this.toGroup = to;
+		}
+		
+		private Point adjustToIfGroup(PointPair startLine)
+		{
+			if (toGroup == GroupSource.NONE) return startLine.to;
+			PointPair toGrown = new PointPair(toGroup.group());
+			return toGrown.quadIntersects(startLine);
+		}
+
+		private Point adjustFromIfGroup(PointPair startLine)
+		{
+			if (fromGroup == GroupSource.NONE) return startLine.from;
+			PointPair fromGrown = new PointPair(fromGroup.group());
+			return fromGrown.quadIntersects(startLine);
+		}
+
+		private PointPair guessStartLine()
+		{
+			Point fromCenter = fromGroup == GroupSource.NONE ? fromPoint : new PointPair(fromGroup.group()).center();
+			Point toCenter = toGroup == GroupSource.NONE ? toPoint : new PointPair(toGroup.group()).center();
+			PointPair startLine = new PointPair(fromCenter, toCenter);
+			return startLine;
+		}
+		
 	}
 
 	private ArrowPoints makeArrowPoints(PointPair target)
