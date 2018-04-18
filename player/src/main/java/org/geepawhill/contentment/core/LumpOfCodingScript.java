@@ -315,7 +315,7 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript>
 
 		sync(12);
 		Appearance<Connector> programmingLine = connector();
-		programmingLine.actor.from(programmingBefore, false).to(programmingAfterBounds.west(), true);
+		programmingLine.actor.from(programmingBefore).to(programmingAfterBounds.west(), true);
 		programmingLine.sketch();
 		letters("Doubled").at(new AboveCenter(programmingLine, 20d)).appear();
 
@@ -338,6 +338,7 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript>
 		Appearance<Marks> gakAfter = box(gakAfterBounds);
 		gakAfter.sketch(2000);
 		assume(emphaticSmall);
+		
 		sync(8);
 		Appearance<Connector> gakLine = connector();
 		gakLine.actor.from(gakBefore, false).to(gakAfterBounds.west(), true);

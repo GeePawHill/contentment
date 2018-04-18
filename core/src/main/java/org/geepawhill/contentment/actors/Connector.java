@@ -51,21 +51,41 @@ public class Connector implements Actor
 		this.toBottomStep = new Mark(entrance(), this::getToBottom);
 	}
 
+	public Connector from(Point target)
+	{
+		return from(target,false);
+	}
+
 	public Connector from(Point target, boolean withHead)
 	{
 		connectorPoints.from(target, withHead);
 		return this;
 	}
-	
-	public Connector from(String actorName, boolean withHead)
+
+	public Connector from(String target)
 	{
-		return from(world.actor(actorName).entrance(), withHead);
+		return from(target,false);
 	}
 
-	public Connector from(GroupSource from, boolean withHead)
+	public Connector from(String target, boolean withHead)
 	{
-		connectorPoints.from(from, withHead);
+		return from(world.actor(target).entrance(), withHead);
+	}
+	
+	public Connector from(GroupSource target)
+	{
+		return from(target,false);
+	}
+
+	public Connector from(GroupSource target, boolean withHead)
+	{
+		connectorPoints.from(target, withHead);
 		return this;
+	}
+	
+	public Connector to(Point target)
+	{
+		return to(target,false);
 	}
 
 	public Connector to(Point target, boolean withHead)
@@ -73,15 +93,25 @@ public class Connector implements Actor
 		connectorPoints.to(target,withHead);
 		return this;
 	}
-
-	public Connector to(String actorName, boolean withHead)
+	
+	public Connector to(String target)
 	{
-		return to(world.actor(actorName).entrance(), withHead);
+		return to(target,false);
 	}
 
-	public Connector to(GroupSource to, boolean withHead)
+	public Connector to(String target, boolean withHead)
 	{
-		connectorPoints.to(to,withHead);
+		return to(world.actor(target).entrance(), withHead);
+	}
+
+	public Connector to(GroupSource target)
+	{
+		return to(target,false);
+	}
+	
+	public Connector to(GroupSource target, boolean withHead)
+	{
+		connectorPoints.to(target,withHead);
 		return this;
 	}
 
