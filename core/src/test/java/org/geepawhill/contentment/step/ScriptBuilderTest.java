@@ -14,7 +14,7 @@ public class ScriptBuilderTest
 	{
 		public ArrayList<Gesture> gestures()
 		{
-			return playables;
+			return gestures;
 		}
 	}
 	

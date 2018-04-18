@@ -43,7 +43,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 		lastScene = beat;
 		lastStall = beat;
 		buildPhrase();
-		addToWorking(new AtomStep(Timing.ms(30000), new Sync(beat * 1000)));
+		addToWorking(new Single(Timing.ms(30000), new Sync(beat * 1000)));
 	}
 
 	public void end()
@@ -57,7 +57,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 	{
 		if (lastScene == -1) throw new RuntimeException("end() called with no scene.");
 		lastStall += beat;
-		addToWorking(new AtomStep(Timing.ms(30000), new Sync(lastStall * 1000)));
+		addToWorking(new Single(Timing.ms(30000), new Sync(lastStall * 1000)));
 	}
 
 	protected void addToWorking(Gesture step)
@@ -132,7 +132,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 
 	public SUBCLASS wipe()
 	{
-		world.add(new AtomStep(Timing.instant(), new Wipe()));
+		world.add(new Single(Timing.instant(), new Wipe()));
 		return downcast();
 	}
 	
@@ -142,8 +142,8 @@ public abstract class ScriptBuilder<SUBCLASS>
 		for(Appearance<? extends Actor> appearance : world.entrances())
 		{
 			world.push(new Phrase());
-			world.add(new AtomStep(Timing.ms(500d),new Fader(appearance, 0)));
-			world.add(new AtomStep(Timing.instant(),new Exit(appearance)));
+			world.add(new Single(Timing.ms(500d),new Fader(appearance, 0)));
+			world.add(new Single(Timing.instant(),new Exit(appearance)));
 			world.popAndAppend();
 		}
 		world.entrances().clear();

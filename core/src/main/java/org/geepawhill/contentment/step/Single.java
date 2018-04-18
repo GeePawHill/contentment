@@ -3,34 +3,33 @@ package org.geepawhill.contentment.step;
 import org.geepawhill.contentment.core.*;
 import org.geepawhill.contentment.timing.Timing;
 
-public class AtomStep implements Gesture
+public class Single implements Gesture
 {
-	
-	private Fragment atom;
+	private Fragment fragment;
 	private Timing timing;
 
-	public AtomStep(Timing timing,Fragment atom)
+	public Single(Timing timing,Fragment fragment)
 	{
 		this.timing = timing;
-		this.atom = atom;
+		this.fragment = fragment;
 	}
 
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		new FragmentTransition((long)timing.ms(), atom, context, onFinished).play();
+		new FragmentTransition((long)timing.ms(), fragment, context, onFinished).play();
 	}
 
 	@Override
 	public void fast(Context context)
 	{
-		atom.prepare(context);
-		atom.interpolate(context, 1d);
+		fragment.prepare(context);
+		fragment.interpolate(context, 1d);
 	}
 	
 	@Override
 	public String toString()
 	{
-		return atom.toString();
+		return fragment.toString();
 	}
 }

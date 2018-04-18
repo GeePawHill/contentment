@@ -37,7 +37,7 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 	
 	public Appearance<ACTOR> sketch(double time)
 	{
-		world.add(new AtomStep(Timing.instant(),entrance));
+		world.add(new Single(Timing.instant(),entrance));
 		world.addActor(this);
 		actor.draw(time);
 		return this;
@@ -45,7 +45,7 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 	
 	public Appearance<ACTOR> appear()
 	{
-		world.add(new AtomStep(Timing.instant(),entrance));
+		world.add(new Single(Timing.instant(),entrance));
 		world.addActor(this);
 		actor.draw(1d);
 		return this;
@@ -54,7 +54,7 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 	public Appearance<ACTOR> disappear()
 	{
 		world.removeActor(this);
-		world.add(new AtomStep(Timing.instant(),new Exit(entrance)));
+		world.add(new Single(Timing.instant(),new Exit(entrance)));
 		return this;
 	}
 
@@ -66,13 +66,13 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 	
 	public Appearance<ACTOR> reColor(Paint paint)
 	{
-		world.add(new AtomStep(Timing.instant(),new Recolor(entrance, paint)));
+		world.add(new Single(Timing.instant(),new Recolor(entrance, paint)));
 		return this;
 	}
 	
 	public Appearance<ACTOR> fadeDown()
 	{
-		world.add(new AtomStep(Timing.ms(500),new Fader(entrance, 0)));
+		world.add(new Single(Timing.ms(500),new Fader(entrance, 0)));
 		return this;
 	}
 	
@@ -80,8 +80,8 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 	{
 		world.removeActor(this);
 		world.push(new Phrase());
-		world.add(new AtomStep(Timing.ms(500d),new Fader(entrance, 0)));
-		world.add(new AtomStep(Timing.instant(),new Exit(entrance)));
+		world.add(new Single(Timing.ms(500d),new Fader(entrance, 0)));
+		world.add(new Single(Timing.instant(),new Exit(entrance)));
 		world.popAndAppend();
 		return this;
 	}
@@ -90,17 +90,17 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 	{
 		world.addActor(this);
 		world.push(new Phrase());
-		world.add(new AtomStep(Timing.instant(),entrance));
-		world.add(new AtomStep(Timing.instant(),new Fader(entrance, 0)));
+		world.add(new Single(Timing.instant(),entrance));
+		world.add(new Single(Timing.instant(),new Fader(entrance, 0)));
 		actor.draw(1d);
-		world.add(new AtomStep(Timing.ms(500d),new Fader(entrance,1)));
+		world.add(new Single(Timing.ms(500d),new Fader(entrance,1)));
 		world.popAndAppend();
 		return this;
 	}
 	
 	public Appearance<ACTOR> fadeUp()
 	{
-		world.add(new AtomStep(Timing.ms(500d),new Fader(entrance,1)));
+		world.add(new Single(Timing.ms(500d),new Fader(entrance,1)));
 		return this;
 	}
 	

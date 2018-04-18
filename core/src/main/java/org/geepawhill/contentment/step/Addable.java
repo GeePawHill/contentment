@@ -5,7 +5,7 @@ import org.geepawhill.contentment.core.Gesture;
 public interface Addable extends Gesture
 {
 
-	Addable add(Gesture Step);
+	Addable add(Gesture gesture);
 	void dump();
 
 }

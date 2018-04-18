@@ -5,7 +5,7 @@ import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.fragments.Mark;
 import org.geepawhill.contentment.geometry.*;
 import org.geepawhill.contentment.position.Position;
-import org.geepawhill.contentment.step.AtomStep;
+import org.geepawhill.contentment.step.Single;
 import org.geepawhill.contentment.timing.Timing;
 
 import javafx.scene.Group;
@@ -39,7 +39,7 @@ public class Marks extends GenericActor
 	{
 		for (Mark curve : marks)
 		{
-			world.add(new AtomStep(Timing.ms(ms / marks.length), curve));
+			world.add(new Single(Timing.ms(ms / marks.length), curve));
 		}
 		return this;
 	}

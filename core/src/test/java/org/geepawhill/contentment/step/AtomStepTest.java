@@ -14,7 +14,7 @@ public class AtomStepTest extends ContentmentTest
 	public void slowTest()
 	{
 		TestAtom atom = new TestAtom();
-		AtomStep step = new AtomStep(Timing.ms(40d),atom);
+		Single step = new Single(Timing.ms(40d),atom);
 		runner.slow(step);
 		assertThat(atom.fractions.size()).isGreaterThan(2);
 		assertThat(atom.fractions).contains(0d,1d);
@@ -24,7 +24,7 @@ public class AtomStepTest extends ContentmentTest
 	public void fastTest()
 	{
 		TestAtom atom = new TestAtom();
-		AtomStep step = new AtomStep(Timing.ms(40d),atom);
+		Single step = new Single(Timing.ms(40d),atom);
 		runner.slow(step);
 		assertThat(atom.fractions).contains(0d,1d);
 	}

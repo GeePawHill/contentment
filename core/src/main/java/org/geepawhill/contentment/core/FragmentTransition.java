@@ -14,10 +14,10 @@ public class FragmentTransition extends Transition
 	 * Create a FragmentTransition that lasts ms long (minimum 1), playing the
 	 * Fragment against the Context, then calling the OnFinished callback.
 	 * 
-	 * @param ms
-	 * @param fragment
-	 * @param context
-	 * @param onFinished
+	 * @param ms -- desired milliseconds
+	 * @param fragment -- fragment to interpolate across the time
+	 * @param context -- context in which to do the fragment
+	 * @param onFinished -- callback for when it's done
 	 */
 	public FragmentTransition(long ms, Fragment fragment, Context context, OnFinished onFinished)
 	{

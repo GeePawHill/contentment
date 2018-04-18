@@ -6,25 +6,25 @@ import org.geepawhill.contentment.core.*;
 
 public class Chord implements Addable
 {
-	private final ArrayList<Gesture> playables;
+	private final ArrayList<Gesture> gestures;
 	private OnFinished onFinished;
 	private int finished;
 	
 	public Chord()
 	{
-		this.playables = new ArrayList<>();
+		this.gestures = new ArrayList<>();
 	}
 
-	public Chord add(Gesture Step)
+	public Chord add(Gesture gesture)
 	{
-		playables.add(Step);
+		gestures.add(gesture);
 		return this;
 	}
 	
 	@Override
 	public void dump()
 	{
-		for(Gesture step : playables)
+		for(Gesture step : gestures)
 		{
 			System.out.println(step);
 		}
@@ -34,7 +34,7 @@ public class Chord implements Addable
 	@Override
 	public void fast(Context context)
 	{
-		for(Gesture Step : playables)
+		for(Gesture Step : gestures)
 		{
 			Step.fast(context);
 		}
@@ -45,7 +45,7 @@ public class Chord implements Addable
 	{
 		this.onFinished = onFinished;
 		this.finished = 0;
-		for(Gesture Step : playables)
+		for(Gesture Step : gestures)
 		{
 			Step.slow(context, ()->next());
 		}
@@ -54,7 +54,7 @@ public class Chord implements Addable
 	private void next()
 	{
 		finished+=1;
-		if(finished==playables.size()) onFinished.run();
+		if(finished==gestures.size()) onFinished.run();
 	}
 	
 }

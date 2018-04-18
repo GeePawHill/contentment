@@ -7,7 +7,7 @@ import org.geepawhill.contentment.utility.Names;
 
 public class Phrase implements Addable
 {
-	protected final ArrayList<Gesture> playables;
+	protected final ArrayList<Gesture> gestures;
 	private String name;
 	
 	public Phrase()
@@ -18,7 +18,7 @@ public class Phrase implements Addable
 	public Phrase(String name)
 	{
 		this.name = name;
-		this.playables = new ArrayList<>();
+		this.gestures = new ArrayList<>();
 	}
 
 	/* (non-Javadoc)
@@ -27,14 +27,14 @@ public class Phrase implements Addable
 	@Override
 	public Phrase add(Gesture Step)
 	{
-		playables.add(Step);
+		gestures.add(Step);
 		return this;
 	}
 	
 	@Override
 	public void fast(Context context)
 	{
-		for(Gesture step : playables)
+		for(Gesture step : gestures)
 		{
 			step.fast(context);
 		}
@@ -43,7 +43,7 @@ public class Phrase implements Addable
 	@Override
 	public void dump()
 	{
-		for(Gesture step : playables)
+		for(Gesture step : gestures)
 		{
 			System.out.println(step);
 		}
@@ -53,7 +53,7 @@ public class Phrase implements Addable
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		new SlowPlayer(context,onFinished,playables);
+		new SlowPlayer(context,onFinished,gestures);
 	}
 	
 	@Override
