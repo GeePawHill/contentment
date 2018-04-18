@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.geepawhill.contentment.actor.*;
 import org.geepawhill.contentment.core.GroupSource;
 import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.fragments.Mark;
+import org.geepawhill.contentment.fragments.*;
 import org.geepawhill.contentment.geometry.*;
 import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.step.Timed;
@@ -15,7 +15,7 @@ import org.geepawhill.contentment.utility.Names;
 import javafx.scene.Group;
 import javafx.scene.transform.Rotate;
 
-public class Connector extends GenericActor
+public class Connector implements Actor
 {
 	final String nickname;
 
@@ -48,9 +48,17 @@ public class Connector extends GenericActor
 
 	private Point toPoint;
 
+	protected final ScriptWorld world;
+
+	protected final Entrance entrance;
+
+	protected final Group group;
+
 	public Connector(ScriptWorld world, Group destination)
 	{
-		super(world);
+		this.world = world;
+		this.group = new Group();
+		this.entrance = new Entrance(group);
 		this.fromGroup = GroupSource.NONE;
 		this.fromPoint = new Point(0, 0);
 		this.arrowheadAtFrom = false;
@@ -240,5 +248,15 @@ public class Connector extends GenericActor
 	@Override
 	public void at(Position position)
 	{
+	}
+
+	public Entrance entrance()
+	{
+		return entrance;
+	}
+
+	public Group group()
+	{
+		return group;
 	}
 }

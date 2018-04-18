@@ -3,7 +3,7 @@ package org.geepawhill.contentment.actors;
 import org.geepawhill.contentment.actor.*;
 import org.geepawhill.contentment.core.GroupSource;
 import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.fragments.Mark;
+import org.geepawhill.contentment.fragments.*;
 import org.geepawhill.contentment.geometry.*;
 import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.step.Timed;
@@ -13,7 +13,7 @@ import org.geepawhill.contentment.timing.Timing;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 
-public class Cross extends GenericActor
+public class Cross implements Actor
 {
 
 	private GroupSource target;
@@ -23,6 +23,9 @@ public class Cross extends GenericActor
 	private double ysize;
 	private Point offset;
 	private Format crossFormat;
+	protected final ScriptWorld world;
+	protected final Entrance entrance;
+	protected final Group group;
 	
 	public Cross(ScriptWorld world, Group destination, Appearance<? extends Actor> target, double size)
 	{
@@ -36,7 +39,9 @@ public class Cross extends GenericActor
 
 	public Cross(ScriptWorld world, Group destination, GroupSource target, double xsize, double ysize, Point offset)
 	{
-		super(world);
+		this.world = world;
+		this.group = new Group();
+		this.entrance = new Entrance(group);
 		this.target = target;
 		this.xsize = xsize;
 		this.ysize = ysize;
@@ -84,5 +89,15 @@ public class Cross extends GenericActor
 	@Override
 	public void at(Position position)
 	{
+	}
+
+	public Entrance entrance()
+	{
+		return entrance;
+	}
+
+	public Group group()
+	{
+		return group;
 	}
 }

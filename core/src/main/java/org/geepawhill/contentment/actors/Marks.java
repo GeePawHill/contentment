@@ -2,7 +2,7 @@ package org.geepawhill.contentment.actors;
 
 import org.geepawhill.contentment.actor.*;
 import org.geepawhill.contentment.format.Format;
-import org.geepawhill.contentment.fragments.Mark;
+import org.geepawhill.contentment.fragments.*;
 import org.geepawhill.contentment.geometry.*;
 import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.step.Single;
@@ -10,13 +10,18 @@ import org.geepawhill.contentment.timing.Timing;
 
 import javafx.scene.Group;
 
-public class Marks extends GenericActor
+public class Marks implements Actor
 {
 	private final Mark[] marks;
+	protected final ScriptWorld world;
+	protected final Entrance entrance;
+	protected final Group group;
 
 	public Marks(ScriptWorld world, Group destination, Bezier... beziers)
 	{
-		super(world);
+		this.world = world;
+		this.group = new Group();
+		this.entrance = new Entrance(group);
 		this.marks = new Mark[beziers.length];
 		int next = 0;
 		for (Bezier bezier : beziers)
@@ -66,6 +71,16 @@ public class Marks extends GenericActor
 	@Override
 	public void at(Position position)
 	{
+	}
+
+	public Entrance entrance()
+	{
+		return entrance;
+	}
+
+	public Group group()
+	{
+		return group;
 	}
 
 }

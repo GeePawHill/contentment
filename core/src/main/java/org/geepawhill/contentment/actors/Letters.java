@@ -10,7 +10,7 @@ import org.geepawhill.contentment.timing.Timing;
 
 import javafx.scene.Group;
 
-public class Letters extends GenericActor implements Actor
+public class Letters implements Actor
 {
 	private Type letters;
 	private boolean hasOval;
@@ -21,10 +21,15 @@ public class Letters extends GenericActor implements Actor
 	private Mark west;
 	private Bezier eastHalfBezier;
 	private Bezier westHalfBezier;
+	protected final ScriptWorld world;
+	protected final Entrance entrance;
+	protected final Group group;
 
 	public Letters(ScriptWorld world, Group destination, String source)
 	{
-		super(world);
+		this.world = world;
+		this.group = new Group();
+		this.entrance = new Entrance(group);
 		this.northJiggler = new Jiggler(.5d, 6d);
 		this.controlJiggler = new Jiggler(.4d, 30d);
 
@@ -103,6 +108,16 @@ public class Letters extends GenericActor implements Actor
 	
 	public void centered(Point p) {
 		centered(p.x,p.y);
+	}
+
+	public Entrance entrance()
+	{
+		return entrance;
+	}
+
+	public Group group()
+	{
+		return group;
 	}
 
 }
