@@ -79,7 +79,7 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 	public Appearance<ACTOR> fadeOut()
 	{
 		world.removeActor(this);
-		world.push(new Phrase());
+		world.push(Phrase.phrase());
 		world.add(new Single(Timing.ms(500d),new Fader(entrance, 0)));
 		world.add(new Single(Timing.instant(),new Exit(entrance)));
 		world.popAndAppend();
@@ -89,7 +89,7 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 	public Appearance<ACTOR> fadeIn()
 	{
 		world.addActor(this);
-		world.push(new Phrase());
+		world.push(Phrase.phrase());
 		world.add(new Single(Timing.instant(),entrance));
 		world.add(new Single(Timing.instant(),new Fader(entrance, 0)));
 		actor.draw(1d);

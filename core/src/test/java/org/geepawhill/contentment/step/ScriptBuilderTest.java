@@ -12,6 +12,11 @@ public class ScriptBuilderTest
 {
 	static class ExposedPhrase extends Phrase
 	{
+		public ExposedPhrase()
+		{
+			super(null);
+		}
+		
 		public ArrayList<Gesture> gestures()
 		{
 			return gestures;

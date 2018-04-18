@@ -13,6 +13,7 @@ public class TestPhrase extends Phrase
 	
 	public TestPhrase()
 	{
+		super(null);
 		isBefore=true;
 		isPlaying=false;
 	}

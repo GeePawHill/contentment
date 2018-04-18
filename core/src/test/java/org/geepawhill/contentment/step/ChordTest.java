@@ -7,8 +7,8 @@ import org.junit.*;
 
 public class ChordTest
 {
-	private Chord onlyOne;
-	private Chord both;
+	private Phrase onlyOne;
+	private Phrase both;
 	private Context context;
 	private TestGesture one;
 	private TestGesture two;
@@ -23,10 +23,10 @@ public class ChordTest
 		one = new TestGesture();
 		two = new TestGesture();
 
-		onlyOne = new Chord();
+		onlyOne = Phrase.chord();
 		onlyOne.add(one);
 
-		both = new Chord();
+		both = Phrase.chord();
 		both.add(one);
 		both.add(two);
 		

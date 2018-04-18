@@ -28,10 +28,10 @@ public class PhraseTest extends ContentmentTest
 		one = new TestGesture();
 		two = new TestGesture();
 
-		onlyOne = new Phrase();
+		onlyOne = Phrase.phrase();
 		onlyOne.add(one);
 
-		both = new Phrase();
+		both = Phrase.phrase();
 		both.add(one);
 		both.add(two);
 

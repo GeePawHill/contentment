@@ -7,17 +7,23 @@ import org.geepawhill.contentment.utility.Names;
 
 public class Phrase implements Addable
 {
-	protected final ArrayList<Gesture> gestures;
-	private String name;
 	
-	public Phrase()
+	private SlowPlayer player;
+	protected final ArrayList<Gesture> gestures;
+	
+	public static Phrase phrase()
 	{
-		this(Names.make(Phrase.class));
+		return new Phrase(new SequencePlayer());
 	}
 	
-	public Phrase(String name)
+	public static Phrase chord()
 	{
-		this.name = name;
+		return new Phrase(new ChordPlayer());
+	}
+	
+	public Phrase(SlowPlayer player)
+	{
+		this.player = player;
 		this.gestures = new ArrayList<>();
 	}
 
@@ -49,17 +55,9 @@ public class Phrase implements Addable
 		}
 	}
 
-
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		new SlowPlayer(context,onFinished,gestures);
-	}
-	
-	@Override
-	public String toString()
-	{
-		return name;
-	}
-	
+		player.play(context,onFinished,gestures);
+	}	
 }

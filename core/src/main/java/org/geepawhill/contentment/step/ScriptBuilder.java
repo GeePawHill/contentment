@@ -14,7 +14,6 @@ import javafx.scene.Group;
 
 public abstract class ScriptBuilder<SUBCLASS>
 {
-
 	protected ScriptWorld world;
 	protected Script script;
 	protected long lastScene;
@@ -67,7 +66,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 
 	public Phrase makePhrase()
 	{
-		return new Phrase();
+		return Phrase.phrase();
 	}
 
 	public void buildPhrase()
@@ -77,7 +76,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 
 	public void buildChord()
 	{
-		world.push(new Chord());
+		world.push(Phrase.chord());
 	}
 
 	public void endChord()
@@ -141,7 +140,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 		buildChord();
 		for(Appearance<? extends Actor> appearance : world.entrances())
 		{
-			world.push(new Phrase());
+			world.push(Phrase.phrase());
 			world.add(new Single(Timing.ms(500d),new Fader(appearance, 0)));
 			world.add(new Single(Timing.instant(),new Exit(appearance)));
 			world.popAndAppend();
