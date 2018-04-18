@@ -3,9 +3,8 @@ package org.geepawhill.contentment.step;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.*;
-import org.geepawhill.contentment.utility.Names;
 
-public class Phrase implements Addable
+public class Phrase implements Gesture
 {
 	
 	private SlowPlayer player;
@@ -27,10 +26,6 @@ public class Phrase implements Addable
 		this.gestures = new ArrayList<>();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.geepawhill.contentment.step.Addable#add(org.geepawhill.contentment.step.Step)
-	 */
-	@Override
 	public Phrase add(Gesture Step)
 	{
 		gestures.add(Step);
@@ -46,15 +41,6 @@ public class Phrase implements Addable
 		}
 	}
 	
-	@Override
-	public void dump()
-	{
-		for(Gesture step : gestures)
-		{
-			System.out.println(step);
-		}
-	}
-
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{

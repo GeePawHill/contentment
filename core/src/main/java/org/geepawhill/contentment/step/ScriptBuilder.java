@@ -84,7 +84,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 		world.popAndAppend();
 	}
 
-	public Addable endBuild()
+	public Phrase endBuild()
 	{
 		return world.pop();
 	}

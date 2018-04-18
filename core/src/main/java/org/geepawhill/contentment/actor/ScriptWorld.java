@@ -5,11 +5,11 @@ import java.util.*;
 import org.geepawhill.contentment.core.Gesture;
 import org.geepawhill.contentment.format.Assumptions;
 import org.geepawhill.contentment.geometry.Point;
-import org.geepawhill.contentment.step.Addable;
+import org.geepawhill.contentment.step.*;
 
 public class ScriptWorld
 {
-	private Stack<Addable> working;
+	private Stack<Phrase> working;
 	private final HashMap<String,Appearance<? extends Actor>> namedActors;
 	private final Vector<Appearance<? extends Actor>> actors;
 	private final Assumptions assumptions;
@@ -59,19 +59,19 @@ public class ScriptWorld
 		return random.nextDouble();
 	}
 	
-	public void push(Addable addable)
+	public void push(Phrase phrase)
 	{
-		working.push(addable);
+		working.push(phrase);
 	}
 	
-	public Addable pop()
+	public Phrase pop()
 	{
 		return working.pop();
 	}
 	
 	public void popAndAppend()
 	{
-		Addable popped = pop();
+		Phrase popped = pop();
 		add(popped);
 	}
 	
@@ -86,7 +86,7 @@ public class ScriptWorld
 		namedActors.put(name, actor);
 	}
 
-	private Addable getWorking()
+	private Phrase getWorking()
 	{
 		return working.peek();
 	}
