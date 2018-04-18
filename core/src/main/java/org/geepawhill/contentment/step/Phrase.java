@@ -3,24 +3,19 @@ package org.geepawhill.contentment.step;
 import java.util.ArrayList;
 
 import org.geepawhill.contentment.core.*;
-import org.geepawhill.contentment.utility.Names;
 
 public class Phrase implements Addable
 {
 	protected final ArrayList<Gesture> gestures;
-	private String name;
-	
+	private int current;
+	private OnFinished onFinished;
+	private Context context;
+
 	public Phrase()
 	{
-		this(Names.make(Phrase.class));
-	}
-	
-	public Phrase(String name)
-	{
-		this.name = name;
 		this.gestures = new ArrayList<>();
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see org.geepawhill.contentment.step.Addable#add(org.geepawhill.contentment.step.Step)
 	 */
@@ -49,17 +44,35 @@ public class Phrase implements Addable
 		}
 	}
 
-
 	@Override
 	public void slow(Context context, OnFinished onFinished)
 	{
-		new SlowPlayer(context,onFinished,gestures);
+		this.context = context;
+		this.onFinished = onFinished;
+		this.current = 0;
+		if (gestures.isEmpty())
+		{
+			onFinished.run();
+		}
+		else
+		{
+			Gesture step = gestures.get(current);
+			step.slow(context, () -> next());
+		}
 	}
-	
-	@Override
-	public String toString()
+
+	private void next()
 	{
-		return name;
+		current += 1;
+		if (current == gestures.size())
+		{
+			onFinished.run();
+		}
+		else
+		{
+			Gesture step = gestures.get(current);
+			step.slow(context, () -> next());
+		}
 	}
-	
+
 }
