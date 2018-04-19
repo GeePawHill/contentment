@@ -46,7 +46,7 @@ public class LumpOfCodingScript extends ScriptBuilder<LumpOfCodingScript>
 
 	public LumpOfCodingScript()
 	{
-		super(new MediaRhythm(new File("D:\\GeePawHillDotOrg\\videos\\lumpOfCoding\\lumpOfCodingFaceover.mp4")));
+//		super(new MediaRhythm(new File("D:\\GeePawHillDotOrg\\videos\\lumpOfCoding\\lumpOfCodingFaceover.mp4")));
 		// new SimpleRhythm());
 
 		master = new Grid();

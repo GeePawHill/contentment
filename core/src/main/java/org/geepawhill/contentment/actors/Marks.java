@@ -26,7 +26,7 @@ public class Marks implements Actor
 		int next = 0;
 		for (Bezier bezier : beziers)
 		{
-			marks[next++] = new Mark(entrance(), () -> bezier);
+			marks[next++] = new Mark(group, () -> bezier);
 		}
 	}
 

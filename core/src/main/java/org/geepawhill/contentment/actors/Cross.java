@@ -47,8 +47,8 @@ public class Cross implements Actor
 		this.ysize = ysize;
 		this.offset = offset;
 		crossFormat = new Format(Frames.frame(Color.RED, 7d, .7d));
-		leftToRight = new Mark(entrance(),this::leftToRightBezier);
-		rightToLeft = new Mark(entrance(),this::rightToLeftBezier);
+		leftToRight = new Mark(group,this::leftToRightBezier);
+		rightToLeft = new Mark(group,this::rightToLeftBezier);
 	}
 
 	@Override

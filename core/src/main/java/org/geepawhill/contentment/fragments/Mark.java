@@ -6,6 +6,7 @@ import org.geepawhill.contentment.geometry.*;
 import org.geepawhill.contentment.style.Frames;
 import org.geepawhill.contentment.utility.JfxUtility;
 
+import javafx.scene.Group;
 import javafx.scene.shape.Path;
 
 /**
@@ -19,14 +20,13 @@ public class Mark implements Fragment
 {
 	private final Path path;
 	private final BezierSource source;
-	private final GroupSource owner;
 	private Format format;
 
-	public Mark(GroupSource owner, BezierSource source)
+	public Mark(Group owner, BezierSource source)
 	{
-		this.owner = owner;
 		this.source = source;
 		this.path = new Path();
+		owner.getChildren().add(path);
 		this.format = Format.DEFAULT;
 	}
 
@@ -34,7 +34,6 @@ public class Mark implements Fragment
 	public void prepare(Context context)
 	{
 		format.apply(Frames.KEY, path);
-		JfxUtility.addIfNeeded(owner, path);
 		interpolate(context, 0d);
 	}
 
