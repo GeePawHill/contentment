@@ -5,7 +5,7 @@ import org.geepawhill.contentment.core.*;
 import javafx.scene.Group;
 
 /**
- * Makes a group and adds it to the canvas at root, making it available via get for later
+ * Makes a group and adds it to the destination, making it available via get for later
  * manipulators.
  * 
  * @author GeePaw
@@ -15,7 +15,7 @@ public class Entrance implements Fragment, GroupSource
 {
 	private Group group;
 
-	public Entrance(Group group)
+	public Entrance(Group destination, Group group)
 	{
 		this.group = group;
 	}

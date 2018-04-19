@@ -42,7 +42,7 @@ public class Connector implements Actor
 	{
 		this.world = world;
 		this.group = new Group();
-		this.entrance = new Entrance(group);
+		this.entrance = new Entrance(destination, group);
 		this.connectorPoints = new ConnectorPoints(world);
 		this.mainStep = new Mark(group, this::getMainBezier);
 		this.fromTopStep = new Mark(group, this::getFromTop);

@@ -19,7 +19,7 @@ public class EntranceTest
 	@Test
 	public void addsNewGroup()
 	{
-		Entrance entrance = new Entrance(new Group() );
+		Entrance entrance = new Entrance(context.canvas, new Group() );
 		entrance.prepare(context);
 		entrance.interpolate(context, 1);
 		assertThat(context.canvas.getChildren().contains(entrance.group())).isTrue();
@@ -28,7 +28,7 @@ public class EntranceTest
 	@Test
 	public void isInstant()
 	{
-		Entrance entrance = new Entrance(new Group());
+		Entrance entrance = new Entrance(context.canvas, new Group());
 		entrance.prepare(context);
 		assertThat(entrance.interpolate(context, .1)).isFalse();
 	}
