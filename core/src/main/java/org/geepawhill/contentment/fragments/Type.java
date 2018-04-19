@@ -7,6 +7,7 @@ import org.geepawhill.contentment.position.Position;
 import org.geepawhill.contentment.style.TypeFace;
 import org.geepawhill.contentment.utility.JfxUtility;
 
+import javafx.scene.Group;
 import javafx.scene.text.Text;
 
 /**
@@ -19,19 +20,19 @@ public class Type implements Fragment
 {
 	public final String source;
 	private Text text;
-	private GroupSource group;
 	private Format format;
 	private Position position;
 	private String lastPartial;
 	
-	public Type(GroupSource owner, String source)
+	public Type(Group owner, String source)
 	{
 		this(owner,source,Format.DEFAULT,Position.DEFAULT);
 	}
 
-	public Type(GroupSource group, String source, Format format, Position position)
+	public Type(Group owner, String source, Format format, Position position)
 	{
-		this.group = group;
+		this.text = new Text();
+		owner.getChildren().add(text);
 		if (source == null || source.isEmpty()) source = " ";
 		this.source = source;
 		this.format = format;
@@ -53,14 +54,12 @@ public class Type implements Fragment
 	@Override
 	public void prepare(Context context)
 	{
-		this.text = new Text();
 		text.setText(source);
 		format.apply(TypeFace.FACE, text);
 		format.apply(TypeFace.COLOR, text);
 		PointPair dimensions = new PointPair(text.getBoundsInLocal());
 		position.position(text, dimensions);
 		text.setText("");
-		JfxUtility.addIfNeeded(group, text);
 		lastPartial = "";
 	}
 

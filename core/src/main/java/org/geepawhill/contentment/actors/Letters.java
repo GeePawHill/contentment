@@ -33,7 +33,7 @@ public class Letters implements Actor
 		this.northJiggler = new Jiggler(.5d, 6d);
 		this.controlJiggler = new Jiggler(.4d, 30d);
 
-		this.letters = new Type(entrance(), source, Format.DEFAULT, Position.DEFAULT);
+		this.letters = new Type(group, source, Format.DEFAULT, Position.DEFAULT);
 		this.east = new Mark(group, this::eastHalfPoints);
 		this.west = new Mark(group, this::westHalfPoints);
 	}

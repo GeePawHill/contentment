@@ -26,7 +26,7 @@ public class TypeTest extends ContentmentTest
 	@Test
 	public void addsEmptyText()
 	{
-		Type mark = new Type(GroupSource.value(owner), source);
+		Type mark = new Type(owner, source);
 		mark.prepare(context);
 		assertThat(owner.getChildren().size()).isEqualTo(1);
 		Node added = owner.getChildren().get(0);
@@ -38,7 +38,7 @@ public class TypeTest extends ContentmentTest
 	@Test
 	public void completedString()
 	{
-		Type mark = new Type(GroupSource.value(owner), source);
+		Type mark = new Type(owner, source);
 		mark.prepare(context);
 		mark.interpolate(context, 1d);
 		Node added = owner.getChildren().get(0);
@@ -49,7 +49,7 @@ public class TypeTest extends ContentmentTest
 	@Test
 	public void partialString()
 	{
-		Type mark = new Type(GroupSource.value(owner), source);
+		Type mark = new Type(owner, source);
 		mark.prepare(context);
 		mark.interpolate(context, .5d);
 		Node added = owner.getChildren().get(0);
