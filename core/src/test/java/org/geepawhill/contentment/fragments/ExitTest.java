@@ -10,20 +10,19 @@ public class ExitTest
 {
 	private Context context;
 	private Group group;
-	private GroupSource source;
 
 	@Before
 	public void before()
 	{
 		context = new Context();
 		group = new Group();
-		source = GroupSource.VALUE(group);
 	}
 
 	@Test
 	public void removesGroup()
 	{
-		Exit exit = new Exit( source );
+		context.canvas.getChildren().add(group);
+		Exit exit = new Exit( group );
 		exit.prepare(context);
 		exit.interpolate(context, 1);
 		assertThat(context.canvas.getChildren().contains(group)).isFalse();
@@ -32,23 +31,16 @@ public class ExitTest
 	@Test
 	public void isInstant()
 	{
-		Exit exit = new Exit( source );
+		context.canvas.getChildren().add(group);
+		Exit exit = new Exit( group );
 		exit.prepare(context);
 		assertThat(exit.interpolate(context, .1)).isFalse();
 	}
 	
-	@Test
-	public void missingGroupIsNoOp()
+	@Test(expected=NullPointerException.class)
+	public void missingGroupThrows()
 	{
-		Exit exit = new Exit( source );
-		exit.prepare(context);
-		assertThat(exit.interpolate(context, .1)).isFalse();
-	}
-	
-	@Test(expected = GroupSource.NoGroupSource.class)
-	public void invalidGroupThrows()
-	{
-		Exit exit = new Exit( GroupSource.NONE );
+		Exit exit = new Exit( group );
 		exit.prepare(context);
 		assertThat(exit.interpolate(context, .1)).isFalse();
 	}

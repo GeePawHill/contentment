@@ -54,7 +54,7 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 	public Appearance<ACTOR> disappear()
 	{
 		world.removeActor(this);
-		world.add(new Single(Timing.instant(),new Exit(entrance)));
+		world.add(new Single(Timing.instant(),new Exit(entrance.group())));
 		return this;
 	}
 
@@ -75,7 +75,7 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 		world.removeActor(this);
 		world.push(Phrase.phrase());
 		world.add(new Single(Timing.ms(500d),new Fader(actor.group(), 0)));
-		world.add(new Single(Timing.instant(),new Exit(entrance)));
+		world.add(new Single(Timing.instant(),new Exit(entrance.group())));
 		world.popAndAppend();
 		return this;
 	}

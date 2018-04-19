@@ -142,7 +142,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 		{
 			world.push(Phrase.phrase());
 			world.add(new Single(Timing.ms(500d),new Fader(appearance.group(), 0)));
-			world.add(new Single(Timing.instant(),new Exit(appearance)));
+			world.add(new Single(Timing.instant(),new Exit(appearance.group())));
 			world.popAndAppend();
 		}
 		world.entrances().clear();
