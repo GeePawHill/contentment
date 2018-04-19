@@ -33,18 +33,18 @@ public class Marks implements Actor
 	@Override
 	public void format(Format format)
 	{
-		for (Mark curve : marks)
+		for (Mark mark : marks)
 		{
-			curve.format(format);
+			mark.format(format);
 		}
 	}
 
 	@Override
 	public Marks draw(double ms)
 	{
-		for (Mark curve : marks)
+		for (Mark mark : marks)
 		{
-			world.add(new Single(Timing.ms(ms / marks.length), curve));
+			world.add(new Single(Timing.ms(ms / marks.length), mark));
 		}
 		return this;
 	}

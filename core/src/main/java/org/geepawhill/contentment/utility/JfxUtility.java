@@ -62,10 +62,16 @@ public class JfxUtility
 		{
 		}
 	}
-
-	public static void addIfNeeded(GroupSource group, Node node)
+	
+	public static void addIfNeeded(Group destination, Node node)
 	{
-		if(!group.group().getChildren().contains(node)) group.group().getChildren().add(node);
+		if(!destination.getChildren().contains(node)) destination.getChildren().add(node);
+	}
+
+
+	public static void addIfNeeded(GroupSource destination, Node node)
+	{
+		addIfNeeded(destination.group(),node);
 	}
 	
 	static public void setTopAlignment(Node node)
