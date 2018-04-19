@@ -30,12 +30,25 @@ public class MarkTest
 		mark.prepare(context);
 		assertThat(group.getChildren().size()).isEqualTo(1);
 	}
+	
+	@Test
+	public void pathClearedAtZero()
+	{
+		Mark mark = new Mark(GroupSource.value(group), BezierSource.value(bezier));
+		mark.prepare(context);
+		assertThat(group.getChildren().size()).isEqualTo(1);
+		Path path = (Path) group.getChildren().get(0);
+		assertThat(path.getElements().size()).isEqualTo(0);
+	}
+
+	
 
 	@Test
 	public void addsTwoStepPath()
 	{
 		Mark mark = new Mark(GroupSource.value(group), BezierSource.value(bezier));
 		mark.prepare(context);
+		mark.interpolate(context, .25);
 		assertThat(group.getChildren().size()).isEqualTo(1);
 		Path path = (Path) group.getChildren().get(0);
 		assertThat(path.getElements().size()).isEqualTo(2);

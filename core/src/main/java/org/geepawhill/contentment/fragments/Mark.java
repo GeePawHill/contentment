@@ -41,7 +41,8 @@ public class Mark implements Fragment
 	@Override
 	public boolean interpolate(Context context, double fraction)
 	{
-		new BezierSplit(fraction, source.get()).setPathToBefore(path);
+		source.get().splitToPath(fraction, path);
+//		new BezierSplit(fraction, source.get()).setPathToBefore(path);
 		return true;
 	}
 
