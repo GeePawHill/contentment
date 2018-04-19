@@ -7,7 +7,6 @@ import org.geepawhill.contentment.position.Position;
 
 public interface Actor extends GroupSource
 {
-	Entrance entrance();
 	void format(Format format);
 	void at(Position position);
 	Actor draw(double ms);

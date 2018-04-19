@@ -1,6 +1,6 @@
 package org.geepawhill.contentment.actor;
 
-import org.geepawhill.contentment.core.GroupSource;
+import org.geepawhill.contentment.core.*;
 import org.geepawhill.contentment.format.Format;
 import org.geepawhill.contentment.fragments.*;
 import org.geepawhill.contentment.geometry.Point;
@@ -21,7 +21,7 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 	{
 		this.actor = actor;
 		this.world = world;
-		this.entrance = actor.entrance();
+		this.entrance = new Entrance(null,actor.group());
 		actor.format(world.assumptions().format());
 	}
 	

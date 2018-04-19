@@ -15,22 +15,6 @@ public class Context
 		this.canvas = new Group();
 	}
 	
-	public void add(GroupSource actor)
-	{
-		if (!canvas.getChildren().contains(actor.group()))
-		{
-			canvas.getChildren().add(actor.group());
-		}
-	}
-
-	public void remove(GroupSource actor)
-	{
-		if (canvas.getChildren().contains(actor.group()))
-		{
-			canvas.getChildren().remove(actor.group());
-		}
-	}
-
 	public void setRhythm(Rhythm rhythm)
 	{
 		this.rhythm = rhythm;

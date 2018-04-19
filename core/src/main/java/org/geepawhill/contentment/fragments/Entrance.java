@@ -14,9 +14,11 @@ import javafx.scene.Group;
 public class Entrance implements Fragment, GroupSource
 {
 	private Group group;
+	private Group destination;
 
 	public Entrance(Group destination, Group group)
 	{
+		this.destination = destination;
 		this.group = group;
 	}
 
@@ -24,7 +26,8 @@ public class Entrance implements Fragment, GroupSource
 	public void prepare(Context context)
 	{
 		group.setOpacity(1);
-		context.add(this);
+		if(destination!=null) destination.getChildren().add(group);
+		else context.canvas.getChildren().add(group);
 	}
 
 	@Override
