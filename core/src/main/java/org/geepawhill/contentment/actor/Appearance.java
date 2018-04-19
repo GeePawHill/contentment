@@ -64,12 +64,6 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 		return this;
 	}
 	
-	public Appearance<ACTOR> reColor(Paint paint)
-	{
-		world.add(new Single(Timing.instant(),new Recolor(entrance, paint)));
-		return this;
-	}
-	
 	public Appearance<ACTOR> fadeDown()
 	{
 		world.add(new Single(Timing.ms(500),new Fader(actor.group(), 0)));
