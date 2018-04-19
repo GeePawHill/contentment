@@ -23,7 +23,6 @@ public class Entrance implements Fragment, GroupSource
 	@Override
 	public void prepare(Context context)
 	{
-//		group.getChildren().clear();
 		group.setOpacity(1);
 		context.add(this);
 	}

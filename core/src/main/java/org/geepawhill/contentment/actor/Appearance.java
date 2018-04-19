@@ -72,7 +72,7 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 	
 	public Appearance<ACTOR> fadeDown()
 	{
-		world.add(new Single(Timing.ms(500),new Fader(entrance, 0)));
+		world.add(new Single(Timing.ms(500),new Fader(actor.group(), 0)));
 		return this;
 	}
 	
@@ -80,7 +80,7 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 	{
 		world.removeActor(this);
 		world.push(Phrase.phrase());
-		world.add(new Single(Timing.ms(500d),new Fader(entrance, 0)));
+		world.add(new Single(Timing.ms(500d),new Fader(actor.group(), 0)));
 		world.add(new Single(Timing.instant(),new Exit(entrance)));
 		world.popAndAppend();
 		return this;
@@ -91,16 +91,16 @@ public class Appearance<ACTOR extends Actor> implements GroupSource
 		world.addActor(this);
 		world.push(Phrase.phrase());
 		world.add(new Single(Timing.instant(),entrance));
-		world.add(new Single(Timing.instant(),new Fader(entrance, 0)));
+		world.add(new Single(Timing.instant(),new Fader(actor.group(), 0)));
 		actor.draw(1d);
-		world.add(new Single(Timing.ms(500d),new Fader(entrance,1)));
+		world.add(new Single(Timing.ms(500d),new Fader(actor.group(),1)));
 		world.popAndAppend();
 		return this;
 	}
 	
 	public Appearance<ACTOR> fadeUp()
 	{
-		world.add(new Single(Timing.ms(500d),new Fader(entrance,1)));
+		world.add(new Single(Timing.ms(500d),new Fader(actor.group(),1)));
 		return this;
 	}
 	

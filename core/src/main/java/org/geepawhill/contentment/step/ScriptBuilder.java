@@ -141,7 +141,7 @@ public abstract class ScriptBuilder<SUBCLASS>
 		for(Appearance<? extends Actor> appearance : world.entrances())
 		{
 			world.push(Phrase.phrase());
-			world.add(new Single(Timing.ms(500d),new Fader(appearance, 0)));
+			world.add(new Single(Timing.ms(500d),new Fader(appearance.group(), 0)));
 			world.add(new Single(Timing.instant(),new Exit(appearance)));
 			world.popAndAppend();
 		}

@@ -2,6 +2,8 @@ package org.geepawhill.contentment.fragments;
 
 import org.geepawhill.contentment.core.*;
 
+import javafx.scene.Group;
+
 /**
  * Changes the opacity of a given Group target.
  * 
@@ -10,11 +12,11 @@ import org.geepawhill.contentment.core.*;
  */
 public class Fader implements Fragment
 {
-	private GroupSource target;
+	private Group target;
 	private double from;
 	private double to;
 
-	public Fader(GroupSource target, double to)
+	public Fader(Group target, double to)
 	{
 		this.target = target;
 		this.to = to;
@@ -23,13 +25,13 @@ public class Fader implements Fragment
 	@Override
 	public void prepare(Context context)
 	{
-		this.from = target.group().getOpacity();
+		this.from = target.getOpacity();
 	}
 
 	@Override
 	public boolean interpolate(Context context, double fraction)
 	{
-		target.group().setOpacity(from + fraction * (to - from));
+		target.setOpacity(from + fraction * (to - from));
 		return true;
 	}
 }
