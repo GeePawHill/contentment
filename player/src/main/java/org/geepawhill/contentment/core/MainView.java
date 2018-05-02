@@ -94,7 +94,7 @@ public class MainView
 			return;
 		}
 		if (event.getButton() == MouseButton.SECONDARY) player.backward();
-		else player.playOne();
+		else player.forward();
 	}
 
 	private ToolBar makeTools()
