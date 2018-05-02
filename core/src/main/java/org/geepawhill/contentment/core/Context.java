@@ -15,6 +15,11 @@ public class Context
 		this.canvas = new Group();
 	}
 	
+	public Rhythm rhythm()
+	{
+		return rhythm;
+	}
+	
 	public void setRhythm(Rhythm rhythm)
 	{
 		this.rhythm = rhythm;
@@ -29,4 +34,5 @@ public class Context
 	{
 		canvas.getChildren().clear();
 	}
+	
 }
